@@ -31,7 +31,7 @@ Overview and Getting Started:
    trouble
    vm
 
-Documentation and Examples:
+Examples and Applications:
 -----------------------------
 
 .. toctree::
