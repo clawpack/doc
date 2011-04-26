@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Clawpack'
-copyright = u'2009, Randall J. LeVeque and others'
+copyright = u'2011, Randall J. LeVeque and others'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
