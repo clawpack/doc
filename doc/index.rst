@@ -66,7 +66,7 @@ Advanced features:
    :maxdepth: 1
    
    gauges
-
+   devel
 
 
 
@@ -125,3 +125,4 @@ Bibliography
 ------------
 
 :ref:`biblio`
+
