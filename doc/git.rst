@@ -7,7 +7,7 @@ Using Git and GitHub
 Forking the repository
 ----------------------
 
-As a first step you should create your own Github account if you do not
+As a first step you should create your own github account if you do not
 already have one.  Follow the instructions after clicking `Create a free
 account` on the `Pricing and Signup <https://github.com/plans>`_ page of
 `<https://github.com/>`_.
@@ -19,7 +19,8 @@ Once you have an account, log in.  Then go to
 and click on the repository you want to work on.  
 This repository on github will be called the *claworg repository* below
 (because `clawpack` is an *organization* on github, meaning it is a
-collection of repositories).
+collection of repositories).  For more about the clawpack organization on
+github, see `the Github plan <https://github.com/clawpack/doc/wiki/Github-plan>`_
 
 Forking on github
 -----------------
@@ -153,15 +154,8 @@ gatekeeper is for this repository, who can then
 merge your changes into `claworg` if he or she approves.
 
 
-Fetching and merging
---------------------
-
-It is best to make sure you do not have any uncommitted changes in your
-working directory before doing the next steps.  You should see::
-
-    $ git status
-    # On branch master
-    nothing to commit (working directory clean)
+Fetching from a remote repository
+---------------------------------
 
 If you have more than one clone of your github repository (e.g. on two
 different computers), then if you push changes from one clone back to github
@@ -175,7 +169,7 @@ git has stored in the hidden directory `.git` at the top level of your
 clone, where a copy of all the history in the remote version (`origin`) is
 stored.  
 
-To see if there changes between your working directory and the `master`
+To see if there are differences between your working directory and the `master`
 branch of the `origin` repository::
 
     $ git diff --name-status origin/master
@@ -186,7 +180,17 @@ to just list the files that are different, or::
 
 to list all the diff's.
 
-To merge the changes in to your working directory::
+Merging into your working copy
+------------------------------
+
+Before merging any changes, make sure you do not have any uncommitted
+changes in your working directory.  You should see::
+
+    $ git status
+    # On branch master
+    nothing to commit (working directory clean)
+
+To merge the changes in to your working directory.
 
     $ git merge origin/master
 
@@ -209,8 +213,16 @@ doing this (so you can inspect the merge before committing it)::
 
     $ git merge --no-commit origin/master
 
-More information: `git-merge documentation
+Also note that sometimes git will not need to do a commit because your local
+copy was a direct ancestor of the lastest version in `origin/master` (i.e.
+you did not make any local commits since the time you cloned or the
+last time you fetched and merged).  In this case, git can simply update your
+working copy to bring it up to date with the latest commit in
+`origin/master`.  This is called a *fast forward* merge.  
+
+For more information see the  `git-merge documentation
 <http://www.kernel.org/pub/software/scm/git/docs/git-merge.html>`_.
+
 
 Pull
 ----
