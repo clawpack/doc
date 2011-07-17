@@ -67,6 +67,7 @@ Advanced features:
    
    gauges
    devel
+   gitwash/index
 
 
 
