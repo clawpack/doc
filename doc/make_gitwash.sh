@@ -1,5 +1,5 @@
 
-python gitwash_dumper.py clawdoc-gitwash Clawpack \
+python gitwash_dumper.py . Clawpack \
 --repo-name=clawpack \
 --github-user=clawpack \
 --project-url=http://www.clawpack.org \
