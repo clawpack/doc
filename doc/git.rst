@@ -4,6 +4,11 @@
 Using Git and GitHub
 ====================
 
+.. note::
+   Thanks to `gitwash <https://github.com/matthew-brett/gitwash>`_ there
+   is now a better version of this workflow description in
+   :ref:`using-git`.
+
 Forking the repository
 ----------------------
 

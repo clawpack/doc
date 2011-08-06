@@ -30,6 +30,7 @@ Overview and Getting Started:
    claw43to44
    trouble
    vm
+   gitwash/index
 
 Examples and Applications:
 -----------------------------
@@ -67,7 +68,6 @@ Advanced features:
    
    gauges
    devel
-   gitwash/index
 
 
 
