@@ -60,7 +60,7 @@ the tar file described below, see the `Clawpack wiki
 
 First download the tar file from the Clawpack download page:
 
-  *  `<http://kingkong.amath.washington.edu/clawpack/clawdownload>`_
+  *  `<http://kingkong.amath.washington.edu/clawpack/download>`_
 
 This file will be of the form clawpack-N.tar.gz  where N is the 
 version number.
