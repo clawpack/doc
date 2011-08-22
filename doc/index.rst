@@ -59,28 +59,6 @@ Fortran and Python codes:
    pyclaw_doc/index
    setrun
    mapc2p
-   
-Advanced features:
-------------------
-
-.. toctree::
-   :maxdepth: 1
-   
-   gauges
-   devel
-
-
-
-Documentation from other Clawpack Projects:
-===========================================
-
-PyClaw: Python tools
---------------------
-
-.. toctree::
-   :maxdepth: 2
-   
-   pyclaw_doc/index
 
 VisClaw: Plotting and Visualization Tools
 -----------------------------------------
@@ -106,21 +84,33 @@ GeoClaw: For geophysical flows
    
    geoclaw_doc/index
 
+   
+Advanced features:
+------------------
+
+.. toctree::
+   :maxdepth: 1
+   
+   gauges
+   devel
+
+
+
+Documentation from other Clawpack Projects:
+===========================================
+
+PyClaw: Python tools
+--------------------
+
+Includes PetClaw, Using PETSc for parallel efficiency.
+
+* `PyClaw Documentation <http://numerics.kaust.edu.sa/pyclaw/>`_
+
 SharpClaw: High-order methods
 -----------------------------------------
 
-.. toctree::
-   :maxdepth: 2
-   
-   sharpclaw_doc/index
+* `SharpClaw Documentation <http://numerics.kaust.edu.sa/sharpclaw/>`_
 
-PetClaw: Using PETSc for parallel efficiency
---------------------------------------------
-
-.. toctree::
-   :maxdepth: 2
-   
-   petclaw_doc/index
 
 Bibliography
 ------------
