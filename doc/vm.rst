@@ -9,6 +9,8 @@ Using Clawpack requires a variety of other software packages, as summarized in
 :ref:`installing`. An alternative to installing the prerequisites is to use the
 virtual machine described in this section.
 
+Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
+
 To do so, you need only download and
 install the 
 `VirtualBox <http://www.virtualbox.org/>`_

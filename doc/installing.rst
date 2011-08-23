@@ -49,6 +49,9 @@ you are not familiar with it.
 An alternative to installing the prerequisites and Clawpack itself is to use the
 :ref:`vm`.
 
+**Cloud Computing.**
+Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
+
 .. _downloading:
 
 Downloading Clawpack
