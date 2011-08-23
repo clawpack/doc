@@ -20,6 +20,8 @@ For general information and a guide to getting started:
   with tutorial to lead you through an example (a similar tutorial geared
   to Clawpack is included below).
 
+* `EC2 FAQ <http://aws.amazon.com/ec2/faqs>`_.
+
 * `Pricing <http://aws.amazon.com/ec2/#pricing>`_.  Note: you are charged
   per hour for hours (or fraction thereof) that your instance is in
   `running` mode, regardless of whether the CPU is being used.
