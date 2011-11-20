@@ -56,7 +56,6 @@ Fortran and Python codes:
    fortran
    python
    makefiles
-   pyclaw_doc/index
    setrun
    mapc2p
 
