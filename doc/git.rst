@@ -4,10 +4,17 @@
 Using Git and GitHub
 ====================
 
+.. include:: gitwash/git_links.inc
+
 .. note::
    Thanks to `gitwash <https://github.com/matthew-brett/gitwash>`_ there
    is now a better version of this workflow description in
    :ref:`using-git`.
+
+.. note:: Clawpack is an "organization" on GitHub, which means that it is
+   comprised of several distinct repositories.  These pages can be used to
+   manage any (or all) of the Clawpack repositories.  On this page the *doc*
+   repository is used as an example.
 
 Forking the repository
 ----------------------
@@ -64,6 +71,13 @@ if you have ssh keys set up, or you can clone via http with::
 The box near the top of the webpage should show you exactly what to type.
 
 In either case, this will create a directory named `doc`.
+
+Deleting the master branch
+--------------------------
+
+Consider deleting your master branch as described at `deleting master on
+github`_.  In the rest of this document *master* will refer to whatever name
+you use instead.
 
 Working in your clone
 ---------------------
@@ -152,7 +166,8 @@ Pull requests
 -------------
 
 If you want this change to be incorporated back into the `claworg`
-repository (the one you forked from), then on the github webpage for your
+repository (the one you forked from in the Clawpack Organization), 
+then on the github webpage for your
 fork, you should see a button `pull request` up near the top.  Clicking on
 this will prompt you for a message that will be sent to whoever the
 gatekeeper is for this repository, who can then
@@ -252,6 +267,9 @@ that you originally forked from on github.  This is useful if other
 developers have made changes to the repository since you forked.  You
 probably want to merge those changes into your local clone (from which you
 can also push them back into your own github repository).
+
+.. note:: Instead of `claworg` it is common to use `upstream` as a generic
+   name, since this is the repository you forked from.
 
 To add a remote::
 
@@ -381,6 +399,7 @@ Other resources
 
 See also:
 
+*  :ref:`using-git`.
 * `Fernando Perez's blog <http://fperez.org/py4science/git.html>`_ has many
   useful links to get started.  
 * `Git Parable

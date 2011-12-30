@@ -4,17 +4,24 @@
 Recent changes
 ==========================
 
+
 .. _planned_for_50:
 
 Planned changes for Clawpack 5.0
 ================================
 
 Substantial changes are planned for Clawpack 5.0.  See the 
-`Clawpack wiki <http://kingkong.amath.washington.edu/trac/clawpack>`_ for
+`Clawpack wiki <https://github.com/clawpack/doc/wiki>`_ for
 details.  Feedback welcome!
 
-You might also view the `tickets <http://kingkong.amath.washington.edu/trac/clawpack/report>`_
-on the Trac wiki to see what bugs and features we are working on.
+Note that Clawpack is an *organization* on GitHub, meaning that it is
+comprised of several repositories.  Go to the 
+`Clawpack GitHub`_ webpage to view all the repositories.
+
+You might also view the 
+`issues <https://github.com/organizations/clawpack/dashboard/issues>`_
+associated with each Clawpack repository on
+GitHub to see what bugs and features we are working on.
 
 .. _new_in_claw46:
 
@@ -346,3 +353,4 @@ Changes since 4.4.0
 
      See clawpack/2d/example1/amr for an example of usage.
 
+.. include:: links.inc
