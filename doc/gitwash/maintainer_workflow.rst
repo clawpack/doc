@@ -4,6 +4,12 @@
 Maintainer workflow
 ###################
 
+.. note:: Clawpack is an "organization" on GitHub, which means that it is
+   comprised of several distinct repositories.  These pages can be used to
+   manage any (or all) of the Clawpack repositories, and in this documentation
+   the string `REPOS` should be replaced by the specific repository name,
+   e.g. *amrclaw*, *pyclaw*, *visclaw*, etc.
+
 This page is for maintainers |emdash| those of us who merge our own or other
 peoples' changes into the upstream repository.
 
@@ -16,7 +22,7 @@ access to the upstream repo.  Being a maintainer, you've got read-write access.
 It's good to have your upstream remote have a scary name, to remind you that
 it's a read-write remote::
 
-    git remote add upstream-rw git@github.com:clawpack/clawpack.git
+    git remote add upstream-rw git@github.com:clawpack/REPOS.git
     git fetch upstream-rw
 
 *******************
@@ -29,7 +35,7 @@ Let's say you have some changes that need to go into trunk
 The changes are in some branch that you are currently on.  For example, you are
 looking at someone's changes like this::
 
-    git remote add someone git://github.com/someone/clawpack.git
+    git remote add someone git://github.com/someone/REPOS.git
     git fetch someone
     git branch cool-feature --track someone/cool-feature
     git checkout cool-feature

@@ -4,6 +4,13 @@
 Development workflow
 ####################
 
+.. note:: Clawpack is an "organization" on GitHub, which means that it is
+   comprised of several distinct repositories.  These pages can be used to
+   manage any (or all) of the Clawpack repositories, and in this documentation
+   the string `REPOS` should be replaced by the specific repository name,
+   e.g. *amrclaw*, *pyclaw*, *visclaw*, etc.
+
+
 You already have your own forked copy of the Clawpack_ repository, by
 following :ref:`forking`. You have :ref:`set-up-fork`. You have configured
 git by following :ref:`configure-git`.  Now you are ready for some real work.
@@ -150,7 +157,7 @@ Ask for your changes to be reviewed or merged
 When you are ready to ask for someone to review your code and consider a merge:
 
 #. Go to the URL of your forked repo, say
-   ``http://github.com/your-user-name/clawpack``.
+   ``http://github.com/your-user-name/REPOS``.
 #. Use the 'Switch Branches' dropdown menu near the top left of the page to
    select the branch with your changes:
 
@@ -195,7 +202,7 @@ share it via github.
 First fork Clawpack into your account, as from :ref:`forking`.
 
 Then, go to your forked repository github page, say
-``http://github.com/your-user-name/clawpack``
+``http://github.com/your-user-name/REPOS``
 
 Click on the 'Admin' button, and add anyone else to the repo as a
 collaborator:
@@ -204,7 +211,7 @@ collaborator:
 
 Now all those people can do::
 
-    git clone git@githhub.com:your-user-name/clawpack.git
+    git clone git@githhub.com:your-user-name/REPOS.git
 
 Remember that links starting with ``git@`` use the ssh protocol and are
 read-write; links starting with ``git://`` are read-only.

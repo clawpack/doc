@@ -2,6 +2,12 @@
  Making a patch
 ================
 
+.. note:: Clawpack is an "organization" on GitHub, which means that it is
+   comprised of several distinct repositories.  These pages can be used to
+   manage any (or all) of the Clawpack repositories, and in this documentation
+   the string `REPOS` should be replaced by the specific repository name,
+   e.g. *amrclaw*, *pyclaw*, *visclaw*, etc.
+
 You've discovered a bug or something else you want to change
 in Clawpack_ .. |emdash| excellent!
 
@@ -29,9 +35,9 @@ Overview
    git config --global user.email you@yourdomain.example.com
    git config --global user.name "Your Name Comes Here"
    # get the repository if you don't have it
-   git clone git://github.com/clawpack/clawpack.git
+   git clone git://github.com/clawpack/REPOS.git
    # make a branch for your patching
-   cd clawpack
+   cd REPOS
    git branch the-fix-im-thinking-of
    git checkout the-fix-im-thinking-of
    # hack, hack, hack
@@ -59,8 +65,8 @@ In detail
 #. If you don't already have one, clone a copy of the
    Clawpack_ repository::
 
-      git clone git://github.com/clawpack/clawpack.git
-      cd clawpack
+      git clone git://github.com/clawpack/REPOS.git
+      cd REPOS
 
 #. Make a 'feature branch'.  This will be where you work on
    your bug fix.  It's nice and safe and leaves you with
@@ -124,7 +130,7 @@ Then::
    # rename pointer to main repository to 'upstream'
    git remote rename origin upstream
    # point your repo to default read / write to your fork on github
-   git remote add origin git@github.com:your-user-name/clawpack.git
+   git remote add origin git@github.com:your-user-name/REPOS.git
    # push up any branches you've made and want to keep
    git push origin the-fix-im-thinking-of
 

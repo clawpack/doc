@@ -30,6 +30,14 @@ Overview and Getting Started:
    claw43to44
    trouble
    vm
+
+Developers' guide to using Git
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   git
    gitwash/index
 
 Examples and Applications:
