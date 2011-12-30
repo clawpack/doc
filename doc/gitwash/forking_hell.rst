@@ -4,6 +4,13 @@
 Making your own copy (fork) of Clawpack
 ==========================================
 
+.. note:: Clawpack is an "organization" on GitHub, which means that it is
+   comprised of several distinct repositories.  These pages can be used to
+   manage any (or all) of the Clawpack repositories, and in this documentation
+   the string `REPOS` should be replaced by the specific repository name,
+   e.g. *amrclaw*, *pyclaw*, *visclaw*, etc.
+
+
 You need to do this only once.  The instructions here are very similar
 to the instructions at http://help.github.com/forking/ |emdash| please see
 that page for more detail.  We're repeating some of it here just to give the
@@ -21,7 +28,8 @@ Create your own forked copy of Clawpack_
 ===========================================
 
 #. Log into your github account.
-#. Go to the Clawpack_ github home at `Clawpack github`_.
+#. Go to the Clawpack_ github home at `<https://github.com/clawpack>`_ and click on the desired REPOS name.
+
 #. Click on the *fork* button:
 
    .. image:: forking_button.png

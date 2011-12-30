@@ -4,6 +4,13 @@
  Set up your fork
 ==================
 
+.. note:: Clawpack is an "organization" on GitHub, which means that it is
+   comprised of several distinct repositories.  These pages can be used to
+   manage any (or all) of the Clawpack repositories, and in this documentation
+   the string `REPOS` should be replaced by the specific repository name,
+   e.g. *amrclaw*, *pyclaw*, *visclaw*, etc.
+
+
 First you follow the instructions for :ref:`forking`.
 
 Overview
@@ -11,9 +18,9 @@ Overview
 
 ::
 
-   git clone git@github.com:your-user-name/clawpack.git
-   cd clawpack
-   git remote add upstream git://github.com/clawpack/clawpack.git
+   git clone git@github.com:your-user-name/REPOS.git
+   cd REPOS
+   git remote add upstream git://github.com/clawpack/REPOS.git
 
 In detail
 =========
@@ -22,8 +29,8 @@ Clone your fork
 ---------------
 
 #. Clone your fork to the local computer with ``git clone
-   git@github.com:your-user-name/clawpack.git``
-#. Investigate.  Change directory to your new repo: ``cd clawpack``. Then
+   git@github.com:your-user-name/REPOS.git``
+#. Investigate.  Change directory to your new repo: ``cd REPOS``. Then
    ``git branch -a`` to show you all branches.  You'll get something
    like::
 
@@ -45,8 +52,8 @@ Linking your repository to the upstream repo
 
 ::
 
-   cd clawpack
-   git remote add upstream git://github.com/clawpack/clawpack.git
+   cd REPOS
+   git remote add upstream git://github.com/clawpack/REPOS.git
 
 ``upstream`` here is just the arbitrary name we're using to refer to the
 main Clawpack_ repository at `Clawpack github`_.
@@ -59,10 +66,10 @@ use it to merge into our own code.
 Just for your own satisfaction, show yourself that you now have a new
 'remote', with ``git remote -v show``, giving you something like::
 
-   upstream	git://github.com/clawpack/clawpack.git (fetch)
-   upstream	git://github.com/clawpack/clawpack.git (push)
-   origin	git@github.com:your-user-name/clawpack.git (fetch)
-   origin	git@github.com:your-user-name/clawpack.git (push)
+   upstream	git://github.com/clawpack/REPOS.git (fetch)
+   upstream	git://github.com/clawpack/REPOS.git (push)
+   origin	git@github.com:your-user-name/REPOS.git (fetch)
+   origin	git@github.com:your-user-name/REPOS.git (push)
 
 .. include:: links.inc
 
