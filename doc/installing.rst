@@ -49,6 +49,9 @@ you are not familiar with it.
 An alternative to installing the prerequisites and Clawpack itself is to use the
 :ref:`vm`.
 
+**Cloud Computing.**
+Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
+
 .. _downloading:
 
 Downloading Clawpack
@@ -60,7 +63,7 @@ the tar file described below, see the `Clawpack wiki
 
 First download the tar file from the Clawpack download page:
 
-  *  `<http://kingkong.amath.washington.edu/clawpack/clawdownload>`_
+  *  `<http://kingkong.amath.washington.edu/clawpack/download>`_
 
 This file will be of the form clawpack-N.tar.gz  where N is the 
 version number.
