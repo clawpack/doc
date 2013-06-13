@@ -26,8 +26,8 @@ Overview and Getting Started:
 .. toctree::
    :maxdepth: 1
 
-   claw43
-   claw43to44
+   claw4x
+   claw46to50
    trouble
    vm
 
@@ -37,7 +37,7 @@ Developers' guide to using Git
 .. toctree::
    :maxdepth: 1
 
-   git
+   git_and_github
    gitwash/index
 
 Examples and Applications:

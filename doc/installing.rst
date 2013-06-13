@@ -4,6 +4,9 @@
 Installation instructions
 **************************************
 
+.. warning:: Out of date!  Needs updating.
+
+
 Prerequisites
 -------------
 
@@ -57,21 +60,9 @@ Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 Downloading Clawpack
 --------------------
 
-For instructions on using the version of Clawpack in the Subversion repository instead of
-the tar file described below, see the `Clawpack wiki
-<http://kingkong.amath.washington.edu/trac/clawpack>`_ 
 
-First download the tar file from the Clawpack download page:
 
-  *  `<http://kingkong.amath.washington.edu/clawpack/download>`_
-
-This file will be of the form clawpack-N.tar.gz  where N is the 
-version number.
-
-Move this tar file to the directory where you want to install claw and then::
-
-  $  tar -zxvf clawpack-N.tar.gz
-  $  cd clawpack-N
+.. warning:: Out of date!  Needs updating.
 
 
 .. _setenv:

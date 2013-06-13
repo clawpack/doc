@@ -5,6 +5,9 @@
 Compiling the Sphinx documentation locally
 ******************************************
 
+.. warning:: Out of date!  Needs updating.
+
+
 For most users, the best way to view the documentation is 
 `online <http://kingkong.amath.washington.edu/clawpack/www/users>`_.
 

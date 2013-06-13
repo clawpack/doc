@@ -6,30 +6,13 @@ Fortran version
 ***************
 
 
-Much of the Clawpack 4.3 documentation still applies:
-
-  * `Original 4.3 documentation <http://www.amath.washington.edu/~claw/doc.html>`_
-
-
-New in 4.4
-----------
-
 Input parameters are generally specified in a Python script :file:`setrun.py`
 and then::
 
    $ make .data
 
-creates the :file:`*.data` files that the Fortran code requires.  These have nearly
-the same form as in Clawpack 4.3, except:
+creates the :file:`*.data` files that the Fortran code requires.  
 
-* :file:`clawNez.data` is now :file:`claw.data`
-
-* The first line of the file now contains ``ndim``, the number of space dimensions.
-
-The output files :file:`fort.*` have nearly the same form as in Clawpack 4.3
-except:
-
-* The :file:`fort.t*` files now contain ``ndim``.
 
 Makefiles
 ---------
@@ -58,8 +41,7 @@ commands.
 The directory where output and plots are stored is specified in the Makefile.
 
 The Makefile in most directories includes a common Makefile found at
-`$CLAW/util/Makefile.common <claw/util/Makefile.common>`_ that does most
-of the work.  
+`$CLAW/clawutil/src/Makefile.common` that does most of the work.  
 
 More tips
 ---------

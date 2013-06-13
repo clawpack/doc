@@ -5,6 +5,9 @@
 Examples from the book FVMHP
 ############################
 
+.. warning:: Out of date!  Needs updating. Links are broken!
+
+
 The book 
 `Finite Volume Methods for Hyperbolic Problems <http://www.amath.washington.edu/~claw/book.html>`_  
 contains many examples that link to Clawpack codes used to create the
