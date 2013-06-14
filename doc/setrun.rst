@@ -6,6 +6,12 @@
 Specifying run-time parameters in `setrun.py`
 *****************************************************************
 
+
+.. warning:: Out of date!  Needs updating.
+   Input parameter have changed drastically in 5.0.
+   See `$CLAW/amrclaw/Tests/example1/setplot.py` for an example.
+
+
 This section explains the parameters needed for the classic single-grid
 Clawpack code.  Additional parameters are needed by extensions of the code.
 For these, see:

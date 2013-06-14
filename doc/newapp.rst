@@ -36,7 +36,7 @@ address should still work.
 In unix/linux you can copy a directory recursively (with all subdirectories
 intact) using the *cp -r* command, e.g. ::
  
-    $ cp -r $CLAW/apps/advection/1d/example1  path-to-newdir
+    $ cp -r $CLAW/amrclaw/Tests/example1  path-to-newdir
  
 for example.  
 
