@@ -59,6 +59,10 @@ The parameters that can be set are the following attributes of
 
    The number of grid cells in the x, y, [,z]  directions.
 
+   Note that when AMR is used, `num_cells` determines the number of cells in 
+   each dimension on the coarsest Level 1 grid.  Additional paramters
+   described below determine refinement ratios to finer levels.
+
 .. attribute:: num_eqn : integer
 
    Number of equations in the system (e.g. *num_eqn=1* for a scalar problem).
@@ -403,6 +407,8 @@ Special AMR parameters
    done at this level or coarser.  Set to 0 to suppress regridding output.
 
 .. attribute:: regions **Regions**
+
+   See :ref:`flag_regions`
 
 .. attribute:: checkpt_style :: int
 

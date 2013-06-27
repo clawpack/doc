@@ -1,8 +1,9 @@
 
 .. _bc:
 
+===================
 Boundary conditions
--------------------
+===================
 
 Boundary conditions are imposed each time step by filling ghost cells
 adjacent to the edge of each grid patch.  See Chapter 4 of [LeVeque-FVMHP]_

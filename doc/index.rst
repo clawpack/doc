@@ -59,7 +59,7 @@ Fortran and Python codes:
 -----------------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    
 
    fortran
@@ -67,10 +67,24 @@ Fortran and Python codes:
    makefiles
    setrun
    bc
+   output_styles
    mapc2p
 
 VisClaw: Plotting and Visualization Tools
 -----------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+   
+   matlab_plotting
+   plotting
+   setplot
+   current_data
+   plotexamples
+   plotting_faq
+   geoplot
+
+**Remove these from visclaw/doc...**
 
 .. toctree::
    :maxdepth: 2
@@ -80,7 +94,13 @@ VisClaw: Plotting and Visualization Tools
 AMRClaw: Adaptive Mesh Refinement
 -----------------------------------------
 
+.. toctree::
+   :maxdepth: 2
+   
    setrun_amrclaw
+   flag
+
+**Documentation below from amrclaw repository should be merged in**
 
 .. toctree::
    :maxdepth: 2
