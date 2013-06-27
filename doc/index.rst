@@ -66,6 +66,7 @@ Fortran and Python codes:
    python
    makefiles
    setrun
+   bc
    mapc2p
 
 VisClaw: Plotting and Visualization Tools
@@ -78,6 +79,8 @@ VisClaw: Plotting and Visualization Tools
 
 AMRClaw: Adaptive Mesh Refinement
 -----------------------------------------
+
+   setrun_amrclaw
 
 .. toctree::
    :maxdepth: 2
