@@ -40,6 +40,8 @@ Developers' guide to using Git
    git_and_github
    gitwash/index
    howto_doc
+   regression
+   git_versions
 
 See also :ref:`setup_dev`
 
