@@ -86,12 +86,6 @@ VisClaw: Plotting and Visualization Tools
    plotting_faq
    geoplot
 
-**Remove these from visclaw/doc...**
-
-.. toctree::
-   :maxdepth: 2
-   
-   visclaw_doc/index
 
 AMRClaw: Adaptive Mesh Refinement
 -----------------------------------------
