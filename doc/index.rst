@@ -78,13 +78,13 @@ VisClaw: Plotting and Visualization Tools
 .. toctree::
    :maxdepth: 2
    
-   matlab_plotting
-   plotting
+   plotting_python
    setplot
    current_data
    plotexamples
    plotting_faq
    geoplot
+   matlab_plotting
 
 
 AMRClaw: Adaptive Mesh Refinement
