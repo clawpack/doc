@@ -1,5 +1,5 @@
 
-.. _plotting:
+.. _plotting_python:
 
 ***************************************
 Plotting options in Python
@@ -10,42 +10,6 @@ Clawpack  includes utilities for plotting using Python.  Most of these
 are defined in the `clawpack.visclaw` module.
 In order to use these you will need to insure that you have the required
 modules installed (see :ref:`python-install`).
-
-**Matlab tools deprecated?**
-Clawpack 4.4 also includes the Matlab plotting tools from 4.3 and before,
-see :ref:`matlabplots`.
-
-The advantages of using the Python options are:
-
- * Python and the graphics modules used in Clawpack are open source.  Since
-   Clawpack itself is open source we find it desirable to also have an open
-   source plotting open for viewing the results.
-
- * The Python tools developed so far (mostly for 1d and 2d data sets) are
-   more powerful than the Matlab versions they replace, and can be used for
-   example to automatically generate html versions of multiple plots each
-   frame over all frames of a computation, to generate latex versions of the
-   output, as well as to step through the frames one by one as with the
-   Matlab tools.  It is easier to specify a set of multiple plots to be
-   produced for each frame.
-
- * Matlab graphics are somewhat limited for 3d data sets, whereas several
-   open source visualization tools such as `VisIt
-   <https://wci.llnl.gov/codes/visit>`_ (developed at Lawrence Livermore
-   National Laboratory) are much better for dealing
-   with large data sets, AMR meshes, etc.  VisIt has Python bindings and 
-   we are currently extending our tools to work with VisIt.  If you are
-   already a VisIt user, note that VisIt has a Claw reader that can be used to
-   import data from Clawpack, see `Application Toolkit Formats
-   <http://www.visitusers.org/index.php?title=Detailed_list_of_file_formats_VisIt_supports#Application_Toolkit_Formats>`_.
-
-   We are also considering developing tools for use with
-   `Mayavi <http://code.enthought.com/projects/mayavi>`_.
-
- * Python is a powerful language that can be scripted to perform multiple
-   runs, such as in a convergence test, and collect the results in tables or
-   plots.  We are developing tools to simplify this process.
-
 
 See :ref:`python` for more information on Python and pointers to many tutorials.
 

@@ -78,6 +78,7 @@ VisClaw: Plotting and Visualization Tools
 .. toctree::
    :maxdepth: 2
    
+   plotting
    plotting_python
    setplot
    current_data

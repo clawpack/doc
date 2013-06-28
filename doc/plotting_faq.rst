@@ -217,6 +217,42 @@ background::
     plotfigure = plotdata.new_plotfigure(name='pinkfig', figno=1)
     plotfigure.kwargs = {'figsize': [10,5],  'facecolor': [1, .7, .7]}
 
+Specifying colormaps for pcolor or contourf plots
+-------------------------------------------------
+
+The matplotlib module `matplotlib.cm` provides many colormaps that can be
+acquired as follows, for example::
+
+    from matplotlib import cm
+    cmap = cm.get_cmap('Greens')
+
+`matplotlib.colors` provides some tools for working with colormaps, 
+and some additional colormaps and tools can be found in 
+`clawpack.visclaw.colormaps`.  
+
+In particular, the `make_colormaps` function simplifies the creation of new
+colormaps interpolating between specified colors.
+For example, a colormap fading from blue to yellow to red can be created
+with the command::
+
+    from clawpack.visclaw import colormaps
+    yellow_red_blue = colormaps.make_colormap({0.:'#ffff00', 0.5:[1,0,0], 1.:'b'})
+
+
+The argument of `make_colormaps` is a dictionary that maps values to colors,
+with linear interpolation between the specified values.  Each color can be
+specified in various ways, e.g. in the example above blue is specified as
+the matlab style 'b', yellow with an html hex string, and red with an RGB
+tuple `[1,0,0]`.
+
+The colormap above is also predefined as
+`clawpack.visclaw.colormaps.yellow_red_blue` and is used in many Clawpack
+examples.
+
+The function 
+`clawpack.visclaw.colormaps.showcolors(cmap)` can be used to display a
+colormap.
+`
 
 
 How to debug setplot.py?
