@@ -41,6 +41,8 @@ Developers' guide to using Git
    gitwash/index
    howto_doc
 
+See also :ref:`setup_dev`
+
 Examples and Applications:
 -----------------------------
 
@@ -113,7 +115,16 @@ GeoClaw: For geophysical flows
 .. toctree::
    :maxdepth: 2
    
-   geoclaw_doc/index
+   geoclaw
+   geohints
+   topo
+   setrun_geoclaw
+   plotting_geoclaw
+   quick_tsunami
+   okada
+   sealevel
+   manning
+   tsunamidata
 
    
 Advanced features:

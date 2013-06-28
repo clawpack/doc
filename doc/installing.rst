@@ -76,8 +76,10 @@ pull requests.
 
 .. _setup_dev:
 
-Temporary instructions for developers
--------------------------------------
+Temporary installation instructions for developers
+---------------------------------------------------
+
+**This should be simplified eventually and moved elsewhere**
 
 Read the sections :ref:`git_and_github` and :ref:`using-git`.
 

@@ -6,6 +6,8 @@
 Sample GeoClaw `setrun.py` module
 *****************************************************************
 
+.. warning :: Needs updating!
+
 This shows an example of a :mod:`setrun.py` module for a GeoClaw
 application.  Note that *claw_pkg='geoclaw'* is expected.  The line::
 
