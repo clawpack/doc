@@ -38,12 +38,16 @@ Then do::
     $ source rsync_clawpack.github.sh     
 
 This copies the contents of `$CLAW/doc/doc/_build/html` to 
-`$CLAW/clawpack.github.org/doc`
+`$CLAW/clawpack.github.com/doc`
 
-Then add and commit any new or changed files in this repository::
+Then move to the latter repository and
+add and commit any new or changed files (all files are needed, so "git add
+." should work).  For the commit message you might want to add the commit
+hash of the most recent commit in $CLAW/doc/doc::
 
-    $ cd $CLAW/clawpack.github.org/doc
-    $ git add ...  # and commit
+    $ cd $CLAW/clawpack.github.com/doc
+    $ git add . 
+    $ git commit -m "changes from doc/doc commit <hash>"
 
 And finally push to the web::
 
@@ -51,3 +55,6 @@ And finally push to the web::
 
 which assumes that `origin` is
 `git@github.com:clawpack/clawpack.github.com.git`.
+
+It may take a few minutes for the updated webpages to appear at 
+`<http://clawpack.github.io/doc/index.html>`_.
