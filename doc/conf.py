@@ -39,7 +39,10 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.inheritance_diagram']
                 
 # extensions.append('sphinx.ext.jsmath')
-extensions.append('sphinx.ext.pngmath')
+#extensions.append('sphinx.ext.pngmath')
+extensions.append('sphinx.ext.mathjax')
+mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

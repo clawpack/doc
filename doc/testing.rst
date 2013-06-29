@@ -5,6 +5,9 @@
 Regression tests
 ===================================================================
 
+.. warning:: Out of date!  Needs updating.
+
+
 We are working on a full suite of regression tests for Clawpack.
 
 For now, the best way to test that everything works properly is to use the

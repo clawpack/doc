@@ -6,6 +6,9 @@ Applications gallery
 ############################
 
 
+.. warning:: Out of date!  Needs updating. Links are broken!
+
+
 Starting with Clawpack 4.4,
 a number of applications are now included in the main Clawpack 
 distribution, in the directory `$CLAW/apps <claw/apps>`_.

@@ -6,6 +6,8 @@
 Gauges
 ***************
 
+.. warning :: Needs updating
+
 With AMRCLAW in two space dimensions
 it is possible to specify gauge locations as points (x,y) where the values of all
 components of q should be output every time step during the computation over some
@@ -145,6 +147,5 @@ Examples
 
 To see an example of the use of gauges see:
 
-   * `[$CLAW/apps/advection/2d/example1_gauges/amr]
-     <claw/apps/advection/2d/example1_gauges/amr/README.html>`_ 
+   * **Need pointer**
 

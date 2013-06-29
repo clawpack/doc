@@ -85,6 +85,8 @@ POSSIBILITY OF SUCH DAMAGE.
 Authors
 -------
 
+.. warning:: Need to update!
+
 Many people have contributed to the development of Clawpack since its
 inception in 1994.  
 

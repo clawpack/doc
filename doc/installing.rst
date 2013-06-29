@@ -4,6 +4,8 @@
 Installation instructions
 **************************************
 
+
+
 Prerequisites
 -------------
 
@@ -30,7 +32,7 @@ Makefiles are used in libraries and directories and you will need some
 version of *make*.
 
 **Python.**
-Starting with Version 4.4, we use Python for visualization of results
+We use Python for visualization of results
 (see :ref:`plotting`) and also for user input (see :ref:`setrun`).
 Older Matlab plotting scripts are still available but are no longer
 being developed and the examples now included in Clawpack include
@@ -57,21 +59,68 @@ Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 Downloading Clawpack
 --------------------
 
-For instructions on using the version of Clawpack in the Subversion repository instead of
-the tar file described below, see the `Clawpack wiki
-<http://kingkong.amath.washington.edu/trac/clawpack>`_ 
+Eventually tar files will be provided containing all the code from various
+repositories together for the convenience of users.
 
-First download the tar file from the Clawpack download page:
+Eventually `pip install clawpack` might work in general for all of Clawpack.
+Currently this only installs PyClaw, see
+`Installing PyClaw <http://numerics.kaust.edu.sa/pyclaw/started.html>`_
 
-  *  `<http://kingkong.amath.washington.edu/clawpack/download>`_
+Currently Clawpack 5.0 can be obtained by cloning a number of repositories
+from `<https://github.com/clawpack>`_.
 
-This file will be of the form clawpack-N.tar.gz  where N is the 
-version number.
+See the :ref:`setup_dev` below and follow these, except
+that you can just clone directly from  `<https://github.com/clawpack>`_
+rather than first forking them if you do not plan to make changes and issue
+pull requests.
 
-Move this tar file to the directory where you want to install claw and then::
+.. _setup_dev:
 
-  $  tar -zxvf clawpack-N.tar.gz
-  $  cd clawpack-N
+Temporary installation instructions for developers
+---------------------------------------------------
+
+**This should be simplified eventually and moved elsewhere**
+
+Read the sections :ref:`git_and_github` and :ref:`using-git`.
+
+To get started you will need to fork and then clone at least the following
+set of repositories:
+
+* `<https://github.com/clawpack/pyclaw>`_  (Python code, some of which is
+  needed also for Fortran version)
+* `<https://github.com/clawpack/clawutil>`_ (Utility functions,
+  Makefile.common used in multiple repositories)
+* `<https://github.com/clawpack/amrclaw>`_ (AMR version of Fortran code)
+* `<https://github.com/clawpack/riemann>`_  (Riemann solvers)
+* `<https://github.com/clawpack/visclaw>`_  (Python graphics and visualization tools)
+
+You might also want:
+
+* `<https://github.com/clawpack/doc>`_  (documentation)
+* `<https://github.com/clawpack/geoclaw>`_  (GeoClaw)
+* `<https://github.com/clawpack/classic>`_  (Classic single-grid code)
+* `<https://github.com/clawpack/apps>`_  (To collect applications)
+* `<https://github.com/clawpack/clawpack-4.x>`_  (Previous versions, 4.6)
+
+You should set your environment variable `$CLAW` to point to the top
+level directory that contains all of these clones.
+
+Then you should be able to do::
+
+    $ cd $CLAW
+    $ python clawutil/src/make_clawtop.sh
+
+This will create a directory `$CLAW/python/clawpack` that contains 
+symbolic links to all the python directories from which you might
+want to import things.
+
+Set your `PYTHONPATH` environment variable to include `$CLAW/python`, e.g.  ::
+
+    $ export PYTHONPATH=$CLAW/python:$PYTHONPATH
+
+and then you should be able to do things like... ::
+
+    >>> from clawpack.visclaw.Iplotclaw import Iplotclaw
 
 
 .. _setenv:
@@ -79,55 +128,27 @@ Move this tar file to the directory where you want to install claw and then::
 Setting environment variables
 -----------------------------
 
-In this claw directory modify the *setenv.py* file if necessary and then::
+In addition to setting the environment variables `$CLAW` and `$PYTHONPATH`
+as described above, you should also set::
 
-  $  python setenv.py 
+    CLAWUTIL=$CLAW/clawutil
+    AMRCLAW=$CLAW/amrclaw
+    GEOCLAW=$CLAW/geoclaw
+    VISCLAW=$CLAW/visclaw
+    RIEMANN=$CLAW/riemann
+    FC=gfortran   # or other preferred Fortran compiler
 
-This will provide files to set environment variables appropriately.
-In particular, the variable `CLAW` should be set to point to this directory.  
-
-Now execute ::
-
-  $ source setenv.bash
-
-if you are using the bash shell, or ::
-
-  $ source setenv.csh
-
-if you use `csh`.  If you don't know what shell you are using, try both and see which one
-doesn't give errors, you won't hurt anything.
-
-If you don't know about Unix shells, see these `class notes 
-<http://kingkong.amath.washington.edu/uwamath583/sphinx/notes/html/shells.html>`_, for an
-introduction and other links.
-
-
-Consider putting the commands  contained in the appropriate file
-`setenv.bash` or `setenv.csh` in your .cshrc or .bashrc
+Consider putting the appropriate commands  in your .cshrc or .bashrc
 file (which is executed automatically in each new shell you create).   
-
-In particular, the commands found in these files set the following
-`environment variables
-<http://kingkong.amath.washington.edu/uwamath583/sphinx/notes/html/vars.html>`_
-
- * `CLAW` is set to the path to the main directory of the Clawpack files.  
- * `PYTHONPATH` is a list of paths that should include $CLAW/python. 
-   If this variable is already set in the shell from which you execute `setenv.py`
-   then it should provide an extension of the original path to include this.
- * `FC` is set to `gfortran` as the default compiler to use for Fortran.  You may 
-   want to change this.
 
 .. _first_test:
 
 Testing your installation and running an example
 ------------------------------------------------
 
-There are a number of test cases bundled with Clawpack in the directories
-`$CLAW/apps` and `$CLAW/book`.  Here and below it is assumed that the
-environment variable `CLAW` has been set properly as described above.
 
 As a first test, go to the directory
-`$CLAW/apps/advection/1d/example1 <claw/apps/advection/1d/example1>`_.
+`$CLAW/amrclaw/tests/example1`.
 You can try the following test in this directory, or you may want to first
 make a copy of it (see the instructions in :ref:`copyex`).
 
@@ -167,19 +188,7 @@ that are read in by the Fortran code.  This can be done via::
 If this gives an error, see :ref:`trouble_makedata`.
 
 This uses the Python code in `setrun.py` to create data files that have the
-form `*.data`.  For the 1d advection example, two files are created,
-`claw.data` and `setprob.data`.  The file `claw.data` 
-contains standard run-time
-parameters of Clawpack (such as the number of grid cells `mx`, indications
-of what method to use, what boundary conditions to impose, etc.).  
-The file `setprob.data` typically contains parameters specific to a
-particular application, in this case the advection velocity `u`.
-
-In Clawpack 4.3 and earlier versions, the user would modify the `claw.data`
-and `setprob.data` files directly.  Starting with Clawpack 4.4, the
-recommended approach is to only modify the Python function `setrun` defined
-in the file `setrun.py`, and use "make .data" to create the `*.data` files.
-See :ref:`setrun` for more details.
+form `*.data`.  
 
 Once the executable and the data files all exist, we can run the code.  The
 recommended way to do this is to type::
@@ -188,7 +197,7 @@ recommended way to do this is to type::
 
 If this gives an error, see :ref:`trouble_makeoutput`.
 
-One could run the code by typing "./xclaw", but using the make option has
+One could run the code by typing "./xamr", but using the make option has
 several advantages.  For one thing,
 this checks dependencies to make sure the executable and data files are up
 to date, so you could have typed "make .output" without the first two steps
@@ -205,55 +214,8 @@ placed in the output directory for future reference.
 
 If the code runs successfully, you should see output like the following::
 
-  Reading data file, first 5 lines are comments: claw.data   
-   running...
-    
-  Reading data file, first 5 lines are comments: setprob.data
-  CLAW1EZ: Frame    0 output plot files done at time t =  0.0000D+00
-  
-  CLAW1... Step   1   Courant number = 5.000  dt =  0.1000D+00  t =  0.1000D+00
-  CLAW1 rejecting step... Courant number too large
-  CLAW1... Step   1   Courant number = 0.900  dt =  0.1800D-01  t =  0.1800D-01
-  CLAW1... Step   2   Courant number = 0.900  dt =  0.1800D-01  t =  0.3600D-01
-  CLAW1... Step   3   Courant number = 0.900  dt =  0.1800D-01  t =  0.5400D-01
-  CLAW1... Step   4   Courant number = 0.900  dt =  0.1800D-01  t =  0.7200D-01
-  CLAW1... Step   5   Courant number = 0.900  dt =  0.1800D-01  t =  0.9000D-01
-  CLAW1... Step   6   Courant number = 0.500  dt =  0.1000D-01  t =  0.1000D+00
-  CLAW1EZ: Frame    1 output plot files done at time t =  0.1000D+00
-  
-  --- etc --- etc ---
-  
-  CLAW1EZ: Frame    9 output plot files done at time t =  0.9000D+00
-  
-  CLAW1... Step   1   Courant number = 0.900  dt =  0.1800D-01  t =  0.9180D+00
-  CLAW1... Step   2   Courant number = 0.900  dt =  0.1800D-01  t =  0.9360D+00
-  CLAW1... Step   3   Courant number = 0.900  dt =  0.1800D-01  t =  0.9540D+00
-  CLAW1... Step   4   Courant number = 0.900  dt =  0.1800D-01  t =  0.9720D+00
-  CLAW1... Step   5   Courant number = 0.900  dt =  0.1800D-01  t =  0.9900D+00
-  CLAW1... Step   6   Courant number = 0.500  dt =  0.1000D-01  t =  0.1000D+01
-  CLAW1EZ: Frame   10 output plot files done at time t =  0.1000D+01
-  
-If you don't like seeing output from every time step, you can suppress this by setting
-`verbosity = 0` in the file `setrun.py`.  You might try doing that and then typing::
+.. warning:: Out of date!  Needs updating.
 
-  $ make .output
-
-It should recreate the data files and rerun the code, with less output along the way.
-
-If the code runs properly, the subdirectory `_output` should contain the following files::
-
-    claw.data   fort.q0003  fort.q0008  fort.t0002  fort.t0007
-    fort.info   fort.q0004  fort.q0009  fort.t0003  fort.t0008
-    fort.q0000  fort.q0005  fort.q0010  fort.t0004  fort.t0009
-    fort.q0001  fort.q0006  fort.t0000  fort.t0005  fort.t0010
-    fort.q0002  fort.q0007  fort.t0001  fort.t0006  setprob.data
-
-The `fort.info` file contains information about the run just completed.  The files
-with names of the form `fort.t000N` and `fort.q000N` contain the computed results for
-Frame `N`.  See :ref:`fortfiles` for more information about the contents of these files.
-
-Normally you will not want to examine these files directly, but instead will use a
-plotting tool to plot the results.
 
 
 **Plotting the results.**  
@@ -282,6 +244,7 @@ format of the files produced by Clawpack.
 
 **Creating html versions of source files.***
 
+
 To best view the results, and the source code and README files,
 type::
 
@@ -293,6 +256,9 @@ and view the resulting README.html file with a web browser.
 
 Starting a Python web server
 -----------------------------
+
+.. warning:: Out of date!  Needs updating.
+
 
 This part is not required, but 
 to best view README.html and other Clawpack generated html files,
