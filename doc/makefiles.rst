@@ -6,8 +6,9 @@
 Clawpack Makefiles
 =====================================
 
-.. contents::
-
+Makefiles for the Fortran code in many repositories 
+use the common Makefile found in `$CLAW/clawutil/src/Makefile.common`,
+so you must have the `clawutil` repository.
 
 In most directories with a `Makefile` you can type::
 
@@ -115,11 +116,4 @@ To force recompilation of all files, use the "make new" option, e.g. to
 recompile with the `-g` flag for debugging::
 
     $ make new FFLAGS=-g
-
-
-
-.. warning::
-   Some significant changes to Makefiles are contemplated for Clawpack 5.0.
-
-
 

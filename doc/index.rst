@@ -26,8 +26,8 @@ Overview and Getting Started:
 .. toctree::
    :maxdepth: 1
 
-   claw43
-   claw43to44
+   claw4x
+   claw46to50
    trouble
    vm
 
@@ -37,8 +37,13 @@ Developers' guide to using Git
 .. toctree::
    :maxdepth: 1
 
-   git
+   git_and_github
    gitwash/index
+   howto_doc
+   regression
+   git_versions
+
+See also :ref:`setup_dev`
 
 Examples and Applications:
 -----------------------------
@@ -58,13 +63,15 @@ Fortran and Python codes:
 -----------------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    
 
    fortran
    python
    makefiles
    setrun
+   bc
+   output_styles
    mapc2p
 
 VisClaw: Plotting and Visualization Tools
@@ -73,10 +80,26 @@ VisClaw: Plotting and Visualization Tools
 .. toctree::
    :maxdepth: 2
    
-   visclaw_doc/index
+   plotting
+   plotting_python
+   setplot
+   current_data
+   plotexamples
+   plotting_faq
+   geoplot
+   matlab_plotting
+
 
 AMRClaw: Adaptive Mesh Refinement
 -----------------------------------------
+
+.. toctree::
+   :maxdepth: 2
+   
+   setrun_amrclaw
+   flag
+
+**Documentation below from amrclaw repository should be merged in**
 
 .. toctree::
    :maxdepth: 2
@@ -89,7 +112,16 @@ GeoClaw: For geophysical flows
 .. toctree::
    :maxdepth: 2
    
-   geoclaw_doc/index
+   geoclaw
+   geohints
+   topo
+   setrun_geoclaw
+   plotting_geoclaw
+   quick_tsunami
+   okada
+   sealevel
+   manning
+   tsunamidata
 
    
 Advanced features:

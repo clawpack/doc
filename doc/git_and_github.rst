@@ -1,5 +1,5 @@
 
-.. _git:
+.. _git_and_github:
 
 Using Git and GitHub
 ====================
