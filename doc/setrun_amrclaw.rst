@@ -10,8 +10,9 @@ It may be useful to look at a specific example, e.g.
 :ref:`setrun_amrclaw_sample`.
 
 **Note:** Many parameters have changed name since Version 4.X and some new
-ones have been added.  To convert a Version 4.x `setrun.py` file to Version
-5.0, see :ref:`claw46to50`.
+ones have been added.  See :ref:`setrun_changes` for a summary.
+
+To convert a Version 4.x `setrun.py` file to Version 5.0, see :ref:`claw46to50`.
 
 
 Input

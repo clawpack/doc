@@ -7,7 +7,7 @@ Flagging cells for adaptive refinement
 
 **Describe flagging  and clustering algorithms in more detail.**
 
-See :ref:`setrun` for a description of the input parameters that define how
+See :ref:`setrun_amrclaw` for a description of the input parameters that define how
 Richardson extrapolation and/or the `flag2refine` subroutine work.
 
 .. _flag_regions:
@@ -18,9 +18,10 @@ Refinement regions
 In AMRClaw and GeoClaw it is possible to specify space-time regions in which
 refinement to a certain level is forced or a level beyond which refinement if
 forbidden.  These are specified through the parameter `rundata.regiondata.regions` in
-`setrun.py`.  See :ref:`setrun`.  **Is this right?**
+`setrun.py`.  
 This is a list of lists, each of which specifies a region in the form 
 `[minlevel,maxlevel,t1,t2,x1,x2,y1,y2]`.
+
 
 For example, suppose that `amr_levels_max = 6` has been specified along
 with these two regions::
@@ -55,23 +56,20 @@ be refined to any level from 1 to 6 depending on the error flagging criteria.
 
 It is easiest to explain how this works by summarizing the implementation:
 
-The regridding algorithm from level L to L+1 first loops over all grid cells
+The regridding algorithm from level L to L+1 loops over all grid cells
 at Level L and flags them or not based on the following criteria, where
 `(xc,yc)` represents the cell center and `t` is the current regridding time:
 
-* Initialize `flag = False` for this cell.
-* Loop over all regions (if any) for which `(xc,yc,t)` lies in the region
-  specified.
-  If `L >= maxlevel` for *any* such region, go on to the next grid cell
-  (with `flag == False` for this cell).
-  If `L < minlevel` for *every* such region, set `flag = True` and
-  go on to the next grid cell.
-* Otherwise, none of the regions either require or forbid
-  refinement of this cell.  In this case, apply the error flagging criteria 
+* Initialize the flag by applying the error flagging criteria
   specified by Richardson extrapolation and/or the default or user-supplied
   routine `flag2refine` to determine whether this cell should be flagged.
 
+* Loop over all regions (if any) for which `(xc,yc,t)` lies in the region
+  specified.
 
+  * If `L >= maxlevel` for *any* such region, set `flag = False` for this
+    cell and go on to the next cell.
 
-
+  * If `L < minlevel` for *every* such region, set `flag = True` and
+    go on to the next grid cell.
 
