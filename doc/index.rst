@@ -28,6 +28,7 @@ Overview and Getting Started:
 
    claw4x
    claw46to50
+   setrun_changes
    trouble
    vm
 
