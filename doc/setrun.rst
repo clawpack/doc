@@ -9,7 +9,7 @@ Specifying run-time parameters in `setrun.py`
 
 
 It may be useful to look at a specific example, e.g. 
-:ref:`setrun__sample`.
+:ref:`setrun_sample`.
 
 **Note:** Many parameters have changed name since Version 4.X and some new
 ones have been added.  See :ref:`setrun_changes` for a summary.
@@ -89,6 +89,25 @@ below.
 
    Initial time, often *t0 = 0.*
 
+.. attribute:: restart : boolean
+
+   **Currently only available in amrclaw and geoclaw.**
+
+   Set True to restart a previous computation.  To use this option, 
+   see :ref:`restart`.  Note that a change in the `Makefile` is also
+   required.
+
+.. attribute:: restart_file : str
+
+   If `restart == True` then this should be the name of the checkpoint 
+   file containing all the information needed to do a restart.  This will
+   generally be of the form `fort.chkNNNNN` where `NNNNN` is the (coarse
+   grid) timestep from the previous computation to restart from. 
+   This file is assumed to be in the directory specified for output from
+   this run.
+   See :ref:`restart` for more details.
+
+   
 .. attribute:: output_style: integer
 
    There are three possible ways to specify the output
@@ -315,8 +334,11 @@ below.
 
 .. attribute:: checkpt_style :: int
 
+   **Currently only available in amrclaw and geoclaw.**
+
    Specify how often checkpoint files should be created that can be used to
    restart a computation.
+   See :ref:`restart` for more details.
 
      * *checkpt_style = 0* : Do not checkpoint at all
     
