@@ -4,7 +4,11 @@
 {% block rootrellink %}
 <li><a href="http://www.clawpack.org"><font color="#7F0000">Clawpack Webpage</font></a>|&nbsp;</li>
 <li><a href="{{ pathto('apps') }}"><font color="#7F0000">Gallery</font></a>|&nbsp;</li>
+{%- if meta and meta.group == 'pyclaw' %}
+<li><a href="{{ pathto('pyclaw/index') }}"><font color="#7F0000">Contents</font></a>|&nbsp;</li>
+{%else %}
 <li><a href="{{ pathto('index') }}"><font color="#7F0000">Contents</font></a>|&nbsp;</li>
+{%endif %}
 {% endblock %}
 
 
@@ -24,11 +28,16 @@ pathto("_static/clawlogo.jpg", 1)}}" width=200 border="0" alt="Clawpack logo"/><
 <td>
 &nbsp;
 <br>
-<p style="font-size:300%;color:#7F0000"> Clawpack Documentation</p>
+<p style="font-size:300%;color:#7F0000"> Clawpack Documentation
+{%- if meta and meta.group == 'pyclaw' %}
+: PyClaw
+{%endif %}
+</p>
 <br>
 <p style="font-size:150%;color:#7F0000"> 
 Version 5.0 --- Under Construction!  Not yet accurate
 </p>
+
 </td>
 </tr>
 </table>
