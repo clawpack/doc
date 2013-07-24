@@ -74,6 +74,7 @@ Fortran and Python codes:
    bc
    output_styles
    mapc2p
+   restart
 
 VisClaw: Plotting and Visualization Tools
 -----------------------------------------
