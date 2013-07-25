@@ -75,42 +75,42 @@ List of available Riemann solvers:
 
 .. _Acoustics:
 
-:mod:`Acoustics <riemann.rp_acoustics>`
+:mod:`Acoustics <riemann.acoustics_1D>`
 ================================================
 
-.. automodule:: clawpack.riemann.rp_acoustics
+.. automodule:: clawpack.riemann.acoustics_1D_py
    :members:
    
 .. _Advection:
    
-:mod:`Advection <riemann.rp_advection>`
+:mod:`Advection <riemann.advection_1D>`
 ================================================
 
-.. automodule:: clawpack.riemann.rp_advection
+.. automodule:: clawpack.riemann.advection_1D_py
    :members:
    
 .. _`Burgers Equation`:
 
-:mod:`Burgers Equation <riemann.rp_burgers>`
+:mod:`Burgers Equation <riemann.burgers_1D>`
 =====================================================
 
-.. automodule:: clawpack.riemann.rp_burgers
+.. automodule:: clawpack.riemann.burgers_1D_py
    :members:
    
 .. _`Euler Equations`:
 
-:mod:`Euler Equations <riemann.rp_euler>`
+:mod:`Euler Equations <riemann.euler_1D>`
 ==================================================
 
-.. automodule:: clawpack.riemann.rp_euler
+.. automodule:: clawpack.riemann.euler_1D_py
    :members:
    
 .. _`Shallow Water Equations`:
    
-:mod:`Shallow Water Equations <riemann.rp_shallow>`
+:mod:`Shallow Water Equations <riemann.shallow_1D>`
 ============================================================
 
-.. automodule:: clawpack.riemann.rp_shallow
+.. automodule:: clawpack.riemann.shallow_1D_py
     :member-order: groupwise
     :members:
    
