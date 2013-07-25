@@ -15,7 +15,8 @@ These are essentially unchanged from 4.3.
 Starting in 4.4, we have also introduced a set of Python plotting tools, see
 :ref:`plotting` for some of the advantages of switching to these tools.
 
-For documentation of the Matlab plotting tools, see the :ref:`claw43`.
+For documentation of the Matlab plotting tools, see the Clawpack 4.3
+documention.
 
 .. warning:: There is one change to the form of the output files `fort.000N` starting in
    Clawpack 4.4:  The parameter `ndim` has been added.  

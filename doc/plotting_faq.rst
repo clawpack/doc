@@ -175,7 +175,7 @@ This would plot results from ``plotdata.outdir`` as blue circles and results
 from ``./_output2`` as red plus signs.  It's best to give the full path
 name, e.g. as done here using ``os.path.join(os.getcwd(), '_output2')``.
 
-How to set plot parameters that are not provided as attributes of :ref:`ClawPlotItem``?
+How to set plot parameters that are not provided as attributes of :ref:`ClawPlotItem`?
 ----------------------------------------------------------------------------------------
 
 Some commonly used plotting parameters can be specified as an attribute of a
