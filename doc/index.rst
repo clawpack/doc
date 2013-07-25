@@ -20,16 +20,19 @@ Overview and Getting Started:
    :maxdepth: 2
    
    about
-   changes
    installing
+   license
+   trouble
+   vm
 
 .. toctree::
    :maxdepth: 1
 
+   changes
    claw4x
    claw46to50
-   trouble
-   vm
+   claw43to44
+   setrun_changes
 
 Developers' guide to using Git
 ------------------------------
@@ -70,9 +73,11 @@ Fortran and Python codes:
    python
    makefiles
    setrun
+   setrun_sample
    bc
    output_styles
    mapc2p
+   restart
 
 VisClaw: Plotting and Visualization Tools
 -----------------------------------------
@@ -97,14 +102,10 @@ AMRClaw: Adaptive Mesh Refinement
    :maxdepth: 2
    
    setrun_amrclaw
+   setrun_amrclaw_sample
    flag
+   regions
 
-**Documentation below from amrclaw repository should be merged in**
-
-.. toctree::
-   :maxdepth: 2
-   
-   amrclaw_doc/index
 
 GeoClaw: For geophysical flows
 -----------------------------------------
@@ -116,6 +117,7 @@ GeoClaw: For geophysical flows
    geohints
    topo
    setrun_geoclaw
+   setrun_geoclaw_sample
    plotting_geoclaw
    quick_tsunami
    okada
@@ -131,7 +133,6 @@ Advanced features:
    :maxdepth: 1
    
    gauges
-   devel
 
 
 
@@ -143,16 +144,29 @@ PyClaw: Python tools
 
 Includes PetClaw, Using PETSc for parallel efficiency.
 
-* `PyClaw Documentation <http://numerics.kaust.edu.sa/pyclaw/>`_
+.. toctree::
+   :maxdepth: 2
+
+   pyclaw/index
 
 SharpClaw: High-order methods
 -----------------------------------------
 
-* `SharpClaw Documentation <http://numerics.kaust.edu.sa/sharpclaw/>`_
+SharpClaw has recently been integrated into PyClaw/PetClaw along with very high order WENO reconstruction through PyWENO code generation.  The 
+`pure Fortran SharpClaw code <http://bitbucket.org/ketch/sharpclaw>`_ is no longer supported.
 
+.. toctree:: 
+   :maxdepth: 1
+
+   pyclaw/solvers
+  
 
 Bibliography
 ------------
 
-:ref:`biblio`
+.. toctree::
+   :maxdepth: 1
+
+   biblio
+
 

@@ -1,5 +1,8 @@
 .. _license:
 
+License
+-------
+
 Copyright (c) 2009, <OWNER>
 All rights reserved.
 

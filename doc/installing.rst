@@ -108,7 +108,8 @@ level directory that contains all of these clones.
 Then you should be able to do::
 
     $ cd $CLAW
-    $ python clawutil/src/make_clawtop.sh
+    $ rm -ri python/clawpack  # only needed if you already had this directory
+    $ bash clawutil/src/make_clawtop.sh
 
 This will create a directory `$CLAW/python/clawpack` that contains 
 symbolic links to all the python directories from which you might
