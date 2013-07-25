@@ -20,7 +20,7 @@ from clawpack import pyclaw
 clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw')
 
 # Location for gallery files:
-gallery_dir_default = os.path.join(clawdir_default,'doc/gallery')  
+gallery_dir_default = '.'#os.path.join(clawdir_default,'doc/gallery')  
 
 remake = True   # True ==> remake all thumbnails even if they exist.
 
@@ -80,6 +80,7 @@ class Gallery(object):
             raise
 
         gfile = open(fname, 'w')
+        gfile.write(":group: pyclaw\n\n")
         gfile.write(".. _gallery:\n\n")
         gfile.write("==========================\n")
         gfile.write("Application gallery\n")
