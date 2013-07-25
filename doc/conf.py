@@ -44,7 +44,7 @@ extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
                 
 # extensions.append('sphinx.ext.jsmath')
 #extensions.append('sphinx.ext.pngmath')
-extensions.append('mathjax')
+extensions.append('sphinx.ext.mathjax')
 mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 

@@ -5,6 +5,10 @@
 Converting from Clawpack 4.6 to 5.0
 ##########################################
 
+Many input parameters have been renamed and some new options have been
+added.  See :ref:`setrun_changes`.
+
+
 
 Python conversion tool
 ----------------------
@@ -18,3 +22,14 @@ in your application directory.  You should then inspect the files generated
 and fix any broken links, etc.
 
 Currently this sort of works for 2d *amrclaw* applications only.
+
+**Note:**
+
+Old AMRClaw codes are often in a subdirectory *amr* of an application
+directory, and the directory above may contain Fortran files or other files
+used by the AMR code.  Typically you will want to combine these in one
+directory.
+
+The `Makefile` is currently not converted properly -- a generic `Makefile`
+is added to the directory but must be customized to point to any local
+Fortran codes, for example.
