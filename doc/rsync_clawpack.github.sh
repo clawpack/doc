@@ -1,2 +1,2 @@
 
-rsync -azv _build/html/ $CLAW/clawpack.github.com/doc/
+rsync -azv _build/html/ ../../clawpack.github.com/doc/
