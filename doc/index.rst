@@ -34,7 +34,6 @@ Overview and Getting Started:
    claw43to44
    setrun_changes
 
-
 Developers' guide to using Git
 ------------------------------
 
