@@ -13,7 +13,7 @@ import os
 
 # Main root for html links:
 #claw_html_root='http://localhost:50005'     
-claw_html_root='http://numerics.kaust.edu.sa/pyclaw'
+claw_html_root='http://clawpack.github.io/doc/pyclaw'
 
 # Determine PyClaw directory:
 from clawpack import pyclaw
