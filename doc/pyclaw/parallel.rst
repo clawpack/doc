@@ -17,7 +17,7 @@ with::
     import clawpack.petclaw as pyclaw
 
 
-Also, most of the provided scripts in `pyclaw/apps` are set up to run in parallel
+Also, most of the provided scripts in `pyclaw/examples` are set up to run in parallel
 simply by passing the command-line option `use_petsc=True` (of course, you will need
 to launch them with `mpirun`.
 
@@ -151,7 +151,7 @@ Running and plotting an example
 ================================
 Next ::
 
-    $ cd $PYCLAW/apps/advection/1d/constant
+    $ cd $PYCLAW/examples/advection/1d/constant
     $ python advection.py use_PETSc=True iplot=1
 
 This will run the code and then place you in an interactive plotting shell.
@@ -204,5 +204,5 @@ Now `state.grid.ng` contains appropriate information.
 
 Passing options to PETSc
 =========================
-The built-in applications (see :ref:`apps`) are set up to automatically pass
+The built-in applications (see :ref:`examples`) are set up to automatically pass
 command-line options starting with a dash ("-") to PETSc.

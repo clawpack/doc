@@ -153,7 +153,7 @@ def test():
     plotdir = '_plots'
     gsec = gallery.new_section('1-dimensional advection')
 
-    appdir = 'apps/advection/1d'
+    appdir = 'examples/advection/1d'
     description = """
         Advecting Gaussian with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1')
@@ -170,21 +170,21 @@ def make_1d():
 
     #----------------------------------------------
     gsec = gallery.new_section('1-dimensional advection')
-    appdir = 'apps/advection_1d/'
+    appdir = 'examples/advection_1d/'
     description = """
          Advecting Gaussian with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section('1-dimensional variable-velocity advection')
-    appdir = 'apps/advection_1d_variable'
+    appdir = 'examples/advection_1d_variable'
     description = """
          Advecting Gaussian and square wave with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0008fig1')
     gsec.new_item(appdir, plotdir, description, images)
      #----------------------------------------------
     gsec = gallery.new_section('1-dimensional acoustics')
-    appdir = 'apps/acoustics_1d_homogeneous'
+    appdir = 'examples/acoustics_1d_homogeneous'
     description = """
          Acoustics equations with wall boundary at left and extrap at
          right."""
@@ -192,7 +192,7 @@ def make_1d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional Burgers' equation")
-    appdir = 'apps/burgers_1d/'
+    appdir = 'examples/burgers_1d/'
     description = """
         Burgers' equation with sinusoidal initial data, steepening to
         N-wave.  """
@@ -200,13 +200,13 @@ def make_1d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional shallow water equation")
-    appdir = 'apps/shallow_1d/'
+    appdir = 'examples/shallow_1d/'
     description = """Shallow water shock tube."""
     images = ('frame0000fig0', 'frame0003fig0', 'frame0006fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional nonlinear elasticity")
-    appdir = 'apps/stegoton_1d'
+    appdir = 'examples/stegoton_1d'
     description = """
         Evolution of two trains of solitary waves from an initial gaussian.
         """
@@ -214,7 +214,7 @@ def make_1d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional Euler equations")
-    appdir = 'apps/euler_1d'
+    appdir = 'examples/euler_1d'
     description = """
         Woodward-Colella blast-wave interaction problem.
         """
@@ -233,7 +233,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional advection')
     #----------------------------------------------
-    appdir = 'apps/advection_2d'
+    appdir = 'examples/advection_2d'
     description = """
         Advecting square with periodic boundary conditions."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
@@ -243,7 +243,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional variable-coefficient advection')
     #----------------------------------------------
-    appdir = 'apps/advection_2d_annulus'
+    appdir = 'examples/advection_2d_annulus'
     description = """
         Advection in an annular region."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0008fig0')
@@ -253,7 +253,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional acoustics')
     #----------------------------------------------
-    appdir = 'apps/acoustics_2d_homogeneous'
+    appdir = 'examples/acoustics_2d_homogeneous'
     description = """
         Expanding radial acoustic wave in a homogeneous medium."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
@@ -263,7 +263,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional variable-coefficient acoustics')
     #----------------------------------------------
-    appdir = 'apps/acoustics_2d_variable'
+    appdir = 'examples/acoustics_2d_variable'
     description = """
         Expanding radial acoustic wave in a two-material medium with an interface."""
     images = ('frame0000fig0', 'frame0010fig0', 'frame0020fig0')
@@ -273,7 +273,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional shallow water equations')
     #----------------------------------------------
-    appdir = 'apps/shallow_2d/'
+    appdir = 'examples/shallow_2d/'
     description = """Radial dam-break."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
     gsec.new_item(appdir, plotdir, description, images)
@@ -282,7 +282,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional shallow water on the sphere')
     #----------------------------------------------
-    appdir = 'apps/shallow_sphere/'
+    appdir = 'examples/shallow_sphere/'
     description = """Wavenumber 4 Rossby-Haurwitz wave on a rotating sphere."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
     gsec.new_item(appdir, plotdir, description, images)
@@ -291,7 +291,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional Euler equations')
     #----------------------------------------------
-    appdir = 'apps/euler_2d'
+    appdir = 'examples/euler_2d'
     description = """
         Shock-bubble interaction."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
@@ -301,7 +301,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional KPP equation')
     #----------------------------------------------
-    appdir = 'apps/kpp/'
+    appdir = 'examples/kpp/'
     description = """
         Non-convex flux example."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
@@ -311,7 +311,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional p-system')
     #----------------------------------------------
-    appdir = 'apps/psystem_2d/'
+    appdir = 'examples/psystem_2d/'
     description = """
         Radial wave in a checkerboard-like medium."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
