@@ -174,11 +174,11 @@ in a PyClaw simulation by providing an appropriate function handle to
     * solver.dq_src if using SharpClaw.  In this case, the function should
       return :math:`\Delta t \cdot \psi(q)`.
 
-For an example, see pyclaw/apps/apps/euler_2d/shockbubble.py.
+For an example, see pyclaw/examples/euler_2d/shockbubble.py.
 
 Setting up the Makefile
 ===============================
-Generally you can just copy the Makefile from an example in pyclaw/apps and
+Generally you can just copy the Makefile from an example in pyclaw/examples and
 replace the value of `RP_SOURCES`.  Make sure the example you choose has the
 same dimensionality.  Also be sure to use the f-wave targets if your Riemann
 solver is an f-wave solver.

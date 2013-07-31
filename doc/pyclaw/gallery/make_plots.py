@@ -8,19 +8,19 @@ Sends output and errors to separate files to simplify looking for errors.
 """
 
 
-def list_apps(apps_dir=None):
+def list_examples(examples_dir=None):
     """
-    Searches all subdirectories of apps_dir for apps and prints out a list.
+    Searches all subdirectories of examples_dir for examples and prints out a list.
     """
     import os
 
-    if apps_dir is None:
+    if examples_dir is None:
         from clawpack import pyclaw
-        apps_dir = '/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw/apps/'
+        examples_dir = '/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw/examples/'
 
-    apps_dir = os.path.abspath(apps_dir)
+    examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()
-    os.chdir(apps_dir)
+    os.chdir(examples_dir)
     
     dirlist = []
     applist = []
@@ -45,16 +45,16 @@ def list_apps(apps_dir=None):
 
     return applist, dirlist
         
-def run_apps(apps_dir = None):
+def run_examples(examples_dir = None):
     """
-    Runs all apps in subdirectories of apps_dir.
+    Runs all examples in subdirectories of examples_dir.
     """
     import os
     import subprocess
 
     current_dir = os.getcwd()
 
-    app_list, dir_list = list_apps(apps_dir)
+    app_list, dir_list = list_examples(examples_dir)
     for app, directory in zip(app_list,dir_list):
         print directory, app
         os.chdir(directory)
@@ -64,19 +64,19 @@ def run_apps(apps_dir = None):
     os.chdir(current_dir)
 
 
-def make_plots(apps_dir = None):
+def make_plots(examples_dir = None):
     import os,sys
 
-    if apps_dir is None:
+    if examples_dir is None:
         from clawpack import pyclaw
-        apps_dir = '/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw/apps/'
+        examples_dir = '/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw/examples/'
 
-    print apps_dir
-    apps_dir = os.path.abspath(apps_dir)
+    print examples_dir
+    examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()
  
     print "Will run code and make plots in every subdirectory of "
-    print "    ", apps_dir
+    print "    ", examples_dir
     ans = raw_input("Ok? ")
     if ans.lower() not in ['y','yes']:
         print "Aborting."
@@ -90,12 +90,12 @@ def make_plots(apps_dir = None):
     ferr = open(fname_errors, 'w')
     ferr.write("ALL ERRORS FROM RUNNING EXAMPLES\n\n")
 
-    os.chdir(apps_dir)
+    os.chdir(examples_dir)
 
     goodlist_run = []
     badlist_run = []
     
-    app_list, dir_list = list_apps(apps_dir)
+    app_list, dir_list = list_examples(examples_dir)
     import subprocess
     for appname, directory in zip(app_list,dir_list):
         print 'Running ', directory, appname

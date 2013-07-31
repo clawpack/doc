@@ -19,14 +19,14 @@ When preparing contributions, please follow the guidelines in
       it's best to discuss them on the `claw-dev Google group
       <http://groups.google.com/group/claw-dev>`_ before starting.
       
-    * Make sure all tests pass and all the built-in apps run correctly.
+    * Make sure all tests pass and all the built-in examples run correctly.
 
     * Be verbose and detailed in your commit messages and your pull request.
 
     * It may be wise to have one of the maintainers look at your changes before
       they are complete
       (especially if the changes will necessitate modifications of tests
-      and/or apps).
+      and/or examples).
 
     * If your changes are not backward-compatible, your pull request should 
       include instructions for users to update their own application codes.
@@ -99,12 +99,12 @@ to run the tests in serial or with a small number of processes.
 Running a specific test
 -----------------------
 
-The PyClaw tests are associated with particular applications in the apps/ sub-
+The PyClaw tests are associated with particular applications in the examples/ sub-
 directory of the primary repository directory.  If you want to run tests for a
 specific application, simply specify the directory containing the application
 you are interested in::
 
-   nosetests -vs apps/acoustics_3d_variable
+   nosetests -vs examples/acoustics_3d_variable
 
 You can also specify a single file to run the tests it contains.
 
@@ -161,9 +161,9 @@ that you can use is :func:`pyclaw.util.check_diff`, which can use either an
 absolute tolerance or a relative tolerance to compare an expected value against
 the test output from the application.
 
-See apps/acoustics_1d_homogeneous/test_acoustics.py for a comprehensive example
+See examples/acoustics_1d_homogeneous/test_acoustics.py for a comprehensive example
 of how to use :func:`~pyclaw.util.gen_variants` and
-:func:`~pyclaw.util.check_diff`. See apps/shallow_sphere/test_shallow_sphere.py
+:func:`~pyclaw.util.check_diff`. See examples/shallow_sphere/test_shallow_sphere.py
 for an example that uses :func:`~pyclaw.util.test_app` and also loads a known
 solution from disk using numpy.
 

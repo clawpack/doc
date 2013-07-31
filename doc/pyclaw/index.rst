@@ -11,7 +11,7 @@ Install and model a shockwave right away::
     git clone git@github.com:clawpack/clawpack.git
     cd clawpack
     pip install -e .
-    cd clawpack/pyclaw/apps/euler_2d
+    cd clawpack/pyclaw/examples/euler_2d
     python shockbubble.py iplot=1
 
 **********

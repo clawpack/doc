@@ -25,7 +25,7 @@ are complicated and implement time consuming algorithms, and the performance
 of the overall procedure (porting and running into PyClaw a new problem) is one 
 of the main user's concern, one should consider directly using the f2py 
 interface in the initialization script (see :ref:`problem_setup`).
-The shallow water equations solved on a sphere `(code here) <http://numerics.kaust.edu.sa/pyclaw/apps/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_ represent a
+The shallow water equations solved on a sphere `(code here) <http://numerics.kaust.edu.sa/pyclaw/examples/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_ represent a
 useful and complete example to understand the simplicity of the procedure. 
 In that problem setup, a few Fortran routines have been used to provide the 
 following functionality:
@@ -45,7 +45,7 @@ following functionality:
 The first step to succesfully interface the Fortran functions with PyClaw 
 is to automate the extension module generation of these routines through f2py.
 `This Makefile
-<http://numerics.kaust.edu.sa/pyclaw/apps/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_
+<http://numerics.kaust.edu.sa/pyclaw/examples/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_
 shows how to do it::
 
     # Problem's source Fortran files
@@ -82,7 +82,7 @@ the following output::
     >>> Base Class:	<type 'module'>
     >>> String Form:	<module 'problem' from 'problem.so'>
     >>> Namespace:	Interactive
-    >>> File:		/Users/../../../clawpack/pyclaw/apps/shallow-sphere/problem.so
+    >>> File:		/Users/../../../clawpack/pyclaw/examples/shallow-sphere/problem.so
     >>> Docstring:
         This module 'problem' is auto-generated with f2py (version:1).
         Functions:
@@ -117,7 +117,7 @@ other multidimensional arrays, i.e. ``q`` and ``aux``.
 
 We are now ready to call and use the Fortran functions in the initialization
 script. For instance, the ``src2`` function is called in the 
-`script <http://numerics.kaust.edu.sa/pyclaw/apps/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_ by using a fortran_src_wrapper function whose main part reads::
+`script <http://numerics.kaust.edu.sa/pyclaw/examples/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_ by using a fortran_src_wrapper function whose main part reads::
 
     >>> # Call src2 function
     >>> import problem
@@ -134,7 +134,7 @@ Makefile. The shallow water equations on a sphere is again a
 typical example that uses this nice feature. Indeed, to run correctly the problem an 
 ad-hoc ``step2`` function (i.e. the ``step2qcor``) is required. For that problem
 the interesting part of the `Makefile
-<http://numerics.kaust.edu.sa/pyclaw/apps/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_
+<http://numerics.kaust.edu.sa/pyclaw/examples/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_
 reads::
 
     # Override step2.f with a new function that contains a call to an additional

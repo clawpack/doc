@@ -134,7 +134,7 @@ Running and plotting an example
 -----------------------------------------------------------
 Next ::
 
-    cd clawpack/pyclaw/apps/advection_1d
+    cd clawpack/pyclaw/examples/advection_1d
     python advection.py iplot=1
 
 This will run the code and then place you in an interactive plotting shell.
