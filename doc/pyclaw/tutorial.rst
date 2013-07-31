@@ -34,7 +34,7 @@ We'll assume that you've already followed the :ref:`installation` instructions.
    interactive shell.  If you don't want to type all these commands, you can
    instead::
    
-    $ cd $PYCLAW/apps/acoustics/1d/homogeneous 
+    $ cd $PYCLAW/examples/acoustics/1d/homogeneous 
     $ python acoustics.py iplot=1
 
 Now launch an iPython session and import pyclaw
@@ -175,6 +175,6 @@ This should print out a few lines indicating the output times. It also prints th
 That's it!  Your first PyClaw simulation.  Of course, we've only
 scratched the surface of what PyClaw can do, and there are many
 important options that haven't been discussed here.  To get an
-idea, take a look through the pyclaw/apps directory and try running
+idea, take a look through the pyclaw/examples directory and try running
 some other examples.  It's also a good idea to get more deeply
 acquainted with the main :ref:`pyclaw_classes`.

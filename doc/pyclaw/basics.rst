@@ -13,5 +13,5 @@ The Basics
 
    started
    tutorial
-   apps
+   examples
    plotting

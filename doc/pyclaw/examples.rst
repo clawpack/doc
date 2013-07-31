@@ -1,6 +1,6 @@
 :group: pyclaw
 
-.. _apps:
+.. _examples:
 
 ========================================
 Solving other hyperbolic PDEs
@@ -10,15 +10,15 @@ solving other systems of hyperbolic equations with PyClaw.
 
 The built-in PyClaw application scripts
 ========================================
-PyClaw comes with many example application scripts in the directory `pyclaw/apps/`.
+PyClaw comes with many example application scripts in the directory `pyclaw/examples/`.
 These applications are meant to demonstrate the kinds of things that can be done
 with PyClaw and are a great place to learn how to use PyClaw.  To run one of them
 simply do the following at the command prompt::
 
-    $ cd $PYCLAW/apps/acoustics_1d_homogeneous
+    $ cd $PYCLAW/examples/acoustics_1d_homogeneous
     $ python acoustics.py iplot=1
 
-You can run any of the apps similarly by going to the appropriate directory and
+You can run any of the examples similarly by going to the appropriate directory and
 executing the Python script.
 
 Command-line options
