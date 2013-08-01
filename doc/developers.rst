@@ -153,7 +153,19 @@ anything:
 
    which gives a cleaner history than merging the branches.
 
-#.  Run the appropriate regression tests (**Need to describe these**)
+#.  Run the appropriate regression tests.  If you have modified code
+    in pyclaw or riemann, then you should run the pyclaw tests.  First,
+    if you have modified any Fortran code, you need to recompile::
+
+        cd clawpack/
+        pip install -e .
+
+    Then run the tests::
+
+        cd pyclaw
+        nosetests
+
+    If any tests fail, you should fix them before issuing a pull request.
 
 To issue a pull request (PR), go to the Github page for your fork of the
 repository in question, select the branch from which you want the pull
