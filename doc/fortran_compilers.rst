@@ -61,7 +61,7 @@ gfortran compiler
 
 * For debugging::
 
-    FFLAGS = -g -Wall -fbounds-check -ffpe-trap=invalid,overflow,zero
+    FFLAGS = -g -Wall -pedantic -fbounds-check -ffpe-trap=invalid,overflow,zero
 
 * For optimizing::
 
@@ -74,7 +74,7 @@ gfortran compiler
   In this case you should also set the environment variable `OMP_NUM_THREADS`
   to indicate how many threads to use.
 
-  **Note:** Versions of gfortran before ?? are known to have OpenMP bugs.
+  **Note:** Versions of gfortran before 4.6 are known to have OpenMP bugs.
 
 .. _fortran_intel:
 
@@ -87,7 +87,7 @@ Set the `FC` environment variable to `ifort`.
 
 * For debugging::
 
-    FFLAGS = -g -C -CB -CU -fpe0 -ftrapuv
+    FFLAGS = -g -C -CB -CU -fpe0 -ftrapuv -fp-model precise
 
 * For optimizing::
 
@@ -95,7 +95,7 @@ Set the `FC` environment variable to `ifort`.
 
 * For using OpenMP::
 
-    FFLAGS = -O2 -fopenmp
+    FFLAGS = -O2 -openmp
 
   In this case you should also set the environment variable `OMP_NUM_THREADS`
   to indicate how many threads to use.

@@ -63,7 +63,8 @@ More tips
 * Similarly, remove the file ``.plots`` to force the plots to be recreated.
   
 
-* If you change the compiler flags FFLAGS in the Makefile then you should
+* If you change the compiler flags FFLAGS in the Makefile or as an
+  environment variable, then you should
   make sure that all files used are recompiled with the new flags.  The
   Makefiles as written do not catch this dependency and will not recompile
   all the .o files when the Makefile changes.  To force recompilation,

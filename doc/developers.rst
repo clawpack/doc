@@ -65,11 +65,12 @@ the `master` branch should always reflect what's in the main
 *clawpack* repository.  You can update it to reflect any changes via::
 
         git checkout master
-        git pull 
+        git fetch origin
+        git merge origin/master
 
 or simply::
 
-        git pull origin master
+        git pull origin master:master
 
 If you plan to make changes and issue pull requests to one or more
 repositories, you will need to do the following steps for each such
@@ -111,7 +112,9 @@ Modifying code
 Before making changes, you generally want to make sure *master* is up to
 date::
 
-        git pull origin master
+        git checkout master
+        git fetch origin
+        git merge origin/master
 
 Then create a new branch based on `origin/master` and
 commit to this branch::
@@ -139,7 +142,7 @@ anything:
 
 #. Make sure you are up to date with *master*::
 
-        git pull origin master
+        git pull origin master:master
 
    If this does not say "Already up-to-date" then you might want to rebase
    your modified code onto the updated master.  With your feature branch

@@ -9,8 +9,13 @@ Boundary conditions are imposed each time step by filling ghost cells
 adjacent to the edge of each grid patch.  See Chapter 4 of [LeVeque-FVMHP]_
 for more details.
 
+Boundary conditions are set by the library routines:
+
+* `$CLAW/classic/src/Nd/bcN.f` for the classic code (N = 1, 2, 3).
+* `$CLAW/amrclaw/src/Nd/bcNamr.f` for the amrclaw code (N = 2, 3).
+
 Several standard choices of boundary condition procedures are provided in
-the library routine `bcN.f` (in `N` space dimensions).  These can be
+these routines, and can be 
 selected at each boundary by setting the input paramters `bc_lower` and
 `bc_upper` in each dimension (see :ref:`setrun`) to one of the following:
 
@@ -106,6 +111,9 @@ also be used on dry land (where the depth `h` is zero).
 In some cases reflecting boundary conditions might be more appropriate,
 e.g. along the walls of a wave tank.  
 
+The library routine `$CLAW/geoclaw/src/2d/shallow/bc2amr.f` is modified from
+the  `amrclaw` version only by extrapolating the depth at the boundaries
+into ghost cells.
 
 .. _bc_sphere:
 
