@@ -29,11 +29,6 @@ used to view the resulting plots.  These will be in a subdirectory
 of the current directory as specified by PLOTDIR in the Makefile.
 
 
-Viewing plots via a local web server
-====================================
-
-**Need to update this section**
-
 
 Producing a latex file with plots from the command line
 =======================================================
@@ -60,16 +55,14 @@ Interactive plotting with ``Iplotclaw``
 =======================================
 
 For interactive plotting we suggest using `IPython
-<http://ipython.scipy.org/moin/>`_, which is a nicer shell
+<http://ipython.org>`_, which is a nicer shell
 than the pure python shell, with things like command completion and history.
-See the `Quick IPython Tutorial
-<http://ipython.scipy.org/doc/manual/html/interactive/tutorial.html>`_
 
 
 Here's an example::
 
     $  ipython
-    In [1]: from pyclaw.plotters.Iplotclaw import Iplotclaw
+    In [1]: from clawpack.visclaw.Iplotclaw import Iplotclaw
     In [2]: ip = Iplotclaw() 
     In [3]: ip.plotloop()
     Executing setplot ... 
@@ -181,11 +174,6 @@ from, you could do, for example::
 
 .. _ipyclaw:
 
-ipyclaw
-=======
-
-**Need to update for new profiles?**
-
 
 .. _printframes:
 
@@ -198,8 +186,8 @@ printframes
 The function pyclaw.plotters.frametools.printframes can be used to produce html and
 latex versions of the plots::
 
-   >>> from pyclaw.plotters.data import ClawPlotData
-   >>> from pyclaw.plotters import frametools
+   >>> from clawpack.visclaw.data import ClawPlotData
+   >>> from clawpack.visclaw import frametools
    >>> plotclaw = ClawPlotData()
    >>> # set attributes as desired
    >>> frametools.printframes(plotclaw)
@@ -220,24 +208,20 @@ Specifying what and how to plot
 
 The first step in specifying how to plot is to create a :ref:`ClawPlotData`
 object to hold all the data required for plotting.  This is generally done
-one of two ways:
+by creating a file `setplot.py` (see below).
 
- 1. In a script such as the plotclaw.py script included in most example
-    directories, e.g.,  
-    `<claw/examples/acoustics/1d/example1/plotclaw.py.html>`_.
-
- 2. By creating an instance of Iplotclaw to do interactive plotting, e.g.::
+Note that when you use Iplotclaw to do interactive plotting, e.g.::
 
        >>> ip = Iplotclaw()
 
-    Then ip will have an attribute plotdata that is a :ref:`ClawPlotData` 
-    object.  This object will have attribute setplot initialized to
-    'setplot.py', indicating that other attributes should be set by
-    executing the setplot function defined in the file 'setplot.py' in this
-    directory.
+Then object `ip` will have an attribute plotdata that is a :ref:`ClawPlotData` 
+object.  This object will have attribute setplot initialized to
+'setplot.py', indicating that other attributes should be set by
+executing the setplot function defined in the file 'setplot.py' in this
+directory.
 
 Once you have a :ref:`ClawPlotData` object you can set various attributes to
-control what is plotted.  For example,::
+control what is plotted interactively if you want.  For example,::
 
       >>> plotdata.plotdir = '_plots'
       >>> plotdata.setplot = 'my_setplot_file.py'
