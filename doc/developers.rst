@@ -118,7 +118,8 @@ commit to this branch::
 
         git checkout -b new_feature origin/master
         # make some changes
-        git commit - "describe the changes"
+        # git add the modified files
+        git commit -m "describe the changes"
 
 then push to your own fork::
 
