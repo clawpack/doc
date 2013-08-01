@@ -45,21 +45,24 @@ An alternative to installing the packages discussed below, you could also use th
 :ref:`VM`, which has all the required Python modules pre-installed.
 
 For use with Clawpack, you will need the `Numpy
-<http://docs.scipy.org/doc/numpy/user/>`_ module (*Numerical Python*)
+<http://www.numpy.org/>`_ module (*Numerical Python*)
 that allows working with arrays in much the same way as in Matlab.  
 This is distributed as part of 
 `SciPy <http://docs.scipy.org/doc/>`_ (*Scientific Python*).
-See the `Installing SciPy http://www.scipy.org/Installing_SciPy>`_
+See the `Installing SciPy <http://www.scipy.org/Installing_SciPy>`_
 page for tips installing SciPy and NumPy on various platforms.
 
 For plotting you will also need the `matplotlib
-<http://matplotlib.sourceforge.net/>`_ module which provides Matlab-like
+<http://matplotlib.org/>`_ module which provides Matlab-like
 plotting commands for 1d and 2d plots (e.g. contour and pcolor plots).
 This is generally the hardest thing to get going properly.  See the 
 `matplotlib Installation FAQ
 <http://matplotlib.sourceforge.net/faq/installing_faq.html>`_.
 
 Often the easiest way to get all the modules you need is to install the
+
+`Anaconda Python Distribution <http://docs.continuum.io/anaconda/>`_
+or the 
 `Enthought Python Distribution
 <http://www.enthought.com/products/epd.php>`_, which is free for academic
 users.  Versions are available for Windows, Mac OS X, and Redhat linux.  
@@ -90,7 +93,8 @@ Some useful links to get started learning Python:
    * `NumPy for Matlab users <http://www.scipy.org/NumPy_for_Matlab_Users>`_
    * `SciPy Reference Guide <http://docs.scipy.org/doc/scipy/reference/>`_
    * `Matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_
-   * `LeVeque's class notes <http://kingkong.amath.washington.edu/uwamath583/sphinx/notes/html/python.html>`_ 
+   * `LeVeque's class notes
+   * <http://faculty.washington.edu/rjl/classes/am583s2013/notes/python.html>`_ 
    * `Langtangen's book <http://folk.uio.no/hpl/scripting/>`_ and
      `Introductory slides <http://heim.ifi.uio.no/~hpl/scripting/all-nosplit/>`_
 

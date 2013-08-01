@@ -12,5 +12,5 @@ For most users, the best way to view the documentation is
 
 The source files that create this documentation are included in the
 repository 
-`clawpac/doc <https://github.com/clawpack/doc>`_ repository in `$CLAW/doc/doc`.
+`clawpack/doc <https://github.com/clawpack/doc>`_ repository in `$CLAW/doc/doc`.
 See :ref:`howto_doc` if you want to create and view them locally.

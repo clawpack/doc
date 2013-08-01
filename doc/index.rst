@@ -40,6 +40,7 @@ Developers' guide to using Git
 .. toctree::
    :maxdepth: 1
 
+   developers
    git_and_github
    gitwash/index
    howto_doc
