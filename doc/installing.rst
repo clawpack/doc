@@ -25,6 +25,9 @@ Fortran 77 and Fortran 90/95) and so compiling and running the code
 requires a Fortran compiler, such as `gfortran
 <http://gcc.gnu.org/wiki/GFortran>`_, which is part of the GNU gcc compiler
 suite.
+See :ref:`fortran_compilers` for more about which compilers work well with
+Clawpack.
+
 For Mac OSX, see `hpc.sourceforge.net <http://hpc.sourceforge.net/>`_ for
 some installation options.
 
@@ -40,8 +43,9 @@ being developed and the examples now included in Clawpack include
 (see :ref:`setplot`).
 
 You will need Python Version 2.5 or above (but **not** 3.0 or above,
-which is not backwards compatible).  You will also need *NumPy* and
-*matplotlib* for plotting.  
+which is not backwards compatible).  You will also need 
+`NumPy <http://www.numpy.org/>`_ and
+`matplotlib <http://matplotlib.org/>`_ for plotting.  
 
 See :ref:`python` for information on
 installing the required modules and to get started using Python if
@@ -59,69 +63,22 @@ Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 Downloading Clawpack
 --------------------
 
-Eventually tar files will be provided containing all the code from various
+Tar files will be provided containing all the code from various
 repositories together for the convenience of users.
+These releases will be found on the
+`Github releases page <https://github.com/clawpack/clawpack/releases>`_.
 
-Eventually `pip install clawpack` might work in general for all of Clawpack.
-Currently this only installs PyClaw, see
+For users who only plan to use the Python interface of PyClaw, ::
+
+    `pip install clawpack` 
+
+can be used.  See
 `Installing PyClaw <http://numerics.kaust.edu.sa/pyclaw/started.html>`_
 
-Currently Clawpack 5.0 can be obtained by cloning a number of repositories
-from `<https://github.com/clawpack>`_.
-
-See the :ref:`setup_dev` below and follow these, except
-that you can just clone directly from  `<https://github.com/clawpack>`_
-rather than first forking them if you do not plan to make changes and issue
-pull requests.
-
-.. _setup_dev:
-
-Temporary installation instructions for developers
----------------------------------------------------
-
-**This should be simplified eventually and moved elsewhere**
-
-Read the sections :ref:`git_and_github` and :ref:`using-git`.
-
-To get started you will need to fork and then clone at least the following
-set of repositories:
-
-* `<https://github.com/clawpack/pyclaw>`_  (Python code, some of which is
-  needed also for Fortran version)
-* `<https://github.com/clawpack/clawutil>`_ (Utility functions,
-  Makefile.common used in multiple repositories)
-* `<https://github.com/clawpack/amrclaw>`_ (AMR version of Fortran code)
-* `<https://github.com/clawpack/riemann>`_  (Riemann solvers)
-* `<https://github.com/clawpack/visclaw>`_  (Python graphics and visualization tools)
-
-You might also want:
-
-* `<https://github.com/clawpack/doc>`_  (documentation)
-* `<https://github.com/clawpack/geoclaw>`_  (GeoClaw)
-* `<https://github.com/clawpack/classic>`_  (Classic single-grid code)
-* `<https://github.com/clawpack/apps>`_  (To collect applications)
-* `<https://github.com/clawpack/clawpack-4.x>`_  (Previous versions, 4.6)
-
-You should set your environment variable `$CLAW` to point to the top
-level directory that contains all of these clones.
-
-Then you should be able to do::
-
-    $ cd $CLAW
-    $ rm -ri python/clawpack  # only needed if you already had this directory
-    $ bash clawutil/src/make_clawtop.sh
-
-This will create a directory `$CLAW/python/clawpack` that contains 
-symbolic links to all the python directories from which you might
-want to import things.
-
-Set your `PYTHONPATH` environment variable to include `$CLAW/python`, e.g.  ::
-
-    $ export PYTHONPATH=$CLAW/python:$PYTHONPATH
-
-and then you should be able to do things like... ::
-
-    >>> from clawpack.visclaw.Iplotclaw import Iplotclaw
+Clawpack 5.0 can also be obtained by cloning a number of repositories
+from `<https://github.com/clawpack>`_, for those who want to help
+develop Clawpack or have the most recent bleeding edge version.
+See :ref:`developers_gitclone` for instructions.
 
 
 .. _setenv:
@@ -129,15 +86,20 @@ and then you should be able to do things like... ::
 Setting environment variables
 -----------------------------
 
-In addition to setting the environment variables `$CLAW` and `$PYTHONPATH`
-as described above, you should also set::
 
-    CLAWUTIL=$CLAW/clawutil
-    AMRCLAW=$CLAW/amrclaw
-    GEOCLAW=$CLAW/geoclaw
-    VISCLAW=$CLAW/visclaw
-    RIEMANN=$CLAW/riemann
-    FC=gfortran   # or other preferred Fortran compiler
+To use the Fortran version of the Clawpack you will need to set the
+environment variable `CLAW` to point to the top level of clawpack tree.
+You also need to set the `PYTHONPATH` variable to include the same
+directory, e.g. in bash via::
+
+    export PYTHONPATH=$CLAW:$PYTHONPATH
+
+which will prepend `$CLAW` to any exisiting path.
+
+Finally, you need to set `FC` to point to the desired Fortran compiler,
+e.g.::
+
+    export FC=gfortran   # or other preferred Fortran compiler
 
 Consider putting the appropriate commands  in your .cshrc or .bashrc
 file (which is executed automatically in each new shell you create).   
@@ -241,45 +203,3 @@ If you wish to use Matlab instead, see :ref:`matlabplots`.
 Other visualization packages could also be used to display the results, but you will need
 to figure out how to read in the data.  See :ref:`fortfiles` for information about the
 format of the files produced by Clawpack.
-
-
-**Creating html versions of source files.***
-
-
-To best view the results, and the source code and README files,
-type::
-
-  $ make .htmls
-
-and view the resulting README.html file with a web browser.  
-
-.. _startserver:
-
-Starting a Python web server
------------------------------
-
-.. warning:: Out of date!  Needs updating.
-
-
-This part is not required, but 
-to best view README.html and other Clawpack generated html files,
-it is convenient to start a local webserver via::
-
-  $ cd $CLAW
-  $ python python/startserver.py
-
-Note that this will take over the window, so do this in a new window, or
-else do::
-
-  $ xterm -e python python/startserver.py &
-
-to execute it in a new xterm (if available).
-The setenv commands described above will define an alias so that this last
-command can be simplified to::
-
-  $ clawserver
-
-The main $CLAW directory will then be available at http://localhost:50005
-and jsMath should work properly to display latex on the webpages (once you've
-downloaded the required fonts, see
-`<http://www.math.union.edu/locate/jsMath/users/fonts.html>`_).  

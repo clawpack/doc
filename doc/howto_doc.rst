@@ -34,6 +34,10 @@ push to `clawpack/doc <https://github.com/clawpack/doc>`_.
 
 Then do::
 
+    $ cd $CLAW/clawpack.github.com
+    $ git checkout master
+    $ git pull origin  # make sure you are up to date before doing next steps!
+
     $ cd $CLAW/doc/doc
     $ source rsync_clawpack.github.sh     
 

@@ -26,13 +26,8 @@ If the code does not compile, check the following:
 
  * Make sure your environment variable `FC` is set properly.  This
    should be set to
-   the command used to invoke the Fortran compiler.  In many Makefiles
-   this is set to `gfortran` by default if the user has not set it,
-   via a line of the form::
+   the command used to invoke the Fortran compiler, e.g. *gfortran*.  
 
-     FC ?= gfortran   
-
-   but this is ignored if the variable has been set by the user.
    If you get an error like::
 
     make[1]: gfortran: No such file or directory
