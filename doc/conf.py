@@ -58,7 +58,7 @@ source_suffix = '.rst'
 #source_encoding = 'utf-8'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = 'contents'
 
 # General information about the project.
 project = u'Clawpack'
@@ -108,18 +108,32 @@ exclude_trees = ['users']
 pygments_style = 'sphinx'
 
 
+sys.path.append(os.path.abspath('_themes'))
+html_theme_path = ['_themes']
+html_theme = 'flask'
+github_fork = 'clawpack'
+html_additional_pages = {'index': 'index.html'}
+
+
+# Custom sidebar templates, maps document names to template names.
+html_sidebars = {
+    'index':    ['localtoc.html', 'sourcelink.html', 'searchbox.html'],
+    '**':       ['localtoc.html', 'relations.html',
+                 'sourcelink.html', 'searchbox.html']
+}
+
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
-html_theme = 'default'
+#html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #html_theme_options = {"linkcolor": "#000000", "textcolor":"#ff0000"}
-html_theme_options = {"rightsidebar": False, "stickysidebar":True}
+#html_theme_options = {"rightsidebar": False, "stickysidebar":True, "relbarbgcolor":"#000000"}
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['_static']
+#html_theme_path = ['_static']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
