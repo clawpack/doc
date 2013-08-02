@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% set title = _('Clawpack documentation') %}
 {% block body %}
-
+<div id=main>
 <p>{%trans%}
 Clawpack (“Conservation Laws Package”) is a collection of finite volume methods
 for linear and nonlinear hyperbolic systems of conservation laws.
@@ -17,7 +17,7 @@ by many developers and includes a number of related projects.  Key features incl
 <ul>
     <li>{%trans%}<b>Solution of general hyperbolic PDEs</b> provided a Riemann solver
                 is given {%endtrans%}</li>
-    <li>{%trans%}<b>Adaptive mesh refinement</b> included in AMRClaw and GeoClaw {%endtrans%}</li>
+    <li><b>Adaptive mesh refinement</b> included in <a href="{{ pathto("setrun_amrclaw") }}">{%trans%}AMRClaw{%endtrans%}</a> and <a href="{{ pathto("geoclaw") }}">GeoClaw</a> </li>
     <li>{%trans%}<b>Parallelism</b> scalable to tens of thousands of cores or more, included in PyClaw {%endtrans%}</li>
 </ul>
 
@@ -50,5 +50,7 @@ that system.  Solvers for many common applications are available in the Riemann 
          <span class="linkdescr">{%trans%}Examples of PyClaw simulation results{%endtrans%}</span></p>
     </td></tr>
   </table>
+
+</div>
 
 {% endblock %}
