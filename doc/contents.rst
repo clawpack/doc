@@ -1,3 +1,4 @@
+.. _contents:
 
 ==========================
 Table of Contents

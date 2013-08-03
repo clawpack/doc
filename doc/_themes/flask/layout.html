@@ -1,0 +1,49 @@
+{%- extends "basic/layout.html" %}
+
+{% set asset_root = "_static" %}
+{% set css_files = [asset_root + "/base.css", asset_root + "/layout.css"] + css_files %}
+
+{%- block relbar2 %}{% endblock %}
+
+
+{%- block header %}
+<div id="main-wrapper" class="sphinx">
+<div id="header-wrapper">
+  <section id="header">
+    <h1><a href="http://clawpack.org/">Clawpack</a></h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="{{ pathto("index") }}">Docs</a>
+        </li>
+        <li>
+          <a href="{{ pathto("installing") }}">Install</a>
+        </li>
+        <li>
+          <a class="" href="{{ pathto("pyclaw/gallery/gallery_all") }}">Gallery</a>
+        </li>
+        <li>
+          <a class="active" href="https://groups.google.com/forum/#!forum/claw-users">Support</a>
+        </li>
+        <li>
+          <a class="active" href="http://github.com/clawpack">Source</a>
+        </li>
+        <li>
+          <a class="" href="{{ pathto("developers") }}">Develop</a>
+        </li>
+      </ul>
+    </nav>
+  </section>
+<div class="decoration"></div>
+</div>
+{% endblock %}
+
+{%- block footer %}
+  <div class="footer">
+    &copy; Copyright {{ copyright }}.
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+  </div>
+  {% if pagename == 'index' %}
+  </div>
+  {% endif %}
+{%- endblock %}
