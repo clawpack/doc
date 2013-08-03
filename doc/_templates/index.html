@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% set title = _('Clawpack documentation') %}
+{% block body %}
+<div id=main>
+<p>{%trans%}
+Clawpack (“Conservation Laws Package”) is a collection of finite volume methods
+for linear and nonlinear hyperbolic systems of conservation laws.
+Clawpack employs high-resolution Godunov-type methods with limiters in a general
+framework applicable to many kinds of waves. 
+{%endtrans%} </p>
+
+<p>{%trans%}
+Originally developed in 1994 by Randall LeVeque, Clawpack is now contributed to
+by many developers and includes a number of related projects.  Key features include:
+{%endtrans%} </p>
+
+<ul>
+    <li>{%trans%}<b>Solution of general hyperbolic PDEs</b> provided a Riemann solver
+                is given {%endtrans%}</li>
+    <li><b>Adaptive mesh refinement</b> included in <a href="{{ pathto("setrun_amrclaw") }}">{%trans%}AMRClaw{%endtrans%}</a> and <a href="{{ pathto("geoclaw") }}">GeoClaw</a> </li>
+    <li>{%trans%}<b>Parallelism</b> scalable to tens of thousands of cores or more, included in PyClaw {%endtrans%}</li>
+</ul>
+
+<p>{%trans%}
+Solution of a given PDE system with Clawpack relies on an approximate Riemann solver for
+that system.  Solvers for many common applications are available in the Riemann package.
+{%endtrans%} </p>
+
+<h2 style="margin-bottom: 0">{%trans%}Packages{%endtrans%}</h2>
+
+  <table class="contentstable" align="center" style="margin-left: 30px"><tr>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="{{ pathto("setrun_amrclaw") }}">{%trans%}AMRClaw{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}Adaptive mesh refinement{%endtrans%}</span></p>
+      <p class="biglink"><a class="biglink" href="{{ pathto("geoclaw") }}">{%trans%}GeoClaw{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}For Geophysical flows (also includes AMR){%endtrans%}</span></p>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="{{ pathto("pyclaw/index") }}">{%trans%}PyClaw{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}Including parallel and higher-order algorithms{%endtrans%}</span></p>
+      <p class="biglink"><a class="biglink" href="{{ pathto("plotting") }}">{%trans%}VisClaw{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}Plotting tools{%endtrans%}</span></p>
+    </td></tr>
+  </table>
+
+
+<h2 style="margin-bottom: 0">{%trans%}Examples{%endtrans%}</h2>
+
+  <table class="contentstable" align="center" style="margin-left: 30px"><tr>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="{{ pathto("apps") }}">{%trans%}Applications gallery -- Clawpack{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}Examples of Clawpack simulation results{%endtrans%}</span></p>
+    </td>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="{{ pathto("pyclaw/gallery/gallery_all") }}">{%trans%}Applications gallery -- PyClaw{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}Examples of PyClaw simulation results{%endtrans%}</span></p>
+    </td></tr>
+  </table>
+
+
+<h2 style="margin-bottom: 0">{%trans%}Site map{%endtrans%}</h2>
+
+  <table class="contentstable" align="center" style="margin-left: 30px"><tr>
+    <td width="50%">
+
+      <p><a class="biglink" href="{{ pathto("contents") }}">{%trans%}Contents{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}for a complete overview{%endtrans%}</span></p>      
+    </td>
+    <td width="50%">
+      <p class="biglink"><a class="biglink" href="{{ pathto("genindex") }}">{%trans%}General Index{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}all functions, classes, terms{%endtrans%}</span></p>
+    </td></tr>
+  </table>
+
+
+
+</div>
+
+{% endblock %}
