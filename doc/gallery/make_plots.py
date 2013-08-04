@@ -7,14 +7,21 @@ First look for  'make_all.sh', which might do other things as well.
 Sends output and errors to separate files to simplify looking for errors.
 """
 
+import os
 
-def list_examples(examples_dir='examples'):
+# Determine directory:
+try:
+    CLAW = os.environ['CLAW']
+except:
+    raise Exception("Need to set CLAW environment variable")
+
+
+def list_examples(examples_dir):
     """
     Searches all subdirectories of examples_dir for examples and prints out a list.
     """
     import os
 
-    examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()
     os.chdir(examples_dir)
     
@@ -39,10 +46,13 @@ def list_examples(examples_dir='examples'):
     return dirlist
         
 
-def make_plots(examples_dir = 'examples'):
+def make_plots(examples_dir = 'amrclaw/examples'):
     import os,sys
 
-    examples_dir = os.path.abspath(examples_dir)
+    examples_dir = os.path.abspath(os.path.join(CLAW,examples_dir))
+    if not os.path.isdir(examples_dir):
+        raise Exception("Directory not found: %s" % examples_dir)
+
     current_dir = os.getcwd()
 
     dir_list = list_examples(examples_dir)

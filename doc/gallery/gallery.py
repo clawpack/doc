@@ -12,8 +12,8 @@ import os
 
 
 # Main root for html links:
-claw_html_root='http://localhost:50005'     
-#claw_html_root='http://clawpack.github.io/doc'
+#claw_html_root='http://localhost:50005'      # to test locally
+claw_html_root='http://clawpack.github.io/doc'
 
 # Determine directory:
 try:
@@ -83,10 +83,10 @@ class Gallery(object):
 
         gfile = open(fname, 'w')
         #gfile.write(":group: pyclaw\n\n")
-        gfile.write(".. _gallery:\n\n")
-        gfile.write("==========================\n")
-        gfile.write("Application gallery\n")
-        gfile.write("==========================\n")
+        gfile.write(".. _clawpack_gallery:\n\n")
+        gfile.write("=============================\n")
+        gfile.write("Clawpack Application Gallery\n")
+        gfile.write("=============================\n")
         gfile.write(".. contents::\n\n")
 
         gfile.write("%s\n" % self.title)
