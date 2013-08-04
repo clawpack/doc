@@ -229,33 +229,40 @@ def make_1d():
 
 
 def make_2d():
-    gallery = Gallery("Gallery of 2d PyClaw applications")
+    gallery = Gallery("Gallery of 2d Clawpack applications")
     plotdir = '_plots'
 
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional advection')
     #----------------------------------------------
-    appdir = 'examples/advection_2d'
+    appdir = 'amrclaw/examples/advection_2d_square'
     description = """
         Advecting square with periodic boundary conditions."""
-    images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
+    images = ('frame0000fig0', 'frame0001fig0', 'frame0001fig2')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional variable-coefficient advection')
     #----------------------------------------------
-    appdir = 'examples/advection_2d_annulus'
+    appdir = 'amrclaw/examples/advection_2d_swirl'
+    description = """
+        Advection with a swirling flow field."""
+    images = ('frame0000fig0', 'frame0004fig0', 'frame0008fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
+    appdir = 'amrclaw/examples/advection_2d_annulus'
     description = """
         Advection in an annular region."""
-    images = ('frame0000fig0', 'frame0004fig0', 'frame0008fig0')
+    images = ('frame0000fig0', 'frame0002fig0', 'frame0002fig2')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional acoustics')
     #----------------------------------------------
-    appdir = 'examples/acoustics_2d_homogeneous'
+    appdir = 'amrclaw/examples/acoustics_2d_radial'
     description = """
         Expanding radial acoustic wave in a homogeneous medium."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
@@ -263,73 +270,40 @@ def make_2d():
     #----------------------------------------------
 
     #----------------------------------------------
-    gsec = gallery.new_section('2-dimensional variable-coefficient acoustics')
+    gsec = gallery.new_section("2-dimensional Burgers' equation")
     #----------------------------------------------
-    appdir = 'examples/acoustics_2d_variable'
+    appdir = 'amrclaw/examples/burgers_2d_square'
     description = """
-        Expanding radial acoustic wave in a two-material medium with an interface."""
-    images = ('frame0000fig0', 'frame0010fig0', 'frame0020fig0')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
-
-    #----------------------------------------------
-    gsec = gallery.new_section('2-dimensional shallow water equations')
-    #----------------------------------------------
-    appdir = 'examples/shallow_2d/'
-    description = """Radial dam-break."""
-    images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
-
-    #----------------------------------------------
-    gsec = gallery.new_section('2-dimensional shallow water on the sphere')
-    #----------------------------------------------
-    appdir = 'examples/shallow_sphere/'
-    description = """Wavenumber 4 Rossby-Haurwitz wave on a rotating sphere."""
-    images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
+        Burgers' equation :math:`q_t + 0.5(q^2)_x + 0.5(q^2)_y = 0`
+        with square initial pulse and periodic boundary conditions."""
+    images = ('frame0000fig1', 'frame0005fig1', 'frame0020fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional Euler equations')
     #----------------------------------------------
-    appdir = 'examples/euler_2d'
+    appdir = 'amrclaw/examples/euler_2d_quadrants'
     description = """
-        Shock-bubble interaction."""
-    images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
+        Euler equations with piecewise constant data in quadrants."""
+    images = ('frame0000fig0', 'frame0004fig0', 'frame0004fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
-    #----------------------------------------------
-    gsec = gallery.new_section('2-dimensional KPP equation')
-    #----------------------------------------------
-    appdir = 'examples/kpp/'
-    description = """
-        Non-convex flux example."""
-    images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
 
-    #----------------------------------------------
-    gsec = gallery.new_section('2-dimensional p-system')
-    #----------------------------------------------
-    appdir = 'examples/psystem_2d/'
-    description = """
-        Radial wave in a checkerboard-like medium."""
-    images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
         
     gallery.create('gallery_2d.rst')
     return gallery
 
 def make_all():
-    gallery_1d = make_1d()
+    #gallery_1d = make_1d()
     gallery_2d = make_2d()
 
     # make gallery of everything:
-    gallery_all = Gallery(title="Gallery of all PyClaw applications")
-    gallery_all.sections = gallery_1d.sections + gallery_2d.sections 
+    gallery_all = Gallery(title="Gallery of all Clawpack applications")
+    #gallery_all.sections = gallery_1d.sections + gallery_2d.sections 
+    gallery_all.sections = gallery_2d.sections 
+    
     gallery_all.create('gallery_all.rst')
 
 if __name__ == "__main__":
