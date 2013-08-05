@@ -2,17 +2,17 @@
 
 .. _pyclaw:
 
-**********
-Quickstart
-**********
+********************
+Pyclaw Quickstart
+********************
 
-Install and model a shockwave right away::
+Install and model a shock wave::
 
     git clone git@github.com:clawpack/clawpack.git
     cd clawpack
     pip install -e .
     cd clawpack/pyclaw/examples/euler_2d
-    python shockbubble.py iplot=1
+    python shockbubble_bubble_interaction.py iplot=1
 
 **********
 PyClaw is:
@@ -30,12 +30,11 @@ PyClaw makes use of the additional Clawpack packages,
 `VisClaw <http://github.com/clawpack/visclaw>`_ for Riemann solvers and visualization, 
 respectively.
 
-If you have any issues or need help using PyClaw and PetClaw, `send e-mail <claw-users@googlegroups.com>`_
-to the `discussion group <http://groups.google.com/group/claw-users>`_.
+If you have any issues or need help using PyClaw, `contact us <claw-users@googlegroups.com>`_.
 
-*************
-Documentation
-*************
+********************
+PyClaw Documentation
+********************
 
 .. toctree::
    :maxdepth: 2

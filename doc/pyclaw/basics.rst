@@ -3,9 +3,9 @@
 .. _basics:
 
 
-**********
-The Basics
-**********
+*************
+PyClaw Basics
+*************
 
 
 .. toctree::

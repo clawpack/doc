@@ -44,9 +44,9 @@ follows from the bottom up.
 
 .. doctest::
 
-    >>> from pyclaw import Solution, State, Dimension, Domain
-    >>> x = Dimension('x', -1.0, 1.0, 200)
-    >>> y = Dimension('y', 0.0, 1.0, 100)
+    >>> from clawpack import pyclaw 
+    >>> x = pyclaw.Dimension('x', -1.0, 1.0, 200)
+    >>> y = pyclaw.Dimension('y', 0.0, 1.0, 100)
     
 This code creates two dimensions, a dimension ``x``  on the interval 
 ``[-1.0, 1.0]`` with :math:`200` grid points and a dimension ``y`` on the interval
@@ -64,15 +64,15 @@ contain our :class:`~pyclaw.geometry.Domain.dimensions` objects.
 
 .. doctest::
 
-    >>> grid = Domain([x,y])
+    >>> domain = pyclaw.Domain([x,y])
     >>> num_eqn = 2
-    >>> state = State(grid,num_eqn)
+    >>> state = pyclaw.State(domain,num_eqn)
 
 
-Here we create a ``grid`` with the dimensions we created earlier to make a single 2D 
+Here we create a ``domain`` with the dimensions we created earlier to make a single 2D 
 :class:`~pyclaw.geometry.Domain` object. Then we set the number of equations the State 
 will represent to 2. Finally, we create a :class:`~pyclaw.state.State` that inhabits 
-this grid. As before, many of the attributes of the :class:`~pyclaw.geometry.Domain` 
+this domain. As before, many of the attributes of the :class:`~pyclaw.geometry.Domain` 
 and State objects are set automatically.
 
 We now need to set the initial condition ``q`` and possibly ``aux`` to the correct
@@ -114,7 +114,7 @@ algorithm, we do not have multiple grids.
 
 .. doctest::
 
-    >>> sol = Solution(state,grid)
+    >>> sol = pyclaw.Solution(state,domain)
     
 We now have a solution ready to be evolved in a 
 :class:`~pyclaw.solver.Solver` object.
@@ -132,10 +132,9 @@ configuration.
 
 .. doctest::
 
-    >>> from pyclaw import ClawSolver1D, BC
-    >>> solver = ClawSolver1D()
-    >>> solver.bc_lower[0] = BC.periodic
-    >>> solver.bc_upper[0] = BC.periodic
+    >>> solver = pyclaw.ClawSolver1D()
+    >>> solver.bc_lower[0] = pyclaw.BC.periodic
+    >>> solver.bc_upper[0] = pyclaw.BC.periodic
 
 Next we need to tell the solver which Riemann solver to use from the
 :ref:`pyclaw_rp`. We can always 
@@ -144,8 +143,8 @@ module. Once we have picked one out, we pass it to the solver via:
 
 .. doctest::
 
-    >>> from pyclaw import riemann 
-    >>> solver.rp = riemann.rp_acoustics.rp_acoustics_1d
+    >>> from clawpack import riemann 
+    >>> solver.rp = riemann.acoustics_1D
 
 In this case we have decided to use the 1D linear acoustics Riemann solver.  You 
 can also set your own solver by importing the module that contains it and 
@@ -162,8 +161,7 @@ defaults.  For instance, we might want to specify a particular limiter
 
 .. doctest::
 
-    >>> from pyclaw import limiters
-    >>> solver.limiters = limiters.tvd.vanleer
+    >>> solver.limiters = pyclaw.limiters.tvd.vanleer
     
 If we wanted to control the simulation we could at this point by issuing the 
 following commands:
@@ -186,7 +184,7 @@ method.
 
 .. testsetup::
 
-    import pyclaw
+    from clawpack import pyclaw
     x = pyclaw.Dimension('x',0.0,1.0,100)
     domain = pyclaw.Domain(x)
     state = pyclaw.State(domain,2)
@@ -230,7 +228,7 @@ frame from a previous run; for example, to restart from frame 3
 
 .. doctest::
 
-    >>> claw.solution = Solution(3, file_format='petsc')
+    >>> claw.solution = pyclaw.Solution(3, file_format='petsc')
 
 By default, the :class:`~pyclaw.controller.Controller` will number your
 output frames starting from the frame number used for initializing
