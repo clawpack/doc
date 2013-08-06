@@ -94,7 +94,7 @@ If you use PyClaw in work that will be published, please cite the software::
     @misc{pyclaw,
     title={PyClaw software}, 
     url={http://numerics.kaust.edu.sa/pyclaw}, 
-    author={Mandli, Kyle T and Ketcheson, David I. and others}, 
+    author={Mandli, Kyle T. and Ketcheson, David I. and others}, 
     note={Version x.y}
     year={2011}}
 
@@ -125,7 +125,8 @@ If you use the Classic (2nd-order) solver, you may also wish to cite::
 If you use the SharpClaw (high order WENO) solver, you may also wish to cite::
 
     @article{Ketcheson2011,
-            Author = {Ketcheson, D I and Parsani, Matteo and LeVeque, R J},
+            Author = {Ketcheson, David I. and Parsani, Matteo and LeVeque,
+            Randall J.},
             Journal = {SIAM Journal on Scientific Computing},
             Number = {1},
             Pages = {A351--A377},
