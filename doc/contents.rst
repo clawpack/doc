@@ -57,7 +57,7 @@ Examples and Applications:
    :maxdepth: 1
    
 
-   apps
+   gallery/gallery_all
    book
    newapp
    sharing
