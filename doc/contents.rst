@@ -42,8 +42,7 @@ Developers' guide to using Git
    :maxdepth: 1
 
    developers
-   git_and_github
-   gitwash/index
+   git_resources
    howto_doc
    regression
    git_versions

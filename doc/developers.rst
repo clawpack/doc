@@ -5,8 +5,7 @@
 Developers' Guide
 **************************************
 
-.. warning:: Draft version, subject to change.
-
+See :ref:`git_resources` for some useful links.
 
 .. _developers_gitclone:
 

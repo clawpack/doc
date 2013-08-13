@@ -42,6 +42,12 @@ The directory where output and plots are stored is specified in the Makefile.
 
 The Makefile in most directories includes a common Makefile found at
 `$CLAW/clawutil/src/Makefile.common` that does most of the work.  
+If you get the error message::
+
+        Makefile:  /clawutil/src/Makefile.common: No such file or directory
+
+then the environment variable `CLAW` is not set properly.  
+See :ref:`setenv`.
 
 More tips
 ---------
@@ -71,3 +77,5 @@ More tips
   use::
 
      $ make new
+
+  See :ref:`fortran_compilers` for more about compiler flags.
