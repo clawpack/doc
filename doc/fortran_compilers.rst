@@ -69,7 +69,7 @@ gfortran compiler
 
 * For using OpenMP::
 
-    FFLAGS = -O2 -fopenmp
+    FFLAGS = -O2 -openmp
 
   In this case you should also set the environment variable `OMP_NUM_THREADS`
   to indicate how many threads to use.

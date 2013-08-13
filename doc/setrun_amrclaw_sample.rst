@@ -7,7 +7,7 @@ Sample `setrun.py` module for AMRClaw
 *****************************************************************
 
 This sample `setrun.py` module is for two-dimensional acoustics, from the
-example in `$CLAW/amrclaw/tests/acoustics-example1`.
+example in `$CLAW/amrclaw/examples/acoustics_2d_radial`.
 
 ::
 

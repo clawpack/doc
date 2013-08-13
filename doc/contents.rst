@@ -105,6 +105,7 @@ AMRClaw: Adaptive Mesh Refinement
 .. toctree::
    :maxdepth: 2
    
+   amrclaw
    setrun_amrclaw
    setrun_amrclaw_sample
    flag

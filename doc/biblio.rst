@@ -5,11 +5,14 @@
 Bibliography
 **************
 
+Papers describing the Clawpack software and algorithms
+------------------------------------------------------
+
 .. [BaleLevMitRoss]
    D. S. Bale, R. J. LeVeque, S. Mitran, and J. A. Rossmanith. 
    `A wave-propagation method for conservation laws with spatially varying
    flux functions,
-   <http://www.amath.washington.edu/~rjl/pubs/vcflux/index.html>`_
+   <http://faculty.washington.edu/rjl/pubs/vcflux/index.html>`_
    SIAM J. Sci.  Comput 24 (2002), 955-978.
 
 .. [BergerColella89]
@@ -52,11 +55,8 @@ Bibliography
    `Finite Volume Methods for Hyperbolic Problems. <http://www.amath.washington.edu/~claw/book.html>`_
    Cambridge University Press, Cambridge, UK, 2002.
 
-.. [LeVeque09]
-   R. J. LeVeque. 
-   `Python Tools for Reproducible Research on Hyperbolic Problems
-   <http://www.amath.washington.edu/~rjl/pubs/cise09/index.html>`_
-   *Computing in Science and Engineering (CiSE)* 11(2009), pp.  19-27. 
+Papers describing applications
+------------------------------
 
 .. [CalHelLeV08]
    Donna A. Calhoun, Christiane Helzel, and Randall J. LeVeque. 
@@ -64,3 +64,11 @@ Bibliography
    Circular and Spherical Domains,
    <http://www.amath.washington.edu/~rjl/pubs/circles/index.html>`_
    *SIAM Review* 50 (2008), 723-752.  
+
+.. [LeVeque09]
+   R. J. LeVeque. 
+   `Python Tools for Reproducible Research on Hyperbolic Problems
+   <http://www.amath.washington.edu/~rjl/pubs/cise09/index.html>`_
+   *Computing in Science and Engineering (CiSE)* 11(2009), pp.  19-27. 
+
+.. note:: Add more...

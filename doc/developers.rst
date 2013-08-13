@@ -175,6 +175,43 @@ To issue a pull request (PR), go to the Github page for your fork of the
 repository in question, select the branch from which you want the pull
 request to originate, and then click the *Pull Request* button.
 
+.. _test_pr:
+
+Testing out a pull request
+--------------------------
+
+To test out someone else pull request, follow the instructions on the
+webpage for the pull request, where it says "You can also merge branches on
+the command line".  Click on *command line* and follow steps 1 and 2.  For
+example, if you want to try out a pull request coming from a branch named
+*bug-fix* from user *rjleveque* to the *master* branch of
+the *amrclaw* repository, you would do::
+
+    cd $CLAW/amrclaw   # (and make sure you don't have uncommitted changes)
+    git checkout master
+    git pull  # to make sure you are up to date
+
+    git checkout -b rjleveque-bug-fix master
+    git pull https://github.com/rjleveque/amrclaw.git bug-fix
+
+This puts you on a new branch of your own repository named
+*rjleveque-bug-fix* that has the proposed changes pulled into it.
+
+Once you are done testing, you can get rid of this branch via::
+
+    git checkout master
+    git branch -D rjleveque-bug-fix
+
+    
+
+.. _toplevel_pr:
+
+Top level pull requests
+-----------------------
+
+The top level *clawpack* repository keeps track of what versions of the
+subrepositories work well together.
+
 If you make pull requests in two different repositories that are linked, say
 to both *pyclaw* and *riemann*, then you should also push these changes to
 the top-level *clawpack* repository and issue a PR for this change::
