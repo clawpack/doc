@@ -5,7 +5,7 @@
 Developers' Guide
 **************************************
 
-See :ref:`git_resources` for some useful links.
+See :ref:`git-resources` for some useful links.
 
 .. _developers_gitclone:
 
@@ -55,7 +55,7 @@ Installation instructions for developers
 Install a read-only copy of all the main repositories as described above in
 :ref:`developers_gitclone`.
 
-Note that the repositories will each be checked out to a specific commit and
+**Important Note:** The repositories will each be checked out to a specific commit and
 will probably be in a detached-head state.  You will need to checkout
 `master` in each repository to see the current head of the master branch.
 
@@ -112,24 +112,49 @@ Before making changes, you generally want to make sure *master* is up to
 date::
 
         git checkout master
-        git fetch origin
-        git merge origin/master
+        git pull 
 
-Then create a new branch based on `origin/master` and
-commit to this branch::
+Then create a new branch based on `master` for any new commits::
 
-        git checkout -b new_feature origin/master
+        git checkout -b new_feature master
+
         # make some changes
         # git add the modified files
         git commit -m "describe the changes"
 
-then push to your own fork::
+Now make changes, add and commit them, 
+and then push to your own fork::
 
         git push username new_feature
+
 
 If you want these changes pulled into *master*, 
 you can issue a pull request from the github page for your fork of this
 repository (make sure to select the correct branch of your repository).
+
+**Note:** If you accidentally commit to `master` rather than creating a
+feature branch first, you can easily recover::
+
+    git checkout -b new_feature
+
+will create a new branch based on the current state and history (including
+your commits to `master`) and you can just continue adding additional 
+commits.
+
+The only problem is your `master` branch no longer agrees with the history
+on Github and you want to throw away the commits you made to `master`.  The
+easiest way to do this is just to make sure you're on a different branch,
+e.g., ::
+
+    git checkout new_feature
+
+and then::
+
+    git branch -D master
+    git checkout -b master origin/master
+
+This deletes your local branch named `master` and recreates a branch with
+the same name based on `origin/master`, which is what you want.
 
 .. _developers_pr:
 
@@ -141,13 +166,15 @@ anything:
 
 #. Make sure you are up to date with *master*::
 
-        git pull origin master:master
+        git checkout master
+        git pull 
 
    If this does not say "Already up-to-date" then you might want to rebase
    your modified code onto the updated master.  With your feature branch
    checked out, you can see what newer commits have been added to *master*
    via::
 
+        git checkout new_feature
         git log HEAD..master
 
    If your new feature can be added on to the updated master, you can rebase::
@@ -179,9 +206,8 @@ request to originate, and then click the *Pull Request* button.
 Testing out a pull request
 --------------------------
 
-To test out someone else pull request, follow the instructions on the
-webpage for the pull request, where it says "You can also merge branches on
-the command line".  Click on *command line* and follow steps 1 and 2.  For
+To test out someone else's pull request, follow these  instructions:
+For
 example, if you want to try out a pull request coming from a branch named
 *bug-fix* from user *rjleveque* to the *master* branch of
 the *amrclaw* repository, you would do::
@@ -228,7 +254,7 @@ the top-level *clawpack* repository and issue a PR for this change::
 Git workflow
 ------------
 
-The sections :ref:`git_and_github` and :ref:`using-git` need to be updated.
+See :ref:`git-resources` for useful links.
 
 
 
