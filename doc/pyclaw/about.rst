@@ -6,8 +6,8 @@
 =======================
 About PyClaw
 =======================
-PyClaw is an open-source, free project.  If you find PyClaw useful,
-please let us know via e-mail to pyclaw@googlegroups.com.
+PyClaw is part of Clawpack -- an open-source, free project.  If you find PyClaw
+useful, please `let us know <claw-users@googlegroups.com>`_.
 
 Contributors
 =======================
@@ -22,9 +22,13 @@ the library (in alphabetical order)
 
     * Jed Brown: Implicit time stepping (still experimental).
 
+    * Ondrej Certik: Installation and continuous integration bug-fixes.
+
     * Lisandro Dalcin: Fortran wrapping; PETSc integration; general efficiency.
 
     * Matthew Emmett: PyWENO integration.
+
+    * Yiannis Hadjimichael: Documentation testing.
 
     * David Ketcheson: General maintenance and development; incorporation of SharpClaw routines.
 
@@ -36,7 +40,11 @@ the library (in alphabetical order)
 
     * Matteo Parsani: Mapped grids; Python-Fortran interfacing; implicit time stepping.
 
-Further contributions to the package are most welcome.  If you have 
+    * Manuel Quezada de Luna: 2D P-system Riemann solvers and example script.
+
+    * Kristof Unterweger: PeanoClaw (AMR); still experimental.
+
+Contributions to the package are most welcome.  If you have 
 used PyClaw for research, chances are that others would find your
 code useful.  See :ref:`develop` for more details.
 

@@ -33,14 +33,14 @@ in state.p
 
 .. testsetup:: *
 
-    import pyclaw
+    from clawpack import pyclaw
+    from clawpack import riemann
     import numpy as np
-    solver = pyclaw.ClawSolver2D()
-    x = pyclaw.Dimension('x',-1.0,1.0,100)
-    y = pyclaw.Dimension('y',-1.0,1.0,100)
-    domain = pyclaw.Domain([x,y])
-    num_eqn = 3; num_aux = 2 
-    state = pyclaw.State(domain,num_eqn,num_aux)
+    solver = pyclaw.ClawSolver2D(riemann.acoustics_2D)
+    domain = pyclaw.Domain([0.,0.],[1.,1.],[100,100])
+    num_aux = 2 
+    state = pyclaw.State(domain,solver.num_eqn,num_aux)
+    solution = pyclaw.Solution(state,domain)
     grid = state.grid
     Y,X = np.meshgrid(grid.y.centers,grid.x.centers)
     r = np.sqrt(X**2 + Y**2)

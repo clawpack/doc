@@ -15,14 +15,22 @@ At present, PyClaw includes two types of solvers:
       Runge-Kutta integration, in 1/2D
 
 
+Solver initialization takes one argument: a Riemann solver, usually
+from the Riemann repository.
 Typically, all that is needed to select a different solver is to specify
 it in the problem script, e.g.
 
-    >>> solver = pyclaw.ClawSolver2D()
+.. doctest::
 
-for the Classic solver or
+    >>> from clawpack import pyclaw
+    >>> from clawpack import riemann
+    >>> solver = pyclaw.ClawSolver2D(riemann.acoustics_2D)   
 
-    >>> solver = pyclaw.SharpClawSolver2D()
+for the 2D acoustics equations and the Classic Clawpack solver or
+
+.. doctest::
+
+    >>> solver = pyclaw.SharpClawSolver2D(riemann.acoustics_2D) 
 
 for the SharpClaw solver.  Most of the applications distributed with PyClaw
 are set up to use either solver, depending on the value of the command line option
@@ -76,8 +84,8 @@ about the methods and attributes they provide each class.
 
 .. doctest::
     
-        >>> from pyclaw import SharpClawSolver1D
-        >>> solver = SharpClawSolver1D()           # Instantiate a default, 1d solver
+        >>> from clawpack import pyclaw
+        >>> solver = pyclaw.SharpClawSolver1D()           # Instantiate a default, 1d solver
         
         >>> solver.evolve_to_time(solution,t_end)  # Evolve the solution to t_end # doctest: +SKIP
 
@@ -117,7 +125,7 @@ about the methods and attributes they provide each class.
 
     >>> from clawpack import pyclaw
     >>> solver = pyclaw.ClawSolver1D()                   # Instantiate a default, 1d solver
-    >>> solver.set_mthlim = pyclaw.limiters.tvd.vanleer  # Use the van Leer limiter
+    >>> solver.limiters = pyclaw.limiters.tvd.vanleer  # Use the van Leer limiter
     >>> solver.dt = 0.0001                               # Set the initial time step
     >>> solver.max_steps = 500                           # Set the maximum number of time steps
 
