@@ -2,15 +2,11 @@
 
 .. _clawpack_and_pyclaw:
 
-======================================================
-Clawpack and PyClaw
-======================================================
-
 .. _port_Example:
 
-Porting a problem from Clawpack to PyClaw 
+Porting a problem from Clawpack 4.6.x to PyClaw 
 ======================================================
-The script `pyclaw/development/clawdata2pyclaw` is intended to aid
+The script `pyclaw/development/clawdata2pyclaw.py` is intended to aid
 in converting a Clawpack 4.6 problem setup to PyClaw.  However,
 some manual conversion is necessary, especially if the problem
 includes custom fortran routines.
@@ -18,15 +14,15 @@ includes custom fortran routines.
 In PyClaw, the high-level portions of the Fortran routines are reorganized in 
 an object-oriented Python framework, while the low-level ones are bound through
 the Fortran to Python interface generator `f2py <http://www.scipy.org/F2py>`_.
-Therefore, in a typical situation the user is shielded from f2py. However, if 
-the user wants to reutilize some problem-specific fortran routines that were set up and 
-tested in a Clawpack problem, he can easily do it. Indeed, if those routines 
-are complicated and implement time consuming algorithms, and the performance 
-of the overall procedure (porting and running into PyClaw a new problem) is one 
-of the main user's concern, one should consider directly using the f2py 
+Therefore, for simple problems you won't need to call f2py directly. However, if 
+you want to reutilize some problem-specific fortran routines that were set up and 
+tested in a Clawpack problem, you can easily do it. Indeed, if those routines 
+are complicated and/or computationally intensive, 
+you should consider directly using the f2py 
 interface in the initialization script (see :ref:`problem_setup`).
-The shallow water equations solved on a sphere `(code here) <http://numerics.kaust.edu.sa/pyclaw/examples/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_ represent a
-useful and complete example to understand the simplicity of the procedure. 
+The example in `clawpack/pyclaw/examples/shallow_sphere`, which
+solves the shallow water equations on the surface of a sphere, is a
+complete example that relies heavily on the use of problem-specific Fortran routines.
 In that problem setup, a few Fortran routines have been used to provide the 
 following functionality:
 
@@ -44,30 +40,25 @@ following functionality:
 
 The first step to succesfully interface the Fortran functions with PyClaw 
 is to automate the extension module generation of these routines through f2py.
-`This Makefile
-<http://numerics.kaust.edu.sa/pyclaw/examples/shallow-sphere/shallow_4_Rossby_Haurwitz_wave.py>`_
-shows how to do it::
+You can use `clawpack/pyclaw/examples/shallow_sphere/Makefile` as a template::
 
     # Problem's source Fortran files
     INITIALIZE_SOURCE = mapc2p.f setaux.f qinit.f src2.f
     problem.so: $(INITIALIZE_SOURCE)
         $(F2PY) -m problem -c $^
 
-In the code above, we are giving to f2py the instructions to compile a 
-set of Fortran routines (the INITIALIZE_SOURCE container) and build a module 
-(``problem.so``) which can then be imported into Python and used there like a normal
-function. Indeed, f2py scans Fortran codes to produce the signature files (.pyf files)
-which contain all the information (function names, arguments and 
-their types, etc.) that is needed to construct Python bindings to Fortran 
-functions. The argument following the ''-m'' flag is the name the python module should have (i.e.
+The code above, calls f2py to compile a set of Fortran routines 
+and build a module 
+(``problem.so``) which can then be imported as a function in Python.
+The argument following the ''-m'' flag is the name the python module should have (i.e.
 the name of the target). f2py uses the ``numpy.distutils`` module from NumPy 
-that supports a number of major Fortran compilers. For more information please 
-look at `<http://www.scipy.org/F2py>`_.
+that supports a number of major Fortran compilers. For more information 
+see `<http://www.scipy.org/F2py>`_.
 
-After the compilation has been succesfully completed, the signature of each 
-function contained in ``problem.so`` must be verified and the intent of the 
-variables added (if there was nothing stated in the 
-code). One can easily achieve that by using the following commands::
+After compilation, it is useful to check the signature of each 
+function contained in ``problem.so``, which may be different than
+that of the original Fortran function, since f2py eliminates dummy variables.
+One can easily achieve that by using the following commands::
 
     $ ipython
     >>> import problem
@@ -154,23 +145,4 @@ and provide new::
 rules to create the targets required by the new Fortran routine. 
 Similar changes to the problem-specific Makefile can be used to replace other 
 low-level Fortran routines.
-
-
-.. _diffs:
-
-Important differences between PyClaw and Clawpack
-==================================================
-PyClaw incorporates some important changes relative to Clawpack.  
-Most of these are planned for inclusion in Clawpack 5.0.
-
-Interleaved arrays
-===================
-PyClaw uses a different array indexing than Clawpack.  In PetClaw,
-the value of the :math:`m`-th conserved quantity at :math:`(x_i,y_j)` is ::
-
-    q[m,i,j]
-
-That is, the index :math:`m` comes first, whereas in Clawpack it comes last.
-This "interleaved" array layout is potentially more cache-efficient.
-The next version of Clawpack (5.0) will also use interleaved arrays.
 

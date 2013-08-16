@@ -8,18 +8,17 @@ Setting up your own problem
 The best way to set up a new problem is to find an existing problem setup that
 is similar.  The main steps are:
 
-    * Write a Riemann solver (if solving a new system of equations)
-    * Set up the Makefile
     * Write the initialization script
     * Write routines for source terms, custom boundary conditions, or other customizations
+    * Write a Riemann solver (if solving a new system of equations)
+    * Write a Makefile if using any custom Fortran code
     * Write a setplot.py file for visualization
 
-These steps require the implementation of some functions which are usually 
-coded in Python language. However, for some specific 
-applications, the user may prefer to write or reuse a set of Fortran routines 
-that are already available in Clawpack. The latter approach is easy
-but requires a direct use of the Fortran to Python interface 
-`f2py <http://www.scipy.org/F2py>`_. Please, look at :ref:`port_Example` for 
+If needed for your problem, custom Riemann solvers, boundary condition routines,
+source term routines, and other functions can all be written in Python but you may
+prefer to write some of them in Fortran for performance reasons.
+The latter approach requires direct use of 
+`f2py <http://www.scipy.org/F2py>`_.  See :ref:`port_Example` for 
 more details.
 
 
@@ -28,33 +27,30 @@ Writing the initialization script
 This script should:
 
     * Import the appropriate package (pyclaw or petclaw)
-    * Instantiate a :class:`~pyclaw.solver.Solver` 
-    * Set the Riemann solver if using a Python Riemann solver
-    * Set solver.num_waves to the number of waves used in the Riemann solver
+    * Instantiate a :class:`~pyclaw.solver.Solver` and specify the Riemann solver to use
     * Set the boundary conditions
-    * Instantiate some :class:`~pyclaw.geometry.Dimension` object(s) and a :class:`~pyclaw.geometry.Grid`
-    * Set any required global values in problem_data
-    * Set grid.num_eqn and grid.num_ghost
-    * Set the initial condition (grid.q)
+    * Define the domain through a :class:`~pyclaw.geometry.Domain` object
+    * Define a :class:`~pyclaw.solution.Solution` object
+    * Set the initial condition
 
 Usually the script then instantiates a :class:`~pyclaw.controller.Controller`, sets the
 initial solution and solver, and calls :meth:`~pyclaw.controller.Controller.run`.
 
 Setting initial conditions
 ----------------------------
-Once you have initialize a State object, it contains a member state.q
+Once you have initialized a Solution object, it contains a member state.q
 whose first dimension is num_eqn and whose remaining dimensions are those
 of the grid.  Now you must set the initial condition.  For instance
 
 .. testsetup:: *
 
-    import pyclaw
+    from clawpack import pyclaw
+    from clawpack import riemann
     x = pyclaw.Dimension('x',-1.0,1.0,100)
     y = pyclaw.Dimension('y',-1.0,1.0,100)
     domain = pyclaw.Domain([x,y])
-    num_eqn = 3
-    state = pyclaw.State(domain,num_eqn)
-    solver = pyclaw.ClawSolver2D()
+    solver = pyclaw.ClawSolver2D(riemann.acoustics_2D)
+    state = pyclaw.State(domain,solver.num_eqn,num_aux)
 
 .. doctest::
 
@@ -82,7 +78,7 @@ you must pass the num_aux argument to the State initialization
 
 .. doctest::
 
-    >>> state = pyclaw.State(domain,num_eqn,num_aux)
+    >>> state = pyclaw.State(domain,solver.num_eqn,num_aux)
 
 The number of fields in state.aux (i.e., the length of its first dimension)
 is set equal to num_aux.  The values of state.aux are set in the same way

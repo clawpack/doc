@@ -2,11 +2,9 @@
 
   .. _pyclaw_tutorial:
   
-***************************************
-Tutorial: Solve the acoustics equations
-***************************************
-.. contents::
-
+***********************************************
+PyClaw tutorial: Solve the acoustics equations
+***********************************************
 PyClaw is designed to solve general systems of hyperbolic PDEs of the form
 
 .. math::
@@ -35,13 +33,15 @@ We'll assume that you've already followed the :ref:`installation` instructions.
    instead::
    
     $ cd $PYCLAW/examples/acoustics/1d/homogeneous 
-    $ python acoustics.py iplot=1
+    $ python acoustics_1D.py iplot=1
 
-Now launch an iPython session and import pyclaw
+The commands below should be typed at the Python prompt; we recommend using
+IPython.
 
 .. doctest::
 
     >>> from clawpack import pyclaw
+    >>> from clawpack import riemann
 
 The Solver
 ===========
@@ -50,27 +50,9 @@ in a :class:`~pyclaw.solver.Solver` object.  So the first step is to create a so
 
 .. doctest::
 
-    >>> solver = pyclaw.ClawSolver1D()
+    >>> solver = pyclaw.ClawSolver1D(riemann.acoustics_1D)
 
-In order to avoid the complication of compiling Fortran code, we'll use a
-Riemann solver implemented in Python
-
-.. doctest::
-
-    >>> solver.kernel_language = 'Python'
-
-Now we import the appropriate solver from the `riemann` package and set the 
-``solver.rp`` attribute, which is a function handle
-
-.. doctest::
-
-    >>> from clawpack.riemann import rp_acoustics
-    >>> solver.rp = rp_acoustics.rp_acoustics_1d
-    >>> solver.num_waves = 2
-
-The ``num_waves`` property indicates the number of waves used in the Riemann solver.
-
-Finally, we set the boundary conditions.  We'll use a wall (wall)
+Next we set the boundary conditions.  We'll use a wall (wall)
 condition at the left boundary and a non-wall (zero-order extrapolation)
 condition at the right boundary
 
@@ -79,34 +61,24 @@ condition at the right boundary
     >>> solver.bc_lower[0] = pyclaw.BC.wall
     >>> solver.bc_upper[0] = pyclaw.BC.extrap
 
-Dimension, Domain, and State
-============================
-Next we need to set up the grid.  A PyClaw grid is built from dimensions;
-a 1D grid requires only 1 dimension
+The domain
+==============
+Next we need to set up the grid.  We do so by defining the
+physical domain and the computational resolution.  We'll
+use the interval :math:`(-1,1)` and 200 grid cells:
 
 .. doctest::
 
-    >>> x = pyclaw.Dimension('x', -1.0, 1.0, 200)
+    >>> domain = pyclaw.Domain([-1.0], [1.0], [200])
     
-This creates a :class:`~pyclaw.geometry.Dimension` object named ``x``  on the interval ``[-1.0, 1.0]`` with ``200``
-cells.  Notice that the calling sequence is similar to numpy's ``linspace``
-command, except that the first argument is the name of the dimension.
+Notice that the calling sequence is similar to numpy's ``linspace`` command.
 
-.. doctest::
-
-    >>> domain = pyclaw.Domain(x)
-
-This creates a :class:`~pyclaw.geometry.Domain` object, which holds information about the cell center
-and edge coordinates.  Finally, we set up a :class:`~pyclaw.state.State`
-=======
+Finally, we set up a :class:`~pyclaw.Solution`
 object, which will hold the solution values::
 
 .. doctest::
 
-    >>> state = pyclaw.State(domain,2)
-
-The second argument indicates the number of equations in the hyperbolic
-system we're solving: in this case, two.
+    >>> solution = pyclaw.Solution(solver.num_eqn, domain)
 
 Initial condition
 =================
@@ -114,16 +86,12 @@ Now we will set the initial value of the solution
 
 .. doctest::
 
-    >>> xc = domain.grid.x.centers              # Array containing the cell center coordinates
+    >>> state = solution.state
+    >>> xc = state.grid.p_centers[0]      # Array containing the cell center coordinates
     >>> from numpy import exp
     >>> state.q[0,:] = exp(-100 * (xc-0.75)**2) # Pressure: Gaussian centered at x=0.75.
     >>> state.q[1,:] = 0.                       # Velocity: zero.
 
-Finally, we put the state into a :class:`~pyclaw.solution.Solution` object::
-
-.. doctest::
-
-    >>> solution = pyclaw.Solution(state,domain)
 
 Problem-specific parameters
 ===========================
@@ -161,8 +129,7 @@ At last everything is set up!  Now run the simulation
 
 .. doctest::
 
-    >>> controller.run()
-    {'dtmin': 0.0010000000000000009, 'dtmax': 0.0090000000000000011, 'numsteps': 12, 'cflmax': 0.90000000000000013}	
+    >>> status = controller.run()
 
 This should print out a few lines indicating the output times. It also prints the minimum and maximum tipe-step used, the number of steps required for the computation and the maximum CFL number. The simplest way to plot the solution is
 
