@@ -48,6 +48,7 @@ class GallerySection(object):
 
 
 class Gallery(object):
+    import os
     
     def __init__(self, title, clawdir=CLAW):
         self.title = title
@@ -83,14 +84,16 @@ class Gallery(object):
 
         gfile = open(fname, 'w')
         #gfile.write(":group: pyclaw\n\n")
-        gfile.write(".. _clawpack_gallery:\n\n")
-        gfile.write("=============================\n")
-        gfile.write("Clawpack Application Gallery\n")
-        gfile.write("=============================\n")
+        gfile.write(".. _%s:\n\n" % os.path.splitext(fname)[0])
+        nchar = len(self.title)
+        gfile.write(nchar*"=" + "\n")
+        gfile.write("%s\n"  % self.title)
+        gfile.write(nchar*"=" + "\n")
         gfile.write(".. contents::\n\n")
 
-        gfile.write("%s\n" % self.title)
-        gfile.write("="*len(self.title)+"\n\n")
+        #gfile.write("%s\n" % self.title)
+        #gfile.write("="*len(self.title)+"\n\n")
+        
         for gsec in self.sections:
             gfile.write("%s\n" % gsec.title)
             gfile.write("="*len(gsec.title)+"\n")
@@ -166,7 +169,7 @@ def test():
 
 
 def make_1d():
-    gallery = Gallery(title="Gallery of 1d PyClaw applications")
+    gallery = Gallery(title="Gallery of 1d Classic applications")
     plotdir = '_plots'
 
 
@@ -293,6 +296,33 @@ def make_2d():
 
         
     gallery.create('gallery_2d.rst')
+    return gallery
+
+def make_fvmbook():
+    gallery = Gallery("Gallery of `FVMHP book <http://www.clawpack.org/book>`_ applications")
+    plotdir = '_plots'
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 3: Linear Hyperbolic Equations')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap3/acousimple'
+    description = """
+        1D Acoustics simple waves"""
+    images = ('frame0000fig1', 'frame0008fig1', 'frame0025fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 20: Multidimensional Scalar Equations')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap20/rotate'
+    description = """
+        2D Advection with a rotation of square and Gaussian"""
+    images = ('frame0000fig0', 'frame0001fig0', 'frame0002fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    
+    gallery.create('gallery_fvmbook.rst')
     return gallery
 
 def make_all():

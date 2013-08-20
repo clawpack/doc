@@ -5,17 +5,16 @@
 Examples from the book FVMHP
 ############################
 
-.. warning:: Out of date!  Needs updating. Links are broken!
 
 
 The book 
-`Finite Volume Methods for Hyperbolic Problems <http://www.amath.washington.edu/~claw/book.html>`_  
+`Finite Volume Methods for Hyperbolic Problems <http://www.clawpack.org/book.html>`_  
 contains many examples that link to Clawpack codes used to create the
 figures in the book.  These codes are  available for Clawpack
 4.3 via the 
-`book webpage <http://www.amath.washington.edu/~claw/book.html>`_  
+`book webpage <http://www.clawpack.org/book.html>`_  
 
-These are slowly being converted to Clawpack 4.4 form, with a `setrun.py`
+Some of have been converted to Clawpack 5.0 form, with a `setrun.py`
 file for setting run time data and a `setplot.py` file for specifying plots
 with Python.  See:
 
@@ -25,12 +24,12 @@ with Python.  See:
 Available examples 
 ------------------
 
-The examples converted so far can be found in the directory
-`$CLAW/book <claw/book>`_ .
+The examples converted so far can be found in the 
+directory `$CLAW/apps/fvmbook` if you clone the `apps` repository.
 
+You can also browse the examples in the 
+:ref:`gallery_fvmbook`.
 
-You can also browse these from the 
-`Gallery  of book examples <claw/doc/gallery/gallery_book.html>`_.
 
 
  * **Chapter 3:** Characteristics and Riemann Problems for Linear Hyperbolic Equations.
