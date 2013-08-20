@@ -9,8 +9,8 @@ The restructured text files are in the `clawpac/doc
 
 To create html files::
 
-    $ cd $CLAW/doc/doc
-    $ make html
+    cd $CLAW/doc/doc
+    make html
 
 To view the files, point your browser to `$CLAW/doc/doc/_build/html/index.html`
 
@@ -34,12 +34,12 @@ push to `clawpack/doc <https://github.com/clawpack/doc>`_.
 
 Then do::
 
-    $ cd $CLAW/clawpack.github.com
-    $ git checkout master
-    $ git pull origin  # make sure you are up to date before doing next steps!
+    cd $CLAW/clawpack.github.com
+    git checkout master
+    git pull origin  # make sure you are up to date before doing next steps!
 
-    $ cd $CLAW/doc/doc
-    $ source rsync_clawpack.github.sh     
+    cd $CLAW/doc/doc
+    source rsync_clawpack.github.sh     
 
 This copies the contents of `$CLAW/doc/doc/_build/html` to 
 `$CLAW/clawpack.github.com/doc`
@@ -49,13 +49,13 @@ add and commit any new or changed files (all files are needed, so "git add
 ." should work).  For the commit message you might want to add the commit
 hash of the most recent commit in $CLAW/doc/doc::
 
-    $ cd $CLAW/clawpack.github.com/doc
-    $ git add . 
-    $ git commit -m "changes from doc/doc commit <hash>"
+    cd $CLAW/clawpack.github.com/doc
+    git add . 
+    git commit -m "changes from doc/doc commit <hash>"
 
 And finally push to the web::
 
-    $ git push origin
+    git push origin
 
 which assumes that `origin` is
 `git@github.com:clawpack/clawpack.github.com.git`.

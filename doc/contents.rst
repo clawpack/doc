@@ -58,6 +58,7 @@ Examples and Applications:
    
 
    gallery/gallery_all
+   gallery/gallery_fvmbook
    book
    newapp
    sharing
