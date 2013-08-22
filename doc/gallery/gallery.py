@@ -130,7 +130,8 @@ class Gallery(object):
 
                     src_name = os.path.join(gitem.appdir, gitem.plotdir, image)
                     thumb_name = src_name.replace('/','_')
-                    src_html = os.path.join(claw_html_root,src_name) + '.html'
+                    src_html = os.path.join(claw_html_root,'../_static', \
+                        src_name) + '.html'
                     src_name = os.path.join(self.clawdir,src_name)
                     src_png = src_name + '.png'
                     if not os.path.isdir('thumbnails'):
