@@ -12,8 +12,8 @@ import os
 
 
 # Main root for html links:
-#claw_html_root='http://localhost:50005'      # to test locally
-claw_html_root='http://clawpack.github.io/doc'
+#claw_html_root='http://clawpack.github.io/doc/gallery'
+claw_html_root='.'
 
 # Determine directory:
 try:
@@ -62,7 +62,7 @@ class Gallery(object):
         self.sections.append(gsec)
         return gsec
     
-    def create(self,fname,gallery_dir=None):
+    def create(self,fname,gallery_dir=None, copy_plots=True):
 
         # Directory for gallery files:
         if gallery_dir is None:
@@ -100,18 +100,30 @@ class Gallery(object):
             gfile.write("%s\n" % gsec.description)
 
             for gitem in gsec.items:
+
+                if not os.path.exists('./'+gitem.appdir):
+                    os.makedirs ('./'+gitem.appdir)
+                static_dir = '$CLAW/doc/doc/_static/'
+
+                if not os.path.exists(static_dir+gitem.appdir):
+                    os.system('mkdir -p %s' % (static_dir+gitem.appdir))
+                print "+++ static_dir = ",static_dir
+
+                os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
+                if copy_plots:
+                    #os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
+                    os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, \
+                                static_dir+gitem.appdir))
                 gfile.write('\n')
                 desc = gitem.description.lstrip().replace('\n',' ')
                 gfile.write('%s\n\n' % desc)
                 code = os.path.join(claw_html_root, gitem.appdir)
-                plotindex = os.path.join(claw_html_root, gitem.appdir, \
-                               gitem.plotdir, '_PlotIndex.html')
+                #plotindex = os.path.join(claw_html_root, gitem.appdir, \
+                #               gitem.plotdir, '_PlotIndex.html')
+                plotindex = os.path.join(claw_html_root, '../_static', \
+                        gitem.appdir, gitem.plotdir, '_PlotIndex.html')
                 gfile.write('%s ... \n`README <%s/README.html>`__ ... \n`Plots <%s>`__\n' \
                       % (gitem.appdir,gitem.appdir,plotindex))
-
-                if not os.path.exists('./'+gitem.appdir):
-                    os.makedirs ('./'+gitem.appdir)
-                os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                 gfile.write('\n\n')
 
                 for image in gitem.images:
