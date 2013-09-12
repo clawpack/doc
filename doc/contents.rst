@@ -58,6 +58,7 @@ Examples and Applications:
 
    gallery/gallery_all
    gallery/gallery_fvmbook
+   gallery/gallery_geoclaw
    book
    newapp
    sharing
@@ -73,6 +74,7 @@ Fortran and Python codes:
 
    fortran
    fortran_compilers
+   openmp
    python
    makefiles
    setrun

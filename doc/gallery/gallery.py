@@ -306,10 +306,47 @@ def make_2d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
-
-        
     gallery.create('gallery_2d.rst')
     return gallery
+
+def make_geoclaw():
+    gallery = Gallery("Gallery of GeoClaw applications")
+    plotdir = '_plots'
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Chile 2010 tsunami')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/chile2010'
+    description = """
+        Simple model of the 2010 tsunami arising offshore Maule, Chile."""
+    images = ('frame0004fig0', 'frame0008fig0', 'frame0012fig0','gauge32412fig300')
+    gsec.new_item(appdir, plotdir, description, images)
+
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Radially-symmetric tsuanami in parabolic bowl')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/bowl-radial'
+    description = """
+        Sample code where solution should be radially symmetric."""
+    images = ('frame0000fig0', 'frame0015fig0', 'frame0015fig10', 'gauge0004fig300')
+    gsec.new_item(appdir, plotdir, description, images)
+
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Sloshing water in parabolic bowl')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/bowl-slosh'
+    description = """
+        Sample code with analytic solution."""
+    images = ('frame0000fig0', 'frame0000fig1', 'frame0010fig0', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
+    gallery.create('gallery_geoclaw.rst')
+    return gallery
+
+
 
 def make_fvmbook():
     gallery = Gallery("Gallery of `FVMHP book <http://www.clawpack.org/book>`_ applications")

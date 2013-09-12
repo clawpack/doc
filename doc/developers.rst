@@ -71,12 +71,21 @@ or simply::
 
         git pull origin master:master
 
+Remember that you need to do this in each repository before running anything
+to make sure everything is up to date with *master*.
+
+.. _dev_remote:
+
+Setting a remote to point to your fork
+---------------------------------------
+
 If you plan to make changes and issue pull requests to one or more
 repositories, you will need to do the following steps for each such
 repository:
 
 #. Go to `<http://github.com/clawpack>`_ and fork the repository to your own
-   Github account.  (See :ref:`git_fork`.)
+   Github account.  (Click on the repository name and then the *Fork* button
+   at the top of the screen.)
 
 #. Add a *remote* pointing to your repository.  For example, if you have
    forked the `amrclaw` repository to account `username`, you would do::
