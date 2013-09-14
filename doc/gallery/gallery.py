@@ -354,16 +354,18 @@ def make_fvmbook():
     gallery.create('gallery_fvmbook.rst')
     return gallery
 
-def make_all():
+def make_classic_amrclaw():
     gallery_1d = make_1d()
     gallery_2d = make_2d()
 
     # make gallery of everything:
-    gallery_all = Gallery(title="Gallery of all Clawpack applications")
-    gallery_all.sections = gallery_1d.sections + gallery_2d.sections 
-    #gallery_all.sections = gallery_2d.sections 
+    gallery_classic_amrclaw = Gallery(title="Gallery of Classic and AMRClaw applications")
+    gallery_classic_amrclaw.sections = gallery_1d.sections + gallery_2d.sections 
+    #gallery_classic_amrclaw.sections = gallery_2d.sections 
     
-    gallery_all.create('gallery_all.rst')
+    gallery_classic_amrclaw.create('gallery_classic_amrclaw.rst')
 
 if __name__ == "__main__":
-    make_all()
+    make_classic_amrclaw()
+    make_geoclaw()
+    make_fvmbook()

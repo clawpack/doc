@@ -4,6 +4,7 @@
 Installation instructions
 **************************************
 
+See also: :ref:`pyclaw`
 
 
 Prerequisites
