@@ -81,14 +81,21 @@ class Gallery(object):
 
         gfile = open(fname, 'w')
         gfile.write(":group: pyclaw\n\n")
-        gfile.write(".. _gallery:\n\n")
-        gfile.write("==========================\n")
-        gfile.write("Application gallery\n")
-        gfile.write("==========================\n")
+        #gfile.write(".. _gallery:\n\n")
+        #gfile.write("==============================\n")
+        #gfile.write("Gallery of PyClaw applications\n")
+        #gfile.write("==============================\n")
+
+        gfile.write(".. _%s:\n\n" % os.path.splitext(fname)[0])
+        nchar = len(self.title)
+        gfile.write(nchar*"=" + "\n")
+        gfile.write("%s\n"  % self.title)
+        gfile.write(nchar*"=" + "\n")
+
         gfile.write(".. contents::\n\n")
 
-        gfile.write("%s\n" % self.title)
-        gfile.write("="*len(self.title)+"\n\n")
+        #gfile.write("%s\n" % self.title)
+        #gfile.write("="*len(self.title)+"\n\n")
         for gsec in self.sections:
             gfile.write("%s\n" % gsec.title)
             gfile.write("="*len(gsec.title)+"\n")
