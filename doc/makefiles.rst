@@ -54,18 +54,17 @@ directory where the output resides (as specified by the ``CLAW_outdir`` variable
 in the ``Makefile``).  This file is used by the interactive plotting routines, as
 described in :ref:`plotting`.
 
-Starting in 4.5.1, you can also do
+You can also do::
 
     $ make output
 
 (with no dot before ``output``) to run the code without checking dependencies.
-This is sometimes handy but note that...
-
-.. warning:: If you modify the ``setrun`` function
-   and then do ``make output``, it will not use the new parameter values.
-   You must do ``make .data`` to regenerate the data files used by Clawpack.
-   This would be done automatically by ``make .output``, for which ``.data`` is a
-   dependency.
+This is sometimes handy but note that
+if you modify the ``setrun`` function
+and then do ``make output``, it will not use the new parameter values.
+You must do ``make .data`` to regenerate the data files used by Clawpack.
+This would be done automatically by ``make .output``, for which ``.data`` is a
+dependency.
 
 .. _makefiles_plots:
 
@@ -117,3 +116,4 @@ recompile with the `-g` flag for debugging::
 
     $ make new FFLAGS=-g
 
+See :ref:`fortran_compilers` for more about compiler flags.

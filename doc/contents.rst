@@ -42,8 +42,7 @@ Developers' guide to using Git
    :maxdepth: 1
 
    developers
-   git_and_github
-   gitwash/index
+   git_resources
    howto_doc
    regression
    git_versions
@@ -59,6 +58,7 @@ Examples and Applications:
 
    gallery/gallery_all
    gallery/gallery_fvmbook
+   gallery/gallery_geoclaw
    book
    newapp
    sharing
@@ -74,6 +74,7 @@ Fortran and Python codes:
 
    fortran
    fortran_compilers
+   openmp
    python
    makefiles
    setrun
@@ -105,6 +106,7 @@ AMRClaw: Adaptive Mesh Refinement
 .. toctree::
    :maxdepth: 2
    
+   amrclaw
    setrun_amrclaw
    setrun_amrclaw_sample
    flag

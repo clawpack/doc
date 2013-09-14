@@ -86,14 +86,14 @@ simulation:
   equations makes little difference in the observed results and so these
   terms are often turned off for efficiency (*icoriolis = 0*).
 
-* The geoclaw parameter *sealevel* determines the initial fluid depth
+* The geoclaw parameter *sea_level* determines the initial fluid depth
   relative to the topography, as specified by the *topo* files.
   It is important to know what 
   `vertical datum <http://tidesandcurrents.noaa.gov/datum_options.html>`_
   the topography is relative to.  Coastal bathymetry developed for tsunami
   modeling is often relative to Mean High Water (MHW) at some point, in
-  which case setting *sealevel = 0.* corresponds to assuming the water level
-  being initially at MHW.  See :ref:`sealevel` for more information.
+  which case setting *sea_level = 0.* corresponds to assuming the water level
+  being initially at MHW.  See :ref:`sea_level` for more information.
 
 * Tsunami modeling generally requires specifying a seafloor displacement in
   order to initiate the tsunami, by specifying a *dtopo* file. This may be a

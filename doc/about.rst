@@ -19,20 +19,17 @@ conservation form.  We are actively working on extensions to parabolic
 equations as well.
 
 The "wave propagation" algorithms implemented in Clawpack are discribed in
-detail in the book `Finite Volume Methods for Hyperbolic Problems
-<http://www.amath.washington.edu/~claw/book.html>`_
-Virtually all of the figures in this book were generated using Clawpack and
-the source code for each can be found in 
-`$CLAW/book <claw/book>`_
+detail in the book *Finite Volume Methods for Hyperbolic Problems*
+[LeVeque-FVMHP]_.
+Virtually all of the figures in this book were generated using Clawpack
+(version 4.3). 
+
 See :ref:`book` for a list of available examples with pointers to the codes
 and resulting plots.
 
 See the :ref:`biblio` for some pointers to papers describing Clawpack and
 the algorithms used in more detail.
 
-A bibliography of older papers using Clawpack can be found 
-`here <http://www.amath.washington.edu/~claw/bib.html>`_.  This is out of
-date!
 
 
 License
@@ -48,69 +45,83 @@ See :ref:`license` for details.
 Authors
 -------
 
-.. warning:: Need to update!
-
 Many people have contributed to the development of Clawpack since its
 inception in 1994.  
 
-Major contributions have been made by the following individuals:
+Major algorithmic and software design contributions have been made by the 
+following individuals:
 
- * Randall J. LeVeque, University of Washington [RJL]
+* Randall J. LeVeque, University of Washington, 
+  `@rjleveque <https://github.com/rjleveque/>`_.
 
-   Originally developed the 1d and 2d Clawpack routines and is the lead
-   developer. 
+* Marsha Berger, Courant Institute, NYU,
+  `@mjberger <https://github.com/mjberger/>`_.
 
- * Jan Olav Langseth, Norwegian Defence Research Establishment [JOL]
+* Jan Olav Langseth, Norwegian Defence Research Establishment.
 
-   Developed the 3d algorithms and software with RJL.
+* David George, USGS Cascades Volcano Observatory, 
+  `@dlgeorge <https://github.com/dlgeorge/>`_.
 
- * Marsha Berger, Courant Institute, NYU  [MJB]
+* David Ketcheson, KAUST
+  `@ketch <https://github.com/ketch/>`_.
 
-   Wrote much of the 2d AMR software originally for the Euler equations and
-   worked with RJL to generalize to the AMRCLAW framework.  Later adapted
-   this to 3d in work with David McQueen (NYU) and DAC, and continues to be 
-   involved in further development of the software.
+* Kyle Mandli, UT-Austin,
+  `@mandli <https://github.com/mandli/>`_.
 
- * Donna Calhoun, CEA, Paris [DAC]
+Other major contributors include:
 
-   Improved Matlab graphics routines and extended to 3d.  Developed 3d AMR
-   routines and applications.  Developed ChomboClaw, an extension to allow
-   the Clawpack Riemann solvers and frontend to be used together with
-   the Chombo AMR package developed by Phil Colella's group at LBL.
+* Aron Ahmadia, 
+  `@ahmadia <https://github.com/ahmadia/>`_.
+* Amal Alghamdi,
+  `@amal-ghamdi <https://github.com/amal-ghamdi/>`_.
+* Peter Blossey.
+* Donna Calhoun, 
+  `@donnaboise <https://github.com/donnaboise/>`_.
+* Ondřej Čertík,
+  `@certik <https://github.com/certik/>`_.
+* Grady Lemoine, 
+  `@gradylemoine <https://github.com/gradylemoine/>`_.
+* Sorin Mitran. 
+* Matteo Parsani,
+  `@mparsani <https://github.com/mparsani/>`_.
+* Andy Terrel,
+  `@aterrel <https://github.com/aterrel/>`_.
 
- * Sorin Mitran, UNC
 
-   Developed MPI and HDF routines and the Clawpack 4.3 website.  He is also
-   the author of BEARCLAW and ASTROBEAR software implementing AMR in a similar
-   framework to Clawpack.
-
- * Peter Blossey, UW
-
-   Developed MPI and HDF versions in Clawpack 4.3.
-
- * David George, USGS Cascades Volcano Observatory [DLG]
-
-   Developing GeoClaw (with RJL, MJB, KM) for geophysical depth-averaged
-   applications.
-
- * Kyle Mandli, UW
-
-   Main developer of the PyClaw pure python version in directory
-   `$CLAW/python/pyclaw <claw/python/pyclaw>`_,
-   and the Python/Fortran interface. 
-
- * Chris Swierczewski, UW
-
-   Working on the Python interface, Sage interface, installation routines.
-
- * David Ketcheson, KAUST
-
-   Developing SharpClaw for high order methods, e.g. WENO, with Runge-Kutta 
-   time stepping.
-
-Numerous students and other users have contributed towards this software, by
-finding bugs, suggesting improvements, and exploring its use on new
+Numerous students and other users have also contributed towards this software, 
+by finding bugs, suggesting improvements, and exploring its use on new
 applications.  Thank you!
+
+.. _citing:
+
+Citing this work
+----------------
+
+If you use Clawpack in publications, please cite the following::
+
+    @misc{clawpack,
+        title={Clawpack software}, 
+        author={Clawpack Development Team}, 
+        url={http://www.clawpack.org}, 
+        note={Version x.y}
+        year={2013}}
+
+Please fill in the version number that you used.
+
+Please also cite at least one of the following regarding the algorithms used
+in Clawpack (click the links for bibtex citations):
+
+* Basic algorithms in 1d and 2d:  [LeVeque97]_, [LeVeque-FVMHP]_
+
+* 3d algorithms: [LangsethLeVeque00]_
+
+* AMR: [BergerLeVeque98]_
+
+* f-wave algorithms: [BaleLevMitRoss02]_
+
+* GeoClaw: [BergerGeorgeLeVequeMandli11]_, [LeVequeGeorgeBerger]_
+
+See also :ref:`pyclaw` for PyClaw citations.
 
 .. _funding:
 
@@ -121,7 +132,7 @@ Development of this software has been supported in part by
 
  * NSF Grants DMS-8657319, DMS-9204329, DMS-9303404, DMS-9505021, 
    DMS-96226645, DMS-9803442, DMS-0106511, CMS-0245206,  DMS-0609661,
-   DMS-0914942
+   DMS-0914942, DMS-1216732.
 
  * DOE Grants DE-FG06-93ER25181,  DE-FG03-96ER25292, DE-FG02-88ER25053,
    DE-FG02-92ER25139, DE-FG03-00ER2592, DE-FC02-01ER25474
@@ -143,25 +154,6 @@ Development of this software has been supported in part by
 Any opinions, findings, and conclusions or recommendations expressed in this
 material are those of the author(s) and do not necessarily reflect the views
 of these agencies. 
-
-.. _citing:
-
-Citing this work
-----------------
-
-If you use Clawpack in publications, please cite the following....
-
-   R. J. LeVeque, M. J. Berger, et. al.,  Clawpack Software <version number>,
-   `www.clawpack.org <http://www.clawpack.org>`_, <date of access>
-
-Please also cite one of the following regarding the algorithms used in Clawpack:
-
- * Basic algorithms in 1d and 2d:  [LeVeque97]_, [LeVeque-FVMHP]_
-
- * 3d algorithms: [LangsethLeVeque00]_
-
- * AMR: [BergerLeVeque98]_
-
 
 
 

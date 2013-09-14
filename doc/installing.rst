@@ -111,7 +111,7 @@ Testing your installation and running an example
 
 
 As a first test, go to the directory
-`$CLAW/amrclaw/tests/example1`.
+`$CLAW/amrclaw/examples/advection_2d_square`.
 You can try the following test in this directory, or you may want to first
 make a copy of it (see the instructions in :ref:`copyex`).
 

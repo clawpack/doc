@@ -24,6 +24,14 @@ If the code does not compile, check the following:
    The Makefiles use this variable to find the common Makefile and
    library routines.
 
+   If you get the error message::
+
+        Makefile:154: /clawutil/src/Makefile.common: No such file or directory
+
+   then `CLAW` is not set properly.  It is looking for the file
+   `$CLAW/clawutil/src/Makefile.common` and if `CLAW` is not set, the path
+   will be missing.
+
  * Make sure your environment variable `FC` is set properly.  This
    should be set to
    the command used to invoke the Fortran compiler, e.g. *gfortran*.  

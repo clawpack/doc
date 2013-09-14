@@ -119,8 +119,8 @@ sets use different convensions for positive and negative values relative to
 sea level). 
 
 For :ref:`geoclaw` applications in the ocean or lakes (such as tsunami
-modeling), it is generally assumed that *sealevel = 0* has been set in
-:ref:`setrun_tsunami` and that *z<0* corresponds to subsurface bathymetry
+modeling), it is generally assumed that *sea_level = 0* has been set in
+:ref:`setrun_geoclaw` and that *z<0* corresponds to subsurface bathymetry
 and *z>0* to topograpy above sea level.
 
 .. _topo_sources:
@@ -186,11 +186,11 @@ qinit data file
 Instead of (or in addition to) specifying a displacement of the topography
 it is possible to specify a perturbation to the depth, momentum, or surface
 elevation of the initial data.  This is generally useful only for tsunami
-modeling where the initial data specified in the default *qinit_geo.f* function
-is the stationary water with surface elevation equal to *sealevel* as set in
-:ref:`setrun_tsunami`.  
+modeling where the initial data specified in the default *qinit.f90* function
+is the stationary water with surface elevation equal to *sea_level* as set in
+`setrun.py` (see :ref:`setrun_geoclaw`).  
 
-Of course it is possible to copy the *qinit_geo.f* function to your
+Of course it is possible to copy the *qinit.f90* function to your
 directory and modify it, but for some applications the initial elevation may
 be given on grid of the same type as described above.  In this case file can
 be provided as described at :ref:`setrun_qinit` containing this

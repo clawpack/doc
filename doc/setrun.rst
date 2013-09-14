@@ -3,7 +3,7 @@
 .. _setrun:
 
 *****************************************************************
-Specifying run-time parameters in `setrun.py`
+Specifying classic run-time parameters in `setrun.py`
 *****************************************************************
 
 
@@ -20,7 +20,7 @@ To convert a Version 4.x `setrun.py` file to Version 5.0, see :ref:`claw46to50`.
 Input
 -----
 
-`setrun` takes a single argument `claw_pkg` that should be set to `amrclaw`.
+`setrun` takes a single argument `claw_pkg` that should be set to `classic`.
 
 Output
 ------
@@ -58,16 +58,16 @@ below.
 
 .. attribute:: lower : list of floats
 
-   lower limits in the x,y [,z]  directions.   
+   lower limits in the x, [y,z]  directions.   
 
 .. attribute:: upper : list of floats
 
-   upper limits in the x,y [,z]  directions.   
+   upper limits in the x, [y ,z]  directions.   
 
 
 .. attribute:: num_cells : list of integers
 
-   The number of grid cells in the x, y, [,z]  directions.
+   The number of grid cells in the x, [y, ,z]  directions.
 
    Note that when AMR is used, `num_cells` determines the number of cells in 
    each dimension on the coarsest Level 1 grid.  Additional paramters

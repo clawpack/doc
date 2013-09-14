@@ -46,10 +46,11 @@ def list_examples(examples_dir):
     return dirlist
         
 
-def make_plots(examples_dir = 'amrclaw/examples'):
+def make_plots(examples_dir = '.'):
     import os,sys
 
-    examples_dir = os.path.abspath(os.path.join(CLAW,examples_dir))
+    #examples_dir = os.path.abspath(os.path.join(CLAW,examples_dir))
+    examples_dir = os.path.abspath(examples_dir)
     if not os.path.isdir(examples_dir):
         raise Exception("Directory not found: %s" % examples_dir)
 
