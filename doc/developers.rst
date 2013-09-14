@@ -5,8 +5,7 @@
 Developers' Guide
 **************************************
 
-.. warning:: Draft version, subject to change.
-
+See :ref:`git-resources` for some useful links.
 
 .. _developers_gitclone:
 
@@ -56,7 +55,7 @@ Installation instructions for developers
 Install a read-only copy of all the main repositories as described above in
 :ref:`developers_gitclone`.
 
-Note that the repositories will each be checked out to a specific commit and
+**Important Note:** The repositories will each be checked out to a specific commit and
 will probably be in a detached-head state.  You will need to checkout
 `master` in each repository to see the current head of the master branch.
 
@@ -65,18 +64,28 @@ the `master` branch should always reflect what's in the main
 *clawpack* repository.  You can update it to reflect any changes via::
 
         git checkout master
-        git pull 
+        git fetch origin
+        git merge origin/master
 
 or simply::
 
-        git pull origin master
+        git pull origin master:master
+
+Remember that you need to do this in each repository before running anything
+to make sure everything is up to date with *master*.
+
+.. _dev_remote:
+
+Setting a remote to point to your fork
+---------------------------------------
 
 If you plan to make changes and issue pull requests to one or more
 repositories, you will need to do the following steps for each such
 repository:
 
 #. Go to `<http://github.com/clawpack>`_ and fork the repository to your own
-   Github account.  (See :ref:`git_fork`.)
+   Github account.  (Click on the repository name and then the *Fork* button
+   at the top of the screen.)
 
 #. Add a *remote* pointing to your repository.  For example, if you have
    forked the `amrclaw` repository to account `username`, you would do::
@@ -111,22 +120,50 @@ Modifying code
 Before making changes, you generally want to make sure *master* is up to
 date::
 
-        git pull origin master
+        git checkout master
+        git pull 
 
-Then create a new branch based on `origin/master` and
-commit to this branch::
+Then create a new branch based on `master` for any new commits::
 
-        git checkout -b new_feature origin/master
+        git checkout -b new_feature master
+
         # make some changes
-        git commit - "describe the changes"
+        # git add the modified files
+        git commit -m "describe the changes"
 
-then push to your own fork::
+Now make changes, add and commit them, 
+and then push to your own fork::
 
         git push username new_feature
+
 
 If you want these changes pulled into *master*, 
 you can issue a pull request from the github page for your fork of this
 repository (make sure to select the correct branch of your repository).
+
+**Note:** If you accidentally commit to `master` rather than creating a
+feature branch first, you can easily recover::
+
+    git checkout -b new_feature
+
+will create a new branch based on the current state and history (including
+your commits to `master`) and you can just continue adding additional 
+commits.
+
+The only problem is your `master` branch no longer agrees with the history
+on Github and you want to throw away the commits you made to `master`.  The
+easiest way to do this is just to make sure you're on a different branch,
+e.g., ::
+
+    git checkout new_feature
+
+and then::
+
+    git branch -D master
+    git checkout -b master origin/master
+
+This deletes your local branch named `master` and recreates a branch with
+the same name based on `origin/master`, which is what you want.
 
 .. _developers_pr:
 
@@ -138,13 +175,15 @@ anything:
 
 #. Make sure you are up to date with *master*::
 
-        git pull origin master
+        git checkout master
+        git pull 
 
    If this does not say "Already up-to-date" then you might want to rebase
    your modified code onto the updated master.  With your feature branch
    checked out, you can see what newer commits have been added to *master*
    via::
 
+        git checkout new_feature
         git log HEAD..master
 
    If your new feature can be added on to the updated master, you can rebase::
@@ -171,6 +210,42 @@ To issue a pull request (PR), go to the Github page for your fork of the
 repository in question, select the branch from which you want the pull
 request to originate, and then click the *Pull Request* button.
 
+.. _test_pr:
+
+Testing out a pull request
+--------------------------
+
+To test out someone else's pull request, follow these  instructions:
+For
+example, if you want to try out a pull request coming from a branch named
+*bug-fix* from user *rjleveque* to the *master* branch of
+the *amrclaw* repository, you would do::
+
+    cd $CLAW/amrclaw   # (and make sure you don't have uncommitted changes)
+    git checkout master
+    git pull  # to make sure you are up to date
+
+    git checkout -b rjleveque-bug-fix master
+    git pull https://github.com/rjleveque/amrclaw.git bug-fix
+
+This puts you on a new branch of your own repository named
+*rjleveque-bug-fix* that has the proposed changes pulled into it.
+
+Once you are done testing, you can get rid of this branch via::
+
+    git checkout master
+    git branch -D rjleveque-bug-fix
+
+    
+
+.. _toplevel_pr:
+
+Top level pull requests
+-----------------------
+
+The top level *clawpack* repository keeps track of what versions of the
+subrepositories work well together.
+
 If you make pull requests in two different repositories that are linked, say
 to both *pyclaw* and *riemann*, then you should also push these changes to
 the top-level *clawpack* repository and issue a PR for this change::
@@ -188,7 +263,7 @@ the top-level *clawpack* repository and issue a PR for this change::
 Git workflow
 ------------
 
-The sections :ref:`git_and_github` and :ref:`using-git` need to be updated.
+See :ref:`git-resources` for useful links.
 
 
 

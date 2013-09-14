@@ -42,6 +42,12 @@ The directory where output and plots are stored is specified in the Makefile.
 
 The Makefile in most directories includes a common Makefile found at
 `$CLAW/clawutil/src/Makefile.common` that does most of the work.  
+If you get the error message::
+
+        Makefile:  /clawutil/src/Makefile.common: No such file or directory
+
+then the environment variable `CLAW` is not set properly.  
+See :ref:`setenv`.
 
 More tips
 ---------
@@ -63,10 +69,13 @@ More tips
 * Similarly, remove the file ``.plots`` to force the plots to be recreated.
   
 
-* If you change the compiler flags FFLAGS in the Makefile then you should
+* If you change the compiler flags FFLAGS in the Makefile or as an
+  environment variable, then you should
   make sure that all files used are recompiled with the new flags.  The
   Makefiles as written do not catch this dependency and will not recompile
   all the .o files when the Makefile changes.  To force recompilation,
   use::
 
      $ make new
+
+  See :ref:`fortran_compilers` for more about compiler flags.

@@ -114,16 +114,19 @@ class Gallery(object):
                     #os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                     os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, \
                                 static_dir+gitem.appdir))
+
+
+                subtitle = '**Directory: `$CLAW/%s`** \n' % gitem.appdir
                 gfile.write('\n')
+                gfile.write(subtitle + '\n')
+                #gfile.write(len(subtitle)*'-' + '\n')
                 desc = gitem.description.lstrip().replace('\n',' ')
                 gfile.write('%s\n\n' % desc)
-                code = os.path.join(claw_html_root, gitem.appdir)
-                #plotindex = os.path.join(claw_html_root, gitem.appdir, \
-                #               gitem.plotdir, '_PlotIndex.html')
                 plotindex = os.path.join(claw_html_root, '../_static', \
                         gitem.appdir, gitem.plotdir, '_PlotIndex.html')
-                gfile.write('%s ... \n`README <%s/README.html>`__ ... \n`Plots <%s>`__\n' \
-                      % (gitem.appdir,gitem.appdir,plotindex))
+                gfile.write('`README <%s/README.html>`__ ... \n`Plots <%s>`__\n' \
+                      % (gitem.appdir,plotindex))
+                code = os.path.join(claw_html_root, gitem.appdir)
                 gfile.write('\n\n')
 
                 for image in gitem.images:
@@ -187,56 +190,19 @@ def make_1d():
 
 
     #----------------------------------------------
-    gsec = gallery.new_section('1-dimensional advection')
-    appdir = 'examples/advection_1d/'
+    gsec = gallery.new_section('1-dimensional acoustics')
+    appdir = 'classic/examples/acoustics_1d_example1'
     description = """
-         Advecting Gaussian with periodic boundary."""
+         Acoustics equations with interface showing reflection and
+         transmission."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
-    gsec = gallery.new_section('1-dimensional variable-velocity advection')
-    appdir = 'examples/advection_1d_variable'
+    appdir = 'classic/examples/acoustics_1d_heterogeneous'
     description = """
-         Advecting Gaussian and square wave with periodic boundary."""
-    images = ('frame0000fig1', 'frame0004fig1', 'frame0008fig1')
-    gsec.new_item(appdir, plotdir, description, images)
-     #----------------------------------------------
-    gsec = gallery.new_section('1-dimensional acoustics')
-    appdir = 'examples/acoustics_1d_homogeneous'
-    description = """
-         Acoustics equations with wall boundary at left and extrap at
-         right."""
-    images = ('frame0000fig1', 'frame0002fig1', 'frame0005fig1')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
-    gsec = gallery.new_section("1-dimensional Burgers' equation")
-    appdir = 'examples/burgers_1d/'
-    description = """
-        Burgers' equation with sinusoidal initial data, steepening to
-        N-wave.  """
-    images = ('frame0000fig0', 'frame0003fig0', 'frame0006fig0')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
-    gsec = gallery.new_section("1-dimensional shallow water equation")
-    appdir = 'examples/shallow_1d/'
-    description = """Shallow water shock tube."""
-    images = ('frame0000fig0', 'frame0003fig0', 'frame0006fig0')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
-    gsec = gallery.new_section("1-dimensional nonlinear elasticity")
-    appdir = 'examples/stegoton_1d'
-    description = """
-        Evolution of two trains of solitary waves from an initial gaussian.
-        """
-    images = ('frame0000fig1', 'frame0003fig1', 'frame0005fig1')
-    gsec.new_item(appdir, plotdir, description, images)
-    #----------------------------------------------
-    gsec = gallery.new_section("1-dimensional Euler equations")
-    appdir = 'examples/euler_1d'
-    description = """
-        Woodward-Colella blast-wave interaction problem.
-        """
-    images = ('frame0000fig0', 'frame0003fig0', 'frame0010fig0')
+         Acoustics equations with interface showing reflection and
+         transmission."""
+    images = ('frame0000fig0', 'frame0007fig0', 'frame0010fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
        
@@ -263,14 +229,21 @@ def make_2d():
     #----------------------------------------------
     appdir = 'amrclaw/examples/advection_2d_swirl'
     description = """
-        Advection with a swirling flow field."""
+        Advection with a swirling flow field with AMR."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0008fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
+    appdir = 'classic/examples/advection_2d_annulus'
+    description = """
+        Advection in an annular region."""
+    images = ('frame0000fig0', 'frame0002fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
     appdir = 'amrclaw/examples/advection_2d_annulus'
     description = """
-        Advection in an annular region."""
+        Advection in an annular region with AMR."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0002fig2')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
@@ -278,9 +251,15 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional acoustics')
     #----------------------------------------------
-    appdir = 'amrclaw/examples/acoustics_2d_radial'
+    appdir = 'classic/examples/acoustics_2d_radial'
     description = """
         Expanding radial acoustic wave in a homogeneous medium."""
+    images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'amrclaw/examples/acoustics_2d_radial'
+    description = """
+        Expanding radial acoustic wave in a homogeneous medium with AMR."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
@@ -306,10 +285,47 @@ def make_2d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
-
-        
     gallery.create('gallery_2d.rst')
     return gallery
+
+def make_geoclaw():
+    gallery = Gallery("Gallery of GeoClaw applications")
+    plotdir = '_plots'
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Chile 2010 tsunami')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/chile2010'
+    description = """
+        Simple model of the 2010 tsunami arising offshore Maule, Chile."""
+    images = ('frame0004fig0', 'frame0008fig0', 'frame0012fig0','gauge32412fig300')
+    gsec.new_item(appdir, plotdir, description, images)
+
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Radially-symmetric tsuanami in parabolic bowl')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/bowl-radial'
+    description = """
+        Sample code where solution should be radially symmetric."""
+    images = ('frame0000fig0', 'frame0015fig0', 'frame0015fig10', 'gauge0004fig300')
+    gsec.new_item(appdir, plotdir, description, images)
+
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Sloshing water in parabolic bowl')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/bowl-slosh'
+    description = """
+        Sample code with analytic solution."""
+    images = ('frame0000fig0', 'frame0000fig1', 'frame0010fig0', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
+    gallery.create('gallery_geoclaw.rst')
+    return gallery
+
+
 
 def make_fvmbook():
     gallery = Gallery("Gallery of `FVMHP book <http://www.clawpack.org/book>`_ applications")
@@ -339,13 +355,13 @@ def make_fvmbook():
     return gallery
 
 def make_all():
-    #gallery_1d = make_1d()
+    gallery_1d = make_1d()
     gallery_2d = make_2d()
 
     # make gallery of everything:
     gallery_all = Gallery(title="Gallery of all Clawpack applications")
-    #gallery_all.sections = gallery_1d.sections + gallery_2d.sections 
-    gallery_all.sections = gallery_2d.sections 
+    gallery_all.sections = gallery_1d.sections + gallery_2d.sections 
+    #gallery_all.sections = gallery_2d.sections 
     
     gallery_all.create('gallery_all.rst')
 

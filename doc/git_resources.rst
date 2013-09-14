@@ -23,6 +23,9 @@ Tutorials and summaries
   links and tips
 * A good but technical page on `git concepts`_
 * `git svn crash course`_: git for those of us used to subversion_
+* `Use gitk to understand git <http://lostechies.com/joshuaflanagan/2010/09/03/use-gitk-to-understand-git/>`_
+  has a good description of merging.
+* `Many more documentation links <https://git.wiki.kernel.org/index.php/GitDocumentation>`_ 
 
 Advanced git workflow
 =====================
@@ -56,4 +59,4 @@ online manual pages for some common commands:
 * `git remote`_
 * `git status`_
 
-.. include:: links.inc
+.. include:: git_links.inc
