@@ -56,9 +56,7 @@ Examples and Applications:
    :maxdepth: 1
    
 
-   gallery/gallery_all
-   gallery/gallery_fvmbook
-   gallery/gallery_geoclaw
+   galleries
    book
    newapp
    sharing
