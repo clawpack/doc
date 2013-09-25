@@ -117,7 +117,7 @@ General geo parameters
 .. attribute:: friction_forcing : bool
 
    Whether to apply friction source terms in momentum equations.
-   See :ref:`manning` for more discussion of the next four parameters.
+   See :ref:`manning` for more discussion of the next three parameters.
 
 .. attribute:: friction_depth : float
 
