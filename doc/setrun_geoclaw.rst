@@ -119,30 +119,35 @@ General geo parameters
    Whether to apply friction source terms in momentum equations.
    See :ref:`manning` for more discussion of the next four parameters.
 
-.. attribute:: manning_coefficient : float
-
-   For friction source terms, the Manning coefficient.  By default this
-   value will be used everywhere unless `manning_coefficient_onshore` is
-   set to a different value, in which case this value will be used only
-   where the topo satisfies `B < friction_shore_level`.
-
-.. attribute:: manning_coefficient_onshore : float
-
-   Optional second Manning coefficient to use "onshore", 
-   where the topo satisfies `B >= friction_shore_level`.
-   If not set, it will default to the same value as `manning_coefficient`.
-
-.. attribute:: friction_shore_level : float
-
-   For friction source terms, the value used to determine whether a cell
-   is "onshore" or "offshore", in cases where different Manning coefficients
-   are desired in the two cases.  The default value is 0.
-
 .. attribute:: friction_depth : float
 
    Friction source terms are only applied in water shallower than this,
    i.e. if `h < friction_depth`, 
-   since they have negligible effect in deeper water.
+   assuming they have negligible effect in deeper water.
+
+.. attribute:: manning_coefficient : float or list of floats
+
+   For friction source terms, the Manning coefficient.  If a single value
+   is given, this value will be used where ever h < friction_depth.
+   If a list of values is given, then the next parameter delineates the
+   regions where each is used based on values of the topography B.
+
+.. attribute:: manning_break : list of floats
+
+   If manning_coefficient is a list of length N, then this should be a 
+   monotonically increasing list
+   of length N-1 giving break points in the topo B used to determine where
+   each Manning coefficient is used.
+
+   For example, if ::
+
+        manning_coefficient = [0.025, 0.06]
+        manning_break = [0.0]
+
+   then 0.025 will be used where B<0 and 0.06 used where B>0.  
+   (Subject still to the restriction that no friction is applied 
+   where h >= friction_depth.)
+
 
 .. _setrun_topo:
 
