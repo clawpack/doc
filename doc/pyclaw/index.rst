@@ -12,7 +12,7 @@ Install and model a shock wave::
     cd clawpack
     pip install -e .
     cd clawpack/pyclaw/examples/euler_2d
-    python shockbubble_bubble_interaction.py iplot=1
+    python shock_bubble_interaction.py iplot=1
 
 **********
 PyClaw is:
