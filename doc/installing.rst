@@ -4,7 +4,10 @@
 Installation instructions
 **************************************
 
-See also: :ref:`pyclaw`
+See also: 
+
+* :ref:`pyclaw`
+* :ref:`setup_dev`
 
 
 Prerequisites
@@ -161,13 +164,7 @@ recommended way to do this is to type::
 
 If this gives an error, see :ref:`trouble_makeoutput`.
 
-One could run the code by typing "./xamr", but using the make option has
-several advantages.  For one thing,
-this checks dependencies to make sure the executable and data files are up
-to date, so you could have typed "make .output" without the first two steps
-above.
-
-Also, before running the code a subdirectory `_output` is created
+Before running the code a subdirectory `_output` is created
 and the output of the code (often a large number of files) is directed to
 this subdirectory.  This is convenient if you want to do several runs with
 different parameter values and keep the results organized.  After the code
@@ -175,10 +172,6 @@ has run you can rename the subdirectory, or you can modify the variable
 `OUTDIR` in the Makefile to direct results to a different directory.  See
 :ref:`makefiles` for more details.  Copies of all the data files are also
 placed in the output directory for future reference.
-
-If the code runs successfully, you should see output like the following::
-
-.. warning:: Out of date!  Needs updating.
 
 
 
