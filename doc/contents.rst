@@ -1,18 +1,11 @@
 .. _contents:
 
-==========================
-Table of Contents
-==========================
+====================================================
+Full Table of Contents
+====================================================
 
-.. This documentation was generated using `Sphinx <http://sphinx.pocoo.org/>`_
+:ref:`toc_condensed`
 
-
-General Clawpack documentation
-==============================
-
-.. toctree::
-   :maxdepth: 2
-   
 
 Overview and Getting Started:
 -----------------------------
@@ -35,19 +28,6 @@ Overview and Getting Started:
    claw43to44
    setrun_changes
 
-Developers' guide to using Git
-------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   developers
-   git_resources
-   howto_doc
-   regression
-   git_versions
-
-See also :ref:`setup_dev`
 
 Examples and Applications:
 -----------------------------
@@ -107,8 +87,9 @@ AMRClaw: Adaptive Mesh Refinement
    amrclaw
    setrun_amrclaw
    setrun_amrclaw_sample
-   flag
-   regions
+   amr_algorithm
+   refinement
+   gauges
 
 
 GeoClaw: For geophysical flows
@@ -121,7 +102,6 @@ GeoClaw: For geophysical flows
    geohints
    topo
    setrun_geoclaw
-   setrun_geoclaw_sample
    plotting_geoclaw
    quick_tsunami
    okada
@@ -130,18 +110,7 @@ GeoClaw: For geophysical flows
    tsunamidata
 
    
-Advanced features:
-------------------
 
-.. toctree::
-   :maxdepth: 1
-   
-   gauges
-
-
-
-Documentation from other Clawpack Projects:
-===========================================
 
 PyClaw: Python tools
 --------------------
@@ -164,6 +133,20 @@ SharpClaw has recently been integrated into PyClaw/PetClaw along with very high 
 
    pyclaw/solvers
   
+
+Developers' resources
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   developers
+   git_resources
+   howto_doc
+   regression
+   git_versions
+
+See also :ref:`setup_dev`
 
 Bibliography
 ------------

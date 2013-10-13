@@ -6,12 +6,13 @@
 Gauges
 ***************
 
-.. warning :: Needs updating
 
-With AMRCLAW in two space dimensions
+With AMRClaw in two space dimensions and GeoClaw
 it is possible to specify gauge locations as points (x,y) where the values of all
 components of q should be output every time step during the computation over some
-time range (t1,t2).  The addition of a time range is new in svn revision 328.
+time range (t1,t2).  
+
+**Still need to add to 3d AMRClaw code, and to Classic codes.**
 
 Gauges are useful in several ways, e.g.:
 
@@ -26,25 +27,34 @@ Gauges are useful in several ways, e.g.:
     comparing to curves that give the solution as a function of time often reveals
     more clearly differences in accuracy or nonphysical oscillations.
 
-To use gauges, include the line::
+.. _setrun_guages:
 
-    call setgauges()
+Gauge parameters in setrun
+--------------------------
 
-in your file setprob.f.  This reads in the gauge locations from the file 
-`setgauges.data`.  This file should have one line giving the number of gauges and
-the following lines specify information for each gauge in the format::
+See also :ref:`setrun_amrclaw`.
 
-    gaugeno  x  y  t1  t2
+Gauges are specified in `setrun` by adding lists of gauge data for each
+desired gauge to the `ClawRunData`
+object `rundata.gaugedata.gauges`.  This is initialized as an empty list and 
+new gauges can be specified by::
 
-Rather than creating this file by hand, it is easiest to do this in your
-`setrun.py` file by including lines of the form::
+    rundata.gaugedata.gauges.append([gaugeno, x, y, t1, t2])
 
-    clawdata.gauges = []
-    clawdata.gauges.append([gaugeno, x, y, t1, t2])
+with values
 
-where the second line is repeated as many times as desired with different values of
-the parameters.  From this information the `setgauges.data` file will be
-automatically created when you do "make .data" or "make .output".
+* *gaugeno* : integer
+
+  the number of this gauge
+
+* *x, y* : floats
+
+  the location of this gauge
+
+* *t1, t2* : floats
+
+  the time interval over which gauge data should be output.
+
 
 During the computation the value of all components of q at all gauge locations will
 be output to a single file `fort.gauge` in the output directory.  Lines of this
@@ -145,7 +155,7 @@ to your setplot.py file and modify at will.
 Examples
 --------
 
-To see an example of the use of gauges see:
+Several of the examples found in `$CLAW/amrclaw/examples/`
+and `$CLAW/geoclaw/examples/` contain the specification of gauges.
 
-   * **Need pointer**
 

@@ -150,9 +150,11 @@ Special AMR parameters
    Additional information is printed to the terminal each time regridding is
    done at this level or coarser.  Set to 0 to suppress regridding output.
 
-.. attribute:: regions **Regions**
+.. attribute:: regions : list
 
-   See :ref:`flag_regions`
+   List of lists of the form
+   `[minlevel,maxlevel,t1,t2,x1,x2,y1,y2]`.
+   See :ref:`refinement_regions`
 
 Debugging flags for additional printing
 ---------------------------------------
