@@ -16,7 +16,7 @@ Plotting hints and FAQ
 
 More to come!
 
-What's the difference between ``make .plots`` and ``make plots`` ?
+What's the difference between `make .plots` and `make plots` ?
 ------------------------------------------------------------------
 
 The default Makefile configuration in Version 4.5.1 was changed to allow two

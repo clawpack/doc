@@ -84,7 +84,7 @@ simulation:
 
 * For most tsunami simulations including the Coriolis terms in the momentum
   equations makes little difference in the observed results and so these
-  terms are often turned off for efficiency (*icoriolis = 0*).
+  terms are often turned off for efficiency (*coriolis_forcing = False*).
 
 * The geoclaw parameter *sea_level* determines the initial fluid depth
   relative to the topography, as specified by the *topo* files.

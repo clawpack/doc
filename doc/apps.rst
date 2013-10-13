@@ -1,19 +1,26 @@
 
 .. _apps:
 
-#############################
-Clawpack Applications gallery
-#############################
+#################################
+Clawpack Applications repository
+#################################
 
+A few examples of how to use different flavors of Clawpack are included in
+the directories
 
-You can browse through the examples from the galleries below:
+* `$CLAW/classic/examples`
+* `$CLAW/amrclaw/examples`
+* `$CLAW/geoclaw/examples`
 
-* :ref:`clawpack_gallery`
+These examples demonstrate some of the basic capabilities.
+The plots resulting from running these examples should agree with those seen
+in the :ref:`galleries`.
 
-* :ref:`book`
+More complex examples and applications are archived in the Github
+`clawpack/apps` repository found at
+`https://github.com/clawpack/apps <https://github.com/clawpack/apps>`_.
 
-* :ref:`gallery`  (PyClaw)
+You can clone this repository or download a zip file from the webpage.
 
-
-.. warning:: Need to clean up and merge.
+In particular, the directory `apps/fvmbook` contains many :ref:`book`.
 

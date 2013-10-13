@@ -11,12 +11,14 @@ Quick start guide for tsunami modeling
    purpose, and no liability on the part of the authors.  See the
    :ref:`license` for more details.
 
+TODO: Need to change all `setrun` parameters to new 5.0 names in this section!
+
 This is a brief outline of how to set up and run GeoClaw to model a real
 event, with pointers to various useful data sources.
 
 As always, the best way to get started is to copy a working example and
 modify it to do what you want.  We'll start with the example in
-`$CLAW/apps/tsunami/chile2010` of Clawpack 4.6.
+`$CLAW/geoclaw/examples/tsunami/chile2010`.
 
 Copy this directory somewhere new with an appropriate name.
 
@@ -352,14 +354,13 @@ The subfault model must be converted to sea floor deformation by applying
 the Okada model to each fault segment and adding together the deformation
 predicted by each.  
 
-.. seealso:: In 4.6.3 there is a new version okada2.py and tools in
-   dtopotools.py that give flexibility in specifying subfaults.
-
 
 .. comment:
-    For example, the function `make_dz_honshu_ucsb3` defined in this module
-    takes a subfault file named `honshu-ucsb3.txt` and produces a `dtopo` file
-    named `honshu-ucsb3.tt1` (of topotype 1 as described at :ref:`topo`).
+   In 4.6.3 there is a new version okada2.py and tools in
+   dtopotools.py that give flexibility in specifying subfaults.
+   For example, the function `make_dz_honshu_ucsb3` defined in this module
+   takes a subfault file named `honshu-ucsb3.txt` and produces a `dtopo` file
+   named `honshu-ucsb3.tt1` (of topotype 1 as described at :ref:`topo`).
 
 
 Specifying dtopo in `setrun.py`

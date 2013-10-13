@@ -25,8 +25,8 @@ Available examples
 ------------------
 
 The examples converted so far can be found in the 
-directory `$CLAW/apps/fvmbook` if you clone the `apps` repository.
-[Need to add better instructions on how to get `apps`.]
+directory `apps/fvmbook` if you clone the `apps` repository.
+(See :ref:`apps`.)
 
 You can also browse the examples in the 
 :ref:`gallery_fvmbook`.

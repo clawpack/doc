@@ -45,7 +45,8 @@ handled by letting the depth variable *h* in the shallow water equations be
 adjacent to wet cells and that allow wetting and drying, for example as a
 tsunami inundates dry land.
 
-Some sample calculations can be viewed in the :ref:`apps`.
+Some sample calculations can be viewed in the :ref:`gallery_geoclaw`.
+More will eventually appear in the :ref:`apps`.
 
 
 
