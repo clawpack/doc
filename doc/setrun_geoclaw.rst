@@ -18,9 +18,7 @@ file in any :ref:`geoclaw` application.
 See also the :ref:`geohints` for more about parameter choices.
 
 It is best to look at a specific example while reading this section, for
-example  :ref:`setrun_geoclaw_sample`.
-
-See also the sample codes in the directory `$CLAW/geoclaw/examples/tsunami`.
+example in one of the subdirectories of `$CLAW/geoclaw/examples/tsunami`.
   
 
 The function `setrun` in this module is essentially the same as for AMRClaw,
@@ -79,6 +77,7 @@ is done should be specified for GeoClaw applications:
    The deepness that triggers the refinement limitation imposed by
    `max_level_deep` above.
 
+.. _setrun_geo:
 
 General geo parameters
 ----------------------
@@ -309,37 +308,6 @@ AMR refinement region parameters
 
     For more about controlling AMR in various regions, see :ref:`regions`.
 
-.. _setrun_guages:
-
-Gauge parameters
-----------------
-
-.. warning :: Needs updating
-
-.. attribute:: gauges : list of lists
-
-   **Note:** this should become a more general AMR parameter.
-
-   *gauges* should be a list of the form *[gauge1info, gauge2info, etc.]*
-   where each element is itself a list of the form 
-
-     [gaugeno, x, y, t1, t2]
-
-   with values
-
-     *gaugeno* : integer
-
-       the number of this gauge
-
-     *x, y* : floats
-
-       the location of this gauge
-
-     *t1, t2* : floats
-
-       the time interval over which gauge data should be output.
-
-   For more about gauges, see :ref:`gauges`.
 
 .. _setrun_fixedgrids:
 

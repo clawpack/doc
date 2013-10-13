@@ -32,7 +32,7 @@ threshold specified by *friction_depth* (see :ref:`setrun_geoclaw`).
 
 New in 5.0: A list of Manning coefficients can be specifed to be used in
 different regions based on the topography B, e.g. one value offshore and a
-different value onshore.  See :ref:`setrun_geoclaw`.
+different value onshore.  See :ref:`setrun_geo`.
 
 .. warning:: Changing the Manning coefficient can have a significant effect
    on the extent of inundation and runup.  If GeoClaw (or any other code) is

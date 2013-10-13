@@ -1,7 +1,7 @@
 
-To build the gallery (for amrclaw 2d only currently):
+To build the gallery (e.g. for amrclaw):
 
-python make_plots.py amrclaw
+python make_plots.py $CLAW/amrclaw/examples
 python gallery.py
 cd ..
 make html
