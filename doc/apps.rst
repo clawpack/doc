@@ -11,6 +11,9 @@ the directories
 * `$CLAW/classic/examples`
 * `$CLAW/amrclaw/examples`
 * `$CLAW/geoclaw/examples`
+* `$CLAW/pyclaw/examples`
+
+
 
 These examples demonstrate some of the basic capabilities.
 The plots resulting from running these examples should agree with those seen

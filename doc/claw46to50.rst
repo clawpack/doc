@@ -21,9 +21,10 @@ A first pass at the conversion of *setrun.py*, *setplot.py* and the
 in your application directory.  You should then inspect the files generated
 and fix any broken links, etc.
 
-Currently this sort of works for 2d *amrclaw* applications only.
 
 **Note:**
+
+This does not yet work for all variants of the code.
 
 Old AMRClaw codes are often in a subdirectory *amr* of an application
 directory, and the directory above may contain Fortran files or other files

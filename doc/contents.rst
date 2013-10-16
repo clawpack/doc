@@ -37,6 +37,7 @@ Examples and Applications:
    
 
    galleries
+   apps
    book
    newapp
    sharing
