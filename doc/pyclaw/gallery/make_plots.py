@@ -34,6 +34,8 @@ def list_examples(examples_dir=None):
         pyfiles=[f for f in files if f.split('.')[-1]=='py']
         appfiles=[f for f in pyfiles if f.split('.')[0] not in ('setup','setplot','__init__')]
         appfiles=[f for f in appfiles if 'test' not in f]
+        appfiles=[f for f in appfiles if 'peano' not in dirpath]
+        appfiles=[f for f in appfiles if 'compare_solvers' not in f]
         #Skip 3d for now because visclaw plotting is not set up for it
         appfiles=[file for file in appfiles if '3d' not in os.path.abspath(dirpath)]
 
