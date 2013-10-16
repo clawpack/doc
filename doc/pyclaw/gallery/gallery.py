@@ -17,7 +17,7 @@ claw_html_root='http://clawpack.github.io/doc/pyclaw'
 
 # Determine PyClaw directory:
 from clawpack import pyclaw
-clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw')
+clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-2])+'/')
 
 # Location for gallery files:
 gallery_dir_default = '.'#os.path.join(clawdir_default,'doc/gallery')  
@@ -59,7 +59,7 @@ class Gallery(object):
         self.sections.append(gsec)
         return gsec
     
-    def create(self,fname,gallery_dir=None):
+    def create(self,fname,gallery_dir=None, copy_plots=True):
 
         # Directory for gallery files:
         if gallery_dir is None:
@@ -81,46 +81,55 @@ class Gallery(object):
 
         gfile = open(fname, 'w')
         gfile.write(":group: pyclaw\n\n")
-        #gfile.write(".. _gallery:\n\n")
-        #gfile.write("==============================\n")
-        #gfile.write("Gallery of PyClaw applications\n")
-        #gfile.write("==============================\n")
-
         gfile.write(".. _%s:\n\n" % os.path.splitext(fname)[0])
         nchar = len(self.title)
         gfile.write(nchar*"=" + "\n")
         gfile.write("%s\n"  % self.title)
         gfile.write(nchar*"=" + "\n")
-
         gfile.write(".. contents::\n\n")
 
         #gfile.write("%s\n" % self.title)
         #gfile.write("="*len(self.title)+"\n\n")
+
         for gsec in self.sections:
             gfile.write("%s\n" % gsec.title)
             gfile.write("="*len(gsec.title)+"\n")
             gfile.write("%s\n" % gsec.description)
 
             for gitem in gsec.items:
+
+                if not os.path.exists('./'+gitem.appdir):
+                    os.makedirs('./'+gitem.appdir)
+                static_dir = clawdir_default+'doc/doc/_static/'
+
+                if not os.path.exists(static_dir+gitem.appdir):
+                    os.system('mkdir -p %s' % (static_dir+gitem.appdir))
+                print "+++ static_dir = ",static_dir
+
+                #os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
+                if copy_plots:
+                    os.system('cp -r %s/_plots %s' % (self.clawdir+gitem.appdir, \
+                                static_dir+gitem.appdir))
+
                 gfile.write('\n')
                 desc = gitem.description.lstrip().replace('\n',' ')
                 gfile.write('%s\n\n' % desc)
-                code = os.path.join(claw_html_root, gitem.appdir)
-                plotindex = os.path.join(claw_html_root, gitem.appdir, \
-                               gitem.plotdir, '_PlotIndex.html')
-                gfile.write('$PYCLAW/%s ... \n`README <%s/README.html>`__ ... \n`Plots <%s>`__\n' \
-                      % (gitem.appdir,gitem.appdir,plotindex))
+                plotindex = os.path.join(claw_html_root, '../_static', \
+                        gitem.appdir, gitem.plotdir, '_PlotIndex.html')
+                gfile.write('$PYCLAW/%s ... \n`Plots <%s>`__\n' \
+                      % (gitem.appdir,plotindex))
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs ('./'+gitem.appdir)
-                os.system('cp %s/README.rst %s' % ('$PYCLAW/'+gitem.appdir, './'+gitem.appdir))
+                #os.system('cp %s/README.rst %s' % ('$PYCLAW/'+gitem.appdir, './'+gitem.appdir))
                 gfile.write('\n\n')
 
                 for image in gitem.images:
 
                     src_name = os.path.join(gitem.appdir, gitem.plotdir, image)
                     thumb_name = src_name.replace('/','_')
-                    src_html = os.path.join(claw_html_root,src_name) + '.html'
+                    src_html = os.path.join(claw_html_root,'../_static', \
+                        src_name) + '.html'
                     src_name = os.path.join(self.clawdir,src_name)
                     src_png = src_name + '.png'
                     if not os.path.isdir('thumbnails'):
@@ -150,8 +159,8 @@ def make_thumb(src_file, thumb_file, scale):
         scale = int(floor(scale*100))
         os.system('convert -resize %s' % scale + '% ' + \
             '%s %s' % (src_file, thumb_file))
-        print "Converted ",src_file
-        print "   to     ",thumb_file
+        #print "Converted ",src_file
+        #print "   to     ",thumb_file
 
    
 
@@ -160,7 +169,7 @@ def test():
     plotdir = '_plots'
     gsec = gallery.new_section('1-dimensional advection')
 
-    appdir = 'examples/advection/1d'
+    appdir = 'pyclaw/examples/advection/1d'
     description = """
         Advecting Gaussian with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1')
@@ -177,21 +186,21 @@ def make_1d():
 
     #----------------------------------------------
     gsec = gallery.new_section('1-dimensional advection')
-    appdir = 'examples/advection_1d/'
+    appdir = 'pyclaw/examples/advection_1d/'
     description = """
          Advecting Gaussian with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section('1-dimensional variable-velocity advection')
-    appdir = 'examples/advection_1d_variable'
+    appdir = 'pyclaw/examples/advection_1d_variable'
     description = """
          Advecting Gaussian and square wave with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0008fig1')
     gsec.new_item(appdir, plotdir, description, images)
      #----------------------------------------------
     gsec = gallery.new_section('1-dimensional acoustics')
-    appdir = 'examples/acoustics_1d_homogeneous'
+    appdir = 'pyclaw/examples/acoustics_1d_homogeneous'
     description = """
          Acoustics equations with wall boundary at left and extrap at
          right."""
@@ -199,7 +208,7 @@ def make_1d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional Burgers' equation")
-    appdir = 'examples/burgers_1d/'
+    appdir = 'pyclaw/examples/burgers_1d/'
     description = """
         Burgers' equation with sinusoidal initial data, steepening to
         N-wave.  """
@@ -207,13 +216,13 @@ def make_1d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional shallow water equation")
-    appdir = 'examples/shallow_1d/'
+    appdir = 'pyclaw/examples/shallow_1d/'
     description = """Shallow water shock tube."""
     images = ('frame0000fig0', 'frame0003fig0', 'frame0006fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional nonlinear elasticity")
-    appdir = 'examples/stegoton_1d'
+    appdir = 'pyclaw/examples/stegoton_1d'
     description = """
         Evolution of two trains of solitary waves from an initial gaussian.
         """
@@ -221,7 +230,7 @@ def make_1d():
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional Euler equations")
-    appdir = 'examples/euler_1d'
+    appdir = 'pyclaw/examples/euler_1d'
     description = """
         Woodward-Colella blast-wave interaction problem.
         """
@@ -240,7 +249,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional advection')
     #----------------------------------------------
-    appdir = 'examples/advection_2d'
+    appdir = 'pyclaw/examples/advection_2d'
     description = """
         Advecting square with periodic boundary conditions."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
@@ -250,7 +259,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional variable-coefficient advection')
     #----------------------------------------------
-    appdir = 'examples/advection_2d_annulus'
+    appdir = 'pyclaw/examples/advection_2d_annulus'
     description = """
         Advection in an annular region."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0008fig0')
@@ -260,7 +269,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional acoustics')
     #----------------------------------------------
-    appdir = 'examples/acoustics_2d_homogeneous'
+    appdir = 'pyclaw/examples/acoustics_2d_homogeneous'
     description = """
         Expanding radial acoustic wave in a homogeneous medium."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
@@ -270,7 +279,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional variable-coefficient acoustics')
     #----------------------------------------------
-    appdir = 'examples/acoustics_2d_variable'
+    appdir = 'pyclaw/examples/acoustics_2d_variable'
     description = """
         Expanding radial acoustic wave in a two-material medium with an interface."""
     images = ('frame0000fig0', 'frame0010fig0', 'frame0020fig0')
@@ -280,7 +289,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional shallow water equations')
     #----------------------------------------------
-    appdir = 'examples/shallow_2d/'
+    appdir = 'pyclaw/examples/shallow_2d/'
     description = """Radial dam-break."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
     gsec.new_item(appdir, plotdir, description, images)
@@ -289,7 +298,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional shallow water on the sphere')
     #----------------------------------------------
-    appdir = 'examples/shallow_sphere/'
+    appdir = 'pyclaw/examples/shallow_sphere/'
     description = """Wavenumber 4 Rossby-Haurwitz wave on a rotating sphere."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
     gsec.new_item(appdir, plotdir, description, images)
@@ -298,7 +307,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional Euler equations')
     #----------------------------------------------
-    appdir = 'examples/euler_2d'
+    appdir = 'pyclaw/examples/euler_2d'
     description = """
         Shock-bubble interaction."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
@@ -308,7 +317,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional KPP equation')
     #----------------------------------------------
-    appdir = 'examples/kpp/'
+    appdir = 'pyclaw/examples/kpp/'
     description = """
         Non-convex flux example."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
@@ -318,7 +327,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional p-system')
     #----------------------------------------------
-    appdir = 'examples/psystem_2d/'
+    appdir = 'pyclaw/examples/psystem_2d/'
     description = """
         Radial wave in a checkerboard-like medium."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
