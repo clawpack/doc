@@ -23,6 +23,7 @@ Overview and Getting Started:
    :maxdepth: 1
 
    changes
+   clawpack5
    claw4x
    claw46to50
    claw43to44
