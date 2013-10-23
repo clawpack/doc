@@ -1,8 +1,8 @@
 .. _changes:
 
-==========================
-Recent changes
-==========================
+================================
+Recent changes --- release notes
+================================
 
 * Clawpack 5.0 has significant changes from past versions. See
   :ref:`clawpack5`.
@@ -13,7 +13,7 @@ Recent changes
 .. _new_in_claw4x:
 
 Clawpack 4.x
-==========================
+-------------
 
 For documentation and recent changes to the Clawpack 4.x version, please see
 `Clawpack 4.x documentation

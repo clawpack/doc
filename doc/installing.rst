@@ -7,6 +7,7 @@ Installation instructions
 See also: 
 
 * :ref:`pyclaw`
+* :ref:`installation`
 * :ref:`setup_dev`
 
 
@@ -62,27 +63,61 @@ An alternative to installing the prerequisites and Clawpack itself is to use the
 **Cloud Computing.**
 Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 
+
+.. _install_pyclaw:
+
+PyClaw only
+-------------------
+
+For users who only plan to use the Python interface of PyClaw, see the
+instructions at
+
+* :ref:`pyclaw`
+* :ref:`installation`
+
+
+.. _install_from_git:
+
+Cloning from GitHub
+---------------------
+
+Clawpack 5.0 be obtained by cloning a number of repositories
+from `<https://github.com/clawpack>`_.  This is advised
+for those who want to help
+develop Clawpack or to have the most recent bleeding edge version.
+See :ref:`developers_gitclone` for instructions.
+
+
 .. _downloading:
 
 Downloading Clawpack
 --------------------
+
+Many users will want to install from a tar file.
 
 Tar files will be provided containing all the code from various
 repositories together for the convenience of users.
 These releases will be found on the
 `Github releases page <https://github.com/clawpack/clawpack/releases>`_.
 
-For users who only plan to use the Python interface of PyClaw, ::
+After downloading a tar file, unzip and untar using a command like::
 
-    `pip install clawpack` 
+    tar -xf clawpack-5.0.0.tar.gz
 
-can be used.  See
-`Installing PyClaw <http://numerics.kaust.edu.sa/pyclaw/started.html>`_
+This should create a directory with the corresponding name, e.g.
+`clawpack-5.0.0`.  If you `cd` into this directory and use `pwd` to "print
+working directory", you will find the full path to the top level of
+Clawpack.  This path is needed in the next step to set environment variables::
 
-Clawpack 5.0 can also be obtained by cloning a number of repositories
-from `<https://github.com/clawpack>`_, for those who want to help
-develop Clawpack or have the most recent bleeding edge version.
-See :ref:`developers_gitclone` for instructions.
+    cd clawpack-5.0.0
+    pwd
+
+**Note:** The tar file contains only a subset of the Clawpack repositories,
+those that contain the core code and examples.  Other repositories contain
+things like additional applications, documentation, and webpages.
+See :ref:`clawpack_components` for more details and information on
+downloading other repositories.
+
 
 
 .. _setenv:
@@ -92,13 +127,27 @@ Setting environment variables
 
 
 To use the Fortran version of the Clawpack you will need to set the
-environment variable `CLAW` to point to the top level of clawpack tree.
+environment variable `CLAW` to point to the top level of clawpack tree, e.g.
+in bash via::
+
+    export CLAW=/full/path/to/top/level
+
+Then the command::
+
+    ls $CLAW
+
+should list the top level directory, and contain for example::
+
+    README.md       riemann/        pyclaw/
+    amrclaw/        setup.py        clawutil/       
+    geoclaw/        visclaw/        classic/        
+    
+
 You also need to set the `PYTHONPATH` variable to include the same
-directory, e.g. in bash via::
+directory. You can prepend this directory to any existing path via::
 
     export PYTHONPATH=$CLAW:$PYTHONPATH
 
-which will prepend `$CLAW` to any exisiting path.
 
 Finally, you need to set `FC` to point to the desired Fortran compiler,
 e.g.::
@@ -108,14 +157,52 @@ e.g.::
 Consider putting the appropriate commands  in your .cshrc or .bashrc
 file (which is executed automatically in each new shell you create).   
 
+.. _install_links:
+
+Symbolic links for Python modules
+---------------------------------
+
+You will need to set up a subdirectory named $CLAW/clawpack that contains
+symbolic links to various other directories.  This are used so that Python
+import commands will work, such as::
+
+    >>> from clawpack import visclaw
+
+These links are created by::
+
+    cd $CLAW
+    python setup.py links
+
+If you plan to use PyClaw, you can instead do::
+
+    python setup.py install
+
+This will create the links and will also compile some Fortran code using
+`f2py` that is needed for the PyClaw codes to work.
+
+
 .. _first_test:
 
 Testing your installation and running an example
 ------------------------------------------------
 
+As a first test, try the following::
 
-As a first test, go to the directory
-`$CLAW/amrclaw/examples/advection_2d_square`.
+    cd $CLAW/classic/tests
+    make tests
+
+This will run several tests and compare a few numbers from the solution with
+archived results.  The tests should run in a few seconds.
+
+There are similar `tests` subdirectories of `$CLAW/amrclaw` and
+`$CLAW/geoclaw` to do quick tests of these codes.
+
+To do a more substantial run and plot the results, try one of the examples
+illustrated in the :ref:`galleries`.
+
+For example, a simple 1-dimensional acoustics equations can be solved
+using the code in `$CLAW/classic/examples/acoustics_1d_example1`.
+
 You can try the following test in this directory, or you may want to first
 make a copy of it (see the instructions in :ref:`copyex`).
 
@@ -197,3 +284,5 @@ If you wish to use Matlab instead, see :ref:`matlabplots`.
 Other visualization packages could also be used to display the results, but you will need
 to figure out how to read in the data.  See :ref:`fortfiles` for information about the
 format of the files produced by Clawpack.
+
+

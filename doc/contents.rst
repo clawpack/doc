@@ -38,6 +38,7 @@ Examples and Applications:
    
 
    galleries
+   clawpack_components
    apps
    book
    newapp
