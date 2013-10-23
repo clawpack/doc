@@ -4,214 +4,48 @@
 Installation instructions
 **************************************
 
-See also: 
+Full install (install all packages)
+---------------------------------------
+First::
 
-* :ref:`pyclaw`
-* :ref:`installation`
-* :ref:`setup_dev`
+    wget https://github.com/clawpack/clawpack/releases/download/5.0.0rc-alpha/clawpack-rc-alpha.tar.gz
+    tar -xzvf clawpack-rc-alpha.tar.gz
+    cd clawpack
+    python setup.py install
 
+If you do not wish to compile the PyClaw source, replace the last line above by::
 
-Prerequisites
--------------
+    python setup.py no-pyclaw
 
-**Operating systems.**
-Clawpack should work fine on Unix/Linux or Mac OS X systems.  Much
-of it will work under Windows using Cygwin, but this is not officially
-supported.
-
-On OS X you need to have the `Xcode developer tools
-<http://developer.apple.com/technologies/tools/xcode.html>`_
-installed in order to have "make" working.
-
-
-**Fortran.**
-The main Clawpack routines are written in Fortran (a mixture of
-Fortran 77 and Fortran 90/95) and so compiling and running the code
-requires a Fortran compiler, such as `gfortran
-<http://gcc.gnu.org/wiki/GFortran>`_, which is part of the GNU gcc compiler
-suite.
-See :ref:`fortran_compilers` for more about which compilers work well with
-Clawpack.
-
-For Mac OSX, see `hpc.sourceforge.net <http://hpc.sourceforge.net/>`_ for
-some installation options.
-
-Makefiles are used in libraries and directories and you will need some
-version of *make*.
-
-**Python.**
-We use Python for visualization of results
-(see :ref:`plotting`) and also for user input (see :ref:`setrun`).
-Older Matlab plotting scripts are still available but are no longer
-being developed and the examples now included in Clawpack include
-`setplot.py` files to facilitate use of the Python plotting tools
-(see :ref:`setplot`).
-
-You will need Python Version 2.5 or above (but **not** 3.0 or above,
-which is not backwards compatible).  You will also need 
-`NumPy <http://www.numpy.org/>`_ and
-`matplotlib <http://matplotlib.org/>`_ for plotting.  
-
-See :ref:`python` for information on
-installing the required modules and to get started using Python if
-you are not familiar with it.
-
-**Virtual Machine.**
-An alternative to installing the prerequisites and Clawpack itself is to use the
-:ref:`vm`.
-
-**Cloud Computing.**
-Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
-
+This installs Classic, AMRClaw, GeoClaw, and PyClaw.
+If you will use Classic/AMRClaw/GeoClaw, you must also :ref:`setenv`.
 
 .. _install_pyclaw:
 
-PyClaw only
--------------------
+Simple install (install PyClaw and VisClaw only)
+--------------------------------------
+If you will only use PyClaw, everything is handled by pip::
 
-For users who only plan to use the Python interface of PyClaw, see the
-instructions at
+    pip install clawpack
 
-* :ref:`pyclaw`
-* :ref:`installation`
-
-
-.. _install_from_git:
-
-Cloning from GitHub
----------------------
-
-Clawpack 5.0 be obtained by cloning a number of repositories
-from `<https://github.com/clawpack>`_.  This is advised
-for those who want to help
-develop Clawpack or to have the most recent bleeding edge version.
-See :ref:`developers_gitclone` for instructions.
-
-
-.. _downloading:
-
-Downloading Clawpack
---------------------
-
-Many users will want to install from a tar file.
-
-Tar files will be provided containing all the code from various
-repositories together for the convenience of users.
-These releases will be found on the
-`Github releases page <https://github.com/clawpack/clawpack/releases>`_.
-
-After downloading a tar file, unzip and untar using a command like::
-
-    tar -xf clawpack-5.0.0.tar.gz
-
-This should create a directory with the corresponding name, e.g.
-`clawpack-5.0.0`.  If you `cd` into this directory and use `pwd` to "print
-working directory", you will find the full path to the top level of
-Clawpack.  This path is needed in the next step to set environment variables::
-
-    cd clawpack-5.0.0
-    pwd
-
-**Note:** The tar file contains only a subset of the Clawpack repositories,
-those that contain the core code and examples.  Other repositories contain
-things like additional applications, documentation, and webpages.
-See :ref:`clawpack_components` for more details and information on
-downloading other repositories.
-
-
-
-.. _setenv:
-
-Setting environment variables
------------------------------
-
-
-To use the Fortran version of the Clawpack you will need to set the
-environment variable `CLAW` to point to the top level of clawpack tree.
-You also need to prepend this directory to your `PYTHONPATH` so that the
-Clawpack Python modules can be found when importing.  
-In the bash shell these can be set via::
-
-    export CLAW=/full/path/to/top/level
-    export PYTHONPATH=$CLAW:$PYTHONPATH
-
-Finally, you need to set `FC` to point to the desired Fortran compiler,
-e.g.::
-
-    export FC=gfortran   # or other preferred Fortran compiler
-
-Consider putting the three commands above in a file that is executed every
-time you open a new shell or terminal window.  On Linux machines
-with the bash shell this is generally the file `.bashrc` in your home
-directory.  On a Mac it may be called `.bash_profile`.
-
-If your environment variable `CLAW` is properly set, the command ::
-
-    ls $CLAW
-
-should list the top level directory, and report for example::
-
-    README.md       riemann/        pyclaw/
-    amrclaw/        setup.py        clawutil/       
-    geoclaw/        visclaw/        classic/        
-    
-
-
-.. _install_links:
-
-Symbolic links for Python modules
----------------------------------
-
-You will need to set up a subdirectory named $CLAW/clawpack that contains
-symbolic links to various other directories.  This are used so that Python
-import commands will work.
-
-These links are created by::
-
-    cd $CLAW
-    python setup.py no-pyclaw
-
-If you plan to use PyClaw, you can instead do::
-
-    python setup.py install
-
-This will create the links and will also compile some Fortran code using
-`f2py` that is needed for the PyClaw codes to work.
-
-
-Test that your links and `PYTHONPATH` are properly set by starting Python
-(or IPython) and trying::
-
-    >>> from clawpack import visclaw
-
-This should not give an error message.
-
-
-.. _first_test:
-
-Testing your installation 
--------------------------
-
-As a first test of the Fortran code, try the following::
-
-    cd $CLAW/classic/tests
-    make tests
-
-This will run several tests and compare a few numbers from the solution with
-archived results.  The tests should run in a few seconds.
-
-There are similar `tests` subdirectories of `$CLAW/amrclaw` and
-`$CLAW/geoclaw` to do quick tests of these codes.
 
 .. _first_run:
 
 Running an example
 ------------------
+Many examples of Clawpack simulations can be seen in the :ref:`galleries`.
 
-To do a more substantial run and plot the results, try one of the examples
-illustrated in the :ref:`galleries`.
+**Using PyClaw.** To run an example and plot the results using PyClaw, simply do the following
+(starting from your `clawpack` directory)::
 
-For example, a simple 1-dimensional acoustics equations can be solved
+    cd pyclaw/examples/euler_2d
+    python shock_bubble_interaction.py iplot=1
+
+That's it.  For next steps with PyClaw, see :ref:`basics`.
+
+**Using Classic.**
+First ensure that you have :ref:`setenv`.
+A simple 1-dimensional acoustics equations can be solved
 using the code in `$CLAW/classic/examples/acoustics_1d_example1`, as
 illustrated in :ref:`gallery_classic_amrclaw`.
 
@@ -302,3 +136,113 @@ to figure out how to read in the data.  See :ref:`fortfiles` for information abo
 format of the files produced by Clawpack.
 
 
+Alternative ways of running Clawpack
+------------------------------------
+**Virtual Machine.**
+An alternative to installing the prerequisites and Clawpack itself is to use the
+:ref:`vm`.
+
+.. Broken link:
+.. **Cloud Computing.**
+.. Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
+
+
+Prerequisites
+-------------
+
+**Operating system:**
+ - Linux
+ - Mac OS X (you need to have the `Xcode developer tools
+   <http://developer.apple.com/technologies/tools/xcode.html>`_ installed in
+   order to have "make" working)
+
+Much of Clawpack will work under Windows using Cygwin, but this is not officially
+supported.
+
+**Fortran:**
+ - `gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler
+
+See :ref:`fortran_compilers` for more about which compilers work well with
+Clawpack.
+For Mac OSX, see `hpc.sourceforge.net <http://hpc.sourceforge.net/>`_ for
+some installation options.
+
+**Python:**
+ - Python Version 2.5 or above (but **not** 3.0 or above, which is not backwards compatible)
+ - `NumPy <http://www.numpy.org/>`_  (for PyClaw/VisClaw)
+ - `matplotlib <http://matplotlib.org/>`_ (for PyClaw/VisClaw)
+
+See :ref:`python` for information on
+installing the required modules and to get started using Python if
+you are not familiar with it.
+
+
+.. _install_from_git:
+
+Developer install
+---------------------
+
+Clawpack 5.0 be obtained by cloning a number of repositories
+from `<https://github.com/clawpack>`_.  This is advised
+for those who want to help
+develop Clawpack or to have the most recent bleeding edge version.
+See :ref:`developers_gitclone`  and :ref:`setup_dev` for instructions.
+
+
+.. _setenv:
+
+Set environment variables
+-----------------------------
+To use the Fortran version of the Clawpack you will need to set the
+environment variable `CLAW` to point to the top level of clawpack tree
+(there is no need to perform this step if you will only use PyClaw).
+You also need to prepend this directory to your `PYTHONPATH` so that the
+Clawpack Python modules can be found when importing.  
+In the bash shell these can be set via::
+
+    export CLAW=/full/path/to/top/level
+
+Finally, you need to set `FC` to point to the desired Fortran compiler,
+e.g.::
+
+    export FC=gfortran   # or other preferred Fortran compiler
+
+Consider putting the three commands above in a file that is executed every
+time you open a new shell or terminal window.  On Linux machines
+with the bash shell this is generally the file `.bashrc` in your home
+directory.  On a Mac it may be called `.bash_profile`.
+
+If your environment variable `CLAW` is properly set, the command ::
+
+    ls $CLAW
+
+should list the top level directory, and report for example::
+
+    README.md       riemann/        pyclaw/
+    amrclaw/        setup.py        clawutil/       
+    geoclaw/        visclaw/        classic/        
+    
+
+.. _first_test:
+
+Testing your installation 
+-------------------------
+**PyClaw.**
+To run the PyClaw tests, starting from your `clawpack` directory::
+
+    cd pyclaw
+    nosetests
+
+This should return 'OK'.
+
+**Classic.**
+As a first test of the Fortran code, try the following::
+
+    cd $CLAW/classic/tests
+    make tests
+
+This will run several tests and compare a few numbers from the solution with
+archived results.  The tests should run in a few seconds.
+
+There are similar `tests` subdirectories of `$CLAW/amrclaw` and
+`$CLAW/geoclaw` to do quick tests of these codes.
