@@ -4,6 +4,14 @@
 Installation instructions
 **************************************
 
+Simple install (install PyClaw and VisClaw only)
+------------------------------------------------
+If you will only use PyClaw, everything is handled by pip::
+
+    pip install clawpack
+
+Do not use this if you intend to run Classic, AMRClaw, or GeoClaw (see next section).
+
 Full install (install all packages)
 ---------------------------------------
 First::
@@ -21,12 +29,6 @@ This installs Classic, AMRClaw, GeoClaw, and PyClaw.
 If you will use Classic/AMRClaw/GeoClaw, you must also :ref:`setenv`.
 
 .. _install_pyclaw:
-
-Simple install (install PyClaw and VisClaw only)
---------------------------------------
-If you will only use PyClaw, everything is handled by pip::
-
-    pip install clawpack
 
 
 .. _first_run:
