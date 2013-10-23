@@ -26,6 +26,6 @@ from any directory as long as the environment variable is set properly.
 In unix/linux you can copy a directory recursively (with all subdirectories
 intact) using the *cp -r* command, e.g. ::
  
-    $ cp -r $CLAW/amrclaw/examples/example1  path-to-newdir
+    $ cp -r $CLAW/classic/examples/acoustics_1d_example1  path-to-newdir
  
 
