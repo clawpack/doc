@@ -486,12 +486,13 @@ a:hover tt {
     div.document {
         width: 100%;
         margin: 0;
+        padding: 0px 0px 30px 20px;
     }
 
     div.related {
         display: block;
         margin: 0;
-        padding: 10px 0 20px 0;
+        padding: 10px 0 20px 20px;
     }
 
     div.related ul,
