@@ -6,6 +6,7 @@ Recent changes --- release notes
 
 * Clawpack 5.0 has significant changes from past versions. See
   :ref:`clawpack5`.
+* For changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 * :ref:`release_5_0_0`
 

@@ -20,7 +20,9 @@ If you wish to view recent changes on GitHub,
 note that Clawpack is an *organization*, meaning that it is
 comprised of several repositories.  Go to the 
 `Clawpack GitHub <https://github.com/organizations/clawpack>`_ 
-webpage to view all the repositories.
+webpage to view all the repositories.  Major changes that are specific
+to PyClaw since its initial release in 2012 are listed in the
+`PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 You might also view the 
 `issues <https://github.com/organizations/clawpack/dashboard/issues>`_
@@ -44,7 +46,7 @@ GitHub to see what bugs and features we are working on.
   and Riemann solvers must be modified.
 
 * The calling sequence of Riemann solvers has been modified by adding
-  `maux` (the number of auxiliary variables) as another paramter.
+  `maux` (the number of auxiliary variables) as another parameter.
   This is required because of the reordering of indices so that
   `aux(ma,i,j)` is now the `ma` element of the `aux` vector in the `(i,j)`
   cell.  The leading dimension of `aux` is assumed to be `maux` and is
@@ -62,7 +64,7 @@ GitHub to see what bugs and features we are working on.
 
 * The names of many input variables in `setrun.py` have been changed to
   clean things up and be more systematic.  Several options that used to be
-  specified by obscure means have clarified, and some new options have been
+  specified by obscure means have been clarified, and some new options have been
   added.  For details and documentation on the new parameters, see:
   
    * :ref:`setrun_changes` 
