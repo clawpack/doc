@@ -127,35 +127,35 @@ Setting environment variables
 
 
 To use the Fortran version of the Clawpack you will need to set the
-environment variable `CLAW` to point to the top level of clawpack tree, e.g.
-in bash via::
+environment variable `CLAW` to point to the top level of clawpack tree.
+You also need to prepend this directory to your `PYTHONPATH` so that the
+Clawpack Python modules can be found when importing.  
+In the bash shell these can be set via::
 
     export CLAW=/full/path/to/top/level
-
-Then the command::
-
-    ls $CLAW
-
-should list the top level directory, and contain for example::
-
-    README.md       riemann/        pyclaw/
-    amrclaw/        setup.py        clawutil/       
-    geoclaw/        visclaw/        classic/        
-    
-
-You also need to set the `PYTHONPATH` variable to include the same
-directory. You can prepend this directory to any existing path via::
-
     export PYTHONPATH=$CLAW:$PYTHONPATH
-
 
 Finally, you need to set `FC` to point to the desired Fortran compiler,
 e.g.::
 
     export FC=gfortran   # or other preferred Fortran compiler
 
-Consider putting the appropriate commands  in your .cshrc or .bashrc
-file (which is executed automatically in each new shell you create).   
+Consider putting the three commands above in a file that is executed every
+time you open a new shell or terminal window.  On Linux machines
+with the bash shell this is generally the file `.bashrc` in your home
+directory.  On a Mac it may be called `.bash_profile`.
+
+If your environment variable `CLAW` is properly set, the command ::
+
+    ls $CLAW
+
+should list the top level directory, and report for example::
+
+    README.md       riemann/        pyclaw/
+    amrclaw/        setup.py        clawutil/       
+    geoclaw/        visclaw/        classic/        
+    
+
 
 .. _install_links:
 
@@ -164,14 +164,12 @@ Symbolic links for Python modules
 
 You will need to set up a subdirectory named $CLAW/clawpack that contains
 symbolic links to various other directories.  This are used so that Python
-import commands will work, such as::
-
-    >>> from clawpack import visclaw
+import commands will work.
 
 These links are created by::
 
     cd $CLAW
-    python setup.py links
+    python setup.py no-pyclaw
 
 If you plan to use PyClaw, you can instead do::
 
@@ -181,12 +179,20 @@ This will create the links and will also compile some Fortran code using
 `f2py` that is needed for the PyClaw codes to work.
 
 
+Test that your links and `PYTHONPATH` are properly set by starting Python
+(or IPython) and trying::
+
+    >>> from clawpack import visclaw
+
+This should not give an error message.
+
+
 .. _first_test:
 
-Testing your installation and running an example
-------------------------------------------------
+Testing your installation 
+-------------------------
 
-As a first test, try the following::
+As a first test of the Fortran code, try the following::
 
     cd $CLAW/classic/tests
     make tests
@@ -197,11 +203,21 @@ archived results.  The tests should run in a few seconds.
 There are similar `tests` subdirectories of `$CLAW/amrclaw` and
 `$CLAW/geoclaw` to do quick tests of these codes.
 
+.. _first_run:
+
+Running an example
+------------------
+
 To do a more substantial run and plot the results, try one of the examples
 illustrated in the :ref:`galleries`.
 
 For example, a simple 1-dimensional acoustics equations can be solved
-using the code in `$CLAW/classic/examples/acoustics_1d_example1`.
+using the code in `$CLAW/classic/examples/acoustics_1d_example1`, as
+illustrated in :ref:`gallery_classic_amrclaw`.
+
+Move to this directory via::
+
+    cd $CLAW/classic/examples/acoustics_1d_example1
 
 You can try the following test in this directory, or you may want to first
 make a copy of it (see the instructions in :ref:`copyex`).

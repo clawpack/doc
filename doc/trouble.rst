@@ -49,18 +49,12 @@ If the code does not compile, check the following:
 Trouble running "make .data"
 ------------------------------
 
-If you get the Python error::
-
-    ImportError: No module named pyclaw
-
-it's possible that your environment variable `PYTHONPATH` does not
-include $CLAW/python in the path.  If you followed the instructions
-at :ref:`setenv` then this variable should be set properly.   Recall
-that this has to be set in any new shell you use for Clawpack.
 
 If there are errors in the `setrun` function (usually defined in
 `setrun.py`) then the these may show up when you try to "make .data"
 since this function must be executed.
+
+See :ref:`setrun` for information about the setrun function.
 
 
 .. _trouble_makeoutput:
@@ -82,7 +76,7 @@ This happens for example if you changed something that you know
 will affect the output but that isn't in the Makefile's set of
 dependencies.
 
-Starting in 4.5.1, you can also do
+You can also do
 
     $ make output
 
@@ -95,17 +89,21 @@ Trouble running "make .plots"
 ------------------------------
    
 The Python plotting routines require `NumPy` and `matplotlib`.  See 
-:ref:`python` for information on installing this.
+:ref:`python` for information on installing these.
 
 If there are errors in the `setplot` function (usually defined in
-`setplot.py`) then the these may show up when you try to "make .output"
-since this function must be executed.
+`setplot.py`) then the these may show up when you try to "make .plots"
+since this function must be executed.  See :ref:`setplot`.
 
-Starting in 4.5.1, you can also do
+You can also do
 
     $ make plots
 
 (with no dot before ``plots``) to plot the output without checking dependencies.
+This will never run the code, it will only attempt to plot the output files
+found in `_output` directory (or wherever the `OUTDIR` variable in the
+`Makefile` points).
+
 See :ref:`makefiles` for more details and warnings.
 
 
