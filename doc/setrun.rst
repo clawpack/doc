@@ -70,7 +70,7 @@ below.
    The number of grid cells in the x, [y, ,z]  directions.
 
    Note that when AMR is used, `num_cells` determines the number of cells in 
-   each dimension on the coarsest Level 1 grid.  Additional paramters
+   each dimension on the coarsest Level 1 grid.  Additional parameters
    described below determine refinement ratios to finer levels.
 
 .. attribute:: num_eqn : integer

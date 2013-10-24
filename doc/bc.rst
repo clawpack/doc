@@ -16,7 +16,7 @@ Boundary conditions are set by the library routines:
 
 Several standard choices of boundary condition procedures are provided in
 these routines, and can be 
-selected at each boundary by setting the input paramters `bc_lower` and
+selected at each boundary by setting the input parameters `bc_lower` and
 `bc_upper` in each dimension (see :ref:`setrun`) to one of the following:
 
 *   1 or 'extrap'   : extrapolation (non-reflecting outflow)
