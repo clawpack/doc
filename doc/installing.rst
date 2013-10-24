@@ -184,7 +184,7 @@ you are not familiar with it.
 Developer install
 ---------------------
 
-Clawpack 5.0 be obtained by cloning a number of repositories
+Clawpack 5.0 can be obtained by cloning a number of repositories
 from `<https://github.com/clawpack>`_.  This is advised
 for those who want to help
 develop Clawpack or to have the most recent bleeding edge version.
@@ -195,21 +195,19 @@ See :ref:`developers_gitclone`  and :ref:`setup_dev` for instructions.
 
 Set environment variables
 -----------------------------
-To use the Fortran version of the Clawpack you will need to set the
+To use the Fortran versions of Clawpack you will need to set the
 environment variable `CLAW` to point to the top level of clawpack tree
 (there is no need to perform this step if you will only use PyClaw).
-You also need to prepend this directory to your `PYTHONPATH` so that the
-Clawpack Python modules can be found when importing.  
 In the bash shell these can be set via::
 
     export CLAW=/full/path/to/top/level
 
-Finally, you need to set `FC` to point to the desired Fortran compiler,
+You also need to set `FC` to point to the desired Fortran compiler,
 e.g.::
 
     export FC=gfortran   # or other preferred Fortran compiler
 
-Consider putting the three commands above in a file that is executed every
+Consider putting the two commands above in a file that is executed every
 time you open a new shell or terminal window.  On Linux machines
 with the bash shell this is generally the file `.bashrc` in your home
 directory.  On a Mac it may be called `.bash_profile`.
