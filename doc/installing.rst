@@ -4,6 +4,8 @@
 Installation instructions
 **************************************
 
+.. _install_pyclaw:
+
 Simple install (install PyClaw and VisClaw only)
 ------------------------------------------------
 If you will only use PyClaw, everything is handled by pip::
@@ -11,6 +13,8 @@ If you will only use PyClaw, everything is handled by pip::
     pip install clawpack
 
 Do not use this if you intend to run Classic, AMRClaw, or GeoClaw (see next section).
+
+.. _install_clawpack:
 
 Full install (install all packages)
 ---------------------------------------
@@ -21,14 +25,8 @@ First::
     cd clawpack
     python setup.py install
 
-If you do not wish to compile the PyClaw source, replace the last line above by::
-
-    python setup.py no-pyclaw
-
-This installs Classic, AMRClaw, GeoClaw, and PyClaw.
 If you will use Classic/AMRClaw/GeoClaw, you must also :ref:`setenv`.
-
-.. _install_pyclaw:
+If you wish to avoid compiling the PyClaw source, see :ref:`fortran_only`.
 
 
 .. _first_run:
@@ -136,6 +134,26 @@ If you wish to use Matlab instead, see :ref:`matlabplots`.
 Other visualization packages could also be used to display the results, but you will need
 to figure out how to read in the data.  See :ref:`fortfiles` for information about the
 format of the files produced by Clawpack.
+
+
+.. _fortran_only:
+
+Installing without compiling PyClaw
+-----------------------------------
+If you get errors in the compilation step when using `pip install` or
+`python setup.py install`, please `let us know <claw-users@googlegroups.com>`_
+or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
+You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
+the following::
+
+    wget https://github.com/clawpack/clawpack/releases/download/5.0.0rc-alpha/clawpack-rc-alpha.tar.gz
+    tar -xzvf clawpack-rc-alpha.tar.gz
+    cd clawpack
+    python setup.py symlink-only
+
+Next :ref:`setenv`.  You must then also set your PYTHONPATH manually::
+
+    export PYTHONPATH=$CLAW:$PYTHONPATH
 
 
 Alternative ways of running Clawpack
