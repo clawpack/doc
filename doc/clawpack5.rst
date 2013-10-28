@@ -72,13 +72,46 @@ GitHub to see what bugs and features we are working on.
    * :ref:`setrun_amrclaw`
    * :ref:`setrun_geoclaw`
   
-* The classic single-grid Clawpack code (without AMR) is now in the 
-  `classic repository <https://github.com/clawpack/classic>`_ 
+* The directory structure has been reorganized.  See
+  :ref:`clawpack_components`.  
+
+* Some regression tests have been added to the `classic`, `amrclaw`,
+  and `geoclaw` directories in subdirectories named `tests`.
+  `Travis <https://travis-ci.org/>`_ is now used for continuous integration 
+  testing during development.
+
+* The 3d single-grid and AMRClaw code, missing since Version 4.3, 
+  has been updated to conform with  1d and 2d style.  In particular,
+  the inputs can now be specified using `setrun.py`.
+
+* Three-dimensional plotting routines in Python are still under
+  construction, so currently there is no capability to use `setplot.py`
+  to specify the desired plots or `make plots` to produce them.  However,
+  the Matlab plotting routines have been updated and are now found in
+  Visclaw.  See :ref:`matlabplots`.
+
+* The classic single-grid Clawpack code (without AMR) is now in the
+  `classic` directory and the `classic repository
+  <https://github.com/clawpack/classic>`_ on GitHub.  Some new
+  capabilities have been added, e.g.:
+
+  * OpenMP parallelization has been added to the 3d codes.  
+    See :ref:`openmp`.
+    
 
 * The AMRClaw code is now in the 
   `amrclaw repository <https://github.com/clawpack/amrclaw>`_.
   Some new capabilities have been added, e.g.:   
   
-   * It is now possible to specify refinement *regions*, previously only
-     supported in GeoClaw.  For a description, see :ref:`refinement`.
+  * It is now possible to specify refinement *regions*, previously only
+    supported in GeoClaw.  For a description, see :ref:`refinement_regions`.
 
+* The GeoClaw code is now in the
+  `geoclaw repository <https://github.com/clawpack/geoclaw>`_.
+  Some new capabilities have been added, e.g.:
+
+  * There is an improved set of tools for monitoring the maximum depth or
+    surface elevation seen over a fixed grid, and the first arrival times.
+    See :ref:`fgmax`.
+ 
+  
