@@ -316,7 +316,6 @@ Fixed grid output parameters
 
 .. attribute:: fixedgrids : list of lists
 
-   **Note:** this might become a more general AMR parameter.
 
    This can be used to specify a set of grids where output should be
    produced at the specified resolution regardless of how the AMR grids look
@@ -345,10 +344,39 @@ Fixed grid output parameters
        the number of grid points in the x and y directions (the grid will
        include *x1*, *x2* and *xpoints-2* points in between, for example).
 
+     *ioutarrivaltimes* : int
 
-.. _setrun_fixedgrids2:
+       **Deprecated feature.**  This should generally be set to 0.  If you want to
+       keep track of arrival times, it is recommended to use the new `fgmax`
+       parameters described below.  
 
-Fixed grid (version 2) output parameters
------------------------------------------
+     *ioutsurfacemax* :
 
-.. warning :: Needs updating
+       **Deprecated feature.**  This should generally be set to 0.  If you want to
+       keep track of surface or depth maxima, it is recommended to use the new 
+       `fgmax` parameters described below.  
+
+.. _setrun_fgmax:
+
+Fixed grid maximum monitoring / arrival times
+---------------------------------------------
+
+.. attribute:: fgmax_files : list of strings
+
+   This can be used to specify a set of grids on which to monitor the
+   maximum flow depth (or other quantities) observed over the course of
+   the computation, and/or the arrival time of the flow or wave.
+
+   This works better than using the older `fixedgrids` approach since it now
+   correctly interpolates when a grid point lies near the junction of two
+   grid patches, which was not always handled properly before.
+
+   The "grids" also do not have to be rectangular grids aligned with the
+   coordinate directions, but can consist of an arbitrary list of points
+   that could also be points along a one-dimensional transect or points
+   following a coastline, for example.
+
+   *fgmax_files* should be a list of strings specifying the file names of
+   files that list the points on each grid and additional information
+   required for each grid, as described at :ref:`fgmax`.
+

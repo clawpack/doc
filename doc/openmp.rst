@@ -6,7 +6,8 @@
 Using OpenMP
 **************************************
 
-Most of the Clawpack Classic, AMRClaw and GeoClaw Fortran codes include
+The Clawpack Fortran Classic 3d code, AMRClaw 2d and 3d code,
+and GeoClaw codes include
 OpenMP directives for making use of multicore shared memory machines.  
 
 **Note:** Versions of gfortran before 4.6 are known to have OpenMP bugs.
@@ -85,5 +86,5 @@ The original fixed grid output routines are not thread safe and so OpenMP
 should not be used if you want to produce output on fixed grids.
 
 The newer fgmax routines that keep track of maxima on fixed grids should be
-thread safe.
+thread safe, see :ref:`fgmax`.
 

@@ -110,6 +110,8 @@ GeoClaw: For geophysical flows
    okada
    sealevel
    manning
+   fgout
+   fgmax
    tsunamidata
 
    
