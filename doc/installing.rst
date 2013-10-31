@@ -18,11 +18,19 @@ Do not use this if you intend to run Classic, AMRClaw, or GeoClaw (see next sect
 
 Full install (install all packages)
 ---------------------------------------
-First::
 
-    wget https://github.com/clawpack/clawpack/releases/download/5.0.0rc-alpha/clawpack-rc-alpha.tar.gz
-    tar -xzvf clawpack-rc-alpha.tar.gz
-    cd clawpack
+First, download a tar file of the latest release:
+
+* `https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz>`_
+
+(See :ref:`previous` for older versions.)
+
+Save this tar file in the directory where you want the top level of the
+clawpack tree to reside.  Then::   
+
+    tar -xzvf clawpack-rc-beta.tar.gz
+    cd clawpack-rc-beta
     python setup.py install
 
 If you will use Classic/AMRClaw/GeoClaw, you must also :ref:`setenv`.
@@ -144,9 +152,11 @@ If you get errors in the compilation step when using `pip install` or
 `python setup.py install`, please `let us know <claw-users@googlegroups.com>`_
 or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
 You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
-the following::
+the following.  
 
-    wget https://github.com/clawpack/clawpack/releases/download/5.0.0rc-alpha/clawpack-rc-alpha.tar.gz
+First, download a tarfile of the latest release as described in
+:ref:`install_clawpack`.  Then::
+
     tar -xzvf clawpack-rc-alpha.tar.gz
     cd clawpack
     python setup.py symlink-only
