@@ -18,6 +18,7 @@ Overview and Getting Started:
    license
    trouble
    vm
+   aws
    previous
 
 .. toctree::
