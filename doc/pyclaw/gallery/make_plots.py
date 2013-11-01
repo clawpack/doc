@@ -1,8 +1,5 @@
 """
-Performs 'make .plots'
-in each directory to create sample results for webpage.
-
-First try 'make all', which might do other things as well.
+Runs code in each example directory to create sample results for webpage.
 
 Sends output and errors to separate files to simplify looking for errors.
 """
