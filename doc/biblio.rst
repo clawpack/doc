@@ -158,4 +158,9 @@ Papers describing applications
    <http://www.amath.washington.edu/~rjl/pubs/cise09/index.html>`_
    *Computing in Science and Engineering (CiSE)* 11(2009), pp.  19-27. 
 
+.. [LeVYon03]
+   R. J. LeVeque and Darryl H. Yong.
+   Solitary Waves in Layered Nonlinear Media,
+   *SIAM J. Appl. Math* 63 (2003) pp. 1539-1560.
+
 .. note:: Add more...
