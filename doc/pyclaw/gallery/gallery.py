@@ -293,7 +293,7 @@ def make_2d():
     gsec = gallery.new_section('2-dimensional acoustics')
     #----------------------------------------------
     appdir = 'pyclaw/examples/acoustics_2d_homogeneous'
-    appname = 'advection_annulus'
+    appname = 'acoustics_2d'
     description = """
         Expanding radial acoustic wave in a homogeneous medium."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
