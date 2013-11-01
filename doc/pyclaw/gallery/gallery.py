@@ -150,9 +150,9 @@ class Gallery(object):
                 print gitem.appdir
                 #if not os.path.exists('./'+gitem.appname+'.rst'):
                 rf = open(gitem.appname+'.rst','w')
+                rf.write('.. _'+gitem.appname+':\n')
                 rf.write('\n')
                 rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
-                rf.write('   :members:'+'\n')
                 rf.write('\n')
                 rf.write('.. literalinclude:: ../../../../'+gitem.appdir+'/'+gitem.appname+'.py'+'\n')
                 rf.close()
@@ -225,7 +225,7 @@ def make_1d():
     gsec.new_item(appdir, appname, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional Burgers' equation")
-    appdir = 'pyclaw/examples/burgers_1d/'
+    appdir = 'pyclaw/examples/burgers_1d'
     appname = 'burgers_1d'
     description = """
         Burgers' equation with sinusoidal initial data, steepening to
@@ -234,7 +234,7 @@ def make_1d():
     gsec.new_item(appdir, appname, plotdir, description, images)
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional shallow water equation")
-    appdir = 'pyclaw/examples/shallow_1d/'
+    appdir = 'pyclaw/examples/shallow_1d'
     appname = 'shallow_water_shocktube'
     description = """Shallow water shock tube."""
     images = ('frame0000fig0', 'frame0003fig0', 'frame0006fig0')
@@ -314,7 +314,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional shallow water equations')
     #----------------------------------------------
-    appdir = 'pyclaw/examples/shallow_2d/'
+    appdir = 'pyclaw/examples/shallow_2d'
     appname = 'radial_dam_break'
     description = """Radial dam-break."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
@@ -324,7 +324,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional shallow water on the sphere')
     #----------------------------------------------
-    appdir = 'pyclaw/examples/shallow_sphere/'
+    appdir = 'pyclaw/examples/shallow_sphere'
     appname = 'Rossby_wave'
     description = """Wavenumber 4 Rossby-Haurwitz wave on a rotating sphere."""
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
@@ -345,7 +345,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional KPP equation')
     #----------------------------------------------
-    appdir = 'pyclaw/examples/kpp/'
+    appdir = 'pyclaw/examples/kpp'
     appname = 'kpp'
     description = """
         Non-convex flux example."""
@@ -356,7 +356,7 @@ def make_2d():
     #----------------------------------------------
     gsec = gallery.new_section('2-dimensional p-system')
     #----------------------------------------------
-    appdir = 'pyclaw/examples/psystem_2d/'
+    appdir = 'pyclaw/examples/psystem_2d'
     appname = 'psystem_2d'
     description = """
         Radial wave in a checkerboard-like medium."""
