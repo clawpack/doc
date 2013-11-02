@@ -62,11 +62,11 @@ a tolerance `flag2refine_tol`.  This indicates that the
 library subroutine `$CLAW/amrclaw/src/Nd/flag2refine.f90` should
 be used to flag cells for refinement.  This routine computes the
 maximum max-norm of the undivided difference of :math:`q_{i,j}`
-with its four neighbors in two space dimensions (or 6 neighbors in
+based its four neighbors in two space dimensions (or 6 neighbors in
 3d).  If this is greater than the specified tolerance, then the
 cell is flagged for refinement (subject to limitations imposed by
 "regions").  The undivided difference (not divided by the mesh
-width) is used, e.g.  :math:`|q(m,i+1,j) - q(m,i,j)|` for each
+width) is used, e.g.  :math:`|q(m,i+1,j) - q(m,i-1,j)|` for each
 component :math:`m`.
 
 Note that the user can change the criterion used for flagging cells by
@@ -85,7 +85,10 @@ extrapolation to estimate the error in each cell.  This is used if
 estimate exceeds the value `flag_richardson_tol`.  
 Richardson estimation requires taking two time steps on the current grid and
 comparing the result with what’s obtained by taking one step on a coarsened
-grid.  For this reason it is more expensive than the `flag2refine` approach,
+grid.  
+One time step on the fine grid is re-used, so only one additional time step
+on the fine grid and one on a coarsened grid are required.
+It is somewhat more expensive than the `flag2refine` approach,
 but may be more useful for cases where the solution is smooth and undivided
 differences do not identify the regions of greatest error.
 
