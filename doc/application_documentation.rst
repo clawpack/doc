@@ -1,5 +1,6 @@
 .. _application_documentation:
 
+-------------------------
 Application documentation
 -------------------------
 
