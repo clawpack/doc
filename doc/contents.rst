@@ -18,6 +18,8 @@ Overview and Getting Started:
    license
    trouble
    vm
+   aws
+   previous
 
 .. toctree::
    :maxdepth: 1

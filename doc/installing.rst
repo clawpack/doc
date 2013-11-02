@@ -4,29 +4,56 @@
 Installation instructions
 **************************************
 
-.. _install_pyclaw:
+See also 
 
-Simple install (install PyClaw and VisClaw only)
-------------------------------------------------
-If you will only use PyClaw, everything is handled by pip::
+* :ref:`install_prerequisites` for other software you need to 
+  successfully use Clawpack.
+* :ref:`install_alternatives`  if you want to avoid installing
+  prerequisites.
+* :ref:`developers` if you want to clone Clawpack from GitHub.
 
-    pip install clawpack
+.. _install_download:
 
-Do not use this if you intend to run Classic, AMRClaw, or GeoClaw (see next section).
+Download a tar file
+-------------------
+
+First, download a tar file of the latest release:
+
+* `https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz>`_
+
+(See :ref:`previous` for older versions.)
+
+Save this tar file in the directory where you want the top level of the
+clawpack tree to reside.  Then untar using the command::   
+
+    tar -xzvf clawpack-rc-beta.tar.gz
 
 .. _install_clawpack:
 
 Full install (install all packages)
 ---------------------------------------
-First::
 
-    wget https://github.com/clawpack/clawpack/releases/download/5.0.0rc-alpha/clawpack-rc-alpha.tar.gz
-    tar -xzvf clawpack-rc-alpha.tar.gz
-    cd clawpack
-    python setup.py install
+Then move into the top level directory::
 
-If you will use Classic/AMRClaw/GeoClaw, you must also :ref:`setenv`.
-If you wish to avoid compiling the PyClaw source, see :ref:`fortran_only`.
+    cd clawpack-rc-beta
+
+If you will use PyClaw (see :ref:`pyclaw`) then you should do::
+
+    pip install -e ./
+
+This will compile a lot of Fortran code using `f2py` and will produce a lot of 
+output, so you might want to redirect the output, e.g. ::
+
+    pip install -e ./ > install_output.txt
+
+If you wish to avoid compiling the PyClaw source (if you will only use
+Fortran versions such as Classic, AMRClaw, or GeoClaw), see
+:ref:`fortran_only`.
+
+Regardless of whether you have done the above `pip install`,
+if you will use Classic/AMRClaw/GeoClaw, you must also :ref:`setenv`.
+
 
 
 .. _first_run:
@@ -144,28 +171,44 @@ If you get errors in the compilation step when using `pip install` or
 `python setup.py install`, please `let us know <claw-users@googlegroups.com>`_
 or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
 You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
-the following::
+the following.  
 
-    wget https://github.com/clawpack/clawpack/releases/download/5.0.0rc-alpha/clawpack-rc-alpha.tar.gz
-    tar -xzvf clawpack-rc-alpha.tar.gz
-    cd clawpack
-    python setup.py symlink-only
+First, download a tarfile of the latest release as described in
+:ref:`install_download`.  
 
 Next :ref:`setenv`.  You must then also set your PYTHONPATH manually::
 
     export PYTHONPATH=$CLAW:$PYTHONPATH
 
+Then you should be able to do::
+
+    cd $CLAW   # assuming this enviornment variable was properly set
+    python setup.py symlink-only
+
+This will create some symbolic links in the `$CLAW/clawpack` 
+subdirectory of your top level Clawpack directory, but does not compile code.  
+In Python you should now be able to do the following, for example::
+
+    >>> from clawpack import visclaw
+
+If not then either your `$PYTHONPATH` environment variable is not set
+properly or the required symbolic links were not created.
+
+.. _install_alternatives:
 
 Alternative ways of running Clawpack
 ------------------------------------
 **Virtual Machine.**
-An alternative to installing the prerequisites and Clawpack itself is to use the
-:ref:`vm`.
+An alternative to installing the :ref:`install_prerequisites` 
+and Clawpack itself is to use the :ref:`vm`.
 
 .. Broken link:
-.. **Cloud Computing.**
-.. Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 
+**Cloud Computing.**
+Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
+
+
+.. _install_prerequisites:
 
 Prerequisites
 -------------

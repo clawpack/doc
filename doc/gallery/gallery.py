@@ -8,7 +8,7 @@ produced using "bash make_all.sh" or "make .plots".
 You should use the script make_plots.py to do this first.
 """
 
-import os
+import os, glob
 
 
 # Main root for html links:
@@ -62,7 +62,7 @@ class Gallery(object):
         self.sections.append(gsec)
         return gsec
     
-    def create(self,fname,gallery_dir=None, copy_plots=True):
+    def create(self,fname,gallery_dir=None, copy_plots=True, copy_files=True):
 
         # Directory for gallery files:
         if gallery_dir is None:
@@ -114,6 +114,20 @@ class Gallery(object):
                     #os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                     os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, \
                                 static_dir+gitem.appdir))
+                if copy_files:
+                    files = []
+                    for ft in ['*.f','*.f90','*.py','*.m','*.html','Makefile']:
+                        files = files + glob.glob('%s/%s' % (CLAW+'/'+gitem.appdir,ft))
+                    # also copy over claw_git_* files to have a record
+                    # of how these plots were created
+                    clawgit = glob.glob('%s/_output/claw_git*' % (CLAW+'/'+gitem.appdir))
+                    files = files + clawgit
+                    for file in files:
+                        os.system('cp %s %s' % (file, static_dir+gitem.appdir))
+                    print "+++ copied files to ",static_dir+gitem.appdir
+                    #print "+++ files: ",files
+
+
 
 
                 subtitle = '**Directory: `$CLAW/%s`** \n' % gitem.appdir
@@ -124,8 +138,10 @@ class Gallery(object):
                 gfile.write('%s\n\n' % desc)
                 plotindex = os.path.join(claw_html_root, '../_static', \
                         gitem.appdir, gitem.plotdir, '_PlotIndex.html')
-                gfile.write('`README <%s/README.html>`__ ... \n`Plots <%s>`__\n' \
-                      % (gitem.appdir,plotindex))
+                readme = os.path.join(claw_html_root, '../_static', \
+                        gitem.appdir, 'README.html')
+                gfile.write('`README <%s>`__ ... \n`Plots <%s>`__\n' \
+                      % (readme,plotindex))
                 code = os.path.join(claw_html_root, gitem.appdir)
                 gfile.write('\n\n')
 
@@ -180,7 +196,7 @@ def test():
     images = ('frame0000fig1', 'frame0004fig1')
     gsec.new_item(appdir, plotdir, description, images)
        
-    gallery.create('test.rst')
+    gallery.create('test.rst',copy_files=True)
 
 
 
@@ -342,12 +358,145 @@ def make_fvmbook():
     #----------------------------------------------
         
     #----------------------------------------------
+    gsec = gallery.new_section('Chapter 6: High-Resolution Methods')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap6/compareadv'
+    description = """
+        comparison of methods"""
+    images = ('frame0000fig1', 'frame0005fig1', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    appdir = 'apps/fvmbook/chap6/wavepacket'
+    description = """
+        wave packet with 1st order Godunov shown here"""
+    images = ('frame0000fig1', 'frame0001fig1', 'frame0002fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 7: Boundary Conditions and Ghost Cells')
+    #----------------------------------------------
+
+    appdir = 'apps/fvmbook/chap7/advinflow'
+    description = """
+        1D Advection with inflow boundary conditions at left and outflow BCs at right"""
+    images = ('frame0001fig0', 'frame0004fig0', 'frame0011fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    appdir = 'apps/fvmbook/chap7/acouinflow'
+    description = """
+        1D Acoustics with inflow boundary conditions at left and reflecting BCs at right"""
+    images = ('frame0001fig0', 'frame0004fig0', 'frame0011fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap7/standing'
+    description = """
+        1D Acoustics with a standing wave solution"""
+    images = ('frame0000fig0', 'frame0005fig0', 'frame0010fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+       
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 10: Other Approaches to High Resolution')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap10/tvb'
+    description = """
+        1D Advection with a TVB method"""
+    images = ('frame0000fig0', 'frame0005fig0', 'frame0010fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 11: Nonlinear Scalar Conservation Laws')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap11/burgers'
+    description = """
+        Burgers' equation"""
+    images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap11/congestion'
+    description = """
+        Traffic flow equation with density bulge"""
+    images = ('frame0000fig1', 'frame0001fig1', 'frame0002fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap11/greenlight'
+    description = """
+        Traffic flow equation with expansion fan"""
+    images = ('frame0000fig1', 'frame0005fig1', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap11/redlight'
+    description = """
+        Traffic flow equation with shock wave behind red light"""
+    images = ('frame0000fig1', 'frame0005fig1', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 12: Finite Volume Methods for' \
+           + ' Nonlinear Scalar Conservation Laws')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap12/efix'
+    description = """
+        Burgers' equation without entropy fix"""
+    images = ('frame0000fig0', 'frame0001fig0', 'frame0002fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 13: Nonlinear Systems of Conservation Laws.')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap13/collide'
+    description = """
+        Colliding and merging shock waves in shallow water equations"""
+    images = ('frame0000fig0', 'frame0003fig0', 'frame0011fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 16: Some Nonclassical Hyperbolic Problems')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap16/vctraffic'
+    description = """
+        Traffic equations with a spatially varying flux"""
+    images = ('frame0000fig0', 'frame0004fig0', 'frame0008fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
+    gsec = gallery.new_section('Chapter 17: Source Terms and Balance Laws')
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap17/advdiff'
+    description = """
+        Advection-diffusion with implicit solver"""
+    images = ('frame0000fig1', 'frame0002fig1', 'frame0004fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap17/onramp'
+    description = """
+        Traffic flow with an on-ramp"""
+    images = ('frame0000fig0', 'frame0002fig0', 'frame0004fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+        
+    #----------------------------------------------
     gsec = gallery.new_section('Chapter 20: Multidimensional Scalar Equations')
     #----------------------------------------------
     appdir = 'apps/fvmbook/chap20/rotate'
     description = """
         2D Advection with a rotation of square and Gaussian"""
     images = ('frame0000fig0', 'frame0001fig0', 'frame0002fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'apps/fvmbook/chap20/burgers'
+    description = """
+        2D Burgers' equation with square and Gaussian data"""
+    images = ('frame0000fig1', 'frame0001fig1', 'frame0005fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
     

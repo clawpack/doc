@@ -3,9 +3,8 @@ Module for making galleries of thumbnails allowing easy browsing of
 applications directories.
 
 These tools assume that the examples have already been run and the plots
-produced using "make .plots".  
+produced using the script make_plots.py.  
 
-You should use the script python/run_examples.py to do this first.
 """
 
 import os

@@ -141,5 +141,12 @@ def make_plots(examples_dir = '.'):
     os.chdir(current_dir)
 
 if __name__=='__main__':
-    import sys
-    make_plots(*sys.argv[1:])
+    import sys,os
+    if len(sys.argv)>1:
+        make_plots(*sys.argv[1:])
+    else:
+        CLAW = os.environ['CLAW']
+        make_plots(CLAW+'/classic/examples')
+        make_plots(CLAW+'/amrclaw/examples')
+        make_plots(CLAW+'/geoclaw/examples')
+        make_plots(CLAW+'/apps/fvmbook')
