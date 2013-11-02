@@ -8,7 +8,7 @@ produced using "bash make_all.sh" or "make .plots".
 You should use the script make_plots.py to do this first.
 """
 
-import os
+import os, glob
 
 
 # Main root for html links:
@@ -62,7 +62,7 @@ class Gallery(object):
         self.sections.append(gsec)
         return gsec
     
-    def create(self,fname,gallery_dir=None, copy_plots=True):
+    def create(self,fname,gallery_dir=None, copy_plots=True, copy_files=True):
 
         # Directory for gallery files:
         if gallery_dir is None:
@@ -114,6 +114,12 @@ class Gallery(object):
                     #os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                     os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, \
                                 static_dir+gitem.appdir))
+                if copy_files:
+                    files = []
+                    for ft in ['*.f','*.f90','*.py','*.m','*.html','Makefile']:
+                        files = files + glob.glob('%s/%s' % (CLAW+'/'+gitem.appdir,ft))
+                    for file in files:
+                        os.system('cp %s %s' % (file, static_dir+gitem.appdir))
 
 
                 subtitle = '**Directory: `$CLAW/%s`** \n' % gitem.appdir
@@ -124,8 +130,10 @@ class Gallery(object):
                 gfile.write('%s\n\n' % desc)
                 plotindex = os.path.join(claw_html_root, '../_static', \
                         gitem.appdir, gitem.plotdir, '_PlotIndex.html')
-                gfile.write('`README <%s/README.html>`__ ... \n`Plots <%s>`__\n' \
-                      % (gitem.appdir,plotindex))
+                readme = os.path.join(claw_html_root, '../_static', \
+                        gitem.appdir, 'README.html')
+                gfile.write('`README <%s>`__ ... \n`Plots <%s>`__\n' \
+                      % (readme,plotindex))
                 code = os.path.join(claw_html_root, gitem.appdir)
                 gfile.write('\n\n')
 
@@ -180,7 +188,7 @@ def test():
     images = ('frame0000fig1', 'frame0004fig1')
     gsec.new_item(appdir, plotdir, description, images)
        
-    gallery.create('test.rst')
+    gallery.create('test.rst',copy_files=True)
 
 
 

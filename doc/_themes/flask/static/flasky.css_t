@@ -372,6 +372,11 @@ tt.xref, a tt {
 a.reference {
     text-decoration: none;
     border-bottom: 1px dotted #004B6B;
+    color: #800000;
+}
+
+a.reference:visited {
+    color: #806060;
 }
 
 a.reference:hover {
