@@ -118,8 +118,16 @@ class Gallery(object):
                     files = []
                     for ft in ['*.f','*.f90','*.py','*.m','*.html','Makefile']:
                         files = files + glob.glob('%s/%s' % (CLAW+'/'+gitem.appdir,ft))
+                    # also copy over claw_git_* files to have a record
+                    # of how these plots were created
+                    clawgit = glob.glob('%s/_output/claw_git*' % (CLAW+'/'+gitem.appdir))
+                    files = files + clawgit
                     for file in files:
                         os.system('cp %s %s' % (file, static_dir+gitem.appdir))
+                    print "+++ copied files to ",static_dir+gitem.appdir
+                    #print "+++ files: ",files
+
+
 
 
                 subtitle = '**Directory: `$CLAW/%s`** \n' % gitem.appdir

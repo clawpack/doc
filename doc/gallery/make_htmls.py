@@ -22,7 +22,7 @@ def make_htmls(rootdir):
         rootdir = clawdir
     else:
         # called with an argument, try to use this for rootdir:
-        rootdir = rootdir[0]
+        #rootdir = rootdir[0]
         rootdir = os.path.abspath(rootdir)
     
     print "Will make htmls in all of ",rootdir
