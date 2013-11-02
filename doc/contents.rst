@@ -62,6 +62,7 @@ Fortran and Python codes:
    openmp
    python
    makefiles
+   application_documentation
    setrun
    setrun_sample
    bc
