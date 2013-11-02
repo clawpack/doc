@@ -22,7 +22,7 @@ generally have to be reduced by a factor *R* as well.
 The AMR code thus proceeds as follows:
 
  * In each time step on the Level 1 grid(s), the values in all grid cells 
-   (including those covered by finer grids) is advanced one time step.
+   (including those covered by finer grids) are advanced one time step.
    Before this time step is taken, ghost cells around the boundary of the
    full computational domain are filled based on the boundary conditions
    specified in the library routine *bcNamr.f* (where *N* is the number of
@@ -45,10 +45,10 @@ The AMR code thus proceeds as follows:
    average than the original value.
 
  * The updating just described can lead to a change in the total mass
-   calculated on the Level 1 grid.  In order to restore global conseravtion,
+   calculated on the Level 1 grid.  In order to restore global conservation,
    it is necessary to do a conservation fix up.  (To be described...)
 
-This style of AMR is often called *Berger-Colella-Oliger* adaptive
+This style of AMR is often called *Berger-Oliger-Colella* adaptive
 refinement, after the papers of Berger and Oliger [BergerOliger84]_ and 
 [BergerColella89]_.
 
@@ -81,12 +81,13 @@ is used at other levels.
    the boundary of the Level k grid lies along the boundary of the full
    domain.  For these cells the subroutine *bcNamr*
    (where *N* is the number of space dimensions) is used to fill ghost cell
-   values with the proper user-specified boundary conditions.
-
+   values with the proper user-specified boundary conditions, unless
+   periodic boundary conditions are specified (see below).
+ 
 For many standard boundary conditions it is not necessary for the user to do
-anything beyond setting the *mthbc* parameters in *setrun.py* (see
-:ref:`setrun`).  Only if some element of *mthbc* is 0 (indicating
-user-specified boundary conditions) is it necessary to modify the library
+anything beyond setting appropriate parameters in *setrun.py* (see
+:ref:`setrun`).  Only if user-specified boundary conditions are
+specified is it necessary to modify the library
 routine *bcNamr.f* (after copying to your application directory so as not to
 damage the library version, and modifying the *Makefile* to point to the new
 version).
