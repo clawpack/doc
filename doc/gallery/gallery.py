@@ -477,6 +477,12 @@ def make_fvmbook():
     images = ('frame0000fig0', 'frame0001fig0', 'frame0002fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
+    appdir = 'apps/fvmbook/chap20/burgers'
+    description = """
+        2D Burgers' equation with square and Gaussian data"""
+    images = ('frame0000fig1', 'frame0001fig1', 'frame0005fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
     
     gallery.create('gallery_fvmbook.rst')
     return gallery

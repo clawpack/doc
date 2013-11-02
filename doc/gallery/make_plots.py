@@ -149,3 +149,4 @@ if __name__=='__main__':
         make_plots(CLAW+'/classic/examples')
         make_plots(CLAW+'/amrclaw/examples')
         make_plots(CLAW+'/geoclaw/examples')
+        make_plots(CLAW+'/apps/fvmbook')
