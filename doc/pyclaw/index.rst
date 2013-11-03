@@ -2,11 +2,11 @@
 
 .. _pyclaw:
 
-********************
-Pyclaw Quickstart
-********************
+*******
+Pyclaw 
+*******
 
-Install and model a shock wave::
+Quck start: install and model a shock wave::
 
     git clone git@github.com:clawpack/clawpack.git
     cd clawpack
