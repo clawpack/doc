@@ -120,16 +120,20 @@ def make_plots(examples_dir = None):
             print "   *** Run errors encountered: see ", fname_errors
             badlist_run.append(directory)
 
-    print ' '
-    print 'Ran PyClaw and created output and plots in directories:'
-    for d in goodlist_run:
-        print '   ',d
-    print ' '
+    if len(goodlist_run)>0:
+        print ' '
+        print 'Ran PyClaw and created output and plots in directories:'
+        for d in goodlist_run:
+            print '   ',d
+        print ' '
     
-    print 'Run or plot errors encountered in the following directories:'
-    for d in badlist_run:
-        print '   ',d
-    print ' '
+    if len(badlist_run)>0:
+        print 'Run or plot errors encountered in the following directories:'
+        for d in badlist_run:
+            print '   ',d
+        print ' '
+    else:
+        print 'All examples ran and plotted successfully.'
     
     fout.close()
     ferr.close()

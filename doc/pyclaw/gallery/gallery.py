@@ -106,7 +106,6 @@ class Gallery(object):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
                 print "+++ static_dir = ",static_dir
 
-                #os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                 if copy_plots:
                     os.system('cp -r %s/_plots %s' % (self.clawdir+gitem.appdir, \
                                 static_dir+gitem.appdir))
@@ -122,8 +121,17 @@ class Gallery(object):
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs ('./'+gitem.appdir)
-                #os.system('cp %s/README.rst %s' % ('$PYCLAW/'+gitem.appdir, './'+gitem.appdir))
                 gfile.write('\n\n')
+
+                # For each example, write a page containing the source
+                rf = open(gitem.appname+'.rst','w')
+                rf.write('.. _'+gitem.appname+':\n')
+                rf.write('\n')
+                rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
+
+                rf.write('\n')
+                rf.write('Output:\n')
+                rf.write('~~~~~~~\n')
 
                 for image in gitem.images:
 
@@ -142,17 +150,19 @@ class Gallery(object):
                     else:
                         scale = 0.3
                         make_thumb(src_png ,thumb_file, scale)
+
                     gfile.write('.. image:: %s\n   :width: 5cm\n' % thumb_file)
                     gfile.write('   :target: %s\n' % src_html)
+
+                    rf.write('.. image:: %s\n   :width: 5cm\n' % thumb_file)
+                    rf.write('   :target: %s\n' % src_html)
+
+                gfile.write('\n\n')
                 gfile.write('\n\n')
 
-                print gitem.appdir
-                #if not os.path.exists('./'+gitem.appname+'.rst'):
-                rf = open(gitem.appname+'.rst','w')
-                rf.write('.. _'+gitem.appname+':\n')
-                rf.write('\n')
-                rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
-                rf.write('\n')
+                rf.write('\n\n')
+                rf.write('Source:\n')
+                rf.write('~~~~~~~\n')
                 rf.write('.. literalinclude:: ../../../../'+gitem.appdir+'/'+gitem.appname+'.py'+'\n')
                 rf.close()
 
