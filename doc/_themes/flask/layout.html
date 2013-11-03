@@ -5,6 +5,13 @@
 
 {%- block relbar2 %}{% endblock %}
 
+{%- block sidebarlogo %}
+<p><a href="index.html">
+    <img class="logo" src= "{{ asset_root }}/clawlogo.jpg" alt="Logo"/>
+</a>
+<h2>Version {{ release }}</h2>
+</p>
+{%- endblock %}
 
 {%- block header %}
 <div id="main-wrapper" class="sphinx">
