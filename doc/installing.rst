@@ -19,6 +19,7 @@ See also:
   successfully use Clawpack.
 * :ref:`install_alternatives`  if you want to avoid installing
   prerequisites.
+* :ref:`clawpack_packages`
 
 .. _install_pyclaw:
 
@@ -41,7 +42,8 @@ First, download a tar file of the latest release:
 * `https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz
   <https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz>`_
 
-(See :ref:`previous` for older versions.)
+(See :ref:`previous` for older versions and :ref:`clawpack_components` for a
+list of what's included in this tar file.)
 
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
@@ -158,10 +160,12 @@ and Clawpack itself is to use the :ref:`vm`.
 
 
 **Cloud Computing.**
-:ref:`pyclaw` can be installed and run in the cloud for free on http://wakari.io
-or http://cloud.sagemath.com.
 
-.. Broken link:
+* :ref:`pyclaw` can be installed and run in the cloud for free on 
+  http://wakari.io or http://cloud.sagemath.com.
+* All of Clawpack can be run on AWS using the :ref:`aws`.
+
+.. Broken link:  should work!
 .. Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 
 
@@ -172,16 +176,18 @@ Prerequisites
 -------------
 
 **Operating system:**
- - Linux
- - Mac OS X (you need to have the `Xcode developer tools
-   <http://developer.apple.com/technologies/tools/xcode.html>`_ installed in
-   order to have "make" working)
+
+- Linux
+- Mac OS X (you need to have the `Xcode developer tools
+  <http://developer.apple.com/technologies/tools/xcode.html>`_ installed in
+  order to have "make" working)
 
 Much of Clawpack will work under Windows using Cygwin, but this is not officially
 supported.
 
 **Fortran:**
- - `gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler
+
+- `gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler
 
 See :ref:`fortran_compilers` for more about which compilers work well with
 Clawpack.
@@ -189,9 +195,10 @@ For Mac OSX, see `hpc.sourceforge.net <http://hpc.sourceforge.net/>`_ for
 some installation options.
 
 **Python:**
- - Python Version 2.5 or above (but **not** 3.0 or above, which is not backwards compatible)
- - `NumPy <http://www.numpy.org/>`_  (for PyClaw/VisClaw)
- - `matplotlib <http://matplotlib.org/>`_ (for PyClaw/VisClaw)
+
+- Python Version 2.5 or above (but **not** 3.0 or above, which is not backwards compatible)
+- `NumPy <http://www.numpy.org/>`_  (for PyClaw/VisClaw)
+- `matplotlib <http://matplotlib.org/>`_ (for PyClaw/VisClaw)
 
 See :ref:`python` for information on
 installing the required modules and to get started using Python if

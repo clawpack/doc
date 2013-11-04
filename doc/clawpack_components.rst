@@ -17,7 +17,7 @@ repositories.  If you are interested in cloning the code directly from
 GitHub and/or helping develop Clawpack, see :ref:`developers`.
 
 If you download a tar file of Clawpack, as described in
-:ref:`downloading`, then you will obtain a top level directory that has the
+:ref:`install_clawpack`, then you will obtain a top level directory that has the
 following subdirectories:
 
 * `classic`  (Classic single-grid Fortran code)
@@ -25,7 +25,7 @@ following subdirectories:
 * `riemann`  (Riemann solvers, in Fortran, also used by PyClaw)
 * `geoclaw`  (GeoClaw for geophysical flows)
 * `clawutil`  (Utility functions, Makefile.common used in multiple repositories)
-* `pyclaw`  (Python code, some of which is needed also for Fortran version)
+* `pyclaw`  (Python version that includes SharpClaw and PETSc parallelization)
 * `visclaw`  (Python graphics and visualization tools)
 
 These correspond to individual GitHub repositories.  
