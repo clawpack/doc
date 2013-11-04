@@ -126,8 +126,16 @@ Papers describing the Clawpack software and algorithms
             Pages = {211-289},
             Year = {2011}}
 
+.. [KetParLev13]
+   D. I. Ketcheson, Matteo Parsani, and R J LeVeque, 2013,
+   High-order Wave Propagation Algorithms for Hyperbolic Systems,
+   *SIAM Journal on Scientific Computing*, 35(1):A351-A377 (2013)
+
 .. [KetchesonMandliEtAl]
-   
+   David I. Ketcheson, Kyle T. Mandli, Aron J. Ahmadia, Amal Alghamdi, Manuel
+   Quezada de Luna, Matteo Parsani, Matthew G. Knepley, and Matthew Emmett, 2012,
+   PyClaw: Accessible, Extensible, Scalable Tools for Wave Propagation Problems,
+   *SIAM Journal on Scientific Computing*, 34(4):C210-C231
    ::
 
         @article{pyclaw-sisc,
