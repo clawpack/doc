@@ -22,7 +22,7 @@ Installation and user interface
 ===============================
 The AMRClaw, GeoClaw, and Classic solvers are traditional Fortran-based
 packages and rely on Makefiles and environment variables.  Problems are
-specified partially through parameter input files (`clawez.data`) and partially
+specified partially through Python scripts (`setrun.py`) and partially
 through custom Fortran code (to set initial conditions, for instance).
 
 With PyClaw, problems are specified through Python script files, or

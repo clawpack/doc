@@ -17,6 +17,8 @@ Overview and Getting Started:
    installing
    license
    trouble
+   packages
+   clawpack_components
    vm
    aws
    previous
@@ -40,7 +42,6 @@ Examples and Applications:
    
 
    galleries
-   clawpack_components
    apps
    book
    newapp
