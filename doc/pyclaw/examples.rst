@@ -3,27 +3,29 @@
 .. _examples:
 
 ========================================
-Solving other hyperbolic PDEs
+Working with PyClaw's built-in examples
 ========================================
-Moving on from the acoustics tutorial, this section explains how to begin
-solving other systems of hyperbolic equations with PyClaw.
-
-The built-in PyClaw examples
-========================================
-PyClaw comes with many example application scripts in the directory `pyclaw/examples/`.
+PyClaw comes with many example problem scripts that can be
+accessed from the module `clawpack.pyclaw.examples`.
+If you have downloaded the PyClaw source, you can find them
+in the directory `clawpack/pyclaw/examples/`.
 These examples demonstrate the kinds of things that can be done
-with PyClaw and are a great way to learn how to use PyClaw.  To run one of them
-simply do the following at the command prompt::
+with PyClaw and are a great way to learn how to use PyClaw.  
 
-    $ cd $PYCLAW/examples/acoustics_1d_homogeneous
-    $ python acoustics.py iplot=1
+Running and plotting examples
+=============================
 
-You can run any of the examples similarly by going to the appropriate directory and
-executing the Python script.
+Interactively in IPython
+++++++++++++++++++++++++
+::
+    from clawpack.pyclaw import examples
+    claw = examples.shock_bubble_interaction.setup()
+    claw.run()
+    claw.plot()
 
-Command-line options
-========================================
-For convenience, the scripts are set up to accept certain command-line options.
+To run and plot a different example, simply replace `shock_bubble_interaction`
+with another example name.  A number of keyword arguments may be passed to
+the setup function; see its docstring for details.
 These usually include the following:
 
    * ``use_petsc``: set to 1 to run in parallel
@@ -38,9 +40,45 @@ These usually include the following:
    * ``outdir``: the name of the subdirectory in which to put output files.  Defaults to
      './_output'.
 
-This list of options can easily be extended by modifying the appropriate script.
 
-Adding new applications
+From the command line
++++++++++++++++++++++
+If you have downloaded the Clawpack source, you can run
+the examples from the command line.
+Simply do the following at the command prompt::
+
+    $ cd clawpack/pyclaw/examples/acoustics_1d_homogeneous
+    $ python acoustics.py iplot=1
+
+You can run any of the examples similarly by going to the appropriate directory and
+executing the Python script.  For convenience, the scripts are set up to pass any
+command-line options as arguments to the setup function.
+
+
+List of built-in examples
+=========================
+You can see results from many of the examples in the :ref:`galleries`.
+
+.. toctree::
+   :glob:
+   :maxdepth: 1
+
+   gallery/*adv*
+   gallery/*acoust*
+   gallery/*burg*
+   gallery/*shallow*
+   gallery/*blast*
+   gallery/*shock*
+   gallery/*psystem*
+   gallery/*Rossby*
+   gallery/*dam*
+   gallery/kpp
+   gallery/stegoton
+
+
+Adding new examples
 ========================================
 If you have used PyClaw, we'd love to add your application to the built-in scripts.
 Please contact us on the `claw-users Google group <http://http://groups.google.com/group/claw-users>`_.
+
+

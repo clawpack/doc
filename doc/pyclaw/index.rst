@@ -6,13 +6,16 @@
 Pyclaw 
 *******
 
-Quck start: install and model a shock wave::
+Installation::
 
-    git clone git@github.com:clawpack/clawpack.git
-    cd clawpack
-    pip install -e .
-    cd clawpack/pyclaw/examples/euler_2d
-    python shock_bubble_interaction.py iplot=1
+    pip install clawpack
+
+To run an example, launch an IPython session and then::
+
+    from clawpack.pyclaw import examples
+    claw = examples.shock_bubble_interaction.setup()
+    claw.run()
+    claw.plot()
 
 **********
 PyClaw is:

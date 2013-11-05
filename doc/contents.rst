@@ -15,6 +15,7 @@ Overview and Getting Started:
    
    about
    installing
+   first_run
    license
    trouble
    packages

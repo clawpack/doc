@@ -228,7 +228,7 @@ frame from a previous run; for example, to restart from frame 3
 
 .. doctest::
 
-    >>> claw.solution = pyclaw.Solution(3, file_format='petsc')
+    >>> claw.solution = pyclaw.Solution(3)
 
 By default, the :class:`~pyclaw.controller.Controller` will number your
 output frames starting from the frame number used for initializing
