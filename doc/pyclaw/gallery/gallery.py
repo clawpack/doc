@@ -59,7 +59,7 @@ class Gallery(object):
         self.sections.append(gsec)
         return gsec
     
-    def create(self,fname,gallery_dir=None, copy_plots=True):
+    def create(self,fname,gallery_dir=None, copy_plots=True, write_file=True):
 
         # Directory for gallery files:
         if gallery_dir is None:
@@ -79,7 +79,11 @@ class Gallery(object):
             print "*** Gallery not created"
             raise
 
-        gfile = open(fname, 'w')
+        if write_file:
+            gfile = open(fname, 'w')
+        else:
+            gfile = open(os.devnull, 'w')
+
         gfile.write(":group: pyclaw\n\n")
         gfile.write(".. _%s:\n\n" % os.path.splitext(fname)[0])
         nchar = len(self.title)
@@ -126,6 +130,9 @@ class Gallery(object):
                 # For each example, write a page containing the source
                 rf = open(gitem.appname+'.rst','w')
                 rf.write('.. _'+gitem.appname+':\n')
+                rf.write('\n')
+                rf.write(gsec.title+'\n')
+                rf.write('-'*len(gsec.title)+'\n')
                 rf.write('\n')
                 rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
 
@@ -268,7 +275,7 @@ def make_1d():
     gsec.new_item(appdir, appname, plotdir, description, images)
     #----------------------------------------------
        
-    gallery.create('gallery_1d.rst')
+    gallery.create('gallery_1d.rst', write_file=False)
     return gallery
 
 
@@ -373,7 +380,7 @@ def make_2d():
     gsec.new_item(appdir, appname, plotdir, description, images)
     #----------------------------------------------
         
-    gallery.create('gallery_2d.rst')
+    gallery.create('gallery_2d.rst', write_file=False)
     return gallery
 
 def make_all():
