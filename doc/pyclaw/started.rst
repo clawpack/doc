@@ -13,7 +13,7 @@ To get the latest development version, do this instead::
 
     git clone git@github.com:clawpack/clawpack.git
     cd clawpack
-    pip install -e .
+    python setup.py install
 
 If you encounter any difficulties in the installation
 process, please `contact us <claw-users@googlegroups.com>`_ or

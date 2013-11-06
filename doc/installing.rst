@@ -57,12 +57,12 @@ Then move into the top level directory::
 
 Next install the Python components of Clawpack::
 
-    pip install -e ./
+    python setup.py install
 
 This will compile a lot of Fortran code using `f2py` and will produce a lot of 
 output, so you might want to redirect the output, e.g. ::
 
-    pip install -e ./ > install_output.txt
+    python setup.py install > install_output.txt
 
 If you get compilation errors in this step, you can still use the
 Classic, AMRClaw, and GeoClaw; see :ref:`install_no-pyclaw`.
