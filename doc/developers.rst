@@ -40,7 +40,20 @@ things in a different repository.)
 
 If you want to also install the PyClaw Python components, you can then do::
 
+    python setup.py install
+
+If you plan to work on the Python parts of Clawpack as a developer, you may instead
+wish to do::
+
     pip install -e .
+
+The advantage of this is that when you edit Python code in your clawpack directly,
+it will immediately take effect, without the need to install again.  However,
+the (potential) danger of this approach is that the path to your clawpack
+directory will be stored in the file site-packages/easy-install.pth and
+prepended to your PYTHONPATH whenever you run Python.  This path will
+take precedence over any manually added paths, unless you delete the .pth
+file.
 
 If you want to use the Fortran versions in `classic`, `amrclaw`, `geoclaw`,
 etc., you need to set environment variables and proceed as described at
