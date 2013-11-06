@@ -277,36 +277,8 @@ See :ref:`qinit_file` for more details about the format.
 AMR refinement region parameters
 --------------------------------
 
-.. attribute:: regions : list of lists
-
-   **Note:** this should become a more general AMR parameter.
-
-   *regions* should be a list of the form *[region1info, region2info, etc.]*
-   where each element is itself a list of the form 
-
-     [minlevel, maxlevel, t1, t2, x1, x2, y1, y2]
-
-   with values
-
-     *minlevel* : integer
-
-       the minimum refinement level that should be enforced in the region
-       covered by this grid (for times between *t1* and *t2*).
-
-     *maxlevel* : integer
-
-       the maximum refinement level that should be allowed in the region
-       covered by this grid (for times between *t1* and *t2*).
-     
-     *t1, t2* : floats
-
-       the time interval over which refinement should be controlled.
-
-     *x1, x2, y1, y2* : floats
-       
-       the spacial extent of this region.
-
-    For more about controlling AMR in various regions, see :ref:`regions`.
+    This is now a general AMRClaw parameter, still available in particular
+    for GeoClaw applications.  See :ref:`refinement_regions`.
 
 
 .. _setrun_fixedgrids:

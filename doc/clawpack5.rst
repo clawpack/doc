@@ -14,7 +14,7 @@ major changes that affect users are listed below.
 Some tools are available to assist users in converting code from earlier
 versions.  To go from Clawpack 4.6 to 5.0, see
 :ref:`claw46to50`.   Some older Clawpack 4.3 code can be first converted 
-to 4.6 form using :ref:`claw43to44`.
+to 4.6 form using :ref:`claw43to46`.
 
 If you wish to view recent changes on GitHub,
 note that Clawpack is an *organization*, meaning that it is
