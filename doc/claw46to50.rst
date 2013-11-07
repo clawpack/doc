@@ -9,7 +9,6 @@ Many input parameters have been renamed and some new options have been
 added.  See :ref:`setrun_changes`.
 
 
-
 Python conversion tool
 ----------------------
 
@@ -34,3 +33,9 @@ directory.
 The `Makefile` is currently not converted properly -- a generic `Makefile`
 is added to the directory but must be customized to point to any local
 Fortran codes, for example.
+
+.. warning::  A number of other changes have been made such as reordering
+   indices in `q` and `aux` array and changes to calling sequences of
+   several subroutines including `qinit`, `setaux`, and the Riemann solvers.
+   These changes are not handeld by this script. 
+   See :ref:`clawpack5`.

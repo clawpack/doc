@@ -51,7 +51,7 @@ Examples can be found at :ref:`plotexamples`.
 
 .. _plotting_Iplotclaw:
 
-Interactive plotting with ``Iplotclaw``
+Interactive plotting with `Iplotclaw`
 =======================================
 
 For interactive plotting we suggest using `IPython

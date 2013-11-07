@@ -32,7 +32,6 @@ Overview and Getting Started:
    claw4x
    claw46to50
    claw43to46
-   setrun_changes
 
 
 Examples and Applications:
