@@ -31,8 +31,7 @@ Overview and Getting Started:
    clawpack5
    claw4x
    claw46to50
-   claw43to44
-   setrun_changes
+   claw43to46
 
 
 Examples and Applications:
@@ -62,6 +61,7 @@ Fortran and Python codes:
    openmp
    python
    makefiles
+   application_documentation
    setrun
    setrun_sample
    bc

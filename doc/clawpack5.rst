@@ -7,6 +7,20 @@ Changes in Clawpack 5.0
 
 Clawpack 5.0 is a major reorganization of the Clawpack code base that has
 been going on for several years.  
+
+PyClaw in 5.0
+-------------
+
+The extensive PyClaw code base is now incorporated into Clawpack.  See
+:ref:`clawpack_packages` for more about how PyClaw relates to the other 
+:ref:`clawpack_components`.  For recent changes in PyClaw, see the
+`PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
+
+Fortran package changes
+-----------------------
+
+The rest of this page concerns the Fortran components of Clawpack.
+
 There is no complete list of changes since it has evolved to be very
 different from the 4.x version of Clawpack in organization, but some of
 major changes that affect users are listed below.
@@ -14,7 +28,7 @@ major changes that affect users are listed below.
 Some tools are available to assist users in converting code from earlier
 versions.  To go from Clawpack 4.6 to 5.0, see
 :ref:`claw46to50`.   Some older Clawpack 4.3 code can be first converted 
-to 4.6 form using :ref:`claw43to44`.
+to 4.6 form using :ref:`claw43to46`.
 
 If you wish to view recent changes on GitHub,
 note that Clawpack is an *organization*, meaning that it is
@@ -115,3 +129,96 @@ GitHub to see what bugs and features we are working on.
     See :ref:`fgmax`.
  
   
+
+
+.. _setrun_changes:
+
+Changes to input parameters in setrun.py from 4.x to 5.0
+----------------------------------------------------------
+
+Changes to general parameters 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Many names have been changed, e.g.
+
+  * `ndim` to `num_dim`
+  * `xlower`, `ylower`, `zlower` are now `lower[0], lower[1], lower[2]`.
+  * `xupper`, `yupper`, `zupper` are now `upper[0], upper[1], upper[2]`.
+  * `mx, my, mz` are now `num_cells[0:3]`.
+
+  There are many other such changes.  It is best to take a look at the 
+  `setrun.py` for an example in `$CLAW/classic/examples`.  
+
+See also:
+  
+ * :ref:`setrun`
+ * :ref:`claw46to50`
+
+Changes to AMR parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* The `rundata` object generally defined in `setrun.py` now has an 
+  attribute `rundata.amrdata` and AMR parameters are attributes of this
+  object.   Most names of attributes have changed from those used in 4.x.
+
+* Setting `mxnest` negative to indicate that anisotropic refinement
+  in different directions might be used has been eliminated.
+  Now this is always assumed and one must always specify 
+  refinement ratios in each direction and in time.
+
+* New attributes have been added to indicate whether Richardson
+  extrapolation and/or the routine ins `flag2refine` should be used
+  to flag cells for refinement.  See :ref:`refinement`.
+
+* The capability of using "regions" to specify areas where refinement is
+  forced or prohibited has been extended from GeoClaw to AMRClaw.
+  See :ref:`refinement_regions`.
+
+See also:
+  
+ * :ref:`setrun_amrclaw`
+ * :ref:`claw46to50`
+
+
+Changes to GeoClaw parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A number of changes have been made to parameter names and also functionality
+in some cases.
+
+See also:
+  
+ * :ref:`setrun_geoclaw`
+ * :ref:`claw46to50`
+
+
+Changes to plotting routines
+-----------------------------
+
+The plotting routines are now in Visclaw, see :ref:`plotting`.
+
+The Matlab tools from version 4.x have been updated a bit and many examples
+once again include `.m` files for users who wish to plot using Matlab.
+
+The Python routines have also been updated.  For the most part older
+versions of `setplot.py` should still work, with a few exceptions:
+
+ * In AMR the individual grids are now called "patches" rather than "grids".  
+   This caused a few changes in attribute names in :ref:`ClawPlotItem`:
+   
+    * The old `plot_type` named `2d_grid` has been renamed `2d_patch`
+    * The old attirbute `gridlines_show` has been renamed `celledges_show`
+    * The old attirbute `grideges_show` has been renamed `patchedges_show`
+
+To use the interactive plotting tool `Iplotclaw`, you now need to import
+this via::
+
+    from clawpack.visclaw.Iplotclaw import Iplotclaw
+
+See :ref:`plotting_python` for more information.
+
+
+
+
+
+

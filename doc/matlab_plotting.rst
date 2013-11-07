@@ -122,7 +122,7 @@ is returned to the plot prompt, a file `afterframe`_ is called.  This
 file contains user commands to set various plot properties.  See below
 for more details on what the user might wish to include in this file.
 
-.. _setplot:
+.. _matlab_setplot:
 
 The setplot file
 ----------------

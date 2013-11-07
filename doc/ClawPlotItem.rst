@@ -38,7 +38,7 @@ The following attributes can be set by the user:
     * '2d_contour' : two dimensional contour plot,
     * '2d_pcolor' : two dimensional pcolor plot,
     * '2d_schlieren' : two dimensional Schlieren plot,
-    * '2d_edges' : two dimensional plot of only the cell and/or patch edges, no data
+    * '2d_patch' : two dimensional plot of only the cell and/or patch edges, no data
 
 .. attribute:: outdir : str or None
 
