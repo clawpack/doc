@@ -29,6 +29,10 @@ Visclaw.
 See :ref:`matlabplots` for pointers if you wish to use these tools.
 For 3d plots the Matlab tools may still be the best choice.
 
+Another alternative for 3d plots (also for 2d) is to use 
+`VisIt <https://wci.llnl.gov/codes/visit/home.html>`_.  
+See :ref:`visit_plotting`.
+
 Since Clawpack 4.4, a set of Python plotting tools for 1d and 2d are
 the recommended approach.  The advantages of using the Python options are:
 
@@ -45,14 +49,10 @@ the recommended approach.  The advantages of using the Python options are:
    produced for each frame.
 
  * Matlab graphics are somewhat limited for 3d data sets, whereas several
-   open source visualization tools such as `VisIt
-   <https://wci.llnl.gov/codes/visit>`_ (developed at Lawrence Livermore
-   National Laboratory) are much better for dealing
-   with large data sets, AMR meshes, etc.  VisIt has Python bindings and 
-   we are currently extending our tools to work with VisIt.  If you are
-   already a VisIt user, note that VisIt has a Claw reader that can be used to
-   import data from Clawpack, see `Application Toolkit Formats
-   <http://www.visitusers.org/index.php?title=Detailed_list_of_file_formats_VisIt_supports#Application_Toolkit_Formats>`_.
+   open source visualization tools such as `VisIt` 
+   are much better for dealing with large data sets, AMR meshes, etc.  
+   and have Python bindings that should allow scripting in a manner
+   compatible with 1d and 2d. (Yet to be done.)
 
  * Python is a powerful language that can be scripted to perform multiple
    runs, such as in a convergence test, and collect the results in tables or

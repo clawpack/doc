@@ -83,6 +83,7 @@ VisClaw: Plotting and Visualization Tools
    plotting_faq
    geoplot
    matlab_plotting
+   visit_plotting
 
 
 AMRClaw: Adaptive Mesh Refinement
