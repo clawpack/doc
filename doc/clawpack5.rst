@@ -102,7 +102,8 @@ GitHub to see what bugs and features we are working on.
   construction, so currently there is no capability to use `setplot.py`
   to specify the desired plots or `make plots` to produce them.  However,
   the Matlab plotting routines have been updated and are now found in
-  Visclaw.  See :ref:`matlabplots`.
+  Visclaw.  See :ref:`matlabplots`.  It is also possible to render 3d
+  plots using the VisIt GUI, see :ref:`visit_plotting`.
 
 * The classic single-grid Clawpack code (without AMR) is now in the
   `classic` directory and the `classic repository
