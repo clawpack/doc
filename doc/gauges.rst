@@ -111,7 +111,10 @@ to produce the plot for gauge 1, or simply::
 
     PLOTCLAW> plotgauge 
 
-to loop through all gauges.
+to loop through all gauges.  If you rerun the code without re-executing
+`Iplotclaw`, you can refresh the gauge data via::
+
+    PLOTCLAW> cleargauges
 
 You can of course specify more than one plotitem on each plotaxes if you want.  For
 example to plot the each gauge from the current run as a blue line and the same
@@ -151,6 +154,9 @@ gauge.
 If you want more control over this plotting you can of course copy the function
 `plot_gauge_locations` from `pyclaw.plotters.gaugetools.py` 
 to your setplot.py file and modify at will.
+
+.. warning:: When doing a restart, previous gauge output is deleted unless
+   you are careful to preserve it.  See :ref:`restart_output`.
 
 Examples
 --------
