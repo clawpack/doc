@@ -1,6 +1,6 @@
 :group: pyclaw
 
-.. _installation:
+.. _pyclaw_installation:
 
 ==================
 Installing PyClaw
@@ -13,16 +13,24 @@ To get the latest development version, do this instead::
 
     git clone git@github.com:clawpack/clawpack.git
     cd clawpack
-    pip install -e .
+    python setup.py install
 
-This assumes that you already have a Fortran 90 compiler; if not,
-we recommend getting one via 
-`GCC Wiki GFortranBinaries <http://gcc.gnu.org/wiki/GFortranBinaries>`_.  
-
-There are some additional dependencies for running in parallel; see
-:ref:`parallel`.  If you encounter any difficulties in the installation
+If you encounter any difficulties in the installation
 process, please `contact us <claw-users@googlegroups.com>`_ or
 `raise an issue <http://github.com/clawpack/pyclaw/issues/>`_.
+
+To run an example, launch an IPython session and then::
+
+    from clawpack.pyclaw import examples
+    claw = examples.shock_bubble_interaction.setup()
+    claw.run()
+    claw.plot()
+
+This will run the code and then place you in an interactive plotting shell.
+To view the simulation output frames in sequence, simply press 'enter'
+repeatedly.  To exit the shell, type 'q'.  For help, type '?' or see
+:ref:`pyclaw_plotting`.
+
 
 Dependencies: Python, gfortran, numpy, and matplotlib
 --------------------------------------------------------
@@ -36,12 +44,16 @@ XLF compiler.
     (optional -- only for plotting).
   * `pip <http://www.pip-installer.org/en/latest/installing.html>`_ 
   * A Fortran 90 compiler, such as gfortran version >= 4.2.
-    You will need to use a Fortran compiler compatible with
-    your Python installation.
+    If you do not have one already, we recommend getting one via 
+    `GCC Wiki GFortranBinaries <http://gcc.gnu.org/wiki/GFortranBinaries>`_.  
 
-Obtaining Python and its dependencies
+There are some additional dependencies for running in parallel; see
+:ref:`parallel`.  
+
+
+Obtaining Python, numpy, and matplotlib
 +++++++++++++++++++++++++++++++++++++++++++++++
-If you don't already have Python on your system, we recommend 
+If you don't already have these on your system, we recommend 
 `Anaconda CE <https://store.continuum.io/>`_ or 
 `Enthought Canopy Express <https://www.enthought.com/products/epd/free/>`_
 (both free).
@@ -49,26 +61,23 @@ If you don't already have Python on your system, we recommend
 
 Clawpack
 -----------------------------------------------------------
-PyClaw is part of Clawpack, which also includes
-
-*Clawutil*
-    A package containing important utilities for working with Clawpack projects
-    
-*Riemann*
-    A package containing a collection of Riemann solvers for PyClaw and 
-    Clawpack.
-    
-*VisClaw*
-    A set of visualization tools built on top of Matplotlib    
+PyClaw is part of Clawpack, which includes several other
+packages; see :ref:`clawpack_components`.  Note that the 
+installation instructions above will install PyClaw,
+Riemann and VisClaw.  If you also wish to use AMRClaw or
+GeoClaw, you should follow the more general Clawpack
+:ref:`installing`.
 
 
 Testing your installation with nose
 -----------------------------------------------------------
-Install nose if you haven't already: ::
+If you've manually downloaded the source, or cloned from Github,
+then you can easily test your installation.
+First install nose: ::
 
    pip install nose
 
-Then test your installation: ::
+Then ::
 
     cd clawpack/pyclaw
     nosetests 
@@ -81,18 +90,6 @@ If you have followed the instructions for :ref:`parallel`, you can run the tests
 
     PyClaw automatically enables tests that require PETSc if it detects a
     petsc4py installation.  Otherwise, tests that use PETSc are disabled.
-
-Running and plotting an example
------------------------------------------------------------
-::
-
-    cd clawpack/pyclaw/examples/euler_2d
-    python shockbubble_bubble_interaction.py iplot=1
-
-This will run the code and then place you in an interactive plotting shell.
-To view the simulation output frames in sequence, simply press 'enter'
-repeatedly.  To exit the shell, type 'q'.  For help, type '?' or see
-:ref:`pyclaw_plotting`.
 
 Next steps
 -----------------------------------------------------------

@@ -15,8 +15,11 @@ Overview and Getting Started:
    
    about
    installing
+   first_run
    license
    trouble
+   packages
+   clawpack_components
    vm
    aws
    previous
@@ -28,8 +31,7 @@ Overview and Getting Started:
    clawpack5
    claw4x
    claw46to50
-   claw43to44
-   setrun_changes
+   claw43to46
 
 
 Examples and Applications:
@@ -40,7 +42,6 @@ Examples and Applications:
    
 
    galleries
-   clawpack_components
    apps
    book
    newapp
@@ -82,6 +83,7 @@ VisClaw: Plotting and Visualization Tools
    plotting_faq
    geoplot
    matlab_plotting
+   visit_plotting
 
 
 AMRClaw: Adaptive Mesh Refinement

@@ -117,8 +117,8 @@ html_additional_pages = {'index': 'index.html'}
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
-    'index':    ['sidelogo.html', 'localtoc.html', 'sourcelink.html', 'searchbox.html'],
-    '**':       ['sidelogo.html', 'localtoc.html', 'relations.html',
+    'index':    ['localtoc.html', 'sourcelink.html', 'searchbox.html'],
+    '**':       ['localtoc.html', 'relations.html',
                  'sourcelink.html', 'searchbox.html']
 }
 

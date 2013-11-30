@@ -59,7 +59,7 @@ class Gallery(object):
         self.sections.append(gsec)
         return gsec
     
-    def create(self,fname,gallery_dir=None, copy_plots=True):
+    def create(self,fname,gallery_dir=None, copy_plots=True, write_file=True):
 
         # Directory for gallery files:
         if gallery_dir is None:
@@ -79,7 +79,11 @@ class Gallery(object):
             print "*** Gallery not created"
             raise
 
-        gfile = open(fname, 'w')
+        if write_file:
+            gfile = open(fname, 'w')
+        else:
+            gfile = open(os.devnull, 'w')
+
         gfile.write(":group: pyclaw\n\n")
         gfile.write(".. _%s:\n\n" % os.path.splitext(fname)[0])
         nchar = len(self.title)
@@ -106,7 +110,6 @@ class Gallery(object):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
                 print "+++ static_dir = ",static_dir
 
-                #os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                 if copy_plots:
                     os.system('cp -r %s/_plots %s' % (self.clawdir+gitem.appdir, \
                                 static_dir+gitem.appdir))
@@ -122,8 +125,20 @@ class Gallery(object):
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs ('./'+gitem.appdir)
-                #os.system('cp %s/README.rst %s' % ('$PYCLAW/'+gitem.appdir, './'+gitem.appdir))
                 gfile.write('\n\n')
+
+                # For each example, write a page containing the source
+                rf = open(gitem.appname+'.rst','w')
+                rf.write('.. _'+gitem.appname+':\n')
+                rf.write('\n')
+                rf.write(gsec.title+'\n')
+                rf.write('-'*len(gsec.title)+'\n')
+                rf.write('\n')
+                rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
+
+                rf.write('\n')
+                rf.write('Output:\n')
+                rf.write('~~~~~~~\n')
 
                 for image in gitem.images:
 
@@ -142,17 +157,19 @@ class Gallery(object):
                     else:
                         scale = 0.3
                         make_thumb(src_png ,thumb_file, scale)
+
                     gfile.write('.. image:: %s\n   :width: 5cm\n' % thumb_file)
                     gfile.write('   :target: %s\n' % src_html)
+
+                    rf.write('.. image:: %s\n   :width: 5cm\n' % thumb_file)
+                    rf.write('   :target: %s\n' % src_html)
+
+                gfile.write('\n\n')
                 gfile.write('\n\n')
 
-                print gitem.appdir
-                #if not os.path.exists('./'+gitem.appname+'.rst'):
-                rf = open(gitem.appname+'.rst','w')
-                rf.write('.. _'+gitem.appname+':\n')
-                rf.write('\n')
-                rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
-                rf.write('\n')
+                rf.write('\n\n')
+                rf.write('Source:\n')
+                rf.write('~~~~~~~\n')
                 rf.write('.. literalinclude:: ../../../../'+gitem.appdir+'/'+gitem.appname+'.py'+'\n')
                 rf.close()
 
@@ -258,7 +275,7 @@ def make_1d():
     gsec.new_item(appdir, appname, plotdir, description, images)
     #----------------------------------------------
        
-    gallery.create('gallery_1d.rst')
+    gallery.create('gallery_1d.rst', write_file=False)
     return gallery
 
 
@@ -363,7 +380,7 @@ def make_2d():
     gsec.new_item(appdir, appname, plotdir, description, images)
     #----------------------------------------------
         
-    gallery.create('gallery_2d.rst')
+    gallery.create('gallery_2d.rst', write_file=False)
     return gallery
 
 def make_all():

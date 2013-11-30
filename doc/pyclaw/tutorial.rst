@@ -1,6 +1,6 @@
 :group: pyclaw
 
-  .. _pyclaw_tutorial:
+.. _pyclaw_tutorial:
   
 ***********************************************
 PyClaw tutorial: Solve the acoustics equations
@@ -25,16 +25,11 @@ The key to solving a particular system of equations with PyClaw or other similar
 codes is a Riemann solver.  Riemann solvers for many systems are available as part 
 of the clawpack/riemann package. 
 
-We'll assume that you've already followed the :ref:`installation` instructions.
+We'll assume that you've already followed the :ref:`pyclaw_installation` instructions.
 
-.. note::
-   The following instructions show how to set up a problem step-by-step in an
-   interactive shell.  If you don't want to type all these commands, you can
-   instead::
+The following instructions show how to set up a problem step-by-step in an
+interactive shell.  See :ref:`acoustics_1d` for the full source on which this is based.
    
-    $ cd $PYCLAW/examples/acoustics/1d/homogeneous 
-    $ python acoustics_1D.py iplot=1
-
 The commands below should be typed at the Python prompt; we recommend using
 IPython.
 
@@ -74,7 +69,7 @@ use the interval :math:`(-1,1)` and 200 grid cells:
 Notice that the calling sequence is similar to numpy's ``linspace`` command.
 
 Finally, we set up a :class:`~pyclaw.Solution`
-object, which will hold the solution values::
+object, which will hold the solution values:
 
 .. doctest::
 
@@ -131,7 +126,10 @@ At last everything is set up!  Now run the simulation
 
     >>> status = controller.run()
 
-This should print out a few lines indicating the output times. It also prints the minimum and maximum tipe-step used, the number of steps required for the computation and the maximum CFL number. The simplest way to plot the solution is
+This should print out a few lines indicating the output times. It also prints
+the minimum and maximum tipe-step used, the number of steps required for the
+computation and the maximum CFL number. The simplest way to plot the solution
+is
 
 .. doctest::
 

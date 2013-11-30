@@ -5,9 +5,11 @@
 Release 5.0.0
 ==========================
 
-Release candidate 5.0.0rc is now being created.
+Release candidate 5.0.0rc-beta is available for testing.  See 
+:ref:`installing`.
 
-This corresponds to `clawpack/clawpack` commit #?. 
+This is based on `clawpack/clawpack pull request 28
+<https://github.com/clawpack/clawpack/pull/28>`_.
 
 Clawpack 5.0 is a major reorganization of the Clawpack code base that has
 been going on for several years.  See :ref:`clawpack5` for an overview of
@@ -22,6 +24,6 @@ listed on a singe page like this one.
 Changes to PyClaw
 ------------------
 
-See :ref:`pyclaw/release_5_0_0`  [If there are things to list other than
-what might go on :ref:`clawpack5`]
+For changes in PyClaw, see the `PyClaw changelog
+<https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 

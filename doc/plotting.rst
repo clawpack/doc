@@ -2,7 +2,7 @@
 .. _plotting:
 
 ***************************************
-Plotting options 
+Visclaw Plotting options 
 ***************************************
 
 .. _plotting_postproc:
@@ -24,11 +24,17 @@ is used under the hood for 1d and 2d plots, but the tools provided with
 Clawpack simplify some common tasks since they handle looping over all grid
 patches as is generally required when plotting AMR data.
 
-Early versions of Clawpack used Matlab for plotting.
+Matlab plotting tools (mostly the same as in Clawpack 4.x) are available in
+Visclaw. 
 See :ref:`matlabplots` for pointers if you wish to use these tools.
-**Matlab tools deprecated?**
+For 3d plots the Matlab tools may still be the best choice.
 
-The advantages of using the Python options are:
+Another alternative for 3d plots (also for 2d) is to use 
+`VisIt <https://wci.llnl.gov/codes/visit/home.html>`_.  
+See :ref:`visit_plotting`.
+
+Since Clawpack 4.4, a set of Python plotting tools for 1d and 2d are
+the recommended approach.  The advantages of using the Python options are:
 
  * Python and the graphics modules used in Clawpack are open source.  Since
    Clawpack itself is open source we find it desirable to also have an open
@@ -43,17 +49,10 @@ The advantages of using the Python options are:
    produced for each frame.
 
  * Matlab graphics are somewhat limited for 3d data sets, whereas several
-   open source visualization tools such as `VisIt
-   <https://wci.llnl.gov/codes/visit>`_ (developed at Lawrence Livermore
-   National Laboratory) are much better for dealing
-   with large data sets, AMR meshes, etc.  VisIt has Python bindings and 
-   we are currently extending our tools to work with VisIt.  If you are
-   already a VisIt user, note that VisIt has a Claw reader that can be used to
-   import data from Clawpack, see `Application Toolkit Formats
-   <http://www.visitusers.org/index.php?title=Detailed_list_of_file_formats_VisIt_supports#Application_Toolkit_Formats>`_.
-
-   We are also considering developing tools for use with
-   `Mayavi <http://code.enthought.com/projects/mayavi>`_.
+   open source visualization tools such as `VisIt` 
+   are much better for dealing with large data sets, AMR meshes, etc.  
+   and have Python bindings that should allow scripting in a manner
+   compatible with 1d and 2d. (Yet to be done.)
 
  * Python is a powerful language that can be scripted to perform multiple
    runs, such as in a convergence test, and collect the results in tables or

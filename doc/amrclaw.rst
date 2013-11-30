@@ -3,7 +3,7 @@
 
 
 *************************************
-AMRClaw Software
+AMRClaw
 *************************************
 
 The AMRClaw version of Clawpack provides Adaptive Mesh Refinement (AMR)
