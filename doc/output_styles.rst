@@ -117,7 +117,7 @@ block of memory is dumped for each patch with a single `write` statement).
 NetCDF output data format
 ------------------------------
 
-Describe...
+See :ref:`netcdf`.
 
 .. _output_aux:
 
