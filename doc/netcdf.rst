@@ -4,6 +4,9 @@
 Using NetCDF output
 ==========================
 
+.. warning:: NetCDF output is currently broken in 5.0.0.
+
+
 The AMRClaw and GeoClaw codes have the option to output results in
 binary using NetCDF instead of the usual :ref:`ascii_output_format`.
 

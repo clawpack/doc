@@ -104,7 +104,7 @@ two to get gauge output for the entire run, e.g.::
 
 This creates a file `fort.gauge` that contains the entire gauge history.
 
-todo: This should be simplified.
+TODO: This should be simplified.
 
 
 

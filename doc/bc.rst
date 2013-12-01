@@ -63,8 +63,7 @@ the subroutine `bcN` so that setting the appropriate component of `bc_lower`
 or `bc_upper` to 0 will execute code added by the user.  In this case it is
 best to put the modified version of `bcN.f` in the application directory and
 modify the `Makefile` to point to the modified version.
-
-For an example, see ??  **Add pointer**
+See :ref:`bc_user` below.
 
 
 
@@ -135,4 +134,33 @@ and `bc_upper` that is implemented in the library routines:
     animations on the `website for the original paper <?>`_
     See also [BergerCalhounHelzelLeVeque]_ for further examples.
     
+.. _bc_user:
+
+User-defined boundary conditions
+--------------------------------
+
+If none of the boundary conditions described above is suitable at one or
+more boundaries of the domain, then you will have to modify the library
+routine to implement the desired boundary condition.  
+See Chapter 4 of [LeVeque-FVMHP]_ for hints on how to specify the ghost cell
+values each time step.
+
+Suppose you need to specify different boundary conditions at the boundary
+`xlower`, for example.  Then in `setrun.py` you should set 
+`bc_lower[0] = 0` and modify the library boundary condition routine to
+insert your desired boundary conditions at the point indicated in the code,
+where it says::
+
+    c     # user-specified boundary conditions go here in place of error output
+
+in the section marked `left boundary`.   The details of how this is done
+differ a bit between the classic and AMR codes and also depend on the number
+of space dimensions.  Examine the way other boundary conditions are
+implemented and follow the model in your own code.
+
+TODO: Give some hints on how things work in AMR code -- must check which ghost
+cells extend outside the physical domain and which are filled automatically
+from adjacent grid patches or by interpolation from coarser patches if they
+are interior to the domain.
+
 

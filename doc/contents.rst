@@ -58,6 +58,7 @@ Fortran and Python codes:
 
    fortran
    fortran_compilers
+   user_routines
    openmp
    python
    makefiles

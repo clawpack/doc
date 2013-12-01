@@ -284,8 +284,8 @@ below.
    If True, the Riemann solvers should return f-waves (a decomposition of
    the the flux difference) rather than the usual waves (which give
    a decomposition of the jump in Q between adjacent states).
-   See Section ?? of [LeVeque-FVMHP]_ 
-   or [BaleLevMitRoss]_ for details.
+   See :ref:`wp_fwave`, :ref:`riemann_fwave` and 
+   Section 16.4 of [LeVeque-FVMHP]_ or [BaleLevMitRoss02]_ for details.
 
 .. attribute:: source_split : list of int or str, of length num_waves
 
@@ -294,6 +294,7 @@ below.
    `srcN.f` (in `N` space dimensions) that is called each time step
    and should advance the solution by solving the source term equations
    (the PDE after dropping the hyperolic terms).
+   See :ref:`user_src`.
 
     *   src_split == 0 or 'none'    : no source term (`srcN` routine never called)
     *   src_split == 1 or 'godunov' : Godunov (1st order) splitting used, 

@@ -113,6 +113,8 @@ Papers describing the Clawpack software and algorithms
             Year = {2002},
             Url = {http://www.clawpack.org/book.html}}
 
+   See :ref:`gallery_fvmbook` for some sample results from this book.
+
 .. [LeVequeGeorgeBerger]
    R. J. LeVeque, D. L. George, and M. J. Berger,  2011,
    Tsunami modelling with adaptively refined finite volume methods,
