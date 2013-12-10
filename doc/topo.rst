@@ -151,6 +151,13 @@ Several on-line databases are available for topograpy, e.g.
 Topography displacement files
 -----------------------------
 
+.. warning::  Some problems have recently been observed when trying to
+   specify time-varying topography with `dtopo` files.  Nearly instantaneous
+   displacement occuring at the start seems to work ok, but slowly varying
+   displacement does not always work well when AMR is also being used.
+   A better version of this code is currently being developed, but for now
+   use with caution!
+
 For tsunami generation a file *dtopo* is generally used to specify the
 displacement of the topography relative to that specified in the topo files.
 
