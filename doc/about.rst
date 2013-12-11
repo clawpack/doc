@@ -10,20 +10,19 @@ focus on implementing high-resolution Godunov type methods using limiters in
 a general framework applicable to many applications.  These finite volume
 methods require a "Riemann solver" to resolve the jump discontinuity at the
 interface between two grid cells into waves propagating into the neighboring
-cells.
+cells.  The formulation used in Clawpack allows easy extension to
+the solution of hyperbolic problems that are not in conservation form.  
+
+See :ref:`wp_algorithms` for a brief description of the finite volume
+methods used in Clawpack.
 
 Adaptive mesh refinement is included, see :ref:`amrclaw`.
-
-Recent extensions allow the solution of hyperbolic problems that are not in
-conservation form.  We are actively working on extensions to parabolic
-equations as well.
 
 The "wave propagation" algorithms implemented in Clawpack are discribed in
 detail in the book *Finite Volume Methods for Hyperbolic Problems*
 [LeVeque-FVMHP]_.
 Virtually all of the figures in this book were generated using Clawpack
 (version 4.3). 
-
 See :ref:`book` for a list of available examples with pointers to the codes
 and resulting plots.
 

@@ -81,3 +81,30 @@ This will ensure that the original set of output files (for times up to the
 restart time) and the checkpoint
 file will not be deleted.  They will still be available in the output directory
 along with the newly created output files.
+
+.. _restart_output:
+
+Output files after a restart
+----------------------------
+
+After running the restarted computation,
+the original set of output files should still be in the output directory
+along with a new set from the second run.  Note that one output time may
+be repeated in two frames if `clawdata.output_t0 == True` in the restarted run.
+
+Note that any gauge output from the first run will be overwritten by the
+second run.  If you wish to preserve the gauge output from the first run,
+currently you must copy the output file `fort.gauge` to another location,
+say `fort.gauge1`, before doing the restart run.  Then you could catenate the
+two to get gauge output for the entire run, e.g.::
+
+    cd _output
+    mv fort.gauge fort.gauge2
+    cat fort.gauge1 fort.gauge2 > fort.gauge
+
+This creates a file `fort.gauge` that contains the entire gauge history.
+
+TODO: This should be simplified.
+
+
+
