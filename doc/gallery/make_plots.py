@@ -1,5 +1,5 @@
 """
-Performs 'make .plots'
+Performs 'make all' or 'make .plots'
 in each directory to create sample results for webpage.
 
 First look for  'make_all.sh', which might do other things as well.
@@ -92,12 +92,6 @@ def make_plots(examples_dir = '.'):
         ferr.write("\n=============================================\n")
 
         os.chdir(directory)
-        if os.path.isfile('make_all.sh'):
-            print "Running 'bash make_all.sh' in ", directory
-            fout.write("Running 'bash make_all.sh'\n ")
-        else:
-            print "Running 'make .plots' in ", directory
-            fout.write("Running 'make .plots'\n ")
 
         # flush I/O buffers:
         fout.flush()
@@ -106,6 +100,10 @@ def make_plots(examples_dir = '.'):
     
         if os.path.isfile('make_all.sh'):
             job = subprocess.Popen(['bash','make_all.sh'], \
+                      stdout=fout,stderr=ferr)
+            return_code = job.wait()
+        elif 'all:' in open('Makefile').read():
+            job = subprocess.Popen(['make','all'], \
                       stdout=fout,stderr=ferr)
             return_code = job.wait()
         else:

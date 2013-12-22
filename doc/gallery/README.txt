@@ -2,7 +2,11 @@
 To build the gallery (e.g. for amrclaw):
 
   export GIT_STATUS=True   # to save git info in each _output
+  python make_plots.py $CLAW/classic/examples
   python make_plots.py $CLAW/amrclaw/examples
+  export CLAW_TOPO_DOWNLOAD=True
+  python make_plots.py $CLAW/geoclaw/examples
+
   python gallery.py
   cd ..
   make html
