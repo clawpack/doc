@@ -85,12 +85,29 @@ Papers describing the Clawpack software and algorithms
             Volume = {165},
             Year = {2000}}
 
+.. [LeVeque96]
+   R. J. LeVeque, 1996. 
+   `High-resolution conservative algorithms for advection in
+  incompressible flow,
+  <http://faculty.washington.edu/rjl/pubs/hiresadv/index.html>`_ ::
+
+        @article{LeVeque1996,
+          author="R. J. LeVeque",
+          title="High-resolution conservative algorithms for advection in
+          incompressible flow",
+          journal="SIAM J. Numer. Anal.",
+          volume="33",
+          year="1996",
+          pages="627-665"
+        }
+
 
 .. [LeVeque97]
    R. J. LeVeque, 1997. 
    `Wave propagation algorithms for multi-dimensional
-   hyperbolic systems.  *J. Comput. Phys.*  131, 327--353.
-   <http://www.amath.washington.edu/~rjl/pubs/wpalg/index.html>`_ ::
+   hyperbolic systems. 
+   <http://www.amath.washington.edu/~rjl/pubs/wpalg/index.html>`_  
+   *J. Comput. Phys.*  131, 327--353.::
 
         @article{rjl:wpalg,
             Author = {R. J. LeVeque},

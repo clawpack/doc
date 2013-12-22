@@ -230,3 +230,5 @@ archived results.  The tests should run in a few seconds.
 
 There are similar `tests` subdirectories of `$CLAW/amrclaw` and
 `$CLAW/geoclaw` to do quick tests of these codes.
+
+See also :ref:`testing`.

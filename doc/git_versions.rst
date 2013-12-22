@@ -28,6 +28,10 @@ The function `$CLAW/clawutil/src/python/clawutil/runclaw.py`
 now has an argument `print_git_status` (with default value `False`).
 Calling `runclaw` with `print_git_status == True` will write these files to
 the output directory specified by the `outdir` argument.
-(Need to modify `Makefile.common` to take advantage of this.)
+
+Setting the environment variable `GIT_STATUS` to True will insure that 
+`make .output` creates output directories containing the `claw_git_status`
+files.
+
 
 
