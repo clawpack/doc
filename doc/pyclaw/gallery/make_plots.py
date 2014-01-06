@@ -13,7 +13,7 @@ def list_examples(examples_dir=None):
 
     if examples_dir is None:
         from clawpack import pyclaw
-        examples_dir = '/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw/examples/'
+        examples_dir = pyclaw.__path__[0]+'/examples'
 
     examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()
@@ -68,9 +68,8 @@ def make_plots(examples_dir = None):
 
     if examples_dir is None:
         from clawpack import pyclaw
-        examples_dir = '/'.join(pyclaw.__path__[0].split('/')[:-2])+'/pyclaw/examples/'
+        examples_dir = pyclaw.__path__[0]+'/examples'
 
-    print examples_dir
     examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()
  
@@ -143,4 +142,9 @@ def make_plots(examples_dir = None):
     os.chdir(current_dir)
 
 if __name__=='__main__':
-    make_plots()
+    import sys
+    if len(sys.argv)>1:
+        print sys.argv
+        make_plots(sys.argv[1])
+    else:
+        make_plots()

@@ -16,7 +16,7 @@ claw_html_root='..'
 
 # Determine PyClaw directory:
 from clawpack import pyclaw
-clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-2])+'/')
+clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-1])+'/')
 
 # Location for gallery files:
 gallery_dir_default = '.'#os.path.join(clawdir_default,'doc/gallery')  

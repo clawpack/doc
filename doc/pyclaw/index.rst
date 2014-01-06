@@ -50,6 +50,7 @@ PyClaw Documentation
    about
    future
    gallery/gallery_all
+   gallery/how-to-build
 
 
 .. _pyclaw_reference:
