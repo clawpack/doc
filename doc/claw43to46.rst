@@ -18,7 +18,7 @@ If you are doing this by hand, you should convert directly to 5.0 form.
 In some cases it will be easiest to do the bulk of the work using scripts.
 A first pass of conversion to 4.6 form can be done by executing::
 
-    $ python $CLAW/clawutil/src/python/clawutil/conversion/convert43to44.py
+    $ python $CLAW/clawutil/src/python/clawutil/conversion/convert43to46.py
 
 in your application directory.  You should then inspect the files generated
 and fix any broken links, etc.

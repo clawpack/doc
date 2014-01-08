@@ -10,3 +10,5 @@ To change layout of pages, adjust
     _themes/flask/layout.html
     _themes/flask/static/flasky.css_t
 
+To change main landing page, edit
+    _templates/index.html 

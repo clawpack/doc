@@ -5,11 +5,7 @@
 Release 5.0.0
 ==========================
 
-Release candidate 5.0.0rc-beta is available for testing.  See 
-:ref:`installing`.
-
-This is based on `clawpack/clawpack pull request 28
-<https://github.com/clawpack/clawpack/pull/28>`_.
+Clawpack 5.0.0 was released on Dec 30, 2013.  See :ref:`installing`.
 
 Clawpack 5.0 is a major reorganization of the Clawpack code base that has
 been going on for several years.  See :ref:`clawpack5` for an overview of

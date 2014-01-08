@@ -14,9 +14,17 @@ cells.  The formulation used in Clawpack allows easy extension to
 the solution of hyperbolic problems that are not in conservation form.  
 
 See :ref:`wp_algorithms` for a brief description of the finite volume
-methods used in Clawpack.
+methods used in Clawpack and :ref:`riemann` for a description of the
+subroutine(s) needed to specify the hyperbolic equation being solved.
 
-Adaptive mesh refinement is included, see :ref:`amrclaw`.
+Adaptive mesh refinement is included, see :ref:`amrclaw`,  and routines
+specialized to depth-averaged geophysical flows can be found in
+:ref:`geoclaw`.
+
+The :ref:`pyclaw` software provides a more pythonic interface and
+parallelism that scales to tens of thousands of cores.  
+
+New users may wish to read :ref:`clawpack_packages` before starting.
 
 The "wave propagation" algorithms implemented in Clawpack are discribed in
 detail in the book *Finite Volume Methods for Hyperbolic Problems*

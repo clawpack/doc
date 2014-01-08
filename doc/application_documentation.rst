@@ -9,10 +9,6 @@ Application documentation
 Converting README.rst to README.html
 -------------------------------------
 
-.. warning:: This is not included in the 5.0.0rc-beta tarfile, but has
-   been used to create the current documentation and will be in the
-   final release.
-
 
 In Fortran versions of Clawpack-5, the main documentation page 
 for an application is often found
