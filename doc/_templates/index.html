@@ -3,16 +3,25 @@
 {% block body %}
 <div id=main>
 <p>{%trans%}
+This is the home for Clawpack 5.0.0 and later versions.  <br>
+For earlier versions and sample codes that rely on them, see the
+<a href="http://depts.washington.edu/clawpack/">Clawpack-4 webpages</a>.
+{%endtrans%} </p>
+
+<p>{%trans%}
 Clawpack (“Conservation Laws Package”) is a collection of finite volume methods
 for linear and nonlinear hyperbolic systems of conservation laws.
 Clawpack employs high-resolution Godunov-type methods with limiters in a general
 framework applicable to many kinds of waves. 
 {%endtrans%} </p>
 
-<p>{%trans%}
+<p>
 Originally developed in 1994 by Randall LeVeque, Clawpack is now contributed to
-by many developers and includes a number of related projects.  Key features include:
-{%endtrans%} </p>
+by many developers and includes a number of related projects.  
+See <a href="{{ pathto("about") }}">About this software</a> for more details. 
+
+<p>Key features include:
+</p>
 
 <ul>
     <li>{%trans%}<b>Solution of general hyperbolic PDEs</b> provided a Riemann solver
@@ -21,10 +30,12 @@ by many developers and includes a number of related projects.  Key features incl
     <li>{%trans%}<b>Parallelism</b>{%endtrans%} scalable to tens of thousands of cores or more, included in <a href="{{ pathto("pyclaw/index") }}">PyClaw</a> </li>
 </ul>
 
-<p>{%trans%}
-Solution of a given PDE system with Clawpack relies on an approximate Riemann solver for
-that system.  Solvers for many common applications are available in the Riemann package.
-{%endtrans%} </p>
+<p>
+Solution of a given PDE system with Clawpack requires specifying
+an approximate Riemann solver for
+that system.  Solvers for many common applications are bundled with the
+software.  See <a href="{{ pathto("riemann") }}">Riemann solvers</a> 
+</p>
 
 <p>
 New users may wish to first read <a href="{{ pathto("packages") }}">
@@ -65,6 +76,12 @@ New users may wish to first read <a href="{{ pathto("packages") }}">
          <span class="linkdescr">{%trans%}Examples of Clawpack, PyClaw,
 AMRClaw, and GeoClaw simulation results{%endtrans%}</span></p>
     </td></tr>
+    <tr><td width="50%">
+      <p class="biglink"><a class="biglink"
+href="http://www.clawpack.org/links">{%trans%}Links{%endtrans%}</a><br/>
+         <span class="linkdescr">{%trans%}Links to code from papers and
+other Clawpack resources{%endtrans%}</span></p>
+    </td></tr>
   </table>
 
 <h2 style="margin-bottom: 0">{%trans%}Older versions{%endtrans%}</h2>
@@ -73,8 +90,8 @@ AMRClaw, and GeoClaw simulation results{%endtrans%}</span></p>
     <td width="50%">
       <p class="biglink"><a class="biglink"
 href="http://www.clawpack.org">{%trans%}Clawpack 4.x home page{%endtrans%}</a><br/>
-         <span class="linkdescr">{%trans%}with links to documentation and
-downloads{%endtrans%}</span></p>
+         <span class="linkdescr">{%trans%}with links to documentation,
+downloads, and sample codes {%endtrans%}</span></p>
     </td>
     </tr>
   </table>
