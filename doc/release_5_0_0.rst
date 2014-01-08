@@ -5,7 +5,7 @@
 Release 5.0.0
 ==========================
 
-Clawpack 5.0.0 was released on Dec 30, 2013.  See :ref:`installing`.
+Clawpack 5.0.0 was released on January 8, 2014.  See :ref:`installing`.
 
 Clawpack 5.0 is a major reorganization of the Clawpack code base that has
 been going on for several years.  See :ref:`clawpack5` for an overview of
@@ -14,8 +14,7 @@ many of the major changes.
 Changes to classic, riemann, amrclaw, geoclaw, visclaw
 ------------------------------------------------------
 
-Are summarized in :ref:`clawpack5`.  For future releases these might be
-listed on a singe page like this one.
+Are summarized in :ref:`clawpack5`.  
 
 Changes to PyClaw
 ------------------
