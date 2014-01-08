@@ -4,6 +4,11 @@
 Installation instructions
 **************************************
 
+Please `register
+<http://depts.washington.edu/clawpack/register/index.html>`_ if you have not
+already done so.  This is purely optional, but is useful in helping us track
+the extent of usage.
+
 You may:
 
 * :ref:`install_clawpack`
@@ -39,8 +44,8 @@ Install all Clawpack packages
 ---------------------------------------
 First, download a tar file of the latest release:
 
-* `https://github.com/clawpack/clawpack/releases/download/5.0.0/clawpack-5.0.0.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/5.0.0/clawpack-5.0.0.tar.gz>`_
+* `https://github.com/clawpack/clawpack/releases/download/v5.0.0/clawpack-5.0.0.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/v5.0.0/clawpack-5.0.0.tar.gz>`_
 
 (See :ref:`previous` for older versions and :ref:`clawpack_components` for a
 list of what's included in this tar file.)
