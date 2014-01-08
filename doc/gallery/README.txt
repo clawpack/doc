@@ -25,8 +25,8 @@ each time so you might want to open those files in a different window.
 
 Before running rsync_clawpack.github.sh, make sure there are no extraneous
 frames left from earlier tests:
-rm -rf $CLAW/clawpack.github.com/_static/classic
-rm -rf $CLAW/clawpack.github.com/_static/amrclaw
-rm -rf $CLAW/clawpack.github.com/_static/geoclaw
-rm -rf $CLAW/clawpack.github.com/_static/apps/fvmbook
+rm -rf $CLAW/clawpack.github.com/doc/_static/classic
+rm -rf $CLAW/clawpack.github.com/doc/_static/amrclaw
+rm -rf $CLAW/clawpack.github.com/doc/_static/geoclaw
+rm -rf $CLAW/clawpack.github.com/doc/_static/apps/fvmbook
 
