@@ -99,6 +99,11 @@ Some useful links to get started learning Python:
      `Introductory slides <http://heim.ifi.uio.no/~hpl/scripting/all-nosplit/>`_
 
 
+Notebooks
+---------
+
+See :ref:`notebooks`.
+
 Sage
 ----
 

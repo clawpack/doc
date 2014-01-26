@@ -61,6 +61,7 @@ Fortran and Python codes:
    user_routines
    openmp
    python
+   notebooks
    makefiles
    application_documentation
    setrun
