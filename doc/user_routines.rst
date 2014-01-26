@@ -15,12 +15,18 @@ The calling sequence for each subroutine differs with the number of space
 dimensions.  The sample calling sequences shown below are for one space
 dimension.  
 
+The subroutines described below have default versions in the
+corresponding library and the `Makefile` can point to these if 
+application-specific versions are not needed.
+
 See the examples in the following directories for additional samples:
 
 * `$CLAW/classic/examples`
 * `$CLAW/amrclaw/examples`
 * `$CLAW/geoclaw/examples`
 
+You can also browse from the :ref:`galleries` to the `README` file for an
+example and then to the source code for the application-specific codes.
 
 .. _user_qinit:
 
@@ -29,7 +35,12 @@ Specifying the initial conditions
 
 Calling sequence in 1d::
 
-      subroutine qinit(meqn,mbc,mx,xlower,dx,q,maux,aux)
+    subroutine qinit(meqn,mbc,mx,xlower,dx,q,maux,aux)
+
+.. comment 
+
+See the :ref:`qinit_defaults` for other calling sequences and the proper
+declaration of input/output parameters.
 
 Typically every application directory contains a file `qinit.f` or
 `qinit.f90` that sets the initial conditions, typically in a loop such as::
@@ -145,6 +156,9 @@ sequence::
 
     subroutine setaux(mbc,mx,xlower,dx,maux,aux)
 
+See the :ref:`setaux_defaults` for other calling sequences and the proper
+declaration of input/output parameters.
+
 If adaptive refinement is being used, then every time a new grid patch is
 created at any refinement level this subroutine will be called to fill in
 the corresponding `aux` arrays.  For a sample, see
@@ -158,7 +172,22 @@ them each time step is in the routine `b4step` described below.
 Using `b4step` for work to be done before each time step
 --------------------------------------------------------
 
-Describe.
+The routine `b4stepN` is called in `N` space dimensions (`N=1,2,3`) just
+before a time step is taken (and after ghost cells have been filled by the
+boundary conditions).  The library version of this routine does
+nothing, but this can be modified to do something prior to every time step.
+
+In one dimension the calling sequence is::
+
+          subroutine b4step1(mbc,mx,meqn,q,xlower,dx,t,dt,maux,aux)
+
+See the :ref:`b4step_defaults` for other calling sequences and the proper
+declaration of input/output parameters.
+
+For example, in `$CLAW/amrclaw/examples/advection_2d_swirl` the advection
+equation is solved with an advection velocity that varies in time as well as
+space.  This is initialized for each grid patch in `setaux`, but is adjusted
+each time step in `b4step2`.
 
 .. _user_src:
 
@@ -177,17 +206,64 @@ space dimensions that takes a single time step on the equation
 On output the `q` array should have been updated by using the input values
 as initial data for a single step of length `dt` starting at time `t`.
 
+See the :ref:`src_defaults` for other calling sequences and the proper
+declaration of input/output parameters.
+
 The library version of `srcN` does nothing.  If you copy this to an
 application directory and modify for your equation, you must modify the
 `Makefile` to point to the local version.  You must also set the
 `source_split` parameter in `setrun.py` (see :ref:`setrun`) to either
-`godunov` or `"strang"`.  In the former case, the 1st order Godunov
+`"godunov"` or `"strang"`.  In the former case, the 1st order Godunov
 splitting is used (after each time step on the homogenous 
 hyperbolic equation, a time step of the same length is taken on the source
 terms).  In the latter case the 2nd order Strang splitting is used: the time
 step on the hyperbolic part is both preceeded and followed by
 a time step of half the length on the source terms.
 
+For an example where source terms are used, see
+`$CLAW/classic/examples/acoustics_2d_radial/1drad` where a one-dimensional
+acoustic equation with a geometric source term is solved in order to provide
+a reference solution for the two-dimensional radially symmetric problem
+solved in `$CLAW/classic/examples/acoustics_2d_radial`.
+
+
+.. _user_src1d:
+
+Using `src1d` for source terms with AMRClaw
+--------------------------------------------------------
+
+When the AMRClaw code is used for a problem in 2 or 3 dimensions with source
+terms, then a subroutine `srcN` must be provided as described above.  In
+addition, for the AMR procedure to work properly it is also necessary to
+provide another subroutine `src1d` with calling sequence::
+
+    subroutine src1d(meqn,mbc,mx1d,q1d,maux,aux1d,t,dt)
+
+See the :ref:`src1d_defaults` for other calling sequences and the proper
+declaration of input/output parameters.
+
+This routine should be a simplified version of `src2` or `src3` that takes a
+one-dimensional set of data in `q1d` rather than a full 2- or 3-dimensional 
+array of data.  The input array `aux1d` has the corresponding set of
+auxiliary variables in case these are needed in stepping forward with the
+source terms.
+
+If the source terms depend only on `q`, it should be easy to 
+adapt src2 to create this routine, simply by looping over `i=1:mx1d` rather
+than over a multi-dimensional array.
+
+This routine is used in computing adjustments around a fine grid patch that
+are needed in order to maintain global conservation after values in a
+coarser grid cell have been overwritten with the average of the more
+accurate fine grid values.  Adjustment of the coarse grid values in the
+cells bordering this patch is then required to maintain conservation.  
+This requires solving a set of Riemann problems between fine-grid and
+coarse-grid values around the edge of the patch and `src1d` is used in
+advancing coarse grid values to intermediate time steps.
+
+The code may work fine without applying source terms in this
+context, so using the dummy library routine `src1d` might be 
+successful even when source terms are present. 
 
 
 

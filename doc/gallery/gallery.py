@@ -344,7 +344,7 @@ def make_geoclaw():
 
 
 def make_fvmbook():
-    gallery = Gallery("Gallery of `FVMHP book <http://www.clawpack.org/book>`_ applications")
+    gallery = Gallery("Gallery of :ref:`fvmbook` applications")
     plotdir = '_plots'
 
     #----------------------------------------------

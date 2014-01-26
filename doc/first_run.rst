@@ -15,7 +15,8 @@ That's it.  For next steps with PyClaw, see :ref:`basics`.
 **Using Classic.**
 First ensure that you have :ref:`setenv`.
 A simple 1-dimensional acoustics equations can be solved
-using the code in `$CLAW/classic/examples/acoustics_1d_example1`, as
+using the code in `$CLAW/classic/examples/acoustics_1d_example1
+<_static/classic/examples/acoustics_1d_example1/README.html>`__, as
 illustrated in :ref:`gallery_classic_amrclaw`.
 
 Move to this directory via::

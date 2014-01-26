@@ -2,8 +2,19 @@
 .. _testing:
 
 ===================================================================
-Regression tests
+Testing your installation
 ===================================================================
+
+PyClaw
+------
+
+Regression tests can be performed via::
+
+    cd $CLAW/pyclaw
+    nosetests
+
+Fortran codes
+-------------
 
 Many repositories have a subdirectory named `tests` that contain a few
 regression tests that run very quickly and check that a few numbers
@@ -17,10 +28,5 @@ will run several tests and report the results.
 
 More extensive tests can be performed by running all of the examples in the
 `examples` directory and comparing the resulting plots against those
-archived in the :ref:`galleries`.  This can be done, for example in
-`amrclaw`, via::
+archived in the :ref:`galleries`.  See also :ref:`regression`.
 
-    cd $CLAW/amrclaw/examples
-    make tests
-
-This takes much longer to run. 

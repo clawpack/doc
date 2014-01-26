@@ -4,6 +4,11 @@
 Installation instructions
 **************************************
 
+Please `register
+<http://depts.washington.edu/clawpack/register/index.html>`_ if you have not
+already done so.  This is purely optional, but is useful in helping us track
+the extent of usage.
+
 You may:
 
 * :ref:`install_clawpack`
@@ -39,8 +44,8 @@ Install all Clawpack packages
 ---------------------------------------
 First, download a tar file of the latest release:
 
-* `https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/5.0.0rc-beta/clawpack-rc-beta.tar.gz>`_
+* `https://github.com/clawpack/clawpack/releases/download/v5.0.0/clawpack-5.0.0.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/v5.0.0/clawpack-5.0.0.tar.gz>`_
 
 (See :ref:`previous` for older versions and :ref:`clawpack_components` for a
 list of what's included in this tar file.)
@@ -48,12 +53,12 @@ list of what's included in this tar file.)
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
 
-    tar -xzvf clawpack-rc-beta.tar.gz
+    tar -xzvf clawpack-5.0.0.tar.gz
 
 
 Then move into the top level directory::
 
-    cd clawpack-rc-beta
+    cd clawpack-5.0.0
 
 Next install the Python components of Clawpack::
 
@@ -230,3 +235,5 @@ archived results.  The tests should run in a few seconds.
 
 There are similar `tests` subdirectories of `$CLAW/amrclaw` and
 `$CLAW/geoclaw` to do quick tests of these codes.
+
+See also :ref:`testing`.

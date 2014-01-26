@@ -61,6 +61,7 @@ Fortran and Python codes:
    user_routines
    openmp
    python
+   notebooks
    makefiles
    application_documentation
    setrun
@@ -165,6 +166,7 @@ Bibliography
 .. toctree::
    :maxdepth: 1
 
+   fvmbook
    biblio
 
 

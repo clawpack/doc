@@ -24,6 +24,9 @@ GeoClaw
 * :ref:`sealevel`
 * :ref:`manning`
 * :ref:`tsunamidata`
+* `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
+  to relevant papers and sample codes based on the Clawpack 4.x
+  version of GeoClaw.
 
 Overview
 --------

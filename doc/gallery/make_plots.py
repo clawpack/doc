@@ -1,8 +1,9 @@
 """
-Performs 'make .plots'
+Performs 'make all' 
 in each directory to create sample results for webpage.
 
-First look for  'make_all.sh', which might do other things as well.
+## Deprecated: First look for  'make_all.sh', which might do other things as well.
+## Add an all target to Makefile to override the default.
 
 Sends output and errors to separate files to simplify looking for errors.
 """
@@ -92,27 +93,30 @@ def make_plots(examples_dir = '.'):
         ferr.write("\n=============================================\n")
 
         os.chdir(directory)
-        if os.path.isfile('make_all.sh'):
-            print "Running 'bash make_all.sh' in ", directory
-            fout.write("Running 'bash make_all.sh'\n ")
-        else:
-            print "Running 'make .plots' in ", directory
-            fout.write("Running 'make .plots'\n ")
 
         # flush I/O buffers:
         fout.flush()
         ferr.flush()
 
-    
-        if os.path.isfile('make_all.sh'):
-            job = subprocess.Popen(['bash','make_all.sh'], \
-                      stdout=fout,stderr=ferr)
-            return_code = job.wait()
-        else:
-            job = subprocess.Popen(['make','.plots'], \
-                      stdout=fout,stderr=ferr)
-            return_code = job.wait()
+        if 0:
+            # deprecated... now 'make all' should always work
+            if os.path.isfile('make_all.sh'):
+                job = subprocess.Popen(['bash','make_all.sh'], \
+                          stdout=fout,stderr=ferr)
+                return_code = job.wait()
+            elif 'all:' in open('Makefile').read():
+                job = subprocess.Popen(['make','all'], \
+                          stdout=fout,stderr=ferr)
+                return_code = job.wait()
+            else:
+                job = subprocess.Popen(['make','.plots'], \
+                          stdout=fout,stderr=ferr)
+                return_code = job.wait()
 
+        job = subprocess.Popen(['make','all'], \
+                  stdout=fout,stderr=ferr)
+        return_code = job.wait()
+                
         if return_code == 0:
             print "Successful run\n"
             goodlist_run.append(directory)
