@@ -7,15 +7,25 @@ IPython notebook examples
 The `IPython notebook <http://ipython.org/notebook.html>`_
 is a very nice platform for illustrating Clawpack examples.
 
-TODO: Give some tips on using and creating notebooks.
+If you have used Clawpack with the IPython notebook, please send us a link
+or submit a pull request to the `apps repository <http://github.com/clawpack/apps>`_.
+The links below will take you to the nbviewer site, where you can view
+the notebooks as html.  You can also play animations in them and interact
+with some plots, but to actually run the code yourself you should click
+the download link at the top-right of each nbviewer page.
+
+You can find demonstrations of how to set up animated results in some of the
+notebooks below.  Source for all of these notebooks can also be found
+`here <https://github.com/clawpack/apps/tree/master/notebooks>`_.
 
 Examples using PyClaw:
 
-* `<http://nbviewer.ipython.org/8332861>`_
-* `<http://nbviewer.ipython.org/8333043>`_
+* `A quick introduction to PyClaw <http://nbviewer.ipython.org/8332861>`_
+* `A 2D fluid dynamics example <http://nbviewer.ipython.org/8333043>`_
+* `Stegotons: solitary waves arising in non-dispersive periodic media <http://nbviewer.ipython.org/gist/ketch/8554686>`_
 * More to come 
 
 Examples using the Fortran code:
 
-* `<http://nbviewer.ipython.org/gist/rjleveque/8328720>`_
+* `Demo of running the Classic Clawpack Fortran code and producing an animation of results <http://nbviewer.ipython.org/gist/rjleveque/8328720>`_
 * More to come illustrating AMRClaw and GeoClaw
