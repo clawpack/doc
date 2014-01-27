@@ -27,5 +27,6 @@ Examples using PyClaw:
 
 Examples using the Fortran code:
 
-* `Demo of running the Classic Clawpack Fortran code and producing an animation of results <http://nbviewer.ipython.org/gist/rjleveque/8328720>`_
-* More to come illustrating AMRClaw and GeoClaw
+* `Demo of running the code and producing an animation of results <http://nbviewer.ipython.org/gist/rjleveque/8328720>`_
+* `Demo of AMRClaw with adjustment of runtime and plotting parameters <http://nbviewer.ipython.org/gist/rjleveque/8642159>`_ 
+* More to come 

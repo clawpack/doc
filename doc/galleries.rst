@@ -5,6 +5,7 @@
 Galleries of all Clawpack applications
 =======================================
 
+See also :ref:`notebooks`.
 
 .. toctree::
    :maxdepth: 2
