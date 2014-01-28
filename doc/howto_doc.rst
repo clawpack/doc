@@ -7,6 +7,10 @@ Guide for updating this documentation
 The restructured text files are in the `clawpac/doc
 <https://github.com/clawpack/doc>`_ repository in `$CLAW/doc/doc`.
 
+Before proceeding, first make sure other repositories are checked out to
+master, since some pages now have literalinclude's that bring in code 
+(e.g. setaux_defaults.rst, etc).
+
 To create html files::
 
     cd $CLAW/doc/doc
