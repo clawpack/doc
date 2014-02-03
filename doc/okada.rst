@@ -68,6 +68,11 @@ modeling of the resulting seafloor deformation may not be justified.
 In addition to the parameters above, the Okada model also requires an elastic
 parameter, the Poisson ratio, which is usually taken to be 0.25.
 
+.. warning:: The next two paragraphs are out of date and the geotools
+   collection of tools is being updated and should be improved when 5.1 is 
+   released.  Some tools are now found in the directory
+   `$CLAW/geoclaw/src/python/geoclaw/`.
+
 The GeoClaw routine `$CLAW/python/pyclaw/geotools/okada2.py` available
 starting in Version 4.6.3, is an improved version of
 `$CLAW/python/pyclaw/geotools/okada.py` that allows specifying whether the

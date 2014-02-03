@@ -53,7 +53,7 @@ The recognized topotypes are:
     each point even though the points are required to be equally spaced.
     Many data sets come this way, but note that you can convert a file of
     this type to one of the more compact types below using
-    `pyclaw.geotools.topotools.converttopotype(inputfile, outputfile,
+    `clawpack.geoclaw.topotools.converttopotype(inputfile, outputfile,
     topotypein=1, topotypeout=2, nodata_value=None)`.
 
 

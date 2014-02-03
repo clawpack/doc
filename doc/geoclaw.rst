@@ -12,6 +12,8 @@ GeoClaw
    :ref:`license` for more details and :ref:`geohints` for tips on
    exercising appropriate care in using the code.
 
+*Note:*  Several improvements to GeoClaw are still under development and
+should appear in Clawpack 5.1.
 
 **See also:**
 

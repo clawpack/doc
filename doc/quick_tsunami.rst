@@ -11,6 +11,10 @@ Quick start guide for tsunami modeling
    purpose, and no liability on the part of the authors.  See the
    :ref:`license` for more details.
 
+.. warning:: This section is out of date and should be cleaned up and
+   improved when 5.1 is released.  Some tools are now found in the directory
+   `$CLAW/geoclaw/src/python/geoclaw/`.
+
 TODO: Need to change all `setrun` parameters to new 5.0 names in this section!
 
 This is a brief outline of how to set up and run GeoClaw to model a real
@@ -149,7 +153,7 @@ line for future reference.  There's a Python script available if you have
 Clawpack installed::
 
     $ python
-    >>> from pyclaw.geotools import topotools
+    >>> from clawpack.geoclaw import topotools
     >>> topotools.swapheader('npacific-1257.asc','npacific.asc')
     >>> quit()
 
@@ -189,7 +193,7 @@ longitude value in eastern hemisphere coordinates rather than western.
 If you want to examine the grids you have obtained, you can use the
 following in Python::
 
-    from pyclaw.plotters import geoplot
+    from clawpack.visclaw import geoplot
 
     T = geoplot.TopoPlotData('npacific.asc')
     T.cmin = -5000.
@@ -298,7 +302,7 @@ the actual slip in an earthquake, it is generally considered to be accurate
 enough.
 
 In GeoClaw there are some Python tools in
-`$CLAW/python/pyclaw/geotools/okada.py` for applying the Okada model and
+$CLAW/geoclaw/src/python/geoclaw/okada.py` for applying the Okada model and
 creating `dtopo` files from given source parameters.
 
 .. seealso:: :ref:`okada` contains a better description.
