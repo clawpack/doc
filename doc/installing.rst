@@ -167,11 +167,8 @@ and Clawpack itself is to use the :ref:`vm`.
 **Cloud Computing.**
 
 * :ref:`pyclaw` can be installed and run in the cloud for free on 
-  http://wakari.io or http://cloud.sagemath.com.
+  http://wakari.io or http://cloud.sagemath.com; see :ref:`cloud`.
 * All of Clawpack can be run on AWS using the :ref:`aws`.
-
-.. Broken link:  should work!
-.. Another alternative is to run Clawpack on the Cloud, see :ref:`aws`.
 
 
 
