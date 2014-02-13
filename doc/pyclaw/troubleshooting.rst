@@ -38,3 +38,13 @@ ordering, for compatibility with the Fortran routines and PETSc.  Ordinarily,
 this is handled automatically when you create a State or Solution object.
 If you are manually creating arrays, be sure to pass the flag 'F' to specify
 Fortran ordering.
+
+Installation
+************
+When installing Clawpack, if you get an error message saying that
+lblas or llapack is not found, please update your installation of Numpy
+to at least version 1.8.  You can do this via::
+
+    pip install -U numpy
+
+Then try the installation again.
