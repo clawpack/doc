@@ -88,8 +88,8 @@ Papers describing the Clawpack software and algorithms
 .. [LeVeque96]
    R. J. LeVeque, 1996. 
    `High-resolution conservative algorithms for advection in
-  incompressible flow,
-  <http://faculty.washington.edu/rjl/pubs/hiresadv/index.html>`_ ::
+   incompressible flow,
+   <http://faculty.washington.edu/rjl/pubs/hiresadv/index.html>`_ ::
 
         @article{LeVeque1996,
           author="R. J. LeVeque",
