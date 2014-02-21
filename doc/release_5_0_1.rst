@@ -5,6 +5,8 @@
 Release 5.0.1
 ==========================
 
+Clawpack 5.0.1rc-alpha release candidate posted on Feb 21, 2014.
+
 Clawpack 5.0.1 was released on ??.  See :ref:`installing`.
 
 
