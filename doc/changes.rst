@@ -12,6 +12,7 @@ Clawpack 5.x
 * For changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 * :ref:`release_5_0_0`
+* :ref:`release_5_0_1`
 
 
 .. _new_in_claw4x:
