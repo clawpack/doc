@@ -1,13 +1,13 @@
 
-.. _release_5_0_1:
+.. _release_5_1_0:
 
 ==========================
-Release 5.0.1
+Release 5.1.0
 ==========================
 
-Clawpack 5.0.1rc-alpha release candidate posted on Feb 21, 2014.
+Clawpack 5.1.0rc-alpha release candidate posted on Feb 
 
-Clawpack 5.0.1 was released on ??.  See :ref:`installing`.
+Clawpack 5.1.0 was released on ??.  See :ref:`installing`.
 
 
 Changes to classic
