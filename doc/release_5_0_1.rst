@@ -59,7 +59,55 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
-* Change gauge output to avoid underflow in printing.
+* Changed gauge output to avoid underflow in printing.
+
+* Major change to the way moving topography (dtopo) is handled to correct
+  problems observed with earlier versions of GeoClaw in which the moving
+  topography was not always tracked properly.  A number of other
+  improvements were also made to the way topography more generally is
+  handled.  Some improvements:
+
+    * Multiple dtopo files can be specified with overlapping time ranges and
+      spatial extent.
+    * Each dtopo file now results in the automatic creation of a topo array
+      at the same resolution as the dtopo array that is updated before each
+      time step so that it contains the proper topography plus dtopo.  
+      These arrays remain after the dtopo stops moving and contain the final
+      topography at the final time.  This avoids issues where dtopo might
+      have been specified at much finer resolution than the topo files. (In
+      earlier versions, the topo arrays were updated to incorporate the
+      final topo+dtopo but only stored at the resolution of the original
+      topo files.)
+    * The routine for integrating the bilinear function defined by all
+      topo arrays over a grid cell to compute `aux(1,i,j)`  has been improved 
+      by making it a recursive function that can handle an arbitrary number
+      of nested topo grids (including those created automatically from dtopo
+      grids).  Previous versions died if there were more than 4 nested topo
+      grids.
+
+* Several changes to the `Makefile` for a GeoClaw run are required because
+  of refactoring of this code.  You must:
+
+    * Remove the line ::
+
+         $(GEOLIB)/dtopo_module.f90 \
+
+    * Replace the lines ::
+
+          $(GEOLIB)/movetopo.f \
+          $(GEOLIB)/cellgridintegrate.f \
+
+      by ::
+
+          $(GEOLIB)/topo_update.f90 \
+          $(GEOLIB)/cellgridintegrate2.f \
+
+      For an example, see the changes made to
+      `$CLAW/geoclaw/examples/tsunami/chile2010/Makefile`,
+
+  As always, you should do `make new` in your application directory
+  after updating the version.
+
 
 See `geoclaw diffs
 <https://github.com/clawpack/geoclaw/compare/eefc8e4ff...master>`_

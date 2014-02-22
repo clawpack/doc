@@ -158,6 +158,9 @@ Topography displacement files
    A better version of this code is currently being developed, but for now
    use with caution!
 
+   This has been fixed in Clawpack 5.1.0.
+
+
 For tsunami generation a file *dtopo* is generally used to specify the
 displacement of the topography relative to that specified in the topo files.
 
@@ -184,6 +187,11 @@ Currently two formats are supported for this file:
 The Okada model can be used to generate *dtopo* files from fault parameters,
 as described in :ref:`okada`. 
 
+Note that if the topography is moving, it is important to insure that the
+time step is small enough to capture the motion.  Starting in Version 5.1.0,
+there is a new parameter that can be specified in `setrun.py`
+to limit the size time step used during the time when topography is moving. 
+See :ref:`setrun_topo`.
 
 .. _qinit_file:
 
