@@ -5,9 +5,8 @@
 Release 5.1.0
 ==========================
 
-Clawpack 5.1.0rc-alpha release candidate posted on Feb 
 
-Clawpack 5.1.0 was released on ??.  See :ref:`installing`.
+Clawpack 5.1.0 was released on March 2, 2014.  See :ref:`installing`.
 
 
 Changes to classic
@@ -108,6 +107,19 @@ Changes to geoclaw
   As always, you should do `make new` in your application directory
   after updating the version.
 
+* A new parameter has been added that can be set in `setrun.py`::
+
+    rundata.dtopo_data.dt_max_dtopo = 0.2
+
+  for example will specify that the maximum time step allowed on the
+  coarsest level is 0.2 seconds during the time when the topography is
+  moving.  This avoids issues where the time step selected by the CFL
+  condition is much larger than the time scale over which the topography
+  changes.  You must also set `rundata.clawdata.dt_initial` to the same
+  value (or smaller) to insure that the first time step is sufficiently small.
+
+
+    
 
 See `geoclaw diffs
 <https://github.com/clawpack/geoclaw/compare/eefc8e4ff...master>`_

@@ -228,7 +228,10 @@ bathymetry) data files in GeoClaw.
    the maximum time step allowed during the time interval over which the 
    topography is moving.  This is assumed to start at time `t0` and to
    extend to the maximum time that any of the dtopo files specified is
-   active.
+   active.  This avoids issues where the time step selected by the CFL
+   condition is much larger than the time scale over which the topography
+   changes.  You must also set `rundata.clawdata.dt_initial` to the same
+   value (or smaller) to insure that the first time step is sufficiently small.
 
 .. _setrun_qinit:
 
