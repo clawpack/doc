@@ -14,9 +14,13 @@ import os
 #claw_html_root='http://localhost:50005'     
 claw_html_root='..'
 
-# Determine PyClaw directory:
 from clawpack import pyclaw
-clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-1])+'/')
+# Determine Clawpack directory:
+try:
+    clawdir_default = os.environ['CLAW']+'/'
+except KeyError:
+    clawdir_default = os.path.join('/'.join(pyclaw.__path__[0].split('/')[:-1])+'/')
+    print 'CLAW environment variable not set; using '+clawdir_default
 
 # Location for gallery files:
 gallery_dir_default = '.'#os.path.join(clawdir_default,'doc/gallery')  
@@ -108,7 +112,7 @@ class Gallery(object):
 
                 if not os.path.exists(static_dir+gitem.appdir):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
-                print "+++ static_dir = ",static_dir
+                print "+++ static_dir = ",static_dir+gitem.appdir
 
                 if copy_plots:
                     os.system('cp -r %s/_plots %s' % (self.clawdir+gitem.appdir, \
