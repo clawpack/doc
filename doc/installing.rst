@@ -14,6 +14,7 @@ You may:
 * :ref:`install_clawpack`
 * :ref:`install_pyclaw`
 * :ref:`install_no-pyclaw`
+* :ref:`install_pyclaw_parallel`
 * :ref:`install_dev`
 
 Note that any of these installations also includes :ref:`visclaw` for plotting.
@@ -28,8 +29,8 @@ See also:
 
 .. _install_pyclaw:
 
-Install only PyClaw
---------------------
+Install only PyClaw (serial)
+----------------------------
 If you wish to install just PyClaw, everything is handled by pip::
 
     pip install clawpack
@@ -111,8 +112,8 @@ Next go to :ref:`first_run`.
 
 .. _install_no-pyclaw:
 
-Install without compiling PyClaw
------------------------------------
+Install other packages without compiling PyClaw
+-----------------------------------------------
 If you get errors in the compilation step when using `pip install` or
 `python setup.py install`, please `let us know <claw-users@googlegroups.com>`_
 or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
@@ -142,6 +143,19 @@ If not then either your `$PYTHONPATH` environment variable is not set
 properly or the required symbolic links were not created.
 
 Next go to :ref:`first_run`.
+
+.. _install_pyclaw_parallel:
+
+Install only PyClaw (for running in parallel)
+------------------------------------------------
+First, install PyClaw as explained above.  Then see the install instructions
+for :ref:`parallel`.
+
+Alternatively, you may use the following shell scripts (assembled by Damian San Roman)
+to install everything:
+
+* Linux machine or Beowulf Cluster: https://gist.github.com/sanromd/9112666
+* Mac OS X: https://gist.github.com/sanromd/10374134
 
 
 .. _install_dev:
