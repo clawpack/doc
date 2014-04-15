@@ -60,7 +60,7 @@ current context, e.g. in a *beforeframe* function.
 .. attribute:: q : 
 
     q array for current frame, so for example the in a scalar 2d problem the
-    value in the (i,j) cell would be *current_data.q[i,j,0]* (remember that
+    value in the (i,j) cell would be *current_data.q[0,i,j]* (remember that
     Python always indexes starting at 0).
 
     In an AMR calculation q will be from the last patch plotted.  
@@ -80,7 +80,7 @@ current context, e.g. in a *beforeframe* function.
 
     array of the variable actually plotted most recently, e.g. if
     *plotitem.plot_var == 0* then in 2d *current_data.var[i,j] ==
-    current_data.q[i,j,0]*.
+    current_data.q[0,i,j]*.
 
 .. attribute:: level : 
 
