@@ -92,14 +92,14 @@ Indices and tables
 
 Citing
 =======================
-If you use PyClaw in work that will be published, please cite the software::
+If you use PyClaw in work that will be published, please cite the Clawpack software::
 
-    @misc{pyclaw,
-    title={PyClaw software}, 
-    url={http://numerics.kaust.edu.sa/pyclaw}, 
-    author={Mandli, Kyle T. and Ketcheson, David I. and others}, 
-    note={Version x.y}
-    year={2011}}
+    @misc{clawpack,
+        title={Clawpack software}, 
+        author={Clawpack Development Team}, 
+        url={http://www.clawpack.org}, 
+        note={Version x.y},
+        year={2014}}
 
 and the paper::
 
@@ -127,7 +127,7 @@ If you use the Classic (2nd-order) solver, you may also wish to cite::
 
 If you use the SharpClaw (high order WENO) solver, you may also wish to cite::
 
-    @article{Ketcheson2011,
+    @article{KetParLev13,
             Author = {Ketcheson, David I. and Parsani, Matteo and LeVeque,
             Randall J.},
             Journal = {SIAM Journal on Scientific Computing},
@@ -136,5 +136,4 @@ If you use the SharpClaw (high order WENO) solver, you may also wish to cite::
             Title = {{High-order Wave Propagation Algorithms for Hyperbolic Systems}},
             Volume = {35},
             Year = {2013}}
-
 

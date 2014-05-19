@@ -110,17 +110,17 @@ If you use Clawpack in publications, please cite the following::
         title={Clawpack software}, 
         author={Clawpack Development Team}, 
         url={http://www.clawpack.org}, 
-        note={Version x.y}
-        year={2013}}
+        note={Version x.y},
+        year={2014}}
 
-Please fill in the version number that you used.
+Please fill in the version number that you used, and its year.
 
 Please also cite at least one of the following regarding the algorithms used
 in Clawpack (click the links for bibtex citations):
 
-* Basic algorithms in 1d and 2d:  [LeVeque97]_, [LeVeque-FVMHP]_
+* Classic algorithms in 1d and 2d:  [LeVeque97]_, [LeVeque-FVMHP]_
 
-* 3d algorithms: [LangsethLeVeque00]_
+* 3d classic algorithms: [LangsethLeVeque00]_
 
 * AMR: [BergerLeVeque98]_
 
@@ -128,7 +128,10 @@ in Clawpack (click the links for bibtex citations):
 
 * GeoClaw: [BergerGeorgeLeVequeMandli11]_, [LeVequeGeorgeBerger]_
 
-See also :ref:`pyclaw` for PyClaw citations.
+* High-order method-of-lines algorithms (SharpClaw): [KetParLev13]_
+
+* PyClaw: [KetchesonMandliEtAl]_
+
 
 .. _funding:
 
