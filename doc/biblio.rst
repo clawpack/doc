@@ -150,6 +150,16 @@ Papers describing the Clawpack software and algorithms
    High-order Wave Propagation Algorithms for Hyperbolic Systems,
    *SIAM Journal on Scientific Computing*, 35(1):A351-A377 (2013)
 
+    @article{KetParLev13,
+            Author = {Ketcheson, David I. and Parsani, Matteo and LeVeque,
+            Randall J.},
+            Journal = {SIAM Journal on Scientific Computing},
+            Number = {1},
+            Pages = {A351--A377},
+            Title = {{High-order Wave Propagation Algorithms for Hyperbolic Systems}},
+            Volume = {35},
+            Year = {2013}}
+
 .. [KetchesonMandliEtAl]
    David I. Ketcheson, Kyle T. Mandli, Aron J. Ahmadia, Amal Alghamdi, Manuel
    Quezada de Luna, Matteo Parsani, Matthew G. Knepley, and Matthew Emmett, 2012,
