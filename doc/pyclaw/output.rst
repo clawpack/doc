@@ -1,9 +1,11 @@
 :group: pyclaw
 
+.. contents::
+
 .. _output:
 
 ***********************
-Advanced output options
+PyClaw output
 ***********************
 PyClaw supports options to output more
 than just the solution :math:`q`.  It can provide:
@@ -108,3 +110,34 @@ To write some other quantity, simply provide a function
     ...    return q[1,:,:]/q[0,:,:]
 
     >>> solver.compute_gauge_values = f
+
+
+Logging
+=======
+By default, PyClaw prints a message to the screen each time it writes
+an output file.  This message is also writing to the file `pyclaw.log`
+in the working directory.  There are additional warning or error messages
+that may be sent to the screen or to file.  You can adjust the logger levels
+in order to turn these messages off or to get more detailed debugging
+information.
+
+Logging to the screen (stdout) is managed by the controller.  To turn it off
+(for instance, if you are running in an IPython notebook, and want plots
+to appear immediately below your code), do::
+
+    claw.verbosity = 0
+
+(here it's assumed that you've followed the convention from the examples
+and used `claw` to refer to your controller object).
+
+When running on a supercomputer, logging to file can be problematic because
+the associated I/O can slow down the entire computation (this is true on Shaheen).
+To turn off all logging (both to screen and to file), you need to change the
+level of the root logger::
+
+    import logging
+    logger = logging.getLogger('pyclaw')
+    logger.setLevel(logging.CRITICAL)
+
+Since we don't use `CRITICAL` logger messages in PyClaw, this has the effect
+of turning the loggers off.
