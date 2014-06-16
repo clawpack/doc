@@ -121,23 +121,37 @@ that may be sent to the screen or to file.  You can adjust the logger levels
 in order to turn these messages off or to get more detailed debugging
 information.
 
-Logging to the screen (stdout) is managed by the controller.  To turn it off
-(for instance, if you are running in an IPython notebook, and want plots
-to appear immediately below your code), do::
+The controller provides one means to managing the logging with the
+:py:attr:`~pyclaw.controller.verbosity` parameter and is provided as an easy
+interace to control the console output (that which is shown on screen).  Valid
+values for :py:attr:`~clawpack.pyclaw.controller.verbosity` are:
 
-    claw.verbosity = 0
-
-(here it's assumed that you've followed the convention from the examples
-and used `claw` to refer to your controller object).
+===========  ================
+Verbosity     Message Level    
+-----------  ----------------
+0             Critical - There are no logging messages in PyClaw that correspond
+              to this level effectively silencing the loggers.  May be useful in
+              an IPython notebook for instance if you want the plots to appear 
+              immediately below your code.
+1             Error - These are logged by the IO system to indicate that 
+              something has gone wrong with either reading or writing a file.
+2             Warning - There are no warning level logger messages.
+3             Info - Additional IO messages are printed and some minor messages 
+              dealing with hitting the end time requested.
+4             Debug - If this level is set all logger output is displayed.  This
+              includes the above and detailed time step information for every 
+              time step (includes CFL, current dt and whether a time step is 
+              rejected).
+===========  ================
 
 When running on a supercomputer, logging to file can be problematic because
-the associated I/O can slow down the entire computation (this is true on Shaheen).
-To turn off all logging (both to screen and to file), you need to change the
+the associated I/O can slow down the entire computation (this is true on 
+Shaheen). To turn off all logging (both to screen and to file), you need to change the
 level of the root logger::
 
     import logging
     logger = logging.getLogger('pyclaw')
     logger.setLevel(logging.CRITICAL)
 
-Since we don't use `CRITICAL` logger messages in PyClaw, this has the effect
-of turning the loggers off.
+Again since we don't use `CRITICAL` logger messages in PyClaw, this has the 
+effect of turning the loggers off. 
