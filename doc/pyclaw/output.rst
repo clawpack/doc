@@ -129,10 +129,10 @@ values for :py:attr:`~clawpack.pyclaw.controller.verbosity` are:
 ===========  ================
 Verbosity     Message Level    
 -----------  ----------------
-0             Critical - There are no logging messages in PyClaw that correspond
-              to this level effectively silencing the loggers.  May be useful in
-              an IPython notebook for instance if you want the plots to appear 
-              immediately below your code.
+0             Critical - This effectively silences the logger, since there are 
+              no logging messages in PyClaw that correspond to this level.  May 
+              be useful in an IPython notebook for instance if you want the 
+              plots to appear immediately below your code.
 1             Error - These are logged by the IO system to indicate that 
               something has gone wrong with either reading or writing a file.
 2             Warning - There are no warning level logger messages.
@@ -146,8 +146,8 @@ Verbosity     Message Level
 
 When running on a supercomputer, logging to file can be problematic because
 the associated I/O can slow down the entire computation (this is true on 
-Shaheen). To turn off all logging (both to screen and to file), you need to change the
-level of the root logger::
+Shaheen). To turn off all logging (both to screen and to file), you need to 
+change the level of the root logger::
 
     import logging
     logger = logging.getLogger('pyclaw')
