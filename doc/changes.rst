@@ -13,6 +13,8 @@ Clawpack 5.x
 
 * :ref:`release_5_0_0`
 * :ref:`release_5_1_0`
+* :ref:`changes_to_master`
+* :ref:`release_5_2_0`  
 
 
 .. _new_in_claw4x:
