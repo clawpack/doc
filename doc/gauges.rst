@@ -69,11 +69,34 @@ interpolation to the gauge locations from the 4 nearest cell centers.
 If you wish to change what is output at these points, you should copy the library
 routine `dumpgauge.f` to your own directory and modify it appropriately.
 
+
+.. warning:: When doing a restart, previous gauge output is deleted unless
+   you are careful to preserve it.  See :ref:`restart_output`.
+
+
 Plotting tools
 --------------
 
 Several Python plotting tools are available to plot the gauge data, so you do not
-have to parse the file `fort.gauge` yourself.  In the `setplot` Python script you
+have to parse the file `fort.gauge` yourself.  
+
+If you want to read in the data for a particular gauge to manipulate it
+yourself, you can do, for example::
+
+    from clawpack.visclaw.data import ClawPlotData
+    plotdata = ClawPlotData()
+    plotdata.outdir = '_output'   # set to the proper output directory
+    gaugeno = 1                   # gauge number to examine
+    g = plotdata.getgauge(gaugeno)
+
+Then:
+
+* `g.t` is the array of times,
+* `g.q` is the array of values recorded at the gauges (`g.q[m,n]` is the `m`th
+  variable at time `t[n]`)
+
+
+In the `setplot` Python script you
 can specify plots that are to be done for each gauge, similar to the manner in
 which you can specify plots that are to be done for each time frame.  For example,
 to plot the component q[0] at each gauge, include in `setplot` lines of this form::
@@ -154,9 +177,6 @@ gauge.
 If you want more control over this plotting you can of course copy the function
 `plot_gauge_locations` from `pyclaw.plotters.gaugetools.py` 
 to your setplot.py file and modify at will.
-
-.. warning:: When doing a restart, previous gauge output is deleted unless
-   you are careful to preserve it.  See :ref:`restart_output`.
 
 Examples
 --------
