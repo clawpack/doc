@@ -122,7 +122,7 @@ Changes to geoclaw
     
 
 See `geoclaw diffs
-<https://github.com/clawpack/geoclaw/compare/eefc8e4ff...v5.1.0>`_
+<https://github.com/clawpack/geoclaw/compare/v5.0.0...v5.1.0>`_
 
 Changes to PyClaw
 ------------------
