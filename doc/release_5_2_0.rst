@@ -78,34 +78,11 @@ Changes to geoclaw
   can be expensive particularly when a grid cell is covered by a finer
   topography grid.
 
-* One change to the `Makefile` for a GeoClaw run is required because
-  of refactoring of this code.  You must:
+* Several changes have been made to the `fgmax` routines that are used to
+  keep a running maximum of values over the entire calculation.  
+  See :ref:`fgmax_5_2_0` for documentation on the latest version.
+  The older version is described in :ref:`fgmax`.
 
-
-    * Replace the line ::
-
-          $(GEOLIB)/fgmax_interpolate.f90 \
-
-      by ::
-
-          $(GEOLIB)/fgmax_interpolate0.f90 \
-
-      or ::
-
-          $(GEOLIB)/fgmax_interpolate1.f90 \
-
-      The latter choice will preserve the original behavior, with 
-      bilinear interpolation used to interpolate from the finite volume
-      grid centers to the fixed grid.  However, the choice 
-      `fgmax_interpolate0.f90` is now recommended.  This simply uses the
-      value in the finite volume grid cell that contains the fixed grid
-      point (0 order extrapolation) and avoids problems sometimes seen when
-      doing linear interpolation near the margins of the flow.
-
-  As always, you should do `make new` in your application directory
-  after updating the version.
-
-* Change to the way fixed grids are specified.... Describe!
 
 * Major refactoring of some of the `topotools` and `dtopotools`....Describe!
 
