@@ -15,7 +15,7 @@ Changes to classic
 * None
 
 See `classic diffs
-<https://github.com/clawpack/classic/compare/aac8471ce97...master>`_
+<https://github.com/clawpack/classic/compare/aac8471ce97...v5.1.0>`_
 
 Changes to clawutil
 -------------------
@@ -23,7 +23,7 @@ Changes to clawutil
 * Minor change for replacing a rundata object.  
 
 See `clawutil diffs
-<https://github.com/clawpack/clawutil/compare/55f81e395...master>`_
+<https://github.com/clawpack/clawutil/compare/55f81e395...v5.1.0>`_
 
 Changes to visclaw
 ------------------
@@ -33,7 +33,7 @@ Changes to visclaw
 * Added an attribute to `data.py`.
  
 See `visclaw diffs
-<https://github.com/clawpack/visclaw/compare/6669145d5bdf...master>`_
+<https://github.com/clawpack/visclaw/compare/6669145d5bdf...v5.1.0>`_
 
 Changes to riemann
 ------------------
@@ -42,7 +42,7 @@ Changes to riemann
   since LAPACK is required.
 
 See `riemann diffs
-<https://github.com/clawpack/riemann/compare/7ef4a50f84c...master>`_
+<https://github.com/clawpack/riemann/compare/7ef4a50f84c...v5.1.0>`_
 
 Changes to amrclaw
 ------------------
@@ -53,7 +53,7 @@ Changes to amrclaw
 * Several other minor fixes.
 
 See `amrclaw diffs
-<https://github.com/clawpack/amrclaw/compare/0ad5e60a38d...master>`_
+<https://github.com/clawpack/amrclaw/compare/0ad5e60a38d...v5.1.0>`_
 
 Changes to geoclaw
 ------------------
@@ -122,7 +122,7 @@ Changes to geoclaw
     
 
 See `geoclaw diffs
-<https://github.com/clawpack/geoclaw/compare/eefc8e4ff...master>`_
+<https://github.com/clawpack/geoclaw/compare/v5.0.0...v5.1.0>`_
 
 Changes to PyClaw
 ------------------
@@ -136,5 +136,5 @@ For changes in PyClaw, see the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 See `pyclaw diffs
-<https://github.com/clawpack/pyclaw/compare/875a98eea...master>`_
+<https://github.com/clawpack/pyclaw/compare/875a98eea...v5.1.0>`_
 
