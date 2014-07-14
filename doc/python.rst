@@ -34,7 +34,7 @@ Installation of required modules
 --------------------------------
 
 To effectively use the pyclaw and Clawpack plotting routines that are
-written in Python, you will need version 2.5 or greater
+written in Python, you will need version 2.7 or greater
 (but **not** 3.0 or above, which is not backwards compatible).  
 some modules that are not included in the standard Python distribution. 
 Python modules are loaded with the *import* statement in Python and a wide

@@ -34,11 +34,11 @@ repeatedly.  To exit the shell, type 'q'.  For help, type '?' or see
 
 Dependencies: Python, gfortran, numpy, and matplotlib
 --------------------------------------------------------
-PyClaw requires Python 2.5 or greater and a modern Fortran 95
+PyClaw requires Python 2.7 or greater and a modern Fortran 95
 compiler.  PyClaw is known to work with GNU gfortran 4.2 and higher and the IBM
 XLF compiler.  
 
-  * `Python <http://python.org>`_ version >= 2.5.
+  * `Python <http://python.org>`_ version >= 2.7.
   * `numpy <http://numpy.scipy.org/>`_ version >= 1.6.
   * `matplotlib <http://matplotlib.sourceforge.net/>`_ version >= 1.0.1
     (optional -- only for plotting).

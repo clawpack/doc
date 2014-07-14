@@ -212,7 +212,7 @@ some installation options.
 
 **Python:**
 
-- Python Version 2.5 or above (but **not** 3.0 or above, which is not backwards compatible)
+- Python Version 2.7 or above (but **not** 3.0 or above, which is not backwards compatible)
 - `NumPy <http://www.numpy.org/>`_  (for PyClaw/VisClaw)
 - `matplotlib <http://matplotlib.org/>`_ (for PyClaw/VisClaw)
 
