@@ -176,6 +176,7 @@ Processing and plotting fgmax output
 ------------------------------------
  
 For an example see `apps/tsunami/chile2010_fgmax` in the :ref:`apps`.   
+To obtain this, see :ref:`apps`.
     
 
 **Describe further.**

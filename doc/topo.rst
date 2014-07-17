@@ -129,22 +129,21 @@ Downloading topography files
 ----------------------------
 
 The example
-`$CLAW/apps/tsunami/chile2010
-<claw/apps/tsunami/chile2010/README.html>`_
+`$CLAW/examples/tsunami/chile2010
+<claw/examples/tsunami/chile2010/README.html>`_
 is set up to automatically download topo files via::
 
 	$ make topo
 
-See the `maketopo.py <claw/apps/tsunami/chile2010/maketopo.py.html>`_
-file in that directory.
+See the `maketopo.py` file in that directory.
 
 Other such examples will appear in the future.  
 
-Several on-line databases are available for topograpy, e.g.
+Several on-line databases are available for topograpy, see 
+:ref:`tsunamidata` for some links.
 
- * NOAA National Geophysical Data Center (NGDC)
-   `Design-a-grid <http://www.ngdc.noaa.gov/mgg/gdas/gd_designagrid.html>`_
-
+Some Python tools for working with topography files are available, see
+:ref:`topotools`.
 
 .. _topo_dtopo:
 

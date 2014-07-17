@@ -111,6 +111,7 @@ GeoClaw: For geophysical flows
    geoclaw
    geohints
    topo
+   topotools
    setrun_geoclaw
    plotting_geoclaw
    quick_tsunami
