@@ -2,11 +2,11 @@
 .. _release_5_2_0:
 
 ==========================
-Release 5.2.0 (TO APPEAR)
+Release 5.2.0 
 ==========================
 
 
-Clawpack 5.2.0 was released on ??? (To appear).  See :ref:`installing`.
+Clawpack 5.2.0 was released on July 18, 2014.  See :ref:`installing`.
 
 
 Changes to classic
@@ -80,11 +80,14 @@ Changes to geoclaw
 
 * Several changes have been made to the `fgmax` routines that are used to
   keep a running maximum of values over the entire calculation.  
-  See :ref:`fgmax_5_2_0` for documentation on the latest version.
-  The older version is described in :ref:`fgmax`.
+  See :ref:`fgmax` for documentation on the latest version.
 
 
-* Major refactoring of some of the `topotools` and `dtopotools`....Describe!
+* Major refactoring of the module
+  `$CLAW/geoclaw/src/python/geoclaw/topotools.py`.  
+  The file `$CLAW/geoclaw/tests/test_topotools.py` contains some tests of these
+  tools.  Looking at these test routines will give some ideas on how to use them.
+  More documentation is needed.
 
 * Change max number of values printed on each line of `fort.q` files to 50.
 

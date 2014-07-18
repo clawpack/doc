@@ -73,21 +73,27 @@ parameter, the Poisson ratio, which is usually taken to be 0.25.
    released.  Some tools are now found in the directory
    `$CLAW/geoclaw/src/python/geoclaw/`.
 
-The GeoClaw routine `$CLAW/python/pyclaw/geotools/okada2.py` available
-starting in Version 4.6.3, is an improved version of
-`$CLAW/python/pyclaw/geotools/okada.py` that allows specifying whether the
+The GeoClaw routine `$CLAW/geoclaw/src/python/geoclaw/okada2.py` available
+starting in Version 4.6.3, is an improved version of the original
+`okada.py` that allows specifying whether the
 latitude and longitude provided corresponds to the centroid, bottom center,
 or the top center of the fault plane (the original assumed top center).  
 The specification of other parameters has also been modified, see the
 documentation in that file.
 
-The Python module `$CLAW/python/pyclaw/geotools/dtopotools.py` (new in
-4.6.3) provides tools to convert a file specifying a collection of subfaults
+The Python module `$CLAW/geoclaw/src/python/geoclaw/dtopotools.py` 
+provides tools to convert a file specifying a collection of subfaults
 into a *dtopofile* by applying the Okada model to each subfault and adding
 the results together (valid by linear superposition of the solutions to the
 linear elastic halfspace problems).
-These still need to be cleaned up and better documented, but an example of
-the usage can be found in the new application example
-`$CLAW/apps/tsunami/chile2010b`.
+
+.. warning:
+   This module is being rewritten and the new version will be quite
+   different.
+
+.. comment:
+   These still need to be cleaned up and better documented, but an example of
+   the usage can be found in the new application example
+   `$CLAW/apps/tsunami/chile2010b`.  (See :ref:`apps`.)
 
 
