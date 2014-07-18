@@ -14,6 +14,7 @@ Overview and Getting Started:
    :maxdepth: 2
    
    about
+   changes
    installing
    first_run
    license
@@ -24,14 +25,6 @@ Overview and Getting Started:
    aws
    previous
 
-.. toctree::
-   :maxdepth: 1
-
-   changes
-   clawpack5
-   claw4x
-   claw46to50
-   claw43to46
 
 
 Examples and Applications:
