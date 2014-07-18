@@ -108,7 +108,7 @@ If you use Clawpack in publications, please cite the following::
 
     @misc{clawpack,
         title={Clawpack software}, 
-        author={Clawpack Development Team}, 
+        author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
         note={Version x.y},
         year={2014}}

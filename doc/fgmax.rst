@@ -1,5 +1,5 @@
 
-.. _fgmax:
+.. _fgmax_5_2_0:
 
 =====================
 Fixed grid monitoring
@@ -7,7 +7,8 @@ Fixed grid monitoring
 
 .. warning::
 
-   This feature is still under development and should be used with caution.
+   This feature has been modified and this documentation describes 
+   the version introduced in 5.2.0.
    The documentation is also still incomplete.
 
 GeoClaw has the capability to monitor certain quantities on a specified
@@ -20,6 +21,7 @@ hazard modeling.
 
 It is also possible to record the *arrival time* of a flow or wave at each
 point on the grid.  
+
 The "grids" do not have to be rectangular grids aligned with the
 coordinate directions, but can consist of an arbitrary list of points
 that could also be points along a one-dimensional transect or points
@@ -39,8 +41,10 @@ of monitoring maxima or arrival times.
 
 .. _fgmax_input:
 
-Input file specification
+Input file specification 
 -------------------------
+
+(changed in Clawpack 5.2.0.)
 
 The input file describing a grid of points has the following form::
 
@@ -49,13 +53,33 @@ The input file describing a grid of points has the following form::
     dt_check
     min_level_check
     arrival_tol
-    npts
-    x1 y1
-    x2 y2
-    ...
+    point_style
 
-with a total of 'npts' pairs of x-y coordinates specified.  These points
-need not line on a regular grid and can be specified in any order.
+followed by additional lines that depend on the value of `point_style`.
+
+If `point_style == 0`, an arbitrary collection of `(x,y)` points is allowed
+and all must be listed, preceeded by the number of points::
+
+    npts      # number of points
+    x1 y1     # first point
+    x2 y2     # second point
+    ...       # etc.
+
+These points need not lie on a regular grid and can be specified in any order.
+
+If `point_style == 1`, a 1-dimensional transect of points is specified by
+three lines of the form::
+
+    npts       # number of points to generate
+    x1, y1     # first point
+    x2, y2     # last point
+
+If `point_style == 2`, a 2-dimensional cartesian of points is specified by
+three lines of the form::
+
+    nx, ny     # number of points in x and y  (nx by ny grid)
+    x1, y1     # lower left corner of cartesian grid
+    x2, y2     # upper right corner of cartesian grid
 
 The output files will list values for the points in the same order as in the
 input file.  See `fgmax_processing` for some hints on processing and
@@ -105,11 +129,45 @@ Values to monitor
 
 The values to be monitored are specified by the subroutine `fgmax_values`.
 The default subroutine found in the library 
-`$CLAW/geoclaw/src/2d/shallow/fgmax_values.f90` monitors a single value
-defined roughly to be the surface elevation `h + B` in wet cells and some
-large negative number in dry cells.  
+`$CLAW/geoclaw/src/2d/shallow/fgmax_values.f90` 
+is now set up to monitor the
+depth `h` (rather than the value `eta_tilde` used in Version 5.1)
+and optionally will also monitor the speed :math:`s = \sqrt{u^2 + v^2}`
+and three  other quantities (the momentum :math:`hs`, 
+the momentum flux :math:`hs^2`, and :math:`-h`, which is useful to monitor
+the minimum depth at each point).  
 
-**Describe this better.**
+The values monitored by the default routine described above is determined
+by the value of the `fgmax_module` variable `FG_NUM_VAL`, which can be set
+to 1, 2, or 5.  This value is now read in from the data file `fgmax.data`
+and can be set by specifying the value of
+`rundata.fgmax_data.num_fgmax_val` in `setrun.py`.  
+
+Choice of interpolation procedure
+---------------------------------
+
+The library routine `geoclaw/src/2d/shallow/fgmax_interpolate.f90` has
+been improved in 5.2.0 to fix some bugs.  This routine does bilinear
+interpolation the finite volume grid centers to the fixed grid in
+order to update the maximum of values such as depth or velocity.
+
+An alternative version of this routine has been added in 5.2.0
+that does piecewise constant interpolation instead. This simply uses the
+value in the finite volume grid cell that contains the fixed grid
+point (0 order extrapolation) and avoids problems sometimes seen when
+doing linear interpolation near the margins of the flow.
+
+This routine is in `fgmax_interpolate0.f90` and is now recommended.  
+To use this routine, modify the `Makefile` in an application directory to
+replace the line ::
+
+      $(GEOLIB)/fgmax_interpolate.f90 \
+
+by ::
+
+      $(GEOLIB)/fgmax_interpolate0.f90 \
+
+
     
 
 .. _fgmax_processing:
@@ -118,6 +176,7 @@ Processing and plotting fgmax output
 ------------------------------------
  
 For an example see `apps/tsunami/chile2010_fgmax` in the :ref:`apps`.   
+To obtain this, see :ref:`apps`.
     
 
 **Describe further.**
