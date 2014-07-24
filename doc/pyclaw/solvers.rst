@@ -139,3 +139,25 @@ about the methods and attributes they provide each class.
 
 .. autoclass:: clawpack.pyclaw.classic.solver.ClawSolver
    :members:
+
+
+.. _pyclaw_clawpack_solvers_custom_BC_change:
+
+=======================================
+Change to Custom BC Function Signatures
+=======================================
+
+To allow better access to aux array data in the boundary condition functions 
+both the `qbc` and `auxbc` arrays are now passed to the custom boundary
+condition functions.  The new signature is
+
+    def my_custom_BC(state, dim, t, qbc, auxbc, num_ghost):
+        ...
+
+and should be adopted as soon as possible.  The old signature
+
+    def my_custom_BC(state, dim, t, bc_array, num_ghost):
+        ...
+
+can still be used but a warning will be issued and the old signature will not be
+supported when version 6.0 is released.
