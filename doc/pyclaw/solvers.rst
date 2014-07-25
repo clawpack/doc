@@ -160,4 +160,4 @@ and should be adopted as soon as possible.  The old signature
         ...
 
 can still be used but a warning will be issued and the old signature will not be
-supported when version 6.0 is released.
+supported when version 6.0 is released.  This was added in version 5.2.
