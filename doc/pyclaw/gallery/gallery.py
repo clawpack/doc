@@ -255,7 +255,7 @@ def make_1d():
     #----------------------------------------------
     gsec = gallery.new_section("1-dimensional shallow water equation")
     appdir = 'pyclaw/examples/shallow_1d'
-    appname = 'shallow_water_shocktube'
+    appname = 'dam_break'
     description = """Shallow water shock tube."""
     images = ('frame0000fig0', 'frame0003fig0', 'frame0006fig0')
     gsec.new_item(appdir, appname, plotdir, description, images)
