@@ -1,14 +1,12 @@
 
 .. _topotools:
 
-Topography tools in the *topotools* module
-------------------------------------------
+Python tools for working with topo and dtopo
+--------------------------------------------
 
-The module `$CLAW/geoclaw/src/python/geoclaw/topotools.py` contains a number
-of tools for manipulating and plotting topography data.
+**This describes new tools to be added in Clawpack 5.2.1**
 
-The file `$CLAW/geoclaw/tests/test_topotools.py` contains some tests of these
-tools.  Looking at these test routines will give some ideas on how to use
-them.
+ - :ref:`topotools_module` - Tools for working with topo files
+ - :ref:`dtopotools_module` - Tools for working with dtopo files
+ - :ref:`geoclaw_util_module` - Other utility functions
 
-TODO: Add more documentation.
