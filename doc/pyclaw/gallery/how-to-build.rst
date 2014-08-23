@@ -11,7 +11,7 @@ the clawpack documentation repository::
 Then run all the examples::
 
     cd doc/doc/pyclaw/gallery
-    python gallery.py
+    python make_plots.py
 
 Next generate the gallery itself::
 
