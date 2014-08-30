@@ -110,6 +110,7 @@ pygments_style = 'sphinx'
 
 sys.path.append(os.path.abspath('_themes'))
 html_theme_path = ['_themes']
+html_extra_path = ['extra_files']
 html_theme = 'flask'
 github_fork = 'clawpack'
 html_additional_pages = {'index': 'index.html'}
