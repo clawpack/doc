@@ -29,6 +29,6 @@ See  :ref:`plotting` and :ref:`setplot` for more about plotting.
 
 Python plotting tools for 3d are still under development.  For now, the
 Matlab tools from Clawpack 4.3 can still be used, see
-:ref:`matlab_plotting`.
+:ref:`matlabplots`.
 
 
