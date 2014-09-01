@@ -8,7 +8,7 @@ Compiling the Sphinx documentation locally
 
 
 For most users, the best way to view the documentation is 
-`online <http://clawpack.github.io/doc/index.html>`_.
+`online <http://clawpack.github.io/index.html>`_.
 
 The source files that create this documentation are included in the
 repository 

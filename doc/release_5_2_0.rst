@@ -5,9 +5,9 @@
 Release 5.2.0 
 ==========================
 
-
 Clawpack 5.2.0 was released on July 18, 2014.  See :ref:`installing`.
 
+Changes relative to Clawpack 5.1.0 (March 2, 2014) are shown below.
 
 Changes to classic
 ------------------
@@ -15,7 +15,7 @@ Changes to classic
 * Change max number of values printed on each line of `fort.q` files to 50.
 
 See `classic diffs
-<https://github.com/clawpack/classic/compare/v5.1.0...master>`_
+<https://github.com/clawpack/classic/compare/v5.1.0...v5.2.0>`_
 
 Changes to clawutil
 -------------------
@@ -25,7 +25,7 @@ Changes to clawutil
 * Some minor corrections.
 
 See `clawutil diffs
-<https://github.com/clawpack/clawutil/compare/v5.1.0...master>`_
+<https://github.com/clawpack/clawutil/compare/v5.1.0...v5.2.0>`_
 
 Changes to visclaw
 ------------------
@@ -33,7 +33,7 @@ Changes to visclaw
 * Several minor improvements.
  
 See `visclaw diffs
-<https://github.com/clawpack/visclaw/compare/v5.1.0...master>`_
+<https://github.com/clawpack/visclaw/compare/v5.1.0...v5.2.0>`_
 
 Changes to riemann
 ------------------
@@ -41,7 +41,7 @@ Changes to riemann
 * Some minor corrections.
 
 See `riemann diffs
-<https://github.com/clawpack/riemann/compare/v5.1.0...master>`_
+<https://github.com/clawpack/riemann/compare/v5.1.0...v5.2.0>`_
 
 Changes to amrclaw
 ------------------
@@ -63,7 +63,7 @@ Changes to amrclaw
 * Several other minor fixes.
 
 See `amrclaw diffs
-<https://github.com/clawpack/amrclaw/compare/v5.1.0...master>`_
+<https://github.com/clawpack/amrclaw/compare/v5.1.0...v5.2.0>`_
 
 Changes to geoclaw
 ------------------
@@ -96,15 +96,15 @@ Changes to geoclaw
 * Several other corrections and minor improvements.
 
 See `geoclaw diffs
-<https://github.com/clawpack/geoclaw/compare/v5.1.0...master>`_
+<https://github.com/clawpack/geoclaw/compare/v5.1.0...v5.2.0>`_
 
 Changes to PyClaw
 ------------------
 
 
 For changes in PyClaw, see the `PyClaw changelog
-<https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
+<https://github.com/clawpack/pyclaw/blob/v5.2.0/CHANGES.md>`_.
 
 See `pyclaw diffs
-<https://github.com/clawpack/pyclaw/compare/v5.1.0...master>`_
+<https://github.com/clawpack/pyclaw/compare/v5.1.0...v5.2.0>`_
 

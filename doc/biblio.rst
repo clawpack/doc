@@ -230,3 +230,11 @@ Papers describing applications
                  pages = {36--50}}
 
 .. note:: Add more...
+
+Other references
+----------------
+
+.. [Okada85]
+   Y. Okada.
+   Surface deformation due to shear and tensile faults in a half-space,
+   Bull. Seism. Soc. Am.* 75 (1985), pp. 1135-1154.

@@ -62,7 +62,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'Clawpack'
-copyright = u'2013, The Clawpack Development Team'
+copyright = u'2014, The Clawpack Development Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -110,6 +110,7 @@ pygments_style = 'sphinx'
 
 sys.path.append(os.path.abspath('_themes'))
 html_theme_path = ['_themes']
+html_extra_path = ['extra_files']
 html_theme = 'flask'
 github_fork = 'clawpack'
 html_additional_pages = {'index': 'index.html'}
