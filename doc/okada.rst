@@ -52,7 +52,8 @@ Okada model
 
 The slip on the fault plane(s) must be translated into seafloor deformation.
 This is often done using the "Okada model", which is derived from
-a Green's function sollution to the elastic half space problem.  Uniform
+a Green's function sollution to the elastic half space problem, following 
+[Okada85]_.  Uniform
 displacement of the solid over a finite rectangular patch specified
 using the parameters described above, when inserted in a homogeneous
 elastic half space a distance *depth* below the free surface, leads
@@ -68,32 +69,18 @@ modeling of the resulting seafloor deformation may not be justified.
 In addition to the parameters above, the Okada model also requires an elastic
 parameter, the Poisson ratio, which is usually taken to be 0.25.
 
-.. warning:: The next two paragraphs are out of date and the geotools
-   collection of tools is being updated and should be improved when 5.2 is 
-   released.  Some tools are now found in the directory
-   `$CLAW/geoclaw/src/python/geoclaw/`.
+.. warning :: Below describes new tools to be added in Clawpack 5.2.1
 
-The GeoClaw routine `$CLAW/geoclaw/src/python/geoclaw/okada2.py` available
-starting in Version 4.6.3, is an improved version of the original
-`okada.py` that allows specifying whether the
-latitude and longitude provided corresponds to the centroid, bottom center,
-or the top center of the fault plane (the original assumed top center).  
-The specification of other parameters has also been modified, see the
-documentation in that file.
+`This IPython notebook
+<http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_
+illustrates how the Okada model works and how to generate the seafloor
+deformation needed in GeoClaw using this model.
+
 
 The Python module `$CLAW/geoclaw/src/python/geoclaw/dtopotools.py` 
 provides tools to convert a file specifying a collection of subfaults
 into a *dtopofile* by applying the Okada model to each subfault and adding
 the results together (valid by linear superposition of the solutions to the
 linear elastic halfspace problems).
-
-.. warning:
-   This module is being rewritten and the new version will be quite
-   different.
-
-.. comment:
-   These still need to be cleaned up and better documented, but an example of
-   the usage can be found in the new application example
-   `$CLAW/apps/tsunami/chile2010b`.  (See :ref:`apps`.)
-
+See :ref:`dtopotools_module` for more documentation and illustrations.
 
