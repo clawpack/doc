@@ -336,6 +336,26 @@ def make_geoclaw():
         Sample code with analytic solution."""
     images = ('frame0000fig0', 'frame0000fig1', 'frame0010fig0', 'frame0010fig1')
     gsec.new_item(appdir, plotdir, description, images)
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Hurricane Ike')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/storm-surge/ike'
+    description = """
+        Storm surge simulation of Hurricane Ike (coarse grid)"""
+    images = ('frame0036fig1', 'frame0036fig9', 'frame0036fig8')
+    gsec.new_item(appdir, plotdir, description, images)
+
+
+    #----------------------------------------------
+    gsec = gallery.new_section('Multi-layer shallow water')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/multi-layer/plane_wave'
+    description = """
+        Plane wave hitting shelf with multi-layer equations"""
+    images = ('frame0006fig0','frame0006fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+
     #----------------------------------------------
 
     gallery.create('gallery_geoclaw.rst')
