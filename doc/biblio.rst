@@ -200,4 +200,33 @@ Papers describing applications
    Solitary Waves in Layered Nonlinear Media,
    *SIAM J. Appl. Math* 63 (2003) pp. 1539-1560.
 
+.. [Mandli13a]
+   Mandli, K. T. 
+   `A Numerical Method for the Two Layer Shallow Water Equations with Dry States.` *Ocean Modelling* 72, 80–91 (2013).
+   ::
+
+        @article{Mandli:2013it,
+                 author = {Mandli, Kyle T},
+                 title = {{A Numerical Method for the Two Layer Shallow Water Equations with Dry States}},
+                 journal = {Ocean Modelling},
+                 year = {2013},
+                 volume = {72},
+                 pages = {80--91},
+                 month = aug
+                 }
+
+.. [Mandli13b]
+   Mandli, K. T. & Dawson, C. N. 
+   `Adaptive Mesh Refinement for Storm Surge.` 
+   *Ocean Modelling* 75, 36–50 (2014).
+   ::
+   
+        @article{Mandli:ws,
+                 author = {Mandli, Kyle T and Dawson, Clint N},
+                 title = {{Adaptive Mesh Refinement for Storm Surge}},
+                 journal = {Ocean Modelling},
+                 year = {2014},
+                 volume = {75},
+                 pages = {36--50}}
+
 .. note:: Add more...
