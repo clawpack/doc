@@ -11,9 +11,10 @@ Clawpack 5.x
   :ref:`clawpack5`.
 * For changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
-* :ref:`release_5_0_0`
-* :ref:`release_5_1_0`
-* :ref:`release_5_2_0`  
+* :ref:`release_5_0_0`  -- January 8, 2014
+* :ref:`release_5_1_0`  -- March 2, 2014
+* :ref:`release_5_2_0`  -- July 18, 2014
+* :ref:`release_5_2_1`  -- October 2, 2014
 * :ref:`changes_to_master`
 
 
