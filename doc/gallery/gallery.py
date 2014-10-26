@@ -153,6 +153,8 @@ class Gallery(object):
                         src_name) + '.html'
                     src_name = os.path.join(self.clawdir,src_name)
                     src_png = src_name + '.png'
+                    if not os.path.isfile(src_html):
+                        src_html = src_png
                     if not os.path.isdir('thumbnails'):
                         print "Creating directory thumbnails"
                         os.system('mkdir thumbnails')
@@ -354,6 +356,24 @@ def make_geoclaw():
     description = """
         Plane wave hitting shelf with multi-layer equations"""
     images = ('frame0006fig0','frame0006fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+
+
+    #----------------------------------------------
+    gsec = gallery.new_section('fgmax examples')
+    #----------------------------------------------
+    appdir = 'apps/tsunami/chile2010_fgmax'
+    description = """
+        Chile 2010 wave heights and arrival times"""
+    images = ('frame0001fig0','frame0002fig0','amplitude_times')
+    gsec.new_item(appdir, plotdir, description, images)
+
+    #----------------------------------------------
+
+    appdir = 'apps/tsunami/bowl_radial_fgmax'
+    description = """
+        Radial bowl comparing maximum amplitudes near x-axis and on diagonal"""
+    images = ('fgmax_grid1','fgmax_grid2','fgmax_transects','fgmax_along_shore')
     gsec.new_item(appdir, plotdir, description, images)
 
     #----------------------------------------------
