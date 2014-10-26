@@ -180,6 +180,8 @@ at Level L and flags them or not based on the following criteria, where
 * Loop over all regions (if any) for which `(xc,yc,t)` lies in the region
   specified.
 
+TODO:  This might be wrong!!!  
+
   * If `L >= maxlevel` for *any* such region, set `flag = False` for this
     cell and go on to the next cell.
 
