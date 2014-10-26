@@ -31,3 +31,12 @@ Examples using the Fortran code:
 * `Demo of AMRClaw with adjustment of runtime and plotting parameters <http://nbviewer.ipython.org/gist/rjleveque/8642159>`_ 
 * `Riemann solutions of the shallow water equations <http://nbviewer.ipython.org/gist/rjleveque/8994740>`_ 
 * More to come 
+
+Examples for GeoClaw:
+
+* `IPython notebook illustrating topotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_
+
+* `IPython notebook illustrating dtopotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/dtopotools_examples.ipynb>`_
+
+* `IPython notebook illustrating the Okada model <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_
+
