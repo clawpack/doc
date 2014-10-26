@@ -4,7 +4,7 @@
 topotools module for working with topography data
 =================================================
 
-.. warning :: This describes new tools to be added in Clawpack 5.2.1
+.. warning :: This describes new tools added in Clawpack 5.2.1
 
 `This IPython notebook
 <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_

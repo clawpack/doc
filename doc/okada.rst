@@ -69,7 +69,6 @@ modeling of the resulting seafloor deformation may not be justified.
 In addition to the parameters above, the Okada model also requires an elastic
 parameter, the Poisson ratio, which is usually taken to be 0.25.
 
-.. warning :: Below describes new tools to be added in Clawpack 5.2.1
 
 `This IPython notebook
 <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_

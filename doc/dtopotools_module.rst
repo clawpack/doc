@@ -4,7 +4,7 @@
 dtopotools module for moving topography
 =======================================
 
-.. warning :: This describes new tools to be added in Clawpack 5.2.1
+**This describes new tools added in Clawpack 5.2.1.**
 
 This IPython notebook `dtopotools_examples.ipynb
 <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/dtopotools_examples.ipynb>`_

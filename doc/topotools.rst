@@ -4,7 +4,7 @@
 Python tools for working with topo and dtopo
 --------------------------------------------
 
-**This describes new tools to be added in Clawpack 5.2.1**
+**This describes new tools added in Clawpack 5.2.1**
 
  - :ref:`topotools_module` - Tools for working with topo files
     - `IPython notebook illustrating topotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_
