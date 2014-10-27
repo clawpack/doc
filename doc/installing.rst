@@ -45,6 +45,9 @@ Install all Clawpack packages
 ---------------------------------------
 First, download a tar file of the latest release:
 
+.. warning:: v5.2.2 is in pre-release form at
+  https://github.com/clawpack/clawpack/releases
+
 * `https://github.com/clawpack/clawpack/releases/download/v5.2.1/clawpack-5.2.1.tar.gz
   <https://github.com/clawpack/clawpack/releases/download/v5.2.1/clawpack-5.2.1.tar.gz>`_
 
