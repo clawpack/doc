@@ -151,10 +151,12 @@ class Gallery(object):
                     thumb_name = src_name.replace('/','_')
                     src_html = os.path.join(claw_html_root,'../_static', \
                         src_name) + '.html'
+                    if not os.path.isfile(src_html):
+                        # have link point directly to png if no html file:
+                        src_html = os.path.join(claw_html_root,'../_static', \
+                            src_name) + '.png'
                     src_name = os.path.join(self.clawdir,src_name)
                     src_png = src_name + '.png'
-                    if not os.path.isfile(src_html):
-                        src_html = src_png
                     if not os.path.isdir('thumbnails'):
                         print "Creating directory thumbnails"
                         os.system('mkdir thumbnails')
