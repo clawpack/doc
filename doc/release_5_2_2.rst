@@ -1,17 +1,14 @@
 
-.. _changes_to_master:
+.. _release_5_2_2:
 
 ===============================
-Changes to master since v5.2.2
+Release 5.2.2
 ===============================
 
+Clawpack 5.2.2 was released on October 28, 2014.  
+See :ref:`installing` and https://github.com/clawpack/clawpack/releases/.
 
-Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.2.2) on October 28, 2014. 
-
-These changes should appear in the next release.  If you need them now,
-see :ref:`developers` for instructions on cloning and installing from the
-master branch. 
+Changes relative to Clawpack 5.2.1 (October 2, 2014) are shown below.
 
 
 Changes to classic
@@ -19,39 +16,39 @@ Changes to classic
 
 
 See `classic diffs
-<https://github.com/clawpack/classic/compare/v5.2.2...master>`_
+<https://github.com/clawpack/classic/compare/v5.2.1...v5.2.2>`_
 
 Changes to clawutil
 -------------------
 
 See `clawutil diffs
-<https://github.com/clawpack/clawutil/compare/v5.2.2...master>`_
+<https://github.com/clawpack/clawutil/compare/v5.2.1...v5.2.2>`_
 
 Changes to visclaw
 ------------------
 
  
 See `visclaw diffs
-<https://github.com/clawpack/visclaw/compare/v5.2.2...master>`_
+<https://github.com/clawpack/visclaw/compare/v5.2.1...v5.2.2>`_
 
 Changes to riemann
 ------------------
 
 See `riemann diffs
-<https://github.com/clawpack/riemann/compare/v5.2.2...master>`_
+<https://github.com/clawpack/riemann/compare/v5.2.1...v5.2.2>`_
 
 Changes to amrclaw
 ------------------
 
 
 See `amrclaw diffs
-<https://github.com/clawpack/amrclaw/compare/v5.2.2...master>`_
+<https://github.com/clawpack/amrclaw/compare/v5.2.1...v5.2.2>`_
 
 Changes to geoclaw
 ------------------
 
 * Fixed problem when a single time is specified in dtopo file and dtdtopo(m) = 0.
-  The example in `$CLAW/geoclaw/apps/tsunami/chile2010` was modified in 5.2.2 
+  The example in `$CLAW/geoclaw/apps/tsunami/chile2010` was modified in 5.2.1 
   to use this feature but it was not implemented properly. 
   See https://github.com/clawpack/geoclaw/pull/116.
 
@@ -72,7 +69,7 @@ Changes to geoclaw
 * Fixed other minor glitches.
 
 See `geoclaw diffs
-<https://github.com/clawpack/geoclaw/compare/v5.2.2...master>`_
+<https://github.com/clawpack/geoclaw/compare/v5.2.1...v5.2.2>`_
 
 
 Changes to PyClaw
@@ -83,5 +80,5 @@ For changes in PyClaw, see the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 See `pyclaw diffs
-<https://github.com/clawpack/pyclaw/compare/v5.2.2...master>`_
+<https://github.com/clawpack/pyclaw/compare/v5.2.1...v5.2.2>`_
 

@@ -45,24 +45,23 @@ Install all Clawpack packages
 ---------------------------------------
 First, download a tar file of the latest release:
 
-.. warning:: v5.2.2 is in pre-release form at
-  https://github.com/clawpack/clawpack/releases
+* `https://github.com/clawpack/clawpack/releases/download/v5.2.2/clawpack-5.2.2.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/v5.2.2/clawpack-5.2.2.tar.gz>`_
+* :ref:`previous`
+* :ref:`changes`
 
-* `https://github.com/clawpack/clawpack/releases/download/v5.2.1/clawpack-5.2.1.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/v5.2.1/clawpack-5.2.1.tar.gz>`_
 
-(See :ref:`previous` for older versions and :ref:`clawpack_components` for a
-list of what's included in this tar file.)
+See :ref:`clawpack_components` for a list of what's included in this tar file.
 
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
 
-    tar -xzvf clawpack-5.2.1.tar.gz
+    tar -xzvf clawpack-5.2.2.tar.gz
 
 
 Then move into the top level directory::
 
-    cd clawpack-5.2.1
+    cd clawpack-5.2.2
 
 Next install the Python components of Clawpack::
 
