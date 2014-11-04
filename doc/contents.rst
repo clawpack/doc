@@ -1,3 +1,6 @@
+.. contents::
+   :depth: 2
+
 .. _contents:
 
 ====================================================
@@ -7,7 +10,7 @@ Full Table of Contents
 :ref:`toc_condensed`
 
 
-Overview and Getting Started:
+Overview and Getting Started
 -----------------------------
 
 .. toctree::
@@ -27,7 +30,7 @@ Overview and Getting Started:
 
 
 
-Examples and Applications:
+Examples and Applications
 -----------------------------
 
 .. toctree::
@@ -42,7 +45,7 @@ Examples and Applications:
    testing
    sphinxdoc
 
-Fortran and Python codes:
+Fortran and Python codes
 -----------------------------
 
 .. toctree::
@@ -118,27 +121,14 @@ GeoClaw: For geophysical flows
    
 
 
-PyClaw: Python tools
---------------------
-
-Includes PetClaw, Using PETSc for parallel efficiency.
+PyClaw: Scriptable, massively parallel, high-order wave propagation
+-------------------------------------------------------------------
 
 .. toctree::
    :maxdepth: 2
 
    pyclaw/index
 
-SharpClaw: High-order methods
------------------------------------------
-
-SharpClaw has recently been integrated into PyClaw/PetClaw along with very high order WENO reconstruction through PyWENO code generation.  The 
-`pure Fortran SharpClaw code <http://bitbucket.org/ketch/sharpclaw>`_ is no longer supported.
-
-.. toctree:: 
-   :maxdepth: 1
-
-   pyclaw/solvers
-  
 
 Developers' resources
 ------------------------------
