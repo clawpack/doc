@@ -45,7 +45,7 @@ PyClaw Documentation
    basics
    going_further
    classes
-   for_developers
+   ../developers
    troubleshooting
    about
    future

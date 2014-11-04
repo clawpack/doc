@@ -10,4 +10,3 @@ The following features are currently under development:
     * Adaptive mesh refinement in PyClaw
     * Discontinuous Galerkin solver algorithms
     * Solving on GPUs
-    * Three-dimensional WENO (SharpClaw) algorithms

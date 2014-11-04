@@ -20,12 +20,12 @@ the main differences between them.
 
 Installation and user interface
 ===============================
-The AMRClaw, GeoClaw, and Classic solvers are traditional Fortran-based
+The AMRClaw, GeoClaw, and Classic solvers are Fortran-based
 packages and rely on Makefiles and environment variables.  Problems are
-specified partially through Python scripts (`setrun.py`) and partially
-through custom Fortran code (to set initial conditions, for instance).
+specified partially through Python scripts at run time (`setrun.py`) and partially
+through custom Fortran code at compile time (to set initial conditions, for instance).
 
-With PyClaw, problems are specified through Python script files, or
+With PyClaw, problems are specified entirely at run time through Python script files, or
 interactively (e.g., in IPython).  Typically, the user does not need to
 write any Fortran code (though custom routines can be written in Fortran
 when necessary for performance reasons).
@@ -38,7 +38,7 @@ Algorithmic differences
 ===============================
 All of the Clawpack solvers include the *classic* algorithms described in 
 [LeVeque-FVMHP]_; if you only require those, it's easiest to use Classic or
-PyClaw.  Most of the packages contain additional algorithms:
+:ref:`pyclaw`.  Most of the packages contain additional algorithms:
 
  - **AMRClaw** includes block-structured adaptive mesh refinement that allows one
    to use a non-uniform grid that changes in time and uses smaller grid cells 
@@ -46,7 +46,7 @@ PyClaw.  Most of the packages contain additional algorithms:
  - **GeoClaw** Includes the AMR capabilities of AMRClaw and also has a number
    of special routines and algorithms for handling geophysical problems, including
    special well-balanced, positivity-preserving shallow water solvers.
- - **PyClaw** includes the high-order WENO-RK algorithms of SharpClaw, described in
+ - **PyClaw** includes the :ref:`high-order WENO-RK algorithms of SharpClaw <sharpclaw_solvers>`, described in
    [KetParLev13]_.
 
 

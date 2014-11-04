@@ -17,7 +17,8 @@ Running and plotting examples
 
 Interactively in IPython
 ++++++++++++++++++++++++
-::
+A built-in example can be run and plotted as follows::
+
     from clawpack.pyclaw import examples
     claw = examples.shock_bubble_interaction.setup()
     claw.run()
@@ -30,7 +31,7 @@ These usually include the following:
 
    * ``use_petsc``: set to 1 to run in parallel
 
-   * ``solver_type``: set to classic or sharpclaw
+   * ``solver_type``: set to ``classic`` or ``sharpclaw``
 
    * ``iplot``: set to 1 to automatically launch interactive plotting after running.
      Note that this shouldn't be used in parallel, as every process will try to plot.
@@ -38,7 +39,7 @@ These usually include the following:
    * ``htmlplot``: set to 1 to automatically create HTML plot pages after running.
 
    * ``outdir``: the name of the subdirectory in which to put output files.  Defaults to
-     './_output'.
+     ``./_output``.
 
 
 From the command line
@@ -79,6 +80,7 @@ You can see results from many of the examples in the :ref:`galleries`.
 Adding new examples
 ========================================
 If you have used PyClaw, we'd love to add your application to the built-in scripts.
-Please contact us on the `claw-users Google group <http://http://groups.google.com/group/claw-users>`_.
+Please contact us on the `claw-users Google group <http://http://groups.google.com/group/claw-users>`_
+or just issue a `pull request on Github <http://github.com/clawpack/pyclaw/pulls>`_.
 
 
