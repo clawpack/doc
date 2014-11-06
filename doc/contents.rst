@@ -7,9 +7,6 @@
 Full Table of Contents
 ====================================================
 
-:ref:`toc_condensed`
-
-
 Overview and Getting Started
 ============================
 
@@ -68,8 +65,8 @@ Using the Fortran codes
    mapc2p
    restart
 
-AMRClaw
--------
+AMRClaw: adaptive mesh refinement
+---------------------------------
 
 .. toctree::
    :maxdepth: 2
@@ -81,8 +78,8 @@ AMRClaw
    refinement
    gauges
 
-GeoClaw
--------
+GeoClaw: geophysical flows
+--------------------------
 
 .. toctree::
    :maxdepth: 2
@@ -103,8 +100,8 @@ GeoClaw
 
 
 
-PyClaw: Scriptable, massively parallel, high-order wave propagation
-===================================================================
+PyClaw
+======
 
 .. toctree::
    :maxdepth: 2
