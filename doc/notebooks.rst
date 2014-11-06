@@ -23,6 +23,7 @@ Examples using PyClaw:
 * `A quick introduction to PyClaw <http://nbviewer.ipython.org/8332861>`_
 * `A 2D fluid dynamics example <http://nbviewer.ipython.org/8333043>`_
 * `Stegotons: solitary waves arising in non-dispersive periodic media <http://nbviewer.ipython.org/gist/ketch/8554686>`_
+* `Demonstration of different limiters for advection <http://nbviewer.ipython.org/gist/ketch/9508222>`_
 * More to come 
 
 Examples using the Fortran code:
