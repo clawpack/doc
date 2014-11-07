@@ -10,7 +10,7 @@ More complex examples and applications are archived in the Github
 `clawpack/apps` repository found at
 `https://github.com/clawpack/apps <https://github.com/clawpack/apps>`_.
 
-In particular, the directory `apps/fvmbook` contains many :ref:`book`.
+In particular, the directory `apps/fvmbook` contains many :ref:`fvmbook`.
 
 These examples are not included in the basic Clawpack installation.
 Users interested in obtaining this collection of applications can either

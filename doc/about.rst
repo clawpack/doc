@@ -31,7 +31,7 @@ detail in the book *Finite Volume Methods for Hyperbolic Problems*
 [LeVeque-FVMHP]_.
 Virtually all of the figures in this book were generated using Clawpack
 (version 4.3). 
-See :ref:`book` for a list of available examples with pointers to the codes
+See :ref:`fvmbook` for a list of available examples with pointers to the codes
 and resulting plots.
 
 See the :ref:`biblio` for some pointers to papers describing Clawpack and
