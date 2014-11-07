@@ -50,26 +50,6 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
-* Fixed problem when a single time is specified in dtopo file and dtdtopo(m) = 0.
-  The example in `$CLAW/geoclaw/apps/tsunami/chile2010` was modified in 5.2.2 
-  to use this feature but it was not implemented properly. 
-  See https://github.com/clawpack/geoclaw/pull/116.
-
-* Removed duplicate definition of RefinementData in `data.py`
-
-* Improved handling of ticklabels in topotools and dtopotools plotting.
-  See https://github.com/clawpack/geoclaw/pull/114.
-
-* Fixed a number of bugs in `fgmax_tools.py` that didn't work properly
-  for `point_style` taking values other than 2.  Some new examples have 
-  been added to `$CLAW/apps/tsunami` to illustrate the use of fgmax
-  monitoring.  See:
-
-   * :ref:`fgmax_5_2_0`
-   * :ref:`apps`
-   * :ref:`galleries`
-
-* Fixed other minor glitches.
 
 See `geoclaw diffs
 <https://github.com/clawpack/geoclaw/compare/v5.2.2...master>`_
