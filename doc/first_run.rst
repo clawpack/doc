@@ -1,10 +1,12 @@
 .. _first_run:
 
 Running an example
-------------------
+==================
 Many examples of Clawpack simulations can be seen in the :ref:`galleries`.
 
-**Using PyClaw.** To run an example and plot the results using PyClaw, simply do the following
+PyClaw
+------
+To run an example and plot the results using PyClaw, simply do the following
 (starting from your `clawpack` directory)::
 
     cd pyclaw/examples/euler_2d
@@ -12,7 +14,8 @@ Many examples of Clawpack simulations can be seen in the :ref:`galleries`.
 
 That's it.  For next steps with PyClaw, see :ref:`basics`.
 
-**Using Classic.**
+Classic
+-------
 First ensure that you have :ref:`setenv`.
 A simple 1-dimensional acoustics equations can be solved
 using the code in `$CLAW/classic/examples/acoustics_1d_example1

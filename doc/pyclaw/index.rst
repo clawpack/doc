@@ -2,9 +2,9 @@
 
 .. _pyclaw:
 
-*******
+
 Pyclaw 
-*******
+======
 
 Installation::
 
@@ -17,9 +17,7 @@ To run an example, launch an IPython session and then::
     claw.run()
     claw.plot()
 
-**********
-PyClaw is:
-**********
+**Features:**
 
     * A **hyperbolic PDE solver** in 1D, 2D, and 3D, including mapped grids and surfaces, built on Clawpack;
     * **Massively parallel** -- the same simple script that runs on your laptop will
@@ -35,9 +33,8 @@ respectively.
 
 If you have any issues or need help using PyClaw, `contact us <claw-users@googlegroups.com>`_.
 
-********************
 PyClaw Documentation
-********************
+====================
 
 .. toctree::
    :maxdepth: 2
@@ -45,10 +42,9 @@ PyClaw Documentation
    basics
    going_further
    classes
-   for_developers
+   ../developers
    troubleshooting
    about
-   future
    gallery/gallery_all
    gallery/how-to-build
 
