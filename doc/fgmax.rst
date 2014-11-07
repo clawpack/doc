@@ -9,7 +9,6 @@ Fixed grid monitoring
 
    This feature has been modified and this documentation describes 
    the version introduced in 5.2.1.
-   The documentation is also still incomplete.
 
 See also:
 
@@ -56,6 +55,14 @@ monitoring values during the computation.
 
 The input file(s) are specified to GeoClaw by a list of file names set in
 `setrun.py` by setting `rundata.fgmax_data.fgmax_files`.
+The order the files appear in this list determines the number assigned to
+this grid (starting with 1) that may be needed for processing or plotting
+the results.
+
+Currently at most 5 fgmax grids are allowed by default.  If you need more,
+you can adjust the parameter `FG_MAXNUM_FGRIDS` in
+`$CLAW/geoclaw/src/2d/shallow/fgmax_module.f90` and the do `make new` to
+recomile everything that depends on this module.   
 
 Each input file describing a grid of points has the following form::
 
@@ -220,8 +227,9 @@ These files are most easily dealt with using :ref:`fgmax_tools_module` by
 defining an object of class `fgmax_tools.FGmaxGrid` and using the  
 class function `read_output` to read the output.  
 
-For an example see `apps/tsunami/chile2010_fgmax` in the :ref:`apps`.   
-To obtain this, see :ref:`apps`.
+For some examples, see `apps/tsunami/chile2010_fgmax` and 
+`apps/tsunami/bowl_radial_fgmax` in the :ref:`apps`.   
+Sample results appear in the :ref:`gallery_geoclaw`.
 
 TODO:  Add a simple example here?
 
