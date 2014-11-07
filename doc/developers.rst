@@ -1,16 +1,56 @@
-
 .. _developers:
 
 **************************************
 Developers' Guide
 **************************************
 
-See :ref:`git-resources` for some useful links.
+.. contents::
+
+Guidelines for contributing
+==================================
+When preparing contributions, please follow the guidelines in
+:ref:`contribution`.  Also:
+
+    * If the planned changes are substantial or will be backward-incompatible,
+      it's best to discuss them on the `claw-dev Google group
+      <http://groups.google.com/group/claw-dev>`_ before starting.
+      
+    * Make sure all tests pass and all the built-in examples run correctly.
+
+    * Be verbose and detailed in your commit messages and your pull request.
+
+    * It may be wise to have one of the maintainers look at your changes before
+      they are complete
+      (especially if the changes will necessitate modifications of tests
+      and/or examples).
+
+    * If your changes are not backward-compatible, your pull request should 
+      include instructions for users to update their own application codes.
+
+Reporting and fixing bugs
+-------------------------
+If you find a bug, post an issue with as much explanation as possible on the
+appropriate issue tracker (for instance, the PyClaw issue tracker is at
+https://github.com/clawpack/pyclaw/issues.  If you're looking 
+for something useful to do, try tackling one of the issues listed there.
+
+Developer communication
+-----------------------
+Developer communication takes place on the google group at
+http://groups.google.com/group/claw-dev/, and (increasingly) within the issue
+trackers on Github.
+
 
 .. _developers_gitclone:
 
+.. _setup_dev:
+
+
+Installation instructions for developers
+========================================
+
 Cloning the most recent code from Github
----------------------------------------------------
+----------------------------------------
 
 You can create a read-only development version of Clawpack via::
 
@@ -59,16 +99,10 @@ If you want to use the Fortran versions in `classic`, `amrclaw`, `geoclaw`,
 etc., you need to set environment variables and proceed as described at
 :ref:`setenv`.
 
-.. _setup_dev:
 
-
-Installation instructions for developers
----------------------------------------------------
-
-Install a read-only copy of all the main repositories as described above in
-:ref:`developers_gitclone`.
-
-**Important Note:** The repositories will each be checked out to a specific commit and
+Updating to the latest development version
+------------------------------------------
+The repositories will each be checked out to a specific commit and
 will probably be in a detached-head state.  You will need to checkout
 `master` in each repository to see the current head of the master branch.
 
@@ -89,8 +123,8 @@ to make sure everything is up to date with *master*.
 
 .. _dev_remote:
 
-Setting a remote to point to your fork
----------------------------------------
+Adding your fork as a remote
+----------------------------
 
 If you plan to make changes and issue pull requests to one or more
 repositories, you will need to do the following steps for each such
@@ -124,14 +158,12 @@ You can get one of these in read-only mode by doing, e.g.::
 
     git clone git://github.com/clawpack/doc.git
 
-Then go through the above steps to add a remote to your own fork of the
-repository if you plan to modify and issue pull requests.
+Then go through the above steps to add your own fork as a remote 
+if you plan to modify code and issue pull requests.
 
 Modifying code
---------------
-
-Before making changes, you generally want to make sure *master* is up to
-date::
+==============
+Before making changes, make sure *master* is up to date::
 
         git checkout master
         git pull 
@@ -140,12 +172,12 @@ Then create a new branch based on `master` for any new commits::
 
         git checkout -b new_feature master
 
+Now make changes, add and commit them, 
+and then push to your own fork::
+
         # make some changes
         # git add the modified files
         git commit -m "describe the changes"
-
-Now make changes, add and commit them, 
-and then push to your own fork::
 
         git push username new_feature
 
@@ -180,8 +212,8 @@ the same name based on `origin/master`, which is what you want.
 
 .. _developers_pr:
 
-Pull requests
--------------
+Issuing a pull request
+----------------------
 
 Before issuing a pull request, you should make sure you have not broken
 anything:  
@@ -225,7 +257,7 @@ request to originate, and then click the *Pull Request* button.
 
 .. _test_pr:
 
-Testing out a pull request
+Testing a pull request
 --------------------------
 
 To test out someone else's pull request, follow these  instructions:
@@ -249,11 +281,10 @@ Once you are done testing, you can get rid of this branch via::
     git checkout master
     git branch -D rjleveque-bug-fix
 
-    
 
 .. _toplevel_pr:
 
-Top level pull requests
+Top-level pull requests
 -----------------------
 
 The top level *clawpack* repository keeps track of what versions of the
@@ -272,7 +303,6 @@ the top-level *clawpack* repository and issue a PR for this change::
     git push username pyclaw-riemann-changes
 
 
-
 Git workflow
 ------------
 
@@ -280,3 +310,37 @@ See :ref:`git-resources` for useful links.
 
 
 
+Catching errors with Pyflakes and Pylint
+===========================================
+
+Pyflakes and Pylint are Python packages designed to help you catch errors or
+poor coding practices.  To run pylint on the whole PyClaw package, do::
+
+    cd $PYCLAW
+    pylint -d C pyclaw
+
+The `-d` option suppresses a lot of style warnings, since PyClaw doesn't
+generally conform to PEP8.  To run pylint on just one module, use something
+like::
+
+    pylint -d C pyclaw.state
+
+Since pylint output can be long, it's helpful to write it to an html file
+and open that in a web browser::
+
+    pylint -d C pyclaw.state -f html > pylint.html
+
+Pyflakes is similar to pylint but aims only to catch errors.  If you
+use Vim, there is a nice extension package 
+`pyflakes.vim <https://github.com/kevinw/pyflakes-vim>`_
+that will catch errors as you code and underline them in red.
+
+Checking test coverage
+========================
+You can use nose to see how much of the code is covered by the current
+suite of tests and track progress if you add more tests ::
+
+    nosetests --with-coverage --cover-package=pyclaw --cover-html
+
+This creates a set of html files in `./cover`, showing exactly which lines
+of code have been tested.

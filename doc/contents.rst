@@ -1,14 +1,14 @@
+.. contents::
+   :depth: 3
+
 .. _contents:
 
 ====================================================
 Full Table of Contents
 ====================================================
 
-:ref:`toc_condensed`
-
-
-Overview and Getting Started:
------------------------------
+Overview and Getting Started
+============================
 
 .. toctree::
    :maxdepth: 2
@@ -27,8 +27,8 @@ Overview and Getting Started:
 
 
 
-Examples and Applications:
------------------------------
+Examples and Applications
+============================
 
 .. toctree::
    :maxdepth: 1
@@ -42,12 +42,13 @@ Examples and Applications:
    testing
    sphinxdoc
 
-Fortran and Python codes:
------------------------------
+Classic, AMRClaw, and GeoClaw
+==============================
 
+Using the Fortran codes
+-------------------------
 .. toctree::
    :maxdepth: 2
-   
 
    fortran
    fortran_compilers
@@ -64,8 +65,53 @@ Fortran and Python codes:
    mapc2p
    restart
 
+AMRClaw: adaptive mesh refinement
+---------------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   amrclaw
+   setrun_amrclaw
+   setrun_amrclaw_sample
+   amr_algorithm
+   refinement
+   gauges
+
+GeoClaw: geophysical flows
+--------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   geoclaw
+   geohints
+   topo
+   topotools
+   setrun_geoclaw
+   plotting_geoclaw
+   quick_tsunami
+   okada
+   sealevel
+   manning
+   fgout
+   fgmax
+   tsunamidata
+
+
+
+PyClaw
+======
+
+.. toctree::
+   :maxdepth: 2
+
+   pyclaw/index
+
+
+
 VisClaw: Plotting and Visualization Tools
------------------------------------------
+=========================================
 
 .. toctree::
    :maxdepth: 2
@@ -81,67 +127,10 @@ VisClaw: Plotting and Visualization Tools
    visit_plotting
 
 
-AMRClaw: Adaptive Mesh Refinement
------------------------------------------
 
-.. toctree::
-   :maxdepth: 2
-   
-   amrclaw
-   setrun_amrclaw
-   setrun_amrclaw_sample
-   amr_algorithm
-   refinement
-   gauges
-
-
-GeoClaw: For geophysical flows
------------------------------------------
-
-.. toctree::
-   :maxdepth: 2
-   
-   geoclaw
-   geohints
-   topo
-   topotools
-   setrun_geoclaw
-   plotting_geoclaw
-   quick_tsunami
-   okada
-   sealevel
-   manning
-   fgout
-   fgmax
-   tsunamidata
-
-   
-
-
-PyClaw: Python tools
---------------------
-
-Includes PetClaw, Using PETSc for parallel efficiency.
-
-.. toctree::
-   :maxdepth: 2
-
-   pyclaw/index
-
-SharpClaw: High-order methods
------------------------------------------
-
-SharpClaw has recently been integrated into PyClaw/PetClaw along with very high order WENO reconstruction through PyWENO code generation.  The 
-`pure Fortran SharpClaw code <http://bitbucket.org/ketch/sharpclaw>`_ is no longer supported.
-
-.. toctree:: 
-   :maxdepth: 1
-
-   pyclaw/solvers
-  
 
 Developers' resources
-------------------------------
+=====================
 
 .. toctree::
    :maxdepth: 1
@@ -155,7 +144,7 @@ Developers' resources
 See also :ref:`setup_dev`
 
 Bibliography
-------------
+============
 
 .. toctree::
    :maxdepth: 1
