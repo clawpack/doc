@@ -11,13 +11,16 @@ After you've followed the instructions below, you may want to try some of the :r
 
 Sage Math Cloud
 ===============
-To install on Sage Math Cloud, create an account and a project at http://cloud.sagemath.org/.
-Then open a new terminal in your project, and type::
+To run on Sage Math Cloud, simply create an account and a project at http://cloud.sagemath.org/.
+Clawpack is pre-installed, so you can use it immediately from a terminal or IPython notebook.
+Since matplotlib plots generated from the terminal will not work in the cloud, we
+recommend using an IPython notebook.
+
+You can also install the latest release of Clawpack in your Sage Math Cloud project.
+Open a new terminal in your project, and type::
 
     pip install --user clawpack
 
-That's it -- you should now be able to import Clawpack in your IPython
-notebooks within that project.  
 
 Wakari
 ======

@@ -4,33 +4,25 @@
 Installation instructions
 **************************************
 
+.. contents::
+   :depth: 2
+
 Please `register
 <http://depts.washington.edu/clawpack/register/index.html>`_ if you have not
 already done so.  This is purely optional, but is useful in helping us track
 the extent of usage.
 
-You may:
-
-* :ref:`install_clawpack`
-* :ref:`install_pyclaw`
-* :ref:`install_no-pyclaw`
-* :ref:`install_pyclaw_parallel`
-* :ref:`install_dev`
-
 Note that any of these installations also includes :ref:`visclaw` for plotting.
 
 See also:
 
-* :ref:`install_prerequisites` for other software you need to 
-  successfully use Clawpack.
-* :ref:`install_alternatives`  if you want to avoid installing
-  prerequisites.
+* :ref:`trouble_installation`
 * :ref:`clawpack_packages`
 
 .. _install_pyclaw:
 
 Install only PyClaw (serial)
-----------------------------
+=====================================
 If you wish to install just PyClaw, everything is handled by pip::
 
     pip install clawpack
@@ -42,7 +34,7 @@ Next go to :ref:`first_run`.
 .. _install_clawpack:
 
 Install all Clawpack packages
----------------------------------------
+=====================================
 First, download a tar file of the latest release:
 
 * `https://github.com/clawpack/clawpack/releases/download/v5.2.2/clawpack-5.2.2.tar.gz
@@ -81,7 +73,7 @@ plan to use Classic, AMRClaw, or GeoClaw continue with :ref:`setenv`.
 .. _setenv:
 
 Set environment variables
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 To use the Fortran versions of Clawpack you will need to set the
 environment variable `CLAW` to point to the top level of clawpack tree
 (there is no need to perform this step if you will only use PyClaw).
@@ -115,9 +107,10 @@ Next go to :ref:`first_run`.
 .. _install_no-pyclaw:
 
 Install other packages without compiling PyClaw
------------------------------------------------
+================================================
 If you get errors in the compilation step when using `pip install` or
-`python setup.py install`, please `let us know <claw-users@googlegroups.com>`_
+`python setup.py install`, check :ref:`trouble_installation`. 
+If your problem is not addressed there, please `let us know <claw-users@googlegroups.com>`_
 or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
 You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
 the following.  
@@ -149,7 +142,7 @@ Next go to :ref:`first_run`.
 .. _install_pyclaw_parallel:
 
 Install only PyClaw (for running in parallel)
-------------------------------------------------
+================================================
 First, install PyClaw as explained above.  Then see the install instructions
 for :ref:`parallel`.
 
@@ -163,18 +156,18 @@ to install everything:
 .. _install_dev:
 
 Install the latest development version
---------------------------------------
+================================================
 
 The development version of Clawpack can be obtained by cloning 
 `<https://github.com/clawpack>`_.  This is advised for those who want to help
 develop Clawpack or to have the most recent bleeding edge version.
-See :ref:`developers_gitclone`  and :ref:`setup_dev` for instructions.
+See :ref:`setup_dev` for instructions.
 
 
 .. _install_alternatives:
 
-Alternative ways of running Clawpack
-------------------------------------
+Running Clawpack on a VM or in the Cloud
+========================================
 **Virtual Machine.**
 An alternative to installing the :ref:`install_prerequisites` 
 and Clawpack itself is to use the :ref:`vm`.
@@ -190,8 +183,8 @@ and Clawpack itself is to use the :ref:`vm`.
 
 .. _install_prerequisites:
 
-Prerequisites
--------------
+Installation Prerequisites
+================================================
 
 **Operating system:**
 
@@ -227,8 +220,10 @@ you are not familiar with it.
 .. _first_test:
 
 Testing your installation 
--------------------------
-**PyClaw.**
+================================================
+
+PyClaw
+------
 If you downloaded Clawpack manually, you can test your PyClaw
 installation as follows (starting from your `clawpack` directory)::
 
@@ -237,7 +232,8 @@ installation as follows (starting from your `clawpack` directory)::
 
 This should return 'OK'.
 
-**Classic.**
+Classic
+-------
 As a first test of the Fortran code, try the following::
 
     cd $CLAW/classic/tests

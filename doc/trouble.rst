@@ -1,18 +1,42 @@
 
 .. _trouble:
 
-
 *************************************
 Troubleshooting
 *************************************
 
-Installation
-++++++++++++
+
+.. _trouble_installation:
+
+Troubleshooting: Installation
++++++++++++++++++++++++++++++
+
+Setting the Fortran compiler to be used by f2py (pip)
+-----------------------------------------------------
+
+When executing ``pip install clawpack`` or ``python setup.py install``,
+if you get an error like::
+
+    error: f90 not supported by GnuFCompiler
+
+then f2py is trying to use your f77 compiler.  This may happen even if
+you also have an f90 compiler like gfortran installed.  In this case,
+``pip install`` will not work; you should download a tarball or clone
+the code from Github.  Then, in order to see the compilers detected by f2py,
+run::
+
+    python setup.py config_fc --help-fcompiler
+
+Then to install using a different compiler, do e.g.::
+
+    python setup.py config_fc --fcompiler=gfortran install
+
+You may replace ``gfortran`` with the compiler you wish to use.
 
 .. _trouble_makeexe:
 
 Trouble running "make .exe"
----------------------------
++++++++++++++++++++++++++++
 
 If the code does not compile, check the following:
 
@@ -47,7 +71,7 @@ If the code does not compile, check the following:
 .. _trouble_makedata:
 
 Trouble running "make .data"
-------------------------------
+++++++++++++++++++++++++++++
 
 
 If there are errors in the `setrun` function (usually defined in
@@ -60,7 +84,7 @@ See :ref:`setrun` for information about the setrun function.
 .. _trouble_makeoutput:
 
 Trouble running "make .output"
-------------------------------
+++++++++++++++++++++++++++++++
 
 If you want to re-run the code and you get::
 
@@ -86,7 +110,7 @@ See :ref:`makefiles` for more details and warnings.
 .. _trouble_makeplots:
 
 Trouble running "make .plots"
-------------------------------
+++++++++++++++++++++++++++++++
    
 The Python plotting routines require `NumPy` and `matplotlib`.  See 
 :ref:`python` for information on installing these.
