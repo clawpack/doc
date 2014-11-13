@@ -41,8 +41,6 @@ http://groups.google.com/group/claw-dev/, and (increasingly) within the issue
 trackers on Github.
 
 
-.. _developers_gitclone:
-
 .. _setup_dev:
 
 
