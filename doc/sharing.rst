@@ -36,3 +36,9 @@ To make it easy for others to view your code and the resulting plots, you
 can simply copy the example directory (containing the code 
 and the _plots subdirectory)  to your publicly visible web pages.  
 
+IPython notebooks
+=================
+
+You should also consider creating an IPython notebook to explain your
+problem, illustrate your workflow, and present plots and animations all in
+one.  See :ref:`notebooks` for some examples.

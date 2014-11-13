@@ -36,9 +36,10 @@ Examples and Applications
 
    galleries
    apps
-   book
+   fvmbook
    newapp
    sharing
+   contribute_apps
    testing
    sphinxdoc
 
@@ -135,6 +136,7 @@ Developers' resources
 .. toctree::
    :maxdepth: 1
 
+   community
    developers
    git_resources
    howto_doc
