@@ -59,8 +59,9 @@ Previous
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
 
- - `[HPC]^3 2012 at KAUST <https://github.com/clawpack/pyclaw/wiki/HPC3-2012>`_
- - `Claw-Dev 2013 at UW <http://www.clawpack.org/clawdev2013/>`_
  - `[HPC]^3 2014 at KAUST <https://github.com/clawpack/pyclaw/wiki/HPC3-2014>`_
+ - `Claw-Dev 2013 at UW <http://www.clawpack.org/clawdev2013/>`_
+ - `[HPC]^3 2012 at KAUST <https://github.com/clawpack/pyclaw/wiki/HPC3-2012>`_
+ - `[HPC]^3 2011 at KAUST <https://sites.google.com/site/hpc3atkaust/>`_
 
 
