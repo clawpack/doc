@@ -51,7 +51,7 @@ Please join us at one of the upcoming sessions, or help plan one elsewhere...
    Minisymposterium Sunday, March 15, 2015 on 
    `Clawpack Development, Extensions and Applications <http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=20422>`_
 
- - Claw-Dev workshop in September, 2015 (??).
+ - Claw-Dev workshop in September (?), 2015 (Date and location TBD).
 
 Previous
 ^^^^^^^^
@@ -59,8 +59,11 @@ Previous
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
 
- - `[HPC]^3 2012 at KAUST <https://github.com/clawpack/pyclaw/wiki/HPC3-2012>`_
- - `Claw-Dev 2013 at UW <http://www.clawpack.org/clawdev2013/>`_
- - `[HPC]^3 2014 at KAUST <https://github.com/clawpack/pyclaw/wiki/HPC3-2014>`_
+ - :math:`[HPC]^3` workshops at KAUST in 
+   `2011 <https://sites.google.com/site/hpc3atkaust/>`_,
+   `2012 <https://github.com/clawpack/pyclaw/wiki/HPC3-2012>`_,
+   `2014 <https://github.com/clawpack/pyclaw/wiki/HPC3-2014>`_
+
+ - Claw-Dev workshop at UW in `2013 <http://www.clawpack.org/clawdev2013/>`_
 
 
