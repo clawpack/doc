@@ -36,6 +36,7 @@ Additional repositories contain documentation and extended examples of using the
 * added 3d with OpenMP, 
 * added regions
 * other changes motivated by Geoclaw
+* Spatially varying boundary conditions
 
 ## geoclaw: 
 * NTHMP benchmarks
@@ -43,6 +44,7 @@ Additional repositories contain documentation and extended examples of using the
 * new topotools and dtopotools
 * multiple dtopo files
 * fixed grid monitoring of max values
+* Spatially varying boundary conditions
 
 ## PyClaw:
 Later 4.x releases included a number of Python-based tools for handling Clawpack input and output.  The 5.0 release includes a full-fledged Python solver in which the higher-level parts of Clawpack have been reimplemented in Python.  This new solver also includes access to the high-order algorithms introduced in SharpClaw and can be used on large distributed-memory parallel machines.  Lower-level code (whatever gets executed repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw codes is automatically wrapped at install time using f2py.
