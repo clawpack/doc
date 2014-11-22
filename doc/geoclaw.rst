@@ -6,14 +6,15 @@
 GeoClaw
 ***************
 
+See `www.geoclaw.org <http://www.geoclaw.org>`_ for more overview of the
+GeoClaw software and links to references and uses.
+
 .. warning:: As with all of Clawpack, this code is provided as a research
    and teaching tool with no guarantee of suitability for any particular
    purpose, and no liability on the part of the authors.  See the
    :ref:`license` for more details and :ref:`geohints` for tips on
    exercising appropriate care in using the code.
 
-*Note:*  Several improvements to GeoClaw are still under development and
-should appear in Clawpack 5.1.
 
 **See also:**
 
