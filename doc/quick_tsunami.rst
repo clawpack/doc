@@ -53,6 +53,13 @@ over a large area of an ocean, and finer scale over one or more small
 regions: those where you want to model inundation and perhaps also
 for the source region where the tsunami was generated.
 
+.. warning::
+   The design-a-grid website discussed below has disappeared.  
+   ETOPO1 data can now be downloaded
+   from http://maps.ngdc.noaa.gov/viewers/wcs-client/, but it is not
+   quite as flexible.  We are working on a tool for scripting this,
+   and this documentation page will be updated in due course.
+
 Coarse-scale topo can be obtained from various on-line databases.  The
 easiest is the NGDC GEODAS `Design-a-grid
 <http://www.ngdc.noaa.gov/mgg/gdas/gd_designagrid.html>`_
