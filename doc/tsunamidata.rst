@@ -23,6 +23,8 @@ modeling inundation.
 * `GEODAS Grid Translator - Design-a-Grid
   <http://www.ngdc.noaa.gov/mgg/gdas/gd_designagrid.html>`_:
   ETOPO 1 minute resolution of all oceans.
+  **This has disappeared --- replaced by:**
+* `NGDC's WCS Grid Extraction Tool <http://maps.ngdc.noaa.gov/viewers/wcs-client/>`_
 * `NOAA NGDC inundataion relief
   <http://www.ngdc.noaa.gov/mgg/coastal/coastal.html>`_:
   High resolution data near US coastlines.
