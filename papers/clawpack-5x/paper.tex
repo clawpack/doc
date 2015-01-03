@@ -86,8 +86,15 @@
 
 \maketitle
 
+\begin{abstract}
+    Put really awesome abstract here.
+\end{abstract}
 
-\section{Github organization, subrepositories}
+\section{Introduction}
+
+\section{Development Approach}
+
+\subsection{Github organization, subrepositories}
 Clawpack includes several related software projects, each of which is managed in its own repository on Github.  These projects are sub-repositories of the high-level Clawpack repository and are assigned to the Clawpack Github organization.  The set of maintainers -- with push and merge privileges -- is different for each sub-repository.  
 
 The main solver repositories are:
@@ -105,13 +112,14 @@ Additional repositories contain documentation and extended examples of using the
     \item apps
 \end{itemize}
 
-\section{Development Model}
+\subsection{Development Model}
 \begin{itemize}
     \item forks, master, branches, pull requests
     \item travis CI
 \end{itemize}
 
-\section{Global Changes}
+\section{Advances}
+\subsection{Global Changes}
 \begin{itemize}
     \item reordering indices
     \item input variables in setrun.py (discuss Python interface to Fortran)
@@ -163,7 +171,7 @@ Later 4.x releases included a number of Python-based tools for handling Clawpack
     \item (Once 3d is working, write a separate paper on visclaw as a general tool?)
 \end{itemize}
 
-\section{Future Plans}
+\section{Future Work}
 \begin{itemize}
     \item Clawpack 6 ideas
     \item Riemann solvers
