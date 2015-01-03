@@ -1,0 +1,45 @@
+%!TEX root = paper.tex
+%  Generic math macros
+\renewcommand{\v}[1]{\boldsymbol{#1}}
+\newcommand{\m}[1]{\text{\textsf#1}}
+
+\newcommand{\pd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}} % partial
+\newcommand{\dee}{\ensuremath{\mathrm{d}}}                  % d symbol
+\newcommand{\diff}[2]{\ensuremath{\frac{\dee #1}{\dee #2}}} % Derivative d/dx
+% \newcommand{\grad}{\ensuremath{\nabla}}                     % Gradient symbol
+\newcommand{\gradient}{\ensuremath{\textsf{grad}}}          % Written gradient
+\newcommand{\Div}{\ensuremath{\nabla \cdot}}                % Divergence
+\newcommand{\divergence}{\ensuremath{\textsf{div}}}         % Written div
+\newcommand{\del}{\ensuremath{\nabla}}                      % Same as gradient
+\newcommand{\delsq}{\ensuremath{\nabla^2}}                  % Laplacian
+\newcommand{\lap}{\ensuremath{\delsq}}                      % Laplacian
+\newcommand{\dx}{\ensuremath{\Delta x}}                     % Delta x
+\newcommand{\dy}{\ensuremath{\Delta y}}                     % Delta y
+\newcommand{\dt}{\ensuremath{\Delta t}}                     % Delta t
+\newcommand{\scinot}[2]{\ensuremath{#1\times10^{#2}}}       % Scientific note
+\newcommand{\bigO}[1]{\ensuremath{\mathcal{O}(#1)}}         % Big O notation
+\newcommand{\R}{\ensuremath{\mathbb{R}}}                    % Real field
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}                    % Integer field
+\newcommand{\half}{\ensuremath{\frac{1}{2}}}                % 1/2 fraction
+
+%  Special formatting for codes
+\newcommand{\geoclaw}{{\sc GeoClaw}\xspace}
+\newcommand{\clawpack}{{\sc Clawpack}\xspace}
+\newcommand{\amrclaw}{{\sc AMRClaw}\xspace}
+\newcommand{\pyclaw}{{\sc PyClaw}\xspace}
+\newcommand{\forestclaw}{Forestclaw\xspace}
+
+%  Finite volume method symbols
+\newcommand{\wave}{\ensuremath{\mathcal{W}}\xspace}             % Wave
+\newcommand{\fwave}{\ensuremath{\mathcal{Z}}\xspace}            % F-Waves
+\newcommand{\cell}{\ensuremath{\mathcal{C}}\xspace}             % FV grid cell
+\newcommand{\apdq}{\ensuremath{\mathcal{A}^+ \Delta Q}\xspace}      % A+dq
+\newcommand{\amdq}{\ensuremath{\mathcal{A}^- \Delta Q}\xspace}      % A-dq
+\newcommand{\apmdq}{\ensuremath{\mathcal{A}^{\pm} \Delta Q}\xspace} % A+-dq
+
+% B+-A+-dq symbols
+\newcommand{\BpApdq}{\ensuremath{\mathcal{B}^{+} \mathcal{A}^{+} \Delta Q}\xspace}
+\newcommand{\BpAmdq}{\ensuremath{\mathcal{B}^{+} \mathcal{A}^{-} \Delta Q}\xspace}
+\newcommand{\BmApdq}{\ensuremath{\mathcal{B}^{-} \mathcal{A}^{+} \Delta Q}\xspace}
+\newcommand{\BmAmdq}{\ensuremath{\mathcal{B}^{-} \mathcal{A}^{-} \Delta Q}\xspace}
+\newcommand{\BpmApmdq}{\ensuremath{\mathcal{B}^{\pm} \mathcal{A}^{\pm} \Delta Q}\xspace}
