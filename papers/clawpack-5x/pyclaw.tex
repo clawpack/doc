@@ -1,0 +1,19 @@
+%!TEX root = paper.tex
+%
+% PyClaw
+%
+% Lead currently:  David Ketcheson
+%
+
+\subsection{\pyclaw}
+
+Later 4.x releases included a number of Python-based tools for handling Clawpack input and output.  The 5.0 release includes a full-fledged Python solver in which the higher-level parts of Clawpack have been reimplemented in Python.  This new solver also includes access to the high-order algorithms introduced in SharpClaw and can be used on large distributed-memory parallel machines.  Lower-level code (whatever gets executed repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw codes is automatically wrapped at install time using f2py.
+
+\begin{itemize}
+    \item overall structure/languages figure
+    \item sharpclaw
+    \item petclaw
+    \item f2py
+    \item pip install
+    \item IPython notebooks
+\end{itemize}

@@ -1,10 +1,8 @@
 %&pdflatex
 %
-%  Clawpack 5.x (x <= 2) Paper
+%  Clawpack 5.x (x <= 3) Paper
 %
-%  Authors:
-%
-\documentclass[]{siamltex}
+\documentclass[]{article}
 
 \usepackage{graphicx}
 
@@ -82,9 +80,9 @@
         David I. Ketcheson\thanks{
             King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{david.ketcheson@kaust.edu.sa})} \and
         Randall J. LeVeque\thanks{
-            University of Washington (\mbox{rjl.@uw.edu})}
+            University of Washington (\mbox{rjl.@uw.edu})} \and
         Kyle T. Mandli\thanks{
-            Columbia University} \and
+            Columbia University (\mbox{kyle.mandli@columbia.edu})}
         }
 
 \maketitle
@@ -93,93 +91,12 @@
     Put really awesome abstract here.
 \end{abstract}
 
-\section{Introduction}
+\input{intro}
 
-\section{Development Approach}
+\input{development}
 
-\subsection{Github organization, subrepositories}
-Clawpack includes several related software projects, each of which is managed in its own repository on Github.  These projects are sub-repositories of the high-level Clawpack repository and are assigned to the Clawpack Github organization.  The set of maintainers -- with push and merge privileges -- is different for each sub-repository.  
+\input{advances}
 
-The main solver repositories are:
-\begin{itemize}
-    \item Riemann (Riemann solvers used by all the other projects)
-    \item Classic
-    \item \amrclaw
-    \item \geoclaw
-    \item \pyclaw
-\end{itemize}
-
-Additional repositories contain documentation and extended examples of using the code:
-\begin{itemize}
-    \item doc
-    \item apps
-\end{itemize}
-
-\subsection{Development Model}
-\begin{itemize}
-    \item forks, master, branches, pull requests
-    \item travis CI
-\end{itemize}
-
-\section{Advances}
-\subsection{Global Changes}
-\begin{itemize}
-    \item reordering indices
-    \item input variables in setrun.py (discuss Python interface to Fortran)
-\end{itemize}
-
-\subsection{riemann repository -- used by PyClaw via f2py}
-
-\subsection{Classic}
-\begin{itemize}
-    \item added 3d with OpenMP
-\end{itemize}
-
-\subsection{\amrclaw}
-\begin{itemize}
-    \item added 3d with OpenMP, 
-    \item added regions
-    \item other changes motivated by Geoclaw
-    \item Spatially varying boundary conditions
-\end{itemize}
-
-\subsection{\geoclaw}
-\begin{itemize}
-    \item NTHMP benchmarks
-    \item setaux copying for faster topography integration, recursive 
-    \item new topotools and dtopotools
-    \item multiple dtopo files
-    \item fixed grid monitoring of max values
-    \item Spatially varying boundary conditions
-\end{itemize}
-    
-\subsection{\pyclaw}
-
-Later 4.x releases included a number of Python-based tools for handling Clawpack input and output.  The 5.0 release includes a full-fledged Python solver in which the higher-level parts of Clawpack have been reimplemented in Python.  This new solver also includes access to the high-order algorithms introduced in SharpClaw and can be used on large distributed-memory parallel machines.  Lower-level code (whatever gets executed repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw codes is automatically wrapped at install time using f2py.
-
-\begin{itemize}
-    \item overall structure/languages figure
-    \item sharpclaw
-    \item petclaw
-    \item f2py
-    \item pip install
-    \item IPython notebooks
-\end{itemize}
-    
-\subsection{visclaw}
-\begin{itemize}
-    \item Iplotclaw
-    \item creation of html pages
-    \item JSAnimation
-    \item (Once 3d is working, write a separate paper on visclaw as a general tool?)
-\end{itemize}
-
-\section{Future Work}
-\begin{itemize}
-    \item Clawpack 6 ideas
-    \item Riemann solvers
-    \item ForestClaw
-    \item ???
-\end{itemize}
+\input{future}
 
 \end{document}

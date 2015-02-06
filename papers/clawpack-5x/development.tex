@@ -1,0 +1,32 @@
+%!TEX root = paper.tex
+%
+% Development Approach
+%
+% Lead currently:  Aron Ahmadia's 
+%
+
+\section{Development Approach}
+
+\subsection{Github organization, subrepositories}
+Clawpack includes several related software projects, each of which is managed in its own repository on Github.  These projects are sub-repositories of the high-level Clawpack repository and are assigned to the Clawpack Github organization.  The set of maintainers -- with push and merge privileges -- is different for each sub-repository.
+
+The main solver repositories are:
+\begin{itemize}
+    \item Riemann (Riemann solvers used by all the other projects)
+    \item Classic
+    \item \amrclaw
+    \item \geoclaw
+    \item \pyclaw
+\end{itemize}
+
+Additional repositories contain documentation and extended examples of using the code:
+\begin{itemize}
+    \item doc
+    \item apps
+\end{itemize}
+
+\subsection{Development Model}
+\begin{itemize}
+    \item forks, master, branches, pull requests
+    \item travis CI
+\end{itemize}
