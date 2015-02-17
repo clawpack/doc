@@ -7,13 +7,55 @@
 
 \subsection{\pyclaw}
 
-Later 4.x releases included a number of Python-based tools for handling Clawpack input and output.  The 5.0 release includes a full-fledged Python solver in which the higher-level parts of Clawpack have been reimplemented in Python.  This new solver also includes access to the high-order algorithms introduced in SharpClaw and can be used on large distributed-memory parallel machines.  Lower-level code (whatever gets executed repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw codes is automatically wrapped at install time using f2py.
+Later 4.x releases included a number of Python-based tools for handling
+Clawpack input and output.  The 5.0 release includes a full-fledged Python
+solver in which the higher-level parts of Clawpack have been reimplemented in
+Python.  This new solver also includes access to the high-order algorithms
+introduced in SharpClaw and can be used on large distributed-memory parallel
+machines.  Lower-level code (whatever gets executed repeatedly and needs to be
+fast) from the earlier Fortran Classic and SharpClaw codes is automatically
+wrapped at install time using f2py.
+
+\subsubsection{Librarization and extensibility}
+Scientific software is easier to use, extend, and integrate with other tools when
+it is designed as a library \cite{brown2014run}.  Clawpack has always been designed
+to be extensible, but PyClaw takes this further in several ways.  First, it is
+distributed via a widely-used package management system, pip.
+Second, the default installation process ("pip install clawpack")
+provides the user with a fully-compiled code and does not require setting environment
+variables.  Like other Clawpack packages, PyClaw provides several "hooks" for users
+to plug in custom routines (for instance, to specify boundary conditions).
+In PyClaw, these routines -- including the Riemann solver itself -- are selected at
+run-time, rather than at compile-time.  These routines can be written directly in
+Python, or (if they are performance-critical) in a compiled language (like Fortran or C)
+and wrapped with one of the many available tools.  Problem setup (including things like
+initial conditions, algorithm selection, and output specification) is also
+performed at run-time, which means that researchers can bypass much of the slower
+code-compile-execute-postprocess cycle.
+It is intended that PyClaw be easily usable within other packages (without control of main()).
+
+\subsubsection{Python classes for data on collections of structured grids}
+PyClaw includes Python classes for describing collections of structured grids
+and data on them.
+These classes are also used by the other codes through VisClaw, for post-processing.
+
+Briefly describe: Dimension, Grid, Patch, State, Solution, Controller.
+
+\subsubsection{PyClaw Solvers}
+\begin{itemize}
+    \item Classic
+    \item SharpClaw: new things include WENO (up to 17th order and in 3D), RK and multistep
+            time integration with rigorous SSP timestepping (Yiannis)
+\end{itemize}
+
+\subsubsection{PyClaw backends}
+\begin{itemize}
+    \item pure numpy
+    \item PETSc
+    \item Boxlib (Matt)
+\end{itemize}
 
 \begin{itemize}
     \item overall structure/languages figure
-    \item sharpclaw
-    \item petclaw
-    \item f2py
-    \item pip install
     \item IPython notebooks
 \end{itemize}
