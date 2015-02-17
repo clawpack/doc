@@ -8,7 +8,11 @@
 \section{Development Approach}
 
 \subsection{Github organization, subrepositories}
-Clawpack includes several related software projects, each of which is managed in its own repository on Github.  These projects are sub-repositories of the high-level Clawpack repository and are assigned to the Clawpack Github organization.  The set of maintainers -- with push and merge privileges -- is different for each sub-repository.
+Clawpack includes several related software projects, each of which is managed
+in its own repository on Github.  These projects are sub-repositories of the
+high-level Clawpack repository and are assigned to the Clawpack Github
+organization.  The set of maintainers -- with push and merge privileges -- is
+different for each sub-repository.
 
 The main solver repositories are:
 \begin{itemize}
@@ -26,7 +30,47 @@ Additional repositories contain documentation and extended examples of using the
 \end{itemize}
 
 \subsection{Development Model}
-\begin{itemize}
-    \item forks, master, branches, pull requests
-    \item travis CI
-\end{itemize}
+
+\subsubsection{Contributing}
+Scientist programmers are often discouraged from sharing code
+due to existing reward mechanisms and the fear of being "scooped".
+In fact, scientific communities that openly share and develop code
+have an advantage because each researcher can leverage the work of
+many others \cite{turk2013scaling}.
+
+Over the past twenty years, a great number of users have written
+additional code, extending Clawpack with new Riemann solvers,
+algorithms, and domain-specific problem tools.  Most of this code
+has not made it back into the core library.  With Clawpack 5.x,
+we are trying to encourage contributions from a broad community, with
+tools like distributed version control and open discussions on 
+the mailing lists and issue trackers.
+Clawpack is supported by a community of user-developers whose
+collaboration
+
+Clawpack uses the distributed version control software git.
+The main repository is hosted on Github.  Anyone may contribute,
+for instance by developing new code, reporting bugs, or suggesting
+improvements.
+
+Bugs and feature requests are posted as issues on the tracker that
+is part of the Github repository.  The tracker provides a page for
+discussing the issue.
+
+The primary development model
+is typical for Github projects: a contributor forks the repository on Github,
+and develops improvements in a branch that is pushed to her own fork.
+She issues a "pull request" (PR) when the branch is ready to be merged
+into the main repository.  Increasingly, contributors are also using
+PRs as a way to conveniently post preliminary or prototype code for
+discussion prior to further development.
+
+After a PR is issued, other developers -- including one or more of the
+maintainers for the corresponding repository -- reviews the code.  The Travis
+CI server also automatically runs the tests on the proposed new code.  The test
+results are visible on the Github page for the PR.  Usually there is some
+iteration as developers suggest improvements, request more testing, etc.
+Once the tests are passing and it is agreed that the code is acceptable, a
+maintainer merges it.
+
+\subsubsection{Releases}
