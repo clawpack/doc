@@ -1,0 +1,105 @@
+%&pdflatex
+%
+%  Clawpack 5.x (x <= 3) Paper
+%
+\documentclass[]{article}
+
+\usepackage{graphicx}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Multipart figures
+% \usepackage{subcaption}
+
+% More symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+% URL and linking help
+\usepackage{hyperref}
+
+% Package for including code in the document
+\usepackage{listings}
+% \DeclareCaptionFont{white}{\color{white}}
+% \DeclareCaptionFormat{listing}{%
+%   \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+% \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+% \lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep,numbers=left,basicstyle=\ttfamily\small,language=python,columns=fixed,commentstyle=\em\color[rgb]{0.133,0.545,0.133}}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+% Add line numbers
+\usepackage[mathlines]{lineno}
+
+% Need to use this package to handle the spacing issues in LaTeX after a command
+\usepackage{xspace}
+
+% Markup
+\usepackage{color}
+\newcommand{\comment}[1]{\color{blue} #1}
+\newcommand{\alert}[1]{\textbf{\color{red} #1}}
+
+\graphicspath{{./figures/}}
+
+
+
+% Useful commands
+\include{macros}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.png, .jpg, .tif, .eps}
+\fi
+
+\title{The Clawpack 5.X Software}
+
+% Authors: Anyone who has....
+%  - Made a nontrivial contribution to 5.0, 5.1, 5.2,
+%  - Contributes at least a sentence to the paper,
+%  - Has read the final draft and agreed to be an author.
+
+\author{
+        Aron J. Ahmadia\thanks{
+            Army Corp of Engineers (\mbox{aron@awesome.com})} \and
+        Marsha Berger\thanks{
+            New York University (\mbox{berger@cims.nyu.edu})} \and
+        Donna Calhoun\thanks{
+            Boise State University (\mbox{donna.calhoun@gmail.com})} \and
+        Matthew Emmett\thanks{
+            Lawrence Berkeley National Laboratory (\mbox{memmett@gmail.com})} \and
+        David George\thanks{
+            USGS (\mbox{dgeorge@usgs.gov})} \and
+        Yiannis Hadjimichael\thanks{
+            King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{yiannis.hadjimichael@kaust.edu.sa})} \and
+        David I. Ketcheson\thanks{
+            King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{david.ketcheson@kaust.edu.sa})} \and
+        Randall J. LeVeque\thanks{
+            University of Washington (\mbox{rjl.@uw.edu})} \and
+        Kyle T. Mandli\thanks{
+            Columbia University (\mbox{kyle.mandli@columbia.edu})}
+        }
+
+\maketitle
+
+\begin{abstract}
+    Put really awesome abstract here.
+\end{abstract}
+
+\input{intro}
+
+\input{development}
+
+\input{advances}
+
+\input{future}
+
+\bibliographystyle{alpha}
+\bibliography{paper}
+
+\end{document}
