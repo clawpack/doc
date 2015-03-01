@@ -8,13 +8,17 @@
 \subsection{\pyclaw}
 
 Later 4.x releases included a number of Python-based tools for handling
-Clawpack input and output.  The 5.0 release includes a full-fledged Python
-solver in which the higher-level parts of Clawpack have been reimplemented in
-Python.  This new solver also includes access to the high-order algorithms
-introduced in SharpClaw and can be used on large distributed-memory parallel
-machines.  Lower-level code (whatever gets executed repeatedly and needs to be
-fast) from the earlier Fortran Classic and SharpClaw codes is automatically
-wrapped at install time using f2py.
+Clawpack input and output.  The 5.x releases include a set of full-fledged Python
+solvers in which the higher-level parts of Clawpack have been reimplemented in
+Python and adapted to an object-oriented framework.  This new solver also
+includes access to the high-order algorithms introduced in SharpClaw (i.e.,
+WENO reconstruction and Runge--Kutta integrators)and can be used on large
+distributed-memory parallel machines.  Lower-level code (whatever gets executed
+repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw
+codes is automatically wrapped at install time using f2py.
+
+PyClaw's data structures and IO routines are also used by the other Clawpack
+codes and VisClaw for post-processing.
 
 \subsubsection{Librarization and extensibility}
 Scientific software is easier to use, extend, and integrate with other tools when
@@ -35,18 +39,39 @@ code-compile-execute-postprocess cycle.
 It is intended that PyClaw be easily usable within other packages (without control of main()).
 
 \subsubsection{Python classes for data on collections of structured grids}
+\todo{DK: I'm not sure how much detail we want here.}
 PyClaw includes Python classes for describing collections of structured grids
 and data on them.
 These classes are also used by the other codes through VisClaw, for post-processing.
 
-Briefly describe: Dimension, Grid, Patch, State, Solution, Controller.
+A mesh in Clawpack always consists of a set of (possibly) mapped tensor-product
+grids (interval, quadrilateral, or hexahedral).  In PyClaw this geometry is represented
+through the following objects:
+\begin{itemize}
+    \item A {\bf Dimension} is an interval divided into a fixed number of equally-sized subintervals.
+    \item A {\bf Patch} is the tensor product of 1-3 Dimension objects, possibly with an associated mapping.
+    \item A {\bf Domain} is a collection of any number of possibly overlapping Patch objects.
+\end{itemize}
+At present, PyClaw solvers operate only on a single patch.  Multi-patch capability
+is used to represent geometries from AMRClaw and GeoClaw runs, and is planned for
+utilization in a future AMR-enabled version of PyClaw.
+
+The simulation data are represented by an additional set of objects:
+\begin{itemize}
+    \item A {\bf State} contains values of the solution vector $q$ and any
+        auxiliary variables for each cell in a given Patch.
+    \item A {\bf Solution} is a collection of States, corresponding to values of the solution
+        on each Patch in a Domain.
+\end{itemize}
 
 \subsubsection{PyClaw Solvers}
+A Solver is used to advance a Solution in time.  Two types of solvers are implemented:
 \begin{itemize}
-    \item Classic
-    \item SharpClaw: new things include WENO (up to 17th order and in 3D), RK and multistep
-            time integration with rigorous SSP timestepping (Yiannis)
+    \item {\bf Classic}: the Lax-Wendroff-based solvers that are used in other Clawpack codes.
+    \item {\bf SharpClaw}: high-order solvers based on WENO reconstruction and Runge-Kutta
+        or linear multistep time integration.
 \end{itemize}
+\todo{Yiannis: describe new timestepping here}
 
 \subsubsection{PyClaw backends}
 \begin{itemize}
