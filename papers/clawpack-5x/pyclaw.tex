@@ -71,7 +71,47 @@ A Solver is used to advance a Solution in time.  Two types of solvers are implem
     \item {\bf SharpClaw}: high-order solvers based on WENO reconstruction and Runge-Kutta
         or linear multistep time integration.
 \end{itemize}
-\todo{Yiannis: describe new timestepping here}
+All PyClaw Solvers can use both fixed and variable step-size.
+In order to preserve stability a CFL-like condition is being checked at each step of the computation, based on
+a user-defined maximum CFL number.
+The step-size must be chosen in such a way that the CFL number is always less than the maximum allowed 
+value, thus in the case of variable step-size a rigorous step-size control is required.
+We distinguish the Lax-Wendroff-based solvers and Runge-Kutta methods from linear multistep methods,
+since the step-size strategy is different.
+
+For the Lax-Wendroff and Runge-Kutta methods, first a choice for the step-size is made according to the 
+maximum wave speed of the current solution 
+(and the maximum wave speeds of stage solutions for Runge--Kutta methods).
+Then a new solution is computed using this step-size and the CFL number is evaluated.
+If the CFL number is less than the maximum allowed value then the step is accepted and a new step-size is 
+chosen in the same manner.
+Otherwise, the wave speed at the current step is large enough to cause instability or spurious oscillations if 
+such a step-size is used, hence the step is rejected.
+An updated step-size based on the increase of the maximum wave speed is calculated and the step is
+repeated.
+This guarantees that a step is rejected at most once and in most cases only the first step is rejected due to 
+large initial step-size.
+Currently SharpClaw Runge--Kutta time integrators consist of Euler method, second-, third- and forth-order
+optimal SSP Runge--Kutta methods with two, three and ten stages respectively.
+Also a general Runge-Kutta method with user-defined coefficients can be used. 
+
+For linear multistep methods the step-size selection is more involved since a variable step-size depends on
+the SSP coefficient of the method which in turn depends on previous step-sizes and the method's coefficients 
+that are varied to attain hight order. 
+All these intricate relations are analysed in [cite SSPVLMM paper], where second and third order SSP linear
+multistep methods with variable step-size are developed.
+SharpClaw linear multistep methods consist of second-order, three-step and third-order, four-step optimal 
+SSP linear multistep methods.
+In both cases explicit formulae for the step-size are used based on the permissible SSP step-size that 
+guarantees the SSP property.
+SSP Runge--Kutta are used for the starting values and the step-size for the those steps is chosen as
+explained above.
+For the third-order linear multistep methods additional {\em a posteriori} conditions must be applied.
+Basically, they imply that the step-size remains finite and non-zero and that the forward Euler step-size
+changes little over a single step.
+Whenever these conditions are violated the step is rejected, a new step-size is derived and the solution is
+recalculated.
+Again, the fix in the step-size is such that the step is rejected at most once.
 
 \subsubsection{PyClaw backends}
 \begin{itemize}
