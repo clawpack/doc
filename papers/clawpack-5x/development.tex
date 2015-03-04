@@ -7,31 +7,86 @@
 
 \section{Development Approach}
 
-\subsection{Github organization, subrepositories}
-Clawpack includes several related software projects, each of which is managed
-in its own repository on Github.  These projects are sub-repositories of the
-high-level Clawpack repository and are assigned to the Clawpack Github
-organization.  The set of maintainers -- with push and merge privileges -- is
-different for each sub-repository.
+Clawpack's development model is largely driven by the needs of its
+developer community.  The Clawpack project contains core solver
+functionality, a visualization suite, a general adaptive mesh
+refinement code, a specialized geophysical flow code, and a
+massively parallelized Python framework.  Changes to the core solvers
+and visualization suite have a downstream effect on the other codes,
+and the developers largely work in an independent, asynchronous manner
+across continents and time zones. 
 
-The main solver repositories are:
+The Clawpack team leverages the Git distributed version control system
+to coordinate development, with each major project and its development
+team assigned to its own repository.  The repositories are each
+publicly coordinated under the Clawpack organization on GitHub, and a
+top-level \texttt{clawpack} repository is responsible for hosting
+build and installation tools as well as providing a synchronization
+point for the other repositories.
+
+\subsection{GitHub}
+
+GitHub is a free provider of public Git repositories.  In addition to
+repository hosting, the Clawpack team uses GitHub for issue tracking,
+code review, automated continuous integration via Travis CI, and test
+coverage tracking via Coveralls.  The issue tracker on GitHub
+automatically recognizes cross-repository references, simplifying
+communication between Clawpack developer sub-teams.  The Travis CI
+services, which provides free continuous integration for publicly
+developed repositories on GitHub, runs Clawpack's test suites on
+proposed changes to the code base, and through a connection to
+the Coveralls service, reports on any test failures as well as changes
+to test coverage.
+
+\subsection{Submodules}
+
+As mentioned earlier, the \texttt{clawpack} repository serves as an
+installation and synchronization point for the other repositories.
+From a Computer Science perspective, the \texttt{clawpack} repository
+holds \textit{references} to a version of the code in each
+repository.  
+
+The main Clawpack repositories are:
 \begin{itemize}
-    \item Riemann (Riemann solvers used by all the other projects)
-    \item Classic
-    \item \amrclaw
-    \item \geoclaw
-    \item \pyclaw
+    \item \texttt{clawpack} - Installation, coordination of other repositories
+    \item \texttt{riemann} - Riemann solvers used by all the other projects
+    \item \texttt{visclaw} - Visualization suite used by all the other projects
+    \item \texttt{classic}
+    \item \texttt{amrclaw}
+    \item \texttt{geoclaw}
+    \item \texttt{pyclaw}
 \end{itemize}
 
-Additional repositories contain documentation and extended examples of using the code:
+Additional repositories contain documentation and extended examples of
+using the code: 
 \begin{itemize}
-    \item doc
-    \item apps
+    \item \texttt{doc}
+    \item \texttt{apps}
 \end{itemize}
 
-\subsection{Development Model}
+We sometimes refer to \texttt{riemann} and \texttt{visclaw} as
+\textit{upstream} repositories, since their changes affect the
+remaining repositories in the list, which we usually refer to as
+\textit{downstream} repositories.
 
-\subsubsection{Contributing}
+Typically, the Clawpack developers advance the master development
+branch of the repository any time a major feature is added or a bug is
+fixed in one of the other repositories.  When a feature is added to an
+upstream repository that affects other repositories, the addition of
+this change is coordinated with the downstream repositories by
+simultaneously advancing the version of the upstream repository as
+well as all affected downstream repositories.  
+
+Git submodules are very powerful, but many developers, both new and
+experienced, find them confusing and challenging to work with.
+However, they have proved invaluable in allowing the Clawpack team to
+work asynchronously on sub-projects while reusing and maintaining
+common software infrastructure.
+
+\subsection{Contributing}
+
+\textbf{TODO: Revise this section, remove redundancy}
+
 Scientist programmers are often discouraged from sharing code
 due to existing reward mechanisms and the fear of being "scooped".
 In fact, scientific communities that openly share and develop code
@@ -48,8 +103,8 @@ the mailing lists and issue trackers.
 Clawpack is supported by a community of user-developers whose
 collaboration
 
-Clawpack uses the distributed version control software git.
-The main repository is hosted on Github.  Anyone may contribute,
+Clawpack uses the distributed version control software Git.
+The main repository is hosted on GitHub.  Anyone may contribute,
 for instance by developing new code, reporting bugs, or suggesting
 improvements.
 
@@ -73,4 +128,6 @@ iteration as developers suggest improvements, request more testing, etc.
 Once the tests are passing and it is agreed that the code is acceptable, a
 maintainer merges it.
 
-\subsubsection{Releases}
+\subsection{Releases}
+
+\textbf{TODO: Add release information}
