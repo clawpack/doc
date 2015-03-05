@@ -5,12 +5,95 @@
 % Lead currently:  Randy LeVeque
 %
 
-\subsection{\geoclaw} \textbf{Randy}
-\begin{itemize}
-    \item NTHMP benchmarks
-    \item setaux copying for faster topography integration, recursive 
-    \item new topotools and dtopotools
-    \item multiple dtopo files
-    \item fixed grid monitoring of max values
-    \item Spatially varying boundary conditions
-\end{itemize}
+\subsection{\geoclaw} 
+
+\todo{Is this the right level of detail?}
+
+The GeoClaw branch of Clawpack originated with the work of George
+\cite{dgeorge:master, dgeorge:phd, dgeorge:jcp} on solving the
+two-dimensional shallow water equations using adaptive mesh refinement under
+conditions necessary for modeling tsunami generation, propagation, and
+inundation.
+The AMRClaw code formed the starting point but it was necessary to make many 
+modifications to support the requirements of this application, as described
+briefly below, and so a branch was created that was initially called
+TsunamiClaw.  Later it became clear that there were many other potential
+applications with similar requirements when modeling a variety of
+geophysical flows over varying topography that are very shallow 
+relative to their lateral extent,
+and the code was generalized to become GeoClaw.  
+\todo{Include the 2d shallow water equations with topography, friction?}
+
+One major issue was the desire to handle wetting and drying of grid cells at
+margins of the flow, which required development of a Riemann solver that
+robustly handled dry states.  The code must also be well-balanced so that an
+ocean at rest remains at rest and waves with amplitudes that are very small
+relative to the depth of the ocean are well resolved.  Topography appears in
+the equations as a source term in the momentum equation and well balancing
+requires that this source term be incorporated into the Riemann solver
+rather than solving with a fractional step approach.  The Riemann solver
+developed in \cite{dgeorge:phd, dgeorge:jcp} achieves these objectives.
+Other features of GeoClaw include the ability to solve the equations in
+latitude--longitude coordinates on the surface of the sphere, and the
+incorporation of source terms modeling bottom friction using a Manning
+formulation.
+More details about the code and tsunami modeling applications can be found
+in \cite{BergerGeorgeLeVequeMandli:awr11, LeVequeGeorgeBerger:an11}. 
+In addition to a variety of tsunami modeling applications (e.g. \cite{??}),
+the GeoClaw code has been used to solve dam break problems in steep terrain
+\cite{George:Malpasset}, storm surge problems \cite{??},
+submarine landslides \cite{??}.  The code also
+formed the basis for exploration for the use of 
+multi-layer shallow water equations for storm surge modeling
+\cite{mandli:phd, ??} and is currently being extended further into D-Claw,
+for debris flow modeling \cite{??}.
+
+%When restructuring the code for Clawpack 5.0, GeoClaw was separated out into
+%a separate GitHub repository.   
+Several substantial improvements in the
+algorithms implemented in GeoClaw have been made between versions 4.6.3 and
+5.3.0, including:
+
+\begin{itemize} 
+\item GeoClaw includes the ability specify topography via a set of {\tt
+topo} files that may cover overlapping regions at different resolutions. The
+finite volume method requires cell averages of topography, computed by
+integrating a piecewise bilinear function constructed from the input {\tt
+topo} files over each grid cell.  In 5.1.0, this was improved to 
+allow an arbitrary number of nested {\tt topo} grids.
+When adaptive mesh refinement is used,
+regridding may take place every few time steps.  Improvements were made 
+in 5.2.0 so that topography could be copied rather than always being
+recomputed in regions where there is an old grid at the same resolution to
+copy from.  
+
+\item The user can also provide {\tt dtopo} files that specify changes to
+the initial topography at a series of times.  This is used to specify
+seafloor motion during a tsunamigenic earthquake, but can also be used to
+specify submarine landslide motion or a failing dam, for example.
+Major changes were made to these algorithms in 5.1.0 to fix a problem
+in earlier versions that resulted in incorrect topography motion in some
+cases, also resulting in a much more robust handling of multiple 
+{\tt dtopo} files.
+
+\item New capabilities were added in 5.0.0 to monitor the maximum of various
+flow quantities over a specified time range of a simulation.  This
+capability is crucial for many applications such as tsunami hazard
+assessment, where the maximum flow depth at each point in a community is
+desired, maximum current velocities in a harbor, or maximum momentum flux (a
+measure of the hydrodynamic force that would be exerted by the flow on a
+structure.  Arrival time of the first wave at each point can also be
+monitored.  Some such capabilities were included in the 4.x version of the code,
+but were more limited and did not always perform properly near the edges of
+refinement patches.  The user can specify a grid
+of points on which to monitor values, and the new code is more flexible in
+allowing one-dimensional grids (e.g. a transect), two-dimensional
+rectangular grids, or an arbitrary set of points.
+
+\item A number of new Python modules have been developed to assist the user
+in working with {\tt topo} and {\tt dtopo} files.  To be continued...
+
+\end{itemize} 
+
+\todo{Still to add: NTHMP benchmark discussion?, 
+Spatially varying boundary conditions -- Kyle what did you have in mind?}
