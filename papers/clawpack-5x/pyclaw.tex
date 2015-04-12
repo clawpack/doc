@@ -8,53 +8,53 @@
 \subsection{\pyclaw}
 
 Later 4.x releases included a number of Python-based tools for handling
-Clawpack input and output.  The 5.x releases include a set of full-fledged Python
-solvers in which the higher-level parts of Clawpack have been reimplemented in
+\clawpack input and output.  The 5.x releases include a set of full-fledged Python
+solvers in which the higher-level parts of \clawpack have been reimplemented in
 Python and adapted to an object-oriented framework.  This new solver also
 includes access to the high-order algorithms introduced in SharpClaw (i.e.,
-WENO reconstruction and Runge--Kutta integrators)and can be used on large
+WENO reconstruction and Runge--Kutta integrators) and can be used on large
 distributed-memory parallel machines.  Lower-level code (whatever gets executed
 repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw
-codes is automatically wrapped at install time using f2py.
+codes is automatically wrapped at install time using \texttt{f2py}.
 
-PyClaw's data structures and IO routines are also used by the other Clawpack
+\pyclaw's data structures and IO routines are also used by the other \clawpack
 codes and VisClaw for post-processing.
 
-\subsubsection{Librarization and extensibility}
+\subsubsection{Librarization and Extensibility}
 Scientific software is easier to use, extend, and integrate with other tools when
-it is designed as a library \cite{Brown:2015cj}.  Clawpack has always been designed
-to be extensible, but PyClaw takes this further in several ways.  First, it is
-distributed via a widely-used package management system, pip.
-Second, the default installation process ("pip install clawpack")
+it is designed as a library \cite{Brown:2015cj}.  \clawpack has always been designed
+to be extensible, but \pyclaw takes this further in several ways.  First, it is
+distributed via a widely-used package management system, \texttt{pip}.
+Second, the default installation process ("\texttt{pip install clawpack}")
 provides the user with a fully-compiled code and does not require setting environment
-variables.  Like other Clawpack packages, PyClaw provides several "hooks" for users
+variables.  Like other \clawpack packages, \pyclaw provides several ``hooks'' for users
 to plug in custom routines (for instance, to specify boundary conditions).
-In PyClaw, these routines -- including the Riemann solver itself -- are selected at
+In \pyclaw, these routines -- including the Riemann solver itself -- are selected at
 run-time, rather than at compile-time.  These routines can be written directly in
 Python, or (if they are performance-critical) in a compiled language (like Fortran or C)
 and wrapped with one of the many available tools.  Problem setup (including things like
 initial conditions, algorithm selection, and output specification) is also
 performed at run-time, which means that researchers can bypass much of the slower
 code-compile-execute-postprocess cycle.
-It is intended that PyClaw be easily usable within other packages (without control of main()).
+It is intended that \pyclaw be easily usable within other packages (without control of main()).
 
 \subsubsection{Python classes for data on collections of structured grids}
-\todo{DK: I'm not sure how much detail we want here.}
-PyClaw includes Python classes for describing collections of structured grids
+\todo{DK: I'm not sure how much detail we want here. <-- Not sure either, lets keep it at this level for the time being and add or subtract later.}
+\pyclaw includes Python classes for describing collections of structured grids
 and data on them.
 These classes are also used by the other codes through VisClaw, for post-processing.
 
-A mesh in Clawpack always consists of a set of (possibly) mapped tensor-product
-grids (interval, quadrilateral, or hexahedral).  In PyClaw this geometry is represented
+A mesh in \clawpack always consists of a set of (possibly) mapped tensor-product
+grids (interval, quadrilateral, or hexahedral).  In \pyclaw this geometry is represented
 through the following objects:
 \begin{itemize}
     \item A {\bf Dimension} is an interval divided into a fixed number of equally-sized subintervals.
     \item A {\bf Patch} is the tensor product of 1-3 Dimension objects, possibly with an associated mapping.
     \item A {\bf Domain} is a collection of any number of possibly overlapping Patch objects.
 \end{itemize}
-At present, PyClaw solvers operate only on a single patch.  Multi-patch capability
-is used to represent geometries from AMRClaw and GeoClaw runs, and is planned for
-utilization in a future AMR-enabled version of PyClaw.
+At present, \pyclaw solvers operate only on a single patch.  Multi-patch capability
+is used to represent geometries from \amrclaw and \geoclaw runs, and is planned for
+utilization in a future AMR-enabled version of \pyclaw.
 
 The simulation data are represented by an additional set of objects:
 \begin{itemize}
@@ -64,14 +64,13 @@ The simulation data are represented by an additional set of objects:
         on each Patch in a Domain.
 \end{itemize}
 
-\subsubsection{PyClaw Solvers}
+\subsubsection{\pyclaw Solvers}
 A Solver is used to advance a Solution in time.  Two types of solvers are implemented:
 \begin{itemize}
     \item {\bf Classic}: the Lax-Wendroff-based solvers that are used in other Clawpack codes.
-    \item {\bf SharpClaw}: high-order solvers based on WENO reconstruction and Runge-Kutta
-        or linear multistep time integration.
+    \item {\bf SharpClaw}: high-order solvers based on WENO reconstruction and Runge-Kutta or linear multistep time integration.
 \end{itemize}
-All PyClaw Solvers can use both fixed and variable step-size.
+All \pyclaw Solvers can use both fixed and variable step-size.
 In order to preserve stability a CFL-like condition is being checked at each step of the computation, based on
 a user-defined maximum CFL number.
 The step-size must be chosen in such a way that the CFL number is always less than the maximum allowed 
@@ -98,11 +97,11 @@ Also a general Runge-Kutta method with user-defined coefficients can be used.
 For linear multistep methods the step-size selection is more involved since a variable step-size depends on
 the SSP coefficient of the method which in turn depends on previous step-sizes and the method's coefficients 
 that are varied to attain hight order. 
-All these intricate relations are analysed in [cite SSPVLMM paper], where second and third order SSP linear
+All these intricate relations are analysed in \todo{cite SSPVLMM paper}, where second and third order SSP linear
 multistep methods with variable step-size are developed.
 SharpClaw linear multistep methods consist of second-order, three-step and third-order, four-step optimal 
 SSP linear multistep methods.
-In both cases explicit formulae for the step-size are used based on the permissible SSP step-size that 
+In both cases explicit formula for the step-size are used based on the permissible SSP step-size that 
 guarantees the SSP property.
 SSP Runge--Kutta are used for the starting values and the step-size for the those steps is chosen as
 explained above.
