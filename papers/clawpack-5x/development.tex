@@ -28,8 +28,9 @@ point for the other repositories.
 
 GitHub is a free provider of public Git repositories.  In addition to
 repository hosting, the Clawpack team uses GitHub for issue tracking,
-code review, automated continuous integration via Travis CI, and test
-coverage tracking via Coveralls.  The issue tracker on GitHub
+code review, automated continuous integration via Travis CI \cite{travis}, 
+and test coverage tracking via Coveralls \cite{coveralls}.  
+The issue tracker on GitHub
 automatically recognizes cross-repository references, simplifying
 communication between Clawpack developer sub-teams.  The Travis CI
 services, which provides free continuous integration for publicly
@@ -48,13 +49,15 @@ repository.
 
 The main Clawpack repositories are:
 \begin{itemize}
-    \item \texttt{clawpack} - Installation, coordination of other repositories
-    \item \texttt{riemann} - Riemann solvers used by all the other projects
-    \item \texttt{visclaw} - Visualization suite used by all the other projects
-    \item \texttt{classic}
-    \item \texttt{amrclaw}
-    \item \texttt{geoclaw}
-    \item \texttt{pyclaw}
+    \item \texttt{clawpack} - Installation, coordination of other repositories,
+    \item \texttt{riemann} - Riemann solvers used by all the other projects,
+    \item \texttt{visclaw} - Visualization suite used by all the other projects,
+    \item \texttt{clawutil} - Utility functions used by most other projects,
+    \item \texttt{classic} - Uniform grid methods in 1, 2, and 3 space dimensions,
+    \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimsensions,
+    \item \texttt{geoclaw} - AMR codes for geophysical flows,
+    \item \texttt{pyclaw} - Python versions with many extensions, see
+        Section~\ref{sec:pyclaw}.
 \end{itemize}
 
 Additional repositories contain documentation and extended examples of
@@ -63,8 +66,14 @@ using the code:
     \item \texttt{doc}
     \item \texttt{apps}
 \end{itemize}
+Clawpack 4.x is still available in the repository
+\begin{itemize}
+    \item \texttt{clawpack-4.x}
+\end{itemize}
+but is no longer under active development.
 
-We sometimes refer to \texttt{riemann} and \texttt{visclaw} as
+We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
+\texttt{clawutil} as
 \textit{upstream} repositories, since their changes affect the
 remaining repositories in the list, which we usually refer to as
 \textit{downstream} repositories.
