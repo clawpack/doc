@@ -52,24 +52,10 @@ The pages below give some tips for those who want to get involved.
 Workshops and Sprint Sessions
 -----------------------------
 
-
 Upcoming
 ^^^^^^^^
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
-
-- Developers' workshop and sprint sessions on Thursday, March 19 at the
-  University of Utah.  (Time and room to be announced.)
-
-  `Wiki to suggest discussion / sprint topics
-  <https://github.com/clawpack/clawpack/wiki/Claw-Dev-Hackathon,-March-2015>`_.
-
-  This is immediately 
-  following the `SIAM CSE <http://www.siam.org/meetings/cse15/submissions.php>`_
-  in Salt Lake City.
-  If you're at the conference, check out the 
-  Minisymposterium Sunday, March 15, 2015 on 
-  `Clawpack Development, Extensions and Applications <http://meetings.siam.org/sess/dsp_programsess.cfm?SESSIONCODE=20422>`_
 
 - Claw-Dev workshop in September (?), 2015 (Date and location TBD).
 
@@ -79,6 +65,11 @@ Previous
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
 
+- Developers' workshop at the University of Utah in 
+  `2015 <https://github.com/clawpack/clawpack/wiki/Claw-Dev-Hackathon,-March-2015>`_, 
+  following the 
+  `SIAM CSE Conference <http://www.siam.org/meetings/cse15/submissions.php>`_.
+
 - :math:`[HPC]^3` workshops at KAUST in 
   `2011 <https://sites.google.com/site/hpc3atkaust/>`_,
   `2012 <https://github.com/clawpack/pyclaw/wiki/HPC3-2012>`_,
@@ -87,3 +78,12 @@ have been tackled (and/or are still work in progress).
 - Claw-Dev workshop at UW in `2013 <http://www.clawpack.org/clawdev2013/>`_
 
 
+Other Clawpack events
+---------------------
+
+-  Minisymposterium on 
+   `Clawpack Development, Extensions and Applications
+   <http://depts.washington.edu/clawpack/posters/siam_cse_2015/>`_
+   at the `SIAM CSE 2015 Conference <http://www.siam.org/meetings/cse15/submissions.php>`_
+
+See :ref:`photos` for some photos of the team.
