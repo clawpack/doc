@@ -10,7 +10,9 @@
 \todo{Is this the right level of detail?}
 
 The \geoclaw branch of Clawpack originated with the work of George
-\cite{dgeorge:masters, dgeorge:phd, dgeorge:jcp} on solving the
+\cite{dgeorge:masters, dgeorge:phd, dgeorge:jcp} 
+%\cite{george:2006, George:2008aa} 
+on solving the
 two-dimensional shallow water equations using adaptive mesh refinement under
 conditions necessary for modeling tsunami generation, propagation, and
 inundation.
@@ -40,12 +42,13 @@ More details about the code and tsunami modeling applications can be found
 in \cite{BergerGeorgeLeVequeMandli:awr11, LeVequeGeorgeBerger:an11}. 
 In addition to a variety of tsunami modeling applications (e.g. \cite{??}),
 the \geoclaw code has been used to solve dam break problems in steep terrain
-\cite{George:Malpasset}, storm surge problems \cite{??},
-submarine landslides \cite{??}.  The code also
+\cite{George:Malpasset}, storm surge problems \cite{Mandli:ws},
+and submarine landslides \cite{??}.  The code also
 formed the basis for exploration for the use of 
 multi-layer shallow water equations for storm surge modeling
-\cite{mandli:phd, ??} and is currently being extended further into D-Claw,
-for debris flow modeling \cite{??}.
+\cite{mandli:phd, Mandli:2011te} 
+and is currently being extended further into D-Claw, for debris flow modeling 
+\cite{Iverson:2014dc,George:2014gh}.
 
 Roughly one third of the files in the \amrclaw source library
 have to be modified for \geoclaw. 
@@ -64,7 +67,7 @@ algorithms implemented in \geoclaw have been made between versions 4.6.3 and
 5.3.0, including:
 
 \begin{itemize} 
-\item \geoclaw includes the ability specify topography via a set of {\tt
+\item \geoclaw includes the ability to specify topography via a set of {\tt
 topo} files that may cover overlapping regions at different resolutions. The
 finite volume method requires cell averages of topography, computed by
 integrating a piecewise bilinear function constructed from the input {\tt
@@ -75,34 +78,35 @@ regridding may take place every few time steps.  Improvements were made
 in 5.2.0 so that topography could be copied rather than always being
 recomputed in regions where there is an old grid at the same resolution to
 copy from.  
+\todo{This was included in AMRClaw above but ok to include again.}
 
-\item The user can also provide {\tt dtopo} files that specify changes to
-the initial topography at a series of times.  This is used to specify
-seafloor motion during a tsunamigenic earthquake, but can also be used to
-specify submarine landslide motion or a failing dam, for example.
-Major changes were made to these algorithms in 5.1.0 to fix a problem
-in earlier versions that resulted in incorrect topography motion in some
-cases, also resulting in a much more robust handling of multiple 
-{\tt dtopo} files.
+\item The user can also provide {\tt dtopo} files that specify changes to the
+initial topography at a series of times.  This is used to specify sea-floor
+motion during a tsunamigenic earthquake, but can also be used to specify
+submarine landslide motion or a failing dam, for example. Major changes were
+made to these algorithms in 5.1.0 to fix a problem in earlier versions that
+resulted in incorrect topography motion in some cases, also resulting in a much
+more robust handling of multiple  {\tt dtopo} files.
 
 \item New capabilities were added in 5.0.0 to monitor the maximum of various
-flow quantities over a specified time range of a simulation.  This
-capability is crucial for many applications such as tsunami hazard
-assessment, where the maximum flow depth at each point in a community is
-desired, maximum current velocities in a harbor, or maximum momentum flux (a
-measure of the hydrodynamic force that would be exerted by the flow on a
-structure.  Arrival time of the first wave at each point can also be
-monitored.  Some such capabilities were included in the 4.x version of the code,
-but were more limited and did not always perform properly near the edges of
-refinement patches.  The user can specify a grid
-of points on which to monitor values, and the new code is more flexible in
-allowing one-dimensional grids (e.g. a transect), two-dimensional
+flow quantities over a specified time range of a simulation.  This capability is
+crucial for many applications such as tsunami hazard assessment, where the
+maximum flow depth at each point in a community is desired, maximum current
+velocities in a harbor, or maximum momentum flux (a measure of the hydrodynamic
+force that would be exerted by the flow on a structure).  Arrival time of the
+first wave at each point can also be monitored.  Some such capabilities were
+included in the 4.x version of the code, but were more limited and did not
+always perform properly near the edges of refinement patches.  The user can
+specify a grid of points on which to monitor values, and the new code is more
+flexible in allowing one-dimensional grids (e.g. a transect), two-dimensional
 rectangular grids, or an arbitrary set of points.
+This is described in 
+\url{http://www.clawpack.org/fgmax.html}.
 
 \item A number of new Python modules have been developed to assist the user
-in working with {\tt topo} and {\tt dtopo} files.  To be continued...
+in working with {\tt topo} and {\tt dtopo} files.  \todo{To be continued...}
 
 \end{itemize} 
 
-\todo{Still to add: NTHMP benchmark discussion?, 
-Spatially varying boundary conditions -- Kyle what did you have in mind?}
+\todo[noline]{Still to add: NTHMP benchmark discussion?  <-- I think this would be great since this was a substantial effort and legitimizes the use of GeoClaw, was this done with 5.x or earlier though?}
+\todo[noline]{We could add more applications but I think this covers everything I was thinking of that was not covered somewhere in the AMRClaw section.}

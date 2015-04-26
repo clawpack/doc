@@ -7,8 +7,8 @@
 
 \section{Development Approach}
 
-Clawpack's development model is largely driven by the needs of its
-developer community.  The Clawpack project contains core solver
+\clawpack's development model is largely driven by the needs of its
+developer community.  The \clawpack project contains core solver
 functionality, a visualization suite, a general adaptive mesh
 refinement code, a specialized geophysical flow code, and a
 massively parallelized Python framework.  Changes to the core solvers
@@ -16,10 +16,10 @@ and visualization suite have a downstream effect on the other codes,
 and the developers largely work in an independent, asynchronous manner
 across continents and time zones. 
 
-The Clawpack team leverages the Git distributed version control system
+The \clawpack team leverages the Git distributed version control system
 to coordinate development, with each major project and its development
 team assigned to its own repository.  The repositories are each
-publicly coordinated under the Clawpack organization on GitHub, and a
+publicly coordinated under the \clawpack organization on GitHub, and a
 top-level \texttt{clawpack} repository is responsible for hosting
 build and installation tools as well as providing a synchronization
 point for the other repositories.
@@ -32,9 +32,9 @@ code review, automated continuous integration via Travis CI \cite{travis},
 and test coverage tracking via Coveralls \cite{coveralls}.  
 The issue tracker on GitHub
 automatically recognizes cross-repository references, simplifying
-communication between Clawpack developer sub-teams.  The Travis CI
+communication between \clawpack developer sub-teams.  The Travis CI
 services, which provides free continuous integration for publicly
-developed repositories on GitHub, runs Clawpack's test suites on
+developed repositories on GitHub, runs \clawpack's test suites on
 proposed changes to the code base, and through a connection to
 the Coveralls service, reports on any test failures as well as changes
 to test coverage.
@@ -47,7 +47,7 @@ From a Computer Science perspective, the \texttt{clawpack} repository
 holds \textit{references} to a version of the code in each
 repository.  
 
-The main Clawpack repositories are:
+The main \clawpack repositories are:
 \begin{itemize}
     \item \texttt{clawpack} - Installation, coordination of other repositories,
     \item \texttt{riemann} - Riemann solvers used by all the other projects,
@@ -55,16 +55,15 @@ The main Clawpack repositories are:
     \item \texttt{clawutil} - Utility functions used by most other projects,
     \item \texttt{classic} - Uniform grid methods in 1, 2, and 3 space dimensions,
     \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimsensions,
-    \item \texttt{geoclaw} - AMR codes for geophysical flows,
-    \item \texttt{pyclaw} - Python versions with many extensions, see
-        Section~\ref{sec:pyclaw}.
+    \item \texttt{geoclaw} - AMR codes for shallow geophysical flows,
+    \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massive parallelism capabilities
 \end{itemize}
 
 Additional repositories contain documentation and extended examples of
 using the code: 
 \begin{itemize}
-    \item \texttt{doc}
-    \item \texttt{apps}
+    \item \texttt{doc} - Documentation
+    \item \texttt{apps} - Applications contributed by developers and users
 \end{itemize}
 Clawpack 4.x is still available in the repository
 \begin{itemize}
@@ -78,7 +77,7 @@ We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
 remaining repositories in the list, which we usually refer to as
 \textit{downstream} repositories.
 
-Typically, the Clawpack developers advance the master development
+Typically, the \clawpack developers advance the master development
 branch of the repository any time a major feature is added or a bug is
 fixed in one of the other repositories.  When a feature is added to an
 upstream repository that affects other repositories, the addition of
@@ -88,43 +87,43 @@ well as all affected downstream repositories.
 
 Git submodules are very powerful, but many developers, both new and
 experienced, find them confusing and challenging to work with.
-However, they have proved invaluable in allowing the Clawpack team to
+However, they have proved invaluable in allowing the \clawpack team to
 work asynchronously on sub-projects while reusing and maintaining
 common software infrastructure.
 
 \subsection{Contributing}
 
-\textbf{TODO: Revise this section, remove redundancy}
+\todo{Revise Contributing section, remove redundancy}
 
 Scientist programmers are often discouraged from sharing code
-due to existing reward mechanisms and the fear of being "scooped".
+due to existing reward mechanisms and the fear of being ``scooped''.
 In fact, scientific communities that openly share and develop code
 have an advantage because each researcher can leverage the work of
-many others \cite{turk2013scaling}.
+many others \cite{Turk:2013hd}.
 
 Over the past twenty years, a great number of users have written
-additional code, extending Clawpack with new Riemann solvers,
+additional code, extending \clawpack with new Riemann solvers,
 algorithms, and domain-specific problem tools.  Most of this code
-has not made it back into the core library.  With Clawpack 5.x,
+has not made it back into the core library.  With \clawpack 5.x,
 we are trying to encourage contributions from a broad community, with
 tools like distributed version control and open discussions on 
 the mailing lists and issue trackers.
-Clawpack is supported by a community of user-developers whose
-collaboration
+\clawpack is supported by a community of user-developers whose
+collaboration is enabled by the use of git and Github.
 
-Clawpack uses the distributed version control software Git.
-The main repository is hosted on GitHub.  Anyone may contribute,
-for instance by developing new code, reporting bugs, or suggesting
-improvements.
+% \clawpack uses the distributed version control software Git.
+% The main repository is hosted on GitHub.  Anyone may contribute,
+% for instance by developing new code, reporting bugs, or suggesting
+% improvements.
 
-Bugs and feature requests are posted as issues on the tracker that
-is part of the Github repository.  The tracker provides a page for
-discussing the issue.
+% Bugs and feature requests are posted as issues on the tracker that
+% is part of the Github repository.  The tracker provides a page for
+% discussing the issue.
 
 The primary development model
 is typical for Github projects: a contributor forks the repository on Github,
 and develops improvements in a branch that is pushed to her own fork.
-She issues a "pull request" (PR) when the branch is ready to be merged
+She issues a ``pull request'' (PR) when the branch is ready to be merged
 into the main repository.  Increasingly, contributors are also using
 PRs as a way to conveniently post preliminary or prototype code for
 discussion prior to further development.
@@ -139,4 +138,4 @@ maintainer merges it.
 
 \subsection{Releases}
 
-\textbf{TODO: Add release information}
+\todo{Add release information}

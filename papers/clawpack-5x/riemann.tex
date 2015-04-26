@@ -6,7 +6,7 @@
 %
 
 \subsection{Riemann: A Community-Driven Collection of Approximate Riemann Solvers}
-The methods implemented in Clawpack, and all modern Godunov-type methods for
+The methods implemented in \clawpack, and all modern Godunov-type methods for
 hyperbolic PDEs, are based on the solution of Riemann problems.  A Riemann
 problem is the Cauchy initial value problem posed by a first-order system of
 hyperbolic PDEs and a piecewise-constant initial state with a single
@@ -19,18 +19,18 @@ encodes the specifics of the hyperbolic system to be solved, and it is the only
 routine (other than problem-specific setup) that needs to be changed in order
 to apply the code to different hyperbolic systems.  In some cases, the Riemann
 solver may also be designed to enforce physical properties like positivity
-(e.g., for the water depth in GeoClaw) or to account for forces (like that
+(e.g., for the water depth in \geoclaw) or to account for forces (like that
 of gravity) that may be balanced by flux terms.
 
 For nonlinear systems, the exact solution of the Riemann problem is computationally
 costly and may involve both discontinuities (shocks and contact waves) and
 rarefactions.  It is almost always preferable to employ inexact Riemann solvers
 that approximate the solution using discontinuities only.  Only the latter type
-of Riemann solvers may be used in Clawpack.  For some systems, like the Euler
+of Riemann solvers may be used in \clawpack.  For some systems, like the Euler
 equations of compressible flow, a range of approximate solvers (giving 
 more or less accurate results) has been developed in the literature.
 
-One of the main commonalities across all packages in the Clawpack suite is the
+One of the main commonalities across all packages in the \clawpack suite is the
 use of a standard interface for Riemann solver routines.  This ensures that new
 solvers or solver improvements developed for one package can immediately
 be used by all packages.  To further facilitate this sharing and to avoid 
@@ -41,15 +41,15 @@ Riemann repository.
 
 In the Fortran-based packages (Classic, AMRClaw, and GeoClaw) the Riemann
 solver is selected at compile-time by modifying a problem-specific Makefile.
-In PyClaw, the Riemann solver to be used is selected at run-time.  This is
-made possible by compiling all of the Riemann solvers (when PyClaw is installed)
-and generating Python wrappers with f2py.  For PyClaw, Riemann also provides
+In \pyclaw, the Riemann solver to be used is selected at run-time.  This is
+made possible by compiling all of the Riemann solvers (when \pyclaw is installed)
+and generating Python wrappers with \texttt{f2py}.  For \pyclaw, Riemann also provides
 useful metadata (such as the number of equations, the number of waves, and
 the names of the conserved quantities) for each solver.
 
 Whereas most existing codes for hyperbolic PDEs use Riemann solvers to
-compute fluxes, Clawpack Riemann solvers instead compute the waves 
+compute fluxes, \clawpack Riemann solvers instead compute the waves 
 (or discontinuities) that make up the approximate Riemann solution.
-Clawpack is also unusual in that it optionally makes use of transverse
+\clawpack is also unusual in that it optionally makes use of transverse
 Riemann solvers, responsible for computing transport between cells that
 touch only along an edge or a corner.
