@@ -16,20 +16,22 @@ and visualization suite have a downstream effect on the other codes,
 and the developers largely work in an independent, asynchronous manner
 across continents and time zones. 
 
+\subsection{GitHub}
+
 The \clawpack team leverages the Git distributed version control system
 to coordinate development, with each major project and its development
 team assigned to its own repository.  The repositories are each
-publicly coordinated under the \clawpack organization on GitHub, and a
+publicly coordinated under the \clawpack organization on GitHub, 
+\url{https://github.com/orgs/clawpack/dashboard} and a
 top-level \texttt{clawpack} repository is responsible for hosting
 build and installation tools as well as providing a synchronization
 point for the other repositories.
 
-\subsection{GitHub}
-
 GitHub is a free provider of public Git repositories.  In addition to
-repository hosting, the \clawpack team uses GitHub for issue tracking,
-code review, automated continuous integration via Travis CI, and test
-coverage tracking via Coveralls.  The issue tracker on GitHub
+repository hosting, the Clawpack team uses GitHub for issue tracking,
+code review, automated continuous integration via Travis CI \cite{travis}, 
+and test coverage tracking via Coveralls \cite{coveralls}.  
+The issue tracker on GitHub
 automatically recognizes cross-repository references, simplifying
 communication between \clawpack developer sub-teams.  The Travis CI
 services, which provides free continuous integration for publicly
@@ -48,12 +50,13 @@ repository.
 
 The main \clawpack repositories are:
 \begin{itemize}
-    \item \texttt{clawpack} - Installation and coordination of other repositories
-    \item \texttt{riemann} - Riemann solvers used by all the other projects
-    \item \texttt{visclaw} - Visualization suite used by all the other projects
-    \item \texttt{classic} - The original and core routines of \clawpack written in Fortran
-    \item \texttt{amrclaw} - General adaptive mesh refinement routines
-    \item \texttt{geoclaw} - Specific application of adaptive mesh refinement for shallow geophysical flows
+    \item \texttt{clawpack} - Installation, coordination of other repositories,
+    \item \texttt{riemann} - Riemann solvers used by all the other projects,
+    \item \texttt{visclaw} - Visualization suite used by all the other projects,
+    \item \texttt{clawutil} - Utility functions used by most other projects,
+    \item \texttt{classic} - Uniform grid methods in 1, 2, and 3 space dimensions,
+    \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimsensions,
+    \item \texttt{geoclaw} - AMR codes for shallow geophysical flows,
     \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massive parallelism capabilities
 \end{itemize}
 
@@ -63,8 +66,14 @@ using the code:
     \item \texttt{doc} - Documentation
     \item \texttt{apps} - Applications contributed by developers and users
 \end{itemize}
+Clawpack 4.x is still available in the repository
+\begin{itemize}
+    \item \texttt{clawpack-4.x}
+\end{itemize}
+but is no longer under active development.
 
-We sometimes refer to \texttt{riemann} and \texttt{visclaw} as
+We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
+\texttt{clawutil} as
 \textit{upstream} repositories, since their changes affect the
 remaining repositories in the list, which we usually refer to as
 \textit{downstream} repositories.
@@ -131,3 +140,4 @@ maintainer merges it.
 \subsection{Releases}
 
 \todo{Add release information}
+

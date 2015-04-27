@@ -5,22 +5,13 @@
 % Lead currently:  David
 %
 
-\subsection{Riemann: A Community-Driven Collection of Approximate Riemann Solvers}
+\subsection{Riemann: A Community-Driven Collection of Approximate Riemann
+Solvers}\label{sec:riemann}
+
 The methods implemented in \clawpack, and all modern Godunov-type methods for
-hyperbolic PDEs, are based on the solution of Riemann problems.  A Riemann
-problem is the Cauchy initial value problem posed by a first-order system of
-hyperbolic PDEs and a piecewise-constant initial state with a single
-discontinuity.  Riemann problems are central to hyperbolic PDEs because
-discontinuities arise spontaneously in their solution.  The main theoretical
-and numerical difficulties of hyperbolic problems involve the prescription of
-physically correct weak solutions -- in other words, understanding the behavior
-of the solution at discontinuities.  The Riemann solver is an algorithm that
-encodes the specifics of the hyperbolic system to be solved, and it is the only
-routine (other than problem-specific setup) that needs to be changed in order
-to apply the code to different hyperbolic systems.  In some cases, the Riemann
-solver may also be designed to enforce physical properties like positivity
-(e.g., for the water depth in \geoclaw) or to account for forces (like that
-of gravity) that may be balanced by flux terms.
+hyperbolic PDEs, are based on the solution of Riemann problems as discussed
+in \cref{sec:hyp}.  
+
 
 For nonlinear systems, the exact solution of the Riemann problem is computationally
 costly and may involve both discontinuities (shocks and contact waves) and

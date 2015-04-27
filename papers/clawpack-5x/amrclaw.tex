@@ -6,94 +6,120 @@
 %
 
 \subsection{\amrclaw}
-The \amrclaw repository performs block structured adaptive mesh
-refinement \cite{Berger:1984ui,Berger:1989gg} for both 
-\clawpack and \geoclaw  applications.
+Fortran code in the \amrclaw repository performs block structured adaptive mesh
+refinement \cite{BO,BC} for both 
+Clawpack and Geoclaw  applications.
 A short overview is given
 here to set the stage for a description of recent changes.
-
-Currently \amrclaw includes the ability to
+\amrclaw includes: 
 \begin{itemize}
 \item
-coordinate the flagging of points where refinement is needed
-either using specified criteria, pre-specified regions, or Richardson extrapolation;
+Coordinating the flagging of points where refinement is needed,
+with a variety of criteria possible for flagging cells that need refinement
+from each level to the next finer level (including Richardson extrapolation,
+gradient testing, or user-specified criteria).  See
+\url{http://www.clawpack.org/flag.html}
 \item
-organize the flagged points into efficient refined grid
-patches at the next finer level;
+Organizing the flagged points into efficient grid
+patches at the next finer level, using the algorithm of
+\cite{mjb-rig:cluster};
 \item
-initialize newly created fine grids, both solution and
-auxiliary arrays (e.g. velocity fields or bathymetry);
+Initializing newly created fine grids, both solution and
+auxiliary arrays;
 \item
-orchestrate the time stepping allowing refinement levels to take
-different time steps (called sub-cycling in time)
+Orchestrating the time stepping since refinement levels may have
+different time steps ({called subcycling in time});
 \item
-interpolation for ghost cells on fine patches needed before a time step can be taken; and
+Interpolating when needed for ghost cells at the boundaries of fine patches \\
+({needed before a time step can be taken});
 \item
-maintenance of conservation involving correction waves at
-the patch boundaries between fine and coarse grids as well as
-underneath fine grids.
+Updating coarse grid values covered by finer grid patches;
+\item
+Maintaining conservation at patch boundaries between resolution levels.\\
 \end{itemize}
 
-These algorithms have been discussed in detail in
-\cite{Berger:1998ia,Berger:2011du}. Roughly one third of the files in \amrclaw
-have to be modified for \geoclaw specifics. For example, to maintain a level
-sea-level when interpolating the sea-level itself must be interpolated rather than the depth which is the conserved quantity being kept track of.  There are 135 files at this moment 
-in the two-dimensional version of \amrclaw.
-Forty-five of them are replaced by a \geoclaw-specific file of the
-same name but in the \geoclaw 2D branch. Recently three-dimensional version of  \amrclaw has also been brought up to parity with the two-dimensional branch which has seen the most development due to the needs of \geoclaw development.
+The algorithms implemented in \amrclaw have been discussed in detail in
+\cite{mjb-rjl:amrclaw,LeVequeGeorgeBerger:an11}. 
 
-Parallel efficiency and overall runtime is one aspect that has received more
-attention in \clawpack 5. This was partly motivated by the need to run larger
-simulations, such as storm surge \cite{Mandli:ws}.  The new emphasis on three-
-dimensional AMR applications has also increased interest in this area.  Since
-the target machine for use with \clawpack has been single workstations or nodes
-of a cluster, the leveraging of multi-core technologies have been the primary
-emphasis with parallelizing the software.  Other frameworks including
+An enhancement to the flagging routines (first introduced in
+\geoclaw and more recently implemented in 2D \amrclaw) \todo{not yet 3D}
+is the ability for the user to easily specify ``regions'' in space-time
+$[x_1,x_2] \times [y_1,y_2] \times [t_1,t_2]$ in which refinement is forced to
+be at least at some level $L_1$ and is allowed to be at most $L_2$.
+Previously the user could enforce such conditions by writing a custom
+flagging routine, but now this is handled in a general manner so that the
+parameters above can all be specified in \texttt{setrun.py}.  Multiple
+regions can be specified and a simple rule is used to determine the
+constraints at a grid cell that lies in multiple regions, as described at
+\url{http://www.clawpack.org/flag.html#refinement-regions}
+
+The 3D \amrclaw code that disappeared in Clawpack 4.4 was reintroduced in
+5.0, and has been improved with the addition of OpenMP.
+Due to the emphasis on multi-core technologies, \amrclaw has been parallelized
+using OpenMP directives based grid patch-based decomposition.  
+The main paradigm in structured AMR is a loop over
+all patches at a level, where some operation is done on each patch
+(i.e. taking a time step, finding ghost cells, conservation
+updates, etc.). This lends itself easily to a {\tt parallel for} loop
+construct where the each iteration of the loop corresponds to a
+grid at that level. Dynamic scheduling is used with a chunk size
+of one, so that one thread is assigned one patch at a time. 
+To help with load balancing, patches at
+each level are sorted from largest to smallest workload when they
+are first created, using
+the total number of cells in the grid as an indicator of work.
+This same approach is now used in three-dimensions as well. 
+Note that this approach causes a memory bulge. Each thread
+must have its own scratch arrays to save the incoming and
+outgoing waves and fluxes for future conservation fix-ups. 
+The bulge is directly proportional to the number
+of threads executing. For stack-based memory allocation per
+thread, the use of the environment variable 
+{\tt OMP\_STACKSIZE} to increase the limit is necessary.
+
+
+The target machine for use with \amrclaw and \geoclaw
+has been single workstations or nodes of a cluster, and so
+the leveraging of multi-core technologies have been the primary
+emphasis with parallelizing this software.  
+\pyclaw, on the other hand, does not include AMR but uses MPI via
+PETSc to achieve parallelism on distributed memory machines that scales to
+thousands of cores (see \cref{sec:pyclaw}).
+Other frameworks including
 \forestclaw \cite{Burstedde:we} and \boxlib \todo{citation for pyboxlib?} also
 exist and are being developed in parallel with \amrclaw to provide scalable
-calculations but on large distributed machines.
+AMR calculations on large distributed memory machines.
 
-Due to the emphasis on multi-core technologies \clawpack has been parallelized
-using OpenMP directives based grid-based decomposition.  The main paradigm in
-structured AMR is a loop over all grids that exist at a level, where some
-operation is done on each grid (e.g. taking a time step, finding ghost cells,
-conservation updates, etc.). This lends itself easily to a {\tt parallel for}
-loop construct where  each iteration of the loop corresponds to a grid at that
-level. Dynamic scheduling is used with a chunk size of one, so that one thread
-is assigned one grid at a time.  To help with load balancing, grids at each
-level are sorted from largest to smallest workload when they are first created,
-using the total number of cells in the grid as an indicator of work. This same
-approach is now used in three-dimensions as well.   Note that this approach
-causes a memory bulge. Each thread must have its own scratch arrays to save the
-incoming and outgoing waves and fluxes for future conservation fix-ups.  The
-bulge is directly proportional to the number of threads executing.
-
-%For stack-based memory allocation per thread, the use of the environmental variable {\tt OMP\_STACKSIZE} to increase the limit is necessary.
 
 \missingfigure{Provide some parallel efficiency results.}
 \todo{(Kyle) I have data for this and can add a plot if need be.}
 
-One of the other significant additions to \amrclaw algorithmically was the
-ability to copy meta-data into newly created grids from their older counterparts
-if they overlapped in the correct way.  This can save effort if the computation
-of the meta-data is expensive.  In \geoclaw, bathymetry is included in this
-meta-data and can be costly to compute for a given cell due to multiple data
-sources, mapping on the sphere and interpolation.  Since it is a common
-occurrence for a new grid to overlap at least partially older grids, this
-ability saves significant computational overhead associated with recomputing
-these quantities.
+Auxiliary arrays are often used in Clawpack to store data that 
+describes the problem (e.g.  variable material parameters) and the routine
+\texttt{setaux} must then be provided by the user to set these values each time a
+new grid patch is created.  For some applications (such as topography in
+\geoclaw) computing these values can be time-consuming.  In Clawpack 5.2,
+this code was improved to allow copying of values from previous patches at
+the same level where possible at each regridding time. 
+This is backward compatible, since no harm is done if previously
+written routines are used that still compute and overwrite instead of
+checking the flag.  
 
-Another new capability just added to both two and three-dimensions is spatially
-varying boundary conditions.  For a single grid, it is a simple matter to
-compute the location of the ghost cells that extend outside the computational
-domain and set them appropriately. With AMR however, the boundary condition
-routine can be called for a grid located anywhere in the domain, and may contain
-fewer or larger numbers of ghost cells. The boundary condition routines must be
-written in a rather unusual way that does not assume it is always setting the
-same number of ghost cells, or that the same number of reflected cells inside
-the domain always exist. A new computational example of a vortex flowing in from
+A new capability added in both two and three dimensions is support for
+spatially varying boundary conditions.  \todo{Is this new, or just a bug fix?}
+For a single grid, it is a simple matter to
+compute the location of the ghost cells that extend
+outside the computational domain and set them appropriately.
+With AMR however, the boundary condition routine can be called
+for a grid located anywhere in the domain, and may contain fewer
+or larger numbers of ghost cells. The boundary condition routines
+must be written in a rather unusual way that does not assume it
+is always setting the same number of ghost cells, or that the
+same number of reflected cells inside the domain always exist.
+
+\todo{Not sure we need to mention this:
+A new computational example of a vortex flowing in from
 one side of the boundary is now part of the {\tt Examples} directory to test
-this.\todo{Confirm addition of vortex movement, I actually think this may have
+this. Confirm addition of vortex movement, I actually think this may have
 been added to the test suite but not the examples.}
-
 

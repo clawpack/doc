@@ -1,6 +1,13 @@
 %% Created using Papers on Sun, 12 Apr 2015.
 %% http://papersapp.com/papers/
 
+@misc{clawpack,
+    title={Clawpack software},
+    author={{Clawpack Development Team}},
+    url={http://www.clawpack.org},
+    note={Version 5.3.0},
+    year={2015}}
+
 @article{Mandli:ws,
 author = {Mandli, Kyle T and Dawson, Clint N},
 title = {{Adaptive Mesh Refinement for Storm Surge}},
@@ -228,7 +235,9 @@ read = {Yes},
 rating = {0},
 date-added = {2012-06-04T22:42:41GMT},
 date-modified = {2015-04-12T22:59:59GMT},
-abstract = {Coastal hazards related to strong storms such as hurricanes and typhoons are one of the most frequently recurring and wide spread hazards to coastal communities. Storm surges are among the most devastating effects of these storms, and their prediction and mitigation is of great interest to coastal communities that need to plan for the subsequent rise in sea level during these storms. Past efforts to model storm surge have usually focused on the single-layer shallow water equations, due to the ease of com- puting a simulation on the relevant scales and domains relative to three-dimensional modeling. The drawback to this approach is that the primary generating mechanism for storm surge is the wind-momentum transfer to the ocean. This boundary layer phenomenon is not well-represented by the shallow water equations, especially in the deep ocean. An alternative is to use the two-layer shallow water equations, with a shallow upper layer driven by the wind and an abyssal layer representing the rest of the water column. The focus of this thesis is on the development of a finite volume method for the multi-layer shallow water equations that is appropriate for application to storm surges. This has been done in the context of the GeoClaw framework, a code designed to handle the single-layer shallow water equations with adaptive mesh refinement al- gorithms, and uses many of the capabilities available to GeoClaw that are pertinent to storm surges. Approximations to the system are also discussed and tested along with methods for handling dry-states and inundation. Finally, idealized storm surge test cases comparing the single-layer and two-layer shallow water equations are explored.},
+abstract = {Coastal hazards related to strong storms such as hurricanes and typhoons are one of the most frequently recurring and wide spread hazards to coastal communities. Storm surges are among the most devastating effects of these storms, and their prediction and mitigation is of great interest to coastal communities that need to plan for the subsequent rise in sea level during these storms. Past efforts to model storm surge have usually focused on the single-layer shallow water equations, due to the ease of com- puting a simulation on the relevant scales and domains relative to three-dimensional modeling. The drawback to this approach is that the primary generating mechanism for storm surge is the wind-momentum transfer to the ocean. This boundary layer phenomenon is not well-represented by the shallow water equations, especially in the deep ocean. An alternative is to use the two-layer shallow water equations, with a shallow upper layer driven by the wind and an abyssal layer representing the rest of the water column.
+ The focus of this thesis is on the development of a finite volume method for the multi-layer shallow water equations that is appropriate for application to storm surges. This has been done in the context of the GeoClaw framework, a code designed to handle the single-layer shallow water equations with adaptive mesh refinement al-
+ gorithms, and uses many of the capabilities available to GeoClaw that are pertinent to storm surges. Approximations to the system are also discussed and tested along with methods for handling dry-states and inundation. Finally, idealized storm surge test cases comparing the single-layer and two-layer shallow water equations are explored.},
 url = {http://hdl.handle.net/1773/16614},
 local-url = {file://localhost/Users/mandli/Dropbox/Research/Library.papers3/Mandli/2011_Mandli.pdf},
 file = {{2011_Mandli.pdf:/Users/mandli/Dropbox/Research/Library.papers3/Mandli/2011_Mandli.pdf:application/pdf}},
@@ -279,3 +288,154 @@ uri = {\url{papers3://publication/doi/10.1017/S0962492904}}
   year={2012},
   publisher={Society for Industrial and Applied Mathematics}
 }
+
+@mastersthesis{dgeorge:masters,
+    Author = {D. L. George},
+    School = {University of Washington},
+    Title = {Numerical Approximation of the Nonlinear Shallow Water Equations with Topography and Dry-Beds: {A} {Godunov-Type} Scheme},
+    Year = {2004}}
+
+@phdthesis{dgeorge:phd,
+    Author = {D. L. George},
+    School = {University of Washington},
+    Title = {Finite Volume Methods and Adaptive Refinement for Tsunami Propagation and Inundation},
+    Year = {2006}}
+
+@article{dgeorge:jcp,
+    Author = {D. L. George},
+    Journal = {J. Comput. Phys.},
+    Pages = {3089-3113},
+    Title = {Augmented {Riemann} solvers for the shallow water equations over variable topography with steady states and inundation},
+    Volume = {227},
+    Year = {2008}}
+
+@unpublished{GeorgeIverson2012pp,
+    Author = {D. L. George and R. M. Iverson},
+    Note = {In preparation for Proc. R. Soc. A.},
+    Owner = {dgeorge},
+    Timestamp = {2011.12.13},
+    Title = {A model of debris-flow motion that accounts for coevolution of dilatancy, porosity and pore-fluid pressure: II. Mathematical properties and computational implementation.}}
+
+@unpublished{IversonGeorge2012pp,
+    Author = {R. M. Iverson and D. L. George},
+    Note = {In preparation for Proc. R. Soc. A.},
+    Owner = {dgeorge},
+    Timestamp = {2011.12.13},
+    Title = {A model of debris-flow motion that accounts for coevolution of dilatancy, porosity and pore-fluid pressure: I. Geological and physical basis.}}
+
+@article{BergerGeorgeLeVequeMandli:awr11,
+    Author = {M. J. Berger and D. L. George and R. J. LeVeque and K. T.  Mandli},
+    Journal = {Adv. Water Res.},
+    Pages = {1195-1206},
+    Title = {The {GeoClaw} software for depth-averaged flows with adaptive
+        refinement},
+    Url = {\url{www.clawpack.org/links/papers/awr11}},
+    Volume = {34},
+    Year = {2011},
+    Bdsk-Url-1 = {www.clawpack.org/links/papers/awr11}}
+
+@phdthesis{mandli:phd,
+    Author = {K. T. Mandli},
+    School = {University of Washington},
+    Title = {Finite Volume Methods for the Multilayer Shallow Water
+        Equations with Applications to Storm Surges},
+    Year = {2011}}
+
+@article{LeVequeGeorgeBerger:an11,
+    Author = {R. J. LeVeque and D. L. George and M. J. Berger},
+    Journal = {Acta Numerica},
+    Misc = {\url{www.clawpack.org/links/an11}},
+    Pages = {211-289},
+    Title = {Tsunami modeling with adaptively refined finite volume methods},
+    Year = {2011}}
+
+@article{mjb-rig:cluster,
+    Author = {M. J. Berger and I. Rigoutsos},
+    Journal = {IEEE Trans. Sys. Man \& Cyber.},
+    Pages = {1278--1286},
+    Title = {An Algorithm for Point Clustering and Grid Generation},
+    Volume = {21},
+    Year = {1991}}
+
+@article{George:Malpasset,
+    Author = {D George},
+    Doi = {10.1002/fld.2298},
+    Journal = {Int. J. Numer. Meth. Fluids},
+    Title = {{Adaptive finite volume methods with well-balanced Riemann
+        solvers for modeling floods in rugged terrain: Application to the Malpasset
+        dam-break flood (France, 1959)}},
+    Url = {http://www3.interscience.wiley.com/journal/123309491/abstract},
+    Year = {2010}}
+
+@article{BC,
+    Author = {M. J. Berger and P. Colella},
+    Journal = jcp,
+    Pages = {64--84},
+    Title = {Local adaptive mesh refinement for shock hydrodynamics},
+    Volume = {82},
+    Year = {1989}}
+
+@article{mjb-rjl:amrclaw,
+    Author = {M. J. Berger and R. J. LeVeque},
+    Journal = {SIAM J. Numer. Anal.},
+    Pages = {2298--2316},
+    Title = {Adaptive Mesh Refinement using Wave-Propagation Algorithms for
+        Hyperbolic Systems},
+    Url = {http://epubs.siam.org/sam-bin/dbq/article/31597},
+    Volume = {35},
+    Year = {1998}}
+
+@article{BO,
+    Author = {M. Berger and J. Oliger},
+    Journal = {J. Comput. Phys.},
+    Pages = {484--512},
+    Title = {Adaptive mesh refinement for hyperbolic partial differential
+        equations},
+    Volume = {53},
+    Year = {1984}}
+
+@phdthesis{jol:thesis,
+    Author = {J. O. Langseth},
+    School = {Department of Informatics, University of Oslo},
+    Title = {Wave Propagation Schemes, Operator Splittings, and Front
+        Tracking for Hyperbolic Conservation Laws},
+    Year = {1996}}
+
+@article{jol-rjl:3d,
+    Author = {J. O. Langseth and R. J. LeVeque},
+    Journal = {J. Comput. Phys.},
+    Pages = {126--166},
+    Title = {A wave-propagation method for three-dimensional hyperbolic
+        conservation laws},
+    Url = {http://www.amath.washington.edu/~rjl/pubs/wp3d/},
+    Volume = {165},
+    Year = {2000}}
+
+@book{rjl:fvmhp,
+    Author = {R. J. LeVeque},
+    Publisher = {Cambridge University Press},
+    Title = {Finite Volume Methods for Hyperbolic Problems},
+    Url = {http://amath.washington.edu/~claw/book.html},
+    Year = {2002},
+    Bdsk-Url-1 = {http://amath.washington.edu/~claw/book.html}}
+
+@article{db-rjl-sm-jr:vcflux,
+    Author = {D. Bale and R. J. LeVeque and S. Mitran and J. A. Rossmanith},
+    Journal = {SIAM J. Sci. Comput.},
+    Pages = {955--978},
+    Title = {A wave-propagation method for conservation laws and balance laws with spatially varying flux functions},
+    Url = {http://www.amath.washington.edu/~rjl/pubs/vcflux/},
+    Volume = {24},
+    Year = {2002},
+    Bdsk-Url-1 = {http://www.amath.washington.edu/~rjl/pubs/vcflux/}}
+
+@article{rjl:wpalg,
+    Author = {R. J. LeVeque},
+    Journal = {J. Comput. Phys.},
+    Pages = {327--353},
+    Title = {Wave propagation algorithms for multi-dimensional hyperbolic systems},
+    Url = {http://www.amath.washington.edu/~rjl/pubs/wpalg/},
+    Volume = {131},
+    Year = {1997},
+    Bdsk-Url-1 = {http://www.amath.washington.edu/~rjl/pubs/wpalg/}}
+
