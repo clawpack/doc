@@ -8,7 +8,7 @@
 \subsection{\amrclaw}
 Fortran code in the \amrclaw repository performs block structured adaptive mesh
 refinement \cite{BO,BC} for both 
-Clawpack and Geoclaw  applications.
+\clawpack and \geoclaw  applications.
 A short overview is given
 here to set the stage for a description of recent changes.
 \amrclaw includes: 
@@ -28,7 +28,7 @@ Initializing newly created fine grids, both solution and
 auxiliary arrays;
 \item
 Orchestrating the time stepping since refinement levels may have
-different time steps ({called subcycling in time});
+different time steps ({called sub-cycling in time});
 \item
 Interpolating when needed for ghost cells at the boundaries of fine patches \\
 ({needed before a time step can be taken});
@@ -53,7 +53,7 @@ regions can be specified and a simple rule is used to determine the
 constraints at a grid cell that lies in multiple regions, as described at
 \url{http://www.clawpack.org/flag.html#refinement-regions}
 
-The 3D \amrclaw code that disappeared in Clawpack 4.4 was reintroduced in
+The 3D \amrclaw code that disappeared in \clawpack 4.4 was reintroduced in
 5.0, and has been improved with the addition of OpenMP.
 Due to the emphasis on multi-core technologies, \amrclaw has been parallelized
 using OpenMP directives based grid patch-based decomposition.  
@@ -94,11 +94,11 @@ AMR calculations on large distributed memory machines.
 \missingfigure{Provide some parallel efficiency results.}
 \todo{(Kyle) I have data for this and can add a plot if need be.}
 
-Auxiliary arrays are often used in Clawpack to store data that 
+Auxiliary arrays are often used in \clawpack to store data that 
 describes the problem (e.g.  variable material parameters) and the routine
 \texttt{setaux} must then be provided by the user to set these values each time a
 new grid patch is created.  For some applications (such as topography in
-\geoclaw) computing these values can be time-consuming.  In Clawpack 5.2,
+\geoclaw) computing these values can be time-consuming.  In \clawpack 5.2,
 this code was improved to allow copying of values from previous patches at
 the same level where possible at each regridding time. 
 This is backward compatible, since no harm is done if previously
