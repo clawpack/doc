@@ -7,14 +7,14 @@
 
 \section{Introduction}\label{sec:intro}
 
-The Clawpack software suite \cite{clawpack}
+The \clawpack software suite \cite{clawpack}
 is designed for the solution of nonlinear conservation laws, balance laws,
 and other first-order hyperbolic partial differential
 equations that need not be in conservation form. 
 A brief overview of such problems is given in \cref{sec:hyp}.
 
-The first version of Clawpack was released by LeVeque in 1994 
-\cite{clawpack-v1} and consisted for Fortran code for solving problems on a
+The first version of \clawpack was released by LeVeque in 1994 
+\cite{clawpack-v1} and consisted of Fortran code for solving problems on a
 fixed grid in one or two space dimensions, together with some Matlab scripts
 for plotting solutions. The wave-propagation method implemented
 in this code provided a general way to apply recently developed
@@ -27,7 +27,7 @@ dimensions, and work with Langseth \cite{jol-rjl:3d, jol:thesis}
 led to three-dimensional versions of the wave-propagation algorithm and the
 software, with three-dimensional AMR then added by Berger.
 
-Version 4.3 of Clawpack contained a number of other improvements to the code
+Version 4.3 of \clawpack contained a number of other improvements to the code
 and formed the basis for the examples presented in a textbook \cite{rjl:fvmhp}
 published in 2003, for which virtually all of the figures were
 produced using codes available at
@@ -40,21 +40,21 @@ of a Python user interface for specifying the input data.
 Since then, a number of other features were added to better cope with new
 problems, to provide a better user interface and visualization tools, and to
 incorporate higher-order accurate algorithms, OpenMP parallelization, and
-other enhancements. The Clawpack 4.x line of code ended with Version 4.6.3
+other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
 (released in January, 2013) and
 many of the changes from 4.3 to 4.6 are summarized at
 \url{http://depts.washington.edu/clawpack/users-4.6/changes.html}
-\todo{Do we want to move the 4.6 documention to GitHub?}
+\todo{Do we want to move the 4.6 documentation to GitHub? - I think this is a good idea!}
 
 Major refactoring of the code and a move to GitHub for development over the
-next year resulted in the release of Clawpack 5.0 in January, 2014. 
+next year resulted in the release of \clawpack 5.0 in January, 2014. 
 A significant number of additional improvements have been made since then. 
 The goals of this paper are to:
 
 \begin{itemize} 
-\item summarize some of the major changes made between the Clawpack
-4.x codes and the most recent Clawpack 5.3;  
-\item provide a citable reference for Clawpack 5.x that includes
+\item summarize some of the major changes made between the \clawpack
+4.x codes and the most recent \clawpack 5.3;  
+\item provide a citable reference for \clawpack 5.x that includes
 substantial contributors to this code as authors;
 \item summarize the development model we have adopted, which we believe
 may be of interest to others managing large open source scientific software
@@ -65,7 +65,7 @@ projects.
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
 In one space dimension, the hyperbolic equation solved with
-Clawpack typically takes the form of a conservation law
+\clawpack typically takes the form of a conservation law
 \begin{equation}\label{eq:hyp1a}
 q_t(x,t) + f(q(x,t))_x = 0
 \end{equation}
@@ -120,12 +120,12 @@ of gravity) that may be balanced by flux terms.
 In practice approximate Riemann solvers are used for nonlinear
 problems, which replace rarefaction waves by one or more discontinuities.
 
-Clawpack is based on Godunov-type finite volume methods in which
+\clawpack is based on Godunov-type finite volume methods in which
 the solution is represented by cell averages and Riemann problems
 between the cell averages in neighboring states is used as the
 fundamental building block of the algorithm.
 The wave-propagation algorithms originally
-implemented in Clawpack (and still used in much of the code) is based on
+implemented in \clawpack (and still used in much of the code) is based on
 using the waves resulting from each Riemann solution together with limiter
 functions to achieve second-order accuracy where the solution is smooth
 together with sharp resolution of discontinuities without spurious numerical
@@ -153,8 +153,8 @@ In two or three space dimensions, the wave-propagation methods
 are extended either using dimensional splitting, so that only
 one-dimensional Riemann solvers are needed, or by a multi-dimensional
 algorithm based on {\em transverse Riemann solvers} introduced in 
-\cite{rjl:wpalg}.  Both approaches are supported in Clawpack.
+\cite{rjl:wpalg}.  Both approaches are supported in \clawpack.
 
-A variety of Riemann solvers have been developed for Clawpack, many of which
+A variety of Riemann solvers have been developed for \clawpack, many of which
 are collected in the \texttt{riemann} repository, see \cref{sec:riemann}.
 
