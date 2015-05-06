@@ -23,7 +23,9 @@ are important.
 The Google Earth browser is not a fully functional GIS tool, and
 so while the simulations may look very realistic, one
 should not base critical decisions on conclusions drawn from the Google Earth
-visualization alone.  Nevertheless, these realistic visualizations can be used
+visualization alone.  Nevertheless, these realistic visualizations
+are useful for setting up simulations, getting simulation
+can be used
 to communicate to non-experts important scientific information.
 
 .. _google_earth_example:
@@ -31,8 +33,10 @@ to communicate to non-experts important scientific information.
 An Example
 ----------
 
-To see what you can do, first you will need to download the
-`Google Earth`_ browser and download this example.
+Simulations of the Chile 2010 earthquake and tsunami are included as examples in the GeoClaw
+module of Clawpack.  You can see the results of these simulations visualized in
+To see the results of this simulation visualized in Google Earth,
+`Google Earth`_ browser and
 
 .. _google_earth_requirements:
 
