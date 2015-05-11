@@ -138,7 +138,6 @@ Developers' resources
 
    community
    developers
-   git_resources
    howto_doc
    regression
    git_versions
