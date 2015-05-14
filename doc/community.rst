@@ -35,6 +35,8 @@ on the appropriate GitHub repository, for example:
 
 **We welcome new contributors and developers!**
 
+See :ref:`photos` for some photos of the team.
+
 The pages below give some tips for those who want to get involved.
 
 - :ref:`contribute_apps` for ideas on how to make applications or examples
@@ -86,4 +88,3 @@ Other Clawpack events
    <http://depts.washington.edu/clawpack/posters/siam_cse_2015/>`_
    at the `SIAM CSE 2015 Conference <http://www.siam.org/meetings/cse15/submissions.php>`_
 
-See :ref:`photos` for some photos of the team.

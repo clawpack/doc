@@ -9,7 +9,7 @@
    nipy, NIPY, Nipy, etc...
 
 .. clawpack stuff
-.. _Clawpack GitHub: https://github.com/organizations/clawpack
+.. _Clawpack GitHub: https://github.com/orgs/clawpack
 
 .. other stuff
 .. _python: http://www.python.org

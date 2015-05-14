@@ -33,13 +33,13 @@ to 4.6 form using :ref:`claw43to46`.
 If you wish to view recent changes on GitHub,
 note that Clawpack is an *organization*, meaning that it is
 comprised of several repositories.  Go to the 
-`Clawpack GitHub <https://github.com/organizations/clawpack>`_ 
+`Clawpack GitHub <https://github.com/clawpack>`_ 
 webpage to view all the repositories.  Major changes that are specific
 to PyClaw since its initial release in 2012 are listed in the
 `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 You might also view the 
-`issues <https://github.com/organizations/clawpack/dashboard/issues>`_
+`issues <https://github.com/orgs/clawpack/dashboard/issues>`_
 associated with each Clawpack repository on
 GitHub to see what bugs and features we are working on.
 

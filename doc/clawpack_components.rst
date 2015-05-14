@@ -8,7 +8,7 @@ Clawpack components
 
 Clawpack is developed using the `git <http://git-scm.com/>`_ version control
 system and all the source code is openly available via the
-`Clawpack GitHub Organization <https://github.com/organizations/clawpack>`_.
+`Clawpack GitHub Organization <https://github.com/orgs/clawpack>`_.
 
 The code is organized in several independent git repositories.  One of these
 is the `clawpack/clawpack <https://github.com/clawpack/clawpack>`_
@@ -36,7 +36,7 @@ Other repositories
 -----------------------
 
 Other repositories in the
-`Clawpack GitHub Organization <https://github.com/organizations/clawpack>`_
+`Clawpack GitHub Organization <https://github.com/orgs/clawpack>`_
 may be of interest to some users:
 
 * `apps` contains additional applications, see :ref:`apps`.
