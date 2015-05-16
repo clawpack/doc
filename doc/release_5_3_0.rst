@@ -102,6 +102,7 @@ Changes to amrclaw
           $(AMRLIB)/step3z.f \
           $(AMRLIB)/flux3_dimSplit.f \
 
+  Here `AMRLIB = $(CLAW)/amrclaw/src/2d` in 2d, for example
 
 * Gauge output refactored.
 
@@ -129,17 +130,29 @@ Changes to geoclaw
 
   - add the MODULEs::
 
+         $(GEOLIB)/gauges_module.f90 \
          $(GEOLIB)/surge/holland_storm_module.f90 \
          $(GEOLIB)/surge/stommel_storm_module.f90 \
          $(GEOLIB)/surge/constant_storm_module.f90 \
          $(GEOLIB)/surge/storm_module.f90 \
          $(GEOLIB)/friction_module.f90
 
+  - remove the MODULE::
+
+         $(AMRLIB)/gauges_module.f90 \
+
   - remove the file::
 
          $(GEOLIB)/dumpgauge.f \
 
-* Gauges refactors as in armclaw.
+  Here `GEOLIB = $(CLAW)/geoclaw/src/2d/shallow`.
+
+* Gauge output refactored as in `amrclaw`.  Note it is now necessary to use
+  the version of `gauges_module.f90` in `geoclaw` rather than the version from 
+  `amrclaw` since the subroutine for printing the gauges is now in this module
+  rather than in `dumpgauge.f`.  In `geoclaw`, an additional column is 
+  printed for `eta = B + h`, the sea surface, in addition to the 
+  components of `q`.
 
 * Multilayer code merged in and several routines refactored or consolidated.
 
