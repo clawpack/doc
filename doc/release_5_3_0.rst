@@ -94,6 +94,8 @@ Changes to amrclaw
 
           $(AMRLIB)/gauges_module.f90
 
+    somewhere **after** `$(AMRLIB)/amr_module.f90` in the list of modules.
+
   - In 3d, add the files::
 
           $(AMRLIB)/stepgrid_dimSplit.f \
@@ -146,6 +148,10 @@ Changes to geoclaw
          $(GEOLIB)/dumpgauge.f \
 
   Here `GEOLIB = $(CLAW)/geoclaw/src/2d/shallow`.
+
+  Note that `$(GEOLIB)/gauges_module.f90` must come **after** both
+  ` $(AMRLIB)/amr_module.f90` and
+  `$(GEOLIB)/geoclaw_module.f90` in the list of modules.
 
 * Gauge output refactored as in `amrclaw`.  Note it is now necessary to use
   the version of `gauges_module.f90` in `geoclaw` rather than the version from 
