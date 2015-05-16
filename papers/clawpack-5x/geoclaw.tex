@@ -104,7 +104,13 @@ This is described in
 \item A number of new Python modules have been developed to assist the user
 in working with {\tt topo} and {\tt dtopo} files.  \todo{To be continued...}
 
+\item In depth-averaged flow the wave speed and therefore the CFL condition depends on the depth.  Thus in shallow water spatially refined grids may not need to be refined in time.  This ``variable-time-stepping'' was easily added due to the anisotropic capabilities that were added to \amrclaw.
+
 \end{itemize} 
 
-\todo[noline]{Still to add: NTHMP benchmark discussion?  <-- I think this would be great since this was a substantial effort and legitimizes the use of GeoClaw, was this done with 5.x or earlier though?}
-\todo[noline]{We could add more applications but I think this covers everything I was thinking of that was not covered somewhere in the AMRClaw section.}
+\todo{Recently a significant effort was made to get \geoclaw verified and validated
+against the National Tsunami Hazard Mitigation Program (NTHMP) benchmarks.
+After approval this allows \geoclaw to be used in hazard mapping projects that 
+involve the Federal Emergency Management Agency (FEMA).
+}{Is this right?}  A number of additional applications have been developed for
+\geoclaw, including storm surge, debris flow, and dam breaks.

@@ -38,13 +38,12 @@ to Python as the recommended visualization tool, and the development
 of a Python user interface for specifying the input data.
 
 Since then, a number of other features were added to better cope with new
-problems, to provide a better user interface and visualization tools, and to
+applications, to provide a better user interface and visualization tools, and to
 incorporate higher-order accurate algorithms, OpenMP parallelization, and
 other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
 (released in January, 2013) and
 many of the changes from 4.3 to 4.6 are summarized at
-\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}
-\todo{Do we want to move the 4.6 documentation to GitHub? - I think this is a good idea!}
+\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
 
 Major refactoring of the code and a move to GitHub for development over the
 next year resulted in the release of \clawpack 5.0 in January, 2014. 
@@ -76,7 +75,7 @@ q_t(x,t) + A(x)q(x,t)_x = 0,
 where subscripts denote partial derivatives and
 $q$ could be a vector with $m$ components for a system of equations. 
 The coefficient matrix $A$ in \cref{eq:hyp1b} or the Jacobian matrix 
-$f'(q)$ in \ref{eq:hyp1a} is assumed to be diagonalizable with real eigenvalues
+$f'(q)$ in \cref{eq:hyp1a} is assumed to be diagonalizable with real eigenvalues
 for all relevant values of $q,~x,~t$. 
 This condition
 guarantees that the system is hyperbolic, with solutions that are wave-like.  
@@ -117,12 +116,12 @@ to apply the code to different hyperbolic systems.  In some cases, the Riemann
 solver may also be designed to enforce physical properties like positivity
 (e.g., for the water depth in \geoclaw) or to account for forces (like that
 of gravity) that may be balanced by flux terms.
-In practice approximate Riemann solvers are used for nonlinear
-problems, which replace rarefaction waves by one or more discontinuities.
+In practice approximate Riemann solvers are commonly used for nonlinear
+problems.%, which replace rarefaction waves by one or more discontinuities.
 
 \clawpack is based on Godunov-type finite volume methods in which
-the solution is represented by cell averages and Riemann problems
-between the cell averages in neighboring states is used as the
+the solution is represented by cell averages.  Riemann problems
+between the cell averages in neighboring states are used as the
 fundamental building block of the algorithm.
 The wave-propagation algorithms originally
 implemented in \clawpack (and still used in much of the code) is based on
@@ -145,12 +144,13 @@ q_t(x,y,t) + A(x,y)q(x,y,t)_x + B(x,y)q(x,y,t)_y = 0
 \end{equation} 
 In this case the
 coefficient matrices $A$ and $B$ in \cref{eq:hyp2a} or the Jacobian matrices
-$f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} are assumed to have the property that any
+$f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} are assumed to be hyperbolic, i.e. have
+the property that any
 linear combination gives a diagonalizable matrix with real eigenvalues.
 The extension to three space dimensions is similar.
 
 In two or three space dimensions, the wave-propagation methods
-are extended either using dimensional splitting, so that only
+are extended using either dimensional splitting, so that only
 one-dimensional Riemann solvers are needed, or by a multi-dimensional
 algorithm based on {\em transverse Riemann solvers} introduced in 
 \cite{rjl:wpalg}.  Both approaches are supported in \clawpack.

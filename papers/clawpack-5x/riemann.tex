@@ -2,8 +2,6 @@
 %
 % Riemann
 %
-% Lead currently:  David
-%
 
 \subsection{Riemann: A Community-Driven Collection of Approximate Riemann
 Solvers}\label{sec:riemann}
@@ -12,12 +10,12 @@ The methods implemented in \clawpack, and all modern Godunov-type methods for
 hyperbolic PDEs, are based on the solution of Riemann problems as discussed
 in \cref{sec:hyp}.  
 
-
 For nonlinear systems, the exact solution of the Riemann problem is computationally
 costly and may involve both discontinuities (shocks and contact waves) and
 rarefactions.  It is almost always preferable to employ inexact Riemann solvers
-that approximate the solution using discontinuities only.  Only the latter type
-of Riemann solvers may be used in \clawpack.  For some systems, like the Euler
+that approximate the solution using discontinuities only, with an appropriate 
+entropy condition.  The latter type
+of Riemann solver is currently what is available in \clawpack.  For some systems, like the Euler
 equations of compressible flow, a range of approximate solvers (giving 
 more or less accurate results) has been developed in the literature.
 

@@ -23,19 +23,20 @@ to coordinate development, with each major project and its development
 team assigned to its own repository.  The repositories are each
 publicly coordinated under the \clawpack organization on GitHub, 
 \url{https://github.com/orgs/clawpack/dashboard} and a
-top-level \texttt{clawpack} repository is responsible for hosting
+top-level \clawpack repository is responsible for hosting
 build and installation tools as well as providing a synchronization
 point for the other repositories.
 
 GitHub is a free provider of public Git repositories.  In addition to
-repository hosting, the Clawpack team uses GitHub for issue tracking,
+repository hosting, the \clawpack team uses GitHub for issue tracking,
 code review, automated continuous integration via Travis CI \cite{travis}, 
-and test coverage tracking via Coveralls \cite{coveralls}.  
+and test coverage tracking via Coveralls \cite{coveralls} for the Python based modules.  
 The issue tracker on GitHub
 automatically recognizes cross-repository references, simplifying
 communication between \clawpack developer sub-teams.  The Travis CI
 services, which provides free continuous integration for publicly
-developed repositories on GitHub, runs \clawpack's test suites on
+developed repositories on GitHub, runs \clawpack's test suites through 
+\texttt{nosetests} \cite{nosetests} on
 proposed changes to the code base, and through a connection to
 the Coveralls service, reports on any test failures as well as changes
 to test coverage.
@@ -55,9 +56,9 @@ The main \clawpack repositories are:
     \item \texttt{visclaw} - Visualization suite used by all the other projects,
     \item \texttt{clawutil} - Utility functions used by most other projects,
     \item \texttt{classic} - Uniform grid methods in 1, 2, and 3 space dimensions,
-    \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimsensions,
-    \item \texttt{geoclaw} - AMR codes for shallow geophysical flows,
-    \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massive parallelism capabilities
+    \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimensions,
+    \item \texttt{geoclaw} - AMR codes for depth-averaged geophysical flows,
+    \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massively parallel capabilities
 \end{itemize}
 
 Additional repositories contain documentation and extended examples of
@@ -70,7 +71,7 @@ Clawpack 4.x is still available in the repository
 \begin{itemize}
     \item \texttt{clawpack-4.x}
 \end{itemize}
-but is no longer under active development.
+but is no longer under development.
 
 We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
 \texttt{clawutil} as
