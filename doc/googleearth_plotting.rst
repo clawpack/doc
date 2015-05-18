@@ -83,6 +83,18 @@ An on-line version of results from this example can be viewed by
 downloading the file `Chile_2010.kml`_ and opening it in the Google
 Earth browser.
 
+.. figure::  images/GE_Chile.png
+   :scale: 50%
+   :align: center
+
+   Example of the
+
+.. figure::  images/GE_screenshot.png
+   :scale: 20%
+   :align: center
+
+   Screen shot of Google Earth visualization in VisClaw.
+
 
 .. _google_earth_basic_plotting:
 
@@ -384,14 +396,3 @@ For example, the Chile file above is stored at::
 The KML file that is created then refers to the linked file "Chile_2010.kmz", stored at the above
 address.  This KML file (see `Chile_2010.kml`_) can be easily shared or posted on webpages to allow
 collaborators to view your results in Google Earth remotely.
-
-.. _Gallery:
-
-Gallery
--------
-
-.. figure::  images/GE_screenshot.png
-   :scale: 30%
-   :align: center
-
-   Screen shot of Google Earth visualization in VisClaw.
