@@ -3,18 +3,6 @@
 {% block body %}
 <div id=main>
 
-<table>
-  <tr>
-    <td width = 200></td>
-    <td>
-    <img src='_static/ClawpackCake.jpg' width=200><br>
-    <font size=-2 color=blue>Cake by Belky Ketcheson&nbsp;&nbsp;
-        <a href="{{ pathto("community") }}">[HPC]<sup>3</sup> Workshop</a></font>
-    </td>
-  </tr>
-</table>
-
-
 
 <p>{%trans%}
 <b>This is the home for Clawpack 5.0.0 and later versions.</b>  <br>
@@ -34,6 +22,7 @@ Originally developed in 1994 by Randall LeVeque, Clawpack is now contributed to
 by many developers and includes a number of related projects.  
 See <a href="{{ pathto("about") }}">About this software</a> for more details. 
 
+
 <p>Key features include:
 </p>
 
@@ -49,6 +38,7 @@ Solution of a given PDE system with Clawpack requires specifying
 an approximate Riemann solver for
 that system.  Solvers for many common applications are bundled with the
 software.  See <a href="{{ pathto("riemann") }}">Riemann solvers</a> 
+for more information.
 </p>
 
 <p>
@@ -57,6 +47,17 @@ New users may wish to first read <a href="{{ pathto("packages") }}">
 {%endtrans%} and
 <a href="{{ pathto("installing") }}">Installation instructions</a>. </p>
 
+<p>
+See <a href="{{ pathto("community") }}">Clawpack Community</a> for links to
+mailing lists, other sources of help, upcoming events,
+and also instructions for raising an issue if you want to 
+report a bug or suggest an improvement.
+
+<p>
+We welcome new developers, see the 
+<a href="{{ pathto("developers") }}">Developers' Guide</a>.
+
+<p>
 If you use Clawpack in published work please see <a href="{{ pathto("about") }}#citing-this-work"{%trans%}>citing Clawpack{%endtrans%}</a>.
 
 <h2 style="margin-bottom: 0">{%trans%}Documentation{%endtrans%}</h2>
