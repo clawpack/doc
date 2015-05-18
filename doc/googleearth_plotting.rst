@@ -13,10 +13,12 @@ suite includes tools that will produce plots and associated .kmz files
 needed for easy browsing of your data in Google Earth.
 
 Below is a guide for how to create Google Earth visualizations of
-simulations produced by GeoClaw.  Of course, VisClaw will allow you to
-visualize results of others types of simulations, but the GeoClaw
-tsunami simulations are particularly appropriate for the Google Earth
-platform in that both water and topography features are important.
+simulations produced by GeoClaw.  Of course, the VisClaw visualization
+tools for Google Earth will allow you to visualize results of others
+types of simulations, but the GeoClaw tsunami simulations are
+particularly appropriate for the Google Earth platform in that land
+topography, ocean bathymetry and wave disturbances created by tsunamis
+or other innundation events can all be viewed simultaneously.
 
 The Google Earth browser is not a fully functional GIS tool, and so
 while the simulations may look very realistic, one should not base
@@ -35,14 +37,12 @@ Basic requirements
 .. _GDAL: http://www.gdal.org
 .. _pykml: http://pythonhosted.org/pykml/
 
-To get started you will need to have the Python packages `lxml`_,
+To get started,  you will need the required Python packages `lxml`_ and
 `pykml`_.  These libraries can be easily installed through Python
 package managers *PIP* and *conda*::
 
-  % conda install lxml
-  % pip install pykml
-
-**Note:** The PYKML library is not available through conda.
+  % conda install lxml   # PIP may also work
+  % pip install pykml    # Not available through conda
 
 For OSX, these libraries can also be installed through MacPorts or Homebrew.
 
@@ -50,16 +50,20 @@ For OSX, these libraries can also be installed through MacPorts or Homebrew.
 
 Optional GDAL library
 ---------------------
-You can optionally install the Geospatial Data Abstraction Library (`GDAL`_) package with *conda*::
+To create a pyramid of images that will load faster in Google Earth, you may also want to install
+the Geospatial Data Abstraction Library (`GDAL`_).    This can be most easily installed with *conda*::
 
   % conda install gdal
 
 You will also need to set an environment
-variable 'GDAL_DATA' to point to the directory containing the projection files,
-including the 'gcs.csv'.  On an Anaconda installation, you can set something
-like::
+variable 'GDAL_DATA' to point to the directory containing the projection files.
+For example, in Anaconda Python, these are installed under the `share/gdal` directory,
+and so you can set (in bash) the environment variable as::
 
     export GDAL_DATA=$ANACONDA/share/gdal
+
+Routines from this library are called if you indicate that you'd like to tile your images.  See
+`Tiling images for faster loading`_.
 
 .. _google_earth_example:
 
@@ -75,8 +79,8 @@ Google Earth KMZ file with the command::
 
   % gmake plots "SETPLOT_FILE=setplot_kml.py"
 
-This runs the commands in *setplot_kml.py* and creates an archive file
-*Chile_2010.kmz* in your plots directory, which you can then open in
+This runs the commands in *setplot_kml.py*. The resulting archive file
+*Chile_2010.kmz* (created in your plots direcotry) can then open in
 Google Earth.
 
 An on-line version of results from this example can be viewed by
@@ -87,7 +91,7 @@ Earth browser.
    :scale: 50%
    :align: center
 
-   Example of the
+   Example of the Chile 2010 tsunami (see geoclaw/examples/tsunami/chile2010).
 
 .. figure::  images/GE_screenshot.png
    :scale: 20%
@@ -149,11 +153,8 @@ attributes are all *optional* and have reasonable default values.
 
 .. attribute:: kml_publish : string
 
-  A URL address for server hosting a KMZ file you wish to make available on-line.   See
+  A URL address for the server hosting a KMZ file you wish to make available on-line.   See
   `Publishing your results`_.
-
-
-**Note** The above attributes are all optional.
 
 
 plotfigure attributes
@@ -193,44 +194,29 @@ plotfigure attributes
 .. attribute:: kml_xlimits : [longitude_min, longitude_max]
 
   Longitude range used to place PNG figure on Google Earth. *This setting will override
-  any limits set as `plotaxes` attributes*  **Required**
+  any limits set as `plotaxes` attributes.  **Required**
 
 .. attribute:: kml_ylimits : [latitude_min, latitude_max]
 
   Latitude range used to place the PNG figure on Google Earth.
-  *This setting will override any limits set as `plotaxes` attributes*  **Required**
+  *This setting will override any limits set as `plotaxes` attributes.  **Required**
 
 .. attribute:: kml_figsize :  [size_x_inches,size_y_inches]
 
-  Set the figure size, in inches, for the PNG file.  Typically, this can be set to the
-  number of cells in the coarse grid.   In the Chile example, the coarse grid (`num_cells`)
-  is `[30, 30]`.  By default, Matlabplotlib chooses a figure size, which will generally lead
-  to unappealing aliasing artifacts when used with the transparent colormap.
-  See `Reducing rendering artifacts`_ below for more details on how to improve the PNG
-  rendering of your figures.
+   Set the figure size, in inches, for the PNG file.  See `Removing aliasing artifacts`_ for
+   tips on how to set the figure size and dpi for best results.  Default : chosen by Matplotlib.
 
 .. attribute:: kml_dpi : integer
 
-  dots-per-inch used in rendering PNG figure.  This should be consistent with the `figsize`
+  dots-per-inch used in rendering PNG figures.  This should be consistent with the `figsize`
   set above, and the refinement factors.
   See `Reducing rendering artifacts`_ below for more details on how to improve the PNG rendering
-  figures.
+  figures.  Default : 200.
 
 .. attribute:: kml_tile_images : boolean
 
   Set to `True` if you want to create a *pyramid* of images for faster loading in Google Earth.
   *This require the GDAL library*.   Default : False.
-
-The *kml_xlimits* and *kml_ylimits* attributes tell Google Earth where
-to place the PNG file on the Google Earth globe.  For at least one of
-the VisClaw figures you will create, you will probably want these limits to be the
-simulation limits describing the computational domain, e.g. the limits
-for the coarse level grids.  But since you can create many figures for
-visualization in Google Earth, you may find that you also want zoomed in figures
-with limits that focus on a particular section of the domain.
-
-**Note** The required *kml_xlimits* and *kml_ylimits* override any *plotaxes* axes
-limits for the given figure.
 
 Creating the figure
 -------------------
@@ -309,7 +295,21 @@ Earth, one additional output parameter is necessary.
 
 .. attribute:: kml : boolean
 
-   Set to `True` to indicate that the KML/KMZ file should be created.
+   Set to `True` to indicate that the KML/KMZ file should be created. Default : False.
+
+Setting the axes limits
+-----------------------
+You can create several figures for visualization in Google Earth.  Each figure you create will show
+up in a separate folder in the Google Earth sidebar.  For at least one figure, you will probably want
+to set the `kml_xlimits` and `kml_ylimits` to match the computational domain.
+
+To get higher resolution zoomed in figures, you will want to restrict
+the x- and y-limits to a smaller region.  For best results, these zoom
+in regions should be consistent with the resolution of your
+simulation.   For example, if you'd like to create a zoomed in figure that contains
+only refinement levels 3 and 4, you will want to set x- and y-limits that
+contain an integral number of grids cells at level 3.  See `Removing aliasing artifacts`_ for
+more details on how to set the zoom levels.
 
 .. _Creating an image pyramid:
 
