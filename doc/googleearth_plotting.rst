@@ -396,3 +396,14 @@ For example, the Chile file above is stored at::
 The KML file that is created then refers to the linked file "Chile_2010.kmz", stored at the above
 address.  This KML file (see `Chile_2010.kml`_) can be easily shared or posted on webpages to allow
 collaborators to view your results in Google Earth remotely.
+
+
+
+Acknowledgements
+----------------
+
+.. _Student Research Initiative:  http://academics.boisestate.edu/undergraduate/undergraduate-research/student-research-initiative/
+
+This visualization suite was developed by Donna Calhoun and Stephanie Potter (Boise State University).
+While working on this project, Stephanie Potter was supported by a Boise State
+`Student Research Initiative`_ Grant and NSF DMS #1419108 supporting undergraduate research.
