@@ -91,6 +91,7 @@ GeoClaw: geophysical flows
    topotools
    setrun_geoclaw
    plotting_geoclaw
+   googleearth_plotting
    quick_tsunami
    okada
    sealevel
