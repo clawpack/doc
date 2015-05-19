@@ -29,7 +29,6 @@ communicate to non-experts important scientific information.
 
 .. _google_earth_requirements:
 
-==================
 Basic requirements
 ==================
 
@@ -68,7 +67,7 @@ Routines from this library are called if you indicate that you'd like to tile yo
 .. _google_earth_example:
 
 An example : The Chile 2010 tsunami event
------------------------------------------
+=========================================
 
 .. _Chile_2010.kml: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/kml/Chile_2010.kml
 
@@ -77,10 +76,10 @@ an example in the GeoClaw module of Clawpack.  Once you have run this
 simulation and created output files in an *_output* directory, you can create a
 Google Earth KMZ file with the command::
 
-  % gmake plots "SETPLOT_FILE=setplot_kml.py"
+  % make plots "SETPLOT_FILE=setplot_kml.py"
 
 This runs the commands in *setplot_kml.py*. The resulting archive file
-*Chile_2010.kmz* (created in your plots direcotry) can then open in
+*Chile_2010.kmz* (created in your plots directory) can then open in
 Google Earth.
 
 An on-line version of results from this example can be viewed by
@@ -170,10 +169,11 @@ plotfigure attributes
 
   # Required KML attributes for visualization in Google Earth
   plotfigure.use_for_kml = True
-  plotfigure.kml_use_for_initial_view = True
   plotfigure.kml_xlimits = [-120,-60]    # Longitude
   plotfigure.kml_ylimits = [-60, 0.0]    # Latitude
 
+  # Optional attributes
+  plotfigure.kml_use_for_initial_view = True
   plotfigure.kml_figsize = [30.0,30.0]
   plotfigure.kml_dpi = 12         # Resolve all three levels
   plotfigure.kml_tile_images = False    # Tile images for faster loading.  Requires GDAL [False]
@@ -184,13 +184,6 @@ plotfigure attributes
   visualization in Google Earth. With this set to `True`, all titles, axes labels, colorbars
   and tick marks will be suppressed.  Default : `False`.
 
-.. attribute:: kml_use_for_initial_view : boolean
-
-  Set to `True` if this figure should be used to determine the initial
-  camera position in Google Earth.  The initial camera position will
-  be centered over this figure, and at an elevation equal to
-  approximately twice the width of the figure, in meters.
-
 .. attribute:: kml_xlimits : [longitude_min, longitude_max]
 
   Longitude range used to place PNG figure on Google Earth. *This setting will override
@@ -200,6 +193,13 @@ plotfigure attributes
 
   Latitude range used to place the PNG figure on Google Earth.
   *This setting will override any limits set as `plotaxes` attributes.  **Required**
+
+.. attribute:: kml_use_for_initial_view : boolean
+
+  Set to `True` if this figure should be used to determine the initial
+  camera position in Google Earth.  The initial camera position will
+  be centered over this figure, and at an elevation equal to
+  approximately twice the width of the figure, in meters.
 
 .. attribute:: kml_figsize :  [size_x_inches,size_y_inches]
 
@@ -404,6 +404,8 @@ Acknowledgements
 
 .. _Student Research Initiative:  http://academics.boisestate.edu/undergraduate/undergraduate-research/student-research-initiative/
 
-This visualization suite was developed by Donna Calhoun and Stephanie Potter (Boise State University).
-While working on this project, Stephanie Potter was supported by a Boise State
-`Student Research Initiative`_ Grant and NSF DMS #1419108 supporting undergraduate research.
+This visualization suite was developed by Donna Calhoun and Stephanie
+Potter (Boise State University).  While working on this project,
+Stephanie Potter was supported by a Boise State `Student Research
+Initiative`_ Grant and NSF DMS #1419108 supporting undergraduate
+research.
