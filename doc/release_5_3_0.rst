@@ -38,7 +38,7 @@ Changes to visclaw
 ------------------
 
 * Added support for creating `kml` files that can be viewed on Google Earth
-  (for GeoClaw applications).  See :ref:`kml`.
+  (for GeoClaw applications).  See :ref:`googleearth_plotting`.
 
 * Added some support for JSAnimation in notebooks and other improvements, in
   particular to insure that filenames do not have extraneous spaces and fail
@@ -181,6 +181,9 @@ Changes to geoclaw
   - The header line for the cellsize `dx` can now have a single value
     or two values `dx` and `dy` for different resolutions in longitude and
     latitude.  Previously a single value was allowed and `dx == dy` assumed.
+
+* Added support for creating `kml` files that can be viewed on Google Earth
+  (for GeoClaw applications).  See :ref:`googleearth_plotting`.
 
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.2.2...v5.3.0>`_
 
