@@ -22,10 +22,10 @@ following subdirectories:
 
 * `classic`  (Classic single-grid Fortran code)
 * `amrclaw` (:ref:`amrclaw`, AMR version of Fortran code)
-* `riemann`  (Riemann solvers, in Fortran, also used by PyClaw)
-* `geoclaw`  (GeoClaw for geophysical flows)
+* `riemann`  (:ref:`riemann`, in Fortran, also used by PyClaw)
+* `geoclaw`  (:ref:`geoclaw` for geophysical flows)
 * `clawutil`  (Utility functions, Makefile.common used in multiple repositories)
-* `pyclaw`  (Python version that includes SharpClaw and PETSc parallelization)
+* `pyclaw`  (:ref:`pyclaw/index`, Python version that includes SharpClaw and PETSc parallelization)
 * `visclaw`  (Python graphics and visualization tools)
 
 These correspond to individual GitHub repositories.  
@@ -41,7 +41,7 @@ may be of interest to some users:
 
 * `apps` contains additional applications, see :ref:`apps`.
 * `doc` contains `sphinx <http://sphinx.pocoo.org/>`_ input files for the
-  Clawpack documentation.
+  Clawpack documentation, see :ref:`howto_doc`
 * `clawpack.github.com` contains the html files that appear on the web.
-* `clawpack-4.x` contains the latest version of Clawpack 4.x, the legacy
-  code.
+* `clawpack-4.x` contains the latest version of 
+  `Clawpack 4.x <http://depts.washington.edu/clawpack>`_, the legacy code.
