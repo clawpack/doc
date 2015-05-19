@@ -27,7 +27,7 @@ GeoClaw software and links to references and uses.
 * :ref:`okada`
 * :ref:`sealevel`
 * :ref:`manning`
-* :ref:`fgmax_5_2_0`
+* :ref:`fgmax`
 * :ref:`tsunamidata`
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x

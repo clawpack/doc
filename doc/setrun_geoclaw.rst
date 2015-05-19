@@ -360,10 +360,10 @@ Fixed grid maximum monitoring / arrival times
 
    *fgmax_files* should be a list of strings specifying the file names of
    files that list the points on each grid and additional information
-   required for each grid, as described at :ref:`fgmax_5_2_0`.
+   required for each grid, as described at :ref:`fgmax`.
 
 .. attribute:: fgmax_data.num_fgmax_val : int
 
    Should take the value 1, 2, or 5 and indicates how many values to monitor.
-   See :ref:`fgmax_5_2_0` for more details.
+   See :ref:`fgmax` for more details.
 
