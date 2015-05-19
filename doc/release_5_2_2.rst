@@ -62,7 +62,7 @@ Changes to geoclaw
   been added to `$CLAW/apps/tsunami` to illustrate the use of fgmax
   monitoring.  See:
 
-   * :ref:`fgmax_5_2_0`
+   * :ref:`fgmax`
    * :ref:`apps`
    * :ref:`galleries`
 

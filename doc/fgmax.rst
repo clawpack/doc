@@ -1,5 +1,5 @@
 
-.. _fgmax_5_2_0:
+.. _fgmax:
 
 =====================
 Fixed grid monitoring
@@ -13,6 +13,7 @@ Fixed grid monitoring
 See also:
 
  - :ref:`fgmax_tools_module` - Tools for working with fgmax files
+ - :ref:`setrun_fgmax` - For adding fgmax data to `setrun.py`
 
 GeoClaw has the capability to monitor certain quantities on a specified
 "fixed grid" by interpolating from the AMR grids active at each time step,

@@ -10,7 +10,7 @@ See http://www.opensource.org/licenses/bsd-license.php
 for more details.
 
 
-Copyright (c) 1994--2014, Randall J. LeVeque and others.
+Copyright (c) 1994--2015, The Clawpack Development Team.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

@@ -69,7 +69,7 @@ gfortran compiler
 
 * For using OpenMP::
 
-    FFLAGS = -O2 -openmp
+    FFLAGS = -O2 -fopenmp
 
   In this case you should also set some  environment variables.  See
   :ref:`openmp` for details.   

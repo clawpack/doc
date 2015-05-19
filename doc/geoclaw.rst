@@ -20,16 +20,18 @@ GeoClaw software and links to references and uses.
 
 * :ref:`geohints`
 * :ref:`topo`
+* :ref:`topotools`
 * :ref:`setrun_geoclaw`
 * :ref:`plotting_geoclaw`
 * :ref:`quick_tsunami`
 * :ref:`okada`
 * :ref:`sealevel`
 * :ref:`manning`
+* :ref:`fgmax`
 * :ref:`tsunamidata`
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
-  to relevant papers and sample codes based on the Clawpack 4.x
-  version of GeoClaw.
+  to relevant papers and sample codes (some are based on the Clawpack 4.x
+  version of GeoClaw).
 
 Overview
 --------
