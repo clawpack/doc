@@ -43,8 +43,6 @@ package managers *PIP* and *conda*::
   % conda install lxml   # PIP may also work
   % pip install pykml    # Not available through conda
 
-For OSX, these libraries can also be installed through MacPorts or Homebrew.
-
 .. _Optional library:
 
 Optional GDAL library
@@ -53,6 +51,8 @@ To create a pyramid of images that will load faster in Google Earth, you may als
 the Geospatial Data Abstraction Library (`GDAL`_).    This can be most easily installed with *conda*::
 
   % conda install gdal
+
+For OSX, these libraries can also be installed through MacPorts or Homebrew.
 
 You will also need to set an environment
 variable 'GDAL_DATA' to point to the directory containing the projection files.
@@ -89,14 +89,7 @@ opening the file `Chile_2010.kml`_ in Google Earth.
    :scale: 50%
    :align: center
 
-   Example of the Chile 2010 tsunami (see geoclaw/examples/tsunami/chile2010).
-
-.. figure::  images/GE_screenshot.png
-   :scale: 20%
-   :align: center
-
-   Screen shot of Google Earth visualization in VisClaw.
-
+   Simulation of the Chile 2010 tsunami (see geoclaw/examples/tsunami/chile2010).
 
 .. _google_earth_basic_plotting:
 
@@ -253,8 +246,8 @@ in Google Earth.
   plotfigure.kml_colorbar = kml_colorbar
 
 
-plotitem and plotaxes attributes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+plotaxes attributes
+^^^^^^^^^^^^^^^^^^^
 
 The plotaxes attributes
 `colorbar`, `xlimits`, `ylimits` and `title` will all be ignored by the KML plotting.
@@ -263,6 +256,9 @@ only plotaxes attribute that might be useful in some limited contexts is the `af
 setting, and only if the `afteraxes` function does not add plot features that cause
 Matplotlib to alter the space occupied by the figure.   In most cases, the `afteraxes`
 commands should not be needed or should not be used.
+
+plotitem attributes
+^^^^^^^^^^^^^^^^^^^
 
 The most useful `plotitem` type will probably be the `2d_pcolor` type, although other
 types including the filled contour `contourf` can also be used to good effect.
@@ -273,6 +269,9 @@ in the geoplot module.   Other colormaps that are designed to work well with the
 browser backdrop are the `googleearth_lightblue` and `googleearth_darkblue` colormaps. These
 are solid colormaps, with the zero sea surface level set to colors which match those of the
 ocean bathymetry.
+
+Adding a colorbar overlay
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A colorbar can be associated with each figure in the Google Earth
 browser by setting the figure attribute `colorbar`. The color axis
@@ -285,21 +284,21 @@ Gauges and miscellaneous settings
 There are no particular attributes for gauge plots and so they
 can be created in the usual way.  In the Google Earth browser, gauge locations
 will be displayed as Placemarks.  Clicking on gauge Placemarks will bring
-up the individual gauge plots.  See the `Gallery`_ below for an example of
-the gauge file created for the Chile example.
+up the individual gauge plots.  The screenshot below shows the gauge plot
+that appears when either the gauge Placemark or the gauge label in the sidebar is
+clicked.
 
-.. code-block:: python
 
-  #-----------------------------------------
-  # Plot gauges
-  #-----------------------------------------
-  # Create gauge plots as usual; these will show up
-  # as Placemarks in Google Earth.
+.. figure::  images/GE_screenshot.png
+   :scale: 20%
+   :align: center
 
-Plot type directives
----------------------------------------------
+   Screenshot illustrating gauge plots.
 
-VisClaw has additional settings indicating which figures and frames
+Additional plotdata attributes
+------------------------------
+
+VisClaw has additional plotdata attributes indicating which figures and frames
 to plot, and which output style to create.  When plotting for Google
 Earth, one additional output parameter is necessary.
 
@@ -318,15 +317,15 @@ Earth, one additional output parameter is necessary.
 
 .. attribute:: kml : boolean
 
-   Set to `True` to indicate that the KML/KMZ file should be created. Default : False.
+   Set to `True` to indicate that a KML/KMZ file should be created. Default : False.
 
 Plotting tips
 =============
 Below are tips for creating zoomed images,  improving the quality of your images and publishing your
 results.
 
-Setting the axes
-----------------
+Creating multiple figures at different resolutions
+--------------------------------------------------
 You can create several figures for visualization in Google Earth.  Each figure you create will show
 up in a separate folder in the Google Earth sidebar.  For at least one figure, you will probably want
 to set the `kml_xlimits` and `kml_ylimits` to match the computational domain.
