@@ -52,7 +52,7 @@ the Geospatial Data Abstraction Library (`GDAL`_).    This can be most easily in
 
   % conda install gdal
 
-For OSX, these libraries can also be installed through MacPorts or Homebrew.
+For OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 You will also need to set an environment
 variable 'GDAL_DATA' to point to the directory containing the projection files.
@@ -127,11 +127,11 @@ have reasonable default values.
 
 .. attribute:: kml_name : string
 
-  Name given to simulation in the Google Earth sidebar.  Default : "GeoClaw".
+  Name used in the Google Earth sidebar to identify the simulation. Default : "GeoClaw"
 
 .. attribute:: kml_starttime : [Y,M,D,H,M,S]
 
-  Start time and date of the event, in UTC.  The format is *[year,month,day,hour, minute, second]*.
+  Start time and date, in UTC,  of the event.  The format is *[year,month,day,hour, minute, second]*.
   By default, local time will be used.
 
 .. attribute:: kml_timezone : integer
@@ -141,7 +141,7 @@ have reasonable default values.
 
 .. attribute:: kml_index_fname : string
 
-  The name given to the KMZ file created in the plots directory.  Default : "_GoogleEarth"
+  The name given to the KMZ file created in the plot directory.  Default : "_GoogleEarth"
 
 .. attribute:: kml_publish : string
 
@@ -333,11 +333,10 @@ to set the `kml_xlimits` and `kml_ylimits` to match the computational domain.
 To get higher resolution zoomed in figures, you will want to restrict
 the x- and y-limits to a smaller region.  For best results, these zoom
 regions should be consistent with the resolution of your simulation.
-For example, if you'd like to create a zoomed in figure that contains
-only refinement levels 3 and 4, you will want to set x- and y-limits
-that contain an integral number of grids cells at level 3.  See
-`Removing aliasing artifacts`_ for more details on how to set the zoom
-levels.
+For example, to create a zoomed in figure that contains only
+refinement levels 3 and 4, set x- and y-limits that contain an integer
+number of grids cells at level 3.  See `Removing aliasing artifacts`_
+for more details on how to set the zoom levels.
 
 
 .. _Creating an image pyramid:
@@ -356,7 +355,7 @@ setting the plotfigure attribute `kml_tile_images` to `True`.
 
    plotfigure.kml_tile_images = True
 
-**Note** This requires the GDAL library, which can be installed following the
+**Note:** This requires the GDAL library, which can be installed following the
 `Optional GDAL library`_ instructions, above.
 
 .. _Enhancing the resolution:
@@ -364,11 +363,13 @@ setting the plotfigure attribute `kml_tile_images` to `True`.
 Removing aliasing artifacts
 ---------------------------
 
-You may find that the transparent colormap leads to unappealing visual artifacts.  This can happen when
-the resolution of the plot does not match the resolution of the data used to create the plot.   For
-example, in the Chile example, the number of grid cells on the coarsest level is 30 in each
-direction.  The default settings for the figure size (`kml_figsize`) and dpi (`kml_dpi`),
-however, result in a figure with a noticable plaid pattern.
+You may find that the transparent colormap leads to unappealing visual
+artifacts.  This can happen when the resolution of the plot does not
+match the resolution of the data used to create the plot.  For
+example, in the Chile example, the number of grid cells on the
+coarsest level is 30 in each direction.  The default settings for the
+figure size (`kml_figsize`) and dpi (`kml_dpi`), however, result in a
+figure with a noticable plaid pattern.
 
 .. figure::  images/GE_aliased.png
    :scale: 50%
@@ -376,10 +377,12 @@ however, result in a figure with a noticable plaid pattern.
 
    Aliasing effects resulting from default `kml_dpi` and `kml_figsize` settings
 
-This can be corrected by matching the resolution to the resolution of the AMR grid hierarchy.  The
-coarsest level grid in the Chile example is 30x30.  The refinement factors for the two finer levels
-are 2 and 6.  To avoid aliasing affects, the resolution of the resulting PNG file should be a
-multiple of 30*2*6 = 360.  This can be done by setting the figure size and DPI properly::
+This can be corrected by matching the resolution to the resolution of
+the AMR grid hierarchy.  The coarsest level grid in the Chile example
+is 30x30.  The refinement factors for the two finer levels are 2
+and 6.  To avoid aliasing affects, the resolution of the resulting PNG
+file should be a multiple of 30*2*6 = 360.  This can be done by
+setting the figure size and DPI properly::
 
   # Set dpi and figure size to resolve the 30x30 coarse grid, and two levels of refinement with
   # refinement factors of 2 and 6.
@@ -395,11 +398,11 @@ The resulting image is free of the aliasing artifacts.
 
    Aliasing effects removed by properly setting `kml_dpi` and `kml_figsize`
 
-While the above removes aliasing artifacts, you may still find that the resolution
-is unacceptable, especially when zooming into to close up views of shorelines, for
-example.  In this case, you can increase the resolution of the figure in multiples
-that remain consistent with the coarse grid and refinement factors.   For best
-results increase the resolution by factors of 4.
+While the above removes aliasing artifacts, you may still find that
+the resolution is unacceptable, especially when viewing close-up
+views of shorelines, for example.  In this case, you can increase
+the resolution of the figure in integer factors that remain consistent with
+the coarse grid and refinement factors.
 
 It might not be possible to fully resolve all levels of a large
 simulation with many refinement levels because the resulting image
@@ -433,10 +436,13 @@ files will be stored.  For example, the Chile file above is stored at::
 
   plotdata.kml_publish = "http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/kmz"
 
-The KML file that is created then refers to the linked file "Chile_2010.kmz", stored at the above
-address.  This KML file (see `Chile_2010.kml`_) can be easily shared or posted on webpages to allow
-collaborators to view your results via links to your remotely stored KMZ file.  This KML file
-is set to automatically load an updated KMZ file every 5 minutes.  You can easily change this
-setting by editing the KML file.
+VisClaw will detect that this `plotdata` attribute has been set and
+automatically create a KML file that refers to the linked file
+"Chile_2010.kmz", stored at the above address.  This KML file (see
+`Chile_2010.kml`_) can be easily shared or posted on webpages to allow
+collaborators to view your results via links to your remotely stored
+KMZ file.  The KML file is set to automatically load an updated KMZ
+file every 5 minutes.  You can easily change this setting by editing
+the KML file.
 
 By default,  `plotdata.kml_publish` is set to `None`, in which case, no KML file will be created.
