@@ -44,8 +44,6 @@ will also want to install the Geospatial Data Abstraction Library
 
   % conda install gdal
 
-.. _OSGeo4W: http://trac.osgeo.org/osgeo4w/wiki
-
 On OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 Depending on your installation, you may also need to set the
