@@ -1,5 +1,5 @@
 
-.. _googleearth:
+.. _googleearth_plotting:
 
 *******************************************
 Visualizing GeoClaw results in Google Earth
