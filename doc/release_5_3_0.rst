@@ -7,7 +7,7 @@
 Release 5.3.0
 ==========================
 
-Clawpack 5.3.0 was released on May ??, 2015.  See :ref:`installing`.
+Clawpack 5.3.0 was released on May 21, 2015.  See :ref:`installing`.
 
 Changes relative to Clawpack 5.2.2 (October 28, 2014) are shown below.
 
