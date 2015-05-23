@@ -7,14 +7,14 @@ Visualizing GeoClaw results in Google Earth
 
 .. _Google Earth: http://www.google.com/earth
 
-The `Google Earth`_ browser is a powerful visualization tool for viewing
-geo-located data.  The VisClaw visualization
-suite includes tools that will produce plots and associated KMZ files
-needed for easy browsing of your GeoClaw simulation results in Google Earth.
-GeoClaw tsunami simulations are particularly appropriate for the
-Google Earth platform in that land topography, ocean bathymetry and
-wave disturbances created by tsunamis or other inundationevents can
-all be viewed simultaneously.
+The `Google Earth`_ browser is a powerful visualization tool for
+viewing georeferenced data.  The VisClaw visualization suite includes
+tools that will produce plots and associated KMZ files needed for easy
+browsing of your GeoClaw simulation results in Google Earth.  GeoClaw
+tsunami simulations are particularly appropriate for the Google Earth
+platform in that land topography, ocean bathymetry and wave
+disturbances created by tsunamis or other inundationevents can all be
+viewed simultaneously.
 
 The Google Earth browser is not a fully functional GIS tool, and so
 while the simulations may look very realistic, one should not base
@@ -47,7 +47,7 @@ will also want to install the Geospatial Data Abstraction Library
 On OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 Depending on your installation, you may also need to set the
-environment variable 'GDAL_DATA' to point to the directory containing
+environment variable `GDAL_DATA` to point to the directory containing
 the projection files (e.g.  gcs.cvs, epsg.wkt, and so on) needed to
 georeference and warp your PNG images.  For example, in Anaconda
 Python, these support files are installed under the `share/gdal`
@@ -184,9 +184,10 @@ The first three attributes are **required**.  The rest are optional.
 
   Set to `True` if this figure should be used to determine the initial
   camera position in Google Earth.  The initial camera position will
-  be centered over this figure, and at an elevation equal to
-  approximately twice the width of the figure, in meters.  By default, the first figure
-  created will be used to set the initial view.
+  be centered over this figure at an elevation equal to approximately
+  twice the width of the figure, in meters.  By default, the first
+  figure encountered with the `use_for_kml` attribute set to *True*
+  will be used to set the initial view.
 
 .. attribute:: kml_figsize :  [size_x_inches,size_y_inches]
 
@@ -196,10 +197,11 @@ The first three attributes are **required**.  The rest are optional.
 
 .. attribute:: kml_dpi : integer
 
-  Number of pixels per inch used in rendering PNG figures.  This
-  should be consistent with the `figsize` and the refinement factors.
-  See `Removing aliasing artifacts`_ below for more details on how to
-  improve the quality of the PNG files created by Matplotlib.  Default : 200.
+  Number of pixels per inch used in rendering PNG figures.  For best
+  results, figure size and dpi should be set to respect the numerical
+  resolution of the the simulation.  See `Removing aliasing
+  artifacts`_ below for more details on how to improve the quality of
+  the PNG files created by Matplotlib.  Default : 200.
 
 .. attribute:: kml_tile_images : boolean
 
@@ -214,7 +216,7 @@ Creating the figures
 All figures created for Google Earth are rendered as PNG files using
 the Matplotlib backend.  So in this sense, the resulting PNG files are
 created in a manner that is no different from other VisClaw output
-formats.  Furthermore, there are no special plotaxes or plotitems
+formats.  Furthermore, there are no special `plotaxes` or *plotitem*
 attributes to set for KML figures.  But several attributes will either
 be ignored by the KML output or should  be suppressed for best results
 in Google Earth.
@@ -257,13 +259,19 @@ plotitem attributes
 
 The most useful `plotitem` type will probably be the `2d_pcolor` type, although other
 types including the filled contour `contourf` can also be used to good effect.
+
+Colormaps that are designed to work well with Google Earth are
+
+* `geoplot.googleearth_transparent`
+* `geoplot.googleearth_lightblue`
+* `geoplot.googleearth_darkblue`
+
 The transparent
-colormap is particularly appealing visually when overlaid onto the Google Earth ocean
-bathymetry.  This colormap is the `geoplot.googleearth_transparent` colormap, available
-in the geoplot module.   Other colormaps that are designed to work well with the Google Earth
-browser backdrop are the `googleearth_lightblue` and `googleearth_darkblue` colormaps. These
-are solid colormaps, with the zero sea surface level set to colors which match those of the
-ocean bathymetry.
+colormap is particularly appealing visually when overlaid onto the Google Earth because
+the ocean bathymetry is clearly visible, illustrating the effect that underwater ridges
+and so on have on the propagation of tsunamis in the ocean. The other two colormaps
+are solid colormaps, where the zero level sea surface height is set to match that of the
+ocean bathymetry in Google Earth.
 
 Adding a colorbar overlay
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -352,40 +360,6 @@ The KMZ file can be posted to a website to share your results with others.
 See `Publishing your results`_, below.
 
 
-Creating multiple figures at different resolutions
---------------------------------------------------
-You can create several figures for visualization in Google Earth.
-Each figure you create will show up in a separate folder in the Google
-Earth sidebar.  For at least one figure, you will probably want to set
-the `kml_xlimits` and `kml_ylimits` to match the computational domain.
-
-To get higher resolution zoomed in figures, you will want to restrict
-the x- and y-limits to a smaller region.  For best results, these zoom
-regions should be consistent with the resolution of your simulation.
-In the Chile example, a 30x30 inch figure resolves two degrees per inch.
-The x- and y-limits for the zoomed in figure should then span an even
-number of degrees in each direction, and have boundaries that align
-with even degree marks, i.e. -120, -118, -116, etc.  In **setplot_kml.py**,
-the zoomed in region is described as :
-
-.. code-block:: python
-
-    # Set Google Earth bounding box and figure size
-    plotfigure.kml_xlimits = [-84,-74]    # 10 degrees
-    plotfigure.kml_ylimits = [-18,-4]     # 14 degrees
-    plotfigure.kml_figsize = [10,14]  # inches. (1 inch per degree)
-
-    # Resolution
-    rcl = 10    # Over-resolve the coarsest level
-    plotfigure.kml_dpi = rcl*2*6       # Resolve all three levels
-    plotfigure.kml_tile_images = False  # Tile images for faster loading.
-
-This figure shows up in the  Google Earth sidebar as "Sea Surface (zoom)".
-
-See `Removing aliasing artifacts`_ for more details on how to set the zoom levels.
-
-
-
 .. _Creating an image pyramid:
 
 Tiling images for faster loading
@@ -439,8 +413,8 @@ done by setting the figure size and DPI appropriately::
   plotfigure.kml_dpi = 12
 
 The resulting PNG file has a resolution of only 360x360, but in fact, is free of
-the vertical and horizontal stripes that appeared in the default, much higher
-resolution image.
+the vertical and horizontal stripes that appeared in the much higher resolution image
+created from the default settings.
 
 .. figure::  images/GE_nonaliased.png
    :scale: 200%
@@ -448,22 +422,60 @@ resolution image.
 
    Aliasing effects removed by properly setting `kml_dpi` and `kml_figsize`
 
-While the above removes aliasing artifacts, you may still find that
-the resolution is unacceptable, especially in close-up
-views of shorelines and so on.  In this case, you can increase
-the resolution of the figure in integer factors that remain consistent with
-the coarse grid and refinement factors.
+If you find that the resolution is unacceptable, especially in
+close-up views of shorelines and so on, you can increaese the
+resolution of the figure in integer factors that remain consistent
+with the coarse grid and refinement factors.  In the Chile example,
+you might try increase the dpi to 24 or even 48, and the resulting PNG file
+will still be modest in size.
 
-It might not be possible to fully resolve all levels of a large
+In some cases, it might not be possible to fully resolve all levels of a large
 simulation with many refinement levels because the resulting image
 resolution exceeds the Matplotlib limit of 32768 pixels on a side.
 In this case, you can limit the number of
 levels that are resolved by a particular figure and create zoomed in
-figures that resolve finer levels.  Alternatively, you can break the
-computational domain into several figures, each covering a portion of
-the entire domain.
+figures that resolve finer levels. See `Creating multiple figures
+at different resolutions`_, below.
 
-The Chile example shows a zoomed in figure near the shoreline with increased resolution at all levels.
+Alternatively, you can break the computational domain into several
+figures, each covering a portion of the entire domain.
+
+
+Creating multiple figures at different resolutions
+--------------------------------------------------
+You can create several figures for visualization in Google Earth.
+Each figure you create will show up in a separate folder in the Google
+Earth sidebar.  For at least one figure, you will probably want to set
+the `kml_xlimits` and `kml_ylimits` to match the computational domain.
+
+To get higher resolution zoomed in figures, you will want to restrict
+the x- and y-limits to a smaller region.  For best results, these zoom
+regions should be consistent with the resolution of your simulation.
+In the Chile example, a 30x30 inch figure resolves two degrees per inch.
+The x- and y-limits for the zoomed in figure should then span an even
+number of degrees in each direction, and have boundaries that align
+with even degree marks, i.e. -120, -118, -116, etc.  In **setplot_kml.py**,
+the zoomed in region is described as :
+
+.. code-block:: python
+
+    # Zoomed figure created for Chile example.
+    plotfigure.kml_xlimits = [-84,-74]    # 10 degrees
+    plotfigure.kml_ylimits = [-18,-4]     # 14 degrees
+    plotfigure.kml_figsize = [10,14]  # inches. (1 inch per degree)
+
+    # Resolution
+    rcl = 10    # Over-resolve the coarsest level
+    plotfigure.kml_dpi = rcl*2*6       # Resolve all three levels
+    plotfigure.kml_tile_images = False  # Tile images for faster loading.
+
+The resulting figure will have a resolution of 120 dots (i.e. pixels) per inch, compared to the
+12 dpi in the larger PNG file covering the whole domain.  The resolution of the zoomed
+image is 1200x1680, compared to 360x360 for the larger domain.
+
+This higher resolution figure shows up in the  Google Earth sidebar as "Sea Surface (zoom)".
+
+See `Removing aliasing artifacts`_ for more details on how to set the zoom levels.
 
 .. _Publishing your results:
 
