@@ -405,7 +405,7 @@ evenly divisible by 30*2*6 = 360.
 
 In the Chile example, we can remove these aliasing effects by making
 the resolution of the PNG file a multiple of 30*2*6 = 360.  This can be
-done by setting the figure size and DPI appropriately::
+done by setting the figure size and dpi appropriately::
 
   # Set dpi and figure size to resolve the 30x30 coarse grid, and two levels of refinement with
   # refinement factors of 2 and 6.
@@ -422,12 +422,14 @@ created from the default settings.
 
    Aliasing effects removed by properly setting `kml_dpi` and `kml_figsize`
 
-If you find that the resolution is unacceptable, especially in
-close-up views of shorelines and so on, you can increaese the
-resolution of the figure in integer factors that remain consistent
-with the coarse grid and refinement factors.  In the Chile example,
-you might try increase the dpi to 24 or even 48, and the resulting PNG file
-will still be modest in size.
+This baseline dpi=12 is the minimum resolution that will remove
+striped artifacts from your images. However, you may find that this
+resolution is unacceptable, especially for close-up views of
+shorelines and so on. In this case, you can increase the resolution of
+the figure by integer factors of the baseline dpi.  In the Chile
+example, you might try increasing the dpi to 24 or even 48.  The resulting
+PNG file, when rendered in Google Earth, should be much sharper when
+zoomed in for near-shoreline views, for example.
 
 In some cases, it might not be possible to fully resolve all levels of a large
 simulation with many refinement levels because the resulting image
