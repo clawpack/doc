@@ -13,7 +13,7 @@ tools that will produce plots and associated KMZ files needed for easy
 browsing of your GeoClaw simulation results in Google Earth.  GeoClaw
 tsunami simulations are particularly appropriate for the Google Earth
 platform in that land topography, ocean bathymetry and wave
-disturbances created by tsunamis or other inundationevents can all be
+disturbances created by tsunamis or other inundation events can all be
 viewed simultaneously.
 
 The Google Earth browser is not a fully functional GIS tool, and so
@@ -40,18 +40,21 @@ Optional GDAL library
 ---------------------
 To create a pyramid of images for faster loading in Google Earth, you
 will also want to install the Geospatial Data Abstraction Library
-(`GDAL`_).  This can be most easily installed with *conda*::
+(`GDAL`_).  The Python bindings for this library can be most easily
+installed with *conda*::
 
   % conda install gdal
 
 On OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 Depending on your installation, you may also need to set the
-environment variable `GDAL_DATA` to point to the directory containing
+environment variable *GDAL_DATA* to point to the directory containing
 the projection files (e.g.  gcs.cvs, epsg.wkt, and so on) needed to
 georeference and warp your PNG images.  For example, in Anaconda
 Python, these support files are installed under the `share/gdal`
-directory, and so you can set (in bash) the environment variable as::
+directory, and so you can set (in bash) the environment variable as
+
+.. code-block:: python
 
     export GDAL_DATA=$ANACONDA/share/gdal
 
@@ -60,10 +63,10 @@ An example : The Chile 2010 tsunami event
 
 .. _Chile_2010.kml: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/kml/Chile_2010.kml
 
-Simulations of the Chile 2010 earthquake and tsunami are included as
-an example in the GeoClaw module of Clawpack.  Once you have run this
-simulation, you can create the KMZ file needed for visualizing your data in
-Google Earth by using the command::
+The Chile 2010 tsunami is included as an example in the GeoClaw module
+of Clawpack.  Once you have run this simulation, you can create the
+KMZ file needed for visualizing your data in Google Earth by using the
+command::
 
   % make plots "SETPLOT_FILE=setplot_kml.py"
 
@@ -71,7 +74,7 @@ This runs the commands in *setplot_kml.py*. The resulting archive file
 *Chile_2010.kmz* (created in your plots directory) can be opened in
 Google Earth.
 
-An on-line version of results from this example can be viewed by
+An on-line version of the results from this example can be viewed by
 opening the file `Chile_2010.kml`_ in Google Earth.
 
 .. figure::  images/GE_Chile.png
@@ -102,7 +105,9 @@ have reasonable default values.
 .. code-block:: python
 
   def setplot(plotdata):
+
   # .....
+
   #-----------------------------------------
   # plotdata attributes for KML
   #-----------------------------------------
@@ -135,7 +140,8 @@ have reasonable default values.
 
 .. attribute:: kml_publish : string
 
-  A URL address and path to remote site hosting a KMZ file you wish to make available on-line.   See
+  A URL address and path to a remote site hosting a
+  KMZ file you wish to make available on-line.   See
   `Publishing your results`_.
 
 
@@ -143,7 +149,8 @@ plotfigure attributes
 ---------------------
 
 The following attributes apply to an individual figure created for visualization in Google Earth.
-The first three attributes are **required**.  The rest are optional.
+The first three attributes are **required**.  The remaining attributes
+are optional.
 
 .. code-block:: python
 
@@ -281,8 +288,8 @@ browser by setting the figure attribute `colorbar`. The color axis
 range `[cmin, cmax]` and the colormap `cmap` should be consistent with
 those set as plotitem attributes.
 
-Gauges and miscellaneous settings
----------------------------------
+Gauge plots
+-----------
 
 There are no particular attributes for gauge plots and so they
 can be created in the usual way.  In the Google Earth browser, gauge locations
