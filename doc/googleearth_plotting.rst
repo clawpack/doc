@@ -36,12 +36,17 @@ package managers *PIP* and *conda*::
   % conda install lxml   # May also use PIP
   % pip install pykml    # Not available through conda
 
+You can test your installation by importing these modules into Python::
+
+  % python -c "import lxml"
+  % python -c "import pykml"
+
 Optional GDAL library
 ---------------------
 To create a pyramid of images for faster loading in Google Earth, you
 will also want to install the Geospatial Data Abstraction Library
-(`GDAL`_).  The Python bindings for this library can be most easily
-installed with *conda*::
+(`GDAL`_).  The GDAL library (and associated Python bindings)
+can be easily installed with *conda*::
 
   % conda install gdal
 
@@ -52,11 +57,26 @@ environment variable *GDAL_DATA* to point to the directory containing
 the projection files (e.g.  gcs.cvs, epsg.wkt, and so on) needed to
 georeference and warp your PNG images.  For example, in Anaconda
 Python, these support files are installed under the `share/gdal`
-directory, and so you can set (in bash) the environment variable as
+directory, and so you can set (in bash) *GDAL_DATA* as
 
 .. code-block:: python
 
     export GDAL_DATA=$ANACONDA/share/gdal
+
+**Note.** It is important to use projection files that are packaged with your particular
+installation of *GDAL*.  Mixing installations and projection files can lead to unexpected
+errors.
+
+.. _gdal_test.py: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/gdal_test.py
+.. _frame0005fig1.png: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/frame0005fig1.png
+
+You can test your installation of the `GDAL` library by downloading the script `gdal_test.py`_
+and associated image file `frame0005fig1.png`_ (to the same diretory) and running the command::
+
+   % python gdal_test.py
+
+This test will create an image pyramid in the directory `frame0005fig1` and an associated
+`doc.kml` file which you can open in Google Earth.
 
 An example : The Chile 2010 tsunami event
 =========================================
@@ -151,6 +171,9 @@ plotfigure attributes
 The following attributes apply to an individual figure created for visualization in Google Earth.
 The first three attributes are **required**.  The remaining attributes
 are optional.
+
+The name "Sea Surface" given to the new instance `plotfigure`, below,
+will be used in the Google Earth sidebar to identify this figure.
 
 .. code-block:: python
 
@@ -414,11 +437,11 @@ each direction.  But the default settings for the figure size
 (`kml_figsize`) is `8x6` inches and dpi (`kml_dpi`) is 200, resulting in an
 image that is 1600 x 1200.  But because 1600 is not an even multiple of 30,
 noticeable vertical stripes appear at the coarsest level.   A more obvious
-plaid patterns appear at finer levels, since neither 1600 or 1200 are
+plaid pattern appears at finer levels, since neither 1600 or 1200 are
 evenly divisible by 30*2*6 = 360.
 
 .. figure::  images/GE_aliased.png
-   :scale: 50%
+   :scale: 40%
    :align: center
 
    Aliasing effects resulting from default `kml_dpi` and `kml_figsize` settings
@@ -437,7 +460,7 @@ the vertical and horizontal stripes that appeared in the much higher resolution 
 created from the default settings.
 
 .. figure::  images/GE_nonaliased.png
-   :scale: 200%
+   :scale: 150%
    :align: center
 
    Aliasing effects removed by properly setting `kml_dpi` and `kml_figsize`
@@ -453,12 +476,17 @@ zoomed in for coastline views.
 
 In some cases, it might not be possible to fully resolve all levels of
 a large multi-level simulation because the resulting image resolution
-exceeds the Matplotlib limit of 32768 pixels on a side.  In this case,
+would exceed the Matplotlib limit of 32768 pixels on a side.  In this case,
 you can limit the number of levels that are resolved by a particular
-figure and create zoomed in figures that resolve finer levels. See
+figure and create zoomed in figures to resolve finer levels. See
 `Creating multiple figures at different resolutions`_, below.
 Alternatively, you can break the computational domain into several
 figures, each covering a portion of the entire domain.
+
+If you set `kml_dpi` to a value less than 10, Matplotlib will revert to
+a dpi of 72 and change the figure size accordingly, so that the
+total number of pixels in each direction will still be equal to
+`kml_figsize*kml_dpi`, subject to round-off error.
 
 
 Creating multiple figures at different resolutions
@@ -479,6 +507,15 @@ with even degree marks, i.e. -120, -118, -116, etc.  In **setplot_kml.py**,
 the zoomed in region is described as :
 
 .. code-block:: python
+
+    #-----------------------------------------------------------
+    # Figure for KML files (zoom)
+    #----------------------------------------------------------
+    plotfigure = plotdata.new_plotfigure(name='Sea Surface (zoom)',figno=2)
+    plotfigure.show = True
+
+    plotfigure.use_for_kml = True
+    plotfigure.kml_use_for_initial_view = False  # Use large plot for view
 
     # Zoomed figure created for Chile example.
     plotfigure.kml_xlimits = [-84,-74]    # 10 degrees
