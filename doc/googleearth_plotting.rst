@@ -7,14 +7,14 @@ Visualizing GeoClaw results in Google Earth
 
 .. _Google Earth: http://www.google.com/earth
 
-The `Google Earth`_ browser is a powerful visualization tool for viewing
-geo-located data.  The VisClaw visualization
-suite includes tools that will produce plots and associated KMZ files
-needed for easy browsing of your GeoClaw simulation results in Google Earth.
-GeoClaw tsunami simulations are particularly appropriate for the
-Google Earth platform in that land topography, ocean bathymetry and
-wave disturbances created by tsunamis or other inundationevents can
-all be viewed simultaneously.
+The `Google Earth`_ browser is a powerful visualization tool for
+viewing georeferenced data and images.  The VisClaw visualization suite includes
+tools that will produce georeferenced plots and associated KMZ files needed for
+animating and browsing your GeoClaw simulation results in Google Earth.  GeoClaw
+tsunami simulations are particularly appropriate for the Google Earth
+platform in that land topography, ocean bathymetry and wave
+disturbances created by tsunamis or other inundation events can all be
+viewed simultaneously.
 
 The Google Earth browser is not a fully functional GIS tool, and so
 while the simulations may look very realistic, one should not base
@@ -36,43 +36,84 @@ package managers *PIP* and *conda*::
   % conda install lxml   # May also use PIP
   % pip install pykml    # Not available through conda
 
+**Test your installation.** You can test your installation by
+importing these modules into Python::
+
+  % python -c "import lxml"
+  % python -c "import pykml"
+
 Optional GDAL library
 ---------------------
 To create a pyramid of images for faster loading in Google Earth, you
 will also want to install the Geospatial Data Abstraction Library
-(`GDAL`_).  This can be most easily installed with *conda*::
+(`GDAL`_).  The GDAL library (and associated Python bindings)
+can be easily installed with *conda*::
 
   % conda install gdal
 
 On OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 Depending on your installation, you may also need to set the
-environment variable 'GDAL_DATA' to point to the directory containing
+environment variable *GDAL_DATA* to point to the directory containing
 the projection files (e.g.  gcs.cvs, epsg.wkt, and so on) needed to
 georeference and warp your PNG images.  For example, in Anaconda
 Python, these support files are installed under the `share/gdal`
-directory, and so you can set (in bash) the environment variable as::
+directory, and so you can set (in bash) *GDAL_DATA* as
+
+.. code-block:: python
 
     export GDAL_DATA=$ANACONDA/share/gdal
+
+**Note.** It is important to use projection files that are packaged with your particular
+installation of *GDAL*.  Mixing installations and projection files can lead to unexpected
+errors.
+
+.. _gdal_test.py: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/gdal_test.py
+.. _frame0005fig1.png: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/frame0005fig1.png
+
+**Test your installation.** You can test your installation of the
+`GDAL` library by downloading the script `gdal_test.py`_ and
+associated image file `frame0005fig1.png`_ (to the same directory) and
+running the command::
+
+   % python -c "import gdal_test"
+
+You should get the output::
+
+    %  python -c "import gdal_test"
+    Input file size is 1440, 1440
+    Creating output file that is 1440P x 1440L.
+    Processing input file frame0005fig1_tmp.vrt.
+    Using band 4 of source image as alpha.
+    Using band 4 of destination image as alpha.
+    Generating Base Tiles:
+    0...10...20...30...40...50...60...70...80...90...100 - done.
+    Generating Overview Tiles:
+    0...10...20...30...40...50...60...70...80...90...100 - done.
+
+This test will create an image pyramid in the directory `frame0005fig1` and an associated
+`doc.kml` file which you can open in Google Earth.
 
 An example : The Chile 2010 tsunami event
 =========================================
 
 .. _Chile_2010.kml: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/kml/Chile_2010.kml
 
-Simulations of the Chile 2010 earthquake and tsunami are included as
-an example in the GeoClaw module of Clawpack.  Once you have run this
-simulation, you can create the KMZ file needed for visualizing your data in
-Google Earth by using the command::
+The Chile 2010 tsunami is included as an example in the GeoClaw module
+of Clawpack.  Once you have run this simulation, you can create the
+KMZ file needed for visualizing your data in Google Earth by using the
+command::
 
   % make plots "SETPLOT_FILE=setplot_kml.py"
 
 This runs the commands in *setplot_kml.py*. The resulting archive file
 *Chile_2010.kmz* (created in your plots directory) can be opened in
-Google Earth.
+Google Earth.  An on-line version of the results from this example can
+be viewed by opening the file `Chile_2010.kml`_ in Google Earth.
 
-An on-line version of results from this example can be viewed by
-opening the file `Chile_2010.kml`_ in Google Earth.
+Use the time slider to step through the frames of the simulation, or
+click on the "animate" button (in the time slider panel) to animate
+the frames.
 
 .. figure::  images/GE_Chile.png
    :scale: 50%
@@ -90,7 +131,7 @@ We describe each of the relevant attributes and refer to their
 usage in the Chile 2010 example file `setplot_kml.py` file.
 
 In what follows, we only refer to instances `plotdata` and `plotfigure`
-of the `ClawPlotData` and `ClawPlotFigure` classes, respectively.
+of the `ClawPlotData` and `ClawPlotFigure` classes.
 
 plotdata attributes
 -------------------
@@ -101,8 +142,6 @@ have reasonable default values.
 
 .. code-block:: python
 
-  def setplot(plotdata):
-  # .....
   #-----------------------------------------
   # plotdata attributes for KML
   #-----------------------------------------
@@ -135,7 +174,8 @@ have reasonable default values.
 
 .. attribute:: kml_publish : string
 
-  A URL address and path to remote site hosting a KMZ file you wish to make available on-line.   See
+  A URL address and path to a remote site hosting a
+  KMZ file you wish to make available on-line.   See
   `Publishing your results`_.
 
 
@@ -143,7 +183,11 @@ plotfigure attributes
 ---------------------
 
 The following attributes apply to an individual figure created for visualization in Google Earth.
-The first three attributes are **required**.  The rest are optional.
+The first three attributes are **required**.  The remaining attributes
+are optional.
+
+The name "Sea Surface" given to the new instance `plotfigure`, below,
+will be used in the Google Earth sidebar to identify this figure.
 
 .. code-block:: python
 
@@ -173,33 +217,35 @@ The first three attributes are **required**.  The rest are optional.
 .. attribute:: kml_xlimits : [longitude_min, longitude_max]
 
   Longitude range used to place PNG figure on Google Earth. *This setting will override
-  any limits set as `plotaxes` attributes*.  **Required**
+  any limits set as plotaxes attributes*.  **Required**
 
 .. attribute:: kml_ylimits : [latitude_min, latitude_max]
 
   Latitude range used to place the PNG figure on Google Earth.
-  *This setting will override any limits set as `plotaxes` attributes*.  **Required**
+  *This setting will override any limits set as plotaxes attributes*.  **Required**
 
 .. attribute:: kml_use_for_initial_view : boolean
 
   Set to `True` if this figure should be used to determine the initial
   camera position in Google Earth.  The initial camera position will
-  be centered over this figure, and at an elevation equal to
-  approximately twice the width of the figure, in meters.  By default, the first figure
-  created will be used to set the initial view.
+  be centered over this figure at an elevation equal to approximately
+  twice the width of the figure, in meters.  By default, the first
+  figure encountered with the `use_for_kml` attribute set to *True*
+  will be used to set the initial view.
 
 .. attribute:: kml_figsize :  [size_x_inches,size_y_inches]
 
-   The figure size, in inches, for the PNG file.  See `Removing aliasing artifacts`_ for
-   tips on how to set the figure size and dpi for best results.
-   Default : 8 x 6 (chosen by Matplotlib).
+   The figure size, in inches, for the PNG file.  See `Removing
+   aliasing artifacts`_ for tips on how to set the figure size and dpi
+   for best results.  Default : 8 x 6 (chosen by Matplotlib).
 
 .. attribute:: kml_dpi : integer
 
-  Number of pixels per inch used in rendering PNG figures.  This
-  should be consistent with the `figsize` and the refinement factors.
-  See `Removing aliasing artifacts`_ below for more details on how to
-  improve the quality of the PNG files created by Matplotlib.  Default : 200.
+  Number of pixels per inch used in rendering PNG figures.  For best
+  results, figure size and dpi should be set to respect the numerical
+  resolution of the the simulation.  See `Removing aliasing
+  artifacts`_ below for more details on how to improve the quality of
+  the PNG files created by Matplotlib.  Default : 200.
 
 .. attribute:: kml_tile_images : boolean
 
@@ -214,7 +260,7 @@ Creating the figures
 All figures created for Google Earth are rendered as PNG files using
 the Matplotlib backend.  So in this sense, the resulting PNG files are
 created in a manner that is no different from other VisClaw output
-formats.  Furthermore, there are no special plotaxes or plotitems
+formats.  Furthermore, there are no special `plotaxes` or *plotitem*
 attributes to set for KML figures.  But several attributes will either
 be ignored by the KML output or should  be suppressed for best results
 in Google Earth.
@@ -257,24 +303,47 @@ plotitem attributes
 
 The most useful `plotitem` type will probably be the `2d_pcolor` type, although other
 types including the filled contour `contourf` can also be used to good effect.
+
+Colormaps that are designed to work well with Google Earth are
+
+* `geoplot.googleearth_transparent`
+* `geoplot.googleearth_lightblue`
+* `geoplot.googleearth_darkblue`
+
 The transparent
-colormap is particularly appealing visually when overlaid onto the Google Earth ocean
-bathymetry.  This colormap is the `geoplot.googleearth_transparent` colormap, available
-in the geoplot module.   Other colormaps that are designed to work well with the Google Earth
-browser backdrop are the `googleearth_lightblue` and `googleearth_darkblue` colormaps. These
-are solid colormaps, with the zero sea surface level set to colors which match those of the
-ocean bathymetry.
+colormap is particularly appealing visually when overlaid onto the Google Earth because
+the ocean bathymetry is clearly visible, illustrating the effect that underwater ridges
+and so on have on the propagating tsunami. The other two colormaps
+are solid colormaps, where the sea level color is set to match that of lighter or darker
+regions of the Google Earth ocean bathymetry.
 
 Adding a colorbar overlay
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A colorbar can be associated with each figure in the Google Earth
-browser by setting the figure attribute `colorbar`. The color axis
-range `[cmin, cmax]` and the colormap `cmap` should be consistent with
-those set as plotitem attributes.
+browser by setting the figure attribute `kml_colorbar` to point to a function
+that creates the colorbar::
 
-Gauges and miscellaneous settings
----------------------------------
+  # Create a colorbar (appears as a Screen Overlay in Google Earth).
+  def kml_colorbar(filename):
+    cmin = -0.2
+    cmax = 0.2
+    cmap = geoplot.googleearth_transparent
+    geoplot.kml_build_colorbar(filename,cmap,cmin,cmax)
+
+  plotfigure.kml_colorbar = kml_colorbar
+
+
+The color axis range `[cmin, cmax]` and the colormap `cmap` should be
+consistent with those set as plotitem attributes.  By expanding the
+figure folder in the Google Earth sidebar, you can use check boxes to
+hide or show the colorbar screen overlay.
+
+The input argument `filename` should be passed unaltered to the
+routine `geoplot.kml_build_colorbar`.
+
+Gauge plots
+-----------
 
 There are no particular attributes for gauge plots and so they
 can be created in the usual way.  In the Google Earth browser, gauge locations
@@ -293,8 +362,8 @@ clicked.
 Additional plotdata attributes
 ------------------------------
 
-VisClaw has additional plotdata attributes indicating which figures and frames
-to plot, and which output style to create.  When plotting for Google
+VisClaw has additional `plotdata` attributes indicating which figures and frames
+to plot and which output style to create.  When plotting for Google
 Earth, one additional output parameter is necessary.
 
 
@@ -307,7 +376,7 @@ Earth, one additional output parameter is necessary.
   plotdata.html = False              # create html files of plots?
   plotdata.latex = False             # create latex file of plots?
   # ....
-  plotdata.kml = True                # Create a KML/KMZ file
+  plotdata.kml = True        # <====== Set to True to create KML/KMZ output
 
   return plotdata   # end of setplot_kml.py file
 
@@ -342,48 +411,14 @@ more individual files from the KMZ file.  Other useful `zip` utilities
 include `zip` (used to create the KMZ file initially) and `zipinfo`.
 
 One reason you might wish to view the contents of an individual KMZ
-file is to inspect the PNG images generated by Matplotlib and that
-will be used as GroundOverlays in the Google Earth browser.  Another
-reason may be that you wish to make minor to edits the top level
-doc.kml file to add additional Google Earth sidebar entries or to
-change visibility defaults of individual folders.
+file is to inspect the PNG images generated by Matplotlib and used as
+GroundOverlays in the Google Earth browser.  Another reason may be
+that you wish to make minor edits the top level doc.kml file to add
+additional Google Earth sidebar entries or to change visibility
+defaults of individual folders.
 
 The KMZ file can be posted to a website to share your results with others.
 See `Publishing your results`_, below.
-
-
-Creating multiple figures at different resolutions
---------------------------------------------------
-You can create several figures for visualization in Google Earth.
-Each figure you create will show up in a separate folder in the Google
-Earth sidebar.  For at least one figure, you will probably want to set
-the `kml_xlimits` and `kml_ylimits` to match the computational domain.
-
-To get higher resolution zoomed in figures, you will want to restrict
-the x- and y-limits to a smaller region.  For best results, these zoom
-regions should be consistent with the resolution of your simulation.
-In the Chile example, a 30x30 inch figure resolves two degrees per inch.
-The x- and y-limits for the zoomed in figure should then span an even
-number of degrees in each direction, and have boundaries that align
-with even degree marks, i.e. -120, -118, -116, etc.  In **setplot_kml.py**,
-the zoomed in region is described as :
-
-.. code-block:: python
-
-    # Set Google Earth bounding box and figure size
-    plotfigure.kml_xlimits = [-84,-74]    # 10 degrees
-    plotfigure.kml_ylimits = [-18,-4]     # 14 degrees
-    plotfigure.kml_figsize = [10,14]  # inches. (1 inch per degree)
-
-    # Resolution
-    rcl = 10    # Over-resolve the coarsest level
-    plotfigure.kml_dpi = rcl*2*6       # Resolve all three levels
-    plotfigure.kml_tile_images = False  # Tile images for faster loading.
-
-This figure shows up in the  Google Earth sidebar as "Sea Surface (zoom)".
-
-See `Removing aliasing artifacts`_ for more details on how to set the zoom levels.
-
 
 
 .. _Creating an image pyramid:
@@ -420,18 +455,18 @@ each direction.  But the default settings for the figure size
 (`kml_figsize`) is `8x6` inches and dpi (`kml_dpi`) is 200, resulting in an
 image that is 1600 x 1200.  But because 1600 is not an even multiple of 30,
 noticeable vertical stripes appear at the coarsest level.   A more obvious
-plaid patterns appear at finer levels, since neither 1600 or 1200 are
+plaid pattern appears at finer levels, since neither 1600 or 1200 are
 evenly divisible by 30*2*6 = 360.
 
 .. figure::  images/GE_aliased.png
-   :scale: 50%
+   :scale: 40%
    :align: center
 
    Aliasing effects resulting from default `kml_dpi` and `kml_figsize` settings
 
-In the Chile example, we can remove these aliasing effects by making
-the resolution of the PNG file a multiple of 30*2*6 = 360.  This can be
-done by setting the figure size and DPI appropriately::
+We can remove these aliasing effects by making the resolution of the
+PNG file a multiple of 30*2*6 = 360.  This can be done by setting the
+figure size and dpi appropriately::
 
   # Set dpi and figure size to resolve the 30x30 coarse grid, and two levels of refinement with
   # refinement factors of 2 and 6.
@@ -439,31 +474,88 @@ done by setting the figure size and DPI appropriately::
   plotfigure.kml_dpi = 12
 
 The resulting PNG file has a resolution of only 360x360, but in fact, is free of
-the vertical and horizontal stripes that appeared in the default, much higher
-resolution image.
+the vertical and horizontal stripes that appeared in the much higher resolution image
+created from the default settings.
 
 .. figure::  images/GE_nonaliased.png
-   :scale: 200%
+   :scale: 150%
    :align: center
 
    Aliasing effects removed by properly setting `kml_dpi` and `kml_figsize`
 
-While the above removes aliasing artifacts, you may still find that
-the resolution is unacceptable, especially in close-up
-views of shorelines and so on.  In this case, you can increase
-the resolution of the figure in integer factors that remain consistent with
-the coarse grid and refinement factors.
+This baseline dpi=12 is the minimum resolution that will remove
+striped artifacts from your images. However, you may find that this
+resolution is unacceptable, especially for close-up views of
+shorelines and so on. In this case, you can increase the resolution of
+the figure by integer factors of the baseline dpi.  In the Chile
+example, you might try increasing the dpi to 24 or even 48.  The resulting
+PNG file, when rendered in Google Earth, should be much sharper when
+zoomed in for coastline views.
 
-It might not be possible to fully resolve all levels of a large
-simulation with many refinement levels because the resulting image
-resolution exceeds the Matplotlib limit of 32768 pixels on a side.
-In this case, you can limit the number of
-levels that are resolved by a particular figure and create zoomed in
-figures that resolve finer levels.  Alternatively, you can break the
-computational domain into several figures, each covering a portion of
-the entire domain.
+In some cases, it might not be possible to fully resolve all levels of
+a large multi-level simulation because the resulting image resolution
+would exceed the Matplotlib limit of 32768 pixels on a side.  In this case,
+you can limit the number of levels that are resolved by a particular
+figure and create zoomed in figures to resolve finer levels. See
+`Creating multiple figures at different resolutions`_, below.
+Alternatively, you can break the computational domain into several
+figures, each covering a portion of the entire domain.
 
-The Chile example shows a zoomed in figure near the shoreline with increased resolution at all levels.
+If you set `kml_dpi` to a value less than 10, Matplotlib will revert to
+a dpi of 72 and change the figure size accordingly, so that the
+total number of pixels in each direction will still be equal to
+`kml_figsize*kml_dpi`, subject to round-off error.  While you can
+avoid aliasing effects if this happens (assuming the dpi is still
+consistent with the resolution of the simulation), you can prevent
+Matplotlib from switching to a 72 dpi by simply reducing your figure
+size by a factor of 10 and increasing your dpi by a factor of 10.
+
+
+Creating multiple figures at different resolutions
+--------------------------------------------------
+You can create several figures for visualization in Google Earth.
+Each figure you create will show up as a separate named folder in the Google
+Earth sidebar.  The name will match that given to the VisClaw *plotfigure*.
+
+For at least one figure, you will probably want to set
+the `kml_xlimits` and `kml_ylimits` to match the computational domain.
+To get higher resolution zoomed in figures, you will want to restrict
+the x- and y-limits to a smaller region.  For best results, these zoom
+regions should be consistent with the resolution of your simulation.
+In the Chile example, a 30x30 inch figure resolves two degrees per inch.
+The x- and y-limits for the zoomed in figure should then span an even
+number of degrees in each direction, and have boundaries that align
+with even degree marks, i.e. -120, -118, -116, etc.  In **setplot_kml.py**,
+the zoomed in region is described as :
+
+.. code-block:: python
+
+    #-----------------------------------------------------------
+    # Figure for KML files (zoom)
+    #----------------------------------------------------------
+    plotfigure = plotdata.new_plotfigure(name='Sea Surface (zoom)',figno=2)
+    plotfigure.show = True
+
+    plotfigure.use_for_kml = True
+    plotfigure.kml_use_for_initial_view = False  # Use large plot for view
+
+    # Zoomed figure created for Chile example.
+    plotfigure.kml_xlimits = [-84,-74]    # 10 degrees
+    plotfigure.kml_ylimits = [-18,-4]     # 14 degrees
+    plotfigure.kml_figsize = [10,14]  # inches. (1 inch per degree)
+
+    # Resolution
+    rcl = 10    # Over-resolve the coarsest level
+    plotfigure.kml_dpi = rcl*2*6       # Resolve all three levels
+    plotfigure.kml_tile_images = False  # Tile images for faster loading.
+
+The resulting figure will have a resolution of 120 dots (i.e. pixels) per inch, compared to the
+12 dpi in the larger PNG file covering the whole domain.  The resolution of the zoomed
+image is 1200x1680, compared to 360x360 for the larger domain.
+
+This higher resolution figure shows up in the  Google Earth sidebar as "Sea Surface (zoom)".
+
+See `Removing aliasing artifacts`_ for more details on how to set the zoom levels.
 
 .. _Publishing your results:
 
@@ -474,12 +566,13 @@ You can easily share your results with collaborators
 by providing links to your archive KMZ file in HTML webpages.  Collaborators can
 download the KMZ file and open it in a Google Earth browser.
 
-However, you may find that the KMZ file is too large to make
-downloading convenient.  In this case, you can provide a light-weight
-KML file that contains a link to your KMZ file stored on a host server.
-Collaborators  can then open this KML file
-in Google Earth and browse your results via an internet connection.
+If you find that the KMZ file is too large to make downloading
+convenient, you can provide a light-weight KML file that contains a
+link to your KMZ file stored on a host server.  Collaborators can then
+open this KML file in Google Earth and browse your results remotely.
 
+VisClaw offers an option to automatically create a sample
+KML file containing a link to your KMZ file.
 To create this KML file, you should set the `plotdata` attribute
 `kml_publish` to the url address of your host server where the KMZ
 files will be stored.  For example, the Chile file above is stored at::
@@ -489,10 +582,8 @@ files will be stored.  For example, the Chile file above is stored at::
 VisClaw will detect that this `plotdata` attribute has been set and
 automatically create a KML file that refers to the linked file
 "Chile_2010.kmz", stored at the above address.  This KML file (see
-`Chile_2010.kml`_ for an example) can be easily shared or posted on webpages to allow
+`Chile_2010.kml`_ for an example) can be easily edited, shared or posted on webpages to allow
 collaborators to view your results via links to your remotely stored
-KMZ file.  The KML file is set to automatically load an updated KMZ
-file every 5 minutes.  You can easily change this setting by editing
-the KML file.
+KMZ file.
 
 By default,  `plotdata.kml_publish` is set to `None`, in which case, no KML file will be created.
