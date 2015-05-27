@@ -77,7 +77,21 @@ errors.
 associated image file `frame0005fig1.png`_ (to the same directory) and
 running the command::
 
-   % python gdal_test.py
+   % python -c "import gdal_test"
+
+You should get the output::
+
+    %  python -c "import gdal_test"
+    Input file size is 1440, 1440
+    Creating output file that is 1440P x 1440L.
+    Processing input file frame0005fig1_tmp.vrt.
+    Using band 4 of source image as alpha.
+    Using band 4 of destination image as alpha.
+    Generating Base Tiles:
+    0...10...20...30...40...50...60...70...80...90...100 - done.
+    Generating Overview Tiles:
+    0...10...20...30...40...50...60...70...80...90...100 - done.
+
 
 This test will create an image pyramid in the directory `frame0005fig1` and an associated
 `doc.kml` file which you can open in Google Earth.
@@ -96,10 +110,12 @@ command::
 
 This runs the commands in *setplot_kml.py*. The resulting archive file
 *Chile_2010.kmz* (created in your plots directory) can be opened in
-Google Earth.
+Google Earth.  An on-line version of the results from this example can
+be viewed by opening the file `Chile_2010.kml`_ in Google Earth.
 
-An on-line version of the results from this example can be viewed by
-opening the file `Chile_2010.kml`_ in Google Earth.
+Use the time slider to step through the frames of the simulation, or
+click on the "animate" button (in the time slider panel) to animate
+the frames.
 
 .. figure::  images/GE_Chile.png
    :scale: 50%
@@ -127,10 +143,6 @@ visualized in Google Earth.  These attributes are all **optional** and
 have reasonable default values.
 
 .. code-block:: python
-
-  def setplot(plotdata):
-
-  # .....
 
   #-----------------------------------------
   # plotdata attributes for KML
@@ -324,9 +336,13 @@ that creates the colorbar::
   plotfigure.kml_colorbar = kml_colorbar
 
 
-The color axis range `[cmin, cmax]` and the colormap `cmap` should be consistent with
-those set as plotitem attributes.  By expanding the figure folder in the Google Earth
-sidebar, you can use check boxes to hide or show the colorbar screen overlay.
+The color axis range `[cmin, cmax]` and the colormap `cmap` should be
+consistent with those set as plotitem attributes.  By expanding the
+figure folder in the Google Earth sidebar, you can use check boxes to
+hide or show the colorbar screen overlay.
+
+The input argument `filename` should be passed unaltered to the
+routine `geoplot.kml_build_colorbar`.
 
 Gauge plots
 -----------
@@ -348,7 +364,7 @@ clicked.
 Additional plotdata attributes
 ------------------------------
 
-VisClaw has additional plotdata attributes indicating which figures and frames
+VisClaw has additional `plotdata` attributes indicating which figures and frames
 to plot and which output style to create.  When plotting for Google
 Earth, one additional output parameter is necessary.
 
@@ -490,7 +506,11 @@ figures, each covering a portion of the entire domain.
 If you set `kml_dpi` to a value less than 10, Matplotlib will revert to
 a dpi of 72 and change the figure size accordingly, so that the
 total number of pixels in each direction will still be equal to
-`kml_figsize*kml_dpi`, subject to round-off error.
+`kml_figsize*kml_dpi`, subject to round-off error.  While you can
+avoid aliasing effects if this happens (assuming the dpi is still
+consistent with the resolution of the simulation), you can prevent
+Matplotlib from switching to a 72 dpi by simply reducing your figure
+size by a factor of 10 and increasing your dpi by a factor of 10.
 
 
 Creating multiple figures at different resolutions
@@ -548,12 +568,13 @@ You can easily share your results with collaborators
 by providing links to your archive KMZ file in HTML webpages.  Collaborators can
 download the KMZ file and open it in a Google Earth browser.
 
-You may find that the KMZ file is too large to make downloading
-convenient.  In this case, you can provide a light-weight KML file
-that contains a link to your KMZ file stored on a host server.
-Collaborators can then open this KML file in Google Earth and browse
-your results remotely.
+If you find that the KMZ file is too large to make downloading
+convenient, you can provide a light-weight KML file that contains a
+link to your KMZ file stored on a host server.  Collaborators can then
+open this KML file in Google Earth and browse your results remotely.
 
+VisClaw offers an option to automatically create a sample
+KML file containing a link to your KMZ file.
 To create this KML file, you should set the `plotdata` attribute
 `kml_publish` to the url address of your host server where the KMZ
 files will be stored.  For example, the Chile file above is stored at::
@@ -563,10 +584,8 @@ files will be stored.  For example, the Chile file above is stored at::
 VisClaw will detect that this `plotdata` attribute has been set and
 automatically create a KML file that refers to the linked file
 "Chile_2010.kmz", stored at the above address.  This KML file (see
-`Chile_2010.kml`_ for an example) can be easily shared or posted on webpages to allow
+`Chile_2010.kml`_ for an example) can be easily edited, shared or posted on webpages to allow
 collaborators to view your results via links to your remotely stored
-KMZ file.  The KML file is set to automatically load an updated KMZ
-file every 5 minutes.  You can easily change this setting by editing
-the KML file.
+KMZ file.
 
 By default,  `plotdata.kml_publish` is set to `None`, in which case, no KML file will be created.
