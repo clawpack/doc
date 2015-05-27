@@ -36,7 +36,6 @@ package managers *PIP* and *conda*::
   % conda install lxml   # May also use PIP
   % pip install pykml    # Not available through conda
 
-
 **Test your installation.** You can test your installation by
 importing these modules into Python::
 
@@ -91,7 +90,6 @@ You should get the output::
     0...10...20...30...40...50...60...70...80...90...100 - done.
     Generating Overview Tiles:
     0...10...20...30...40...50...60...70...80...90...100 - done.
-
 
 This test will create an image pyramid in the directory `frame0005fig1` and an associated
 `doc.kml` file which you can open in Google Earth.
