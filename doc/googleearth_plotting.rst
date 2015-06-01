@@ -55,10 +55,11 @@ On OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 Depending on your installation, you may also need to set the
 environment variable *GDAL_DATA* to point to the directory containing
-the projection files (e.g.  gcs.cvs, epsg.wkt, and so on) needed to
+projection files (e.g. gcs.cvs, epsg.wkt) needed to
 georeference and warp your PNG images.  For example, in Anaconda
 Python, these support files are installed under the `share/gdal`
-directory, and so you can set (in bash) *GDAL_DATA* as
+directory.  In *bash*, the *GDAL_DATA* environment variable can be exported
+as
 
 .. code-block:: python
 
@@ -112,7 +113,7 @@ Google Earth.  An on-line version of the results from this example can
 be viewed by opening the file `Chile_2010.kml`_ in Google Earth.
 
 Use the time slider to step through the frames of the simulation, or
-click on the "animate" button (in the time slider panel) to animate
+click on the "animate" button (also in the time slider panel) to animate
 the frames.
 
 .. figure::  images/GE_Chile.png
@@ -126,7 +127,7 @@ Plotting attributes needed for Google Earth
 
 The plotting parameters needed to instruct VisClaw to create plots
 suitable for visualization in Google Earth are all set as attributes
-to instances of the VisClaw classes *ClawPlotData* and *ClawPlotFigure*.
+of instances of the VisClaw classes *ClawPlotData* and *ClawPlotFigure*.
 We describe each of the relevant attributes and refer to their
 usage in the Chile 2010 example file `setplot_kml.py` file.
 
@@ -210,18 +211,18 @@ will be used in the Google Earth sidebar to identify this figure.
 
 .. attribute:: use_for_kml : boolean
 
-  Indicates to VisClaw that the PNG file created for this figure should be suitable for
+  Indicates to VisClaw that the PNG files created for this figure should be suitable for
   visualization in Google Earth. With this set to `True`, all titles, axes labels, colorbars
   and tick marks will be suppressed.  Default : `False`.
 
 .. attribute:: kml_xlimits : [longitude_min, longitude_max]
 
-  Longitude range used to place PNG figure on Google Earth. *This setting will override
+  Longitude range used to place PNG images on Google Earth. *This setting will override
   any limits set as plotaxes attributes*.  **Required**
 
 .. attribute:: kml_ylimits : [latitude_min, latitude_max]
 
-  Latitude range used to place the PNG figure on Google Earth.
+  Latitude range used to place the PNG images on Google Earth.
   *This setting will override any limits set as plotaxes attributes*.  **Required**
 
 .. attribute:: kml_use_for_initial_view : boolean
@@ -391,13 +392,15 @@ improving the quality of your images and publishing your results.
 
 KML and KMZ files
 -----------------
-KML files are very similar to HTML files in that they use
-`<tags>...</tags>` to describe data to be rendered by a suitable
-rendering engine.  Like a web browser, Google Earth can be viewed as
-browser for geospatial data described by the KML-specific tags.
+KML files are very similar to HTML files in that they contan
+`<tags>...</tags>` describing data to be rendered by a suitable
+rendering engine.  Whereas as standard web browsers can render content
+described by HTML tags, Google Earth renders the geospatial data
+described by KML-specific tags.
 
-The VisClaw `kml` attributes described above will create PNG files
-for frames, gauges and colorbars, and a hierarchy of linked KML files,
+The `kml` attributes described above will direct VisClaw to create
+Google Earth suitable PNG files
+for frames and colorbars and a hierarchy of linked KML files,
 including a top level `doc.kml` file for the entire simulation, one
 top level `doc.kml` file per figure, and additional referenced kml
 files per frame.  These KML and image files will not appear
@@ -451,12 +454,13 @@ You may find that the transparent colormap leads to unappealing visual
 artifacts.  This can happen when the resolution of the PNG file does
 not match the resolution of the data used to create the image.  In the
 Chile example, the number of grid cells on the coarsest level is 30 in
-each direction.  But the default settings for the figure size
-(`kml_figsize`) is `8x6` inches and dpi (`kml_dpi`) is 200, resulting in an
-image that is 1600 x 1200.  But because 1600 is not an even multiple of 30,
-noticeable vertical stripes appear at the coarsest level.   A more obvious
-plaid pattern appears at finer levels, since neither 1600 or 1200 are
-evenly divisible by 30*2*6 = 360.
+each direction. Two additional levels are created by refining first by
+a factor of 2 and then by a factor of 6.  But the default settings for
+the figure size (`kml_figsize`) is `8x6` inches and dpi (`kml_dpi`) is
+200, resulting in an image that is 1600 x 1200.  But because 1600 is
+not an even multiple of 30, noticeable vertical stripes appear at the
+coarsest level.  A more obvious plaid pattern appears at finer levels,
+since neither 1600 or 1200 are evenly divisible by 30*2*6 = 360.
 
 .. figure::  images/GE_aliased.png
    :scale: 40%
