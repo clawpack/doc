@@ -47,19 +47,17 @@ many of the changes from 4.3 to 4.6 are summarized at
 
 Major refactoring of the code and a move to GitHub for development over the
 next year resulted in the release of \clawpack 5.0 in January, 2014. 
-A significant number of additional improvements have been made since then. 
-The goals of this paper are to:
-
+A significant number of additional improvements have been made since then.  The
+objectives of this paper are to:
 \begin{itemize} 
 \item summarize some of the major changes made between the \clawpack
-4.x codes and the most recent \clawpack 5.3;  
+4.x codes and the most recent \clawpack 5.3,
 \item provide a citable reference for \clawpack 5.x that includes
-substantial contributors to this code as authors;
+substantial contributors to this code as authors, and
 \item summarize the development model we have adopted, which we believe
 may be of interest to others managing large open source scientific software
 projects.
 \end{itemize} 
-
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
@@ -70,7 +68,7 @@ q_t(x,t) + f(q(x,t))_x = 0
 \end{equation}
 or a non-conservative linear equation
 \begin{equation}\label{eq:hyp1b}
-q_t(x,t) + A(x)q(x,t)_x = 0,
+q_t(x,t) + A(x) q(x,t)_x = 0,
 \end{equation} 
 where subscripts denote partial derivatives and
 $q$ could be a vector with $m$ components for a system of equations. 
@@ -128,8 +126,8 @@ implemented in \clawpack (and still used in much of the code) is based on
 using the waves resulting from each Riemann solution together with limiter
 functions to achieve second-order accuracy where the solution is smooth
 together with sharp resolution of discontinuities without spurious numerical
-oscillations. See \cite{rjl:fvmhp} for a detailed description of the
-algorithms.   The more-recently developed SharpClaw algorithms,
+oscillations (see \cite{rjl:fvmhp} for a detailed description of the
+algorithms).   The more-recently developed SharpClaw algorithms,
 now incorporated in
 \pyclaw, use higher-order WENO methods, but still rely on the same Riemann
 solvers (see \cref{sec:pyclaw}).  

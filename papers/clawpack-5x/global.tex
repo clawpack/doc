@@ -12,23 +12,27 @@ the 5.x line) can be found at \url{http://www.clawpack.org/clawpack5.html}.
 Major changes that affected all aspects of the code include:
 \begin{itemize}
     \item Interface to the Riemann solvers were changed so that the same Fortran
-Riemann solvers can be used for all versions of the code (including \pyclaw
-thanks to \texttt{f2py}).  These have all be collected into the new
-\texttt{riemann} repository and calling sequences were modified.  Calling
-sequences for a number of other Fortran subroutines were also modified based
-on experiences with the \clawpack 4.x code.  These can also be used as a 
-stand-alone product for those who only want the Riemann solvers.
-    \item Python front-ends were redesigned for specifying run-time options for the flow solver (\texttt{setrun.py} and visualization \texttt{setplot.py}.  The Fortran variants
-(\classic, \amrclaw, and \geoclaw) all use a Python script to facilitate
-setting input variables.  This is creates text files with a rigidly specified format that are
-then read in when the Fortran code is run.  The interface now allows updates to the input parameters while maintaining backwards compatibility.
-    \item Reordering indices.  In \clawpack 4.x, the $m$th component of a
-system of equations in grid cell $(i,j)$ (in two dimensions, for example),
-was stored in \texttt{q(i,j,m)}.  This index order caused problems in
-optimizing code and when interfacing with PETSc in PyClaw, and so a global
-change was made to change the ordering so that the component number comes
-first, e.g. \texttt{q(m,i,j)}.  A seemingly minor change like this affects a
-huge number of lines in the code and cannot easily be automated. The use of
-version control and regression tests was crucial in the successful
-completion of the project.
+    Riemann solvers can be used for all versions of the code (including \pyclaw
+    thanks to \texttt{f2py}).  These have all be collected into the new
+    \texttt{riemann} repository and calling sequences were modified.  Calling
+    sequences for a number of other Fortran subroutines were also modified based
+    on experiences with the \clawpack 4.x code.  These can also be used as a
+    stand-alone product for those who only want the Riemann solvers.
+    \item Python front-ends were redesigned for specifying run-time options for
+    the solver (\texttt{setrun.py} and visualization \texttt{setplot.py}.  The
+    Fortran variants (\classic, \amrclaw, and \geoclaw) all use a Python script
+    to facilitate setting input variables.  This creates text files with a
+    rigidly specified format that are then read in when the Fortran code is run.
+    The interface now allows updates to the input parameters while maintaining
+    backwards compatibility.
+    \item The indices of the primary conserved quantities were reordered.  In
+    \clawpack 4.x, the $m$th component of a
+    system of equations in grid cell $(i,j)$ (in two dimensions, for example),
+    was stored in \texttt{q(i,j,m)}.  This index order caused problems in
+    optimizing code and when interfacing with PETSc in PyClaw, and so a global
+    change was made to change the ordering so that the component number comes
+    first, e.g. \texttt{q(m,i,j)}.  A seemingly minor change like this affects a
+    huge number of lines in the code and cannot easily be automated. The use of
+    version control and regression tests was crucial in the successful
+    completion of the project.
 \end{itemize}

@@ -7,15 +7,17 @@
 
 \subsection{\pyclaw} \label{sec:pyclaw}
 
-Later 4.x releases included a number of Python-based tools for handling
-\clawpack input and output.  The 5.x releases include a set of full-fledged Python
-solvers in which the higher-level parts of \clawpack have been reimplemented in
-Python and adapted to an object-oriented framework.  This new solver also
-includes access to the high-order algorithms introduced in SharpClaw (i.e.,
-WENO reconstruction and Runge--Kutta integrators) and can be used on large
-distributed-memory parallel machines.  Lower-level code (whatever gets executed
-repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw
-codes is automatically wrapped at install time using \texttt{f2py}.
+Later 4.x releases included a number of \todo{I think some version of a full
+solver existed in 4.x but was primitive compared to the 5.x version}{Python-
+based tools} for handling \clawpack input and output.  The 5.x releases include
+a set of full-fledged Python solvers in which the higher-level parts of
+\clawpack have been reimplemented in Python and adapted to an object-oriented
+framework.  This new solver also includes access to the high-order algorithms
+introduced in SharpClaw (i.e., WENO reconstruction and Runge--Kutta integrators)
+and can be used on large distributed-memory parallel machines.  Lower-level code
+(whatever gets executed repeatedly and needs to be fast) from the earlier
+Fortran Classic and SharpClaw codes is automatically wrapped at install time
+using \texttt{f2py}.
 
 \pyclaw's data structures and IO routines are also used by the other \clawpack
 codes and VisClaw for post-processing.
