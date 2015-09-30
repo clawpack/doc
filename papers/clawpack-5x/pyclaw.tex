@@ -1,0 +1,140 @@
+%!TEX root = paper.tex
+%
+% PyClaw
+%
+% Lead currently:  David Ketcheson
+%
+
+\subsection{\pyclaw} \label{sec:pyclaw}
+
+Later 4.x releases included a number of \todo{I think some version of a full
+solver existed in 4.x but was primitive compared to the 5.x version}{Python-
+based tools} for handling \clawpack input and output.  The 5.x releases include
+a set of full-fledged Python solvers in which the higher-level parts of
+\clawpack have been reimplemented in Python and adapted to an object-oriented
+framework.  This new solver also includes access to the high-order algorithms
+introduced in SharpClaw (i.e., WENO reconstruction and Runge--Kutta integrators)
+and can be used on large distributed-memory parallel machines.  Lower-level code
+(whatever gets executed repeatedly and needs to be fast) from the earlier
+Fortran Classic and SharpClaw codes is automatically wrapped at install time
+using \texttt{f2py}.
+
+\pyclaw's data structures and IO routines are also used by the other \clawpack
+codes and VisClaw for post-processing.
+
+\subsubsection{Librarization and Extensibility}
+Scientific software is easier to use, extend, and integrate with other tools when
+it is designed as a library \cite{Brown:2015cj}.  \clawpack has always been designed
+to be extensible, but \pyclaw takes this further in several ways.  First, it is
+distributed via a widely-used package management system, \texttt{pip}.
+Second, the default installation process (``\texttt{pip install clawpack}'')
+provides the user with a fully-compiled code and does not require setting environment
+variables.  Like other \clawpack packages, \pyclaw provides several ``hooks'' for users
+to plug in custom routines (for instance, to specify boundary conditions).
+In \pyclaw, these routines -- including the Riemann solver itself -- are selected at
+run-time, rather than at compile-time.  These routines can be written directly in
+Python, or (if they are performance-critical) in a compiled language (like Fortran or C)
+and wrapped with one of the many available tools.  Problem setup (including things like
+initial conditions, algorithm selection, and output specification) is also
+performed at run-time, which means that researchers can bypass much of the slower
+code-compile-execute-post-process cycle.
+It is intended that \pyclaw be easily usable within other packages (without control of \texttt{main()}).  This is in contrast to \amrclaw, \geoclaw and classic, which provides an end-to-end solution.
+
+% \subsubsection{Python classes for data on collections of structured grids}
+% \pyclaw includes Python classes for describing collections of structured grids
+% and data on them.
+% These classes are also used by the other codes through VisClaw, for post-processing.
+
+% A mesh in \clawpack always consists of a set of (possibly) mapped tensor-product
+% grids (interval, quadrilateral, or hexahedral).  In \pyclaw this geometry is represented
+% through the following objects:
+% \begin{itemize}
+%     \item A {\bf Dimension} is an interval divided into a fixed number of equally-sized subintervals.
+%     \item A {\bf Patch} is the tensor product of 1-3 Dimension objects, possibly with an associated mapping.
+%     \item A {\bf Domain} is a collection of any number of possibly overlapping Patch objects.
+% \end{itemize}
+% At present, \pyclaw solvers operate only on a single patch.  Multi-patch capability
+% is used to represent geometries from \amrclaw and \geoclaw runs, and is planned for
+% utilization in a future AMR-enabled version of \pyclaw.
+
+% The simulation data are represented by an additional set of objects:
+% \begin{itemize}
+%     \item A {\bf State} contains values of the solution vector $q$ and any
+%         auxiliary variables for each cell in a given Patch.
+%     \item A {\bf Solution} is a collection of States, corresponding to values of the solution
+%         on each Patch in a Domain.
+% \end{itemize}
+
+% \subsubsection{\pyclaw Solvers}
+% A Solver is used to advance a Solution in time.  Two types of solvers are implemented:
+% \begin{itemize}
+%     \item {\bf Classic}: the Lax-Wendroff-based solvers that are used in other Clawpack codes.
+%     \item {\bf SharpClaw}: high-order solvers based on WENO reconstruction and Runge-Kutta or linear multistep time integration.
+% \end{itemize}
+% All \pyclaw Solvers can use both fixed and variable step-size.
+% In order to preserve stability a CFL-like condition is being checked at each step of the computation, based on
+% a user-defined maximum CFL number.
+% The step-size must be chosen in such a way that the CFL number is always less than the maximum allowed 
+% value, thus in the case of variable step-size a rigorous step-size control is required.
+% We distinguish the Lax-Wendroff-based solvers and Runge-Kutta methods from linear multistep methods,
+% since the step-size strategy is different.
+
+% For the Lax-Wendroff and Runge-Kutta methods, first a choice for the step-size is made according to the 
+% maximum wave speed of the current solution 
+% (and the maximum wave speeds of stage solutions for Runge--Kutta methods).
+% Then a new solution is computed using this step-size and the CFL number is evaluated.
+% If the CFL number is less than the maximum allowed value then the step is accepted and a new step-size is 
+% chosen in the same manner.
+% Otherwise, the wave speed at the current step is large enough to cause instability or spurious oscillations if 
+% such a step-size is used, hence the step is rejected.
+% An updated step-size based on the increase of the maximum wave speed is calculated and the step is
+% repeated.
+% This guarantees that a step is rejected at most once and in most cases only the first step is rejected due to 
+% large initial step-size.
+% Currently SharpClaw Runge--Kutta time integrators consist of Euler's method, second-, third- and forth-order
+% optimal SSP Runge--Kutta methods with two, three and ten stages respectively.
+% Also a general Runge-Kutta method with user-defined coefficients can be used. 
+
+% For linear multistep methods the step-size selection is more involved since a variable step-size depends on
+% the SSP coefficient of the method which in turn depends on previous step-sizes and the method's coefficients 
+% that are varied to attain hight order. 
+% All these intricate relations are analysed in \todo{cite SSPVLMM paper}, where second and third order SSP linear
+% multistep methods with variable step-size are developed.
+% SharpClaw linear multistep methods consist of second-order, three-step and third-order, four-step optimal 
+% SSP linear multistep methods.
+% In both cases explicit formula for the step-size are used based on the permissible SSP step-size that 
+% guarantees the SSP property.
+% SSP Runge--Kutta are used for the starting values and the step-size for the those steps is chosen as
+% explained above.
+% For the third-order linear multistep methods additional {\em a posteriori} conditions must be applied.
+% Basically, they imply that the step-size remains finite and non-zero and that the forward Euler step-size
+% changes little over a single step.
+% Whenever these conditions are violated the step is rejected, a new step-size is derived and the solution is
+% recalculated.
+% Again, the fix in the step-size is such that the step is rejected at most once.
+
+% SharpClaw uses a traditional method-of-lines approach, in which
+% spatial operators are discretized first, to achieve high-order
+% resolution in space and time.  Spatial derivaties are discretized
+% using a high-order nonoscillatory reconstruction of the solution from
+% cell averages, which results in a system of ODEs that are subsequently
+% solved using the time-stepping methods described above.  The spatial
+% reconstructions are obtained using the weighted essentially
+% nonoscillatory (WENO) reconstruction algorithm which suppresses
+% spurious oscillations near discontinuities.  The WENO routines in
+% SharpClaw were generated by PyWENO, which is a standalone package for
+% building custom WENO codes. \cite{ketcheson2012pyclaw} \todo{should a
+%   breif description of PyWENO appear here, or just a citation?}
+
+
+\subsubsection{PyClaw backends}
+\begin{itemize}
+    \item pure numpy
+    \item PETSc
+    \item Boxlib (Matt)
+\end{itemize}
+
+\begin{itemize}
+    \item overall structure/languages figure
+    \item IPython notebooks
+\end{itemize}
