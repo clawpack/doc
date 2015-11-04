@@ -17,6 +17,7 @@ Clawpack 5.x
 * :ref:`release_5_2_1`  -- October 2, 2014
 * :ref:`release_5_2_2`  -- October 28, 2014
 * :ref:`release_5_3_0`  -- May 21, 2015
+* :ref:`release_5_3_1`  -- November ??, 2015
 * :ref:`changes_to_master`
 
 
