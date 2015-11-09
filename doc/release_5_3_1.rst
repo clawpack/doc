@@ -7,7 +7,9 @@
 Release 5.3.1
 ==========================
 
-Clawpack 5.3.1 was released on DATE.  See :ref:`installing`.
+Release candidate pending.
+
+Clawpack 5.3.1 was released on TBA.  See :ref:`installing`.
 
 Changes relative to Clawpack 5.3.0 (May 21, 2015) are shown below.
 
@@ -32,9 +34,11 @@ Changes to visclaw
 
 Added `amr_data_show` attribute to `ClawPlotItem` to suppress certain amr levels in plotting.
  
-Read gauge locations from `setgauge.data` file in `plotdata.outdir` rather
-than in `datadir`.  This works better if gauges are changed for new runs but
-you want to plot old output.
+Read gauge locations from `setgauge.data` file found in `plotdata.outdir` (the
+output directory where `fort.gauge` is located)  rather
+than from `datadir`.  This works better if gauges are changed for new runs but
+you want to plot old output, since the correct `setgauge.data` input for a run
+is copied to the output directory at the start of the run.
 
 Fix `colormaps.add_colormap` function to work better for combining two
 different colormaps for different ranges of a variable in certain cases.
@@ -66,7 +70,14 @@ frequently but only need the most recent one, e.g. to guard against crashes
 in a long run.  Two files are used in case the code crashes in the middle of
 doing a checkpoint, the previous one is still intact.  You can set
 `checkpt_style = -2`, for example, to give the same behavior as
-`checkpt_style = 2` but with only two files.
+`checkpt_style = 2` but saving only two latest checkpoint files.
+
+With this feature turned on, instead of files with names like
+`fort.chk00100` and `fort.tck00100` being created for a checkpoint
+after 100 steps, the files are named either `fort.chkaaaaa,
+fort.tckaaaaa` or `fort.chkbbbbb, fort.tckbbbbb` and these names
+alternate.  (The `fort.tck` files are very small with information
+about the time of checkpointing, the solution data is all in the `fort.chk` file.)
 
 Also improved checkpointing so that the output files `fort.amr` and `fort.gauge`
 have buffers flushed whenever checkpointing, to avoid possibly losing some
@@ -80,7 +91,7 @@ Better reporting of statistics regarding run time and number of cells
 integrated is now provided to the screen at the end of a run, and to the
 file `_output/fort.amr`.  In particular, better reports wall time vs. CPU
 time when OpenMP is used, and breaks this down into several groups to help
-determine where the code is spending the most time.
+determine where the code is spending the most time.  See :ref:`timing`.
 
 New testing framework and several changes in the `tests` directory.
 
@@ -88,6 +99,9 @@ See `amrclaw diffs <https://github.com/clawpack/amrclaw/compare/v5.3.0...v5.3.1>
 
 Changes to geoclaw
 ------------------
+
+NetCDF format can now be used for topography files by specifying `topo_type = 4`,
+both in `topotools.py` and when reading into the Fortran modeling code.
 
 Binary output option added for multi-layer code.
 

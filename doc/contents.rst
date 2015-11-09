@@ -55,6 +55,7 @@ Using the Fortran codes
    fortran_compilers
    user_routines
    openmp
+   timing
    python
    notebooks
    makefiles
