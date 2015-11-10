@@ -342,3 +342,14 @@ suite of tests and track progress if you add more tests ::
 
 This creates a set of html files in `./cover`, showing exactly which lines
 of code have been tested.
+
+
+Trouble-Shooting Tips
+=====================
+If you are having trouble installing or building Clawpack try out some of the
+following tips:
+
+ - Check to see if you have set the environment variable `FFLAGS` which may be
+   overriding flags that need to be set.  This is especially important to check
+   when building the PyClaw fortran libraries as a number of flags must be set
+   for the Python bindings and will override the defaults.
