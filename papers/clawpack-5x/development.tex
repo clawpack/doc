@@ -8,46 +8,14 @@
 \section{Development Approach}
 
 \clawpack's development model is largely driven by the needs of its
-developer community.  The \clawpack project contains core solver
-functionality, a visualization suite, a general adaptive mesh
-refinement code, a specialized geophysical flow code, and a
-massively parallelized Python framework.  Changes to the core solvers
-and visualization suite have a downstream effect on the other codes,
-and the developers largely work in an independent, asynchronous manner
-across continents and time zones. 
-
-\subsection{GitHub}
-
-The \clawpack team leverages the Git distributed version control system
-to coordinate development, with each major project and its development
-team assigned to its own repository.  The repositories are each
-publicly coordinated under the \clawpack organization on GitHub, 
-\url{https://github.com/orgs/clawpack/dashboard} and a
-top-level \clawpack repository is responsible for hosting
-build and installation tools as well as providing a synchronization
-point for the other repositories.
-
-GitHub is a free provider of public Git repositories.  In addition to
-repository hosting, the \clawpack team uses GitHub for issue tracking,
-code review, automated continuous integration via Travis CI \cite{travis}, 
-and test coverage tracking via Coveralls \cite{coveralls} for the Python based modules.  
-The issue tracker on GitHub
-automatically recognizes cross-repository references, simplifying
-communication between \clawpack developer sub-teams.  The Travis CI
-services, which provides free continuous integration for publicly
-developed repositories on GitHub, runs \clawpack's test suites through 
-\texttt{nosetests} \cite{nosetests} on
-proposed changes to the code base, and through a connection to
-the Coveralls service, reports on any test failures as well as changes
-to test coverage.
-
-\subsection{Submodules}
-
-As mentioned earlier, the \texttt{clawpack} repository serves as an
-installation and synchronization point for the other repositories.
-From a Computer Science perspective, the \texttt{clawpack} repository
-holds \textit{references} to a version of the code in each
-repository.  
+developer community.  The \clawpack project is a collective coupling several
+independently developed projects: core solver functionality, a
+visualization suite, a general adaptive mesh refinement code, a
+specialized geophysical flow code, and a massively parallelized Python
+framework.  Changes to the core solvers and visualization suite have a
+downstream effect on the other codes, and the developers largely work
+in an independent, asynchronous manner across continents and time
+zones.
 
 The main \clawpack repositories are:
 \begin{itemize}
@@ -55,7 +23,8 @@ The main \clawpack repositories are:
     \item \texttt{riemann} - Riemann solvers used by all the other projects,
     \item \texttt{visclaw} - Visualization suite used by all the other projects,
     \item \texttt{clawutil} - Utility functions used by most other projects,
-    \item \texttt{classic} - Uniform grid methods in 1, 2, and 3 space dimensions,
+    \item \texttt{classic} - Single grid methods in 1, 2, and 3 space
+    dimensions,
     \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimensions,
     \item \texttt{geoclaw} - AMR codes for depth-averaged geophysical flows,
     \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massively parallel capabilities
@@ -75,27 +44,58 @@ but is no longer under development.
 
 We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
 \texttt{clawutil} as
-\textit{upstream} repositories, since their changes affect the
-remaining repositories in the list, which we usually refer to as
-\textit{downstream} repositories.
+\textit{upstream} projects, since their changes affect the
+remaining projects in the list, which we usually refer to as
+\textit{downstream} projects.
+
+\subsection{GitHub}
+
+The \clawpack team leverages the Git distributed version control system
+to coordinate development, with each major project and its development
+team assigned to its own repository.  The repositories are each
+publicly coordinated under the \clawpack organization on GitHub, 
+\url{https://github.com/orgs/clawpack/dashboard} and a
+top-level \clawpack repository is responsible for hosting
+build and installation tools as well as providing a synchronization
+point for the other repositories.  
+
+GitHub is a free provider of public Git repositories.  In addition to
+repository hosting, the \clawpack team uses GitHub for issue tracking,
+code review, automated continuous integration via Travis CI
+\cite{travis}, and test coverage tracking via Coveralls
+\cite{coveralls} for the Python-based modules.  The issue tracker on
+GitHub automatically recognizes cross-repository references,
+simplifying communication between \clawpack developer sub-teams.  The
+Travis CI service, which provides free continuous integration for
+publicly developed repositories on GitHub, runs \clawpack's test
+suites through \texttt{nosetests} \cite{nosetests} on proposed changes
+to the code base, and through a connection to the Coveralls service,
+reports on any test failures as well as changes to test coverage.
+
+\subsection{Submodules}
+
+As mentioned earlier, the \texttt{clawpack} repository serves as an
+installation and synchronization point for the other project repositories.
+Snapshots of the top-level repository are taken both to prepare for
+software releases of the Clawpack project itself, and to provide
+``known working states'' when changes from upstream repositories must
+be coordinated with their downstream consumers.
 
 Typically, the \clawpack developers advance the master development
-branch of the repository any time a major feature is added or a bug is
-fixed in one of the other repositories.  When a feature is added to an
-upstream repository that affects other repositories, the addition of
-this change is coordinated with the downstream repositories by
-simultaneously advancing the version of the upstream repository as
-well as all affected downstream repositories.  
+branch of the top-level repository any time a major feature is added
+or a bug is fixed in one of the other projects.  When a feature is
+added to an upstream repository that affects other repositories, the
+addition of this change is coordinated with the downstream
+repositories by simultaneously advancing the version of the upstream
+repository as well as all affected downstream repositories.
 
 Git submodules are very powerful, but many developers, both new and
 experienced, find them confusing and challenging to work with.
 However, they have proved invaluable in allowing the \clawpack team to
-work asynchronously on sub-projects while reusing and maintaining
+work asynchronously on independent projects while reusing and maintaining
 common software infrastructure.
 
 \subsection{Contributing}
-
-\todo{Revise Contributing section, remove redundancy}
 
 Scientist programmers are often discouraged from sharing code
 due to existing reward mechanisms and the fear of being ``scooped''.
@@ -110,35 +110,44 @@ has not made it back into the core library.  With \clawpack 5.x,
 we are trying to encourage contributions from a broad community, with
 tools like distributed version control and open discussions on 
 the mailing lists and issue trackers.
-\clawpack is supported by a community of user-developers whose
-collaboration is enabled by the use of git and Github.
 
-% \clawpack uses the distributed version control software Git.
-% The main repository is hosted on GitHub.  Anyone may contribute,
-% for instance by developing new code, reporting bugs, or suggesting
-% improvements.
-
-% Bugs and feature requests are posted as issues on the tracker that
-% is part of the Github repository.  The tracker provides a page for
-% discussing the issue.
-
-The primary development model
-is typical for Github projects: a contributor forks the repository on Github,
-and develops improvements in a branch that is pushed to her own fork.
-She issues a ``pull request'' (PR) when the branch is ready to be merged
-into the main repository.  Increasingly, contributors are also using
-PRs as a way to conveniently post preliminary or prototype code for
-discussion prior to further development.
+The primary development model is typical for GitHub projects: a
+contributor forks the repository on GitHub, then develops improvements
+in a branch that is pushed to her own fork.  She issues a ``pull
+request'' (PR) when the branch is ready to be merged into the main
+repository.  Increasingly, contributors are also using PRs as a way to
+conveniently post preliminary or prototype code for discussion prior
+to further development.
 
 After a PR is issued, other developers -- including one or more of the
-maintainers for the corresponding repository -- reviews the code.  The Travis
+maintainers for the corresponding project -- reviews the code.  The Travis
 CI server also automatically runs the tests on the proposed new code.  The test
-results are visible on the Github page for the PR.  Usually there is some
-iteration as developers suggest improvements, request more testing, etc.
-Once the tests are passing and it is agreed that the code is acceptable, a
-maintainer merges it.
+results are visible on the GitHub page for the PR.  Usually there is
+some iteration as developers suggest improvements or discuss
+implementation choices in the code.  Once the tests are passing and it
+is agreed that the code is acceptable, a maintainer merges it.
 
 \subsection{Releases}
 
-\todo{Add release information}
+Although \clawpack is continuously developed, it is convenient for
+users to be able to install stable versions of the software.  The
+\clawpack developers provide these releases through two distribution
+channels, GitHub and the Python Package Index (PyPI).  Full source
+releases are available on GitHub.  Alternatively, the PyClaw
+subproject and its dependencies can be installed automatically using a
+PyPI client such as \texttt{pip}.
 
+\clawpack does not follow a calendar release cycle.  Instead, releases
+emerge when the developer community feels enough changes have
+accumulated since the last release to justify the cost to both users
+and developers of switching to a new release.  \clawpack releases are
+versioned using an $x.y.z$ triplet, representing the major, minor, and
+patch versions respectively.  In the broader software engineering
+community, this is often referred to as semantic versioning.  Small
+changes that fix bugs and cosmetic issues result in increments to the
+patch-level.  Backwards-compatible changes result in an increase to
+the minor version.  The introduction of backwards-incompatible changes
+require that the major version be incremented.  In addition, the
+implementation of significant new algorithms or capability will also
+justify the increment of major release number, and is often an impetus
+for providing another release to the public.
