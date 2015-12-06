@@ -39,9 +39,9 @@ of a Python user interface for specifying the input data.
 
 Since then, a number of other features were added to better cope with new
 applications, to provide a better user interface and visualization tools, and to
-incorporate higher-order accurate algorithms, OpenMP parallelization, and
+incorporate higher-order accurate algorithms, MPI and OpenMP parallelization, and
 other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
-(released in January, 2013) and
+(released in January 2013) and
 many of the changes from 4.3 to 4.6 are summarized at
 \url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
 
@@ -55,23 +55,23 @@ objectives of this paper are to:
 \item provide a citable reference for \clawpack 5.x that includes
 substantial contributors to this code as authors, and
 \item summarize the development model we have adopted, which we believe
-may be of interest to others managing large open source scientific software
-projects.
+may be of interest to others managing open source scientific software
+projects with many contributors.
 \end{itemize} 
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
-In one space dimension, the hyperbolic equation solved with
-\clawpack typically takes the form of a conservation law
+In one space dimension, the hyperbolic systems solved with
+\clawpack typically take the form of conservation laws
 \begin{equation}\label{eq:hyp1a}
 q_t(x,t) + f(q(x,t))_x = 0
 \end{equation}
-or a non-conservative linear equation
+or non-conservative linear systems
 \begin{equation}\label{eq:hyp1b}
 q_t(x,t) + A(x) q(x,t)_x = 0,
 \end{equation} 
 where subscripts denote partial derivatives and
-$q$ could be a vector with $m$ components for a system of equations. 
+$q$ is a vector with $m\ge 1$ components.
 The coefficient matrix $A$ in \cref{eq:hyp1b} or the Jacobian matrix 
 $f'(q)$ in \cref{eq:hyp1a} is assumed to be diagonalizable with real eigenvalues
 for all relevant values of $q,~x,~t$. 
@@ -86,13 +86,30 @@ than a conservation law in the case of \cref{eq:hyp1a}.
 Spatially-varying flux functions $f(q,x)$ in \cref{eq:hyp1a} can also be handled
 using the f-wave approach \cite{db-rjl-sm-jr:vcflux}.
 
+Some common examples of such hyperbolic systems include:
+\begin{itemize}
+    \item The Euler equations of compressible, inviscid fluid dynamics.
+        They consist of conservation laws for mass, momentum, and energy.
+        The wave speeds are a combination of the local fluid velocity
+        and the acoustic wave velocity.  Source terms could be added
+        to include the effects of viscosity and heat transfer
+        (leading to the Navier-Stokes equations) or the effect of gravity.
+        These systems have important applications for instance in
+        aerodynamics, climate and weather modeling, and astrophysics.
+    \item The shallow water equations, describing the velocity and
+        surface height of a liquid whose depth is small relative to
+        typical wavelengths.  In this case source terms may include
+        the effect of varying bathymetry and of bottom friction.
+        These equations are used, for instance, to model inundation
+        caused tsunamis and dam breaks, as well as atmospheric flows.
+\end{itemize}
 %For a one-dimensional problem \cref{eq:hyp1a} or \cref{eq:hyp1b},
 %the {\em Riemann problem} consists of the equation together with
 %piecewise constant initial data with a single jump discontinuity.
 
-Discontinuities can arise spontaneously in the solution of nonlinear
-hyperbolic equations (shock wave formation), causing difficulties for
-traditional finite-difference methods based on discretizing derivatives
+Discontinuities (shock waves) can arise spontaneously in the solution of nonlinear
+hyperbolic equations, causing difficulties for
+traditional numerical methods based on discretizing derivatives
 directly.   Modern shock capturing methods are generally based on solutions
 to the {\em Riemann problem}, which consists of the equation 
 \cref{eq:hyp1a} or \cref{eq:hyp1b}
@@ -114,7 +131,7 @@ to apply the code to different hyperbolic systems.  In some cases, the Riemann
 solver may also be designed to enforce physical properties like positivity
 (e.g., for the water depth in \geoclaw) or to account for forces (like that
 of gravity) that may be balanced by flux terms.
-In practice approximate Riemann solvers are commonly used for nonlinear
+In practice, approximate Riemann solvers are commonly used for nonlinear
 problems.%, which replace rarefaction waves by one or more discontinuities.
 
 \clawpack is based on Godunov-type finite volume methods in which
@@ -127,10 +144,9 @@ using the waves resulting from each Riemann solution together with limiter
 functions to achieve second-order accuracy where the solution is smooth
 together with sharp resolution of discontinuities without spurious numerical
 oscillations (see \cite{rjl:fvmhp} for a detailed description of the
-algorithms).   The more-recently developed SharpClaw algorithms,
-now incorporated in
-\pyclaw, use higher-order WENO methods, but still rely on the same Riemann
-solvers (see \cref{sec:pyclaw}).  
+algorithms).   The more-recently developed SharpClaw algorithms (see
+\cref{sec:pyclaw}), now incorporated in \pyclaw, use higher-order WENO methods
+but rely on the same Riemann solvers.
 
 In two space dimensions, hyperbolic equations might take the form
 \begin{equation}\label{eq:hyp2a}

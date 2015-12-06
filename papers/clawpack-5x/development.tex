@@ -7,11 +7,11 @@
 
 \section{Development Approach}
 
-\clawpack's development model is largely driven by the needs of its
-developer community.  The \clawpack project is a collective coupling several
-independently developed projects: core solver functionality, a
+\clawpack's development model is driven by the needs of its
+developer community.  The \clawpack project consists of several
+interdependent projects: core solver functionality, a
 visualization suite, a general adaptive mesh refinement code, a
-specialized geophysical flow code, and a massively parallelized Python
+specialized geophysical flow code, and a massively parallel Python
 framework.  Changes to the core solvers and visualization suite have a
 downstream effect on the other codes, and the developers largely work
 in an independent, asynchronous manner across continents and time
@@ -48,27 +48,27 @@ We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
 remaining projects in the list, which we usually refer to as
 \textit{downstream} projects.
 
-\subsection{GitHub}
+\subsection{Version Control}
 
 The \clawpack team leverages the Git distributed version control system
 to coordinate development, with each major project and its development
 team assigned to its own repository.  The repositories are each
-publicly coordinated under the \clawpack organization on GitHub, 
-\url{https://github.com/orgs/clawpack/dashboard} and a
+publicly coordinated under the \clawpack organization on GitHub\footnote{\url{https://github.com/orgs/clawpack/dashboard}} and a
 top-level \clawpack repository is responsible for hosting
 build and installation tools as well as providing a synchronization
 point for the other repositories.  
 
 GitHub is a free provider of public Git repositories.  In addition to
 repository hosting, the \clawpack team uses GitHub for issue tracking,
-code review, automated continuous integration via Travis CI
-\cite{travis}, and test coverage tracking via Coveralls
-\cite{coveralls} for the Python-based modules.  The issue tracker on
+code review, automated continuous integration via Travis CI\footnote{\url{https://travis-ci.org/}},
+and test coverage tracking via Coveralls\footnote{\url{http://coveralls.io}}
+for the Python-based modules.  The issue tracker on
 GitHub automatically recognizes cross-repository references,
 simplifying communication between \clawpack developer sub-teams.  The
 Travis CI service, which provides free continuous integration for
 publicly developed repositories on GitHub, runs \clawpack's test
-suites through \texttt{nosetests} \cite{nosetests} on proposed changes
+suites through \texttt{nose}\footnote{\url{https://nose.readthedocs.org}}
+on proposed changes
 to the code base, and through a connection to the Coveralls service,
 reports on any test failures as well as changes to test coverage.
 
@@ -91,7 +91,7 @@ repository as well as all affected downstream repositories.
 
 Git submodules are very powerful, but many developers, both new and
 experienced, find them confusing and challenging to work with.
-However, they have proved invaluable in allowing the \clawpack team to
+Nevertheless, they have proved invaluable in allowing the \clawpack team to
 work asynchronously on independent projects while reusing and maintaining
 common software infrastructure.
 
@@ -132,7 +132,7 @@ is agreed that the code is acceptable, a maintainer merges it.
 Although \clawpack is continuously developed, it is convenient for
 users to be able to install stable versions of the software.  The
 \clawpack developers provide these releases through two distribution
-channels, GitHub and the Python Package Index (PyPI).  Full source
+channels: GitHub and the Python Package Index (PyPI).  Full source
 releases are available on GitHub.  Alternatively, the PyClaw
 subproject and its dependencies can be installed automatically using a
 PyPI client such as \texttt{pip}.
