@@ -17,7 +17,8 @@ downstream effect on the other codes, and the developers largely work
 in an independent, asynchronous manner across continents and time
 zones.
 
-The main \clawpack repositories are:
+\vskip 5pt
+The core \clawpack software repositories are:
 \begin{itemize}
     \item \texttt{clawpack} - Installation, coordination of other repositories,
     \item \texttt{riemann} - Riemann solvers used by all the other projects,
@@ -29,12 +30,21 @@ The main \clawpack repositories are:
     \item \texttt{geoclaw} - AMR codes for depth-averaged geophysical flows,
     \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massively parallel capabilities.
 \end{itemize}
-
+A release of \clawpack downloaded by users contains all of the above.
+We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
+\texttt{clawutil} as
+\textit{upstream} projects, since their changes affect the
+remaining projects in the list, which we usually refer to as
+\textit{downstream} projects.
 Additional repositories contain documentation and extended examples of
 using the code: 
 \begin{itemize}
-    \item \texttt{doc} - Documentation
+    \item \texttt{doc} - Documentation source files, developed using
+Sphinx\footnote{\url{http://sphinx-doc.org}},
+    \item \texttt{clawpack.github.com} - Documentation html files that appear
+at \url{http://www.clawpack.org},
     \item \texttt{apps} - Applications contributed by developers and users
+that go beyond the introductory examples included in the core repositories.
 \end{itemize}
 Clawpack 4.x is still available in the repository
 \begin{itemize}
@@ -42,11 +52,6 @@ Clawpack 4.x is still available in the repository
 \end{itemize}
 but is no longer under development.
 
-We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
-\texttt{clawutil} as
-\textit{upstream} projects, since their changes affect the
-remaining projects in the list, which we usually refer to as
-\textit{downstream} projects.
 
 \subsection{Version Control}
 
@@ -57,9 +62,8 @@ publicly coordinated under the \clawpack organization on
 GitHub\footnote{\url{https://github.com/clawpack}} and the
 top-level \texttt{clawpack} super-repository is responsible for hosting
 build and installation tools, as well as providing a synchronization
-point for the other repositories.  With the exception of \texttt{doc}, 
-\texttt{apps}, and \texttt{clawpack-4.x},
-the other repositories listed above are subrepositories of \texttt{clawpack}. 
+point for the other repositories.  The remaining ``core \clawpack repositories'' 
+listed above are subrepositories of \texttt{clawpack}. 
 
 GitHub is a free provider of public Git repositories.  In addition to
 repository hosting, the \clawpack team uses GitHub for issue tracking,
@@ -120,7 +124,8 @@ in a branch that is pushed to her own fork.  She issues a ``pull
 request'' (PR) when the branch is ready to be merged into the main
 repository.  Increasingly, contributors are also using PRs as a way to
 conveniently post preliminary or prototype code for discussion prior
-to further development, often marked WIP for ``work in progress''.
+to further development, often marked WIP for ``work in progress'' to signal
+that it is not ready to merge.
 
 After a PR is issued, other developers -- including one or more of the
 maintainers for the corresponding project -- review the code.  The Travis
