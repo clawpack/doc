@@ -17,7 +17,7 @@ inundation.
 The \amrclaw code formed the starting point but it was necessary to make many 
 modifications to support the requirements of this application, as described
 briefly below, and so a branch was created that was initially called
-TsunamiClaw.  Later it became clear that there were many other potential
+{\sc TsunamiClaw}.  Later it became clear that there were many other potential
 applications with similar requirements when modeling a variety of
 geophysical flows over varying topography that are very shallow 
 relative to their lateral extent,
@@ -38,10 +38,18 @@ incorporation of source terms modeling bottom friction using a Manning
 formulation.
 More details about the code and tsunami modeling applications can be found
 in \cite{BergerGeorgeLeVequeMandli:awr11, LeVequeGeorgeBerger:an11}. 
-In addition to a variety of tsunami modeling applications (e.g. \cite{??}),
+In 2011, a significant effort took place to verify and validate \geoclaw 
+against the US National Tsunami Hazard Mitigation Program (NTHMP) benchmarks
+\cite{GonzalezLeVequeEtAl2011}.
+NTHMP approval of the code allows \geoclaw to be used in hazard mapping 
+projects that are funded by this program or other federal and state agencies,
+e.g.
+\cite{GonzalezLeVequeEtAl2013a,GonzalezLeVequeEtAl2014}.
+
+In addition to a variety of tsunami modeling applications,
 the \geoclaw code has been used to solve dam break problems in steep terrain
 \cite{George:Malpasset}, storm surge problems \cite{Mandli:ws},
-and submarine landslides \cite{??}.  The code also
+and submarine landslides \cite{jhkim:phd}.  The code also
 formed the basis for exploration for the use of 
 multi-layer shallow water equations for storm surge modeling
 \cite{mandli:phd}, development of storm surge applications \cite{Mandli:ws},
@@ -50,8 +58,7 @@ and is currently being extended further into D-Claw, for debris flow modeling
 
 Roughly one third of the files in the \amrclaw source library
 have to be modified for \geoclaw. 
-There are 135 files at this moment 
-in the \amrclaw 2D branch.
+There are currently 135 files in the \amrclaw 2D branch.
 Forty-five of them are replaced by a \geoclaw-specific file of the
 same name but in the \geoclaw 2D branch. 
 For example, to keep a flat
@@ -65,6 +72,8 @@ algorithms implemented in \geoclaw have been made between versions 4.6.3 and
 5.3.0, including:
 
 \begin{itemize} 
+\item In depth-averaged flow the wave speed and therefore the CFL condition depends on the depth.  Thus in shallow water spatially refined grids may not need to be refined in time.  This ``variable-time-stepping'' was easily added along with the anisotropic capabilities that were added to \amrclaw.
+
 \item the ability to specify topography via a set of {\tt
 topo} files that may cover overlapping regions at different resolutions. The
 finite volume method requires cell averages of topography, computed by
@@ -76,7 +85,7 @@ regridding may take place every few time steps.  Improvements were made
 in 5.2.0 so that topography could be copied rather than always being
 recomputed in regions where there is an old grid at the same resolution to
 copy from.  
-\todo{This was included in AMRClaw above but ok to include again.}
+%\todo{This was included in AMRClaw above but ok to include again.}
 
 \item The user can also provide {\tt dtopo} files that specify changes to the
 initial topography at a series of times.  This is used to specify sea-floor
@@ -86,6 +95,11 @@ made to these algorithms in 5.1.0 to fix a problem in earlier versions that
 resulted in incorrect topography motion in some cases, also resulting in a much
 more robust handling of multiple  {\tt dtopo} files.
 
+\item A number of new Python modules have been developed to assist the user
+in working with {\tt topo} and {\tt dtopo} files.  These are documented in
+the Clawpack documentation and several of them are illustrated with Jupyter
+notebooks found in the Clawpack Gallery.
+
 \item New capabilities were added in 5.0.0 to monitor the maximum of various
 flow quantities over a specified time range of a simulation.  This capability is
 crucial for many applications such as tsunami hazard assessment, where the
@@ -94,23 +108,20 @@ velocities in a harbor, or maximum momentum flux (a measure of the hydrodynamic
 force that would be exerted by the flow on a structure).  Arrival time of the
 first wave at each point can also be monitored.  Some such capabilities were
 included in the 4.x version of the code, but were more limited and did not
-always perform properly near the edges of refinement patches.  The user can
+always perform properly near the edges of refinement patches.  
+In Version 5.2 these routines were further improved and extended.  
+The user can
 specify a grid of points on which to monitor values, and the new code is more
 flexible in allowing one-dimensional grids (e.g. a transect), two-dimensional
 rectangular grids, or an arbitrary set of points.
 This is described in 
 \url{http://www.clawpack.org/fgmax.html}.
 
-\item A number of new Python modules have been developed to assist the user
-in working with {\tt topo} and {\tt dtopo} files.  \todo{To be continued...}
 
-\item In depth-averaged flow the wave speed and therefore the CFL condition depends on the depth.  Thus in shallow water spatially refined grids may not need to be refined in time.  This ``variable-time-stepping'' was easily added due to the anisotropic capabilities that were added to \amrclaw.
+\item The multi-layer shallow water code has been incorporated into the
+\geoclaw libraries and examples added for both multi-layer and storm surge
+applications.
 
 \end{itemize} 
 
-\todo{Recently a significant effort was made to get \geoclaw verified and validated
-against the National Tsunami Hazard Mitigation Program (NTHMP) benchmarks.
-After approval this allows \geoclaw to be used in hazard mapping projects that 
-involve the Federal Emergency Management Agency (FEMA).
-}{Is this right?}  A number of additional applications have been developed for
-\geoclaw, including storm surge, debris flow, and dam breaks.
+

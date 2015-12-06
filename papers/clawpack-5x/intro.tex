@@ -121,7 +121,7 @@ problems.%, which replace rarefaction waves by one or more discontinuities.
 the solution is represented by cell averages.  Riemann problems
 between the cell averages in neighboring states are used as the
 fundamental building block of the algorithm.
-The wave-propagation algorithms originally
+The wave-propagation algorithm originally
 implemented in \clawpack (and still used in much of the code) is based on
 using the waves resulting from each Riemann solution together with limiter
 functions to achieve second-order accuracy where the solution is smooth
@@ -155,4 +155,16 @@ algorithm based on {\em transverse Riemann solvers} introduced in
 
 A variety of Riemann solvers have been developed for \clawpack, many of which
 are collected in the \texttt{riemann} repository, see \cref{sec:riemann}.
+
+Adaptive mesh refinement (AMR) is essential for many problems and 
+has been available in two space dimensions
+since 1995, when Marsha Berger joined the project team and her AMR
+code for the Euler equations of compressible flow was generalized to fit into
+the software as \amrclaw, as described in \cite{Berger:1998ia}.  This was
+later carried over to three space dimensions using the unsplit algorithms
+introduced in \cite{jol-rjl:3d}.  Starting in Version 5.3.0, dimensional
+splitting is also supported in \amrclaw, which can be particularly useful in
+three space dimensions where the unsplit algorithms are much more expensive
+due to the transverse Riemann solves.  Other recent improvements to \amrclaw
+are discussed in \cref{sec:amrclaw}.
 

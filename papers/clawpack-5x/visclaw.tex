@@ -41,19 +41,22 @@ Starting with version 4.x, however, it was recognized that a reliance
 on proprietary software for visualization prevented a sizable
 potential user base from making use of the \cpack software.  As a
 result, it was decided to convert the one and two dimensional plotting
-routines from \mlab to routines written for the \mplotlib, a popular open source
+routines from \mlab to routines written for the \mplotlib,\todo{This
+capitalization looks non-standard? It's usually just \texttt{matplotlib}}
+a popular open source
 Python package for producing publication quality graphics
 for one and two dimensional data \cite{Hunter:2007}.
 
 With the development of \cpack Version 5.x, Python graphics tools
-became what is now called \vclaw, available as a submodule in the
+have been collected in \vclaw, available as a submodule in the
 \cpack GitHub organization.  The \vclaw suite of tools extends the
 functionality of the existing 4.x Python routines for creating one and
 two dimensional plots, and adds several new capabilities.  Chief among
 these new capabilities are the ability to generate output to webpages,
 where a series of plots can be viewed individually or as an animated
 time sequence using the Javascript package {\sc JSAnimation}
-\cite{jsanimation}.  The \vclaw module {\tt iplotclaw} provides
+\cite{jsanimation} that was inspired by an earlier \clawpack implementation.  
+The \vclaw module {\tt iplotclaw} provides
 interactive plotting capabilities from the Python or IPython prompt.
 Providing much of the same interactive capabilities as the original
 \mlab routines, {\tt iplotclaw} allows the user to step,
@@ -74,8 +77,9 @@ compared graphically to observational data.  Finally, to more
 thoroughly analyze the computational data, simulation data
 should be made available in formats that can be easily exported to GIS tools
 such as \agis or the open source alternative \qgis
-\cite{arcgis,qgis}.  For communicating results to non-experts, Google
-Earth may also be helpful.
+\cite{arcgis,qgis}.  For exploration of preliminary results or 
+communicating results to non-experts, Google
+Earth is also helpful.
 
 The latest release of \cpack includes many specialized \vclaw routines
 for handling the above issues with plotting geo-spatial data.
@@ -100,12 +104,13 @@ the  KML files created for Google Earth can be edited for
 export, along with associated PNG files to these other GIS applications.
 
 \subsubsection{Matlab plotting routines}
-The \mlab plotting available in early versions of \cpack are now part
-of \vclaw.  While most of the one and two dimensional capabilities
+The \mlab plotting available in early versions of \cpack are also included in
+\vclaw.  While most of the one and two dimensional capabilities
 available originally in the \mlab suite have been ported to Python and
 \mplotlib, the original \mlab routines are still available in the \mlab suite of
 plotting tools.  Other plotting capabilities, such as two dimensional
 manifolds embedded in three dimensional space, or three dimensional
-plots of fully 3d data are only available in the \mlab routines, or
-via some other package such as \visit \cite{HPV:VisIt}.  These more advanced
-3d plotting capabilities are planned for future releases of \vclaw.
+plots of fully 3d data are only available in the \mlab routines in a way that
+interfaces directly with \clawpack. 
+%via some other package such as \visit \cite{HPV:VisIt}.  
+More advanced 3d plotting capabilities are planned for future releases of \vclaw.
