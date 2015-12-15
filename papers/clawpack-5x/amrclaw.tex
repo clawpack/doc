@@ -75,33 +75,35 @@ Anisotropic refinement is allowed in both two and three dimensions.  This means 
 In addition, capabilities have been added to automatically select the 
 refinement ratio on each level based on the CFL condition.
 
-The \todo{What state was 2D in for 4.x vs. 5.x?}{3D} \amrclaw code has been
-reintroduced in 5.0. \amrclaw has also been parallelized using OpenMP directives based on grid patch-based decomposition.
-The main paradigm in structured AMR is a loop over
-all patches at a level, where some operation is done on each patch
-(i.e. taking a time step, finding ghost cells, conservation
-updates, etc.).  This lends itself easily to a {\tt parallel for} loop
-construct where each iteration of the loop corresponds to a
-grid at that level. Dynamic scheduling is used with a chunk size
-of one, so that one thread is assigned one patch at a time. 
-To help with load balancing, patches at
-each level are sorted from largest to smallest workload when they
-are first created, using
-the total number of cells in the grid as an indicator of work.
-Note that this approach causes a memory bulge. Each thread
-must have its own scratch arrays to save the incoming and
-outgoing waves and fluxes for future conservation fix-ups. 
-The bulge is directly proportional to the number
-of threads executing. For stack-based memory allocation per
-thread, the use of the environment variable 
-{\tt OMP\_STACKSIZE} to increase the limit may be necessary.
+The 3D \amrclaw code has been reintroduced in 5.0. \amrclaw has also been
+parallelized using OpenMP directives based on grid patch-based decomposition.
+The main paradigm in structured AMR is a loop over all patches at a level, where
+some operation is done on each patch (i.e. taking a time step, finding ghost
+cells, conservation updates, etc.).  This lends itself easily to a {\tt parallel
+for} loop construct where each iteration of the loop corresponds to a grid at
+that level. Dynamic scheduling is used with a chunk size of one, so that one
+thread is assigned one patch at a time. To help with load balancing, patches at
+each level are sorted from largest to smallest workload when they are first
+created, using the total number of cells in the grid as an indicator of work.
+Note that this approach causes a memory bulge. Each thread must have its own
+scratch arrays to save the incoming and outgoing waves and fluxes for future
+conservation fix-ups. The bulge is directly proportional to the number of
+threads executing. For stack-based memory allocation per thread, the use of the
+environment variable {\tt OMP\_STACKSIZE} to increase the limit may be
+necessary.
 
-The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the target architecture.  \pyclaw, on the other hand, does not include AMR but uses MPI via
-PETSc to achieve parallelism on distributed memory machines that scale to tens of
-thousands of cores (see \cref{sec:pyclaw}).
-Other frameworks including
-\forestclaw \cite{Burstedde:we} and \boxlib \todo{citation for pyboxlib?} also
-exist and are being developed in parallel with \amrclaw to provide scalable
-AMR calculations on large distributed memory machines.
+The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
+target architecture.  \pyclaw, on the other hand, does not include AMR but uses
+MPI via PETSc to achieve parallelism on distributed memory machines that scale
+to tens of thousands of cores (see \cref{sec:pyclaw}). Other frameworks exist,
+most notably \forestclaw \cite{Burstedde:we} which are being developed in
+parallel with \amrclaw to provide scalable AMR calculations on large distributed
+memory machines.
 
-\missingfigure{Provide some parallel efficiency results (Kyle).}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{efficiency}
+    \includegraphics[width=0.45\textwidth]{weak_scaling}
+    \caption{Caption here}
+    \label{fig:figure1}
+\end{figure}
