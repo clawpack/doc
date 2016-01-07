@@ -34,12 +34,13 @@ The core \clawpack software repositories are:
 \noindent
 A release of \clawpack downloaded by users contains all of the above.
 We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
-\texttt{clawutil} as
-\textit{upstream} projects, since their changes affect the
-remaining projects in the list, which we usually refer to as
-\textit{downstream} projects. \comment{DAC : Do changes in visclaw really affect, for
-example, amrclaw? Or Classic Claw?  Maybe call these utilities, core routines (upstream)
-and applications (downstream)?}
+\texttt{clawutil} as \textit{upstream} projects, since their changes
+affect the remaining projects \comment{(repository?)} in the list, which
+we usually refer to as \textit{downstream} projects
+\comment{(repository?)}.  \comment{DAC : Do changes in visclaw really
+affect, for example, amrclaw? Maybe the categories could be called
+utilities, core routines (upstream) and applications (downstream)?}
+
 Additional repositories contain documentation and extended examples of
 using the code:
 \begin{itemize}
@@ -149,13 +150,13 @@ channels: GitHub and the Python Package Index (PyPI).  Full source
 releases are available on GitHub.  Alternatively, the PyClaw
 subproject and its dependencies can be installed automatically using a
 PyPI client such as \texttt{pip}. \comment{DAC :
-Can Clawpack also be installed using pip?  It sounds like only PyClaw can, although
-we say Clawpack is available on PyPI. }
+Can Clawpack also be installed using pip?  From the way it is written,
+it sounds like only PyClaw can be installed using pip.}
 
 \clawpack does not follow a calendar release cycle.  Instead, releases
 emerge when the developer community feels enough changes have
-accumulated since the last release to justify the cost to both users
-and developers of switching to a new release.  \clawpack releases are
+accumulated since the last release to justify
+the cost of switching to a new release.  \clawpack releases are
 versioned using an $M.m.p$ triplet, representing the major (M), minor (m), and
 patch (p) versions respectively.  In the broader software engineering
 community, this is often referred to as semantic versioning.  Small

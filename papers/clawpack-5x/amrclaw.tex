@@ -23,18 +23,11 @@ gradient testing, or user-specified criteria).  See
 organizing the flagged points into efficient grid
 patches at the next finer level, using the algorithm of
 \cite{mjb-rig:cluster};
-\item
-initializing newly created fine grids, both solution and auxiliary arrays that store additional grid data such as topography, wind velocity, metric data for example latitude and longitude, etc.;
-\item
-orchestrating the time stepping, since refinement levels may have
-different time steps ({called sub-cycling in time});
-\item
-interpolating for ghost cells at the boundaries of fine patches,
-needed before a time step can be taken;
-\item
-updating coarse grid values covered by finer grid patches;
-\item
-maintaining conservation at patch boundaries between resolution levels.
+\item interpolating the solution to newly created fine grids and initializing auxiliary data (topography, wind velocity, metric data and so on) on  these grids,
+\item averaging fine grid solutions to coarser grids,
+\item orchestrating the adaptive time stepping (i.e. subcycling in time),
+\item interpolating coarse grid solution to fine grid ghost cells
+\item maintaining conservation at patch boundaries between resolution levels.
 \end{itemize}
 The algorithms implemented in \amrclaw have been discussed in detail in
 \cite{mjb-rjl:amrclaw,LeVequeGeorgeBerger:an11}.
@@ -45,9 +38,9 @@ be at least at some level $L_1$ and is allowed to be at most $L_2$.  This can be
 useful for constraining refinement, e.g. allowing or ensuring resolution of only a small coastal region in a global tsunami simulation.
 Previously the user could enforce such conditions by writing a custom
 flagging routine, but now this is handled in a general manner so that the
-parameters above can all be specified in \texttt{setrun.py}.  Multiple
+parameters above \comment{(above where?)} can all be specified in \texttt{setrun.py}.  Multiple
 regions can be specified, and a simple rule is used to determine the
-constraints at a grid cell that lies in multiple regions, as described at
+constraints at a grid cell that lies in multiple regions. See \comment{cite website?}
 \url{http://www.clawpack.org/flag.html#refinement-regions}
 
 Auxiliary arrays are often used in \clawpack to store data that
@@ -60,22 +53,30 @@ This is backward compatible, since no harm is done if previously
 written routines are used that still compute and overwrite instead of
 checking a mask.
 
-In \clawpack 5.3 the capability to specify spatially varying boundary conditions
-was added. For a single grid, it is a simple matter to
-compute the location of the ghost cells that extend
-outside the computational domain and set them appropriately.
-With AMR however, the boundary condition routine can be called
-for a grid located anywhere in the domain, and may contain fewer
-or larger numbers of ghost cells. The boundary condition routines
-must be written in a rather unusual way that does not assume it
-is always setting the same number of ghost cells, or that the
-same number of reflected cells inside the domain always exist.
+In \clawpack 5.3 the capability to specify spatially varying boundary
+conditions was added. For a single grid, it is a simple matter to
+compute the location of the ghost cells that extend outside the
+computational domain and set them appropriately.  With AMR however,
+the boundary condition routine can be called for a grid located
+anywhere in the domain, and may contain fewer or larger numbers of
+ghost cells. The boundary condition routines must be written in a
+rather unusual way that does not assume it is always setting the same
+number of ghost cells, or that the same number of reflected cells
+inside the domain always exist.  \comment{This isn't clear.
+Presumably, the boundary condition routines are only used for physical
+boundaries, and the boundaries that are interior to the domain would
+just ``pass through'' the physical boundary routine, right?
+Shouldn't, then, xlower, ylower, dx,dy, etc be enough to set spatially
+varying physical boundary conditions?}
 
-Anisotropic refinement is allowed in both two and three dimensions.  This means that the spatial and temporal refinement ratios can be specified independently from one another (as long as the temporal refinement satisfies the CFL condition).
-In addition, capabilities have been added to automatically select the
-refinement ratio on each level based on the CFL condition.
+Anisotropic refinement is allowed in both two and three dimensions.
+This means that the spatial and temporal refinement ratios can be
+specified independently from one another (as long as the temporal
+refinement satisfies the CFL condition).  In addition, capabilities
+have been added to automatically select the refinement ratio on each
+level based on the CFL condition. \comment{What does this mean?}
 
-The 3D \amrclaw code has been reintroduced in 5.0. \amrclaw has also been
+\amrclaw has also been
 parallelized using OpenMP directives based on grid patch-based decomposition.
 The main paradigm in structured AMR is a loop over all patches at a level, where
 some operation is done on each patch (i.e. taking a time step, finding ghost
@@ -99,6 +100,8 @@ to tens of thousands of cores (see \cref{sec:pyclaw}). Other frameworks exist,
 most notably \forestclaw \cite{Burstedde:we} which are being developed in
 parallel with \amrclaw to provide scalable AMR calculations on large distributed
 memory machines. \todo{Need to cite \cref{fig:figure1} and add caption.}
+
+The 3D \amrclaw code has been reintroduced in 5.0.
 
 \begin{figure}[h]
     \centering
