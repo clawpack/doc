@@ -1,0 +1,193 @@
+%!TEX root = paper.tex
+%
+% Introduction
+%
+% Lead currently:  Kyle Mandli
+%
+
+\section{Introduction}\label{sec:intro}
+
+The \clawpack software suite \cite{clawpack}
+is designed for the solution of nonlinear conservation laws, balance laws,
+and other first-order hyperbolic partial differential
+equations. A particular feature of \clawpack is that the system does not
+need to be in conservation form.
+A brief overview of such problems is given in \cref{sec:hyp}.
+
+The first version of \clawpack was released by LeVeque in 1994
+\cite{clawpack-v1} and consisted of Fortran code for solving problems on a
+fixed grid in one or two space dimensions, together with some Matlab scripts
+for plotting solutions. The wave-propagation method implemented
+in this code provided a general way to apply recently developed
+high-resolution shock capturing methods to general hyperbolic systems and
+required only that the user provide a ``Riemann solver'' to specify a new
+hyperbolic problem.
+Collaboration with Berger \cite{mjb-rjl:amrclaw}
+soon led to the incorporation of adaptive mesh refinement (AMR) in two space
+dimensions, and work with Langseth \cite{jol-rjl:3d, jol:thesis}
+led to three-dimensional versions of the wave-propagation algorithm and the
+software, with three-dimensional AMR then added by Berger.
+
+Version 4.3 of \clawpack contained a number of other improvements to
+the code and formed the basis for the examples presented in a textbook
+\cite{rjl:fvmhp} published in 2003.  That text not only provided a
+complete description of the wave propagation algorithm, developed by LeVeque,
+but also is notable in that the codes used to produce virtually all of figures
+in the text were made available online \cite{rjl:fvmhp}
+at \url{http://depts.washington.edu/clawpack/clawpack-4.3/book.html}.
+\comment{DAC : Include URL in references only?}
+
+In 2009, \clawpack Version 4.4 was released with a major change from Matlab
+to Python as the recommended visualization tool, and the development
+of a Python user interface for specifying the input data.
+
+Since then, a number of other features were added to better cope with new
+applications, to provide a better user interface and visualization tools, and to
+incorporate higher-order accurate algorithms, MPI and OpenMP parallelization, and
+other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
+(released in January 2013) and
+many of the changes from 4.3 to 4.6 are summarized at
+\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
+
+Major refactoring of the code and a move to GitHub for development over the
+next year resulted in the release of \clawpack 5.0 in January, 2014.
+A significant number of additional improvements have been made since then.  The
+objectives of this paper are to:
+\begin{itemize}
+\item summarize some of the major changes made between the \clawpack
+4.x codes and the most recent \clawpack 5.3,
+\item provide a citable reference for \clawpack 5.x that includes
+substantial contributors to this code as authors, and
+\item summarize the development model we have adopted, which we believe
+may be of interest to others managing open source scientific software
+projects with many contributors.
+\item encourage users to contribute to the \clawpack suite of tools
+\end{itemize}
+\comment{DAC : Maybe these reasons should go in the first paragraph?
+We could then describe the version development in a new subsection on
+``History of development'', or something like that}
+
+\subsection{Hyperbolic problems}\label{sec:hyp}
+
+In one space dimension, the hyperbolic systems solved with
+\clawpack typically take the form of conservation laws
+\begin{equation}\label{eq:hyp1a}
+q_t(x,t) + f(q(x,t))_x = 0
+\end{equation}
+or non-conservative linear systems
+\begin{equation}\label{eq:hyp1b}
+q_t(x,t) + A(x) q(x,t)_x = 0,
+\end{equation}
+where subscripts denote partial derivatives and $q$ is a vector with
+$m\ge 1$ components.  The coefficient matrix $A$ in \cref{eq:hyp1b} or
+the Jacobian matrix $f'(q)$ in \cref{eq:hyp1a} is assumed to be
+diagonalizable with real eigenvalues for all relevant values of
+$q,~x,~t$.  This condition guarantees that the system is hyperbolic,
+with solutions that are wave-like.  The eigenvectors of the system
+determine the relation between the different components
+of system, or waves, and the eigenvalues determine the speeds at which these
+waves travel.  The right hand side of these equations could be
+replaced by a ``source term'' $\psi(q,x,t)$ to give a non-homogeneous
+equation that is sometimes called a ``balance law'' rather than a
+conservation law.  Spatially-varying flux functions $f(q,x)$ in
+\cref{eq:hyp1a} can also be handled using the f-wave approach
+\cite{db-rjl-sm-jr:vcflux}.
+
+Some common examples of such hyperbolic systems include:
+\begin{itemize}
+    \item The Euler equations of compressible, inviscid fluid dynamics.
+        They consist of conservation laws for mass, momentum, and energy.
+        The wave speeds are a combination of the local fluid velocity
+        and the acoustic wave velocity.  Source terms could be added
+        to include the effects of viscosity and heat transfer
+        (leading to the Navier-Stokes equations) or the effect of gravity.
+        These systems have important applications in
+        aerodynamics, climate and weather modeling, and astrophysics.
+    \item The shallow water equations, describing the velocity and
+        surface height of a liquid whose depth is small relative to
+        typical wavelengths.  In this case source terms may include
+        the effect of varying bathymetry and of bottom friction.
+        These equations are used, for instance, to model inundation
+        caused tsunamis and dam breaks, as well as atmospheric flows.
+\end{itemize}
+%For a one-dimensional problem \cref{eq:hyp1a} or \cref{eq:hyp1b},
+%the {\em Riemann problem} consists of the equation together with
+%piecewise constant initial data with a single jump discontinuity.
+
+Discontinuities (shock waves) can arise spontaneously in the solution of nonlinear
+hyperbolic equations, causing difficulties for
+traditional numerical methods based on discretizing derivatives
+directly.   Modern shock capturing methods are generally based on solutions
+to the {\em Riemann problem}, which consists of the equation
+\cref{eq:hyp1a} or \cref{eq:hyp1b}
+together with piecewise constant initial data with a single jump discontinuity.
+The solution to the Riemann problem is a similarity
+solution (a function of $x/t$ only),
+typically consisting of $m$ waves (for a system of $m$ equations)
+propagating at constant speed.  This is true even for nonlinear problems,
+where the waves may be discontinuous shocks or rarefaction waves
+(through which the solution varies continuously in a self-similar manner).
+
+The main theoretical
+and numerical difficulties of hyperbolic problems involve the prescription of
+physically correct weak solutions -- in other words, understanding the behavior
+of the solution at discontinuities.  The Riemann solver is an algorithm that
+encodes the specifics of the hyperbolic system to be solved, and it is the only
+routine (other than problem-specific setup) that needs to be changed in order
+to apply the code to different hyperbolic systems.  In some cases, the Riemann
+solver may also be designed to enforce physical properties like positivity
+(e.g., for the water depth in \geoclaw) or to account for forces (like that
+of gravity) that may be balanced by flux terms.
+In practice, approximate Riemann solvers are commonly used for nonlinear
+problems.%, which replace rarefaction waves by one or more discontinuities.
+
+\clawpack is based on Godunov-type finite volume methods in which
+the solution is represented by cell averages.  Riemann problems
+between the cell averages in neighboring states are used as the
+fundamental building block of the algorithm.
+The wave-propagation algorithm originally
+implemented in \clawpack (and still used in much of the code) is based on
+using the waves resulting from each Riemann solution together with limiter
+functions to achieve second-order accuracy where the solution is smooth
+together with sharp resolution of discontinuities without spurious numerical
+oscillations (see \cite{rjl:fvmhp} for a detailed description of the
+algorithms).   The more-recently developed SharpClaw algorithms (see
+\cref{sec:pyclaw}), now incorporated in \pyclaw, use higher-order WENO methods
+but rely on the same Riemann solvers.
+
+In two space dimensions, hyperbolic equations might take the form
+\begin{equation}\label{eq:hyp2a}
+q_t(x,y,t) + f(q(x,y,t))_x + g(q(x,y,t))_y = 0
+\end{equation}
+or
+\begin{equation}\label{eq:hyp2b}
+q_t(x,y,t) + A(x,y)q(x,y,t)_x + B(x,y)q(x,y,t)_y = 0
+\end{equation}
+In this case the coefficient matrices $A$ and $B$ in \cref{eq:hyp2a}
+or the Jacobian matrices $f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} are
+assumed to be hyperbolic, i.e. have the property that any linear
+combination gives a diagonalizable matrix with real eigenvalues.  The
+extension to three space dimensions is similar. \comment{DAC : $(f,g)
+\cdot n$ is diagonalizable?}
+
+In two or three space dimensions, the wave-propagation methods
+are extended using either dimensional splitting, so that only
+one-dimensional Riemann solvers are needed, or by a multi-dimensional
+algorithm based on {\em transverse Riemann solvers} introduced in
+\cite{rjl:wpalg}.  Both approaches are supported in \clawpack.
+
+A variety of Riemann solvers have been developed for \clawpack, many
+of which are collected in the \texttt{riemann} repository, see
+\cref{sec:riemann}.  \comment{DAC : Does this fit here?}
+
+Adaptive mesh refinement (AMR) is essential for many problems and
+has been available in two space dimensions
+since 1995, when Marsha Berger joined the project team and her AMR
+code for the Euler equations of compressible flow was generalized to fit into
+the software as \amrclaw, as described in \cite{Berger:1998ia}.  This was
+later carried over to three space dimensions using the unsplit algorithms
+introduced in \cite{jol-rjl:3d}.  Starting in Version 5.3.0, dimensional
+splitting is also supported in \amrclaw, which can be particularly useful in
+three space dimensions where the unsplit algorithms are much more expensive
+due to the transverse Riemann solves.  Other recent improvements to \amrclaw
+are discussed in \cref{sec:amrclaw}.
