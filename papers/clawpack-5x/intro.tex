@@ -10,30 +10,34 @@
 The \clawpack software suite \cite{clawpack}
 is designed for the solution of nonlinear conservation laws, balance laws,
 and other first-order hyperbolic partial differential
-equations that need not be in conservation form. 
+equations. A particular feature of \clawpack is that the system does not
+need to be in conservation form.
 A brief overview of such problems is given in \cref{sec:hyp}.
 
-The first version of \clawpack was released by LeVeque in 1994 
+The first version of \clawpack was released by LeVeque in 1994
 \cite{clawpack-v1} and consisted of Fortran code for solving problems on a
 fixed grid in one or two space dimensions, together with some Matlab scripts
 for plotting solutions. The wave-propagation method implemented
 in this code provided a general way to apply recently developed
-high-resolution shock capturing methods to general hyperbolic systems,
-requiring only that the user provide a ``Riemann solver'' to specify a new
-hyperbolic problem, as discussed further in \cref{sec:riemann}.  
-Collaboration with Berger \cite{mjb-rjl:amrclaw} 
+high-resolution shock capturing methods to general hyperbolic systems and
+required only that the user provide a ``Riemann solver'' to specify a new
+hyperbolic problem.
+Collaboration with Berger \cite{mjb-rjl:amrclaw}
 soon led to the incorporation of adaptive mesh refinement (AMR) in two space
 dimensions, and work with Langseth \cite{jol-rjl:3d, jol:thesis}
 led to three-dimensional versions of the wave-propagation algorithm and the
 software, with three-dimensional AMR then added by Berger.
 
-Version 4.3 of \clawpack contained a number of other improvements to the code
-and formed the basis for the examples presented in a textbook \cite{rjl:fvmhp}
-published in 2003, for which virtually all of the figures were
-produced using codes available at
-\url{http://depts.washington.edu/clawpack/clawpack-4.3/book.html}.
+Version 4.3 of \clawpack contained a number of other improvements to
+the code and formed the basis for the examples presented in a textbook
+\cite{rjl:fvmhp} published in 2003.  That text not only provided a
+complete description of the wave propagation algorithm, developed by LeVeque,
+but also is notable in that the codes used to produce virtually all of figures
+in the text were made available online \cite{rjl:fvmhp}
+at \url{http://depts.washington.edu/clawpack/clawpack-4.3/book.html}.
+\comment{DAC : Include URL in references only?}
 
-In 2009, Version 4.4 was released with a major change from Matlab
+In 2009, \clawpack Version 4.4 was released with a major change from Matlab
 to Python as the recommended visualization tool, and the development
 of a Python user interface for specifying the input data.
 
@@ -46,10 +50,10 @@ many of the changes from 4.3 to 4.6 are summarized at
 \url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
 
 Major refactoring of the code and a move to GitHub for development over the
-next year resulted in the release of \clawpack 5.0 in January, 2014. 
+next year resulted in the release of \clawpack 5.0 in January, 2014.
 A significant number of additional improvements have been made since then.  The
 objectives of this paper are to:
-\begin{itemize} 
+\begin{itemize}
 \item summarize some of the major changes made between the \clawpack
 4.x codes and the most recent \clawpack 5.3,
 \item provide a citable reference for \clawpack 5.x that includes
@@ -57,7 +61,11 @@ substantial contributors to this code as authors, and
 \item summarize the development model we have adopted, which we believe
 may be of interest to others managing open source scientific software
 projects with many contributors.
-\end{itemize} 
+\item encourage users to contribute to the \clawpack suite of tools
+\end{itemize}
+\comment{DAC : Maybe these reasons should go in the first paragraph?
+We could then describe the version development in a new subsection on
+``History of development'', or something like that}
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
@@ -69,22 +77,21 @@ q_t(x,t) + f(q(x,t))_x = 0
 or non-conservative linear systems
 \begin{equation}\label{eq:hyp1b}
 q_t(x,t) + A(x) q(x,t)_x = 0,
-\end{equation} 
-where subscripts denote partial derivatives and
-$q$ is a vector with $m\ge 1$ components.
-The coefficient matrix $A$ in \cref{eq:hyp1b} or the Jacobian matrix 
-$f'(q)$ in \cref{eq:hyp1a} is assumed to be diagonalizable with real eigenvalues
-for all relevant values of $q,~x,~t$. 
-This condition
-guarantees that the system is hyperbolic, with solutions that are wave-like.  
-The eigenvalues are the wave speeds.  For a system of equations,
-the eigenvectors determine the relation between different components of the
-system in waves of different families.  The right hand side of these
-equations could be replaced by a ``source term'' $\psi(q,x,t)$ to give a
-non-homogeneous equation that is sometimes called a ``balance law'' rather
-than a conservation law in the case of \cref{eq:hyp1a}.
-Spatially-varying flux functions $f(q,x)$ in \cref{eq:hyp1a} can also be handled
-using the f-wave approach \cite{db-rjl-sm-jr:vcflux}.
+\end{equation}
+where subscripts denote partial derivatives and $q$ is a vector with
+$m\ge 1$ components.  The coefficient matrix $A$ in \cref{eq:hyp1b} or
+the Jacobian matrix $f'(q)$ in \cref{eq:hyp1a} is assumed to be
+diagonalizable with real eigenvalues for all relevant values of
+$q,~x,~t$.  This condition guarantees that the system is hyperbolic,
+with solutions that are wave-like.  The eigenvectors of the system
+determine the relation between the different components
+of system, or waves, and the eigenvalues determine the speeds at which these
+waves travel.  The right hand side of these equations could be
+replaced by a ``source term'' $\psi(q,x,t)$ to give a non-homogeneous
+equation that is sometimes called a ``balance law'' rather than a
+conservation law.  Spatially-varying flux functions $f(q,x)$ in
+\cref{eq:hyp1a} can also be handled using the f-wave approach
+\cite{db-rjl-sm-jr:vcflux}.
 
 Some common examples of such hyperbolic systems include:
 \begin{itemize}
@@ -94,7 +101,7 @@ Some common examples of such hyperbolic systems include:
         and the acoustic wave velocity.  Source terms could be added
         to include the effects of viscosity and heat transfer
         (leading to the Navier-Stokes equations) or the effect of gravity.
-        These systems have important applications for instance in
+        These systems have important applications in
         aerodynamics, climate and weather modeling, and astrophysics.
     \item The shallow water equations, describing the velocity and
         surface height of a liquid whose depth is small relative to
@@ -111,7 +118,7 @@ Discontinuities (shock waves) can arise spontaneously in the solution of nonline
 hyperbolic equations, causing difficulties for
 traditional numerical methods based on discretizing derivatives
 directly.   Modern shock capturing methods are generally based on solutions
-to the {\em Riemann problem}, which consists of the equation 
+to the {\em Riemann problem}, which consists of the equation
 \cref{eq:hyp1a} or \cref{eq:hyp1b}
 together with piecewise constant initial data with a single jump discontinuity.
 The solution to the Riemann problem is a similarity
@@ -155,24 +162,25 @@ q_t(x,y,t) + f(q(x,y,t))_x + g(q(x,y,t))_y = 0
 or
 \begin{equation}\label{eq:hyp2b}
 q_t(x,y,t) + A(x,y)q(x,y,t)_x + B(x,y)q(x,y,t)_y = 0
-\end{equation} 
-In this case the
-coefficient matrices $A$ and $B$ in \cref{eq:hyp2a} or the Jacobian matrices
-$f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} are assumed to be hyperbolic, i.e. have
-the property that any
-linear combination gives a diagonalizable matrix with real eigenvalues.
-The extension to three space dimensions is similar.
+\end{equation}
+In this case the coefficient matrices $A$ and $B$ in \cref{eq:hyp2a}
+or the Jacobian matrices $f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} are
+assumed to be hyperbolic, i.e. have the property that any linear
+combination gives a diagonalizable matrix with real eigenvalues.  The
+extension to three space dimensions is similar. \comment{DAC : $(f,g)
+\cdot n$ is diagonalizable?}
 
 In two or three space dimensions, the wave-propagation methods
 are extended using either dimensional splitting, so that only
 one-dimensional Riemann solvers are needed, or by a multi-dimensional
-algorithm based on {\em transverse Riemann solvers} introduced in 
+algorithm based on {\em transverse Riemann solvers} introduced in
 \cite{rjl:wpalg}.  Both approaches are supported in \clawpack.
 
-A variety of Riemann solvers have been developed for \clawpack, many of which
-are collected in the \texttt{riemann} repository, see \cref{sec:riemann}.
+A variety of Riemann solvers have been developed for \clawpack, many
+of which are collected in the \texttt{riemann} repository, see
+\cref{sec:riemann}.  \comment{DAC : Does this fit here?}
 
-Adaptive mesh refinement (AMR) is essential for many problems and 
+Adaptive mesh refinement (AMR) is essential for many problems and
 has been available in two space dimensions
 since 1995, when Marsha Berger joined the project team and her AMR
 code for the Euler equations of compressible flow was generalized to fit into
@@ -183,4 +191,3 @@ splitting is also supported in \amrclaw, which can be particularly useful in
 three space dimensions where the unsplit algorithms are much more expensive
 due to the transverse Riemann solves.  Other recent improvements to \amrclaw
 are discussed in \cref{sec:amrclaw}.
-

@@ -2,7 +2,7 @@
 %
 % Development Approach
 %
-% Lead currently:  Aron Ahmadia's 
+% Lead currently:  Aron Ahmadia's
 %
 
 \section{Development Approach}
@@ -30,14 +30,19 @@ The core \clawpack software repositories are:
     \item \texttt{geoclaw} - AMR codes for depth-averaged geophysical flows,
     \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massively parallel capabilities.
 \end{itemize}
+
+\noindent
 A release of \clawpack downloaded by users contains all of the above.
 We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
-\texttt{clawutil} as
-\textit{upstream} projects, since their changes affect the
-remaining projects in the list, which we usually refer to as
-\textit{downstream} projects.
+\texttt{clawutil} as \textit{upstream} projects, since their changes
+affect the remaining projects \comment{(repository?)} in the list, which
+we usually refer to as \textit{downstream} projects
+\comment{(repository?)}.  \comment{DAC : Do changes in visclaw really
+affect, for example, amrclaw? Maybe the categories could be called
+utilities, core routines (upstream) and applications (downstream)?}
+
 Additional repositories contain documentation and extended examples of
-using the code: 
+using the code:
 \begin{itemize}
     \item \texttt{doc} - Documentation source files, developed using
 Sphinx\footnote{\url{http://sphinx-doc.org}},
@@ -62,8 +67,8 @@ publicly coordinated under the \clawpack organization on
 GitHub\footnote{\url{https://github.com/clawpack}} and the
 top-level \texttt{clawpack} super-repository is responsible for hosting
 build and installation tools, as well as providing a synchronization
-point for the other repositories.  The remaining ``core \clawpack repositories'' 
-listed above are subrepositories of \texttt{clawpack}. 
+point for the other repositories.  The remaining ``core \clawpack repositories''
+listed above are subrepositories of \texttt{clawpack}.
 
 GitHub is a free provider of public Git repositories.  In addition to
 repository hosting, the \clawpack team uses GitHub for issue tracking,
@@ -96,11 +101,12 @@ addition of this change is coordinated with the downstream
 repositories by simultaneously advancing the version of the upstream
 repository as well as all affected downstream repositories.
 
-Git submodules are very powerful, but many developers, both new and
-experienced, find them confusing and challenging to work with.
-Nevertheless, they have proved invaluable in allowing the \clawpack team to
+Developers, both new and experienced, may find Git submodules challenging
+to work with, but they are very powerful and
+have proved invaluable in allowing the \clawpack team to
 work asynchronously on independent projects while reusing and maintaining
 common software infrastructure.
+
 
 \subsection{Contributing}
 
@@ -115,7 +121,7 @@ additional code, extending \clawpack with new Riemann solvers,
 algorithms, and domain-specific problem tools.  Most of this code
 has not made it back into the core library.  With \clawpack 5.x,
 we are trying to encourage contributions from a broad community, with
-tools like distributed version control and open discussions on 
+tools like distributed version control and open discussions on
 the mailing lists and issue trackers.
 
 The primary development model is typical for GitHub projects: a
@@ -143,14 +149,16 @@ users to be able to install stable versions of the software.  The
 channels: GitHub and the Python Package Index (PyPI).  Full source
 releases are available on GitHub.  Alternatively, the PyClaw
 subproject and its dependencies can be installed automatically using a
-PyPI client such as \texttt{pip}.
+PyPI client such as \texttt{pip}. \comment{DAC :
+Can Clawpack also be installed using pip?  From the way it is written,
+it sounds like only PyClaw can be installed using pip.}
 
 \clawpack does not follow a calendar release cycle.  Instead, releases
 emerge when the developer community feels enough changes have
-accumulated since the last release to justify the cost to both users
-and developers of switching to a new release.  \clawpack releases are
-versioned using an $x.y.z$ triplet, representing the major, minor, and
-patch versions respectively.  In the broader software engineering
+accumulated since the last release to justify
+the cost of switching to a new release.  \clawpack releases are
+versioned using an $M.m.p$ triplet, representing the major (M), minor (m), and
+patch (p) versions respectively.  In the broader software engineering
 community, this is often referred to as semantic versioning.  Small
 changes that fix bugs and cosmetic issues result in increments to the
 patch-level.  Backwards-compatible changes result in an increase to

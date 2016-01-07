@@ -10,12 +10,18 @@ Substantial redesign of the \clawpack code base was performed in the move
 from \clawpack 4.x to 5.x.  A summary of these changes (and changes within
 the 5.x line) can be found at \url{http://www.clawpack.org/clawpack5.html}.
 Major changes that affected all aspects of the code include:
+\comment{DAC : General comment : It might be a good idea to distinguish between
+the ``Riemann solver'' as a general mathematical idea, and the actual Fortran
+code that \clawpack users call to solve a Riemann problem.  Maybe refer to the latter
+as \texttt{rpnD} and \texttt{rptD}? Or \clawpack Riemann solvers?}
 \begin{itemize}
-    \item The interface to the Riemann solvers was changed so that the same Fortran
-    Riemann solvers can be used for all versions of the code (including \pyclaw
+    \item The interface to the \clawpack Riemann solvers was changed so that one set
+of solvers can be used for all versions of the code (including \pyclaw
     via \texttt{f2py}).  Rather than appearing in scattered example directories,
     these Riemann solvers have all been collected into the new
-    \texttt{riemann} repository and calling sequences were modified.  Calling
+    \texttt{riemann} repository. Additionally, modifications to the
+calling sequences were made to accommodate this increased generality.
+\item Calling
     sequences for a number of other Fortran subroutines were also modified based
     on experiences with the \clawpack 4.x code.  These can also be used as a
     stand-alone product for those who only want the Riemann solvers.
