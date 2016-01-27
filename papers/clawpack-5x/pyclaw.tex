@@ -24,6 +24,25 @@ Lower-level code (whatever gets executed
 repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw
 codes is automatically wrapped at install time using \texttt{f2py}.
 
+Recent applications of PyClaw include studies of laser light trapping by moving
+refractive index perturbations \cite{sanroman_thesis}, instabilities of weakly nonlinear detonation
+waves \cite{faria2015qualitative}, and effective dispersion of nonlinear waves via diffraction in
+periodic materials \cite{2015_diffractons}.  Two of these are depicted in Figure
+\ref{fig:pyclaw-apps}.
+
+\begin{figure}
+\hfil\includegraphics[height=1.2in]{detonation.png}
+\hskip 5pt
+\hfil\includegraphics[height=1.4in]{diffractons.png}
+\hskip 5pt
+\caption{\label{fig:pyclaw-apps}
+Left: A two-dimensional detonation wave solution of the reactive Euler equations,
+showing transverse shocks that arise from instabilities; see \cite{faria2015qualitative}.
+Right: Dispersion of waves in a layered medium with matched impedance and periodically-varying
+sound speed; see \cite{2015_diffractons}.}
+\end{figure}
+
+
 \subsubsection{Librarization and Extensibility}
 Scientific software is easier to use, extend, and integrate with other tools
 when it is designed as a library \cite{Brown:2015cj}.  \clawpack has always been
