@@ -20,38 +20,49 @@ zones.
 \vskip 5pt
 The core \clawpack software repositories are:
 \begin{itemize}
-    \item \texttt{clawpack} - Installation, coordination of other repositories,
-    \item \texttt{riemann} - Riemann solvers used by all the other projects,
-    \item \texttt{visclaw} - Visualization suite used by all the other projects,
-    \item \texttt{clawutil} - Utility functions used by most other projects,
-    \item \texttt{classic} - Single grid methods in 1, 2, and 3 space
-    dimensions,
-    \item \texttt{amrclaw} - Adaptive mesh refinement (AMR) in 2 and 3 dimensions,
-    \item \texttt{geoclaw} - AMR codes for depth-averaged geophysical flows,
-    \item \texttt{pyclaw} - Python implementation and interface to the \clawpack algorithms including massively parallel capabilities.
+    \item \texttt{clawpack} - responsible for installation and coordination of
+    other repositories,
+    \item \texttt{riemann} - contains Riemann solvers used by all the other
+    projects,
+    \item \texttt{visclaw} - a visualization suite used by all the other
+    projects,
+    \item \texttt{clawutil} - contains utility functions used by most other
+    projects,
+    \item \texttt{classic} - the original single grid methods in 1, 2, and 3
+    space dimensions,
+    \item \texttt{amrclaw} - the general adaptive mesh refinement (AMR)
+    framework in 2 and 3 dimensions,
+    \item \texttt{geoclaw} - solvers for depth-averaged
+    geophysical flows which employs the framework in \texttt{amrclaw}, and
+    \item \texttt{pyclaw} - a Python implementation and interface to the
+    \clawpack algorithms including massively parallel capabilities.
 \end{itemize}
 
 \noindent
 A release of \clawpack downloaded by users contains all of the above.
-We sometimes refer to \texttt{riemann}, \texttt{visclaw}, and
-\texttt{clawutil} as \textit{upstream} projects, since their changes
-affect the remaining projects \comment{(repository?)} in the list, which
-we usually refer to as \textit{downstream} projects
-\comment{(repository?)}.  \comment{DAC : Do changes in visclaw really
-affect, for example, amrclaw? Maybe the categories could be called
-utilities, core routines (upstream) and applications (downstream)?}
+The repositories \texttt{riemann}, \texttt{visclaw}, and
+\texttt{clawutil} are sometimes referred to as \textit{upstream} projects, since
+their changes
+affect the remaining projects in the above list, commonly referred to as 
+\textit{downstream} projects.  There are some variations on this, for instance a
+change to \amrclaw will affect \geoclaw as it relies on the algorithms
+implemented in \amrclaw.  To coordinate this the \texttt{clawpack} repository
+records broad changes that have multi-repository implications.
 
-Additional repositories contain documentation and extended examples of
-using the code:
+Beyond the major code containing repositories additional repositories contain
+documentation and extended examples for using the packages:
 \begin{itemize}
-    \item \texttt{doc} - Documentation source files, developed using
+    \item \texttt{doc} - contains the primary documentation source files,
+    developed using
 Sphinx\footnote{\url{http://sphinx-doc.org}},
-    \item \texttt{clawpack.github.com} - Documentation html files that appear
-at \url{http://www.clawpack.org},
-    \item \texttt{apps} - Applications contributed by developers and users
-that go beyond the introductory examples included in the core repositories.
+    \item \texttt{clawpack.github.com} - a host repository for the html files
+    that appear at \url{http://www.clawpack.org}, and
+    \item \texttt{apps} - containing applications contributed by developers and
+    users that go beyond the introductory examples included in the core
+    repositories.
 \end{itemize}
-Clawpack 4.x is still available in the repository
+Last but not least is the Clawpack 4.x code which is still available in the
+repository
 \begin{itemize}
     \item \texttt{clawpack-4.x}
 \end{itemize}
@@ -64,13 +75,13 @@ The \clawpack team leverages the Git distributed version control system
 to coordinate development, with each major project and its development
 team assigned to its own repository.  The repositories are each
 publicly coordinated under the \clawpack organization on
-GitHub\footnote{\url{https://github.com/clawpack}} and the
-top-level \texttt{clawpack} super-repository is responsible for hosting
+GitHub\footnote{\url{https://github.com/clawpack}} with the
+top-level \texttt{clawpack} super-repository responsible for hosting
 build and installation tools, as well as providing a synchronization
 point for the other repositories.  The remaining ``core \clawpack repositories''
 listed above are subrepositories of \texttt{clawpack}.
 
-GitHub is a free provider of public Git repositories.  In addition to
+GitHub itself is a free provider of public Git repositories.  In addition to
 repository hosting, the \clawpack team uses GitHub for issue tracking,
 code review, automated continuous integration via Travis CI\footnote{\url{https://travis-ci.org/}},
 and test coverage tracking via Coveralls\footnote{\url{http://coveralls.io}}
@@ -89,7 +100,7 @@ reports on any test failures as well as changes to test coverage.
 As mentioned earlier, the \texttt{clawpack} repository serves as an
 installation and synchronization point for the other project repositories.
 Snapshots of the top-level repository are taken both to prepare for
-software releases of the Clawpack project itself, and to provide
+software releases of the \clawpack project itself, and to provide
 ``known working states'' when changes from upstream repositories must
 be coordinated with their downstream consumers.
 
@@ -116,13 +127,13 @@ In fact, scientific communities that openly share and develop code
 have an advantage because each researcher can leverage the work of
 many others \cite{Turk:2013hd}.
 
-Over the past twenty years, a great number of users have written
-additional code, extending \clawpack with new Riemann solvers,
-algorithms, and domain-specific problem tools.  Most of this code
-has not made it back into the core library.  With \clawpack 5.x,
-we are trying to encourage contributions from a broad community, with
-tools like distributed version control and open discussions on
-the mailing lists and issue trackers.
+Over the past twenty years, a great number of users have written additional
+code, extending \clawpack with new Riemann solvers, algorithms, and domain-
+specific problem tools.  Most of this code has not made it back into the core
+library.  Due to this many of the development changes in \clawpack 5.x were done
+to encourage contributions from a broad community through tools such as
+distributed version control and open discussions on the mailing lists and issue
+trackers.
 
 The primary development model is typical for GitHub projects: a
 contributor forks the repository on GitHub, then develops improvements
@@ -149,9 +160,7 @@ users to be able to install stable versions of the software.  The
 channels: GitHub and the Python Package Index (PyPI).  Full source
 releases are available on GitHub.  Alternatively, the PyClaw
 subproject and its dependencies can be installed automatically using a
-PyPI client such as \texttt{pip}. \comment{DAC :
-Can Clawpack also be installed using pip?  From the way it is written,
-it sounds like only PyClaw can be installed using pip.}
+PyPI client such as \texttt{pip}.
 
 \clawpack does not follow a calendar release cycle.  Instead, releases
 emerge when the developer community feels enough changes have
