@@ -7,12 +7,32 @@
 
 \section{Introduction}\label{sec:intro}
 
-The \clawpack software suite \cite{clawpack}
-is designed for the solution of nonlinear conservation laws, balance laws,
-and other first-order hyperbolic partial differential
-equations. A particular feature of \clawpack is that the system does not
-need to be in conservation form.
-A brief overview of such problems is given in \cref{sec:hyp}.
+The \clawpack software suite \cite{clawpack} is designed for the solution of
+nonlinear conservation laws, balance laws, and other first-order hyperbolic
+partial differential equations not necessarily in conservation form.  \clawpack
+was first released in 1994 and since then has made major strides in both
+capability and interface. More recently a major refactoring of the code and a
+move to GitHub for development has resulted in the release of
+\clawpack 5.0 in January, 2014. A significant number of additional improvements
+have been made since then and the aim of this paper are to:
+\begin{itemize}
+\item summarize some of the major changes made between the \clawpack
+4.x codes and the most recent \clawpack 5.3,
+\item provide a citable reference for \clawpack 5.x that includes
+substantial contributors to this code as authors,
+\item summarize the development model we have adopted, which we believe
+may be of interest to others managing open source scientific software
+projects with many contributors, and
+\item encourage users to contribute to the \clawpack suite of tools.
+\end{itemize}
+To meet these aims this paper provides a brief history of \clawpack in 
+\ref{sub:history}, a background of the mathematical concerns in \ref{sec:hyp},
+the modernized development approach now being used in \ref{sec:development}, the
+major feature additions in the \clawpack 5.x major release up until 5.3 in
+\ref{sec:advances}, and finally the future plans of the package in 
+\ref{sec:future}.
+
+\subsection{History of \clawpack} \label{sub:history}
 
 The first version of \clawpack was released by LeVeque in 1994
 \cite{clawpack-v1} and consisted of Fortran code for solving problems on a
@@ -35,7 +55,6 @@ complete description of the wave propagation algorithm, developed by LeVeque,
 but also is notable in that the codes used to produce virtually all of figures
 in the text were made available online \cite{rjl:fvmhp}
 at \url{http://depts.washington.edu/clawpack/clawpack-4.3/book.html}.
-\comment{DAC : Include URL in references only?}
 
 In 2009, \clawpack Version 4.4 was released with a major change from Matlab
 to Python as the recommended visualization tool, and the development
@@ -45,27 +64,12 @@ Since then, a number of other features were added to better cope with new
 applications, to provide a better user interface and visualization tools, and to
 incorporate higher-order accurate algorithms, MPI and OpenMP parallelization, and
 other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
-(released in January 2013) and
-many of the changes from 4.3 to 4.6 are summarized at
+(released in January 2013) with many of the changes from 4.3 to 4.6 summarized at
 \url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
 
-Major refactoring of the code and a move to GitHub for development over the
-next year resulted in the release of \clawpack 5.0 in January, 2014.
-A significant number of additional improvements have been made since then.  The
-objectives of this paper are to:
-\begin{itemize}
-\item summarize some of the major changes made between the \clawpack
-4.x codes and the most recent \clawpack 5.3,
-\item provide a citable reference for \clawpack 5.x that includes
-substantial contributors to this code as authors, and
-\item summarize the development model we have adopted, which we believe
-may be of interest to others managing open source scientific software
-projects with many contributors.
-\item encourage users to contribute to the \clawpack suite of tools
-\end{itemize}
-\comment{DAC : Maybe these reasons should go in the first paragraph?
-We could then describe the version development in a new subsection on
-``History of development'', or something like that}
+Now with the current major version of \clawpack at 5 a number of modern
+approaches to development, interfacing and capabilities have been adopted and
+are the subject of the rest of the paper.
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
