@@ -9,9 +9,8 @@
 
 The \geoclaw branch of \clawpack originated with the work of George
 \cite{dgeorge:masters, dgeorge:phd, dgeorge:jcp} 
-%\cite{george:2006, George:2008aa} 
-on solving the
-two-dimensional shallow water equations using adaptive mesh refinement under
+solving the
+two-dimensional shallow water equations using AMR under
 conditions necessary for modeling tsunami generation, propagation, and
 inundation.
 The \amrclaw code formed the starting point but it was necessary to make many 
@@ -19,27 +18,26 @@ modifications to support the requirements of this application, as described
 briefly below, and so a branch was created that was initially called
 {\sc TsunamiClaw}.  Later it became clear that there were many other potential
 applications with similar requirements when modeling a variety of
-geophysical flows over varying topography that are very shallow 
-relative to their lateral extent,
-and the code was generalized to become \geoclaw.  
+geophysical flows over varying topography that are shallow 
+relative to their lateral extent.  This code was generalized to
+become \geoclaw.
 
-One major issue was the desire to handle wetting and drying of grid cells at
-margins of the flow, which required development of a Riemann solver that
-robustly handled dry states.  The code must also be well-balanced so that an
-ocean at rest remains at rest and waves with amplitudes that are very small
-relative to the depth of the ocean are well resolved.  Topography appears in
-the equations as a source term in the momentum equation and well balancing
-requires that this source term be incorporated into the Riemann solver
-rather than solving with a fractional step approach.  The Riemann solver
-developed in \cite{dgeorge:phd, dgeorge:jcp} achieves these objectives.
-Other features of \geoclaw include the ability to solve the equations in
-latitude--longitude coordinates on the surface of the sphere, and the
-incorporation of source terms modeling bottom friction using a Manning
-formulation.
-More details about the code and tsunami modeling applications can be found
-in \cite{BergerGeorgeLeVequeMandli:awr11, LeVequeGeorgeBerger:an11}. 
-In 2011, a significant effort took place to verify and validate \geoclaw 
-against the US National Tsunami Hazard Mitigation Program (NTHMP) benchmarks
+One of the major issues handled by \geoclaw is the handling of wetting and
+drying of grid cells at margins of the flow, which required development of a
+Riemann solver that robustly handled dry states.  The code also must be well-
+balanced so that an ocean at rest remains at rest and waves with amplitudes that
+are very small relative to the depth of the ocean are well resolved.  This
+effectively means that topography, which appears as a source term in the
+momentum equations, be incorporated into the Riemann solver rather than solving
+with a fractional step approach.  The Riemann solver developed in
+\cite{dgeorge:phd, dgeorge:jcp} achieves these objectives. Other features of
+\geoclaw include the ability to solve the equations in latitude--longitude
+coordinates on the surface of the sphere, and the incorporation of source terms
+modeling bottom friction using a Manning formulation. More details about the
+code and tsunami modeling applications can be found in
+\cite{BergerGeorgeLeVequeMandli:awr11, LeVequeGeorgeBerger:an11}. In 2011, a
+significant effort took place to verify and validate \geoclaw against the US
+National Tsunami Hazard Mitigation Program (NTHMP) benchmarks
 \cite{GonzalezLeVequeEtAl2011}.
 NTHMP approval of the code allows \geoclaw to be used in hazard mapping 
 projects that are funded by this program or other federal and state agencies,
@@ -47,28 +45,28 @@ e.g.
 \cite{GonzalezLeVequeEtAl2013a,GonzalezLeVequeEtAl2014}.
 
 In addition to a variety of tsunami modeling applications,
-the \geoclaw code has been used to solve dam break problems in steep terrain
-\cite{George:Malpasset}, storm surge problems \cite{Mandli:ws},
+\geoclaw has been used to solve dam break problems in steep terrain
+\cite{George:Malpasset}, storm surge problems \cite{Mandli:ws} demonstrated in
+Figure~\ref{fig:surge},
 and submarine landslides \cite{jhkim:phd}.  The code also
-formed the basis for exploration for the use of 
+formed the basis for solving the 
 multi-layer shallow water equations for storm surge modeling
-\cite{mandli:phd}, development of storm surge applications \cite{Mandli:ws},
-and is currently being extended further into D-Claw, for debris flow modeling 
-\cite{Iverson:2014dc,George:2014gh}.
+\cite{mandli:phd, Mandli:2013it},
+and is currently being extended further to handle debris flow modeling in the
+packages D-Claw
+\cite{Iverson:2014dc,George:2014gh} demonstrated in Figure~\ref{fig:meager}.
 
-Roughly one third of the files in the \amrclaw source library
-have to be modified for \geoclaw. 
-There are currently 135 files in the \amrclaw 2D branch.
-Forty-five of them are replaced by a \geoclaw-specific file of the
-same name but in the \geoclaw 2D branch. 
-For example, to keep a flat
-sea level when interpolating, it is necessary to account for bathymetry.
-So the water height plus bathymetry is interpolated rather than just
-interpolating the conserved quantity, which is the default behavior in
+Roughly one third of the files in the \amrclaw source library have to be
+modified for \geoclaw. There are currently 135 files in the \amrclaw 2D branch.
+Forty-five of them are replaced by a \geoclaw-specific file of the same name but
+in the \geoclaw 2D branch. For example, to keep a flat sea level when
+interpolating, it is necessary to account for topography. This implies that the
+water height plus topography is interpolated rather than just interpolating the
+conserved quantity, which is the default behavior in
 \amrclaw.
 
-Several substantial improvements in the
-algorithms implemented in \geoclaw have been made between versions 4.6.3 and
+Several other substantial improvements in the
+algorithms implemented in \geoclaw have been made between versions 4.6 and
 5.3.0, including:
 
 \begin{itemize} 
@@ -116,16 +114,7 @@ rectangular grids, or an arbitrary set of points.
 This is described in 
 \url{http://www.clawpack.org/fgmax.html}.
 
-\item The multi-layer shallow water code has been incorporated into the
-\geoclaw libraries and examples added for both multi-layer and storm surge
-applications.
-
 \end{itemize} 
-
-Some of the most significant work in \geoclaw has been extending the package's
-capabilities to more complex applications, both within the tsunami context where
-it has been validated and also within a number of other fields.  As a
-demonstration of this extended capability \todo{Incomplete sentence.}
 
 \begin{figure}
 \hfil\includegraphics[height=1.2in]{Grays.png}

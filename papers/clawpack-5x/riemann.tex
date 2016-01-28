@@ -23,9 +23,8 @@ use of a standard interface for Fortran Riemann solver routines.  This ensures t
 solvers or solver improvements developed for one package can immediately
 be used by all packages.  To further facilitate this sharing and to avoid
 duplication, Riemann solvers are (with rare exceptions) not maintained under
-the other packages but are collected in a single repository named Riemann.
-\comment{For consistency, should all repository names be typeset using
-\textbackslash texttt\{reponame\}?}
+the other packages but are collected in a single repository named 
+\texttt{riemann}.
 Users who develop new solvers for \clawpack are encouraged to submit them to the
 Riemann repository.
 
@@ -33,10 +32,11 @@ In the Fortran-based packages (Classic, AMRClaw, and GeoClaw) the Riemann solver
 is selected at compile-time by modifying a problem-specific Makefile. In
 \pyclaw, the Riemann solver to be used is selected at run-time.  This is made
 possible by compiling all of the Riemann solvers (when \pyclaw is installed) and
-generating Python wrappers with \texttt{f2py}.  For \pyclaw, Riemann also
-provides useful metadata (such as the number of equations, the number of waves,
-and the names of the conserved quantities) for each solver.  \comment{what does this
-mean?  Isn't meqn, mwaves etc passed into all Riemann solvers?}
+generating Python wrappers with \texttt{f2py}.  For \pyclaw, \texttt{riemann}
+also
+provides metadata (such as the number of equations, the number of waves,
+and the names of the conserved quantities) for each solver so that setup is
+made more transparent.
 
 Whereas most existing codes for hyperbolic PDEs use Riemann solvers to
 compute fluxes, \clawpack Riemann solvers instead compute the waves

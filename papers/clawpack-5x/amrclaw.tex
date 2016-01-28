@@ -5,7 +5,7 @@
 % Lead currently:  Marsha Berger
 %
 
-\subsection{\amrclaw}\label{sec:amrclaw}
+\subsection{\amrclaw} \label{sec:amrclaw}
 Fortran code in the \amrclaw repository performs block structured adaptive mesh
 refinement \cite{BO,BC} for both
 \clawpack and \geoclaw  applications.
@@ -23,9 +23,11 @@ gradient testing, or user-specified criteria).  See
 organizing the flagged points into efficient grid
 patches at the next finer level, using the algorithm of
 \cite{mjb-rig:cluster};
-\item interpolating the solution to newly created fine grids and initializing auxiliary data (topography, wind velocity, metric data and so on) on  these grids,
+\item interpolating the solution to newly created fine grids and initializing 
+auxiliary data (topography, wind velocity, metric data and so on) on  these 
+grids,
 \item averaging fine grid solutions to coarser grids,
-\item orchestrating the adaptive time stepping (i.e. subcycling in time),
+\item orchestrating the adaptive time stepping (i.e. sub-cycling in time),
 \item interpolating coarse grid solution to fine grid ghost cells
 \item maintaining conservation at patch boundaries between resolution levels.
 \end{itemize}
@@ -35,13 +37,13 @@ The algorithms implemented in \amrclaw have been discussed in detail in
 \amrclaw now allows users to specify ``regions'' in space-time
 $[x_1,x_2] \times [y_1,y_2] \times [t_1,t_2]$ in which refinement is forced to
 be at least at some level $L_1$ and is allowed to be at most $L_2$.  This can be
-useful for constraining refinement, e.g. allowing or ensuring resolution of only a small coastal region in a global tsunami simulation.
-Previously the user could enforce such conditions by writing a custom
-flagging routine, but now this is handled in a general manner so that the
-parameters above \comment{(above where?)} can all be specified in \texttt{setrun.py}.  Multiple
-regions can be specified, and a simple rule is used to determine the
-constraints at a grid cell that lies in multiple regions. See \comment{cite website?}
-\url{http://www.clawpack.org/flag.html#refinement-regions}
+useful for constraining refinement, e.g. allowing or ensuring resolution of only
+a small coastal region in a global tsunami simulation. Previously the user could
+enforce such conditions by writing a custom flagging routine, but now this is
+handled in a general manner so that the parameters above can all be specified in
+the Python problem specification. Multiple regions can be specified, and a
+simple rule is used to determine the constraints at a grid cell that lies in
+multiple regions.
 
 Auxiliary arrays are often used in \clawpack to store data that
 describes the problem and the routine.
@@ -62,26 +64,23 @@ anywhere in the domain, and may contain fewer or larger numbers of
 ghost cells. The boundary condition routines must be written in a
 rather unusual way that does not assume it is always setting the same
 number of ghost cells, or that the same number of reflected cells
-inside the domain always exist.  \comment{This isn't clear.
-Presumably, the boundary condition routines are only used for physical
-boundaries, and the boundaries that are interior to the domain would
-just ``pass through'' the physical boundary routine, right?
-Shouldn't, then, xlower, ylower, dx,dy, etc be enough to set spatially
-varying physical boundary conditions?}
+inside the domain always exist.
 
 Anisotropic refinement is allowed in both two and three dimensions.
 This means that the spatial and temporal refinement ratios can be
 specified independently from one another (as long as the temporal
 refinement satisfies the CFL condition).  In addition, capabilities
 have been added to automatically select the refinement ratio on each
-level based on the CFL condition. \comment{What does this mean?}
+level based on the CFL condition.  This works in cases where there is a good
+estimate for the expected wave speed and has primarily been implemented in
+\geoclaw.
 
 \amrclaw has also been
 parallelized using OpenMP directives based on grid patch-based decomposition.
 The main paradigm in structured AMR is a loop over all patches at a level, where
 some operation is done on each patch (i.e. taking a time step, finding ghost
 cells, conservation updates, etc.).  This lends itself easily to a {\tt parallel
-for} loop construct where each iteration of the loop corresponds to a grid at
+for} loop constructs where each iteration of the loop corresponds to a grid at
 that level. Dynamic scheduling is used with a chunk size of one, so that one
 thread is assigned one patch at a time. To help with load balancing, patches at
 each level are sorted from largest to smallest workload when they are first
@@ -91,23 +90,23 @@ scratch arrays to save the incoming and outgoing waves and fluxes for future
 conservation fix-ups. The bulge is directly proportional to the number of
 threads executing. For stack-based memory allocation per thread, the use of the
 environment variable {\tt OMP\_STACKSIZE} to increase the limit may be
-necessary.
+necessary.  Some scaling tests are illustrated in \ref{fig:amr_scaling}.
 
 The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
 target architecture.  \pyclaw, on the other hand, does not include AMR but uses
 MPI via PETSc to achieve parallelism on distributed memory machines that scale
 to tens of thousands of cores (see \cref{sec:pyclaw}). Other frameworks exist,
-most notably \forestclaw \cite{Burstedde:we} which are being developed in
-parallel with \amrclaw to provide scalable AMR calculations on large distributed
-memory machines. \todo{Need to cite \cref{fig:figure1} and add caption.}
-
-The 3D \amrclaw code has been reintroduced in 5.0.
+most notably \forestclaw \cite{Burstedde:we}, which are being developed in
+parallel with \amrclaw, that provide scalable AMR calculations on large
+distributed
+memory machines.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.45\textwidth]{efficiency}
     \includegraphics[width=0.45\textwidth]{weak_scaling}
-    \caption{Caption here. \comment{line colors are hard to distinguish.  Maybe use different
-line-styles?  Or more distinctive symbols? }}
-    \label{fig:figure1}
+    \caption{Scaling results for an \amrclaw example demonstrating a
+    shock-bubble interaction in the Euler equations of compressible
+    gas-dynamics.}
+    \label{fig:amr_scaling}
 \end{figure}
