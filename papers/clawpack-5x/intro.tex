@@ -46,7 +46,8 @@ substantial contributors to this code as authors,
 By submitting this paper to a refereed journal, we aim to elevate the role of
 producing software in academic departments and to emphasize the
 importance of acknowledging the substantial contributions
-made by the many developers (listed here as authors) to the \clawpack code.
+made by the many developers (some of whom are listed here as authors) to the
+\clawpack code.
 
 To meet these aims, this paper provides a brief history of \clawpack in
 \cref{sub:history}, a background of the mathematical concerns in \cref{sec:hyp},
@@ -123,7 +124,7 @@ conservation law.  Spatially-varying flux functions $f(q,x)$ in
 \cref{eq:hyp1a} can also be handled using the f-wave approach
 \cite{db-rjl-sm-jr:vcflux}.
 
-Some common examples included in the \clawpack sample equations are:
+Examples of equations solved by \clawpack include:
 \begin{itemize}
   \item  Advection equation for one or more tracers.  The velocity field is
 typically prescribed from wind data, or as the solution to another fluid
@@ -154,7 +155,7 @@ Discontinuities (shock waves) can arise in the solution of nonlinear
 hyperbolic equations, causing difficulties for traditional numerical
 methods based on discretizing derivatives directly.  Modern shock
 capturing methods are often based on solutions to the {\em Riemann
-problem}, which consists of equations \cref{eq:hyp1a} or
+problem} that consists of equations \cref{eq:hyp1a} or
 \cref{eq:hyp1b} together with piecewise constant initial data with a
 single jump discontinuity.  The solution to the Riemann problem is a
 similarity solution (a function of $x/t$ only), typically consisting
