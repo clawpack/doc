@@ -9,13 +9,13 @@
 \pyclaw is an object-oriented Python package that provides a convenient way
 to set up problems and call the algorithms of \clawpack.  It grew
 from what was initially a set of data structures and file IO routines that are
-used by the other \clawpack codes and by VisClaw; these were released in
+used by the other \clawpack codes and by VisClaw.  These routines were released in
 an early form in later 4.x versions of \clawpack.  Those releases also
 included a fully-functional implementation of the 1D classic algorithm
-in pure Python; that implementation still exists in \pyclaw and is useful
+in pure Python. That implementation still exists in \pyclaw and is useful
 for understanding the algorithm.
 
-The current release of PyClaw includes access to the classic algorithms as well
+The current release of \pyclaw includes access to the classic algorithms as well
 as the high-order algorithms introduced in SharpClaw \cite{2013_sharpclaw} (i.e., WENO
 reconstruction and Runge--Kutta integrators) and can be used on large
 distributed-memory parallel machines.  For the latter capability, \pyclaw
@@ -24,10 +24,10 @@ Lower-level code (whatever gets executed
 repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw
 codes is automatically wrapped at install time using \texttt{f2py}.
 
-Recent applications of PyClaw include studies of laser light trapping by moving
+Recent applications of \pyclaw include studies of laser light trapping by moving
 refractive index perturbations \cite{sanroman_thesis}, instabilities of weakly nonlinear detonation
 waves \cite{faria2015qualitative}, and effective dispersion of nonlinear waves via diffraction in
-periodic materials \cite{2015_diffractons}.  Two of these are depicted in 
+periodic materials \cite{2015_diffractons}.  Two of these are depicted in
 Figure~\ref{fig:pyclaw-apps}.
 
 \begin{figure}
@@ -60,7 +60,7 @@ tools.  Problem setup (including things like initial conditions, algorithm
 selection, and output specification) is also performed at run-time, which means
 that researchers can bypass much of the slower code-compile-execute-post-process
 cycle. It is intended that \pyclaw be easily usable within other packages
-(without control of \texttt{main()}).  
+(without control of \texttt{main()}).
 
 \subsubsection{Python geometry}
 \pyclaw includes Python classes for describing collections of structured grids
@@ -72,7 +72,7 @@ At present, \pyclaw solvers operate only on a single patch, but the
 geometry and grids already incorporate multi-patch
 capabilities for visualization in \amrclaw and \geoclaw.
 
-\subsubsection{\pyclaw Solvers} 
+\subsubsection{\pyclaw Solvers}
 
 PyClaw includes an interface to both the Classic solvers (already
 described above) and those of SharpClaw \cite{ketcheson2012pyclaw}.
@@ -90,7 +90,7 @@ The default time stepping routines in SharpClaw are strong stability
 preserving (SSP) Runge--Kutta methods of order two to four.
 Some of the methods use extra stages in order to allow more efficient
 time stepping with larger CFL numbers.
-Time stepping in SharpClaw has recently been augmented to include 
+Time stepping in SharpClaw has recently been augmented to include
 linear multistep methods with variable step size.  These methods use
 a time step size selection that ensures the strong stability preserving
 property, as described in \cite{ssp_lmm_vss}.

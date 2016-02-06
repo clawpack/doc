@@ -5,15 +5,15 @@
 % Lead currently:  Randy LeVeque
 %
 
-\subsection{\geoclaw} 
+\subsection{\geoclaw}
 
 The \geoclaw branch of \clawpack was developed to solve the
 two-dimensional shallow water equations over topography
 for modeling tsunami generation, propagation, and inundation.
-The \amrclaw code formed the starting point but it was necessary to make many 
+The \amrclaw code formed the starting point but it was necessary to make many
 modifications to support the requirements of this application, as described
 briefly below.  This code originated with the work of George
-\cite{dgeorge:masters, dgeorge:phd, dgeorge:jcp} 
+\cite{dgeorge:masters, dgeorge:phd, dgeorge:jcp}
 and was initially called
 {\sc TsunamiClaw}.  Later it became clear that many other
 geophysical flow applications have similar requirements and the code was
@@ -24,14 +24,13 @@ One of the major issues is the treatment of wetting and
 drying of grid cells at the margins of the flow. The handling of dry
 states in a Riemann solver is difficult to handle robustly, and has gone
 through several iterations.
-\geoclaw must also be well-
-balanced - an ocean at rest should remain at rest. THis is necessary for 
-waves with amplitudes that
-are very small relative to the depth of the ocean to be  well resolved.  
-Numerical methods that are well balanced treat 
+\geoclaw must also be well-balanced in order to preserve steady states.
+This is necessary for  waves with amplitudes that
+are very small relative to the depth of the ocean to be  well-resolved.
+Numerical methods that are well-balanced treat
 the topography, which appears as a source term in the
 momentum equations, in the Riemann solver rather than treating it as a
-source term using a splitting method. 
+source term using a splitting method. \alert{Is true generally, or only in Clawpack?}
 This is all incorporated into the Riemann solver developed in
 \cite{dgeorge:phd, dgeorge:jcp}. Other features of
 \geoclaw include the ability to solve the equations in latitude--longitude
@@ -42,7 +41,7 @@ code and tsunami modeling applications can be found in
 significant effort took place to verify and validate \geoclaw against the US
 National Tsunami Hazard Mitigation Program (NTHMP) benchmarks
 \cite{GonzalezLeVequeEtAl2011}.
-NTHMP approval of the code allows \geoclaw to be used in hazard mapping 
+NTHMP approval of the code allows \geoclaw to be used in hazard mapping
 projects that are funded by this program or other federal and state agencies,
 e.g.
 \cite{GonzalezLeVequeEtAl2013a,GonzalezLeVequeEtAl2014}.
@@ -53,7 +52,7 @@ In addition to a variety of tsunami modeling applications,
 \cite{George:Malpasset}, storm surge problems \cite{Mandli:ws} (see \cref
 {fig:surge}),
 and submarine landslides \cite{jhkim:phd}.  The code also
-formed the basis for solving the 
+formed the basis for solving the
 multi-layer shallow water equations for storm surge modeling
 \cite{mandli:phd, Mandli:2013it},
 and is currently being extended further to handle debris flow modeling in the
@@ -73,55 +72,55 @@ Several other substantial improvements in the
 algorithms implemented in \geoclaw have been made between versions 4.6 and
 5.3.0, including:
 
-\begin{itemize} 
-\item In depth-averaged flow the wave speed and therefore the CFL condition depends on the depth.  Thus in shallow water spatially refined grids may not need to be refined in time.  This ``variable-time-stepping'' was easily added along with the anisotropic capabilities that were added to \amrclaw.
-
-\item the ability to specify topography via a set of {\tt
-topo} files that may cover overlapping regions at different resolutions. The
-finite volume method requires cell averages of topography, computed by
+\begin{itemize}
+\item In depth-averaged flow, the wave speed and therefore the CFL
+condition depends on the depth.  As a result, flows in shallow water
+that have been refined spatially may not need to be refined in time.
+This ``variable-time-stepping'' was easily added along with the anisotropic
+capabilities that were added to \amrclaw.
+\item The ability to specify topography via a set of {\tt
+topo} files that may cover overlapping regions at different resolutions has been added.
+ The finite volume method requires cell averages of topography, computed by
 integrating a piecewise bilinear function constructed from the input {\tt
-topo} files over each grid cell.  In 5.1.0, this was improved to 
+topo} files over each grid cell.  In \clawpack 5.1.0, this was improved to
 allow an arbitrary number of nested {\tt topo} grids.
 When adaptive mesh refinement is used,
-regridding may take place every few time steps.  Improvements were made 
+regridding may take place every few time steps.  Improvements were made
 in 5.2.0 so that topography could be copied rather than always being
-recomputed in regions where there is an old grid at the same resolution to
-copy from. 
+recomputed in regions where there is an existing old grid.
 
-\item The user can now provide multiple  {\tt dtopo} files that 
+\item The user can now provide multiple  {\tt dtopo} files that
 specify changes to the
 initial topography at a series of times.  This is used to specify sea-floor
 motion during a tsunamigenic earthquake, but can also be used to specify
-submarine landslide motion or a failing dam, for example. 
+submarine landslide motion or a failing dam, for example.
 %Major changes were
 %made to these algorithms in 5.1.0 to fix a problem in earlier versions that
 %resulted in incorrect topography motion in some cases, also resulting in a much
 %more robust handling of multiple  {\tt dtopo} files.
 
-\item A number of new Python modules have been developed to assist the user
+\item A number of new Python modules has been developed to assist the user
 in working with {\tt topo} and {\tt dtopo} files.  These are documented in
-the Clawpack documentation and several of them are illustrated with Jupyter
-notebooks found in the Clawpack Gallery.
+the \clawpack documentation and several of them are illustrated with Jupyter
+notebooks found in the \clawpack Gallery.
 
-\item New capabilities were added in 5.0.0 to monitor the maximum of various
-flow quantities over a specified time range of a simulation.  This capability is
-crucial for many applications such as tsunami hazard assessment, where the
-maximum flow depth at each point where hazard assesment is desired, 
-maximum current
-velocities in a harbor, or maximum momentum flux (a measure of the hydrodynamic
-force that would be exerted by the flow on a structure).  Arrival time of the
-first wave at each point can also be monitored.  Some such capabilities were
-included in the 4.x version of the code, but were more limited and did not
-always perform properly near the edges of refinement patches.  
-In Version 5.2 these routines were further improved and extended.  
-The user can
-specify a grid of points on which to monitor values, and the new code is more
-flexible in allowing one-dimensional grids (e.g. a transect), two-dimensional
-rectangular grids, or an arbitrary set of points.
-This is described in 
+\item New capabilities were added in 5.0.0 to monitor the maximum of
+various flow quantities over a specified time range of a simulation.
+This capability is crucial for many applications where the maximum
+flow depth at each point, maximum current velocities in a harbor, or
+maximum momentum flux (a measure of the hydrodynamic force that would
+be exerted by the flow on a structure) is desired.  Arrival time of
+the first wave at each point can also be monitored.  Such
+capabilities were included in the 4.x version of the code, but were
+more limited and did not always perform properly near the edges of
+refinement patches.  In Version 5.2 these routines were further
+improved and extended.  The user can specify a grid of points on which
+to monitor values, and the new code is more flexible in allowing
+one-dimensional grids (e.g. a transect), two-dimensional rectangular
+grids, or an arbitrary set of points.  This is described in
 \url{http://www.clawpack.org/fgmax.html}.
 
-\end{itemize} 
+\end{itemize}
 
 \begin{figure}
 \hfil\includegraphics[height=1.2in]{Grays.png}
