@@ -14,24 +14,29 @@ was first released in 1994 and since then has made major strides in both
 capability and interface. More recently a major refactoring of the code and a
 move to GitHub for development has resulted in the release of
 \clawpack 5.0 in January, 2014. A significant number of additional improvements
-have been made since then and the aim of this paper are to:
+have been made since then. The goals of this paper are to:
 \begin{itemize}
 \item summarize some of the major changes made between the \clawpack
 4.x codes and the most recent \clawpack 5.3,
-\item provide a citable reference for \clawpack 5.x that includes
-substantial contributors to this code as authors,
 \item summarize the development model we have adopted, which we believe
 may be of interest to others managing open source scientific software
 projects with many contributors, and
 \item encourage users to contribute to the \clawpack suite of tools.
+\item provide a citable reference for \clawpack 5.x that includes
+substantial contributors to this code as authors,
 \end{itemize}
-To meet these aims this paper provides a brief history of \clawpack in 
-\ref{sub:history}, a background of the mathematical concerns in \ref{sec:hyp},
-the modernized development approach now being used in \ref{sec:development}, the
-major feature additions in the \clawpack 5.x major release up until 5.3 in
-\ref{sec:advances}, and finally some concluding thoughts and future plans for
+Also, by submitting this to a refereed journal we are trying to elevate
+the role of producing software in academic departments, and we
+would like to acknowledge the substantial contributions to the
+code by the many authors.
+
+To meet these aims, this paper provides a brief history of \clawpack in 
+\cref{sub:history}, a background of the mathematical concerns in \cref{sec:hyp},
+the modernized development approach now being used in \cref{sec:development},
+the major feature additions in the \clawpack 5.x major release up until 5.3 in
+\cref{sec:advances}, and finally some concluding thoughts and future plans for
 \clawpack in
-\ref{sec:conclusions}.
+\cref{sec:conclusions}.
 
 \subsection{History of \clawpack} \label{sub:history}
 
@@ -68,9 +73,10 @@ other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
 (released in January 2013) with many of the changes from 4.3 to 4.6 summarized at
 \url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
 
-Now with the current major version of \clawpack at 5 a number of modern
-approaches to development, interfacing and capabilities have been adopted and
-are the subject of the rest of the paper.
+Version 5 of \clawpack introudces a number of modern
+approaches to code development, interfacing with other codes,  and
+adding new capabilities. This is 
+the subject of the rest of the paper.
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
@@ -103,9 +109,9 @@ Some common examples of such hyperbolic systems include:
     \item The Euler equations of compressible, inviscid fluid dynamics.
         They consist of conservation laws for mass, momentum, and energy.
         The wave speeds are a combination of the local fluid velocity
-        and the acoustic wave velocity.  Source terms could be added
-        to include the effects of viscosity and heat transfer
-        (leading to the Navier-Stokes equations) or the effect of gravity.
+        and the acoustic wave velocity.  Source terms have been added
+        to include the effect of gravity, or could be added to include 
+        viscosity and heat transfer.
         These systems have important applications in
         aerodynamics, climate and weather modeling, and astrophysics.
     \item The shallow water equations, describing the velocity and
@@ -114,7 +120,10 @@ Some common examples of such hyperbolic systems include:
         the effect of varying bathymetry and of bottom friction.
         These equations are used, for instance, to model inundation
         caused tsunamis and dam breaks, as well as atmospheric flows.
+    \item Elastic wave equations, used to model waves in solid
+    materials. 
 \end{itemize}
+These examples are part of Clawpack's sample applications.
 %For a one-dimensional problem \cref{eq:hyp1a} or \cref{eq:hyp1b},
 %the {\em Riemann problem} consists of the equation together with
 %piecewise constant initial data with a single jump discontinuity.
@@ -168,22 +177,20 @@ or
 \begin{equation}\label{eq:hyp2b}
 q_t(x,y,t) + A(x,y)q(x,y,t)_x + B(x,y)q(x,y,t)_y = 0
 \end{equation}
-In this case the coefficient matrices $A$ and $B$ in \cref{eq:hyp2a}
-or the Jacobian matrices $f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} are
-assumed to be hyperbolic, i.e. have the property that any linear
+In order to be hyperbolic, the coefficient matrices $A$ and $B$ in \cref{eq:hyp2a}
+or the Jacobian matrices $f'(q)$ and $g'(q)$ in \cref{eq:hyp2b} 
+must have the property that any linear
 combination gives a diagonalizable matrix with real eigenvalues.  The
-extension to three space dimensions is similar. \comment{DAC : $(f,g)
-\cdot n$ is diagonalizable?}
+extension to three space dimensions is similar. 
 
 In two or three space dimensions, the wave-propagation methods
 are extended using either dimensional splitting, so that only
 one-dimensional Riemann solvers are needed, or by a multi-dimensional
 algorithm based on {\em transverse Riemann solvers} introduced in
 \cite{rjl:wpalg}.  Both approaches are supported in \clawpack.
-
 A variety of Riemann solvers have been developed for \clawpack, many
 of which are collected in the \texttt{riemann} repository, see
-\cref{sec:riemann}.  \comment{DAC : Does this fit here?}
+\cref{sec:riemann}.  
 
 Adaptive mesh refinement (AMR) is essential for many problems and
 has been available in two space dimensions

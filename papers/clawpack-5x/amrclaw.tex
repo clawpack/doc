@@ -63,24 +63,25 @@ the boundary condition routine can be called for a grid located
 anywhere in the domain, and may contain fewer or larger numbers of
 ghost cells. The boundary condition routines must be written in a
 rather unusual way that does not assume it is always setting the same
-number of ghost cells, or that the same number of reflected cells
-inside the domain always exist.
+number of ghost cells.
 
 Anisotropic refinement is allowed in both two and three dimensions.
 This means that the spatial and temporal refinement ratios can be
 specified independently from one another (as long as the temporal
 refinement satisfies the CFL condition).  In addition, capabilities
-have been added to automatically select the refinement ratio on each
-level based on the CFL condition.  This works in cases where there is a good
-estimate for the expected wave speed and has primarily been implemented in
-\geoclaw.
+have been added to automatically select the refinement ratio in time  on each
+level based on the CFL condition.  This has only been in implemented in
+\geoclaw. where the wave speed in the shallow water equations
+depends on the local depth. The finest grids are often located only in
+shallow coastal regions, so a large refinement ratio in space does not
+lead to a large refinement ratio in time.
 
-\amrclaw has also been
-parallelized using OpenMP directives based on grid patch-based decomposition.
+\amrclaw has been
+parallelized using OpenMP directives using a  patch-based decomposition.
 The main paradigm in structured AMR is a loop over all patches at a level, where
 some operation is done on each patch (i.e. taking a time step, finding ghost
 cells, conservation updates, etc.).  This lends itself easily to a {\tt parallel
-for} loop constructs where each iteration of the loop corresponds to a grid at
+for} loop construct where each iteration of the loop corresponds to a grid at
 that level. Dynamic scheduling is used with a chunk size of one, so that one
 thread is assigned one patch at a time. To help with load balancing, patches at
 each level are sorted from largest to smallest workload when they are first
@@ -90,16 +91,15 @@ scratch arrays to save the incoming and outgoing waves and fluxes for future
 conservation fix-ups. The bulge is directly proportional to the number of
 threads executing. For stack-based memory allocation per thread, the use of the
 environment variable {\tt OMP\_STACKSIZE} to increase the limit may be
-necessary.  Some scaling tests are illustrated in \ref{fig:amr_scaling}.
+necessary.  
 
-The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
-target architecture.  \pyclaw, on the other hand, does not include AMR but uses
-MPI via PETSc to achieve parallelism on distributed memory machines that scale
-to tens of thousands of cores (see \cref{sec:pyclaw}). Other frameworks exist,
-most notably \forestclaw \cite{Burstedde:we}, which are being developed in
-parallel with \amrclaw, that provide scalable AMR calculations on large
-distributed
-memory machines.
+In \cref{fig:amr_scaling} we show scalability tests and some timings for
+the shockbubble example in the \clawpack apps directory.  We took the 3D
+version of this example, and ran it on a 40 core Intel Xeon XX with XX
+sockets. The solution at the end of the XX time steps is shown on the
+left.  The efficiency for selected numbers of cores using strong
+scaling is shown in the right plot.
+SHOW PERCENTAGE OF TIME IN STEPGRID VERSUS OTHER STUFF (TABLE?)
 
 \begin{figure}[h]
     \centering
@@ -110,3 +110,13 @@ memory machines.
     gas-dynamics.}
     \label{fig:amr_scaling}
 \end{figure}
+
+The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
+target architecture.  \pyclaw, on the other hand, does not include AMR but uses
+MPI via PETSc to achieve parallelism on distributed memory machines that scale
+to tens of thousands of cores (see \cref{sec:pyclaw}). Other frameworks exist,
+most notably \forestclaw \cite{Burstedde:we}, which are being developed in
+parallel with \amrclaw, that provide scalable AMR calculations on large
+distributed
+memory machines.
+

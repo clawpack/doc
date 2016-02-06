@@ -5,11 +5,11 @@
 % Lead currently:  None
 %
 
-\subsection{VisClaw : Graphics for visualizing \clawpack output}
+\subsection{VisClaw : Visualizing \clawpack output}
 A practical way to visualize the results of simulations is
-essential to any software package focused on solving PDEs.
+essential to any software package for solving PDEs.
 This is particularly true for simulations making use of adaptive mesh
-refinement methods, since most available visualization packages do not
+refinement, since most available visualization packages do not
 have tools that conveniently visualize hierarchical AMR data.  \visclaw provides 
 support for all of the main \clawpack submodules, including
 \classic, \amrclaw, \pyclaw and \geoclaw.
@@ -17,36 +17,34 @@ support for all of the main \clawpack submodules, including
 From its very first release,
 \clawpack has included tools for visualizing the output of \clawpack and
 \amrclaw runs.  Up until the release of version \clawpack 4.x, these
-visualization tools consisted primarily of a suite of \mlab routines
-for creating custom one, two and three dimensional plots including
-pseudo-color plots, Schlieren plots, contour plots and scatter plots
-of radially or spherically symmetric data. All of the routines were
-specially designed to handle the particular file formats produced by
-\clawpack and to visualize AMR data.  Built-in tools were also available
+visualization tools consisted primarily of \mlab routines
+for creating one, two and three dimensional plots including
+pseudo-color plots, Schlieren plots, contour plots and scatter plots,
+including  radially or spherically symmetric data. 
+Built-in tools were also available
 for handling one, two and three-dimensional mapped grids.
 Starting with version 4.x, however, it was recognized that a reliance
 on proprietary software for visualization prevented a sizable
-potential user base from making use of the \clawpack software.  As a
-result, it was decided to convert the one and two dimensional plotting
-routines from \mlab to routines written for the \mplotlib,
+potential user base from making use of the \clawpack software.
+The one and two dimensional plotting
+routines were converted from \mlab to \mplotlib,
 a popular open source
 Python package for producing publication quality graphics
 for one and two dimensional data \cite{Hunter:2007}.
 
 With the development of \clawpack Version 5 and above, Python graphics tools
-have been collected into the \visclaw repository, available as a
-submodule in the
-\clawpack GitHub organization.  The \visclaw suite of tools extends the
-functionality of the existing version 4 Python routines for creating one and
+have been collected into the \visclaw repository.
+The \visclaw tools extends the
+functionality of the version 4 Python routines for creating one and
 two dimensional plots, and adds several new capabilities.  Chief among
-these new capabilities are the ability to generate output to webpages,
+these are the ability to generate output to webpages,
 where a series of plots can be viewed individually or as an animated
 time sequence using the Javascript package {\sc JSAnimation}
 \cite{jsanimation}.
-The \visclaw module {\tt iplotclaw} provides
+The \visclaw module {\tt Iplotclaw} provides
 interactive plotting capabilities from the Python or IPython prompt.
 Providing much of the same interactive capabilities as the original
-\mlab routines, {\tt iplotclaw} allows the user to step,
+\mlab routines, {\tt Iplotclaw} allows the user to step,
 interactively, through a time sequence of plots, jump from one frame
 to another, or interactively explore data from the current time frame.
 
@@ -88,7 +86,8 @@ the  KML files created for Google Earth can be edited for
 export, along with associated PNG files to these other GIS applications.
 
 \subsubsection{Matlab plotting routines}
-The \mlab plotting available in early versions of \clawpack are also included in
+The \mlab plotting tools available in early versions of \clawpack are
+still included in
 \visclaw.  While most of the one and two dimensional capabilities
 available originally in the \mlab suite have been ported to Python and
 \mplotlib, the original \mlab routines are still available in the \mlab suite of
