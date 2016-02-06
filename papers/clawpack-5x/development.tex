@@ -22,11 +22,11 @@ The core \clawpack software repositories are:
 \begin{itemize}
     \item \texttt{clawpack} - responsible for installation and coordination of
     other repositories,
-    \item \texttt{riemann} - contains Riemann solvers used by all the other
+    \item \texttt{riemann} - Riemann solvers used by all the other
     projects,
     \item \texttt{visclaw} - a visualization suite used by all the other
     projects,
-    \item \texttt{clawutil} - contains utility functions used by most other
+    \item \texttt{clawutil} - utility functions used by most other
     projects,
     \item \texttt{classic} - the original single grid methods in 1, 2, and 3
     space dimensions,
@@ -35,7 +35,8 @@ The core \clawpack software repositories are:
     \item \texttt{geoclaw} - solvers for depth-averaged
     geophysical flows which employs the framework in \texttt{amrclaw}, and
     \item \texttt{pyclaw} - a Python implementation and interface to the
-    \clawpack algorithms including massively parallel capabilities.
+    \clawpack algorithms including high-order metods and massively 
+    parallel capabilities.
 \end{itemize}
 
 \noindent
@@ -43,11 +44,14 @@ A release of \clawpack downloaded by users contains all of the above.
 The repositories \texttt{riemann}, \texttt{visclaw}, and
 \texttt{clawutil} are sometimes referred to as \textit{upstream} projects, since
 their changes
-affect the remaining projects in the above list, commonly referred to as 
-\textit{downstream} projects.  There are some variations on this, for instance a
-change to \amrclaw will affect \geoclaw as it relies on the algorithms
-implemented in \amrclaw.  To coordinate this the \texttt{clawpack} repository
-records broad changes that have multi-repository implications.
+affect all the remaining projects in the above list, commonly referred to as 
+\textit{downstream} projects.  There are some variations on this, for instance 
+\amrclaw is upstream of \geoclaw, which uses many of the algorithms and
+software base from
+\amrclaw.  To coordinate this the \texttt{clawpack} repository
+%records broad changes that have multi-repository implications.
+points to the compatible version of each repository, 
+described later in this section.
 
 Beyond the major code containing repositories additional repositories contain
 documentation and extended examples for using the packages:
@@ -73,7 +77,7 @@ but is no longer under development.
 
 The \clawpack team leverages the Git distributed version control system
 to coordinate development, with each major project and its development
-team assigned to its own repository.  The repositories are each
+team assigned to its own repository.  The repositories are 
 publicly coordinated under the \clawpack organization on
 GitHub\footnote{\url{https://github.com/clawpack}} with the
 top-level \texttt{clawpack} super-repository responsible for hosting
@@ -86,7 +90,7 @@ repository hosting, the \clawpack team uses GitHub for issue tracking,
 code review, automated continuous integration via Travis CI\footnote{\url{https://travis-ci.org/}},
 and test coverage tracking via Coveralls\footnote{\url{http://coveralls.io}}
 for the Python-based modules.  The issue tracker on
-GitHub automatically recognizes cross-repository references,
+GitHub supports cross-repository references,
 simplifying communication between \clawpack developer sub-teams.  The
 Travis CI service, which provides free continuous integration for
 publicly developed repositories on GitHub, runs \clawpack's test
@@ -103,6 +107,7 @@ Snapshots of the top-level repository are taken both to prepare for
 software releases of the \clawpack project itself, and to provide
 ``known working states'' when changes from upstream repositories must
 be coordinated with their downstream consumers.
+\comment{MJB - should describe a little more how}
 
 Typically, the \clawpack developers advance the master development
 branch of the top-level repository any time a major feature is added
@@ -127,13 +132,14 @@ In fact, scientific communities that openly share and develop code
 have an advantage because each researcher can leverage the work of
 many others \cite{Turk:2013hd}.
 
-Over the past twenty years, a great number of users have written additional
+Over the past twenty years, many users have written additional
 code, extending \clawpack with new Riemann solvers, algorithms, and domain-
-specific problem tools.  Most of this code has not made it back into the core
-library.  Due to this many of the development changes in \clawpack 5.x were done
+specific problem tools.  Unfortunately, much of this code has not 
+made it back into the core
+library.  Many of the development changes in \clawpack 5.x were done
 to encourage contributions from a broad community through tools such as
 distributed version control and open discussions on the mailing lists and issue
-trackers.
+trackers. 
 
 The primary development model is typical for GitHub projects: a
 contributor forks the repository on GitHub, then develops improvements
@@ -165,7 +171,8 @@ PyPI client such as \texttt{pip}.
 \clawpack does not follow a calendar release cycle.  Instead, releases
 emerge when the developer community feels enough changes have
 accumulated since the last release to justify
-the cost of switching to a new release.  \clawpack releases are
+the cost of switching to a new release.  For the most part, \clawpack 
+releases are
 versioned using an $M.m.p$ triplet, representing the major (M), minor (m), and
 patch (p) versions respectively.  In the broader software engineering
 community, this is often referred to as semantic versioning.  Small
