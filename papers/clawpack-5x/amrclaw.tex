@@ -88,9 +88,13 @@ threads executing. For stack-based memory allocation per thread, the use of the
 environment variable {\tt OMP\_STACKSIZE} to increase the limit may be
 necessary.
 
+\Cref{fig:shockbubble} shows two snapshots of the solution to a
+three-dimensional shock-bubble
+interaction problem found in the \clawpack \texttt{apps} repository,
+illustrating localized phenomena requiring adaptive refinement.
 In \cref{fig:amr_scaling} we show scalability tests and some timings for
-the shockbubble example in the \clawpack apps directory.  We took the 3D
-version of this example, and ran it on a 40 core Intel Xeon Haswell machine.
+this example, when run on a 40 core Intel Xeon Haswell machine, using
+\texttt{KMP\_AFFINITY compact}.
 For timing purposes, the only modifications made to the input parameters was to turn
 off checkpointing and graphics output.
 The plot on the left shows that most of the wall clock time is in the integration
@@ -104,27 +108,29 @@ the work is on level 3 grids, where there are an average of 138.1 grids over all
 level 3 timestep.  This is very coarse
 for large numbers of cores (hence the dropoff in efficiency). At 40 cores, there are
 less than 4 grids per core, and the grids are very different sizes.
-Several snapshots of the solution are shown in the \cref{fig:shockbubble}, 
-to illustrate how localized the phenomena needing refinement is. 
 
-\begin{figure}[h]
-    \centering
-    %\includegraphics[width=0.45\textwidth]{amr_scaling}
-    \includegraphics[width=0.45\textwidth]{cpuTime.png}
-    \includegraphics[width=0.45\textwidth]{efficiency.png}
-    \caption{Left is strong scaling results for an \amrclaw example demonstrating a
-    shock-bubble interaction in the Euler equations of compressible
-    gas-dynamics. Right is plot of efficency based on total computational time.}
-    \label{fig:amr_scaling}
-\end{figure}
-\begin{figure}[h]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.45\textwidth]{f1.png}
     \includegraphics[width=0.45\textwidth]{f4.png}
-    \caption{Scaling results for an \amrclaw example demonstrating a
+    \caption{\amrclaw example demonstrating a
     shock-bubble interaction in the Euler equations of compressible
-    gas-dynamics.}
+    gas-dynamics at two times, illustrating the need for adaptive refinement
+    to capture localized behavior. The
+    $40\times 10\times 10$ grid at Level 1 is refined where needed
+    by factors of 4 and then 2 in this 3-level run.}
     \label{fig:shockbubble}
+%\end{figure}
+
+%\begin{figure}[h]
+    %\centering
+    %\includegraphics[width=0.45\textwidth]{amr_scaling}
+    \includegraphics[width=0.35\textwidth]{cpuTime.png}
+    \includegraphics[width=0.35\textwidth]{efficiency.png}
+    \caption{Left is strong scaling results for the \amrclaw example shown in
+    \cref{fig:shockbubble}.
+    Right is plot of efficency based on total computational time.}
+    \label{fig:amr_scaling}
 \end{figure}
 
 The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
