@@ -90,20 +90,41 @@ necessary.
 
 In \cref{fig:amr_scaling} we show scalability tests and some timings for
 the shockbubble example in the \clawpack apps directory.  We took the 3D
-version of this example, and ran it on a 40 core Intel Xeon \alert{XX} with \alert{XX}
-sockets. The solution at the end of the \alert{XX} time steps is shown on the
-left.  The efficiency for selected numbers of cores using strong
-scaling is shown in the right plot.
-\alert{SHOW PERCENTAGE OF TIME IN STEPGRID VERSUS OTHER STUFF (TABLE?)}.
+version of this example, and ran it on a 40 core Intel Xeon Haswell machine.
+For timing purposes, the only modifications made to the input parameters was to turn
+off checkpointing and graphics output.
+The plot on the left shows that most of the wall clock time is in the integration
+routine (stepgrid), which closely tracks the total time.
+The second chunk of time is in the regridding, which contains algorithms that are not
+completely scalable. Very little time is in the filling of ghost cells, mostly from
+other patches but also includes those at domain boundaries.
+The efficiency is above 80\% until 24 cores, then drops off dramatically.
+Note that there are only 2 level 1 grids, and an average of 22.8 level 2 grids. Most of
+the work is on level 3 grids, where there are an average of 138.1 grids over all the
+level 3 timestep.  This is very coarse
+for large numbers of cores (hence the dropoff in efficiency). At 40 cores, there are
+less than 4 grids per core, and the grids are very different sizes.
+Several snapshots of the solution are shown in the \cref{fig:shockbubble}, 
+to illustrate how localized the phenomena needing refinement is. 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.45\textwidth]{efficiency}
-    \includegraphics[width=0.45\textwidth]{weak_scaling}
+    %\includegraphics[width=0.45\textwidth]{amr_scaling}
+    \includegraphics[width=0.45\textwidth]{cpuTime.png}
+    \includegraphics[width=0.45\textwidth]{efficiency.png}
+    \caption{Left is strong scaling results for an \amrclaw example demonstrating a
+    shock-bubble interaction in the Euler equations of compressible
+    gas-dynamics. Right is plot of efficency based on total computational time.}
+    \label{fig:amr_scaling}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{f1.png}
+    \includegraphics[width=0.45\textwidth]{f4.png}
     \caption{Scaling results for an \amrclaw example demonstrating a
     shock-bubble interaction in the Euler equations of compressible
     gas-dynamics.}
-    \label{fig:amr_scaling}
+    \label{fig:shockbubble}
 \end{figure}
 
 The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
