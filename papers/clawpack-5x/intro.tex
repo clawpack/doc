@@ -39,7 +39,7 @@ With this in mind, the goals of this paper are to:
 4.x versions and the most recent version, \clawpack 5.3,
 \item Summarize the development model we have adopted, for
 managing open source scientific software
-projects with many contributors,
+projects with many contributors, and
 \item Identify how users can contribute to the \clawpack suite of tools.
 \end{itemize}
 
@@ -180,8 +180,8 @@ using the waves resulting from each Riemann solution together with limiter
 functions to achieve second-order accuracy where the solution is smooth
 together with sharp resolution of discontinuities without spurious numerical
 oscillations (see \cite{rjl:fvmhp} for a detailed description of the
-algorithms).   The recently developed SharpClaw algorithms (see
-\cref{sec:pyclaw}), now incorporated in \pyclaw, use higher-order WENO methods
+algorithms).   The recently developed \sharpclaw algorithms (see
+\cref{sec:pyclaw}), now incorporated into \pyclaw, use higher-order WENO methods
 but rely on the same Riemann solvers.
 
 Problem-specific boundary conditions must also be imposed, which
