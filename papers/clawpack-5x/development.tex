@@ -20,21 +20,21 @@ zones.
 \vskip 5pt
 The core \clawpack software repositories are:
 \begin{itemize}
-    \item \texttt{clawpack} - responsible for installation and coordination of
+    \item \texttt{clawpack} -- responsible for installation and coordination of
     other repositories,
-    \item \texttt{riemann} - Riemann solvers used by all the other
+    \item \texttt{riemann} -- Riemann solvers used by all the other
     projects,
-    \item \texttt{visclaw} - a visualization suite used by all the other
+    \item \texttt{visclaw} -- a visualization suite used by all the other
     projects,
-    \item \texttt{clawutil} - utility functions used by most other
+    \item \texttt{clawutil} -- utility functions used by most other
     projects,
-    \item \texttt{classic} - the original single grid methods in 1, 2, and 3
+    \item \texttt{classic} -- the original single grid methods in 1, 2, and 3
     space dimensions,
-    \item \texttt{amrclaw} - the general adaptive mesh refinement
+    \item \texttt{amrclaw} -- the general adaptive mesh refinement
     framework in 2 and 3 dimensions,
-    \item \texttt{geoclaw} - solvers for depth-averaged
+    \item \texttt{geoclaw} -- solvers for depth-averaged
     geophysical flows which employs the framework in \texttt{amrclaw}, and
-    \item \texttt{pyclaw} - a Python implementation and interface to the
+    \item \texttt{pyclaw} -- a Python implementation and interface to the
     \clawpack algorithms including high-order metods and massively
     parallel capabilities.
 \end{itemize}
@@ -55,17 +55,16 @@ in this section.
 Beyond the major code containing repositories additional repositories contain
 documentation and extended examples for using the packages:
 \begin{itemize}
-    \item \texttt{doc} - contains the primary documentation source files,
-    developed using
-Sphinx\footnote{\url{http://sphinx-doc.org}},
-    \item \texttt{clawpack.github.com} - a host repository for the html files
+    \item \texttt{doc} -- the primary documentation source files,
+    developed using Sphinx\footnote{\url{http://sphinx-doc.org}},
+    \item \texttt{clawpack.github.com} -- a host repository for the
+    documentation html files
     that appear at \url{http://www.clawpack.org}, and
-    \item \texttt{apps} - containing applications contributed by developers and
+    \item \texttt{apps} -- applications contributed by developers and
     users that go beyond the introductory examples included in the core
     repositories.
 \end{itemize}
-The Clawpack 4.x code is also available in the
-repository as
+The Clawpack 4.x code is also available in the repository
 \begin{itemize}
     \item \texttt{clawpack-4.x}
 \end{itemize}
@@ -77,7 +76,7 @@ but is no longer under development.
 The \clawpack team uses the Git distributed version control system
 to coordinate development of each major project.  The repositories are
 publicly coordinated under the \clawpack organization on
-GitHub \footnote{\url{https://github.com/clawpack}} with the
+GitHub\footnote{\url{https://github.com/clawpack}} with the
 top-level \texttt{clawpack} super-repository responsible for hosting
 build and installation tools, as well as providing a synchronization
 point for the other repositories.  The remaining ``core \clawpack repositories''
@@ -99,23 +98,51 @@ reports on any test failures as well as changes to test coverage.
 
 \subsection{Submodules}
 
-The \texttt{clawpack} repository serves as an
-installation and synchronization point for the other project repositories.
+The \texttt{clawpack} ``super-repository'' serves as an
+installation and synchronization point for the project repositories:
+each of the other core \clawpack repositories listed above is a submodule
+of the \texttt{clawpack} repository.  A commit to the \texttt{clawpack}
+repository serves to keep track of the
+versions of each submodule that are meant to function together.
+
+Typically the \clawpack developers advance the master development
+branch of the top-level \texttt{clawpack} 
+repository any time a major feature is added
+or a bug is fixed in one of the upstream projects that might affect code in
+other repositories.  By checking out a particular commit in the
+\texttt{clawpack} repository and performing a \texttt{git submodule update},
+all repositories can be updated to versions that are intended to be
+consistent and functional.
+
+In particular, when Travis runs the regression tests in any project
+repository (performed automatically for any pull request), it starts
+by installing \clawpack on a virtual machine and the current head
+of the \texttt{clawpack/master} branch indicates the commit from each of the
+other projects that must be checked out before performing the tests.
+If the \texttt{clawpack} repository has not been properly updated
+following changes in other upstream projects, these tests may fail.
+
+Any new release of \clawpack is a snapshot of one particular commit on
+\texttt{clawpack} and the related commits on all submodules.  These
+particular commits are also tagged for future reference with consistent
+names, such as \texttt{v5.3.1}.  (Git tags simply provide a descriptive name
+for a particular commit rather than having to refer to a Git hash code.)
+
+\ignore{
 Snapshots of the top-level repository are taken both to prepare for
-software releases of the \clawpack project itself, and to provide
+software releases of the \clawpack project itself, and is used to provide
 ``known working states'' when changes from upstream repositories must
 be coordinated with their downstream consumers.
-\comment{MJB - should describe a little more how}
+%\comment{MJB - should describe a little more how}
 
-Typically, the \clawpack developers advance the master development
-branch of the top-level repository any time a major feature is added
-or a bug is fixed in one of the other projects.  When a feature is
+When a feature is
 added to an upstream repository that affects other repositories, the
 addition of this change is coordinated with the downstream
 repositories by simultaneously advancing the version of the upstream
 repository as well as all affected downstream repositories.
+}
 
-Git submodules have proven to be very powerful and provide an invaluable
+Git submodules provide an invaluable
 mechanism for allowing \clawpack team members to work asynchronously on
 independent projects while reusing and maintaining common software
 infrastructure.
@@ -123,20 +150,36 @@ infrastructure.
 
 \subsection{Contributing}
 
-Scientist programmers are often discouraged from sharing code
+Scientists who program are often discouraged from sharing code
 due to existing reward mechanisms and the fear of being ``scooped''.
-In fact, scientific communities that openly share and develop code
+However, recent studies indicate that 
+scientific communities that openly share and develop code
 have an advantage because each researcher can leverage the work of
-many others \cite{Turk:2013hd}.
+many others \cite{Turk:2013hd}, and that paper citation rates can be
+increased by sharing code \cite{Vandewalle2012} and/or 
+data \cite{PiwowarDayEtAl2007}.  
+Moreover, journals and funding agencies are increasingly requiring
+investigators to share code used to obtain published results.  One
+of the goals of the \clawpack project is to facilitate code sharing
+by users, by providing an easy mechanism to refer to a specific
+version of the \clawpack software and ensuring that past versions
+of the software remain available on a stable and citable platform.
 
-Over the past twenty years, many users have written additional
-code, extending \clawpack with new Riemann solvers, algorithms, and
-domain-specific problem tools.  Unfortunately, much of this code has not
-made it back into the core
-library.  Many of the development changes in \clawpack 5.x were done
-to encourage contributions from a broad community through tools such as
-distributed version control and open discussions on the mailing lists and issue
-trackers.
+On the development side, we expect that the open source development model
+with important discussions conducted in public will lead to further growth of
+the developer community and additional contributions from users.
+Over the past twenty years, many users have written
+code extending \clawpack with new Riemann solvers, algorithms, or
+domain-specific problem tools.  Unfortunately, much of this code did not
+make it back into the core software for others to use.
+Many of the development changes in \clawpack 5.x were done
+to encourage contributions from a broader community. We have begun to see an
+increase in contributions from outside the developers' groups, and hope to
+encourage more of this in the future.
+
+%through tools such as
+%distributed version control and open discussions on the mailing lists and issue
+%trackers.
 
 The primary development model is typical for GitHub projects: a
 contributor forks the repository on GitHub, then develops improvements
@@ -180,3 +223,8 @@ require that the major version be incremented.  In addition, the
 implementation of significant new algorithms or capability will also
 justify the increment of major release number, and is often an impetus
 for providing another release to the public.
+In practice, the \clawpack software has frequently included changes in minor
+version releases that were not entirely backwards compatible, but these have
+been relatively minor and documented in the release notes.  Major version
+numbers have changed infrequently and related to major refactoring of the
+code as in going from 4.x to 5.0.

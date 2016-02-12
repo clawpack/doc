@@ -23,13 +23,14 @@ then.
 
 Because scientific software  has become central to many advances made
 in science, engineering, resource management, natural hazards modeling
-and so on, it is increasingly important to describe and
+and other fields, it is increasingly important to describe and
 document changes made to widely used packages.  Such documentation efforts
-serve both to orient new and existing users to the  strategies
+serve to orient new and existing users to the  strategies
 taken by developers of the software, place the software package in the context
-of other packages, document major code changes, and to provide a
+of other packages, document major code changes, and provide a
 concrete, citable reference for users of the software.
 
+\newpage % to put list on page 2
 With this in mind, the goals of this paper are to:
 
 \begin{itemize}
@@ -39,22 +40,15 @@ With this in mind, the goals of this paper are to:
 \item Summarize the development model we have adopted, for
 managing open source scientific software
 projects with many contributors,
-\item Identify how users can contribute to the \clawpack suite of tools, and
-%\item Provide a citable reference for \clawpack 5.x that includes
-%substantial contributors to this code as authors,
+\item Identify how users can contribute to the \clawpack suite of tools.
 \end{itemize}
-By submitting this paper to a refereed journal, we aim to elevate the role of
-producing software in academic departments and to emphasize the
-importance of acknowledging the substantial contributions
-made by the many developers (some of whom are listed here as authors) to the
-\clawpack code.
 
-To meet these aims, this paper provides a brief history of \clawpack in
+This paper provides a brief history of \clawpack in
 \cref{sub:history}, a background of the mathematical concerns in \cref{sec:hyp},
 the modern development approach now being used in \cref{sec:development},
-the major feature additions in the \clawpack 5.x major release up until 5.3 in
-\cref{sec:advances}, and finally some concluding thoughts and future plans for
-\clawpack in
+the major feature additions in the \clawpack 5.x major release up until Version 5.3 in
+\cref{sec:advances}. Some concluding thoughts and future plans for
+\clawpack are mentioned in
 \cref{sec:conclusions}.
 
 \subsection{History of \clawpack} \label{sub:history}
@@ -169,14 +163,12 @@ involve the prescription of physically correct weak solutions and
 understanding the behavior of the solution at discontinuities.  The
 Riemann solver is an algorithm that encodes the specifics of the
 hyperbolic system to be solved, and it is the only routine (other than
-problem-specific setup) that needs to be changed in order to apply the
+problem-specific setup such as initial conditions) 
+that needs to be changed in order to apply the
 code to different hyperbolic systems.  In some cases, the Riemann
 solver may also be designed to enforce physical properties like
 positivity (e.g., for the water depth in \geoclaw) or to account for
 forces (like that of gravity) that may be balanced by flux terms.
-\ignore{In practice, approximate Riemann solvers are commonly used for
-nonlinear problems.}
-%, which replace rarefaction waves by one or more discontinuities.
 
 \clawpack is based on Godunov-type finite volume methods in which
 the solution is represented by cell averages.  Riemann problems
@@ -191,6 +183,18 @@ oscillations (see \cite{rjl:fvmhp} for a detailed description of the
 algorithms).   The recently developed SharpClaw algorithms (see
 \cref{sec:pyclaw}), now incorporated in \pyclaw, use higher-order WENO methods
 but rely on the same Riemann solvers.
+
+Problem-specific boundary conditions must also be imposed, which
+are implemented by a subroutine that sets the solution value in
+{\em ghost cells} exterior to the domain each time step.  The
+\clawpack software contains library routines that implement several
+sets of boundary conditions that are commonly used, {\em e.g.}
+periodic boundary conditions, reflecting solid wall boundary
+conditions for problems such as acoustics, Euler, or shallow water
+equations, and non-reflecting (absorbing) extrapolation boundary
+conditions.  As with all \clawpack library routines, the boundary
+condition routine can be copied and modified by the user to implement
+other boundary conditions needed for a particular application.
 
 In two space dimensions, hyperbolic equations might take the form
 \begin{equation}\label{eq:hyp2a}

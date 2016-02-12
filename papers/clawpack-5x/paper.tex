@@ -95,6 +95,8 @@
 %  - Has read the final draft and agreed to be an author.
 
 \author{
+        Kyle T. Mandli\thanks{
+            Columbia University (\mbox{kyle.mandli@columbia.edu})} \and
         Aron J. Ahmadia\thanks{
             Continuum Analytics (\mbox{aahmadia@continuum.io})} \and
         Marsha Berger\thanks{
@@ -112,21 +114,23 @@
         Grady I. Lemoine\thanks{
             CD-Adapco, Bellevue, WA} \and
         Randall J. LeVeque\thanks{
-            Dept.\ of Applied Mathematics, University of Washington (\mbox{rjl.@uw.edu})} \and
-        Kyle T. Mandli\thanks{
-            Columbia University (\mbox{kyle.mandli@columbia.edu})}
+            Dept.\ of Applied Mathematics, University of Washington (\mbox{rjl.@uw.edu})}
         }
 
 \maketitle
 
 \begin{abstract}
     \clawpack is a software package designed to solve nonlinear
-hyperbolic partial differential equations and has been actively developed
-for over 20 years.  The newest major release, \clawpack 5, introduces
+hyperbolic partial differential equations using high-resolution finite volume
+methods based on Riemann solvers and limiters. The package includes a number
+of variants aimed at different applications and user communities.
+\clawpack has been actively developed as an open source project
+for over 20 years.  The latest major release, \clawpack 5, introduces
 a number of new features and changes to the code base and a new
-development model.  This article provides a summary of these changes,
-the rationale behind some of these changes, and more generally, the
-approach we have taken in developing \clawpack.
+development model based on GitHub and Git submodules.  
+This article provides a summary of the most significant changes,
+the rationale behind some of these changes, and a description of our current
+development model.
 \end{abstract}
 
 \input{intro}
@@ -136,6 +140,8 @@ approach we have taken in developing \clawpack.
 \input{advances}
 
 \input{future}
+
+\input{acknowledgments}
 
 \bibliographystyle{siamplain}
 \bibliography{paper}
