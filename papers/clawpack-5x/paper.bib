@@ -104,12 +104,17 @@ uri = {\url{papers3://publication/doi/10.1098/rspa.2013.0819}}
 @inproceedings{Burstedde:we,
 author = {Burstedde, Carsten and Calhoun, Donna A and Mandli, Kyle and Terrel, Andy R},
 title = {{ForestClaw: Hybrid forest-of-octrees AMR for hyperbolic conservation laws}},
-booktitle = {ParCo 2013},
+Booktitle = {Parallel Computing : Accelerating Computational Science and Engineering (CSE)},
 editor = {Bader, Michael and Bode, Arndt and Bungartz, Hans-Joachim and Gerndt, Michael and Joubert, Gerhard R and Peters, Frans},
 pages = {253--262},
+Publisher = {IOS Press},
+Series = {Advances in Parallel Computing},
+Volume = {25},
+Year = {2014}}
 keywords = {adaptive mesh refinement, CLAWPACK, HPC, hyperbolic conservation laws, manycore},
 doi = {10.3233/978-1-61499-381-0-253},
 rating = {0},
+publisher
 date-added = {2013-08-16T14:11:39GMT},
 date-modified = {2015-04-12T22:57:07GMT},
 abstract = {We present a new hybrid paradigm for parallel adaptive mesh refinement (AMR) that combines the scalability and lightweight architecture of tree-based AMR with the computational efficiency of patch-based solvers for hyperbolic conservation laws. The key idea is to interpret each leaf of the AMR hierarchy as one uniform compute patch in Rd with md degrees of freedom, where m is customarily between 8 and 32. Thus, computation on each patch can be optimized for speed, while we inherit the flexibility of adaptive meshes. In our work we choose to integrate with the p4est AMR library since it allows us to compose the mesh from multiple mapped octrees and enables the cubed sphere and other nontrivial multiblock geometries. We describe aspects of the parallel implementation and close with scalings for both MPI-only and OpenMP/MPI hybrid runs, where the largest MPI run executes on 16,384 CPU cores.},
@@ -118,6 +123,19 @@ local-url = {file://localhost/Users/mandli/Dropbox/Research/Library.papers3/Burs
 file = {{ParCo_2013__Burstedde.pdf:/Users/mandli/Dropbox/Research/Library.papers3/Burstedde/ParCo_2013__Burstedde.pdf:application/pdf;ParCo_2013__Burstedde.pdf:/Users/mandli/Dropbox/Research/Library.papers3/Burstedde/ParCo_2013__Burstedde.pdf:application/pdf}},
 uri = {\url{papers3://publication/doi/10.3233/978-1-61499-381-0-253}}
 }
+
+
+@inproceedings{bu-ca-ma-te:2014,
+	Author = {Carsten Burstedde and Donna Calhoun and Kyle T. Mandli and Andy R. Terrel},
+	Booktitle = {Parallel Computing : Accelerating Computational Science and Engineering (CSE)},
+	Editor = {Michael Bader and Arndt Bode and Hans-Joachim Bungartz and Michael Gerndt and Gerhard R. Joubert and Frans Peter},
+	Pages = {253--262},
+	Publisher = {IOS Press},
+	Series = {Advances in Parallel Computing},
+	Title = {{{\sc ForestClaw}: Hybrid forest-of-octrees {AMR} for hyperbolic conservation laws}},
+	Volume = {25},
+	Year = {2014}}
+
 
 @article{Berger:2011vi,
 author = {Berger, Marsha J and George, David L and LeVeque, Randall J. and Mandli, Kyle T},
@@ -744,4 +762,3 @@ uri = {\url{papers3://publication/doi/10.1016/j.ocemod.2013.08.001}}
     Year = {2010},
     doi={10.1007/s10915-010-9411-0}
 }
-
