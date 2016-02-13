@@ -31,10 +31,10 @@ periodic materials \cite{2015_diffractons}.  Two of these are depicted in
 Figure~\ref{fig:pyclaw-apps}.
 
 \begin{figure}
-\hfil\includegraphics[height=1.2in]{detonation.png}
-\hskip 5pt
-\hfil\includegraphics[height=1.4in]{diffractons.png}
-\hskip 5pt
+\begin{center}
+\plotbox{\includegraphics[height=0.35\textwidth]{detonation.png}}\hfil
+\plotbox{\includegraphics[height=0.35\textwidth]{diffractons.png}}
+\end{center}
 \caption{\label{fig:pyclaw-apps}
 Left: A two-dimensional detonation wave solution of the reactive Euler equations,
 showing transverse shocks that arise from instabilities; see \cite{faria2015qualitative}.
@@ -43,7 +43,7 @@ sound speed; see \cite{2015_diffractons}.}
 \end{figure}
 
 
-\subsubsection{Librarization and Extensibility}
+\subsubsection{Librarization and extensibility}
 Scientific software is easier to use, extend, and integrate with other tools
 when it is designed as a library \cite{Brown:2015cj}.  \clawpack has always been
 designed to be extensible, but \pyclaw takes this further in several ways.
@@ -72,7 +72,7 @@ At present, \pyclaw solvers operate only on a single patch, but the
 geometry and grids already incorporate multi-patch
 capabilities for visualization in \amrclaw and \geoclaw.
 
-\subsubsection{\pyclaw Solvers}
+\subsubsection{\pyclaw solvers}
 
 PyClaw includes an interface to both the Classic solvers (already
 described above) and those of \sharpclaw \cite{ketcheson2012pyclaw}.
