@@ -110,27 +110,31 @@ for large numbers of cores (hence the dropoff in efficiency). At 40 cores, there
 less than 4 grids per core, and the grids are very different sizes.
 
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=0.45\textwidth]{f1.png}
-    \includegraphics[width=0.45\textwidth]{f4.png}
-    \caption{\amrclaw example demonstrating a
-    shock-bubble interaction in the Euler equations of compressible
-    gas-dynamics at two times, illustrating the need for adaptive refinement
-    to capture localized behavior. The
-    $40\times 10\times 10$ grid at Level 1 is refined where needed
-    by factors of 4 and then 2 in this 3-level run.}
-    \label{fig:shockbubble}
-%\end{figure}
+  \begin{center}
+    \plotbox{\includegraphics[width=0.45\textwidth]{f1.png}}\hfil
+    \plotbox{\includegraphics[width=0.45\textwidth]{f4.png}}
+  \end{center}
+\caption{\amrclaw example demonstrating a
+  shock-bubble interaction in the Euler equations of compressible
+  gas-dynamics at two times, illustrating the need for adaptive refinement
+  to capture localized behavior. The
+  $40\times 10\times 10$ grid at Level 1 is refined where needed
+  by factors of 4 and then 2 in this 3-level run.}
+\label{fig:shockbubble}
+\end{figure}
 
-%\begin{figure}[h]
-    %\centering
-    %\includegraphics[width=0.45\textwidth]{amr_scaling}
-    \includegraphics[width=0.35\textwidth]{cpuTime.png}
-    \includegraphics[width=0.35\textwidth]{efficiency.png}
-    \caption{Left is strong scaling results for the \amrclaw example shown in
+\begin{figure}[h]
+  \begin{center}
+    % \includegraphics[width=0.45\textwidth]{amr_scaling}
+    \plotbox{\includegraphics[width=0.4\textwidth,
+      clip=true,trim=0cm 1cm 1cm 2cm]{cpuTime.png}}\hfil
+    \plotbox{\includegraphics[width=0.4\textwidth,
+      clip=true,trim=0cm 1cm 1cm 2cm]{efficiency.png}}
+  \end{center}
+  \caption{Left is strong scaling results for the \amrclaw example shown in
     \cref{fig:shockbubble}.
-    Right is plot of efficency based on total computational time.}
-    \label{fig:amr_scaling}
+    Right is plot of efficiency based on total computational time.}
+  \label{fig:amr_scaling}
 \end{figure}
 
 The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
