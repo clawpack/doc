@@ -16,12 +16,12 @@ in pure Python. That implementation still exists in \pyclaw and is useful
 for understanding the algorithm.
 
 The current release of \pyclaw includes access to the classic algorithms as well
-as the high-order algorithms introduced in SharpClaw \cite{2013_sharpclaw} (i.e., WENO
+as the high-order algorithms introduced in \sharpclaw \cite{2013_sharpclaw} (i.e., WENO
 reconstruction and Runge--Kutta integrators) and can be used on large
 distributed-memory parallel machines.  For the latter capability, \pyclaw
 relies on PETSc \cite{petsc-user-ref}.
 Lower-level code (whatever gets executed
-repeatedly and needs to be fast) from the earlier Fortran Classic and SharpClaw
+repeatedly and needs to be fast) from the earlier Fortran Classic and \sharpclaw
 codes is automatically wrapped at install time using \texttt{f2py}.
 
 Recent applications of \pyclaw include studies of laser light trapping by moving
