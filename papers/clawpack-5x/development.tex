@@ -64,10 +64,7 @@ documentation and extended examples for using the packages:
     users that go beyond the introductory examples included in the core
     repositories.
 \end{itemize}
-The \clawpack 4.x code is also available in the repository
-\begin{itemize}
-    \item \texttt{clawpack-4.x}
-\end{itemize}
+The \clawpack 4.x code is also available in the repository \texttt{clawpack-4.x}
 but is no longer under development.
 
 
@@ -103,7 +100,11 @@ installation and synchronization point for the project repositories:
 each of the other core \clawpack repositories listed above is a submodule
 of the \texttt{clawpack} repository.  A commit to the \texttt{clawpack}
 repository serves to keep track of the
-versions of each submodule that are meant to function together.
+versions of each submodule that are meant to function together.  
+Git submodules provide an invaluable
+mechanism for allowing \clawpack team members to work asynchronously on
+independent projects while reusing and maintaining common software
+infrastructure.
 
 Typically the \clawpack developers advance the master development
 branch of the top-level \texttt{clawpack}
@@ -141,12 +142,6 @@ addition of this change is coordinated with the downstream
 repositories by simultaneously advancing the version of the upstream
 repository as well as all affected downstream repositories.
 }
-
-Git submodules provide an invaluable
-mechanism for allowing \clawpack team members to work asynchronously on
-independent projects while reusing and maintaining common software
-infrastructure.
-
 
 \subsection{Contributing}
 

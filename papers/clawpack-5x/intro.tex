@@ -81,16 +81,16 @@ In 2009, \clawpack Version 4.4 was released with a major change from Matlab
 to Python as the recommended visualization tool, and the development
 of a Python user interface for specifying the input data.
 
-Since then, a number of other features were added to handle new
-applications, to provide a better user interface and visualization tools, and to
-incorporate higher-order accurate algorithms, MPI and OpenMP parallelization, and
+Since then, a number of other features were added to handle new applications, to
+provide a better user interface and visualization tools, to incorporate
+higher-order accurate algorithms, to parallelize through MPI and OpenMP, and
 other enhancements. The \clawpack 4.x line of code ended with Version 4.6.3
-(released in January 2013) with many of the changes from 4.3 to 4.6 summarized at
-\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.
+(released in January 2013) with many of the changes from 4.3 to 4.6\footnote{
+\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}}.
 
 Version 5 of \clawpack introduces a number of modern approaches to
 code development, interfacing with other codes, and adding new
-capabilities. These changes are the subject of the rest of the paper.
+capabilities. These changes are the subject of the rest of this paper.
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
@@ -110,7 +110,7 @@ diagonalizable with real eigenvalues for all relevant values of
 $q$, $x$, and $t$.  This condition guarantees that the system is hyperbolic,
 with solutions that are wave-like.  The eigenvectors of the system
 determine the relation between the different components
-of system, or waves, and the eigenvalues determine the speeds at which these
+of the system, or waves, and the eigenvalues determine the speeds at which these
 waves travel.  The right hand side of these equations could be
 replaced by a ``source term'' $\psi(q,x,t)$ to give a non-homogeneous
 equation that is sometimes called a ``balance law'' rather than a
@@ -120,13 +120,12 @@ conservation law.  Spatially-varying flux functions $f(q,x)$ in
 
 Examples of equations solved by \clawpack include:
 \begin{itemize}
-  \item  Advection equation for one or more tracers.  The velocity field is
-typically prescribed from wind data, or as the solution to another fluid
-flow problem.  Typical applications include transport of heat, energy,
-pollution, smoke or another species that do not influence the velocity field.
-
-    \item The Euler equations of compressible, inviscid fluid dynamics.
-        They consist of conservation laws for mass, momentum, and energy.
+  \item  Advection equation(s) for one or more tracers.  The velocity field is
+    typically prescribed from the solution to another fluid flow problem, such
+    as wind.  Typical applications include transport of heat, energy, pollution,
+    smoke or another species that does not influence the velocity field.
+    \item The Euler equations of compressible, inviscid fluid dynamics, consist
+    of conservation laws for mass, momentum, and energy.
         The wave speeds depend on the local fluid velocity
         and the acoustic wave velocity (sound speed).  Source terms can be added
         to include the effect of gravity, viscosity or heat transfer.
@@ -139,7 +138,8 @@ pollution, smoke or another species that do not influence the velocity field.
         These equations are used, for instance, to model inundation
         caused tsunamis and dam breaks, as well as atmospheric flows.
     \item Elastic wave equations, used to model waves in solid
-    materials.
+    materials.  Here even a linear problem can be complex due to varying
+    material properties on multiple scales that then effect the wave speeds.
 \end{itemize}
 %For a one-dimensional problem \cref{eq:hyp1a} or \cref{eq:hyp1b},
 %the {\em Riemann problem} consists of the equation together with
