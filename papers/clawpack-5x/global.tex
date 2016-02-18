@@ -1,0 +1,43 @@
+%!TEX root = paper.tex
+%
+% Global Changes
+%
+% Lead currently:  None
+%
+
+\subsection{Global Changes}
+Substantial redesign of the \clawpack code base was performed in the move
+from \clawpack 4.x to 5.x.
+Major changes that affected all aspects of the code include:
+\begin{itemize}
+    \item The interface to the \clawpack Riemann solvers was changed so that one
+    set of solvers can be used for all versions of the code (including \pyclaw
+    via
+    \texttt{f2py}\footnote{\url{http://docs.scipy.org/doc/numpy-dev/f2py}}).
+    Rather than appearing in scattered example directories,
+    these Riemann solvers have all been collected into the new
+    \texttt{riemann} repository. Modifications to the
+    calling sequences were made to accommodate this increased generality.
+    \item Calling sequences for a number of other Fortran subroutines were also
+    modified based on experiences with the \clawpack 4.x code.  These can also
+    be used as a stand-alone product for those who only want the Riemann
+    solvers.
+    \item Python front-ends were redesigned to more easily
+    specify run-time options for
+    the solver and visualization.  The Fortran variants (\classic, \amrclaw, and
+    \geoclaw) all use a Python script to facilitate setting input variables.
+    These scripts create text files with a rigidly specified format that are then read
+    in when the Fortran code is run. The interface now allows updates to the
+    input parameters while maintaining backwards compatibility.
+    \item The indices of the primary conserved quantities were reordered.  In
+    \clawpack 4.x, the $m$th component of a
+    system of equations in grid cell $(i,j)$ (in two dimensions, for example),
+    was stored in \texttt{q(i,j,m)}.  In order to improve cache usage and to
+    more easily interface with PETSc, a global
+    change was made to the ordering so that the component number comes
+    first; i.e. \texttt{q(m,i,j)}.  A seemingly minor change like this affects a
+    huge number of lines in the code and cannot easily be automated. The use of
+    version control and regression tests was crucial in the successful
+    completion of the project. 
+    %\comment{MJB Interestingly, we did not observe any appreciate change in performance.}
+\end{itemize}

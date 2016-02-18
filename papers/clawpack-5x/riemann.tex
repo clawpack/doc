@@ -1,0 +1,45 @@
+%!TEX root = paper.tex
+%
+% Riemann
+%
+
+\subsection{Riemann: A Community-Driven Collection of Approximate Riemann
+Solvers}\label{sec:riemann}
+
+The methods implemented in \clawpack, and all modern Godunov-type
+methods for hyperbolic PDEs, are based on the solution of Riemann
+problems as discussed in \cref{sec:hyp}.  Whereas most existing codes
+for hyperbolic PDEs use Riemann solvers to compute fluxes, \clawpack
+Riemann solvers instead compute the waves (or discontinuities) that
+make up the Riemann solution.  In the unsplit algorithm, \clawpack
+also makes use of {\em transverse} Riemann solvers, responsible for
+computing transport between cells that are only corner (in 2d) or edge
+(in 3d) adjacent.
+
+For nonlinear systems, the exact solution of the Riemann problem is
+computationally costly and may involve both discontinuities (shocks and contact
+waves) and rarefactions.  It is almost always preferable to employ inexact
+Riemann solvers that approximate the solution using discontinuities only, with
+an appropriate entropy condition.  The solvers available in \clawpack are
+all approximate solvers, although one could easily implement their own exact
+solver and make it available in the format needed by \clawpack routines.
+
+A common feature in all packages in the \clawpack suite is the
+use of a standard interface for Fortran Riemann solver routines.  This ensures that new
+solvers or solver improvements developed for one package can immediately
+be used by all packages.  To further facilitate this sharing and to avoid
+duplication, Riemann solvers are (with rare exceptions) not maintained under
+the other packages but are collected in a single repository named
+\texttt{riemann}.
+Users who develop new solvers for \clawpack are encouraged to submit them to the
+Riemann repository.
+
+In the Fortran-based packages (Classic, AMRClaw, and GeoClaw) the Riemann solver
+is selected at compile-time by modifying a problem-specific Makefile. In
+\pyclaw, the Riemann solver to be used is selected at run-time.  This is made
+possible by compiling all of the Riemann solvers (when \pyclaw is installed) and
+generating Python wrappers with \texttt{f2py}.  For \pyclaw, \texttt{riemann}
+also
+provides metadata (such as the number of equations, the number of waves,
+and the names of the conserved quantities) for each solver so that setup is
+made more transparent.
