@@ -103,10 +103,12 @@ routines without modification.  In the high-level routines, only a few
 hundred lines of Python code deal explicitly with parallel communication,
 in order to transfer ghost cell information between subdomains and to
 find the global maximum CFL number in order to adapt the time step
-size.  The code has been demonstrated to scale with better than 90\%
-efficiency on tens of thousands of processors on both the Shaheen I
-(BlueGene/P) and Shaheen II (Cray XC40) supercomputers at KAUST.
+size.
+For instance, the computation shown in the right part of Figure
+\ref{fig:pyclaw-apps} involved more than 120 million degrees of freedom and was
+run on two racks of the Shaheen I BlueGene/P supercomputer.
+The code has been demonstrated to scale with better than 90\%
+efficiency in even larger tests on tens of thousands of processors on both the
+Shaheen I (BlueGene/P) and Shaheen II (Cray XC40) supercomputers at KAUST.
 A hybrid MPI/OpenMP version is already available in a development branch
 and will be included in future releases.
-\todo{Mention the grid resolution needed for the computations shown in the
-figure \cref{fig:pyclaw-apps} to stress the parallel performance?}
