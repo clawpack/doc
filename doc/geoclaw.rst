@@ -29,6 +29,7 @@ GeoClaw software and links to references and uses.
 * :ref:`manning`
 * :ref:`fgmax`
 * :ref:`tsunamidata`
+* :ref:`geoclaw_refinement`
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x
   version of GeoClaw).
@@ -112,4 +113,4 @@ Setting up a new example
 ------------------------
 
  * :ref:`quick_tsunami`
-
+ 
