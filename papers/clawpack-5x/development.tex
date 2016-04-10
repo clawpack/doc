@@ -115,7 +115,7 @@ other repositories.  By checking out a particular commit in the
 all repositories can be updated to versions that are intended to be
 consistent and functional.
 
-In particular, when Travis runs the regression tests in any project
+In particular, when Travis CI runs the regression tests in any project
 repository (performed automatically for any pull request), it starts
 by installing \clawpack on a virtual machine and the current head
 of the \texttt{clawpack/master} branch indicates the commit from each of the
@@ -223,3 +223,16 @@ version releases that were not entirely backwards compatible, but these have
 been relatively minor and documented in the release notes.  Major version
 numbers have changed infrequently and related to major refactoring of the
 code as in going from 4.x to 5.0.
+
+\revised{\subsection{Dependencies}
+
+Running any part of \clawpack requires a Python interpreter and
+the common Python packages numpy and matplotlib, as well as
+(except for the pure-Python 1D code) GNU make and a Fortran compiler.  Other
+dependencies are optional, depending on which parts of \clawpack
+are to be used:
+\begin{itemize}
+    \item PETSc \cite{petsc-user-ref}, if using distributed parallelism in \pyclaw.
+    \item OpenMP, if using shared-memory parallelism in \amrclaw or \geoclaw.
+    \item MATLAB, if using the legacy visualization tools.
+\end{itemize}}
