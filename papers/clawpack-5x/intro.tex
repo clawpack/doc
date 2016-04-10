@@ -74,8 +74,7 @@ the code and formed the basis for the examples presented in a textbook
 \cite{rjl:fvmhp} published in 2003.  That text not only provided a
 complete description of the wave propagation algorithm, developed by LeVeque,
 but also is notable in that the codes used to produce virtually all of figures
-in the text were made available online \cite{rjl:fvmhp}.  These examples are
-available at \url{http://depts.washington.edu/clawpack/clawpack-4.3/book.html}.
+in the text were made available online \cite{rjl:fvmhp}.
 
 In 2009, \clawpack Version 4.4 was released with a major change from Matlab
 to Python as the recommended visualization tool, and the development
@@ -104,7 +103,12 @@ or non-conservative linear systems
 q_t(x,t) + A(x) q(x,t)_x = 0,
 \end{equation}
 where subscripts denote partial derivatives and $q(x,t)$ is a vector with
-$m\ge 1$ components.  The coefficient matrix $A$ in \cref{eq:hyp1b} or
+$m\ge 1$ components.
+\revised{Here the components of $q$ represent conserved quantities, while the
+function $f$ represents the flux (transport) of $q$.
+Equation \eqref{eq:hyp1a} generalizes in a natural way to higher
+space dimensions; see the examples below.}
+The coefficient matrix $A$ in \cref{eq:hyp1b} or
 the Jacobian matrix $f'(q)$ in \cref{eq:hyp1a} is assumed to be
 diagonalizable with real eigenvalues for all relevant values of
 $q$, $x$, and $t$.  This condition guarantees that the system is hyperbolic,
@@ -120,26 +124,38 @@ conservation law.  Spatially-varying flux functions $f(q,x)$ in
 
 Examples of equations solved by \clawpack include:
 \begin{itemize}
-  \item  Advection equation(s) for one or more tracers.  The velocity field is
-    typically prescribed from the solution to another fluid flow problem, such
-    as wind.  Typical applications include transport of heat, energy, pollution,
-    smoke or another species that does not influence the velocity field.
+    \item  \revised{Advection equation(s) for one or more tracers; in the simplest,
+      one-dimensional case we have:
+      $$q_t + (u(x,t)q)_x = 0.$$
+      The velocity field $u(x,t)$ is
+      typically prescribed from the solution to another fluid flow problem, such
+      as wind.  Typical applications include transport of heat, energy, pollution,
+      smoke or another species that does not influence the velocity field.}
+    \item \revised{The shallow water equations, describing the velocity $(u,v)$ and
+        surface height $h$ of a fluid whose depth is small relative to
+        typical wavelengths.
+        \begin{align}
+            h_t + (hu)_x + (hv)_y & = 0 \\
+            (hu)_t + \left(hu^2 + \frac{1}{2} g h^2\right)_x + (huv)_y & = -g b_x \\
+            (hv)_t + \left(hv^2 + \frac{1}{2} g h^2\right)_y + (huv)_x & = -g b_y \\
+        \end{align}
+        Here $g$ is a constant related to the gravitational force and
+        $b(x,y)$ is the {\em bathymetry}, or bottom surface height.
+        Notice that the bathymetry enters the equations through a
+        {\em source term}; additional terms could be added to model
+        the effect of bottom friction.}
+        These equations are used, for instance, to model inundation
+        caused by tsunamis and dam breaks, as well as to model atmospheric flows.
     \item The Euler equations of compressible, inviscid fluid dynamics, consist
-    of conservation laws for mass, momentum, and energy.
+        of conservation laws for mass, momentum, and energy.
         The wave speeds depend on the local fluid velocity
         and the acoustic wave velocity (sound speed).  Source terms can be added
         to include the effect of gravity, viscosity or heat transfer.
         These systems have important applications in
         aerodynamics, climate and weather modeling, and astrophysics.
-    \item The shallow water equations, describing the velocity and
-        surface height of a liquid whose depth is small relative to
-        typical wavelengths.  In this case source terms may include
-        the effect of varying bathymetry and of bottom friction.
-        These equations are used, for instance, to model inundation
-        caused tsunamis and dam breaks, as well as atmospheric flows.
     \item Elastic wave equations, used to model waves in solid
-    materials.  Here even a linear problem can be complex due to varying
-    material properties on multiple scales that then effect the wave speeds.
+        materials.  \revised{Here even linear models can be complex due to varying
+        material properties on multiple scales that then affect the wave speeds.}
 \end{itemize}
 %For a one-dimensional problem \cref{eq:hyp1a} or \cref{eq:hyp1b},
 %the {\em Riemann problem} consists of the equation together with
@@ -195,20 +211,6 @@ equations, and non-reflecting (absorbing) extrapolation boundary
 conditions.  As with all \clawpack library routines, the boundary
 condition routine can be copied and modified by the user to implement
 other boundary conditions needed for a particular application.
-
-In two space dimensions, hyperbolic equations might take the form
-\begin{equation}\label{eq:hyp2a}
-q_t(x,y,t) + f(q(x,y,t))_x + g(q(x,y,t))_y = 0
-\end{equation}
-or
-\begin{equation}\label{eq:hyp2b}
-q_t(x,y,t) + A(x,y)q(x,y,t)_x + B(x,y)q(x,y,t)_y = 0
-\end{equation}
-In order to be hyperbolic, the coefficient matrices $A$ and $B$ in \cref{eq:hyp2a}
-or the Jacobian matrices $f'(q)$ and $g'(q)$ in \cref{eq:hyp2b}
-must have the property that any linear
-combination gives a diagonalizable matrix with real eigenvalues.  The
-extension to three space dimensions is similar.
 
 In two or three space dimensions, the wave-propagation methods
 are extended using either dimensional splitting, so that only

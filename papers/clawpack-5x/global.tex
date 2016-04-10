@@ -33,7 +33,7 @@ Major changes that affected all aspects of the code include:
     \clawpack 4.x, the $m$th component of a
     system of equations in grid cell $(i,j)$ (in two dimensions, for example),
     was stored in \texttt{q(i,j,m)}.  In order to improve cache usage and to
-    more easily interface with PETSc, a global
+    more easily interface with PETSc \revised{\cite{petsc-user-ref}}, a global
     change was made to the ordering so that the component number comes
     first; i.e. \texttt{q(m,i,j)}.  A seemingly minor change like this affects a
     huge number of lines in the code and cannot easily be automated. The use of
