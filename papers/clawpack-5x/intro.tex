@@ -130,7 +130,7 @@ Examples of equations solved by \clawpack include:
       The velocity field $u(x,t)$ is
       typically prescribed from the solution to another fluid flow problem, such
       as wind.  Typical applications include transport of heat, energy, pollution,
-      smoke or another species that does not influence the velocity field.}
+      smoke, or another passively-advected quantity that does not influence the velocity field.}
     \item \revised{The shallow water equations, describing the velocity $(u,v)$ and
         surface height $h$ of a fluid whose depth is small relative to
         typical wavelengths.
@@ -153,9 +153,11 @@ Examples of equations solved by \clawpack include:
         to include the effect of gravity, viscosity or heat transfer.
         These systems have important applications in
         aerodynamics, climate and weather modeling, and astrophysics.
-    \item Elastic wave equations, used to model waves in solid
+    \item Elastic wave equations, used to model 
+        \revised{compressional and shear} waves in solid
         materials.  \revised{Here even linear models can be complex due to varying
-        material properties on multiple scales that then affect the wave speeds.}
+        material properties on multiple scales that affect the wave speeds
+        and eigenvectors.}
 \end{itemize}
 %For a one-dimensional problem \cref{eq:hyp1a} or \cref{eq:hyp1b},
 %the {\em Riemann problem} consists of the equation together with
