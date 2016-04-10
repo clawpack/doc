@@ -66,7 +66,7 @@ specified independently from one another (as long as the temporal
 refinement satisfies the CFL condition).  In addition, capabilities
 have been added to automatically select the refinement ratio in time  on each
 level based on the CFL condition.  This has only been implemented in
-\geoclaw. where the wave speed in the shallow water equations
+\geoclaw where the wave speed in the shallow water equations
 depends on the local depth. The finest grids are often located only in
 shallow coastal regions, so a large refinement ratio in space does not
 lead to a large refinement ratio in time.
@@ -88,26 +88,26 @@ threads executing. For stack-based memory allocation per thread, the use of the
 environment variable {\tt OMP\_STACKSIZE} to increase the limit may be
 necessary.
 
-\Cref{fig:shockbubble} shows two snapshots of the solution to a
+\cref{fig:shockbubble} shows two snapshots of the solution to a
 three-dimensional shock-bubble
 interaction problem found in the \clawpack \texttt{apps} repository,
 illustrating localized phenomena requiring adaptive refinement.
 In \cref{fig:amr_scaling} we show scalability tests and some timings for
 this example, when run on a 40 core Intel Xeon Haswell machine, using
 \texttt{KMP\_AFFINITY compact}.
-For timing purposes, the only modifications made to the input parameters was to turn
-off checkpointing and graphics output.
-The plot on the left shows that most of the wall clock time is in the integration
-routine (stepgrid), which closely tracks the total time.
-The second chunk of time is in the regridding, which contains algorithms that are not
-completely scalable. Very little time is in the filling of ghost cells, mostly from
-other patches but also includes those at domain boundaries.
-The efficiency is above 80\% until 24 cores, then drops off dramatically.
-Note that there are only 2 level 1 grids, and an average of 22.8 level 2 grids. Most of
-the work is on level 3 grids, where there are an average of 138.1 grids over all the
-level 3 timestep.  This is very coarse
-for large numbers of cores (hence the dropoff in efficiency). At 40 cores, there are
-less than 4 grids per core, and the grids are very different sizes.
+For timing purposes, the only modifications made to the input parameters was to
+turn off checkpointing and graphics output. The plot on the left shows that most
+of the wall clock time is in the integration routine (\texttt{stepgrid}), which
+closely
+tracks the total time. The second chunk of time is in the regridding, which
+contains algorithms that are not completely scalable. Very little time is in the
+filling of ghost cells, mostly from other patches but also includes those at
+domain boundaries. The efficiency is above 80\% until 24 cores, then drops off
+dramatically. Note that there are only two level 1 grids, and an average of 22.8
+level 2 grids. Most of the work is on level 3 grids, where there are an average
+of 138.1 grids over all the level 3 timestep.  This is very coarse for large
+numbers of cores (hence the dropoff in efficiency). At 40 cores, there are less
+than 4 grids per core, and the grids are very different sizes.
 
 \begin{figure}[t]
   \begin{center}
