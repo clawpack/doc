@@ -16,11 +16,14 @@ grids.  One (or more) level 1 grids comprise the entire domain, while grids at
 finer level are created and destroyed (as opposed to moving these grids) to
 follow important features in the solution.}
 
-
-\revised{Unlike, for example, tree-based methods that refine on a cell by cell basis
-\amrclaw flags cells needing refinement and collects them into rectangular grid
-patches.  Finer grids must be nested within the union of grids at the next
-coarser level.}
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=\textwidth]{./figures/shockbubble_grids.png}
+    \caption{\revised{An illustration of grid and cell layout for an
+    axis-symmetric Euler gas bubble problem.  The illustration shows cells on
+    levels up to level 2 and grids on finer levels.}}
+    \label{fig:figure1}
+\end{figure}
 
 \amrclaw includes the functionality for:
 \begin{itemize}
