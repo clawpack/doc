@@ -9,8 +9,19 @@
 Fortran code in the \amrclaw repository performs block-structured adaptive mesh
 refinement \cite{BO,BC} for both \clawpack and \geoclaw  applications.
 The algorithms implemented in \amrclaw are discussed in detail in
-\cite{mjb-rjl:amrclaw,LeVequeGeorgeBerger:an11}, but a  short overview is given
-here to set the stage for a description of recent changes.
+\cite{mjb-rjl:amrclaw,LeVequeGeorgeBerger:an11}, but a  short description is
+given here to set the stage for a description of recent changes. \revised{
+This type of refinement solves the PDE on a hierarchy of logically rectangular
+grids.  One (or more) level 1 grids comprise the entire domain, while grids at
+finer level are created and destroyed (as opposed to moving these grids) to
+follow important features in the solution.}
+
+
+\revised{Unlike, for example, tree-based methods that refine on a cell by cell basis
+\amrclaw flags cells needing refinement and collects them into rectangular grid
+patches.  Finer grids must be nested within the union of grids at the next
+coarser level.}
+
 \amrclaw includes the functionality for:
 \begin{itemize}
 \item Coordinating the flagging of points where refinement is needed,
@@ -79,7 +90,9 @@ etc.).  This inner loop is parallelized using a {\tt parallel for} loop
 construct one thread is assigned to operate on one grid. Dynamic scheduling is
 used with a chunk size of one.  To help with load balancing, grids at each level
 are sorted from largest to smallest, using the total number of cells in the grid
-as an indicator of work.} Note that this approach causes a memory bulge. Each
+as an indicator of work.  In addition there is a grids are limited to a 
+maximum of 32 cells in each dimension, otherwise they are bisected until this
+condition is met.}  Note that this approach causes a memory bulge. Each
 thread must have its own scratch arrays to save the incoming and outgoing waves
 and fluxes for future conservation fix-ups. The bulge is directly proportional
 to the number of threads executing. For stack-based memory allocation per
@@ -87,25 +100,24 @@ thread, the use of the environment variable {\tt OMP\_STACKSIZE} to increase the
 limit may be necessary.
 
 \cref{fig:shockbubble} shows two snapshots of the solution to a
-three-dimensional shock-bubble
-interaction problem found in the \clawpack \texttt{apps} repository,
-illustrating localized phenomena requiring adaptive refinement.
-In \cref{fig:amr_scaling} we show scalability tests and some timings for
-this example, when run on a 40 core Intel Xeon Haswell machine, using
-\texttt{KMP\_AFFINITY compact}.
+three-dimensional shock-bubble interaction problem found in the \clawpack
+\texttt{apps} repository, illustrating localized phenomena requiring adaptive
+refinement. In \cref{fig:amr_scaling} we show scalability tests and some timings
+for this example, when run on a 40 core Intel Xeon Haswell machine 
+\revised{(E5-2670v3 at 2.3 GHz)}, using
+\texttt{KMP\_AFFINITY compact} \revised{with one thread per core}.
 For timing purposes, the only modifications made to the input parameters was to
-turn off checkpointing and graphics output. The plot on the left shows that most
+turn off check-pointing and graphics output. The plot on the left shows that most
 of the wall clock time is in the integration routine (\texttt{stepgrid}), which
-closely
-tracks the total time. The second chunk of time is in the regridding, which
-contains algorithms that are not completely scalable. Very little time is in the
-filling of ghost cells, mostly from other patches but also includes those at
-domain boundaries. The efficiency is above 80\% until 24 cores, then drops off
-dramatically. Note that there are only two level 1 grids, and an average of 22.8
-level 2 grids. Most of the work is on level 3 grids, where there are an average
-of 138.1 grids over all the level 3 timestep.  This is very coarse for large
-numbers of cores (hence the dropoff in efficiency). At 40 cores, there are less
-than 4 grids per core, and the grids are very different sizes.
+closely tracks the total time. The second chunk of time is in the regridding,
+which contains algorithms that are not completely scalable. Very little time is
+in the filling of ghost cells, mostly from other patches but also includes those
+at domain boundaries. The efficiency is above 80\% until 24 cores, then drops
+off dramatically. Note that there are only two grids on level, and an average of
+22.8 level 2 grids. Most of the work is on level 3 grids, where there are an
+average of 138.1 grids over all the level 3 timestep.  This is very coarse for
+large numbers of cores (hence the dropoff in efficiency). At 40 cores, there are
+less than 4 grids per core, and the grids are very different sizes.
 
 \begin{figure}[t]
   \begin{center}
@@ -115,8 +127,9 @@ than 4 grids per core, and the grids are very different sizes.
 \caption{\amrclaw example demonstrating a
   shock-bubble interaction in the Euler equations of compressible
   gas-dynamics at two times, illustrating the need for adaptive refinement
-  to capture localized behavior. The
-  $40\times 10\times 10$ grid at Level 1 is refined where needed
+  to capture localized behavior. \revised{There are two $20 \times 10 \times 10$
+  grids at
+  level 1.  They are refined} where needed
   by factors of 4 and then 2 in this 3-level run.}
 \label{fig:shockbubble}
 \end{figure}
