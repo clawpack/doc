@@ -71,22 +71,20 @@ depends on the local depth. The finest grids are often located only in
 shallow coastal regions, so a large refinement ratio in space does not
 lead to a large refinement ratio in time.
 
-\amrclaw has been
-parallelized using OpenMP directives using a  patch-based decomposition.
-The main paradigm in structured AMR is a loop over all patches at a given level, where
-some operation is done on each patch (i.e. taking a time step, finding ghost
-cells, conservation updates, etc.).  This lends itself easily to a {\tt parallel
-for} loop construct where each iteration of the loop corresponds to a grid at
-that level. Dynamic scheduling is used with a chunk size of one, so that one
-thread is assigned one patch at a time. To help with load balancing, patches at
-each level are sorted from largest to smallest workload when they are first
-created, using the total number of cells in the grid as an indicator of work.
-Note that this approach causes a memory bulge. Each thread must have its own
-scratch arrays to save the incoming and outgoing waves and fluxes for future
-conservation fix-ups. The bulge is directly proportional to the number of
-threads executing. For stack-based memory allocation per thread, the use of the
-environment variable {\tt OMP\_STACKSIZE} to increase the limit may be
-necessary.
+\amrclaw has been parallelized using OpenMP directives. \revised{The main
+paradigm in structured AMR is an outer loop over levels of refinement, and in
+inner loop overall grids at that level, where some operation is performed on
+each grid (i.e. taking a time step, finding ghost cells, conservation updates,
+etc.).  This inner loop is parallelized using a {\tt parallel for} loop
+construct one thread is assigned to operate on one grid. Dynamic scheduling is
+used with a chunk size of one.  To help with load balancing, grids at each level
+are sorted from largest to smallest, using the total number of cells in the grid
+as an indicator of work.} Note that this approach causes a memory bulge. Each
+thread must have its own scratch arrays to save the incoming and outgoing waves
+and fluxes for future conservation fix-ups. The bulge is directly proportional
+to the number of threads executing. For stack-based memory allocation per
+thread, the use of the environment variable {\tt OMP\_STACKSIZE} to increase the
+limit may be necessary.
 
 \cref{fig:shockbubble} shows two snapshots of the solution to a
 three-dimensional shock-bubble
