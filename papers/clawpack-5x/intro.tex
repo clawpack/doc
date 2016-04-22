@@ -202,9 +202,9 @@ using the waves resulting from each Riemann solution together with limiter
 functions to achieve second-order accuracy where the solution is smooth
 together with sharp resolution of discontinuities without spurious numerical
 oscillations (see \cite{rjl:fvmhp} for a detailed description of the
-algorithms).   The recently developed \sharpclaw algorithms (see
-\cref{sec:pyclaw}), now incorporated into \pyclaw, use higher-order WENO methods
-but rely on the same Riemann solvers.
+algorithms).   \revised{Higher-order WENO methods have also been developed
+relying on the same Riemann solvers.  These methods can be found in \pyclaw 
+(see \cref{sec:pyclaw}), one of the packages in the larger \clawpack ecosystem.}
 
 Problem-specific boundary conditions must also be imposed, which
 are implemented by a subroutine that sets the solution value in
@@ -227,11 +227,12 @@ A variety of Riemann solvers have been developed for \clawpack, many
 of which are collected in the \texttt{riemann} repository, see
 \cref{sec:riemann}.
 
-Adaptive mesh refinement is essential for many problems and has been
+Adaptive mesh refinement (AMR) is essential for many problems and has been
 available in two space dimensions since 1995, when Marsha Berger
 joined the project team and her AMR code for the Euler equations of
 compressible flow was generalized to fit into the software which
-became \amrclaw \cite{Berger:1998ia}.  \amrclaw was carried over to
+became \amrclaw \cite{Berger:1998ia}, \revised{another package included in the
+\clawpack ecosystem.} \amrclaw was carried over to
 three space dimensions using the unsplit algorithms introduced in
 \cite{jol-rjl:3d}.  Starting in Version 5.3.0, dimensional splitting
 is also supported in \amrclaw, which can be particularly useful in
