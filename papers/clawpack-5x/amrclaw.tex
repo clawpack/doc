@@ -152,11 +152,7 @@ less than 4 grids per core, and the grids are very different sizes.
   \label{fig:amr_scaling}
 \end{figure}
 
-The parallelization of \amrclaw and \geoclaw assumes multi-core machines for the
-target architecture.  \pyclaw, on the other hand, does not include AMR but uses
-MPI via PETSc \revised{\cite{petsc-user-ref}} to achieve parallelism on distributed memory machines that scale
-to tens of thousands of cores (see \cref{sec:pyclaw}). Other frameworks exist,
-most notably \forestclaw \cite{Burstedde:we}, which are being developed in
-parallel with \amrclaw, that provide scalable AMR calculations on large
-distributed
-memory machines.
+\revised{The target architecture for \amrclaw and \geoclaw are multi-core
+machines.  \pyclaw on the other hand scales to tens of
+thousands of cores using MPI via PETSc \cite{petsc-user-ref} but is not
+adaptive.}
