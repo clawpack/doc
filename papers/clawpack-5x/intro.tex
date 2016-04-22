@@ -56,7 +56,7 @@ the major feature additions in the \clawpack 5.x major release up until Version 
 The first version of \clawpack was released by LeVeque in 1994
 \cite{clawpack-v1} and consisted of Fortran code for solving problems on a
 single, uniform Cartesian
-grid in one or two space dimensions, together with some Matlab
+grid in one or two space dimensions, together with some \mlab
 \cite{MATLAB:2015a} scripts
 for plotting solutions. The wave-propagation method implemented
 in this code provided a general way to apply recently developed
@@ -76,7 +76,7 @@ complete description of the wave propagation algorithm, developed by LeVeque,
 but also is notable in that the codes used to produce virtually all of figures
 in the text were made available online \cite{rjl:fvmhp}.
 
-In 2009, \clawpack Version 4.4 was released with a major change from Matlab
+In 2009, \clawpack Version 4.4 was released with a major change from \mlab
 to Python as the recommended visualization tool, and the development
 of a Python user interface for specifying the input data.
 
@@ -86,11 +86,14 @@ higher-order accurate algorithms, to parallelize through MPI and OpenMP, and
 other enhancements. \revised{In January of 2013 the 4.x versions of \clawpack
 ended with the release of 4.6.3}\footnote{\revised{Details of these changes can
 be found
-at }\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}}.
+at }\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.  Version
+4.x used \texttt{svn} version control and the freely available software (under
+the BSD license) was distributed via tarballs.}
 
-Version 5 of \clawpack introduces a number of modern approaches to
-code development, interfacing with other codes, and adding new
-capabilities. These changes are the subject of the rest of this paper.
+Version 5 of \clawpack introduces a number of modern approaches to code
+development, interfacing with other codes, and adding new capabilities.
+\revised{The move to \texttt{git} version control also allowed a more complete
+open source model.}  These changes are the subject of the rest of this paper.
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
