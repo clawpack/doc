@@ -177,8 +177,9 @@ have reasonable default values.
 .. attribute:: kml_publish : string
 
   A URL address and path to a remote site hosting a
-  KMZ file you wish to make available on-line.   See
-  `Publishing your results`_.
+  KMZ file you wish to make available on-line. Default : None
+
+  See `Publishing your results`_ for more details.
 
 .. attribute:: kml_map_topo_to_latlong : function
 
@@ -195,9 +196,9 @@ have reasonable default values.
 .. attribute:: kml_use_figure_limits : boolean
 
    Set to *True* to indicate that the `plotfigure` limits should be
-   used as axes limits when createin the PNG file.  If set to *False*,
-   then specific axes limits set in `plotaxes` will be used. Default :
-   True.
+   used as axes limits when creating the PNG file.  If set to *False*,
+   then axes limits set by an `axes` member of a *plotfigure*
+   (e.g. *plotaxes*) will be used. Default : True.
 
 
 plotfigure attributes
@@ -587,33 +588,42 @@ See `Removing aliasing artifacts`_ for more details on how to set the zoom level
 
 Mapping topography data to latitude/longitude coordinates
 ---------------------------------------------------------
-In many situations, your computational domain may not be conveniently described in
-latitude/longitude coordinates. When simulating overland flooding
-events, for example, topographic data may more easily be described in
-rasterized distance increments (meters, for example).  To visualize
-the results in Google Earth of a simulation done in coordinates other than
-latitude/longitude, you must supply Visclaw with a way to convert the
-computational coordinates to lat/long coordinates.  This is done by
+In many situations, your computational domain may not be conveniently
+described in latitude/longitude coordinates. When simulating overland
+flooding events, for example, topographic data may more easily be
+described in rasterized distance increments (meters, for example).
+VisClaw uses data stored in generated data files (`gauges.data`,
+`regions.data`, and so on) to position objects on the Google Earth
+browser.  The coordinate system for these objects is, however, in
+computational coordinates, and so to locate them in the Google Earth
+browser, the user must provide VisClaw a function to convert from
+computational to latitude/longtitude coordinates.  This is done by
 setting the `plotdata` attribute `kml_map_topo_to_latlong` to a
 function describing your mapping between the two coordinate systems.
 
-The following example illustrates how to set a linear map
-between the coordinates from `[0,48000]x[0,17540]` to the latitude
-longitude coordinates that Google Earth will use to visualize the
-results of your simulation.
+A crucial underlying assumption in setting the mapping function for
+use with GoogleEarth is that the boundary of your physical domain is
+approximately aligned with spherical (latitude/longitude) coordinate
+lines.
+
+
+The following example illustrates how to set a linear map between the
+coordinates in `[0,48000]x[0,17540]` and the latitude/longitude
+coordinates that Google Earth will use to visualize the results of
+your simulation.
 
 .. code-block:: python
 
 
-    def map_topo_to_latlong(xc,yc):
+    def map_cart_to_latlong(xc,yc):
 	# Map x-coordinates
-        topo_xlim = [0,48000]  # x-limits, in meters
+        topo_xlim = [0,48000]                     # x-limits, in meters
         ge_xlim = [-111.96132553, -111.36256443]  # longitude limits
         slope_x = (ge_xlim[1]-ge_xlim[0])/(topo_xlim[1]-topo_xlim[0])
         xp = slope_x*(xc-topo_xlim[0]) + ge_xlim[0]
 
 	# Map y-coordinates
-	topo_ylim = [0,17500]  # y-limits, in meters
+	topo_ylim = [0,17500]                     # y-limits, in meters
         ge_ylim = [43.79453362, 43.95123268]      # latitude limits
         slope_y = (ge_ylim[1]-ge_ylim[0])/(topo_ylim[1]-topo_ylim[0])
         yp = slope_y*(yc-topo_ylim[0]) + ge_ylim[0]
@@ -623,12 +633,9 @@ results of your simulation.
     # set plotdata attribute.
     plotdata.kml_map_topo_to_latlong = map_cart_to_latlong
 
-An underlying assumption is that the boundary of your computational
-domain is approximately aligned with longitude/latitude lines.
-
 Figure limits `plotfigure.kml_xlimits` and `plotfigure.kml_ylimits` must still be set to
 the latitude/longitude coordinates for your Google Earth figure.  But to indicate that you
-do not wish to use these coordinates for plotting you must set
+do not wish to use these coordinates for creating PNG files, you must set
 the `plotfigure.kml_use_figure_limits` attribute to `False`.  This will indicate that when
 creating the PNG figure, the axes limits should be set to those specifed in the
 `plotaxes` attribute.  For example,
@@ -651,10 +658,8 @@ creating the PNG figure, the axes limits should be set to those specifed in the
     plotaxes.ylimits = [0,17500]
 
 
-The mapping function will be called to map gauge data locations,
-regions boundaries and patch boundaries (all of which are specified in
-computational coordinates in a `setrun.py` file) so that that they
-will all show up in Google Earth.
+The mapping function will be used to position PNG Overlays, locate gauge placemarks,
+and plot patch and region boundaries on the Google Earth browser.
 
 
 Publishing your results
