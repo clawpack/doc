@@ -37,8 +37,9 @@
 
 % Markup
 \usepackage{color}
-\newcommand{\comment}[1]{\color{blue} #1}
-\newcommand{\alert}[1]{\textbf{\color{red} #1}}
+% \newcommand{\comment}[1]{{\color{blue}#1}}
+% \newcommand{\alert}[1]{\textbf{\color{red} #1}}
+\newcommand{\revised}[1]{{\color{red} #1}}
 
 % URL and linking help with subtle colors and no boxes
 \definecolor{darkgreen}{rgb}{0.1,0.5,0.1}
@@ -46,6 +47,9 @@
 \usepackage[colorlinks=true,linkcolor=darkblue,citecolor=darkblue,
             filecolor=darkblue,urlcolor=darkgreen]{hyperref}
 
+
+% Need this package to allow footnotes for more than 9 authors:
+\usepackage{footmisc}
 
 %=================
 % Try using cleveref...
@@ -84,7 +88,7 @@
 \DeclareGraphicsExtensions{.png, .jpg, .tif, .eps}
 \fi
 
-\title{The Clawpack 5.X Software}
+\title{Clawpack: building an open source ecosystem for solving hyperbolic PDEs}
 
 % Authors: Anyone who has....
 %  - Made a nontrivial contribution to 5.0, 5.1, 5.2,
@@ -92,33 +96,43 @@
 %  - Has read the final draft and agreed to be an author.
 
 \author{
+        Kyle T. Mandli\thanks{
+            Columbia University (\mbox{kyle.mandli@columbia.edu})} \and
         Aron J. Ahmadia\thanks{
-            Army Corp of Engineers (\mbox{aron@awesome.com})} \and
-        Marsha Berger\thanks{
+            Continuum Analytics (\mbox{aahmadia@continuum.io})} \and
+        Marsha J. Berger\thanks{
             New York University (\mbox{berger@cims.nyu.edu})} \and
-        Donna Calhoun\thanks{
-            Boise State University (\mbox{donna.calhoun@gmail.com})} \and
-        Matthew Emmett\thanks{
-            Lawrence Berkeley National Laboratory (\mbox{memmett@gmail.com})} \and
-        David George\thanks{
-            USGS (\mbox{dgeorge@usgs.gov})} \and
+        Donna A. Calhoun\thanks{
+            Boise State University (\mbox{donnacalhoun@boisestate.edu})} \and
+        % Matthew Emmett\thanks{
+        %     Lawrence Berkeley National Laboratory (\mbox{memmett@gmail.com})} \and
+        David L. George\thanks{
+            USGS Cascades Volcano Observatory (\mbox{dgeorge@usgs.gov})} \and
         Yiannis Hadjimichael\thanks{
             King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{yiannis.hadjimichael@kaust.edu.sa})} \and
         David I. Ketcheson\thanks{
             King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{david.ketcheson@kaust.edu.sa})} \and
+        Grady I. Lemoine\thanks{
+            CD-Adapco, Bellevue, WA} \and
         Randall J. LeVeque\thanks{
-            University of Washington (\mbox{rjl.@uw.edu})} \and
-        Kyle T. Mandli\thanks{
-            Columbia University (\mbox{kyle.mandli@columbia.edu})}
+            Dept.\ of Applied Mathematics, University of Washington (\mbox{rjl.@uw.edu})}
         }
 
 \maketitle
-
+\linenumbers
 \begin{abstract}
-    Put really awesome abstract here.
+    \clawpack is a software package designed to solve nonlinear
+hyperbolic partial differential equations using high-resolution finite volume
+methods based on Riemann solvers and limiters. The package includes a number
+of variants aimed at different applications and user communities.
+\clawpack has been actively developed as an open source project
+for over 20 years.  The latest major release, \clawpack 5, introduces
+a number of new features and changes to the code base and a new
+development model based on GitHub and Git submodules.  
+This article provides a summary of the most significant changes,
+the rationale behind some of these changes, and a description of our current
+development model.
 \end{abstract}
-
-\todo{Fix Aron and Matt's associations}{}
 
 \input{intro}
 
@@ -128,7 +142,10 @@
 
 \input{future}
 
-\bibliographystyle{alpha}
+% Removed, will be placed in submission
+% \input{acknowledgments}
+
+\bibliographystyle{siamplain}
 \bibliography{paper}
 
 \end{document}

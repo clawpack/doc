@@ -8,19 +8,9 @@
 \subsection{\classic}
 The \texttt{classic} repository contains code implementing the wave
 propagation algorithm on a single uniform grid, in much the same form as the
-original \clawpack 1.0 version of 1994 but with various enhancement added
-through the years.  Some major changes introduced in \clawpack 5.x:
-\begin{itemize}
-    \item The three-dimensional wave propagation algorithm first described
-in \cite{jol:thesis, jol-rjl:3d} 
-and first implemented in \clawpack 3.0 in 1997, remaining in place through
-\clawpack 4.3.  The 3D codes 
-disappeared from \clawpack 4.4 --- the Python user interface and plotting
-routines were introduced at that time in 1D and 2D, but were not 
-carried over to three dimensions.  In \clawpack 5.0, the three-dimensional
-code was reincorporated.  Moreover, OpenMP directives were added to the 3D code
-for greater efficiency on shared memory computers.
-
-\todo{What else?}{}
-
-\end{itemize}
+original \clawpack 1.0 version of 1994 but with various enhancements added
+through the years.  Following the introduction of \clawpack 4.4 the
+three-dimensional routines were left out of the Python user interfaces and
+plotting routines.  These have been reintroduced in \clawpack 5.  Additionally
+the OpenMP shared-memory parallelism capabilities have been extended to the
+three-dimensional code.
