@@ -154,6 +154,8 @@ have reasonable default values.
   # Set to a URL where KMZ file will be published.
   # plotdata.kml_publish = None
 
+  # plotdata.kml_map_topo_to_latlong = None  # Use if topo coords. are not lat/long [None]
+
 .. attribute:: kml_name : string
 
   Name used in the Google Earth sidebar to identify the simulation. Default : "GeoClaw"
@@ -177,6 +179,25 @@ have reasonable default values.
   A URL address and path to a remote site hosting a
   KMZ file you wish to make available on-line.   See
   `Publishing your results`_.
+
+.. attribute:: kml_map_topo_to_latlong : function
+
+   A function that maps computational coordinates (in meters, for
+   example) to latitude/longitude coordinates.  This will be called to
+   position PNG overlays, gauges, patch boundaries, and regions boundaries to the
+   latitude longitude box specified in `plotfigure.kml_xlimits` and
+   `plotfigure.kml_ylimits` used by Google Earth.
+   Default : None.
+
+   See `Mapping topography data to latitude/longitude coordinates`_
+   for details on how to set this function.
+
+.. attribute:: kml_use_figure_limits : boolean
+
+   Set to *True* to indicate that the `plotfigure` limits should be
+   used as axes limits when createin the PNG file.  If set to *False*,
+   then specific axes limits set in `plotaxes` will be used. Default :
+   True.
 
 
 plotfigure attributes
@@ -358,6 +379,11 @@ clicked.
    :align: center
 
    Screenshot illustrating gauge plots.
+
+If the computational coordinates are not in latitude/longitude coordinates, then you must
+set the `plotdata` attribute `map_topo_to_latlong` to specify a mapping between the computational
+coordinates and latitude longitude box which Google Earth will use to visualize your data.
+See `plotdata attributes`_.
 
 Additional plotdata attributes
 ------------------------------
@@ -558,6 +584,78 @@ This higher resolution figure shows up in the  Google Earth sidebar as "Sea Surf
 See `Removing aliasing artifacts`_ for more details on how to set the zoom levels.
 
 .. _Publishing your results:
+
+Mapping topography data to latitude/longitude coordinates
+---------------------------------------------------------
+In many situations, your computational domain may not be conveniently described in
+latitude/longitude coordinates. When simulating overland flooding
+events, for example, topographic data may more easily be described in
+rasterized distance increments (meters, for example).  To visualize
+the results in Google Earth of a simulation done in coordinates other than
+latitude/longitude, you must supply Visclaw with a way to convert the
+computational coordinates to lat/long coordinates.  This is done by
+setting the `plotdata` attribute `kml_map_topo_to_latlong` to a
+function describing your mapping between the two coordinate systems.
+
+The following example illustrates how to set a linear map
+between the coordinates from `[0,48000]x[0,17540]` to the latitude
+longitude coordinates that Google Earth will use to visualize the
+results of your simulation.
+
+.. code-block:: python
+
+
+    def map_topo_to_latlong(xc,yc):
+	# Map x-coordinates
+        topo_xlim = [0,48000]  # x-limits, in meters
+        ge_xlim = [-111.96132553, -111.36256443]  # longitude limits
+        slope_x = (ge_xlim[1]-ge_xlim[0])/(topo_xlim[1]-topo_xlim[0])
+        xp = slope_x*(xc-topo_xlim[0]) + ge_xlim[0]
+
+	# Map y-coordinates
+	topo_ylim = [0,17500]  # y-limits, in meters
+        ge_ylim = [43.79453362, 43.95123268]      # latitude limits
+        slope_y = (ge_ylim[1]-ge_ylim[0])/(topo_ylim[1]-topo_ylim[0])
+        yp = slope_y*(yc-topo_ylim[0]) + ge_ylim[0]
+
+        return xp,yp
+
+    # set plotdata attribute.
+    plotdata.kml_map_topo_to_latlong = map_cart_to_latlong
+
+An underlying assumption is that the boundary of your computational
+domain is approximately aligned with longitude/latitude lines.
+
+Figure limits `plotfigure.kml_xlimits` and `plotfigure.kml_ylimits` must still be set to
+the latitude/longitude coordinates for your Google Earth figure.  But to indicate that you
+do not wish to use these coordinates for plotting you must set
+the `plotfigure.kml_use_figure_limits` attribute to `False`.  This will indicate that when
+creating the PNG figure, the axes limits should be set to those specifed in the
+`plotaxes` attribute.  For example,
+
+.. code-block:: python
+
+    plotfigure = plotdata.new_plotfigure(name='Teton Dam',figno=1)
+    plotfigure.use_for_kml = True
+
+    # Latlong box used for GoogleEarth
+    plotfigure.kml_xlimits = [-111.96132553, -111.36256443]  #  Lat/Long box use by Google Earth
+    plotfigure.kml_ylimits = [43.79453362, 43.95123268]
+
+    # Use computational coordinates for plotting
+    plotfigure.kml_use_figure_limits = False   # Use plotaxes limits below
+
+    # ....
+
+    plotaxes.xlimits = [0,48000]   # Computational axes needed for creating PNG files.
+    plotaxes.ylimits = [0,17500]
+
+
+The mapping function will be called to map gauge data locations,
+regions boundaries and patch boundaries (all of which are specified in
+computational coordinates in a `setrun.py` file) so that that they
+will all show up in Google Earth.
+
 
 Publishing your results
 -----------------------
