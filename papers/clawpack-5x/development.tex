@@ -55,11 +55,19 @@ in this section.
 Beyond the major core code repositories, additional repositories contain
 documentation and extended examples for using the packages:
 \begin{itemize}
-    \item \texttt{doc} -- the primary documentation source files,
-    developed using Sphinx\footnote{\url{http://sphinx-doc.org}},
-    \item \texttt{clawpack.github.com} -- a host repository for the
-    documentation html files
-    that appear at \url{http://www.clawpack.org}, and
+    \item \texttt{doc} -- the primary documentation source files.
+    These files are written in the markup language reStructured
+    Text\footnote{http://www.sphinx-doc.org/en/stable/rest.html}, and 
+    are then converted to html files using
+    Sphinx\footnote{\url{http://sphinx-doc.org}}.  Other documentation
+    such as drafts of this paper are also found in this repository.
+    \item \texttt{clawpack.github.com} -- the html files created by
+    Sphinx in the \texttt{doc} repository are
+    pushed to this repository, and are then automatically served on the web.
+    These appear at \url{http://www.clawpack.org}, which
+    is configured to point to \url{http://clawpack.github.com}.
+    The name of this repository follows GitHub convention for use with
+    GitHub Pages\footnote{\url{https://pages.github.com/}}.
     \item \texttt{apps} -- applications contributed by developers and
     users that go beyond the introductory examples included in the core
     repositories.
