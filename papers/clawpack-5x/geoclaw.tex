@@ -58,7 +58,7 @@ multi-layer shallow water equations for storm surge modeling
 \cite{mandli:phd, Mandli:2013it},
 and is currently being extended further to handle debris flow modeling in the
 packages D-Claw
-\cite{Iverson:2014dc,George:2014gh} (see \cref{fig:meager}).
+\cite{Iverson:2014dc,George:2014gh} (see \cref{fig:meager,fig:oso}).
 
 Nearly one quarter of the files in the \amrclaw source library have to be
 modified for \geoclaw. There are currently 113 files in the \amrclaw 2D
@@ -129,13 +129,13 @@ grids, or an arbitrary set of points\footnote{Described in
 \begin{figure}
 \hfil\includegraphics[width=0.9\textwidth]{GraysHarborFigs.png}
 \caption{\label{fig:ocosta}
-\revised{(a) Google Maps image of}
 Gray's Harbor showing Westport, WA on southern peninsula.
+\revised{(Google map data and image, 2016.)}
 (b) Simulation of a potential magnitude 9
 Cascadia Subduction Zone event, 40 minutes after the earthquake.
 (c) Design for new Ocosta Elementary School in Westport, based in part on
 \geoclaw simulations \cite{GonzalezLeVequeEtAl2013a}.
-\revised{Checking on usage of this image.}
+\revised{Image courtesy of TCF Architecture.}
   }
 \end{figure}
 
@@ -159,14 +159,18 @@ Bottom: Computational effort and timings for \geoclaw and {\sc adcirc}.  From
 \end{figure}
 
 \begin{figure}[t]
-\hfil\includegraphics[height=1.3in]{meagerview.png}
+\hfil\includegraphics[height=1.9in]{meagerview.png}
 \hskip 5pt
-\includegraphics[height=1.3in]{meager200.png}\hfil
-\hskip 5pt
-\includegraphics[height=1.3in]{Oso_comparison.jpg}\hfil
+\includegraphics[height=1.9in]{meager200.png}\hfil
 \caption{\label{fig:meager}
 Left: Mt.\ Meager debris flow of 2010, from \cite{Allstadt2013}.
-Middle: Simulated debris flow, from D.\ George.
-Right: Observed (yellow line) and computed (blue) landslide at Oso, WA in
+Right: Simulated debris flow, from D.\ George.
+}
+\end{figure}
+
+\begin{figure}[t]
+\centerline{\includegraphics[height=2.2in]{Oso_comparison.jpg}}
+\caption{\label{fig:oso}
+Observed (yellow line) and computed (blue) landslide at Oso, WA in
 2014 \cite{IversonGeorgeEtAl2015}.}
 \end{figure}
