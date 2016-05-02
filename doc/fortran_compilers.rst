@@ -51,6 +51,32 @@ code, and this dependency is not handled automatically.  So always do::
 
 before rerunning an example with `make .output` or `make .plots`.
 
+
+.. _fortran_LFAGS:
+
+`LFLAGS` environment variable
+------------------------------
+
+The `LFLAGS` environment variable is used to provide flags that are needed when
+linking the final binary.  The most likely use for this flag would be to link a
+particular library with the binary (such as a NetCDF library) or provide a path
+to a compiled module. If this variable is not set in the environment then
+`LFLAGS` defaults to the relevant flags in `FFLAGS`.
+
+
+.. _fortran_PPFLAGS:
+
+Pre-Processor and the `PPFLAGS` environment variable
+----------------------------------------------------
+
+Compilers often provide a pre-processor that can scan source code before
+compilation providing some ability to define variables at compile time or
+transform the code.  Currently the pre-processor is always called before
+Clawpack compilation to support optional dependencies, such as NetCDF support,
+and some testing abilities.  The `PPFLAGS` environment variable is meant to
+provide further control of the pre-processor.  
+
+
 .. _fortran_gfortran:
 
 gfortran compiler
@@ -76,6 +102,15 @@ gfortran compiler
 
   **Note:** Versions of gfortran before 4.6 are known to have OpenMP bugs.
 
+* For using NetCDF::
+
+    FFLAGS = -DNETCDF -lnetcdf -I$(NETCDF4_DIR)/include
+    LFLAGS = -lnetcdf
+
+  The `FFLAGS` can also be put into `PPFLAGS`.  Note that the variable
+  `NETCDF4_DIR` should be defined in the environment.
+
+
 .. _fortran_intel:
 
 Intel fortran compiler
@@ -100,3 +135,9 @@ Set the `FC` environment variable to `ifort`.
   In this case you should also set the environment variable `OMP_NUM_THREADS`
   to indicate how many threads to use.
 
+* For using NetCDF::
+
+    FFLAGS = -DNETCDF -lnetcdf -I$(NETCDF4_DIR)/include
+    LFLAGS = -lnetcdf
+
+  Same as for gfortran above.

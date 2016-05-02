@@ -1,0 +1,151 @@
+%&pdflatex
+%
+%  Clawpack 5.x (x <= 3) Paper
+%
+\documentclass[]{article}
+
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Multipart figures
+% \usepackage{subcaption}
+
+% More symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+
+% Package for including code in the document
+\usepackage{listings}
+% \DeclareCaptionFont{white}{\color{white}}
+% \DeclareCaptionFormat{listing}{%
+%   \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+% \captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+% \lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep,numbers=left,basicstyle=\ttfamily\small,language=python,columns=fixed,commentstyle=\em\color[rgb]{0.133,0.545,0.133}}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+% Add line numbers
+\usepackage[mathlines]{lineno}
+
+% Need to use this package to handle the spacing issues in LaTeX after a command
+\usepackage{xspace}
+
+% Markup
+\usepackage{color}
+% \newcommand{\comment}[1]{{\color{blue}#1}}
+% \newcommand{\alert}[1]{\textbf{\color{red} #1}}
+\newcommand{\revised}[1]{{\color{red} #1}}
+
+% URL and linking help with subtle colors and no boxes
+\definecolor{darkgreen}{rgb}{0.1,0.5,0.1}
+\definecolor{darkblue}{rgb}{0.2,0.2,1.0}
+\usepackage[colorlinks=true,linkcolor=darkblue,citecolor=darkblue,
+            filecolor=darkblue,urlcolor=darkgreen]{hyperref}
+
+
+% Need this package to allow footnotes for more than 9 authors:
+\usepackage{footmisc}
+
+%=================
+% Try using cleveref...
+
+\usepackage[capitalize,nameinlink]{cleveref}
+
+\crefformat{equation}{#2(#1)#3}
+\crefrangeformat{equation}{(#3#1#4--#5#2#6)}
+\crefmultiformat{equation}{#2(#1)#3}{ and #2(#1)#3}
+{, #2(#1)#3}{, and #2(#1)#3}
+\crefrangemultiformat{equation}{(#3#1#4--#5#2#6)}%
+{ and (#3#1#4--#5#2#6)}{, (#3#1#4--#5#2#6)}{, and (#3#1#4--#5#2#6)}
+
+%=================
+
+
+\graphicspath{{./figures/}}
+
+
+\setlength{\textwidth}{6.2in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{8.7in}
+\setlength{\voffset}{-.7in}
+\setlength{\headsep}{26pt}
+
+
+% Useful commands
+\include{macros}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.png, .jpg, .tif, .eps}
+\fi
+
+\title{Clawpack: building an open source ecosystem for solving hyperbolic PDEs}
+
+% Authors: Anyone who has....
+%  - Made a nontrivial contribution to 5.0, 5.1, 5.2,
+%  - Contributes at least a sentence to the paper,
+%  - Has read the final draft and agreed to be an author.
+
+\author{
+        Kyle T. Mandli\thanks{
+            Columbia University (\mbox{kyle.mandli@columbia.edu})} \and
+        Aron J. Ahmadia\thanks{
+            Continuum Analytics (\mbox{aahmadia@continuum.io})} \and
+        Marsha J. Berger\thanks{
+            New York University (\mbox{berger@cims.nyu.edu})} \and
+        Donna A. Calhoun\thanks{
+            Boise State University (\mbox{donnacalhoun@boisestate.edu})} \and
+        % Matthew Emmett\thanks{
+        %     Lawrence Berkeley National Laboratory (\mbox{memmett@gmail.com})} \and
+        David L. George\thanks{
+            USGS Cascades Volcano Observatory (\mbox{dgeorge@usgs.gov})} \and
+        Yiannis Hadjimichael\thanks{
+            King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{yiannis.hadjimichael@kaust.edu.sa})} \and
+        David I. Ketcheson\thanks{
+            King Abdullah University of Science and Technology, Box 4700, Thuwal, Saudi Arabia, 23955-6900 (\mbox{david.ketcheson@kaust.edu.sa})} \and
+        Grady I. Lemoine\thanks{
+            CD-Adapco, Bellevue, WA} \and
+        Randall J. LeVeque\thanks{
+            Dept.\ of Applied Mathematics, University of Washington (\mbox{rjl.@uw.edu})}
+        }
+
+\maketitle
+\linenumbers
+\begin{abstract}
+    \clawpack is a software package designed to solve nonlinear
+hyperbolic partial differential equations using high-resolution finite volume
+methods based on Riemann solvers and limiters. The package includes a number
+of variants aimed at different applications and user communities.
+\clawpack has been actively developed as an open source project
+for over 20 years.  The latest major release, \clawpack 5, introduces
+a number of new features and changes to the code base and a new
+development model based on GitHub and Git submodules.  
+This article provides a summary of the most significant changes,
+the rationale behind some of these changes, and a description of our current
+development model.
+\end{abstract}
+
+\input{intro}
+
+\input{development}
+
+\input{advances}
+
+\input{future}
+
+% Removed, will be placed in submission
+% \input{acknowledgments}
+
+\bibliographystyle{siamplain}
+\bibliography{paper}
+
+\end{document}
