@@ -55,6 +55,7 @@ in this section.
 Beyond the major core code repositories, additional repositories contain
 documentation and extended examples for using the packages:
 \begin{itemize}
+    \revised{
     \item \texttt{doc} -- the primary documentation source files.
     These files are written in the markup language reStructured
     Text\footnote{http://www.sphinx-doc.org/en/stable/rest.html}, and 
@@ -68,6 +69,7 @@ documentation and extended examples for using the packages:
     is configured to point to \url{http://clawpack.github.com}.
     The name of this repository follows GitHub convention for use with
     GitHub Pages\footnote{\url{https://pages.github.com/}}.
+    }
     \item \texttt{apps} -- applications contributed by developers and
     users that go beyond the introductory examples included in the core
     repositories.
@@ -243,6 +245,12 @@ version releases that were not entirely backwards compatible, but these have
 been relatively minor and documented in the release notes.  Major version
 numbers have changed infrequently and related to major refactoring of the
 code as in going from 4.x to 5.0.
+
+\revised{Staring with Version 5.3.1, the tarfiles for  Clawpack releases will
+also be archived on Zenodo\footnote{https://zenodo.org}, a data repository
+hosted at CERN that issues DOIs so that the software version can be cited
+with a permanent link \cite{clawpack_development_team_2015_50982} that does
+not depend on the long-term existence of GitHub.}
 
 \revised{\subsection{Dependencies}
 
