@@ -55,10 +55,11 @@ On OSX, the GDAL library can also be installed through MacPorts or Homebrew.
 
 Depending on your installation, you may also need to set the
 environment variable *GDAL_DATA* to point to the directory containing
-the projection files (e.g.  gcs.cvs, epsg.wkt, and so on) needed to
+projection files (e.g. gcs.cvs, epsg.wkt) needed to
 georeference and warp your PNG images.  For example, in Anaconda
 Python, these support files are installed under the `share/gdal`
-directory, and so you can set (in bash) *GDAL_DATA* as
+directory.  In *bash*, the *GDAL_DATA* environment variable can be exported
+as
 
 .. code-block:: python
 
@@ -112,7 +113,7 @@ Google Earth.  An on-line version of the results from this example can
 be viewed by opening the file `Chile_2010.kml`_ in Google Earth.
 
 Use the time slider to step through the frames of the simulation, or
-click on the "animate" button (in the time slider panel) to animate
+click on the "animate" button (also in the time slider panel) to animate
 the frames.
 
 .. figure::  images/GE_Chile.png
@@ -126,7 +127,7 @@ Plotting attributes needed for Google Earth
 
 The plotting parameters needed to instruct VisClaw to create plots
 suitable for visualization in Google Earth are all set as attributes
-to instances of the VisClaw classes *ClawPlotData* and *ClawPlotFigure*.
+of instances of the VisClaw classes *ClawPlotData* and *ClawPlotFigure*.
 We describe each of the relevant attributes and refer to their
 usage in the Chile 2010 example file `setplot_kml.py` file.
 
@@ -154,6 +155,8 @@ have reasonable default values.
   # Set to a URL where KMZ file will be published.
   # plotdata.kml_publish = None
 
+  # plotdata.kml_map_topo_to_latlong = None  # Use if topo coords. are not lat/long [None]
+
 .. attribute:: kml_name : string
 
   Name used in the Google Earth sidebar to identify the simulation. Default : "GeoClaw"
@@ -175,8 +178,28 @@ have reasonable default values.
 .. attribute:: kml_publish : string
 
   A URL address and path to a remote site hosting a
-  KMZ file you wish to make available on-line.   See
-  `Publishing your results`_.
+  KMZ file you wish to make available on-line. Default : None
+
+  See `Publishing your results`_ for more details.
+
+.. attribute:: kml_map_topo_to_latlong : function
+
+   A function that maps computational coordinates (in meters, for
+   example) to latitude/longitude coordinates.  This will be called to
+   position PNG overlays, gauges, patch boundaries, and regions boundaries to the
+   latitude longitude box specified in `plotfigure.kml_xlimits` and
+   `plotfigure.kml_ylimits` used by Google Earth.
+   Default : None.
+
+   See `Mapping topography data to latitude/longitude coordinates`_
+   for details on how to set this function.
+
+.. attribute:: kml_use_figure_limits : boolean
+
+   Set to *True* to indicate that the `plotfigure` limits should be
+   used as axes limits when creating the PNG file.  If set to *False*,
+   then axes limits set by an `axes` member of a *plotfigure*
+   (e.g. *plotaxes*) will be used. Default : True.
 
 
 plotfigure attributes
@@ -210,18 +233,18 @@ will be used in the Google Earth sidebar to identify this figure.
 
 .. attribute:: use_for_kml : boolean
 
-  Indicates to VisClaw that the PNG file created for this figure should be suitable for
+  Indicates to VisClaw that the PNG files created for this figure should be suitable for
   visualization in Google Earth. With this set to `True`, all titles, axes labels, colorbars
   and tick marks will be suppressed.  Default : `False`.
 
 .. attribute:: kml_xlimits : [longitude_min, longitude_max]
 
-  Longitude range used to place PNG figure on Google Earth. *This setting will override
+  Longitude range used to place PNG images on Google Earth. *This setting will override
   any limits set as plotaxes attributes*.  **Required**
 
 .. attribute:: kml_ylimits : [latitude_min, latitude_max]
 
-  Latitude range used to place the PNG figure on Google Earth.
+  Latitude range used to place the PNG images on Google Earth.
   *This setting will override any limits set as plotaxes attributes*.  **Required**
 
 .. attribute:: kml_use_for_initial_view : boolean
@@ -359,6 +382,11 @@ clicked.
 
    Screenshot illustrating gauge plots.
 
+If the computational coordinates are not in latitude/longitude coordinates, then you must
+set the `plotdata` attribute `map_topo_to_latlong` to specify a mapping between the computational
+coordinates and latitude longitude box which Google Earth will use to visualize your data.
+See `plotdata attributes`_.
+
 Additional plotdata attributes
 ------------------------------
 
@@ -391,13 +419,15 @@ improving the quality of your images and publishing your results.
 
 KML and KMZ files
 -----------------
-KML files are very similar to HTML files in that they use
-`<tags>...</tags>` to describe data to be rendered by a suitable
-rendering engine.  Like a web browser, Google Earth can be viewed as
-browser for geospatial data described by the KML-specific tags.
+KML files are very similar to HTML files in that they contan
+`<tags>...</tags>` describing data to be rendered by a suitable
+rendering engine.  Whereas as standard web browsers can render content
+described by HTML tags, Google Earth renders the geospatial data
+described by KML-specific tags.
 
-The VisClaw `kml` attributes described above will create PNG files
-for frames, gauges and colorbars, and a hierarchy of linked KML files,
+The `kml` attributes described above will direct VisClaw to create
+Google Earth suitable PNG files
+for frames and colorbars and a hierarchy of linked KML files,
 including a top level `doc.kml` file for the entire simulation, one
 top level `doc.kml` file per figure, and additional referenced kml
 files per frame.  These KML and image files will not appear
@@ -451,12 +481,13 @@ You may find that the transparent colormap leads to unappealing visual
 artifacts.  This can happen when the resolution of the PNG file does
 not match the resolution of the data used to create the image.  In the
 Chile example, the number of grid cells on the coarsest level is 30 in
-each direction.  But the default settings for the figure size
-(`kml_figsize`) is `8x6` inches and dpi (`kml_dpi`) is 200, resulting in an
-image that is 1600 x 1200.  But because 1600 is not an even multiple of 30,
-noticeable vertical stripes appear at the coarsest level.   A more obvious
-plaid pattern appears at finer levels, since neither 1600 or 1200 are
-evenly divisible by 30*2*6 = 360.
+each direction. Two additional levels are created by refining first by
+a factor of 2 and then by a factor of 6.  But the default settings for
+the figure size (`kml_figsize`) is `8x6` inches and dpi (`kml_dpi`) is
+200, resulting in an image that is 1600 x 1200.  But because 1600 is
+not an even multiple of 30, noticeable vertical stripes appear at the
+coarsest level.  A more obvious plaid pattern appears at finer levels,
+since neither 1600 or 1200 are evenly divisible by 30*2*6 = 360.
 
 .. figure::  images/GE_aliased.png
    :scale: 40%
@@ -558,6 +589,82 @@ This higher resolution figure shows up in the  Google Earth sidebar as "Sea Surf
 See `Removing aliasing artifacts`_ for more details on how to set the zoom levels.
 
 .. _Publishing your results:
+
+Mapping topography data to latitude/longitude coordinates
+---------------------------------------------------------
+In many situations, your computational domain may not be conveniently
+described in latitude/longitude coordinates. When simulating overland
+flooding events, for example, topographic data may more easily be
+described in rasterized distance increments (meters, for example).
+VisClaw uses data stored in generated data files (`gauges.data`,
+`regions.data`, and so on) to position objects on the Google Earth
+browser.  The coordinate system for these objects is, however, in
+computational coordinates, and so to locate them in the Google Earth
+browser, the user must provide VisClaw a function to convert from
+computational to latitude/longtitude coordinates.  This is done by
+setting the `plotdata` attribute `kml_map_topo_to_latlong` to a
+function describing your mapping between the two coordinate systems.
+
+A crucial underlying assumption in setting the mapping function for
+use with GoogleEarth is that the boundary of your physical domain is
+approximately aligned with spherical (latitude/longitude) coordinate
+lines.
+
+
+The following example illustrates how to set a linear map between the
+coordinates in `[0,48000]x[0,17540]` and the latitude/longitude
+coordinates that Google Earth will use to visualize the results of
+your simulation.
+
+.. code-block:: python
+
+
+    def map_cart_to_latlong(xc,yc):
+	# Map x-coordinates
+        topo_xlim = [0,48000]                     # x-limits, in meters
+        ge_xlim = [-111.96132553, -111.36256443]  # longitude limits
+        slope_x = (ge_xlim[1]-ge_xlim[0])/(topo_xlim[1]-topo_xlim[0])
+        xp = slope_x*(xc-topo_xlim[0]) + ge_xlim[0]
+
+	# Map y-coordinates
+	topo_ylim = [0,17500]                     # y-limits, in meters
+        ge_ylim = [43.79453362, 43.95123268]      # latitude limits
+        slope_y = (ge_ylim[1]-ge_ylim[0])/(topo_ylim[1]-topo_ylim[0])
+        yp = slope_y*(yc-topo_ylim[0]) + ge_ylim[0]
+
+        return xp,yp
+
+    # set plotdata attribute.
+    plotdata.kml_map_topo_to_latlong = map_cart_to_latlong
+
+Figure limits `plotfigure.kml_xlimits` and `plotfigure.kml_ylimits` must still be set to
+the latitude/longitude coordinates for your Google Earth figure.  But to indicate that you
+do not wish to use these coordinates for creating PNG files, you must set
+the `plotfigure.kml_use_figure_limits` attribute to `False`.  This will indicate that when
+creating the PNG figure, the axes limits should be set to those specifed in the
+`plotaxes` attribute.  For example,
+
+.. code-block:: python
+
+    plotfigure = plotdata.new_plotfigure(name='Teton Dam',figno=1)
+    plotfigure.use_for_kml = True
+
+    # Latlong box used for GoogleEarth
+    plotfigure.kml_xlimits = [-111.96132553, -111.36256443]  #  Lat/Long box use by Google Earth
+    plotfigure.kml_ylimits = [43.79453362, 43.95123268]
+
+    # Use computational coordinates for plotting
+    plotfigure.kml_use_figure_limits = False   # Use plotaxes limits below
+
+    # ....
+
+    plotaxes.xlimits = [0,48000]   # Computational axes needed for creating PNG files.
+    plotaxes.ylimits = [0,17500]
+
+
+The mapping function will be used to position PNG Overlays, locate gauge placemarks,
+and plot patch and region boundaries on the Google Earth browser.
+
 
 Publishing your results
 -----------------------
