@@ -49,8 +49,8 @@ There are some variations on this, for instance \amrclaw is upstream
 of \geoclaw, which uses many of the algorithms and software base from
 \amrclaw.  To coordinate this the \texttt{clawpack} repository
 %records broad changes that have multi-repository implications.
-points to the compatible version of each repository, described later
-in this section.
+points to the most recent known-compatible version of each repository, 
+described later in this section.
 
 Beyond the major core code repositories, additional repositories contain
 documentation and extended examples for using the packages:
@@ -103,22 +103,32 @@ reports on any test failures as well as changes to test coverage.
 
 \subsection{Submodules}
 
-The \texttt{clawpack} ``super-repository'' serves as an
-installation and synchronization point for the project repositories:
-each of the other core \clawpack repositories listed above is a submodule
-of the \texttt{clawpack} repository.  A commit to the \texttt{clawpack}
-repository serves to keep track of the
-versions of each submodule that are meant to function together.  
-Git submodules provide an invaluable
-mechanism for allowing \clawpack team members to work asynchronously on
-independent projects while reusing and maintaining common software
-infrastructure.
+The \texttt{clawpack} ``super-repository'' serves two purposes. First, it contains
+installation utilities for each of the sub-projects.
+Second, it serves as a synchronization point for the project repositories. The remainder of
+this section provides more details on how Git submodules enable this synchronization.
+
+Whenever possible, Teams of software developers coordinate their development in a single 
+unified repository. In situations where this isn't possible, one option provided by Git
+is the submodule, which allows a super-repository (in this case, \texttt{clawpack}), to nest
+sub-repositories as directories, with the ability to capture changes to sub-repository 
+revisions as new revisions in the super-repository. Under the hood, the super-repository 
+maintains pointers to the location of each submodule and its current revision. The submodule 
+directories contain normal Git repositories, all of the coordination happens in the 
+super-repository.
+
+Each of the other core \clawpack repositories listed above is a submodule
+of the \texttt{clawpack} repository.  Every commit that creates a new revision to 
+the \texttt{clawpack} repository describes top-level installation code as well as 
+the revisions of each of the submodules. In this way, Git submodules allow 
+\clawpack team members to work asynchronously on independent projects while 
+reusing and maintaining common software infrastructure.
 
 Typically the \clawpack developers advance the master development
 branch of the top-level \texttt{clawpack}
 repository any time a major feature is added
 or a bug is fixed in one of the upstream projects that might affect code in
-other repositories.  By checking out a particular commit in the
+other repositories.  By checking out a particular revision in the
 \texttt{clawpack} repository and performing a \texttt{git submodule update},
 all repositories can be updated to versions that are intended to be
 consistent and functional.
@@ -131,11 +141,11 @@ other projects that must be checked out before performing the tests.
 If the \texttt{clawpack} repository has not been properly updated
 following changes in other upstream projects, these tests may fail.
 
-Any new release of \clawpack is a snapshot of one particular commit on
-\texttt{clawpack} and the related commits on all submodules.  These
-particular commits are also tagged for future reference with consistent
+Any new release of \clawpack is a snapshot of one particular revision on
+\texttt{clawpack} and the related revisions on all submodules.  These
+particular revisions are also tagged for future reference with consistent
 names, such as \texttt{v5.3.1}.  (Git tags simply provide a descriptive name
-for a particular commit rather than having to refer to a Git hash code.)
+for a particular revision rather than having to refer to a Git hash code.)
 
 \ignore{
 Snapshots of the top-level repository are taken both to prepare for
