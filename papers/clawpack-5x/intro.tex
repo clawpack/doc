@@ -7,19 +7,20 @@
 
 \section{Introduction}\label{sec:intro}
 
-The \clawpack software suite \cite{clawpack} is designed for the
-solution of nonlinear conservation laws, balance laws, and other
-first-order hyperbolic partial differential equations not necessarily
-in conservation form.  The underlying solvers are based on the wave
-propagation algorithms described by LeVeque in \cite{rjl:fvmhp}, and
-are designed for logically Cartesian uniform or mapped grids or an
-adaptive hierarchy of such grids.  The original \clawpack was first
-released as a software package in 1994 and since then has made major
-strides in both capability and interface. More recently a major
-refactoring of the code and a move to GitHub for development has
-resulted in the release of \clawpack 5.0 in January, 2014. A
-significant number of additional improvements have been made since
-then.
+The \clawpack software suite \cite{clawpack} is designed for the solution of
+nonlinear conservation laws, balance laws, and other first-order hyperbolic
+partial differential equations not necessarily in conservation form.  The
+underlying solvers are based on the wave propagation algorithms described by
+LeVeque in \cite{rjl:fvmhp}, and are designed for logically Cartesian uniform or
+mapped grids or an adaptive hierarchy of such grids.  The original \clawpack was
+first released as a software package in 1994 and since then has made major
+strides in both capability and interface. More recently a major refactoring of
+the code and a move to GitHub for development has resulted in the release of
+\clawpack 5.0 in January, 2014.  \revised{Beyond enabling a distributed and
+better managed development process a number of user-facing improvements were
+made including a new user interface and visualization tools, incorporation of
+high-order accurate algorithms, parallelization through MPI and OpenMP, and
+other enhancements.}
 
 Because scientific software  has become central to many advances made
 in science, engineering, resource management, natural hazards modeling
@@ -80,20 +81,20 @@ In 2009, \clawpack Version 4.4 was released with a major change from \mlab
 to Python as the recommended visualization tool, and the development
 of a Python user interface for specifying the input data.
 
-Since then, a number of other features were added to handle new applications, to
-provide a better user interface and visualization tools, to incorporate
-higher-order accurate algorithms, to parallelize through MPI and OpenMP, and
-other enhancements. \revised{In January of 2013 the 4.x versions of \clawpack
-ended with the release of 4.6.3}\footnote{\revised{Details of these changes can
-be found
-at }\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.  Version
-4.x used \texttt{svn} version control and the freely available software (under
-the BSD license) was distributed via tarballs.}
+In 2009, \clawpack Version 4.4 was released with a major change from \mlab to
+Python as the recommended visualization tool, and the development of a Python
+user interface for specifying the input data. \revised{Finally in January of
+2013 the 4.x versions of \clawpack ended with the release of
+4.6.3}\footnote{\revised{Details of these changes can be found at
+}\url{http://depts.washington.edu/clawpack/users-4.6/changes.html}.  Version 4.x
+used \texttt{svn} version control and the freely available software (under the
+BSD license) was distributed via tarballs.}
 
-Version 5 of \clawpack introduces a number of modern approaches to code
-development, interfacing with other codes, and adding new capabilities.
-\revised{The move to \texttt{git} version control also allowed a more complete
-open source model.}  These changes are the subject of the rest of this paper.
+Version 5 of \clawpack introduces both user-exposed features and a number of
+modern approaches to code development, interfacing with other codes, and adding
+new capabilities.  \revised{The move to \texttt{git} version control also
+allowed a more complete open source model.}  These changes are the subject of
+the rest of this paper.
 
 \subsection{Hyperbolic problems}\label{sec:hyp}
 
@@ -243,7 +244,7 @@ expensive.  Other recent improvements to \amrclaw are discussed in
 \revised{
 There are several other open source software projects that provide adaptive
 mesh refinement for hyperbolic PDEs.  The interested reader may want to
-investigate AMROC \cite{amroc}, BoxLib \cite{boxlib}, Chombo \cite{chombo}, 
-Gerris \cite{gerris}, OpenFOAM \cite{openfoam}, or SAMRAI \cite{samrai}, for
-example.
-}
+investigate AMROC \cite{Deiterding:2011bj}, 
+BoxLib\footnote{\url{https://ccse.lbl.gov/BoxLib/index.html}}, 
+Chombo \cite{chombo}, Gerris \cite{gerris}, OpenFOAM \cite{OpenFOAM}, 
+or SAMRAI \cite{samrai}, for example.}

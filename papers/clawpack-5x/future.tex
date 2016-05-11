@@ -17,7 +17,11 @@ groups of developers scattered at many institutions.  The adoption of better
 software engineering practices, in particular the use of Git and GitHub as an
 open development platform and the use of pull requests to discuss proposed
 changes, has been instrumental in facilitating the development of many of the
-new capabilities summarized in this paper.  
+new capabilities summarized in this paper.  \revised{These developer facing
+improvements of course affect the user as well since better and faster
+development cycles means better and faster implementation of features.  The
+user facing features already implemented in version 5 have opened up
+the use of \clawpack to a broader audience.}
 
 \subsection{Future Plans} \label{sub:future}
 
@@ -33,6 +37,8 @@ of \clawpack include
     on more of the same code-base,
     \item An increased emphasis on a larger development community,
     \item More support for new frameworks such as \forestclaw \cite{Burstedde:we},
+    \item \revised{Adjoint error estimation for flagging cells to increase
+    the efficiency of the AMR codes \cite{DavisLeVeque:adjoint1},}
     \item A refactoring of the visualization tools in \visclaw, along with
     support for additional backends, particularly for three-dimensional results
     (e.g.
@@ -42,3 +48,16 @@ of \clawpack include
 \texttt{ParaView}\footnote{\url{http://www.paraview.org/}}, or 
 \texttt{yt}\footnote{\url{http://yt-project.org/}}).
 \end{itemize}
+
+\section*{Acknowledgements}
+\revised{
+Clawpack development has been funded by many agencies and institutions over
+the past 20 years and were made possible by their generous support.
+% The improvements
+% % cataloged in this paper have been funded in part by
+% % DOE grant DE-FG02-88ER25053, NSF grants DMS-1216732, EAR-1331412,
+The latest developments have also built on the work of many earlier Clawpack
+developers and users, many of whom are acknowledged on the Clawpack Authors
+webpage.
+}
+

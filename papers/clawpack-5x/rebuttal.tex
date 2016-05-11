@@ -6,6 +6,9 @@
 % \usepackage{a4}
 % \pagestyle{empty}
 
+\usepackage{color}
+\newcommand{\alert}[1]{\textbf{\color{red} #1}}
+
 \begin{document}
 
 \address{Clawpack Developers}
@@ -26,8 +29,238 @@
 \opening{To the editors and reviewers of ``The Clawpack 5.X Software'',}
 
 First the authors would like to thank the editor and both reviewers for their
-helpful comments, we feel the paper has been made awesome due to their
-suggestions.
+helpful comments.  We feel the suggestions have lead to a more thorough
+presentation as well as a cleaner explanation of many points that are crystal
+clear to those who are neck deep and completely opaque to others who have not
+waded so far into the deep end.
+
+\textbf{\large Editors Comments}
+\begin{itemize}
+    \item At the moment the title implies the paper is simply a description of
+    the software, so it needs changing to something more descriptive. Perhaps
+    something along the lines of ``The Clawpack Software: Building an Open
+    Source Ecosystem for Solving Nonlinear PDEs''. I would be inclined not to
+    put the version number in the tile. \\
+    
+    We agree with the editor, this title is more reflective of the paper's
+    content and we have changed the title accordingly. \\
+
+
+    \item Page 5, line 4 of sec 2.2: Git submodules are new to me. Can you add a
+    brief explanation of what they are? \\
+
+    Additional text and a revision have hopefully provided more detail regarding
+    the use of git submodules. \\
+
+    \item Page 6, line 8 of sec 2.3: ``ensuring that past versions of the
+    software remain available on a stable and citable platform''. How is that
+    done? I'm not sure if you say so later. \\
+
+    Details of this including specifics of the use of Zonodo and DOIs through
+    github have been added.
+\end{itemize}
+
+The following have been corrected as requested:
+\begin{itemize}
+    \item Page 1, line -10 of section 1.1: why are both [34], with its URL, and
+    the explicit URL given?
+    \item Page 1, line -3 of section 1.1: ``with many of the changes from 4.3 to
+    4.6'' appears to be part of an incomplete sentence, or at least one
+    in need of rewriting.
+\end{itemize}
+
+
+\textbf{\large Reviewer Anders Logg:}
+\begin{itemize} 
+    \item On p. 2: What is q and what is f? And how does f (typically) depend on
+    q (one or two examples). This is clear for most readers but please add one
+    or two sentences to give a gentle introduction to non-specialists. \\
+
+    Additional clarification text was added that hopefully illuminates the
+    situation. \\
+
+    \item Some of the packages, e.g. PyCLAW on p. 3 and AMRCLAW on p. 4 are
+    mentioned before it is made clear on p. 4-5 that these are separate packages
+    in the collection that make up CLAWPACK. Please clarify earlier. \\
+
+    The text has been slightly rearranged to avoid this. \\
+
+    \item A diagram could be added to explain the relationships between the
+    packages listed on p. 4-5. \\
+
+    We created a draft diagram but decided it was not really all that helpful
+    given the space it took up.  Instead we attempted to clarify in the text the
+    relationships. \\
+
+    \item The documentation repository is hosted on \url{clawpack.github.com} whereas
+    the rest is hosted on \url{github.com/clawpack/}. This looks confusing to
+    me. \\
+
+    Clarification on this point was added. \\
+
+    \item Line 198: Should it be ``Travis CI'', not only ``Travis''? Or is
+    Travis the team member responsible for running the regression tests? \\
+
+    Instead of forcing a poor graduate student to adopt the name ``Travis'' we
+    decided it was wiser to give better clarification on our use of the Travis
+    CI service. \\
+
+    \item Figures 2 and 3 are small and very difficult to read. \\
+
+    We have gone back to the original versions and provided \emph{significantly}
+    better resolution figures. \\
+
+    \item Remove FIXME/margin note on p. 14. \\
+
+    Yeah, that was stupid, blame the lead author.
+\end{itemize}
+
+The following have been corrected as requested:
+\begin{itemize}
+    \item Add a comma on line 163 (following ``repositories'') for increased
+    readability.
+
+    \item Top paragraph on p. 10: Somewhat confusing, seems to contrast AMR with
+    MPI (``... on the other hand does not include AMR but uses MPI...''). Please
+    reword.
+\end{itemize}
+
+
+\textbf{\large Reviewer Markus Blatt:}
+
+A note regarding the reviewers concern regarding formatting, we were informed
+that the editorial staff of PeerJ would assist with formatting issues once the
+article was accepted.  If there are outstanding formatting issues beyond what
+the PeerJ staff would accommodate please let us know.
+
+\begin{itemize}
+    \item The introduction is missing a list of related efforts/software
+    packages that are comparable to (parts of) ClawPack. This should be
+    added. \\
+
+    A number of similar packages has been added along with appropriate
+    citations. \\
+
+    \item Furthermore a section should be added that lists all scientific
+    software that is used/needed by ClawPack together with
+    references. Currently, only PETSc and matplotlib are cited. According
+    to the website at least NumPy is needed/recommend and according to the
+    source matlab seems to be also used if it is found. These two should
+    be cited. \\
+
+    \alert{ADDRESS THIS} \\
+
+    \item The text in the pictures of Figure 5 cannot be read on a laptop
+    screen. Maybe increasing the size of the text or the pictures
+    themselves would fix this. Some of the pictures seem to be or use
+    third party pictures. The author should check whether their license
+    allows the distribution under CC-BY. Some of the pictures (e.g. the
+    maps in Figure 3 and 5 might need a copyright attribute added. \\
+
+    Figure 5's resolution has been increased and the text made more clear. 
+    Additionally some of the figures have been removed from figures 3 and 5 or
+    or distribution rights confirmed and/or cited. \\
+
+    \item lines 27--28 (Introduction): I think it would be nice to list one/some
+    of the major changes that will make upgrading to the new user worthwhile or
+    make ClawPack more unique. \\
+
+    Text added to address this. \\
+
+    \item lines 563--570 (Conclusion): Similar to above, I am missing a short
+    sentence why upgrading is worthwhile for a user. The current conclusion only
+    takes into account the view of developers. \\
+
+    Text in the conclusion added to also reiterate this. \\
+
+    \item lines 216 - 223:  In the abstract it says that clawpack has been
+    developed as open source for 20 years. Here it reads like the software has
+    been made open source recently as you expect it to increase the developer
+    community. Please clarify! \\
+
+    Hopefully this has been clarified via the additional text. \\
+
+    \item line 358:  ``..., where some operation ...'' Is it really some (might be
+    different per thread) or the same operation? \\
+
+    \alert{ADDRESS THIS!} \\
+
+    \item lines 357 - 362:  ``The main ... patch at a time'' Application of
+    \texttt{parallel\_for} is not clear to me. First it seems like
+    parallelization will be over the patches. Then you say that each iteration
+    corresponds to a grid level (shouldn't that be a patch?). Afterwards you say
+    you assign one patch to each thread. It might also be that my understanding
+    of a grid is different from the author's. Please clarify, currently the
+    parallelization strategy is not clear to me. \\
+
+    Additional text has been added that hopefully clarifies this point. \\
+
+    \item lines 370 - 371: 40 cores or 20 cores/40 threads? Which exact processor
+    model did you use? \\
+
+    Text has been added and clarification about the testing hardware was added.
+    \\
+
+    \item line 376: ``The efficiency is above 80\% until 24 cores, then drops...'' 
+    I would have expected it drop for >20 threads as two threads share one core.
+    Might the preservation of efficiency be due to the ordering of the patch by
+    size? Do you have an explanation? \\
+
+    The test hardware does not use hyperthreading and does contain 40 cores. 
+    Text to clarify this was added. \\
+
+    \item lines 377--380:  I don't understand these sentences about level n grids.
+    Does two level 1 grids mean that 2 cells on level 0 got refined? Maybe the
+    meaning/definition of a level n grid could/should be stated. \\
+
+    Clarification text was added. \\
+
+    \item Figure 3:  The text in the left two pictures is hardly readable on a
+    laptop screen. Maybe making the picture larger would help. If these are 3rd
+    party pictures, please check whether they can be distributed via CC-BY
+    License. At least for the map a reference is missing. \\
+
+    Figure 3 has been modified to remove questionable copyrighted material and
+    made higher resolution. \alert{CHECK THIS!} \\
+
+    \item Figure 5:  Please double check whether you are allowed to distribute
+    the pictures under CC-BY License and whether they need a reference to be
+    added. \\
+
+    Distribution rights were checked and addressed. \\
+
+    \item lines 480-482: Is the definition of patch here the same as in the
+    description of the OpenMP parallelization above (lines 357--362)? If this is
+    the case then the mesh-patch equivalence should be mentioned there. \\
+
+    Clarification text regarding the patches vs. mesh was added. \\
+
+    \item Page 14:  There is an annotation in the original PDF. \\
+
+    Yeah, again, blame the lead author on that one.
+
+\end{itemize}
+
+The following have been corrected as requested:
+\begin{itemize}
+    \item The referencing style for figures should be used consistently. Figure
+    1 is referenced as ``Figure 1'' while the rest is referenced as ``Fig. 2'',
+    etc.
+
+    \item lines 49--50: Reference [34] contains the URL. Therefore the last
+    sentence (lines 49-50) is superfluous.
+
+    \item line 227: Citation of PETSc reference missing.
+
+    \item line 354: ``GEOCLAW. where'' has a superfluous dot.
+
+    \item line 368: ``Figure 1'' -> ``Fig. 1'' for consistency.
+
+    \item line 377: ``Note that there are only 2 level 1'' -> ``Note that there
+    are only two level 1''
+
+    \item line 382: Citation of PetSc missing.
+\end{itemize}
 
 \begin{itemize}
     \item Mention improvement of AMR discussion
@@ -40,7 +273,10 @@ suggestions.
     \item Cleaned up parallelism architectures
     \item Cite PETSc - line 227, all PETSc references are included
     \item Add text regarding ecosystem
+    \item Diagram of package dependency - added better explanation in text
+    rather than diagram (tried, did not seem to work well)
 \end{itemize}
+
 
 \vspace{4cm}
 
