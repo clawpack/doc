@@ -264,11 +264,12 @@ not depend on the long-term existence of GitHub.}
 \revised{\subsection{Dependencies}
 
 Running any part of \clawpack requires a Python interpreter and
-the common Python packages numpy and matplotlib, as well as
+the common Python packages numpy \revised{\cite{numpy}, \texttt{f2py} \cite{Peterson:2009tp}, matplotlib \cite{Hunter:2007}}, as well as
 (except for the pure-Python 1D code) GNU make and a Fortran compiler.  Other
 dependencies are optional, depending on which parts of \clawpack
 are to be used:
 \begin{itemize}
+    \item \revised{IPython/Jupyter if using the notebook interfaces \cite{ipython}.}
     \item PETSc \cite{petsc-user-ref}, if using distributed parallelism in \pyclaw.
     \item OpenMP, if using shared-memory parallelism in \amrclaw or \geoclaw.
     \item MATLAB, if using the legacy visualization tools.
