@@ -51,7 +51,7 @@ One such project is illustrated in \cref{fig:ocosta}.
 In addition to a variety of tsunami modeling applications,
 \geoclaw has been used to solve dam break problems in steep terrain
 \cite{George:Malpasset}, storm surge problems \cite{Mandli:ws} (see \cref
-{fig:surge}),
+{fig:surge} and \cref{tab:surge_timing}),
 and submarine landslides \cite{jhkim:phd}.  The code also
 formed the basis for solving the
 multi-layer shallow water equations for storm surge modeling
@@ -127,7 +127,7 @@ grids, or an arbitrary set of points\footnote{Described in
 \end{itemize}
 
 \begin{figure}
-\hfil\includegraphics[width=0.9\textwidth]{GraysHarborFigs.png}
+\hfil\includegraphics[width=0.9\textwidth]{final_submission/Fig4}
 \caption{\label{fig:ocosta}
 Gray's Harbor showing Westport, WA on southern peninsula.
 \revised{(Google map data and image, 2016.)}
@@ -141,8 +141,16 @@ Cascadia Subduction Zone event, 40 minutes after the earthquake.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\textwidth]{surge_figure}
-\vskip 5pt
+    \includegraphics[width=\textwidth]{final_submission/Fig5}
+    \caption{(a) A snapshot of a \geoclaw storm surge simulation of
+Hurricane Ike at landfall.  (b) Tide gauge data computed from \geoclaw
+and {\sc adcirc} along with observed data at the same location.
+(c) Computational effort and timings for \geoclaw and {\sc adcirc}.  From
+\cite{Mandli:ws}. \label{fig:surge}}
+\end{figure}
+
+\begin{table}
+    \centering
     \begin{tabular}{|c|c|c|c|}
         \hline
         {\bf Package} & {\bf Threads} & {\bf Wall Time} & {\bf Core Time} \\
@@ -151,15 +159,13 @@ Cascadia Subduction Zone event, 40 minutes after the earthquake.
         \geoclaw & 4 & 2 hours & 8 hours \\
         \hline
     \end{tabular}
-    \caption{Top Left: A snapshot of a \geoclaw storm surge simulation of
-Hurricane Ike at landfall.  Top Right:  Tide gauge data computed from \geoclaw
-and {\sc adcirc} along with observed data at the same location.
-Bottom: Computational effort and timings for \geoclaw and {\sc adcirc}.  From
-\cite{Mandli:ws}. \label{fig:surge}}
-\end{figure}
+    \caption{
+    Computational effort and timings for \geoclaw and {\sc adcirc}.  From
+\cite{Mandli:ws}.} \label{tab:surge_timing}
+\end{table}
 
 \begin{figure}[t]
-\hfil\includegraphics[height=1.9in]{MeagerFig6.png}
+\hfil\includegraphics[height=1.9in]{final_submission/Fig6}
 %\hfil\includegraphics[height=1.9in]{meagerview.png}
 %\hskip 5pt
 %\includegraphics[height=1.9in]{meager200_labeled.png}\hfil
@@ -170,7 +176,7 @@ Bottom: Computational effort and timings for \geoclaw and {\sc adcirc}.  From
 \end{figure}
 
 \begin{figure}[t]
-\centerline{\includegraphics[height=2.2in]{Oso_comparison.jpg}}
+\centerline{\includegraphics[height=2.2in]{final_submission/Fig7}}
 \caption{\label{fig:oso}
 Observed (yellow line) and computed (blue) landslide at Oso, WA in
 2014 \cite{IversonGeorgeEtAl2015}.}
