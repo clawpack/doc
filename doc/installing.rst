@@ -4,6 +4,8 @@
 Installation instructions
 **************************************
 
+To replace :ref:`installing_old`.
+
 .. contents::
    :depth: 2
 
@@ -16,32 +18,49 @@ Note that any of these installations also includes :ref:`visclaw` for plotting.
 
 See also:
 
-* :ref:`trouble_installation`
+* :ref:`install_prerequisites`
 * :ref:`clawpack_packages`
+* :ref:`changes`
+* :ref:`previous`
+* :ref:`trouble_installation`
 
 .. _install_pyclaw:
 
 Install only PyClaw (serial)
 =====================================
-If you wish to install just PyClaw, everything is handled by pip::
+
+This works if you only wish to use the :ref:`pyclaw` Python interface 
+(but **not** run Fortran codes from the Classic, :ref:`amrclaw`,
+or :ref:`geoclaw` portions of Clawpack).  For more information, see
+:ref:`clawpack_packages`
+
+If you wish to install just PyClaw, everything can be handled by pip::
 
     pip install clawpack
 
-Next go to :ref:`first_run`.
+Next go to :ref:`first_run_pyclaw`.
 
 
+.. _install_fortran:
 
-.. _install_clawpack:
+Install Fortran packages and Python tools
+==========================================
 
-Install all Clawpack packages
-=====================================
+This works if you wish to use the 
+Fortran codes from the Classic, :ref:`amrclaw`, or :ref:`geoclaw` portions of
+Clawpack, and the associated Python
+tools (as needed for specifying input in `setrun.py`, plotting results with
+`setplot.py` and :ref:`visclaw`, etc.)
+
 First, download a tar file of the latest release:
 
 * `https://github.com/clawpack/clawpack/releases/download/v5.3.1/clawpack-5.3.1.tar.gz
   <https://github.com/clawpack/clawpack/releases/download/v5.3.1/clawpack-5.3.1.tar.gz>`_
-* :ref:`previous`
-* :ref:`changes`
 
+Alternatively, tarfiles for releases are also archived on 
+`Zenodo <https://zenodo.org>`_ with
+permanent DOIs.  The most recent release can be found at:
+`10.5281/zenodo.50982 <http://dx.doi.org/10.5281/zenodo.50982>`_
 
 See :ref:`clawpack_components` for a list of what's included in this tar file.
 
@@ -54,32 +73,23 @@ clawpack tree to reside.  Then untar using the command::
 Then move into the top level directory::
 
     cd clawpack-5.3.1
+    pwd
 
-Next install the Python components of Clawpack::
-
-    python setup.py install
-
-This will compile a lot of Fortran code using `f2py` and will produce a lot of 
-output, so you might want to redirect the output, e.g. ::
-
-    python setup.py install > install_output.txt
-
-If you get compilation errors in this step, you can still use the
-Classic, AMRClaw, and GeoClaw; see :ref:`install_no-pyclaw`.
-
-If you only plan to use PyClaw, jump to :ref:`first_run`.  If you
-plan to use Classic, AMRClaw, or GeoClaw continue with :ref:`setenv`.
+The `pwd` command should print the `/full/path/to/top/level` that you
+will need in the next step
 
 .. _setenv:
 
 Set environment variables
 -------------------------
+
 To use the Fortran versions of Clawpack you will need to set the
 environment variable `CLAW` to point to the top level of clawpack tree
-(there is no need to perform this step if you will only use PyClaw).
+and adjust your `PYTHONPATH` to include the same directory.
 In the bash shell these can be set via::
 
     export CLAW=/full/path/to/top/level
+    export PYTHONPATH=$CLAW:$PYTHONPATH
 
 You also need to set `FC` to point to the desired Fortran compiler,
 e.g.::
@@ -97,53 +107,66 @@ If your environment variable `CLAW` is properly set, the command ::
 
 should list the top level directory, and report for example::
 
-    README.md       riemann/        pyclaw/
-    amrclaw/        setup.py        clawutil/       
-    geoclaw/        visclaw/        classic/        
+    CITATION.md changes.md  clawutil/   riemann/
+    README.md   classic/    geoclaw/    setup.py
+    amrclaw/    clawpack/   pyclaw/     visclaw/
+
  
-Next go to :ref:`first_run`.
+.. _install_symlink:
 
-
-.. _install_no-pyclaw:
-
-Install other packages without compiling PyClaw
-================================================
-If you get errors in the compilation step when using `pip install` or
-`python setup.py install`, check :ref:`trouble_installation`. 
-If your problem is not addressed there, please `let us know <claw-users@googlegroups.com>`_
-or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
-You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
-the following.  
-
-First, download a tarfile of the latest release as described in
-:ref:`install_clawpack`.  
-
-Next :ref:`setenv`.  You must then also set your PYTHONPATH manually::
-
-    export PYTHONPATH=$CLAW:$PYTHONPATH
+Create symbolic links
+---------------------
 
 Then you should be able to do::
 
     cd $CLAW   # assuming this environment variable was properly set
     python setup.py symlink-only
 
-This will create some symbolic links in the `$CLAW/clawpack` 
-subdirectory of your top level Clawpack directory, but does not compile code
-or put anything in your site-packages.
-In Python you should now be able to do the following, for example::
+This last step creates some symbolic links (in the directory
+`$CLAW/clawpack`) that are needed in order for import
+statements to work properly in Python.  You should now be able to start a
+Python (or IPython) shell (from any directory)
+and do the following command, for example, with no error:
 
     >>> from clawpack import visclaw
 
 If not then either your `$PYTHONPATH` environment variable is not set
-properly or the required symbolic links were not created.
+properly, or the required symbolic links were not created.
 
-Next go to :ref:`first_run`.
+Next go to :ref:`first_run_fortran`.
+
+
+
+.. _install_fortran_pyclaw:
+
+Install for using both Fortran and PyClaw components
+=====================================================
+
+If you have installed using the procedure just described to 
+:ref:`install_fortran` and you also want to use :ref:`pyclaw` (to run Clawpack
+solvers directly from Python), then you can add one more step::
+
+    cd $CLAW
+    python setup.py install
+
+This will compile a lot of Fortran code using `f2py` and will produce a lot of 
+output, so you might want to redirect the output, e.g. ::
+
+    python setup.py install > install_output.txt
+
+If you get compilation errors in this step, you can still use the
+Fortran codes (and associated Python tools) without problems.
+
+To experiment with :ref:`pyclaw`, jump to :ref:`first_run_pyclaw`.  
+
+    >>> from clawpack import visclaw
+
 
 .. _install_pyclaw_parallel:
 
 Install only PyClaw (for running in parallel)
 ================================================
-First, install PyClaw as explained above.  Then see the install instructions
+First, install :ref:`pyclaw` as explained above.  Then see the install instructions
 for :ref:`parallel`.
 
 Alternatively, you may use the following shell scripts (assembled by Damian San Roman)
@@ -211,38 +234,11 @@ some installation options.
 - `NumPy <http://www.numpy.org/>`_  (for PyClaw/VisClaw)
 - `matplotlib <http://matplotlib.org/>`_ (for PyClaw/VisClaw)
 
-See :ref:`python` for information on
+The `Anaconda Python Distribution <https://docs.continuum.io/anaconda/index>`_
+is an easy way to get all of these. 
+See :ref:`python` for more information on
 installing the required modules and to get started using Python if
 you are not familiar with it.
 
   
 
-.. _first_test:
-
-Testing your installation 
-================================================
-
-PyClaw
-------
-If you downloaded Clawpack manually, you can test your PyClaw
-installation as follows (starting from your `clawpack` directory)::
-
-    cd pyclaw
-    nosetests
-
-This should return 'OK'.
-
-Classic
--------
-As a first test of the Fortran code, try the following::
-
-    cd $CLAW/classic/tests
-    make tests
-
-This will run several tests and compare a few numbers from the solution with
-archived results.  The tests should run in a few seconds.
-
-There are similar `tests` subdirectories of `$CLAW/amrclaw` and
-`$CLAW/geoclaw` to do quick tests of these codes.
-
-See also :ref:`testing`.

@@ -1,26 +1,44 @@
-.. _first_run:
+.. _first_run_fortran:
+
+Testing your Fortran installation and running an example
+=============================================================
+
+This assumes that you have downloaded the Fortran components of Clawpack,
+see :ref:`install_fortran`.
+
+First ensure that you have :ref:`setenv`
+and that you have the :ref:`install_prerequisites`.
+
+As a first test of the Fortran code, try the following::
+
+    cd $CLAW/classic/tests
+    nosetests -sv
+
+This will run several tests and compare a few numbers from the solution with
+archived results.  The tests should run in a few seconds and 
+you should see output similar to this::
+
+    runTest (tests.acoustics_1d_heterogeneous.regression_tests.Acoustics1DHeterogeneousTest) ... ok
+    runTest (tests.acoustics_3d_heterogeneous.regression_tests.Acoustics3DHeterogeneousTest) ... ok
+    runTest (tests.advection_2d_annulus.regression_tests.Advection2DAnnulusTest) ... ok
+
+    ----------------------------------------------------------------------
+    Ran 3 tests in 4.639s
+    OK
+
+
+There are similar `tests` subdirectories of `$CLAW/amrclaw` and
+`$CLAW/geoclaw` to do quick tests of these codes.
+
 
 Running an example
-==================
+------------------
 
 Many examples of Clawpack simulations can be seen in the :ref:`galleries`.
 
-See also :ref:`first_tests`.
-
-PyClaw
-------
-To run an example and plot the results using PyClaw, simply do the following
-(starting from your `clawpack` directory)::
-
-    cd pyclaw/examples/euler_2d
-    python shock_bubble_interaction.py iplot=1
-
-That's it.  For next steps with PyClaw, see :ref:`basics`.
 
 Classic
 -------
-First ensure that you have :ref:`setenv`
-and that you have the :ref:`install_prerequisites`.
 
 A simple 1-dimensional acoustics equations can be solved
 using the code in `$CLAW/classic/examples/acoustics_1d_example1
@@ -113,4 +131,14 @@ Other visualization packages could also be used to display the results, but you 
 to figure out how to read in the data.  See :ref:`fortfiles` for information about the
 format of the files produced by Clawpack.
 
+More examples
+-------------
 
+There are additional examples in these directories:
+
+    * `$CLAW/classic/examples`
+    * `$CLAW/amrclaw/examples`
+    * `$CLAW/geoclaw/examples`
+
+You might also want to download the :ref:`apps`, which contains additional
+examples.

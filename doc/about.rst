@@ -111,9 +111,16 @@ If you use Clawpack in publications, please cite the following::
         author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
         note={Version x.y},
+        doi={10.5281/zenodo.50982},
         year={2014}}
 
 Please fill in the version number that you used, and its year.
+
+For recent releases you can also include a DOI from 
+`Zenodo <https://zenodo.org>`_ , for example
+
+    * Version 5.3.1: `10.5281/zenodo.50982 <http://dx.doi.org/10.5281/zenodo.50982>`_
+
 
 Please also cite at least one of the following regarding the algorithms used
 in Clawpack (click the links for bibtex citations):

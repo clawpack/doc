@@ -1,13 +1,14 @@
 
 .. _notebooks:
 
-IPython notebook examples
+Jupyter notebook examples
 =========================
 
-The `IPython notebook <http://ipython.org/notebook.html>`_
+The `Jupyter notebook <http://jupyter.org/>`_
+(formerly known as IPython notebook)
 is a very nice platform for illustrating Clawpack examples.
 
-If you have used Clawpack with the IPython notebook, please send us a link
+If you have used Clawpack with the Jupyter notebook, please send us a link
 or submit a pull request to the `apps repository <http://github.com/clawpack/apps>`_.
 The links below will take you to the nbviewer site, where you can view
 the notebooks as html.  You can also play animations in them and interact
@@ -49,9 +50,9 @@ here may not work with the current Clawpack.
 
 **Examples for GeoClaw:**
 
-* `IPython notebook illustrating topotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_
+* `Jupyter notebook illustrating topotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_
 
-* `IPython notebook illustrating dtopotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/dtopotools_examples.ipynb>`_
+* `Jupyter notebook illustrating dtopotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/dtopotools_examples.ipynb>`_
 
 * `IPython notebook illustrating the Okada model <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_
 
