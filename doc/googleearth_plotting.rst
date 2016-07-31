@@ -152,6 +152,8 @@ have reasonable default values.
 
   plotdata.kml_index_fname = "Chile_2010"  # name for .kmz and .kml files ["_GoogleEarth"]
 
+  plotdata.kml_user_files.append(['Santiago.kml',True])
+
   # Set to a URL where KMZ file will be published.
   # plotdata.kml_publish = None
 
@@ -200,6 +202,13 @@ have reasonable default values.
    used as axes limits when creating the PNG file.  If set to *False*,
    then axes limits set by an `axes` member of a *plotfigure*
    (e.g. *plotaxes*) will be used. Default : True.
+
+.. attribute:: kml_user_files : list
+
+   A list of extra user KML files that will be archived and opened in the top level KMZ file
+   created in the plots directory.  Append addition files, along with a boolean (`True` or `False`)
+   using `append`, as in the example above. Default : No user files are included.
+
 
 
 plotfigure attributes
