@@ -18,11 +18,8 @@ follow important features in the solution.}
 
 \begin{figure}[tb]
     \centering
-    \includegraphics[width=\textwidth, trim=40 80 40 70, clip]{./figures/shockbubble_grids.png}
-    \caption{\revised{An illustration of grid and cell layout for an
-    axisymmetric Euler gas shock bubble interaction.  The illustration shows
-    cells on levels one and two and only grid outlines on levels three and
-    four.}}
+    \includegraphics[width=0.6\textwidth, trim=40 80 40 70, clip]{final_submission/Fig1.png}
+    \caption{\revised{An illustration showing grid cells on levels one and two, and only grid outlines on levels three and four.}}
     \label{fig:figure1}
 \end{figure}
 
@@ -87,15 +84,15 @@ shallow coastal regions, so a large refinement ratio in space does not
 lead to a large refinement ratio in time.
 
 \amrclaw has been parallelized using OpenMP directives. \revised{The main
-paradigm in structured AMR is an outer loop over levels of refinement, and in
-inner loop overall grids at that level, where \revised{the same} operation is
+paradigm in structured AMR is an outer loop over levels of refinement, and an
+inner loop over all grids at that level, where \revised{the same} operation is
 performed on each grid (i.e. taking a time step, finding ghost cells,
 conservation updates, etc.).  This inner loop is parallelized using a {\tt
-parallel for} loop construct one thread is assigned to operate on one grid.
+parallel for} loop construct.  One thread is assigned to operate on one grid.
 Dynamic scheduling is used with a chunk size of one.  To help with load
 balancing, grids at each level are sorted from largest to smallest, using the
-total number of cells in the grid as an indicator of work.  In addition there is
-a grids are limited to a maximum of 32 cells in each dimension, otherwise they
+total number of cells in the grid as an indicator of work.  In addition the
+grids are limited to a maximum of 32 cells in each dimension, otherwise they
 are bisected until this condition is met.}  Note that this approach causes a
 memory bulge. Each thread must have its own scratch arrays to save the incoming
 and outgoing waves and fluxes for future conservation fix-ups. The bulge is
@@ -107,7 +104,7 @@ to increase the limit may be necessary.
 three-dimensional shock-bubble interaction problem found in the \clawpack
 \texttt{apps} repository, illustrating localized phenomena requiring adaptive
 refinement. In \cref{fig:amr_scaling} we show scalability tests and some timings
-for this example, when run on a 40 core Intel Xeon Haswell machine 
+for this example, when run on a 24 core Intel Xeon Haswell machine
 \revised{(E5-2670v3 at 2.3 GHz)}, using
 \texttt{KMP\_AFFINITY compact} \revised{with one thread per core}.
 For timing purposes, the only modifications made to the input parameters was to
@@ -116,17 +113,17 @@ of the wall clock time is in the integration routine (\texttt{stepgrid}), which
 closely tracks the total time. The second chunk of time is in the regridding,
 which contains algorithms that are not completely scalable. Very little time is
 in the filling of ghost cells, mostly from other patches but also includes those
-at domain boundaries. The efficiency is above 80\% until 24 cores, then drops
-off dramatically. Note that there are only two grids on level, and an average of
+at domain boundaries. The efficiency is above 80\% until 24 cores.
+Note that there are only two grids on level, and an average of
 22.8 level 2 grids. Most of the work is on level 3 grids, where there are an
-average of 138.1 grids over all the level 3 timestep.  This is very coarse for
-large numbers of cores (hence the dropoff in efficiency). At 40 cores, there are
-less than 4 grids per core, and the grids are very different sizes.
+average of 138.1 grids over all the level 3 timestep.  At 24 cores, there are
+on average 5.8 grids per core, and the grids are very different sizes.
 
 \begin{figure}[t]
   \begin{center}
-    \plotbox{\includegraphics[width=0.45\textwidth]{f1.png}}\hfil
-    \plotbox{\includegraphics[width=0.45\textwidth]{f4.png}}
+    \includegraphics[width=\textwidth]{figures/final_submission/Fig2}
+    % \plotbox{\includegraphics[width=0.45\textwidth]{f1.png}}\hfil
+    % \plotbox{\includegraphics[width=0.45\textwidth]{f4.png}}
   \end{center}
 \caption{\amrclaw example demonstrating a
   shock-bubble interaction in the Euler equations of compressible
@@ -141,14 +138,15 @@ less than 4 grids per core, and the grids are very different sizes.
 \begin{figure}[h]
   \begin{center}
     % \includegraphics[width=0.45\textwidth]{amr_scaling}
-    \plotbox{\includegraphics[width=0.4\textwidth,
-      clip=true,trim=0cm 1cm 1cm 2cm]{newcpu.pdf}}\hfil
-    \plotbox{\includegraphics[width=0.4\textwidth,
-      clip=true,trim=0cm 1cm 1cm 2cm]{efficiency.pdf}}
+    % \plotbox{\includegraphics[width=0.4\textwidth,
+    %   clip=true,trim=0cm 1cm 1cm 2cm]{newcpu.pdf}}\hfil
+    % \plotbox{\includegraphics[width=0.4\textwidth,
+    %   clip=true,trim=0cm 1cm 1cm 2cm]{efficiency.pdf}}
+    \includegraphics[width=\textwidth]{final_submission/Fig3.pdf}
   \end{center}
-  \caption{Left is strong scaling results for the \amrclaw example shown in
+  \caption{(a) Strong scaling results for the \amrclaw example shown in
     \cref{fig:shockbubble}.
-    Right is plot of efficiency based on total computational time.}
+    (b) Plot of efficiency based on total computational time.}
   \label{fig:amr_scaling}
 \end{figure}
 

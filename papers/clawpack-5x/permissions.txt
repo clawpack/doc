@@ -1,0 +1,10 @@
+
+fig:ocosta - Google maps image cited following
+  https://www.google.com/permissions/geoguidelines/attr-guide.html
+
+fig:meager - Figure from Allstadt paper allowed under AGU reuse policy of
+  http://publications.agu.org/author-resource-center/terms-of-use/
+
+fig:oso - Figure from Iverson, George, et al. allowed since paper was
+  published CC BY NC ND, see OsoFigurePermission.png
+
