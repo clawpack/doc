@@ -152,6 +152,8 @@ have reasonable default values.
 
   plotdata.kml_index_fname = "Chile_2010"  # name for .kmz and .kml files ["_GoogleEarth"]
 
+  plotdata.kml_user_files.append(['Santiago.kml',True])  # Extra user defined file.
+
   # Set to a URL where KMZ file will be published.
   # plotdata.kml_publish = None
 
@@ -200,6 +202,25 @@ have reasonable default values.
    used as axes limits when creating the PNG file.  If set to *False*,
    then axes limits set by an `axes` member of a *plotfigure*
    (e.g. *plotaxes*) will be used. Default : True.
+
+.. attribute:: kml_user_files : list
+
+   A list of extra user KML files to be archived along with image
+   files and other plotting artifacts created by the VisClaw
+   GoogleEarth plotting routines.  These user files can contain, for
+   example, additional placemarks, polygons, paths or other geographic
+   features of relevance to the simulation.  These geographic features
+   will be copied to the KMZ archive and viewable in GoogleEarth,
+   along with the results of the GeoClaw simulation.
+
+   The additional files to be archived are assumed to exist in the
+   working directory (i.e. the directory containing the plots and
+   output directories).  For each file to be included, append a list
+   of the form `[filename, visibility]` where `filename` is the KML
+   file name (with the `.kml` extension) and `visibility` is either *True* or
+   *False*.  Append this list to the *plotdata* attribute, as in the
+   example above.  Default : No user files are included.
+
 
 
 plotfigure attributes
