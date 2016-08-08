@@ -71,6 +71,7 @@ errors.
 
 .. _gdal_test.py: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/gdal_test.py
 .. _frame0005fig1.png: http://math.boisestate.edu/~calhoun/visclaw/GoogleEarth/frame0005fig1.png
+.. _GDAL install bug: https://github.com/ContinuumIO/anaconda-issues/issues/951
 
 **Test your installation.** You can test your installation of the
 `GDAL` library by downloading the script `gdal_test.py`_ and
@@ -94,6 +95,18 @@ You should get the output::
 
 This test will create an image pyramid in the directory `frame0005fig1` and an associated
 `doc.kml` file which you can open in Google Earth.
+
+**NOTE (8/1/16)** The latest release of the Anaconda GDAL library is not fully version compatible with
+its dependencies.  If you receive an error that ends with::
+
+    % Reason: Incompatible library version: libgdal.20.dylib requires version 8.0.0 or later, but liblzma.5.dylib provides version 6.0.0
+
+you should install a new version of the `xz` library::
+
+    % conda install xz
+
+This bug can be tracked at `GDAL install bug`_.
+
 
 An example : The Chile 2010 tsunami event
 =========================================
