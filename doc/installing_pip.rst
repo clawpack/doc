@@ -77,7 +77,7 @@ The recommended way to install the latest release of Clawpack, for
 using PyClaw and/or the Fortran packages, is to give the following pip
 install command::  
 
-    pip install --src=$HOME/src -e git+git@github.com:clawpack/clawpack.git@v5.3.1#egg=clawpack
+    pip install --src=$HOME/src -e git+https://github.com/clawpack/clawpack.git@v5.3.1#egg=clawpack
 
 This will install Clawpack into the directory `$HOME/src/clawpack`, or the
 installation directory can be changed by modifying the `--src` target
