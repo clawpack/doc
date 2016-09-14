@@ -49,23 +49,55 @@ The pages below give some tips for those who want to get involved.
   <https://groups.google.com/forum/#!forum/claw-dev>`_
   to track discussion on the code.
 
-.. _workshops:
+.. _tutorials:
 
-Workshops and Sprint Sessions
------------------------------
+User Workshops, Clinics, and Tutorials
+---------------------------------------
 
 Upcoming
 ^^^^^^^^
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- Claw-Dev workshop in September (?), 2015 (Date and location TBD).
+-  Minisymposterium on Clawpack and GeoClaw at 
+   at the `SIAM CSE 2017 Conference <http://www.siam.org/meetings/cse17>`_,
+   February/March, 2017.
+
+- Tutorial on storm surge modeling with GeoClaw, Tulane University, April, 2017.
+
+Recent
+^^^^^^^^
+
+- `Clinic at the CSDMS Annual Meeting
+  <http://csdms.colorado.edu/wiki/CSDMS_2016_annual_meeting_Randy_LeVeque>`_ 
+  in Boulder, CO, May 2016.
+-  Minisymposterium on 
+   `Clawpack Development, Extensions and Applications
+   <http://depts.washington.edu/clawpack/posters/siam_cse_2015/>`_
+   at the `SIAM CSE 2015 Conference <http://www.siam.org/meetings/cse15/submissions.php>`_
+
+
+.. _workshops:
+
+Developer Workshops and Sprint Sessions
+----------------------------------------
+
+Upcoming
+^^^^^^^^
+
+Please join us at one of the upcoming sessions, or help plan one elsewhere...
+
+- GeoClaw Developers' workshop at `CSDMS
+  <http://csdms.colorado.edu>`_, tentatively planned for autumn, 2017.
 
 Previous
 ^^^^^^^^
 
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
+
+- Developers' workshop at the University of Washington, August
+  `2016 <http://www.clawpack.org/clawdev-2016/>`_.
 
 - Developers' workshop at the University of Utah in 
   `2015 <https://github.com/clawpack/clawpack/wiki/Claw-Dev-Hackathon,-March-2015>`_, 
@@ -82,9 +114,4 @@ have been tackled (and/or are still work in progress).
 
 Other Clawpack events
 ---------------------
-
--  Minisymposterium on 
-   `Clawpack Development, Extensions and Applications
-   <http://depts.washington.edu/clawpack/posters/siam_cse_2015/>`_
-   at the `SIAM CSE 2015 Conference <http://www.siam.org/meetings/cse15/submissions.php>`_
 
