@@ -35,8 +35,6 @@ Installation Prerequisites
 
 See :ref:`fortran_compilers` for more about which compilers work well with
 Clawpack.
-For Mac OSX, see `hpc.sourceforge.net <http://hpc.sourceforge.net/>`_ for
-some installation options.
 
 **Python:**
 
