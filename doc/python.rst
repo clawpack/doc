@@ -85,8 +85,7 @@ References and tutorials
 
 Some useful links to get started learning Python:
 
-   * `Enthought Python Distribution <http://www.enthought.com/products/epd.php>`_
-   * `Dive Into Python <http://www.diveintopython.org/>`_
+   * `Dive Into Python <http://www.diveintopython.net/>`_
 
    * `Python tutorial <http://www.python.org/doc/tut/>`_
    * `NumPy User Guide <http://docs.scipy.org/doc/numpy/user/>`_
@@ -94,7 +93,7 @@ Some useful links to get started learning Python:
    * `SciPy Reference Guide <http://docs.scipy.org/doc/scipy/reference/>`_
    * `Matplotlib gallery <http://matplotlib.sourceforge.net/gallery.html>`_
    * `LeVeque's class notes
-   * <http://faculty.washington.edu/rjl/classes/am583s2013/notes/python.html>`_ 
+     <http://faculty.washington.edu/rjl/classes/am583s2014/notes/python.html>`_ 
    * `Langtangen's book <http://folk.uio.no/hpl/scripting/>`_ and
      `Introductory slides <http://heim.ifi.uio.no/~hpl/scripting/all-nosplit/>`_
 
@@ -103,18 +102,4 @@ Notebooks
 ---------
 
 See :ref:`notebooks`.
-
-Sage
-----
-
-`Sage <http://www.sagemath.org/>`_ is an open source mathematics software 
-collection with its own interface and notebook system.  It is based on
-Python and the full distribution contains in particular
-the Python modules needed for Clawpack.
-
-You can try Sage directly from the
-web without downloading, click on "Try Sage Online" link on the
-`Sage <http://www.sagemath.org/>`_ webpage.
-
-We are working on incorporating Pyclaw into Sage as an optional package.
 

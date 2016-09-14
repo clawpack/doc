@@ -7,24 +7,39 @@ Testing your installation
 
 PyClaw
 ------
+If you downloaded Clawpack manually, you can test your :ref:`pyclaw`
+installation as follows (starting from your `clawpack` directory)::
 
-Regression tests can be performed via::
 
-    cd $CLAW/pyclaw
+    cd pyclaw
     nosetests
 
-Fortran codes
--------------
+This should return 'OK'.
 
-Many repositories have a subdirectory named `tests` that contain a few
-regression tests that run very quickly and check that a few numbers
-determined from the solution agree with values stored in the example
-directories.  For example, to run some quick tests of `amrclaw`::
+Classic
+-------
+As a first test of the Fortran code, try the following::
 
-    cd $CLAW/amrclaw/tests
-    make tests
+    cd $CLAW/classic/tests
+    nosetests -sv
 
-will run several tests and report the results.
+
+This will run several tests and compare a few numbers from the solution with
+archived results.  The tests should run in a few seconds and 
+you should see output similar to this::
+
+    runTest (tests.acoustics_1d_heterogeneous.regression_tests.Acoustics1DHeterogeneousTest) ... ok
+    runTest (tests.acoustics_3d_heterogeneous.regression_tests.Acoustics3DHeterogeneousTest) ... ok
+    runTest (tests.advection_2d_annulus.regression_tests.Advection2DAnnulusTest) ... ok
+
+    ----------------------------------------------------------------------
+    Ran 3 tests in 4.639s
+    OK
+
+
+There are similar `tests` subdirectories of `$CLAW/amrclaw` and
+`$CLAW/geoclaw` to do quick tests of these codes.
+
 
 More extensive tests can be performed by running all of the examples in the
 `examples` directory and comparing the resulting plots against those

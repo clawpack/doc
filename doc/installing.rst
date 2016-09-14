@@ -1,8 +1,11 @@
 .. _installing:
 
 **************************************
-Installation instructions
+Installation instructions (original)
 **************************************
+
+For a simplified approach that is still being tweaked, see
+:ref:`installing_pip`.
 
 .. contents::
    :depth: 2
