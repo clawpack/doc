@@ -4,6 +4,13 @@
 Clawpack Community Photos
 =========================
 
+`2016 Developers' workshop at University of Washington <http://www.clawpack.org/clawdev-2016/>`_
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+.. image :: photos/Claw-Dev2016.jpg
+   :width: 20cm
+
 `2015 Developers' workshop at University of Utah <https://github.com/clawpack/clawpack/wiki/Claw-Dev-Hackathon,-March-2015>`_
 ---------------------------------------------------------------------------------------------------------------------------------
 
