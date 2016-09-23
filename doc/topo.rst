@@ -120,10 +120,12 @@ The recognized topotypes are:
   **topotype = 4**
 
     This file type is not ASCII but rather in a NetCDF4 format supported by the
-    `CF MetaData conventions (v. 1.6)`<http://http://cfconventions.org>. Files 
+    `CF MetaData conventions (v. 1.6) <http://cfconventions.org>`_. Files 
     that conform to this standard can be read in by GeoClaw.  The `topotools`
     module also has support for reading and writing (including therefore 
-    conversion) of these types of bathymetry files.
+    conversion) of these types of bathymetry files.  To use this functionality
+    you will need to add *-DNETCDF* to the *FFLAGS* variable either by the
+    command line or in the Makefile.
 
 The Fortran code will recognize headers for *topotype* 2
 or 3 that have the labels first and then the parameter values.  Note that
