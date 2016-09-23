@@ -112,12 +112,20 @@ The recognized topotypes are:
       -1000.  -1000.
       -1000.  -1000.
 
-This is essentially the same as the `ESRI ASCII Raster format
-<http://resources.esri.com/help/9.3/arcgisengine/java/GP_ToolRef/spatial_analyst_tools/esri_ascii_raster_format.htm>`_
-except that the Fortran code assumes the parameter values come first rather
-than the labels.
+    This is essentially the same as the `ESRI ASCII Raster format
+    <http://resources.esri.com/help/9.3/arcgisengine/java/GP_ToolRef/spatial_analyst_tools/esri_ascii_raster_format.htm>`_
+    except that the Fortran code assumes the parameter values come first rather
+    than the labels.
 
-**New in 5.3.0:** The Fortran code will recognize headers for *topotype* 2
+  **topotype = 4**
+
+    This file type is not ASCII but rather in a NetCDF4 format supported by the
+    `CF MetaData conventions (v. 1.6)`<http://http://cfconventions.org>. Files 
+    that conform to this standard can be read in by GeoClaw.  The `topotools`
+    module also has support for reading and writing (including therefore 
+    conversion) of these types of bathymetry files.
+
+The Fortran code will recognize headers for *topotype* 2
 or 3 that have the labels first and then the parameter values.  Note that
 the label strings are ignored in either case, the order of lines 
 is important.
