@@ -18,6 +18,17 @@ Changes relative to Clawpack 5.3.1 (November 9, 2015) are shown below.
 Changes to classic
 ------------------
 
+**Makefile structure.** The `Makefile` in all examples and tests have been
+modified to rely on a common list of library source code files,
+rather than listing all of these in every `Makefile`.  Capabilites include
+the ability to specify whether a library file should be replaced
+by one from the local directory.  This is cleaner and will make it
+easier to update code in the future -- if a new library routine is
+required only one master list needs updating rather than the
+`Makefile` in every example and users' application directories.
+See :ref:`makefiles_library` for more details on how to specify
+local files in place of default library files.
+
 
 See `classic diffs
 <https://github.com/clawpack/classic/compare/v5.3.1...master>`_
