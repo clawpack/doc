@@ -31,6 +31,17 @@ See `clawutil diffs
 Changes to visclaw
 ------------------
 
+**Parallel Plotting in setplot.py.**
+A new capability to plot  mutiple frames at once  on a multicore machine
+when doing `make plots` using `setplot.py` (i.e. not interactive) 
+has been added.  To use this feature you need to
+
+  1. add the line `plotdata.parallel = True`,  usually at the 
+     bottom of setplot.py
+
+  2. you need to set the environment variable `OMP_NUM_THREADS` or the
+     default is to use only one thread.
+
  
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.3.1...master>`_
