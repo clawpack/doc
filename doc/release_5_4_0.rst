@@ -77,17 +77,33 @@ Changes to visclaw
 ------------------
 
 **Parallel Plotting in setplot.py.**
-A new capability to plot  mutiple frames at once  on a multicore machine
-when doing `make plots` using `setplot.py` (i.e. not interactive) 
-has been added.  To use this feature you need to
+A new capability has been added to plot multiple frames at once  on
+a multicore machine when doing `make plots` (i.e. not interactive).
+The png files for different frames can be simultaneously generated.
+To use this feature you need to:
 
-  1. add the line `plotdata.parallel = True`,  usually at the 
-     bottom of setplot.py
+ - Add the line `plotdata.parallel = True` (usually at the 
+   bottom) to `setplot.py`.
 
-  2. you need to set the environment variable `OMP_NUM_THREADS` or the
-     default is to use only one thread.
+and then *either*:
 
- 
+ - Add the line `plotdata.num_procs = 4` (or however many processes you
+   wish to use), or
+
+ - Alternatively you can set the shell environment variable 
+   `OMP_NUM_THREADS` to the number of processes desired.  
+
+The value specified by `OMP_NUM_THREADS` is used only if
+`plotdata.num_procs` is not set.  If neither is set, the default
+is to use only one process.
+
+**Gauge plots.** 
+Updates to go with improvements to how gauges are handled.
+
+**KML files for GeoClaw output.**
+Some improvements have been made to the capabilities for creating KML and
+KMZ files for plotting on Google Earth or with other GIS tools.
+
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.3.1...master>`_
 
