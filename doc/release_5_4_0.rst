@@ -14,11 +14,23 @@ Clawpack 5.4.0 will be released on TBA.  See :ref:`installing`.
 
 Changes relative to Clawpack 5.3.1 (November 9, 2015) are shown below.
 
+.. _release_5_4_0_global:
 
-Changes to classic
-------------------
+Global changes
+--------------
 
-**Makefile structure.** The `Makefile` in all examples and tests have been
+**Python 3 compatibility.** Python code in all repositories has been updated so
+that it should work with either Python 2 or Python 3.  In particular the
+statements::
+
+    from __future__ import absolute_import
+    from __future__ import print_function
+
+have been added and print statements have been replaced by print functions.
+Various other minor changes were also required.
+
+**Makefile structure for Fortran codes.** 
+The `Makefile` in all Fortran examples and tests has been
 modified to rely on a common list of library source code files,
 rather than listing all of these in every `Makefile`.  Capabilites include
 the ability to specify whether a library file should be replaced
@@ -29,12 +41,34 @@ required only one master list needs updating rather than the
 See :ref:`makefiles_library` for more details on how to specify
 local files in place of default library files.
 
+**Better support for gauges.**
+@mandli will write something.
+
+**Updated regression testing framework for Fortran.**
+The Fortran code uses an updated framework and so the regression data has
+changed.
+
+Changes to classic
+------------------
+
+**Makefile structure.** See discussion above, under
+:ref:`release_5_4_0_global`.
 
 See `classic diffs
 <https://github.com/clawpack/classic/compare/v5.3.1...master>`_
 
 Changes to clawutil
 -------------------
+
+**Makefile structure.** The `Makefile.common` was updated to support the
+changes described in the discussion above, under
+:ref:`release_5_4_0_global`.
+
+**Better support for gauges.**  
+New supporting code added.
+
+**Updated regression testing framework for Fortran.**
+New supporting code added.
 
 See `clawutil diffs
 <https://github.com/clawpack/clawutil/compare/v5.3.1...master>`_
@@ -54,6 +88,9 @@ See `riemann diffs
 
 Changes to amrclaw
 ------------------
+
+**Makefile structure.** See discussion above, under
+:ref:`release_5_4_0_global`.
 
 **Ghost Cell  (filpatch) Filling.**
 A list of the neighboring grids at same the level of refinement 
@@ -85,6 +122,10 @@ See `amrclaw diffs
 
 Changes to geoclaw
 ------------------
+
+**Makefile structure.** See discussion above, under
+:ref:`release_5_4_0_global`.
+
 The changes in amrclaw titled **Ghost Cell  (filpatch) Filling**,
 **Proper Nesting** and **Output Formats**
 also affect geoclaw. See notes above.
@@ -103,6 +144,8 @@ See `geoclaw diffs
 Changes to PyClaw
 ------------------
 
+**Python 3 compatibility.** See discussion above, under
+:ref:`release_5_4_0_global`.
 
 For changes in PyClaw, see the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
