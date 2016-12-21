@@ -10,6 +10,12 @@ Makefiles for the Fortran code in many repositories
 use the common Makefile found in `$CLAW/clawutil/src/Makefile.common`,
 so you must have the `clawutil` repository.
 
+**New in 5.4.0.** The `Makefile` also typically refers to a common list of
+library routines needed for this particular example or application code,
+rather than listing all the files individually in every `Makefile`.  See
+:ref:`makefiles_library` for more details on how to specify local files in
+place of library files if you need to replace a default file.
+
 In most directories with a `Makefile` you can type::
 
     $ make help

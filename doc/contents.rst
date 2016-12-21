@@ -53,12 +53,14 @@ Using the Fortran codes
 
    fortran
    fortran_compilers
+   f77_vs_f90
    user_routines
    openmp
    timing
    python
    notebooks
    makefiles
+   makefiles_library
    application_documentation
    setrun
    setrun_sample

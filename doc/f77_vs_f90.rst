@@ -1,0 +1,13 @@
+
+.. _f77_vs_f90:
+
+
+=====================================
+Fortran 77 vs. Fortran 90 files
+=====================================
+
+- Summarize differences between `.f` and `.f90` files.
+
+- Describe what happens if `filename.f` and `filename.f90` exist in the same
+  directory.
+
