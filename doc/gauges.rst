@@ -64,13 +64,12 @@ where level is the AMR level used to determine the q values at this time.
 Internally the finest level available at each gauge is used, with bilinear
 interpolation to the gauge locations from the 4 nearest cell centers.
 
-.. If you wish to change what is output at these points, you should copy the library
-.. routine `dumpgauge.f` to your own directory and modify it appropriately.
-
-The output that is in the gauge files can be controlled by a variety of parameters.  These can be specified on a per gauge basis or set for all gauges specified.  The output parameters are
+The output that is in the gauge files can be controlled by a variety of
+parameters.  These can be specified on a per gauge basis or set for all gauges
+specified.  The output parameters are
 
 - *file_format* : Specifies the file format of the gauge data.  Currently
-  *"ASCII"* is the only value accepted.
+  *"ascii"* is the only value accepted.
 - *display_format* : Specifies the format of the numbers written to the gauge
   file for each field.  These are Fortran format strings defaulting to
   *"e15.7"*.
@@ -80,11 +79,15 @@ The output that is in the gauge files can be controlled by a variety of paramete
   Specify as a list the indices that should be output. Defaults to *"none"*
 - *min_time_increment* : Specify a minimum amount of time that should pass
   before recording the values at a gauge.  This can be useful for decreasing
-  the amount of output at a gauge location that is currently being time-
-  stepped at small increments.  The default is *0* which effectively turns off
-  this constraint.
+  the amount of output at a gauge location that is currently being 
+  time-stepped at small increments.  The default is *0* which effectively 
+  turns off this constraint.
 
-Setting these values can be done in multiple ways for convenience.  The most direct way is via a dictionary with the keys as the gauge ids and the corresponding parameter as the value.  For example, if we had 3 gauges with ids 3, 7, 13 we could specify that they all use the display format *e26.16* by setting::
+Setting these values can be done in multiple ways for convenience.  The most
+direct way is via a dictionary with the keys as the gauge ids and the
+corresponding parameter as the value.  For example, if we had 3 gauges with
+ids 3, 7, 13 we could specify that they all use the display format *e26.16* by
+setting::
 
     gaugedata.display_format = "e26.16"
 
@@ -95,7 +98,8 @@ or::
 to set gauge 3's display format to "e26.16", leave gauge 7 set to the default
 and  set 13's to "e8.6".  For the parameters *q_out_fields* and
 *aux_out_fields* one can also specify *"all"* to output all fields or *"none"*
-to specify none of them (equivalent to an empty list of indices).
+to specify none of them (equivalent to an empty list of indices).  Both of
+these arrays use Python indexing, i.e. they start at 0.
 
 **Note** for GeoClaw that we also output the sea-surface value after the q
 fields.
