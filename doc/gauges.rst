@@ -12,8 +12,6 @@ it is possible to specify gauge locations as points (x,y) where the values of al
 components of q should be output every time step during the computation over some
 time range (t1,t2).  
 
-**Still need to add to 3d AMRClaw code, and to Classic codes.**
-
 Gauges are useful in several ways, e.g.:
 
  1. To compare computational results to measurements from 
@@ -66,9 +64,47 @@ where level is the AMR level used to determine the q values at this time.
 Internally the finest level available at each gauge is used, with bilinear
 interpolation to the gauge locations from the 4 nearest cell centers.
 
-If you wish to change what is output at these points, you should copy the library
-routine `dumpgauge.f` to your own directory and modify it appropriately.
+The output that is in the gauge files can be controlled by a variety of
+parameters.  These can be specified on a per gauge basis or set for all gauges
+specified.  The output parameters are
 
+- *file_format* : Specifies the file format of the gauge data.  Currently
+  *"ascii"* is the only value accepted.
+- *display_format* : Specifies the format of the numbers written to the gauge
+  file for each field.  These are Fortran format strings defaulting to
+  *"e15.7"*.
+- *q_out_fields* : Specifies which fields of the q array to output. Specify as
+  a list the indices that should be output.  Defaults to *"all"*.
+- *aux_out_fields* : Specifies which fields of the aux array to output.
+  Specify as a list the indices that should be output. Defaults to *"none"*
+- *min_time_increment* : Specify a minimum amount of time that should pass
+  before recording the values at a gauge.  This can be useful for decreasing
+  the amount of output at a gauge location that is currently being 
+  time-stepped at small increments.  The default is *0* which effectively 
+  turns off this constraint.
+
+Setting these values can be done in multiple ways for convenience.  The most
+direct way is via a dictionary with the keys as the gauge ids and the
+corresponding parameter as the value.  For example, if we had 3 gauges with
+ids 3, 7, 13 we could specify that they all use the display format *e26.16* by
+setting::
+
+    gaugedata.display_format = "e26.16"
+
+or::
+
+    gaugedata.display_format = {3:"e26.16", 13:"e8.6"}
+
+to set gauge 3's display format to "e26.16", leave gauge 7 set to the default
+and  set 13's to "e8.6".  For the parameters *q_out_fields* and
+*aux_out_fields* one can also specify *"all"* to output all fields or *"none"*
+to specify none of them (equivalent to an empty list of indices).  Both of
+these arrays use Python indexing, i.e. they start at 0.
+
+**Note** for GeoClaw that we also output the sea-surface value after the q
+fields.
+In the case of the multilayer code the eta for each surface follows the q
+fields for that layer.
 
 .. warning:: When doing a restart, previous gauge output is deleted unless
    you are careful to preserve it.  See :ref:`restart_output`.

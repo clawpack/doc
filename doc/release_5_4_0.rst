@@ -41,8 +41,20 @@ required only one master list needs updating rather than the
 See :ref:`makefiles_library` for more details on how to specify
 local files in place of default library files.
 
-**Better support for gauges.**
-@mandli will write something.
+**Improved Gauge Output Options**
+Gauges now support a number of additional output options including:
+
+ - specification of output fields, i.e. you can now specify the q and aux
+   fields that are output;
+ - specification of output field format, i.e. you can now specify the number
+   of digits to output;
+ - a minimum length of time at which a gauge is allowed to output, i.e. if
+   this was set to 10 time units then the gauge would only output every 10
+   time units or longer;
+ - support for future file format specifications (only ASCII is supported now);
+ - some header info to reflect what is in the file has been added; and
+ - a refactor of how the code stores gauge data in the Fortran
+   *gauges_module.f90* source file.
 
 **Updated regression testing framework for Fortran.**
 The Fortran code uses an updated framework and so the regression data has
