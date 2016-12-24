@@ -131,7 +131,12 @@ Fortran source files with the same base name but different suffixes can cause
 unexpected source files to be compiled.  This occurs as the Makefiles are
 structured to use the free-format Fortran source files **.f90* before the
 fixed-format source files with *.f*.  For example, if someone specified
-*qinit.f* in the Makefile but there was *qinit.f90* file that had already been
-compiled then the compiler would assume that object file is up to date.  The
-simple fix for this is to make sure to run *make new* to ignore all the old
-object files and recompile all the source in the Makefile.
+*qinit.f* in the Makefile but there was a *qinit.f90* file that existed in the
+same directory then the compiler would compile the **f90** file instead of the
+**f** file. 
+
+The best way to avoid this problem is to check periodically whether you may
+have conlicting source via the **make debug** command which should list
+possible conflicts.  Note that this command will also list sources that may
+not be in conflict.  If you do have conflicting source either remove the
+**f90** file, rename it, or convert the **f** file into a **f90** file.
