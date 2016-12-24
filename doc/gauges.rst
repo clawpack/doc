@@ -90,14 +90,16 @@ corresponding parameter as the value.  For example, if we had 3 gauges with
 ids 3, 7, 13 we could specify that they all use the display format *e26.16* by
 setting::
 
-    gaugedata.display_format = "e26.16"
+    rundata.gaugedata.display_format = "e26.16"
 
 or::
 
-    gaugedata.display_format = {3:"e26.16", 13:"e8.6"}
+    rundata.gaugedata.display_format = {3:"e26.16", 13:"e8.6"}
 
 to set gauge 3's display format to "e26.16", leave gauge 7 set to the default
-and  set 13's to "e8.6".  For the parameters *q_out_fields* and
+and  set 13's to "e8.6".  
+
+For the parameters *q_out_fields* and
 *aux_out_fields* one can also specify *"all"* to output all fields or *"none"*
 to specify none of them (equivalent to an empty list of indices).  Both of
 these arrays use Python indexing, i.e. they start at 0.
