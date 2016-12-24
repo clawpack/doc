@@ -8,7 +8,12 @@ Troubleshooting
 
 .. _trouble_installation:
 
-Troubleshooting: Installation
+Troubleshooting Installation
++++++++++++++++++++++++++++++
+
+.. todo: Need to add something about installation problems.
+
+Troubleshooting Fortran:
 +++++++++++++++++++++++++++++
 
 Setting the Fortran compiler to be used by f2py (pip)

@@ -5,6 +5,9 @@
 Bibliography
 **************
 
+See also `www.geoclaw.org <http://www.geoclaw.org>`_ for papers, posters, and
+other resources for GeoClaw.
+
 Papers describing the Clawpack software and algorithms
 ------------------------------------------------------
 
@@ -178,6 +181,26 @@ Papers describing the Clawpack software and algorithms
             Pages = {C210--C231},
             Volume = {34},
             Year = {2012}}
+
+
+.. [MandliEtAl2016]
+   Kyle T. Mandli, Aron J. Ahmadia, Marsha Berger, Donna Calhoun, David L.
+   George, Yiannis Hadjimichael, David I. Ketcheson, Grady I. Lemoine, Randall J. LeVeque, 
+   Clawpack: building an open source ecosystem for solving hyperbolic PDEs 
+   PeerJ Computer Science 2 (2016), e68::
+
+        @article{mandli2016clawpack,
+          title={Clawpack: building an open source ecosystem for solving hyperbolic PDEs},
+          author={Mandli, Kyle T and Ahmadia, Aron J and Berger, Marsha and Calhoun, Donna
+            and George, David L and Hadjimichael, Yiannis and Ketcheson, David I
+            and Lemoine, Grady I and LeVeque, Randall J},
+          journal={PeerJ Computer Science},
+          volume={2},
+          pages={e68},
+          year={2016},
+          publisher={PeerJ Inc.},
+          doi={10.7717/peerj-cs.68} }
+
 
 Papers describing applications
 ------------------------------

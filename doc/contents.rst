@@ -15,15 +15,19 @@ Overview and Getting Started
    
    about
    changes
-   installing
-   first_run
-   license
-   trouble
+   previous
    packages
+   installing
+   installing_pip
+   first_run
    clawpack_components
+   trouble
+
+.. toctree::
+   :maxdepth: 1
+   
    vm
    aws
-   previous
 
 
 
