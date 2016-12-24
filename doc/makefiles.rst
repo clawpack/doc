@@ -123,3 +123,15 @@ recompile with the `-g` flag for debugging::
     $ make new FFLAGS=-g
 
 See :ref:`fortran_compilers` for more about compiler flags.
+
+Duplicate Base Source Name
+++++++++++++++++++++++++++
+
+Fortran source files with the same base name but different suffixes can cause
+unexpected source files to be compiled.  This occurs as the Makefiles are
+structured to use the free-format Fortran source files **.f90* before the
+fixed-format source files with *.f*.  For example, if someone specified
+*qinit.f* in the Makefile but there was *qinit.f90* file that had already been
+compiled then the compiler would assume that object file is up to date.  The
+simple fix for this is to make sure to run *make new* to ignore all the old
+object files and recompile all the source in the Makefile.
