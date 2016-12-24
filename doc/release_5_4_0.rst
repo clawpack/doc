@@ -41,8 +41,15 @@ required only one master list needs updating rather than the
 See :ref:`makefiles_library` for more details on how to specify
 local files in place of default library files.
 
+It is also no longer necessary to set the `Makefile` variable
+`RESTART` to `True` or `False`.  Instead you can set it to `None` (or omit
+setting it at all, since this is the default), in which case the `setrun.py`
+file will be used to determine if this is a restart run (in which case
+the previous output directory should be added to, rather than replaced).
+
 **Improved Gauge Output Options**
-Gauges now support a number of additional output options including:
+:ref:`gauges` in `amrclaw` and `geoclaw` now support a number of additional 
+output options including:
 
  - specification of output fields, i.e. you can now specify the q and aux
    fields that are output;
@@ -52,9 +59,31 @@ Gauges now support a number of additional output options including:
    this was set to 10 time units then the gauge would only output every 10
    time units or longer;
  - support for future file format specifications (only ASCII is supported now);
- - some header info to reflect what is in the file has been added; and
- - a refactor of how the code stores gauge data in the Fortran
-   *gauges_module.f90* source file.
+
+Other improvements to gauge handling include:
+
+ - a refactor of how the code stores gauge data has been done in the Fortran
+   *gauges_module.f90* source file in each library.
+
+ - Gauge output is accumulated in a buffer internally and written out
+   intermitently, instead of writing to disk every time step.
+   (The parameter `MAX_BUFFER` in the `amrclaw` library routines 
+   `gauges_module.f90` controls the size of this buffer.)
+
+ - The gauge output for the gauges is written to distinct files in the
+   output directory, e.g. `gauge00001.txt` for gauge number 1.  In previous
+   versions of Clawpack all gauges were written to a single file
+   `fort.gauge`.  The new approach allows gauges to be written in parallel and
+   also facilitates reading in a single gauge more quickly.
+
+ - Some header info appears in each of these files to describe the gauge
+   output.
+
+ - When doing a restart (see :ref:`restart`), gauge output from the original run
+   is no longer overwritten by the second run. Instead gauge
+   output from the restart run will be appended to the end of each
+   `gaugeXXXXX.txt` file.
+
 
 **Updated regression testing framework for Fortran.**
 The Fortran code uses an updated framework and so the regression data has
@@ -119,8 +148,28 @@ KMZ files for plotting on Google Earth or with other GIS tools.
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.3.1...master>`_
 
+.. _release_5_4_0_riemann:
+
 Changes to riemann
 ------------------
+
+**GeoClaw Riemann solver.** The Riemann solver generally used in GeoClaw has
+been updated to fix a couple issues:
+
+ - The transverse velocity jump is now put into the 1-wave or 3-wave rather 
+   than the 2-wave.  This avoids some cases where transverse velocity does
+   not propagate past jump in bathymetry, may improve some instability issues.
+   See https://github.com/clawpack/riemann/pull/111 for details.
+
+ - The tolerance used in the transonic test has been modified to be better
+   scaled.
+
+These changes cause some changes to results computed with GeoClaw.  They
+have been fairly extensively tested by now and give results that are
+generally believed to be at least as good or better than the previous
+version.
+
+Some other solvers were added or updated.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.3.1...master>`_
@@ -129,6 +178,9 @@ Changes to amrclaw
 ------------------
 
 **Makefile structure.** See discussion above, under
+:ref:`release_5_4_0_global`.
+
+**Gauge output** See discussion above, under
 :ref:`release_5_4_0_global`.
 
 **Ghost Cell  (filpatch) Filling.**
@@ -162,7 +214,15 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+**Changes to Riemann solver.** The default Riemann solver used 
+for single-layer shallow water equations was modified, causing potential
+changes to computed results.  See the discussion above, under
+:ref:`release_5_4_0_riemann`.
+
 **Makefile structure.** See discussion above, under
+:ref:`release_5_4_0_global`.
+
+**Gauge output** See discussion above, under
 :ref:`release_5_4_0_global`.
 
 The changes in amrclaw titled **Ghost Cell  (filpatch) Filling**,

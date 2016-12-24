@@ -93,6 +93,8 @@ Other major contributors include:
   `@mparsani <https://github.com/mparsani/>`_.
 * Andy Terrel,
   `@aterrel <https://github.com/aterrel/>`_.
+* Chris Vogl,
+  `@cjvogl <https://github.com/cjvogl>`_.
 
 
 Numerous students and other users have also contributed towards this software, 
@@ -114,7 +116,23 @@ If you use Clawpack in publications, please cite the following::
         doi={10.5281/zenodo.50982},
         year={2014}}
 
-Please fill in the version number that you used, and its year.
+Please fill in the version number that you used, and its year, with the
+appropriate DOI if available.
+
+and::
+
+        @article{mandli2016clawpack,
+          title={Clawpack: building an open source ecosystem for solving hyperbolic PDEs},
+          author={Mandli, Kyle T and Ahmadia, Aron J and Berger, Marsha and Calhoun, Donna
+            and George, David L and Hadjimichael, Yiannis and Ketcheson, David I
+            and Lemoine, Grady I and LeVeque, Randall J},
+          journal={PeerJ Computer Science},
+          volume={2},
+          pages={e68},
+          year={2016},
+          publisher={PeerJ Inc.},
+          doi={10.7717/peerj-cs.68} }
+
 
 For recent releases you can also include a DOI from 
 `Zenodo <https://zenodo.org>`_ , for example
@@ -149,7 +167,7 @@ Development of this software has been supported in part by
 
  * NSF Grants DMS-8657319, DMS-9204329, DMS-9303404, DMS-9505021, 
    DMS-96226645, DMS-9803442, DMS-0106511, CMS-0245206,  DMS-0609661,
-   DMS-0914942, DMS-1216732.
+   DMS-0914942, DMS-1216732, EAR-1331412.
 
  * DOE Grants DE-FG06-93ER25181,  DE-FG03-96ER25292, DE-FG02-88ER25053,
    DE-FG02-92ER25139, DE-FG03-00ER2592, DE-FC02-01ER25474
@@ -167,6 +185,8 @@ Development of this software has been supported in part by
 
  * The Boeing Professorship and the Founders Term Professorship in the
    Department of Applied Mathematics, University of Washington.
+
+ * University of Washington CoMotion Fellowship.
 
 Any opinions, findings, and conclusions or recommendations expressed in this
 material are those of the author(s) and do not necessarily reflect the views
