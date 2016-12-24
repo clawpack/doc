@@ -42,7 +42,8 @@ See :ref:`makefiles_library` for more details on how to specify
 local files in place of default library files.
 
 **Improved Gauge Output Options**
-Gauges now support a number of additional output options including:
+:ref:`gauges` in `amrclaw` and `geoclaw` now support a number of additional 
+output options including:
 
  - specification of output fields, i.e. you can now specify the q and aux
    fields that are output;
@@ -52,9 +53,31 @@ Gauges now support a number of additional output options including:
    this was set to 10 time units then the gauge would only output every 10
    time units or longer;
  - support for future file format specifications (only ASCII is supported now);
- - some header info to reflect what is in the file has been added; and
- - a refactor of how the code stores gauge data in the Fortran
-   *gauges_module.f90* source file.
+
+Other improvements to gauge handling include:
+
+ - a refactor of how the code stores gauge data has been done in the Fortran
+   *gauges_module.f90* source file in each library.
+
+ - Gauge output is accumulated in a buffer internally and written out
+   intermitently, instead of writing to disk every time step.
+   (The parameter `MAX_BUFFER` in the `amrclaw` library routines 
+   `gauges_module.f90` controls the size of this buffer.)
+
+ - The gauge output for the gauges is written to distinct files in the
+   output directory, e.g. `gauge00001.txt` for gauge number 1.  In previous
+   versions of Clawpack all gauges were written to a single file
+   `fort.gauge`.  The new approach allows gauges to be written in parallel and
+   also facilitates reading in a single gauge more quickly.
+
+ - Some header info appears in each of these files to describe the gauge
+   output.
+
+ - When doing a restart (see :ref:`restart`), gauge output from the original run
+   is no longer overwritten by the second run. Instead gauge
+   output from the restart run will be appended to the end of each
+   `gaugeXXXXX.txt` file.
+
 
 **Updated regression testing framework for Fortran.**
 The Fortran code uses an updated framework and so the regression data has
@@ -131,6 +154,9 @@ Changes to amrclaw
 **Makefile structure.** See discussion above, under
 :ref:`release_5_4_0_global`.
 
+**Gauge output** See discussion above, under
+:ref:`release_5_4_0_global`.
+
 **Ghost Cell  (filpatch) Filling.**
 A list of the neighboring grids at same the level of refinement 
 that are used for filling ghost cells for each grid patch is saved between
@@ -163,6 +189,9 @@ Changes to geoclaw
 ------------------
 
 **Makefile structure.** See discussion above, under
+:ref:`release_5_4_0_global`.
+
+**Gauge output** See discussion above, under
 :ref:`release_5_4_0_global`.
 
 The changes in amrclaw titled **Ghost Cell  (filpatch) Filling**,
