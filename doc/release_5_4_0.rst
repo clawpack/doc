@@ -41,6 +41,12 @@ required only one master list needs updating rather than the
 See :ref:`makefiles_library` for more details on how to specify
 local files in place of default library files.
 
+It is also no longer necessary to set the `Makefile` variable
+`RESTART` to `True` or `False`.  Instead you can set it to `None` (or omit
+setting it at all, since this is the default), in which case the `setrun.py`
+file will be used to determine if this is a restart run (in which case
+the previous output directory should be added to, rather than replaced).
+
 **Improved Gauge Output Options**
 :ref:`gauges` in `amrclaw` and `geoclaw` now support a number of additional 
 output options including:

@@ -72,15 +72,11 @@ Note the following in setting the new output times:
 Modifying the Makefile for a restart
 ------------------------------------
 
-To restart a computation, it is necessary to modify the `Makefile` as well
-as `setrun.py`.  In the `Makefile`, set::
-
-    RESTART = True
-
-This will ensure that the original set of output files (for times up to the
-restart time) and the checkpoint
-file will not be deleted.  They will still be available in the output directory
-along with the newly created output files.
+**New in 5.4.0.** It is no longer necessary to set the `Makefile` variable
+`RESTART` to `True` or `False`.  Instead you can set it to `None` (or omit
+setting it at all, since this is the default), in which case the `setrun.py`
+file will be used to determine if this is a restart run (in which case
+the previous output directory should be added to, rather than replaced).
 
 .. _restart_output:
 
