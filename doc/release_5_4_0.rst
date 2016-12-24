@@ -148,8 +148,28 @@ KMZ files for plotting on Google Earth or with other GIS tools.
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.3.1...master>`_
 
+.. _release_5_4_0_riemann:
+
 Changes to riemann
 ------------------
+
+**GeoClaw Riemann solver.** The Riemann solver generally used in GeoClaw has
+been updated to fix a couple issues:
+
+ - The transverse velocity jump is now put into the 1-wave or 3-wave rather 
+   than the 2-wave.  This avoids some cases where transverse velocity does
+   not propagate past jump in bathymetry, may improve some instability issues.
+   See https://github.com/clawpack/riemann/pull/111 for details.
+
+ - The tolerance used in the transonic test has been modified to be better
+   scaled.
+
+These changes cause some changes to results computed with GeoClaw.  They
+have been fairly extensively tested by now and give results that are
+generally believed to be at least as good or better than the previous
+version.
+
+Some other solvers were added or updated.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.3.1...master>`_
@@ -193,6 +213,11 @@ See `amrclaw diffs
 
 Changes to geoclaw
 ------------------
+
+**Changes to Riemann solver.** The default Riemann solver used 
+for single-layer shallow water equations was modified, causing potential
+changes to computed results.  See the discussion above, under
+:ref:`release_5_4_0_riemann`.
 
 **Makefile structure.** See discussion above, under
 :ref:`release_5_4_0_global`.
