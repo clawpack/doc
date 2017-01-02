@@ -75,9 +75,9 @@ The recommended way to install the latest release of Clawpack, for
 using PyClaw and/or the Fortran packages, is to give the following pip
 install command::  
 
-    pip install --src=$HOME/src -e git+https://github.com/clawpack/clawpack.git@v5.3.1#egg=clawpack
+    pip install --src=$HOME/clawpack_src -e git+https://github.com/clawpack/clawpack.git@v5.3.1#egg=clawpack
 
-This will install Clawpack into the directory `$HOME/src/clawpack`, or the
+This will install Clawpack into the directory `$HOME/clawpack_src/clawpack`, or the
 installation directory can be changed by modifying the `--src` target
 in this command.
 
@@ -85,7 +85,7 @@ In order to use the Fortran versions, you should then set the environment
 variable `CLAW` to point to this directory, and `FC` to point to the desired
 Fortran compiler, e.g. ::
 
-    export CLAW=$HOME/src/clawpack
+    export CLAW=$HOME/clawpack_src/clawpack
     export FC=gfortran
 
 You may want to set `CLAW` even if you are only using PyClaw, since `$CLAW` is
@@ -102,7 +102,7 @@ Clawpack source directory structure.
   different tag in the `pip install` command.
   You can switch between versions or upgrade to a newer version by
   repeating the above command with a different version number.
-  The directory `$HOME/src/clawpack` is a git clone of the top level
+  The directory `$HOME/clawpack_src/clawpack` is a git clone of the top level
   `clawpack` repository and "installing" a different version checks out
   different tagged versions.
 
