@@ -83,7 +83,7 @@ Instead, you can always install another branch by doing a new
 
     export CLAW_VERSION=v5.3.1  # used several places in next commands
     pip install --src=$HOME/clawpack_$CLAW_VERSION -e git+https://github.com/clawpack/clawpack.git@$CLAW_VERSION#egg=clawpack
-    export CLAW=$HOME/clawpack_$CLAW_VERSION
+    export CLAW=$HOME/clawpack_$CLAW_VERSION/clawpack
 
 We also suggest that if you want to experiment extensively with examples or
 modify an example to solve your own problem, you first copy a directory out
