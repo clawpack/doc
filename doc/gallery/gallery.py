@@ -347,7 +347,7 @@ def make_geoclaw():
     appdir = 'geoclaw/examples/storm-surge/ike'
     description = """
         Storm surge simulation of Hurricane Ike (coarse grid)"""
-    images = ('frame0036fig1', 'frame0036fig9', 'frame0036fig8')
+    images = ('frame0006fig1', 'frame0006fig9', 'frame0006fig8')
     gsec.new_item(appdir, plotdir, description, images)
 
 
