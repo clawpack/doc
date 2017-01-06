@@ -17,8 +17,9 @@ Overview and Getting Started
    changes
    previous
    packages
-   installing
    installing_pip
+   installing
+   setenv
    first_run
    clawpack_components
    trouble
