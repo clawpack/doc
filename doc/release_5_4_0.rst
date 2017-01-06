@@ -8,7 +8,7 @@
 Release 5.4.0
 ==========================
 
-Release candidate pending.
+Release candidate `v5.4.0rc-alpha` on 6 January 2017: see :ref:`installing`.
 
 Clawpack 5.4.0 will be released on TBA.  See :ref:`installing`.
 
