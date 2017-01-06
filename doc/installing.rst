@@ -4,10 +4,10 @@
 Installation options
 **************************************
 
-Please `register
-<http://depts.washington.edu/clawpack/register/index.html>`_ if you have not
-already done so.  This is purely optional, but is useful in helping us track
-the extent of usage.
+Please `register <http://depts.washington.edu/clawpack/register/index.html>`_
+if you have not already done so.  This is very useful in helping
+us track the extent of usage, and important to the :ref:`funding` agencies
+who support this work.
 
 First check that you have the :ref:`prereqs`.
 
@@ -22,8 +22,8 @@ Install from a tarfile
 
 Download a tar file of the latest release:
 
-* `https://github.com/clawpack/clawpack/releases/download/v5.4.0/clawpack-5.4.0.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/v5.4.0/clawpack-5.4.0.tar.gz>`_
+* `https://github.com/clawpack/clawpack/releases/download/v5.4.0rc-alpha/clawpack-v5.4.0rc-alpha.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/v5.4.0rc-alpha/clawpack-v5.4.0rc-alpha.tar.gz>`_
 * :ref:`previous`
 * :ref:`changes`
 
@@ -33,11 +33,11 @@ See :ref:`clawpack_components` for a list of what's included in this tar file.
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
 
-    tar -xzvf clawpack-5.4.0.tar.gz
+    tar -xzvf clawpack-v5.4.0rc-alpha.tar.gz
 
 Then move into the top level directory::
 
-    cd clawpack-5.4.0
+    cd clawpack-v5.4.0
 
 Next install the Python components of Clawpack::
 
