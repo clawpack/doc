@@ -5,12 +5,19 @@
 Set environment variables
 =========================
 
+CLAW
+----
+
 To use the Fortran versions of Clawpack you will need to set the
 environment variable `CLAW` to point to the top level of clawpack tree
 (there is no need to perform this step if you will only use PyClaw).
 In the bash shell these can be set via::
 
     export CLAW=/full/path/to/top/level
+
+
+FC
+--
 
 You also need to set `FC` to point to the desired Fortran compiler,
 e.g.::
@@ -32,4 +39,12 @@ should list the top level directory, and report for example::
     amrclaw/        setup.py        clawutil/       
     geoclaw/        visclaw/        classic/        
  
+PYTHONPATH
+----------
 
+In earlier versions of Clawpack it was recommended to set the environment
+variable `PYTHONPATH` when using the Fortran codes in Clawpack.  We now
+recommend avoiding this by using these :ref:`installing_pip`.
+
+See :ref:`python_path` for more about Python paths and this environment
+variable.

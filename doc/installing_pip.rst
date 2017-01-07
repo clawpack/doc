@@ -130,7 +130,7 @@ here are some tips:
 - If you wish to point to a different version of the Clawpack Python tools, 
   you need to rerun `pip install`, or else remove the path from the
   `easy-install.pth` file if you need to use `PYTHONPATH`.
-  See :ref:`installing_version_switching` for more information.
+  See :ref:`python_path` for more information.
 
 - If you get a Fortran error message when installing, see
   :ref:`trouble_f2py`.
