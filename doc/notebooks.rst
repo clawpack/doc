@@ -23,6 +23,21 @@ in `$CLAW/apps/notebooks`.
 developed, so these may change in the near future and the versions posted
 here may not work with the current Clawpack.
 
+.. _notebooks_new:
+
+New examples --- under development in :ref:`apps`
+-------------------------------------------------
+
+* `Euler equations: exact solutions
+  <https://nbviewer.jupyter.org/url/depts.washington.edu/clawpack/v5.4.0alpha/_static/notebooks/Riemann_problem_Euler_exact.ipynb>`_
+* `Riemann problem for acoustics 
+  <https://nbviewer.jupyter.org/url/depts.washington.edu/clawpack/v5.4.0alpha/_static/notebooks/Riemann_problem_acoustics.ipynb>`_
+
+.. _notebooks_old:
+
+Old notebooks --- many need updating
+------------------------------------
+
 **Examples using PyClaw:**
 
 * `A quick introduction to PyClaw <http://nbviewer.ipython.org/8332861>`_
