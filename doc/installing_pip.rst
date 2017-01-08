@@ -22,25 +22,12 @@ us track the extent of usage, and important to the :ref:`funding` agencies
 who support this work.
 
 
-.. _install_quick:
+**Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 
-Quick Installation of only PyClaw
-=====================================
-
-If you only want to use PyClaw (and associated Python
-tools, e.g. VisClaw for visualization), they you could do::
-
-    pip install clawpack
-
-However, if you think you might want to use the Fortran packages as well
-(Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source
-code, it is recommended that you follow the instructions below instead (or
-see other :ref:`installing`)
+.. _install_quick_all:
 
 Quick Installation of all packages
 =====================================
-
-Check that you have the :ref:`prereqs`.
 
 The recommended way to install the latest release of Clawpack, for
 using PyClaw and/or the Fortran packages, is to give the following pip
@@ -57,7 +44,7 @@ In order to use the Fortran codes within Clawpack (`classic`,
 `amrclaw`, or `geoclaw`), you should then set the environment
 variable `CLAW` to point to the `clawpack-v5.4.0rc-alpha` directory within
 the installation directory `$HOME/clawpack_src`, and `FC` to point
-to the desired Fortran compiler, e.g. ::
+to the desired Fortran compiler, e.g. in the bash shell::
 
     export CLAW=$HOME/clawpack_src/clawpack-v5.4.0rc-alpha
     export FC=gfortran
@@ -68,6 +55,22 @@ sometimes used in this documentation to indicate the top level of the
 Clawpack source directory structure.
 
 See :ref:`setenv` for more information.
+
+.. _install_quick_pyclaw:
+
+Quick Installation of only PyClaw
+=====================================
+
+If you only want to use PyClaw (and associated Python
+tools, e.g. VisClaw for visualization), they you could do::
+
+    pip install clawpack
+
+However, if you think you might want to use the Fortran packages as well
+(Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source
+code, it is recommended that you follow the instructions above for 
+:ref:`install_quick_all` (or see other :ref:`installing`)
+
 
 Next steps:
 -----------

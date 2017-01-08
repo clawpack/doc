@@ -9,7 +9,7 @@ if you have not already done so.  This is very useful in helping
 us track the extent of usage, and important to the :ref:`funding` agencies
 who support this work.
 
-First check that you have the :ref:`prereqs`.
+**Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 
 Install using pip
 =====================================
