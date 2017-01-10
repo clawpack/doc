@@ -48,3 +48,15 @@ recommend avoiding this by using these :ref:`installing_pip`.
 
 See :ref:`python_path` for more about Python paths and this environment
 variable.
+
+If you want to set this environment variable to point to a different version
+of Clawpack (useful in particular if you are using different version in
+different shells, e.g. when dual-debugging or for different projects), you
+can set (in bash)::
+
+    export PYTHONPATH=/path/to/clawpack:$PYTHONPATH
+
+to make sure this version is used instead of one specified in a
+`site-packages/easy-install.pth` file.
+
+

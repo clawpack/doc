@@ -8,7 +8,10 @@ When using PyClaw or other Python tools from Clawpack (e.g. the
 visualization tools in VisClaw or :ref:`topotools` from GeoClaw), you need
 to be able to import various modules.  
 
-See `??` for a general discussion about Python modules.
+For a general discussion of importing Python modules, see the tutorial in
+the Python documentation:  
+`Python 2 <https://docs.python.org/2/tutorial/modules.html>`_,
+`Python 3 <https://docs.python.org/3/tutorial/modules.html>`_.
 
 Below are some hints in case you run into problems with import statements
 with modules not being found, or being imported from the wrong version of
@@ -88,30 +91,48 @@ documentation is in the path.
 
 If you have multiple versions of Clawpack on your computer and Python seems 
 to be importing from the wrong place, check the path.
+Directories are searched in the order listed in `sys.path`.  
 
-Note the following:
 
- - If you used `pip` to install Clawpack (following :ref:`installing_pip`),
-   then the path to the installed version will may be added to the file
-   `easy-install.pth` located in the `site-packages` directory.  If you want
-   to switch to a different version you may need to either use `pip` again,
-   or remove this line from `site-packages/easy-install.pth`.
+easy-install.pth
+----------------
 
- - To find `site-packages/easy-install.pth`, try something like
-   the following in Python::
+If you used `pip` to install Clawpack (following :ref:`installing_pip`),
+then the path to the installed version will may be added to the file
+`easy-install.pth` located in the `site-packages` directory.  If you want
+to switch to a different version you may need to either use `pip` again,
+or remove this line from `site-packages/easy-install.pth`.
 
-        >>> import numpy
-        >>> numpy.__file__
 
-        '/usr/local/lib/python2.7/site-packages/numpy/__init__.pyc'
-    
-   The output shows the path to `site-packages`.
+To find `site-packages/easy-install.pth`, use this these commands in Python::
 
- - If you have an environment variable `PYTHONPATH` set, the paths specified
-   here will generally be searched before what is specified in 
-   `site-packages/easy-install.pth`.  To see if this is set, in the bash
-   shell you can do::
+    >>> import site
+    >>> site.getusersitepackages()
 
-        $ echo $PYTHONPATH
+this will tell you where the users' `site-packages` directory is. If you
+installed using the `--user` flag in the `pip install`, then it is the
+`easy-install.pth` in this directory that contains the path.
+
+If you installed without the `--user` flag, then then system-wide
+`site-packages/easy-install.pth` file has been modified.  You can find the
+path to this via::
+
+    >>> import site
+    >>> site.getsitepackages()
+
+
+
+PYTHONPATH
+----------
+
+If you have an environment variable `PYTHONPATH` set, the paths specified
+here may be searched before or after what is specified in the users'
+`site-packages/easy-install.pth`, depending on how you set `PYTHONPATH`.  
+
+To see if this is set, in the bash shell you can do::
+
+     $ echo $PYTHONPATH
+
+See :ref:`setenv` for information on setting environment variables.
 
 
