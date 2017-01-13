@@ -17,6 +17,16 @@ Below are some hints in case you run into problems with import statements
 with modules not being found, or being imported from the wrong version of
 Clawpack (if you have more than one on your computer).
 
+whichclaw.py
+------------
+
+The script `$CLAW/clawutil/src/python/clawutil/whichclaw.py` may be useful in
+debugging paths.  It prints out information on how various paths and environment
+variables are set.  
+
+Which version was imported?
+---------------------------
+
 Try the following in a Python (or IPython) shell::
 
     >>> import clawpack

@@ -14,7 +14,10 @@ who support this work.
 Install using pip
 =====================================
 
-This is the simplest approach, see :ref:`installing_pip`.
+This is the simplest approach, particularly if you already 
+use `pip` for other purposes; see :ref:`installing_pip`.  
+
+Unfortunately if this doesn't work it may be hard to debug what went wrong.
 
 
 Install from a tarfile

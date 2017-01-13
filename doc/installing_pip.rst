@@ -41,6 +41,8 @@ This will install Clawpack into the directory
 `$HOME/clawpack_src/clawpack-v5.4.0rc-alpha`, or the top 
 installation directory can be changed by modifying the `--src` target.
 
+See :ref:`clawpack_components` for a list of what's included in this top level.
+
 The `--user` flag is necessary if you are installing on a shared computer
 where you do not have root access.  If you do have root access and want it
 to be available to all users, you can omit this flag.  See notes below for
