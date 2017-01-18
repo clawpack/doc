@@ -10,6 +10,12 @@ Makefiles for the Fortran code in many repositories
 use the common Makefile found in `$CLAW/clawutil/src/Makefile.common`,
 so you must have the `clawutil` repository.
 
+**New in 5.4.0.** The `Makefile` also typically refers to a common list of
+library routines needed for this particular example or application code,
+rather than listing all the files individually in every `Makefile`.  See
+:ref:`makefiles_library` for more details on how to specify local files in
+place of library files if you need to replace a default file.
+
 In most directories with a `Makefile` you can type::
 
     $ make help
@@ -117,3 +123,20 @@ recompile with the `-g` flag for debugging::
     $ make new FFLAGS=-g
 
 See :ref:`fortran_compilers` for more about compiler flags.
+
+Duplicate Base Source Name
+++++++++++++++++++++++++++
+
+Fortran source files with the same base name but different suffixes can cause
+unexpected source files to be compiled.  This occurs as the Makefiles are
+structured to use the free-format Fortran source files **.f90* before the
+fixed-format source files with *.f*.  For example, if someone specified
+*qinit.f* in the Makefile but there was a *qinit.f90* file that existed in the
+same directory then the compiler would compile the **f90** file instead of the
+**f** file. 
+
+The best way to avoid this problem is to check periodically whether you may
+have conlicting source via the **make debug** command which should list
+possible conflicts.  Note that this command will also list sources that may
+not be in conflict.  If you do have conflicting source either remove the
+**f90** file, rename it, or convert the **f** file into a **f90** file.

@@ -72,15 +72,11 @@ Note the following in setting the new output times:
 Modifying the Makefile for a restart
 ------------------------------------
 
-To restart a computation, it is necessary to modify the `Makefile` as well
-as `setrun.py`.  In the `Makefile`, set::
-
-    RESTART = True
-
-This will ensure that the original set of output files (for times up to the
-restart time) and the checkpoint
-file will not be deleted.  They will still be available in the output directory
-along with the newly created output files.
+**New in 5.4.0.** It is no longer necessary to set the `Makefile` variable
+`RESTART` to `True` or `False`.  Instead you can set it to `None` (or omit
+setting it at all, since this is the default), in which case the `setrun.py`
+file will be used to determine if this is a restart run (in which case
+the previous output directory should be added to, rather than replaced).
 
 .. _restart_output:
 
@@ -92,19 +88,13 @@ the original set of output files should still be in the output directory
 along with a new set from the second run.  Note that one output time may
 be repeated in two frames if `clawdata.output_t0 == True` in the restarted run.
 
-Note that any gauge output from the first run will be overwritten by the
-second run.  If you wish to preserve the gauge output from the first run,
-currently you must copy the output file `fort.gauge` to another location,
-say `fort.gauge1`, before doing the restart run.  Then you could catenate the
-two to get gauge output for the entire run, e.g.::
-
-    cd _output
-    mv fort.gauge fort.gauge2
-    cat fort.gauge1 fort.gauge2 > fort.gauge
-
-This creates a file `fort.gauge` that contains the entire gauge history.
-
-TODO: This should be simplified.
+**New in 5.4.0.**
+Gauge output from the original run 
+is no longer overwritten by the second run. Instead gauge
+output from the restart run will be appended to the end of each
+`gaugeXXXXX.txt` file.  (If multiple restarts are performed from the same
+checkpoint file then these will accumulate in an undesirable fashion, but
+for for most purposes this does the right thing.)
 
 
 

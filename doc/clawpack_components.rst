@@ -16,8 +16,7 @@ super-repository that is used to coordinate versions between other
 repositories.  If you are interested in cloning the code directly from
 GitHub and/or helping develop Clawpack, see :ref:`developers`.
 
-If you download a tar file of Clawpack, as described in
-:ref:`install_clawpack`, then you will obtain a top level directory that has the
+After installing Clawpack, you should have a top level directory that has the
 following subdirectories:
 
 * `classic`  (Classic single-grid Fortran code)
@@ -28,7 +27,8 @@ following subdirectories:
 * `pyclaw`  (:ref:`pyclaw/index`, Python version that includes SharpClaw and PETSc parallelization)
 * `visclaw`  (Python graphics and visualization tools)
 
-These correspond to individual GitHub repositories.  
+These correspond to individual GitHub repositories in the 
+`Clawpack GitHub Organization <https://github.com/orgs/clawpack>`_.
 
 .. _other_repos:
 

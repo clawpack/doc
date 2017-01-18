@@ -8,14 +8,21 @@ Troubleshooting
 
 .. _trouble_installation:
 
-Troubleshooting: Installation
+Troubleshooting Installation
 +++++++++++++++++++++++++++++
+
+.. todo: Need to add something about installation problems.
+
+Troubleshooting Fortran:
++++++++++++++++++++++++++++++
+
+.. _trouble_f2py:
 
 Setting the Fortran compiler to be used by f2py (pip)
 -----------------------------------------------------
 
-When executing ``pip install clawpack`` or ``python setup.py install``,
-if you get an error like::
+When trying to install with `pip` (see :ref:`installing_pip`)
+or `python setup.py install`, if you get an error like::
 
     error: f90 not supported by GnuFCompiler
 

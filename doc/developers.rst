@@ -76,48 +76,65 @@ This should give a snapshot of the repositories that work well together.
 repositories and checking out a different commit in one repository may break
 things in a different repository.)
 
-If you want to also install the PyClaw Python components, you can then do::
 
-    python setup.py install
-
-If you plan to work on the Python parts of Clawpack as a developer, you may instead
-wish to do::
+Now install this version of Clawpack using::
 
     pip install -e .
 
-The advantage of this is that when you edit Python code in your clawpack directly,
-it will immediately take effect, without the need to install again.  However,
-the (potential) danger of this approach is that the path to your clawpack
-directory will be stored in the file site-packages/easy-install.pth and
-prepended to your PYTHONPATH whenever you run Python.  This path will
-take precedence over any manually added paths, unless you delete the .pth
-file.
+The `-e` flag means that this is an editabl version of the Clawpack code
+(rather than installing the original version in the `site-packages`
+directory).
 
 If you want to use the Fortran versions in `classic`, `amrclaw`, `geoclaw`,
 etc., you need to set environment variables and proceed as described at
 :ref:`setenv`.
 
 
-Updating to the latest development version
+Checking out the master branch on each repository
+-------------------------------------------------
+
+Following the instructions above gives you a top level `$CLAW` directory
+that is checked out to the tip of the master branch, and each subrepository
+will be checked out to a particular commit as specified by this master
+branch.  For development work, You probably want to check out each
+subrepository to the master branch as well.  The shell script 
+`$CLAW/pull_all.sh` can be used to do this for all subrepositories (or look
+at this file to see how to do it more selectively).  At a shell prompt,
+type::
+
+    source pull_all.sh
+
+which will check out master on each repository and then do a `git pull` to
+make sure it is up to date.  If you do this shortly after cloning all the
+repositories, they should all have been up to date already.
+
+Updating to the latest master branch
 ------------------------------------------
-The repositories will each be checked out to a specific commit and
-will probably be in a detached-head state.  You will need to checkout
-`master` in each repository to see the current head of the master branch.
+
+The script `pull_all.sh` can be used at any time to check out all
+subrepositories to master and do a `git pull`.  This is handy if you want to
+make sure your version of `master` is up to date in every repository.
+
+You should first make sure that you do not have uncommitted changes in any
+repository that might conflict with the `git checkout master` or
+`git pull` commands.  You can do this easily with the command::
+
+    python $CLAW/clawutil/src/python/clawutil/claw_git_status.py
+
+and then check the files `claw_git_status.txt` and `claw_git_diffs.txt`,
+which summarize the status of each subrepository.
+
+Never commit to `master`
+------------------------
 
 You should never commit to `master`, only to a feature branch, so
-the `master` branch should always reflect what's in the main 
-*clawpack* repository.  You can update it to reflect any changes via::
+the `master` branch should always reflect what's in the `master` branch on
+the primary Github repositories.
 
-        git checkout master
-        git fetch origin
-        git merge origin/master
+You can update `master` to reflect any changes via the above approach (for
+all subrepositories at once), or do `git checkout master` and then `git
+pull` within any of the subrepositories separately.
 
-or simply::
-
-        git pull origin master:master
-
-Remember that you need to do this in each repository before running anything
-to make sure everything is up to date with *master*.
 
 .. _dev_remote:
 
@@ -137,6 +154,12 @@ repository:
 
         cd amrclaw
         git remote add username git@github.com:username/amrclaw.git
+
+   provided you have ssh keys set up, or else:
+
+        git remote add username htpps://github.com/username/amrclaw.git
+
+   if you don't mind having to type your password whenever you push or pull.
 
    You should push only to this remote, not to `origin`, e.g.::
 
@@ -158,6 +181,13 @@ You can get one of these in read-only mode by doing, e.g.::
 
 Then go through the above steps to add your own fork as a remote 
 if you plan to modify code and issue pull requests.
+
+**Note:** The `git://github.com...` form of specifying a remote
+clones the repository in a form
+that does not allow pushing to it (unlike the `git@github.com:...` or
+`https://github.com...` forms).  This is good practic so you do not
+accidently try to push to the main clawpack repository rather than to your
+own fork.
 
 Modifying code
 ==============

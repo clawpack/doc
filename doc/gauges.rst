@@ -12,8 +12,6 @@ it is possible to specify gauge locations as points (x,y) where the values of al
 components of q should be output every time step during the computation over some
 time range (t1,t2).  
 
-**Still need to add to 3d AMRClaw code, and to Classic codes.**
-
 Gauges are useful in several ways, e.g.:
 
  1. To compare computational results to measurements from 
@@ -66,12 +64,71 @@ where level is the AMR level used to determine the q values at this time.
 Internally the finest level available at each gauge is used, with bilinear
 interpolation to the gauge locations from the 4 nearest cell centers.
 
-If you wish to change what is output at these points, you should copy the library
-routine `dumpgauge.f` to your own directory and modify it appropriately.
+**New in 5.4.0.**
+The output that is in the gauge files can be controlled by a variety of
+parameters.  These can be specified on a per gauge basis or set for all gauges
+specified.  The output parameters are
 
+- *file_format* : Specifies the file format of the gauge data.  Currently
+  *"ascii"* is the only value accepted.
+- *display_format* : Specifies the format of the numbers written to the gauge
+  file for each field.  These are Fortran format strings defaulting to
+  *"e15.7"*.
+- *q_out_fields* : Specifies which fields of the q array to output. Specify as
+  a list the indices that should be output.  Defaults to *"all"*.
+- *aux_out_fields* : Specifies which fields of the aux array to output.
+  Specify as a list the indices that should be output. Defaults to *"none"*
+- *min_time_increment* : Specify a minimum amount of time that should pass
+  before recording the values at a gauge.  This can be useful for decreasing
+  the amount of output at a gauge location that is currently being 
+  time-stepped at small increments.  The default is *0* which effectively 
+  turns off this constraint.
 
-.. warning:: When doing a restart, previous gauge output is deleted unless
-   you are careful to preserve it.  See :ref:`restart_output`.
+Setting these values can be done in multiple ways for convenience.  The most
+direct way is via a dictionary with the keys as the gauge ids and the
+corresponding parameter as the value.  For example, if we had 3 gauges with
+ids 3, 7, 13 we could specify that they all use the display format *e26.16* by
+setting::
+
+    rundata.gaugedata.display_format = "e26.16"
+
+or::
+
+    rundata.gaugedata.display_format = {3:"e26.16", 13:"e8.6"}
+
+to set gauge 3's display format to "e26.16", leave gauge 7 set to the default
+and  set 13's to "e8.6".  
+
+For the parameters *q_out_fields* and
+*aux_out_fields* one can also specify *"all"* to output all fields or *"none"*
+to specify none of them (equivalent to an empty list of indices).  Both of
+these arrays use Python indexing, i.e. they start at 0.
+
+**Note:** For GeoClaw, the sea-surface value :math:`\eta = h + B` (sum of
+water depth and topography) is also output as another column after the q fields.
+In the case of the multilayer code the eta for each surface follows the q
+fields for that layer.
+
+**New in 5.4.0:**
+
+ - Gauge output is accumulated in a buffer internally and written out
+   intermitently, instead of writing to disk every time step.
+   (The parameter `MAX_BUFFER` in the `amrclaw` library routines 
+   `gauges_module.f90` controls the size of this buffer.)
+
+ - The gauge output for the gauges is written to distinct files in the
+   output directory, e.g. `gauge00001.txt` for gauge number 1.  In previous
+   versions of Clawpack all gauges were written to a single file
+   `fort.gauge`.  The new approach allows gauges to be written in parallel and
+   also facilitates reading in a single gauge more quickly.
+
+ - Some header info appears in each of these files to describe the gauge
+   output.
+
+ - When doing a restart (see :ref:`restart`), gauge output from the original run
+   is no longer overwritten by the second run. Instead gauge
+   output from the restart run will be appended to the end of each
+   `gaugeXXXXX.txt` file.
 
 
 Plotting tools
@@ -83,17 +140,26 @@ have to parse the file `fort.gauge` yourself.
 If you want to read in the data for a particular gauge to manipulate it
 yourself, you can do, for example::
 
-    from clawpack.visclaw.data import ClawPlotData
-    plotdata = ClawPlotData()
-    plotdata.outdir = '_output'   # set to the proper output directory
-    gaugeno = 1                   # gauge number to examine
-    g = plotdata.getgauge(gaugeno)
+    from clawpack.pyclaw.gauges import GaugeSolution
+    g = GaugeSolution(gauge_id=1, path='_output')
+
+to examine gauge number 1, for example.
 
 Then:
 
 * `g.t` is the array of times,
 * `g.q` is the array of values recorded at the gauges (`g.q[m,n]` is the `m`th
   variable at time `t[n]`)
+
+
+Alternatively, you can use the `getgauge` method of a `ClawPlotData` object,
+e.g.::
+
+    from clawpack.visclaw.data import ClawPlotData
+    plotdata = ClawPlotData()
+    plotdata.outdir = '_output'   # set to the proper output directory
+    gaugeno = 1                   # gauge number to examine
+    g = plotdata.getgauge(gaugeno)
 
 
 In the `setplot` Python script you
@@ -163,7 +229,7 @@ plots each time frame.  You can do this as follows, for example::
     # set other attributes as desired
 
     def addgauges(current_data):
-        from pyclaw.plotters import gaugetools
+        from clawpack.visclaw import gaugetools
         gaugetools.plot_gauge_locations(current_data.plotdata, \
              gaugenos='all', format_string='ko', add_labels=True)
 
@@ -175,7 +241,7 @@ location and `add_labels=True` means that the gauge number will appear next to e
 gauge.
 
 If you want more control over this plotting you can of course copy the function
-`plot_gauge_locations` from `pyclaw.plotters.gaugetools.py` 
+`plot_gauge_locations` from `clawpack.visclaw.gaugetools.py` 
 to your setplot.py file and modify at will.
 
 Examples

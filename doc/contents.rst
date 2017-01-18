@@ -15,15 +15,20 @@ Overview and Getting Started
    
    about
    changes
-   installing
-   first_run
-   license
-   trouble
+   previous
    packages
+   installing_pip
+   installing
+   setenv
+   first_run
    clawpack_components
+   trouble
+
+.. toctree::
+   :maxdepth: 1
+   
    vm
    aws
-   previous
 
 
 
@@ -53,12 +58,14 @@ Using the Fortran codes
 
    fortran
    fortran_compilers
+   f77_vs_f90
    user_routines
    openmp
    timing
    python
    notebooks
    makefiles
+   makefiles_library
    application_documentation
    setrun
    setrun_sample
