@@ -8,9 +8,8 @@
 Release 5.4.0
 ==========================
 
-Release candidate `v5.4.0rc-alpha` on 6 January 2017: see :ref:`installing`.
 
-Clawpack 5.4.0 will be released on TBA.  See :ref:`installing`.
+Clawpack 5.4.0 was released on January 17, 2017.  See :ref:`installing`.
 
 Changes relative to Clawpack 5.3.1 (November 9, 2015) are shown below.
 
@@ -96,7 +95,7 @@ Changes to classic
 :ref:`release_5_4_0_global`.
 
 See `classic diffs
-<https://github.com/clawpack/classic/compare/v5.3.1...master>`_
+<https://github.com/clawpack/classic/compare/v5.3.1...v5.4.0>`_
 
 Changes to clawutil
 -------------------
@@ -112,7 +111,7 @@ New supporting code added.
 New supporting code added.
 
 See `clawutil diffs
-<https://github.com/clawpack/clawutil/compare/v5.3.1...master>`_
+<https://github.com/clawpack/clawutil/compare/v5.3.1...v5.4.0>`_
 
 Changes to visclaw
 ------------------
@@ -146,7 +145,7 @@ Some improvements have been made to the capabilities for creating KML and
 KMZ files for plotting on Google Earth or with other GIS tools.
 
 See `visclaw diffs
-<https://github.com/clawpack/visclaw/compare/v5.3.1...master>`_
+<https://github.com/clawpack/visclaw/compare/v5.3.1...v5.4.0>`_
 
 .. _release_5_4_0_riemann:
 
@@ -172,7 +171,7 @@ version.
 Some other solvers were added or updated.
 
 See `riemann diffs
-<https://github.com/clawpack/riemann/compare/v5.3.1...master>`_
+<https://github.com/clawpack/riemann/compare/v5.3.1...v5.4.0>`_
 
 Changes to amrclaw
 ------------------
@@ -209,7 +208,7 @@ Enlarged formats in many format statements used for ascii output
 throughout.
 
 See `amrclaw diffs
-<https://github.com/clawpack/amrclaw/compare/v5.3.1...master>`_
+<https://github.com/clawpack/amrclaw/compare/v5.3.1...v5.4.0>`_
 
 Changes to geoclaw
 ------------------
@@ -237,7 +236,7 @@ amplitudes and arrival times,  instead of reinitializing the `fgmax` arrays.
 See :ref:`fgmax`.
 
 See `geoclaw diffs
-<https://github.com/clawpack/geoclaw/compare/v5.3.1...master>`_
+<https://github.com/clawpack/geoclaw/compare/v5.3.1...v5.4.0>`_
 
 
 Changes to PyClaw
@@ -250,5 +249,5 @@ For changes in PyClaw, see the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 See `pyclaw diffs
-<https://github.com/clawpack/pyclaw/compare/v5.3.1...master>`_
+<https://github.com/clawpack/pyclaw/compare/v5.3.1...v5.4.0>`_
 
