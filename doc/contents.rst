@@ -27,6 +27,7 @@ Overview and Getting Started
 .. toctree::
    :maxdepth: 1
    
+   docker_image
    vm
    aws
 
