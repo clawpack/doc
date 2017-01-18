@@ -35,10 +35,10 @@ install command (you might want to first read the notes below to see if you
 want to change anything in this command)::  
 
     pip install --src=$HOME/clawpack_src --user -e \
-        git+https://github.com/clawpack/clawpack.git@v5.4.0rc-alpha#egg=clawpack-v5.4.0rc-alpha
+        git+https://github.com/clawpack/clawpack.git@v5.4.0#egg=clawpack-v5.4.0
 
 This will install Clawpack into the directory
-`$HOME/clawpack_src/clawpack-v5.4.0rc-alpha`, or the top 
+`$HOME/clawpack_src/clawpack-v5.4.0`, or the top 
 installation directory can be changed by modifying the `--src` target.
 
 See :ref:`clawpack_components` for a list of what's included in this top level.
@@ -50,11 +50,11 @@ more information.
 
 In order to use the Fortran codes within Clawpack (`classic`,
 `amrclaw`, or `geoclaw`), you should then set the environment
-variable `CLAW` to point to the `clawpack-v5.4.0rc-alpha` directory within
+variable `CLAW` to point to the `clawpack-v5.4.0` directory within
 the installation directory `$HOME/clawpack_src`, and `FC` to point
 to the desired Fortran compiler, e.g. in the bash shell::
 
-    export CLAW=$HOME/clawpack_src/clawpack-v5.4.0rc-alpha
+    export CLAW=$HOME/clawpack_src/clawpack-v5.4.0
     export FC=gfortran
 
 **Note:** 
@@ -62,7 +62,8 @@ You may want to set `CLAW` even if you are only using PyClaw, since `$CLAW` is
 sometimes used in this documentation to indicate the top level of the
 Clawpack source directory structure.
 
-See :ref:`setenv` for more information.
+See :ref:`setenv` for more information, and :ref:`python_path` if you are
+having problems with importing Python modules.
 
 .. _install_quick_pyclaw:
 

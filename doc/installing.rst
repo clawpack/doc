@@ -25,8 +25,8 @@ Install from a tarfile
 
 Download a tar file of the latest release:
 
-* `https://github.com/clawpack/clawpack/releases/download/v5.4.0rc-alpha/clawpack-v5.4.0rc-alpha.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/v5.4.0rc-alpha/clawpack-v5.4.0rc-alpha.tar.gz>`_
+* `https://github.com/clawpack/clawpack/releases/download/v5.4.0/clawpack-v5.4.0.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/v5.4.0/clawpack-v5.4.0.tar.gz>`_
 * :ref:`previous`
 * :ref:`changes`
 
@@ -36,7 +36,7 @@ See :ref:`clawpack_components` for a list of what's included in this tar file.
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
 
-    tar -xzvf clawpack-v5.4.0rc-alpha.tar.gz
+    tar -xzvf clawpack-v5.4.0.tar.gz
 
 Then move into the top level directory::
 
@@ -90,6 +90,8 @@ In Python you should now be able to do the following, for example::
 
 If not then either your `$PYTHONPATH` environment variable is not set
 properly or the required symbolic links were not created.
+See :ref:`setenv` for more information, and :ref:`python_path` if you are
+having problems with importing Python modules.
 
 Next go to :ref:`first_run`.
 

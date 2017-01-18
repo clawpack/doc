@@ -17,12 +17,14 @@ Below are some hints in case you run into problems with import statements
 with modules not being found, or being imported from the wrong version of
 Clawpack (if you have more than one on your computer).
 
+.. _whichclaw:
+
 whichclaw.py
 ------------
 
 The script `$CLAW/clawutil/src/python/clawutil/whichclaw.py` may be useful in
 debugging paths.  It prints out information on how various paths and environment
-variables are set.  
+variables are set.  (Available starting in Version 5.4.0.)
 
 Which version was imported?
 ---------------------------
