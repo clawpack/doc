@@ -20,7 +20,7 @@ Install using conda
 This was recently added and not yet extensively tested, but if you use the
 conda package manager then you might want to try this::
 
-    conda install -c clawpack clawpack=5.4.0
+    conda install -c clawpack -c conda-forge clawpack=5.4.0
 
 If you are only using PyClaw, this avoids the need for a Fortran compiler.
 
