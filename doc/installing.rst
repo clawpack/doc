@@ -14,16 +14,6 @@ is :ref:`docker_image`.
 
 **Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 
-Install using conda
-===================
-
-This was recently added and not yet extensively tested, but if you use the
-conda package manager then you might want to try this::
-
-    conda install -c clawpack -c conda-forge clawpack=5.4.0
-
-If you are only using PyClaw, this avoids the need for a Fortran compiler.
-
 
 Install using pip
 =====================================
@@ -33,6 +23,7 @@ use `pip` for other purposes; see :ref:`installing_pip`.
 
 Unfortunately if this doesn't work it may be hard to debug what went wrong.
 
+.. _installing_tarfile:
 
 Install from a tarfile
 =====================================
@@ -56,20 +47,21 @@ Then move into the top level directory::
 
     cd clawpack-v5.4.0
 
-Next install the Python components of Clawpack::
+Next install the Python components of Clawpack (but read the next two
+paragraphs first)::
 
     python setup.py install
 
-This will compile a lot of Fortran code using `f2py` and will produce a lot of 
-output, so you might want to redirect the output, e.g. ::
+This will compile a lot of Fortran code using `f2py` for PyClaw and may
+produce a lot of output.
 
-    python setup.py install > install_output.txt
-
-If you get compilation errors in this step, you can still use the
-Classic, AMRClaw, and GeoClaw; see :ref:`install_no-pyclaw`.
+If you get compilation errors in this step, or if you do not plan to use
+PyClaw, you can still use the
+Classic, AMRClaw, and GeoClaw version; see :ref:`install_no-pyclaw` below.
 
 If you only plan to use PyClaw, jump to :ref:`first_run`.  If you
-plan to use Classic, AMRClaw, or GeoClaw continue with :ref:`setenv`.
+plan to use Classic, AMRClaw, or GeoClaw continue with :ref:`setenv` to
+set the environment variables `CLAW` and `FC`.
 
 
 .. _install_no-pyclaw:
@@ -83,12 +75,10 @@ or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
 You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
 the following.  
 
-First, download a tarfile of the latest release as described in
-:ref:`install_clawpack`.  
+First, download a tarfile of the latest release as described above in
+the section :ref:`installing_tarfile`.  
 
-Next :ref:`setenv`.  You must then also set your PYTHONPATH manually::
-
-    export PYTHONPATH=$CLAW:$PYTHONPATH
+Next :ref:`setenv`, including `CLAW`, `FC`, and  `PYTHONPATH`.
 
 Then you should be able to do::
 
@@ -133,24 +123,24 @@ The development version of Clawpack can be obtained by cloning
 develop Clawpack or to have the most recent bleeding edge version.
 See :ref:`setup_dev` for instructions.
 
+Install using conda
+===================
+
+This was recently added and not yet extensively tested, see
+:ref:`installing_conda`.
+
 
 .. _install_alternatives:
 
-Running Clawpack on a VM or in the Cloud
-========================================
+Running Clawpack on a VM 
+========================
 
-.. warning:: The information on the pages listed below is out of date.
+See :ref:`docker_image` to use Docker.
 
-**Virtual Machine.**
-An alternative to installing the :ref:`install_prerequisites` 
-and Clawpack itself is to use the :ref:`vm`.
+Other VM versions are currently out of date. Check back for updates to
+this page.
 
 
-**Cloud Computing.**
-
-* :ref:`pyclaw` can be installed and run in the cloud for free on 
-  http://wakari.io or http://cloud.sagemath.com; see :ref:`cloud`.
-* All of Clawpack can be run on AWS using the :ref:`aws`.
 
 Next steps:
 ===========
