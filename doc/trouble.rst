@@ -11,7 +11,11 @@ Troubleshooting
 Troubleshooting Installation
 +++++++++++++++++++++++++++++
 
-.. todo: Need to add something about installation problems.
+Don't forget to :ref:`setenv`, if necessary.
+
+See :ref:`python_path` for problems with your Python path.
+
+The utility function :ref:`whichclaw` may be useful for sorting out path issues.
 
 Troubleshooting Fortran:
 +++++++++++++++++++++++++++++
