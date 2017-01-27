@@ -76,7 +76,7 @@ tools, e.g. VisClaw for visualization), they you could do::
 
     pip install clawpack
 
-or, more specifically,
+or, more specifically, ::
 
     pip install clawpack==5.4.0
 
