@@ -7,10 +7,12 @@ Installation options
 Please `register <http://depts.washington.edu/clawpack/register/index.html>`_
 if you have not already done so.  This is very useful in helping
 us track the extent of usage, and important to the :ref:`funding` agencies
-who support this work.
+who support this work.  Please also see :ref:`citing`.
 
 Instead of installing Clawpack and all its dependencies, another alternative
 is :ref:`docker_image`.
+
+See also :ref:`previous`.
 
 **Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 

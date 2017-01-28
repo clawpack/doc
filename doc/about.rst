@@ -106,38 +106,49 @@ applications.  Thank you!
 Citing this work
 ----------------
 
-If you use Clawpack in publications, please cite the following::
+If you use Clawpack in publications, please cite the software itself as
+well, with a citation similar to the following::
+
+    Clawpack Development Team (2017), Clawpack Version 5.4.0,
+    http://www.clawpack.org, doi:10.5281/zenodo.262111.
+
+Here's the bibtex::
 
     @misc{clawpack,
         title={Clawpack software}, 
         author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
-        note={Version x.y},
-        doi={10.5281/zenodo.50982},
-        year={2014}}
+        note={Version 5.4.0},
+        doi={10.5281/zenodo.262111},
+        year={2017}}
 
 Please fill in the version number that you used, and its year, with the
-appropriate DOI if available.
+appropriate DOI from `Zenodo <https://zenodo.org>`_, if available.  
+See :ref:`previous`.
 
-and::
-
-        @article{mandli2016clawpack,
-          title={Clawpack: building an open source ecosystem for solving hyperbolic PDEs},
-          author={Mandli, Kyle T and Ahmadia, Aron J and Berger, Marsha and Calhoun, Donna
-            and George, David L and Hadjimichael, Yiannis and Ketcheson, David I
-            and Lemoine, Grady I and LeVeque, Randall J},
-          journal={PeerJ Computer Science},
-          volume={2},
-          pages={e68},
-          year={2016},
-          publisher={PeerJ Inc.},
-          doi={10.7717/peerj-cs.68} }
+Also please cite the `recent article <https://peerj.com/articles/cs-68/>`_::
 
 
-For recent releases you can also include a DOI from 
-`Zenodo <https://zenodo.org>`_ , for example
+    Mandli, K.T., Ahmadia, A.J., Berger, M.J., Calhoun, D.A., George, D.L.,
+    Hadjimichael, Y., Ketcheson, D.I., Lemoine, G.I., LeVeque, R.J., 2016.
+    Clawpack: building an open source ecosystem for solving hyperbolic PDEs.
+    PeerJ Computer Science. doi:10.7717/peerj-cs.68
 
-    * Version 5.3.1: `10.5281/zenodo.50982 <http://dx.doi.org/10.5281/zenodo.50982>`_
+Here's the bibtex::
+
+    @article{mandli2016clawpack,
+        title={Clawpack: building an open source ecosystem for solving hyperbolic PDEs},
+        author={Mandli, Kyle T and Ahmadia, Aron J and Berger, Marsha and Calhoun, Donna
+        and George, David L and Hadjimichael, Yiannis and Ketcheson, David I
+        and Lemoine, Grady I and LeVeque, Randall J},
+        journal={PeerJ Computer Science},
+        volume={2},
+        pages={e68},
+        year={2016},
+        publisher={PeerJ Inc.},
+        doi={10.7717/peerj-cs.68} }
+
+
 
 
 Please also cite at least one of the following regarding the algorithms used
