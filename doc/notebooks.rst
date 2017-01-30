@@ -29,9 +29,11 @@ New examples --- under development in :ref:`apps`
 -------------------------------------------------
 
 * `Euler equations: exact solutions
-  <https://nbviewer.jupyter.org/url/depts.washington.edu/clawpack/v5.4.0alpha/_static/notebooks/Riemann_problem_Euler_exact.ipynb>`_
+  <https://nbviewer.jupyter.org/url/www.clawpack.org/_static/notebooks/Riemann_problem_Euler_exact.ipynb>`_
 * `Riemann problem for acoustics 
-  <https://nbviewer.jupyter.org/url/depts.washington.edu/clawpack/v5.4.0alpha/_static/notebooks/Riemann_problem_acoustics.ipynb>`_
+  <https://nbviewer.jupyter.org/url/www.clawpack.org/_static/notebooks/Riemann_problem_acoustics.ipynb>`_
+* `Animation tools demo
+  <https://nbviewer.jupyter.org/url/www.clawpack.org/_static/notebooks/animation_tools_demo.ipynb>`_
 
 .. _notebooks_old:
 
