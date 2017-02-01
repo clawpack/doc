@@ -192,21 +192,27 @@ been improved in 5.2.0 to fix some bugs.  This routine does bilinear
 interpolation the finite volume grid centers to the fixed grid in
 order to update the maximum of values such as depth or velocity.
 
-An alternative version of this routine has been added in 5.2.0
+An alternative version of this routine was added in 5.2.0
 that does piecewise constant interpolation instead. This simply uses the
 value in the finite volume grid cell that contains the fixed grid
 point (0 order extrapolation) and avoids problems sometimes seen when
 doing linear interpolation near the margins of the flow.
+(The surface elevation :math:`\eta = B + h` may be very large in a
+neighboring dry cell and interpolating this sometimes gives non-physical large
+values for the surface elevation in wet cells.)
 
 This routine is in `fgmax_interpolate0.f90` and is now recommended.  
-To use this routine, modify the `Makefile` in an application directory to
-replace the line ::
 
-      $(GEOLIB)/fgmax_interpolate.f90 \
+Starting in Version 5.4.0 this is the default that is specified in the
+library `Makefile` found in `$CLAW/geoclaw/src/2d/shallow/Makefile.geoclaw`
+(see :ref:`makefiles_library`).   
 
-by ::
+To switch back to the bilinear interpolation version, you can modify
+your application `Makefile` to exclude the default routine and
+include the desired routine, e.g.  you can use 
+`this Makefile <_static/Makefile_geoclaw_bilinear_interp>`_
+(modified if necessary for any other application-specific changes).
 
-      $(GEOLIB)/fgmax_interpolate0.f90 \
 
 
 .. _fgmax_processing:
