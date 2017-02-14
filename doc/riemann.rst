@@ -57,7 +57,7 @@ of the i’th cell, as indicated in this figure:
 
 .. image :: images/qlqr.gif
 
-In the classic Clawpack algorithm, `q_i^L = q_i^R` and both values agree with
+In the classic Clawpack algorithm, :math:`q_i^L = q_i^R` and both values agree with
 :math:`Q_i` , the cell average.
 More flexibility is allowed because in some applications, or in
 adapting clawpack to implement different algorithms, it is useful to allow
