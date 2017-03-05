@@ -40,7 +40,7 @@ Examples and Applications
    :maxdepth: 1
    
 
-   gallery/galleries
+   galleries
    apps
    fvmbook
    newapp
