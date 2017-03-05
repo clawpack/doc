@@ -16,6 +16,23 @@ To create html files::
     cd $CLAW/doc/doc
     make html
 
+Or, to make the version that shows previous versions, first install the
+sphinx extension via::
+
+    pip install -U sphinx
+    pip install sphinxcontrib-versioning
+
+and then do this::
+
+    cd $CLAW/doc/doc
+    sphinx-versioning build -i -r master doc ./_build/html
+
+Note that `-i` causes versions to be listed in reverse order at the bottom,
+`-r master` uses the master branch for the main landing page, and `doc` is
+the directory containing the `.rst` files relative to the top directory
+of the Git repository. Only `.rst` files that are checked into Git on some
+branch at `origin` are seen.
+
 To view the files, point your browser to `$CLAW/doc/doc/_build/html/index.html`
 
 If you like what you see, you can push back to your fork and then issue a
