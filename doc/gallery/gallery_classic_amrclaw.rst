@@ -13,19 +13,19 @@ Gallery of Classic and AMRClaw applications
 
 Acoustics equations with interface showing reflection and          transmission.
 
-`README <./../_static/classic/examples/acoustics_1d_example1/README.html>`__ ... 
-`Plots <./../_static/classic/examples/acoustics_1d_example1/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/classic/examples/acoustics_1d_example1/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/classic/examples/acoustics_1d_example1/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/classic_examples_acoustics_1d_example1__plots_frame0000fig1.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_1d_example1/_plots/frame0000fig1.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_1d_example1/_plots/frame0000fig1.html
 .. image:: thumbnails/classic_examples_acoustics_1d_example1__plots_frame0004fig1.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_1d_example1/_plots/frame0004fig1.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_1d_example1/_plots/frame0004fig1.html
 .. image:: thumbnails/classic_examples_acoustics_1d_example1__plots_frame0010fig1.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_1d_example1/_plots/frame0010fig1.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_1d_example1/_plots/frame0010fig1.html
 
 
 
@@ -33,19 +33,19 @@ Acoustics equations with interface showing reflection and          transmission.
 
 Acoustics equations with interface showing reflection and          transmission.
 
-`README <./../_static/classic/examples/acoustics_1d_heterogeneous/README.html>`__ ... 
-`Plots <./../_static/classic/examples/acoustics_1d_heterogeneous/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/classic/examples/acoustics_1d_heterogeneous/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/classic/examples/acoustics_1d_heterogeneous/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/classic_examples_acoustics_1d_heterogeneous__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_1d_heterogeneous/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_1d_heterogeneous/_plots/frame0000fig0.html
 .. image:: thumbnails/classic_examples_acoustics_1d_heterogeneous__plots_frame0007fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_1d_heterogeneous/_plots/frame0007fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_1d_heterogeneous/_plots/frame0007fig0.html
 .. image:: thumbnails/classic_examples_acoustics_1d_heterogeneous__plots_frame0010fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_1d_heterogeneous/_plots/frame0010fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_1d_heterogeneous/_plots/frame0010fig0.html
 
 
 2-dimensional advection
@@ -56,19 +56,19 @@ Acoustics equations with interface showing reflection and          transmission.
 
 Advecting square with periodic boundary conditions.
 
-`README <./../_static/amrclaw/examples/advection_2d_square/README.html>`__ ... 
-`Plots <./../_static/amrclaw/examples/advection_2d_square/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/amrclaw/examples/advection_2d_square/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/amrclaw/examples/advection_2d_square/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/amrclaw_examples_advection_2d_square__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_square/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_square/_plots/frame0000fig0.html
 .. image:: thumbnails/amrclaw_examples_advection_2d_square__plots_frame0001fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_square/_plots/frame0001fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_square/_plots/frame0001fig0.html
 .. image:: thumbnails/amrclaw_examples_advection_2d_square__plots_frame0001fig2.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_square/_plots/frame0001fig2.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_square/_plots/frame0001fig2.html
 
 
 2-dimensional variable-coefficient advection
@@ -79,19 +79,19 @@ Advecting square with periodic boundary conditions.
 
 Advection with a swirling flow field with AMR.
 
-`README <./../_static/amrclaw/examples/advection_2d_swirl/README.html>`__ ... 
-`Plots <./../_static/amrclaw/examples/advection_2d_swirl/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/amrclaw/examples/advection_2d_swirl/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/amrclaw/examples/advection_2d_swirl/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/amrclaw_examples_advection_2d_swirl__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_swirl/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_swirl/_plots/frame0000fig0.html
 .. image:: thumbnails/amrclaw_examples_advection_2d_swirl__plots_frame0004fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_swirl/_plots/frame0004fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_swirl/_plots/frame0004fig0.html
 .. image:: thumbnails/amrclaw_examples_advection_2d_swirl__plots_frame0008fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_swirl/_plots/frame0008fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_swirl/_plots/frame0008fig0.html
 
 
 
@@ -99,16 +99,16 @@ Advection with a swirling flow field with AMR.
 
 Advection in an annular region.
 
-`README <./../_static/classic/examples/advection_2d_annulus/README.html>`__ ... 
-`Plots <./../_static/classic/examples/advection_2d_annulus/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/classic/examples/advection_2d_annulus/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/classic/examples/advection_2d_annulus/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/classic_examples_advection_2d_annulus__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/advection_2d_annulus/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/advection_2d_annulus/_plots/frame0000fig0.html
 .. image:: thumbnails/classic_examples_advection_2d_annulus__plots_frame0002fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/advection_2d_annulus/_plots/frame0002fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/advection_2d_annulus/_plots/frame0002fig0.html
 
 
 
@@ -116,19 +116,19 @@ Advection in an annular region.
 
 Advection in an annular region with AMR.
 
-`README <./../_static/amrclaw/examples/advection_2d_annulus/README.html>`__ ... 
-`Plots <./../_static/amrclaw/examples/advection_2d_annulus/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/amrclaw/examples/advection_2d_annulus/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/amrclaw/examples/advection_2d_annulus/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/amrclaw_examples_advection_2d_annulus__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_annulus/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_annulus/_plots/frame0000fig0.html
 .. image:: thumbnails/amrclaw_examples_advection_2d_annulus__plots_frame0002fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_annulus/_plots/frame0002fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_annulus/_plots/frame0002fig0.html
 .. image:: thumbnails/amrclaw_examples_advection_2d_annulus__plots_frame0002fig2.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/advection_2d_annulus/_plots/frame0002fig2.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/advection_2d_annulus/_plots/frame0002fig2.html
 
 
 2-dimensional acoustics
@@ -139,19 +139,19 @@ Advection in an annular region with AMR.
 
 Expanding radial acoustic wave in a homogeneous medium.
 
-`README <./../_static/classic/examples/acoustics_2d_radial/README.html>`__ ... 
-`Plots <./../_static/classic/examples/acoustics_2d_radial/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/classic/examples/acoustics_2d_radial/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/classic/examples/acoustics_2d_radial/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/classic_examples_acoustics_2d_radial__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_2d_radial/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_2d_radial/_plots/frame0000fig0.html
 .. image:: thumbnails/classic_examples_acoustics_2d_radial__plots_frame0002fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_2d_radial/_plots/frame0002fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_2d_radial/_plots/frame0002fig0.html
 .. image:: thumbnails/classic_examples_acoustics_2d_radial__plots_frame0004fig0.png
    :width: 5cm
-   :target: ./../_static/classic/examples/acoustics_2d_radial/_plots/frame0004fig0.html
+   :target: http://www.clawpack.org/_static/classic/examples/acoustics_2d_radial/_plots/frame0004fig0.html
 
 
 
@@ -159,19 +159,19 @@ Expanding radial acoustic wave in a homogeneous medium.
 
 Expanding radial acoustic wave in a homogeneous medium with AMR.
 
-`README <./../_static/amrclaw/examples/acoustics_2d_radial/README.html>`__ ... 
-`Plots <./../_static/amrclaw/examples/acoustics_2d_radial/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/amrclaw/examples/acoustics_2d_radial/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/amrclaw/examples/acoustics_2d_radial/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/amrclaw_examples_acoustics_2d_radial__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/acoustics_2d_radial/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/acoustics_2d_radial/_plots/frame0000fig0.html
 .. image:: thumbnails/amrclaw_examples_acoustics_2d_radial__plots_frame0002fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/acoustics_2d_radial/_plots/frame0002fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/acoustics_2d_radial/_plots/frame0002fig0.html
 .. image:: thumbnails/amrclaw_examples_acoustics_2d_radial__plots_frame0004fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/acoustics_2d_radial/_plots/frame0004fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/acoustics_2d_radial/_plots/frame0004fig0.html
 
 
 2-dimensional Burgers' equation
@@ -182,19 +182,19 @@ Expanding radial acoustic wave in a homogeneous medium with AMR.
 
 Burgers' equation :math:`q_t + 0.5(q^2)_x + 0.5(q^2)_y = 0`         with square initial pulse and periodic boundary conditions.
 
-`README <./../_static/amrclaw/examples/burgers_2d_square/README.html>`__ ... 
-`Plots <./../_static/amrclaw/examples/burgers_2d_square/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/amrclaw/examples/burgers_2d_square/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/amrclaw/examples/burgers_2d_square/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/amrclaw_examples_burgers_2d_square__plots_frame0000fig1.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/burgers_2d_square/_plots/frame0000fig1.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/burgers_2d_square/_plots/frame0000fig1.html
 .. image:: thumbnails/amrclaw_examples_burgers_2d_square__plots_frame0005fig1.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/burgers_2d_square/_plots/frame0005fig1.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/burgers_2d_square/_plots/frame0005fig1.html
 .. image:: thumbnails/amrclaw_examples_burgers_2d_square__plots_frame0020fig1.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/burgers_2d_square/_plots/frame0020fig1.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/burgers_2d_square/_plots/frame0020fig1.html
 
 
 2-dimensional Euler equations
@@ -205,18 +205,18 @@ Burgers' equation :math:`q_t + 0.5(q^2)_x + 0.5(q^2)_y = 0`         with square 
 
 Euler equations with piecewise constant data in quadrants.
 
-`README <./../_static/amrclaw/examples/euler_2d_quadrants/README.html>`__ ... 
-`Plots <./../_static/amrclaw/examples/euler_2d_quadrants/_plots/_PlotIndex.html>`__
+`README <http://www.clawpack.org/_static/amrclaw/examples/euler_2d_quadrants/README.html>`__ ... 
+`Plots <http://www.clawpack.org/_static/amrclaw/examples/euler_2d_quadrants/_plots/_PlotIndex.html>`__
 
 
 .. image:: thumbnails/amrclaw_examples_euler_2d_quadrants__plots_frame0000fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/euler_2d_quadrants/_plots/frame0000fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/euler_2d_quadrants/_plots/frame0000fig0.html
 .. image:: thumbnails/amrclaw_examples_euler_2d_quadrants__plots_frame0004fig0.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/euler_2d_quadrants/_plots/frame0004fig0.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/euler_2d_quadrants/_plots/frame0004fig0.html
 .. image:: thumbnails/amrclaw_examples_euler_2d_quadrants__plots_frame0004fig1.png
    :width: 5cm
-   :target: ./../_static/amrclaw/examples/euler_2d_quadrants/_plots/frame0004fig1.html
+   :target: http://www.clawpack.org/_static/amrclaw/examples/euler_2d_quadrants/_plots/frame0004fig1.html
 
 
