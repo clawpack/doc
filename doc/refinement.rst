@@ -196,9 +196,8 @@ TODO:  This might be wrong!!!
 Flagging criteria in GeoClaw
 -----------------------------
 
-In GeoClaw, a special `flag2refine` subroutine is defined.
-
-TODO: need to describe geoclaw flag2refine.
+In GeoClaw, a special `flag2refine` subroutine is defined.  See 
+:ref:`geoclaw_refinement` for details on how GeoClaw flags cells.
 
 
 

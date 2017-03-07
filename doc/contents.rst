@@ -108,6 +108,7 @@ GeoClaw: geophysical flows
    fgout
    fgmax
    tsunamidata
+   geoclaw_refinement
 
 
 
