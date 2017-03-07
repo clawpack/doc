@@ -1,9 +1,23 @@
 
 .. _plotting:
 
+
 ***************************************
-Visclaw Plotting options 
+Plotting with Visclaw
 ***************************************
+
+.. toctree::
+   :maxdepth: 2
+   
+   plotting_python
+   setplot
+   current_data
+   plotexamples
+   plotting_faq
+   geoplot
+   matlab_plotting
+   visit_plotting
+
 
 .. _plotting_postproc:
 

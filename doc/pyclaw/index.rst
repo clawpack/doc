@@ -39,6 +39,7 @@ PyClaw Documentation
 .. toctree::
    :maxdepth: 2
 
+   ../first_run_pyclaw
    basics
    going_further
    classes
