@@ -67,11 +67,11 @@ Old notebooks --- many need updating
 
 **Examples for GeoClaw:**
 
-* `Jupyter notebook illustrating topotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_
+* :ref:`geoclaw/topotools_examples.ipynb`
 
-* `Jupyter notebook illustrating dtopotools <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/dtopotools_examples.ipynb>`_
+* :ref:`geoclaw/dtopotools_examples.ipynb`
 
-* `IPython notebook illustrating the Okada model <http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_
+* :ref:`geoclaw/Okada.ipynb`
 
 **Examples illustrating methods:**
 

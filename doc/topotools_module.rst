@@ -6,9 +6,7 @@ topotools module for working with topography data
 
 .. warning :: This describes new tools added in Clawpack 5.2.1
 
-`This IPython notebook
-<http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/topotools_examples.ipynb>`_
-illustrates how to use some of the tools.
+:ref:`geoclaw/topotools_examples.ipynb` illustrates how to use some of the tools.
 
 The file `$CLAW/geoclaw/tests/test_topotools.py` contains some tests of these
 tools.  Looking at these test routines may also give some ideas on 

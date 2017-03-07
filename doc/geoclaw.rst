@@ -40,6 +40,8 @@ More will eventually appear in the :ref:`apps`.
    geohints
    topo
    topotools
+   geoclaw/topotools_examples
+   geoclaw/dtopotools_examples
    setrun_geoclaw
    plotting_geoclaw
    googleearth_plotting
@@ -50,6 +52,7 @@ More will eventually appear in the :ref:`apps`.
    fgout
    fgmax
    tsunamidata
+   geoclaw/Okada
 
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x
