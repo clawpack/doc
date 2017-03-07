@@ -1,3 +1,5 @@
+:orphan:
+
 .. _installing:
 
 **************************************
@@ -125,11 +127,27 @@ The development version of Clawpack can be obtained by cloning
 develop Clawpack or to have the most recent bleeding edge version.
 See :ref:`setup_dev` for instructions.
 
-Install using conda
-===================
+.. _installing_conda:
 
-This was recently added and not yet extensively tested, see
-:ref:`installing_conda`.
+Install using conda (does not require a Fortran compiler)
+=========================================================
+
+.. warning:: This is currently under development and not extensively tested.
+
+You can install PyClaw and VisClaw only (without AMRClaw, GeoClaw, or Classic)
+via the `conda package manager <http://conda.pydata.org/docs/index.html>`_.
+Conda binaries are available for Mac OS X and Ubuntu Linux
+(may work on other flavors of Linux).
+
+From a terminal, simply do::
+
+    conda install -c clawpack -c conda-forge clawpack=5.4.0
+
+You might want to consider first creating a separate `conda environment
+<http://conda.pydata.org/docs/using/envs.html>`_ if you want to separate
+Clawpack and its dependencies from other versions of Python code. 
+
+See https://github.com/clawpack/conda-recipes.
 
 
 .. _install_alternatives:

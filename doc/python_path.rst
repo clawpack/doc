@@ -1,4 +1,4 @@
-
+:orphan:
 .. _python_path:
 
 Python path

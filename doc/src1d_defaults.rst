@@ -1,3 +1,4 @@
+:orphan:
 
 .. _src1d_defaults:
 

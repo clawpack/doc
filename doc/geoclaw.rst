@@ -1,5 +1,3 @@
-
-
 .. _geoclaw:
 
 ***************
@@ -14,27 +12,6 @@ GeoClaw software and links to references and uses.
    purpose, and no liability on the part of the authors.  See the
    :ref:`license` for more details and :ref:`geohints` for tips on
    exercising appropriate care in using the code.
-
-
-**See also:**
-
-* :ref:`geohints`
-* :ref:`topo`
-* :ref:`topotools`
-* :ref:`setrun_geoclaw`
-* :ref:`plotting_geoclaw`
-* :ref:`quick_tsunami`
-* :ref:`okada`
-* :ref:`sealevel`
-* :ref:`manning`
-* :ref:`fgmax`
-* :ref:`tsunamidata`
-* `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
-  to relevant papers and sample codes (some are based on the Clawpack 4.x
-  version of GeoClaw).
-
-Overview
---------
 
 The `$CLAW/geoclaw` directory contains a specialized version of some Clawpack
 and AMRClaw routines that have been modified to work well for certain
@@ -56,60 +33,24 @@ tsunami inundates dry land.
 Some sample calculations can be viewed in the :ref:`gallery_geoclaw`.
 More will eventually appear in the :ref:`apps`.
 
+.. toctree::
+   :maxdepth: 2
 
+   geoclaw_started
+   geohints
+   topo
+   topotools
+   setrun_geoclaw
+   plotting_geoclaw
+   googleearth_plotting
+   quick_tsunami
+   okada
+   sealevel
+   manning
+   fgout
+   fgmax
+   tsunamidata
 
-.. _geoclaw_run:
-
-Running a GeoClaw code
-----------------------
-
-Setting up, running, and plotting a GeoClaw application follows the same pattern
-as other AMRClaw applications, which in turn use many of the same
-conventions as the classic single grid Clawpack code, in particular:
-
- * Setting parameters is done in `setrun.py`, as for other versions
-   of Clawpack, as described in :ref:`setrun`.  However, there are several
-   new parameters that may or must be set for GeoClaw.  See
-   :ref:`setrun_geoclaw` for more details on these.
-
- * The program can be compiled and run using *make* and *make .output* as
-   for other versions, see :ref:`fortran`.
-
- * Plots of results can be created either as a set of webpages via
-   *make .plots* or interactively using *Iplotclaw*.  See
-   :ref:`plotting` for more details.  Some additional Python plotting tools 
-   that are useful for GeoClaw output (e.g. plotting land and water with
-   different colormaps) are described in the section
-   :ref:`plotting_geoclaw`.
-
-
-.. _topo_intro:
-
-Topography
-----------
-
-To simulate  flow over topography it is of course necessary to specify 
-the topography.  This is usually done by providing one or more files of
-surface elevation (relative to some reference, e.g. sea level) at a set of
-points on a rectangular grid (with x-y locations in Cartesian units or in
-latitude-longitude, depending on the application).
-
-Several file formats are recognized by GeoClaw.  See :ref:`topo` for more
-information on how to specify topography and some on-line resources for
-obtaining topography.
-
-.. _geoclaw_plotting:
-
-Plotting GeoClaw results
-------------------------
-
-GeoClaw results can be plotted with the usual Python plotting tools (see
-:ref:`plotting`).  
-
-Some special tools and colormaps are available, see :ref:`geoplot`.
-
-Setting up a new example
-------------------------
-
- * :ref:`quick_tsunami`
-
+* `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
+  to relevant papers and sample codes (some are based on the Clawpack 4.x
+  version of GeoClaw).

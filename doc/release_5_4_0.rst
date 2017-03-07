@@ -1,4 +1,4 @@
-
+:orphan:
 
 .. comment: Change master to v5.4.0 in github links below once release is tagged
 
@@ -246,7 +246,7 @@ Changes to PyClaw
 :ref:`release_5_4_0_global`.
 
 For changes in PyClaw, see the `PyClaw changelog
-<https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
+<https://github.com/clawpack/pyclaw/blob/v5.4.0/CHANGES.md>`_.
 
 See `pyclaw diffs
 <https://github.com/clawpack/pyclaw/compare/v5.3.1...v5.4.0>`_

@@ -1,3 +1,4 @@
+:orphan:
 
 .. _wp_algorithms:
 
