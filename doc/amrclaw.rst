@@ -34,6 +34,7 @@ Matlab tools from Clawpack 4.3 can still be used, see
 .. toctree::
    :maxdepth: 2
 
+   amrclaw/amrclaw_advection_2d_square
    amrclaw1d
    setrun_amrclaw
    setrun_amrclaw_sample

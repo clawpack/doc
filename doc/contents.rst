@@ -110,6 +110,7 @@ All Clawpack packages make use of the same collection of Riemann solvers.
    :maxdepth: 2
 
    riemann
+   riemann/Shallow_water_Riemann_solvers
 
 VisClaw: Plotting and Visualization Tools
 =========================================

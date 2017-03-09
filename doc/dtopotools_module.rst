@@ -6,12 +6,9 @@ dtopotools module for moving topography
 
 **This describes new tools added in Clawpack 5.2.1.**
 
-This IPython notebook `dtopotools_examples.ipynb
-<http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/dtopotools_examples.ipynb>`_
-illustrates how to use some of the tools.
+:ref:`geoclaw/dtopotools_examples.ipynb` illustrates how to use some of the tools.
 
-See also `Okada.ipynb
-<http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_,
+See also :ref:`geoclaw/Okada.ipynb`,
 which illustrates the Okada model using some of these tools.
 
 The file `$CLAW/geoclaw/tests/test_dtopotools.py` contains some tests of these

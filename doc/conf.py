@@ -36,14 +36,14 @@ sys.path.append(os.path.join(clawpack_root,'riemann/src/python/riemann'))
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-#extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.coverage','sphinx.ext.viewcode','sphinx.ext.inheritance_diagram']
+# extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.coverage','sphinx.ext.viewcode','sphinx.ext.inheritance_diagram']
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx','plot_directive','only_directives',
-              'sphinx.ext.inheritance_diagram']
-                
-# extensions.append('sphinx.ext.jsmath')
-#extensions.append('sphinx.ext.pngmath')
+              'sphinx.ext.inheritance_diagram', 'nbsphinx','edit_on_github']
+
+nbsphinx_allow_errors = False
+
 extensions.append('sphinx.ext.mathjax')
 mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
@@ -53,6 +53,9 @@ templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
+html_sourcelink_suffix = '' # Don't add '.txt' to ipynb's.
+edit_on_github_project = 'clawpack/doc'
+edit_on_github_branch = 'master/doc'
 
 # The encoding of source files.
 #source_encoding = 'utf-8'
