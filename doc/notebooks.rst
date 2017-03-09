@@ -35,18 +35,18 @@ New examples --- under development in :ref:`apps`
 * `Animation tools demo
   <https://nbviewer.jupyter.org/url/www.clawpack.org/_static/notebooks/animation_tools_demo.ipynb>`_
 
+**Examples using PyClaw:**
+
+* :ref:`pyclaw/intro_notebook.ipynb`
+* `A 2D fluid dynamics example <https://github.com/clawpack/apps/blob/master/notebooks/pyclaw/Quadrants.ipynb>`_
+* `Stegotons: solitary waves arising in non-dispersive periodic media <https://github.com/clawpack/apps/blob/master/notebooks/pyclaw/Stegotons.ipynb>`_
+* `Demonstration of different limiters for advection <http://nbviewer.ipython.org/gist/ketch/9508222>`_
+
+
 .. _notebooks_old:
 
 Old notebooks --- many need updating
 ------------------------------------
-
-**Examples using PyClaw:**
-
-* `A quick introduction to PyClaw <http://nbviewer.ipython.org/8332861>`_
-* `A 2D fluid dynamics example <http://nbviewer.ipython.org/8333043>`_
-* `Stegotons: solitary waves arising in non-dispersive periodic media <http://nbviewer.ipython.org/gist/ketch/8554686>`_
-* `Demonstration of different limiters for advection <http://nbviewer.ipython.org/gist/ketch/9508222>`_
-* More to come 
 
 **Examples illustrating Riemann solvers:**
 
@@ -60,17 +60,14 @@ Old notebooks --- many need updating
 
 **Examples using the Fortran code:**
 
-* `Demo of running the code and producing an animation of results <http://nbviewer.ipython.org/gist/rjleveque/8328720>`_
-* `Demo of AMRClaw with adjustment of runtime and plotting parameters <http://nbviewer.ipython.org/gist/rjleveque/8642159>`_ 
+* :ref:`classic_demo.ipynb`
+* :ref:`amrclaw/amrclaw_advection_2d_square.ipynb`
 * `Riemann solutions of the shallow water equations <http://nbviewer.ipython.org/gist/rjleveque/8994740>`_ 
-* More to come 
 
 **Examples for GeoClaw:**
 
 * :ref:`geoclaw/topotools_examples.ipynb`
-
 * :ref:`geoclaw/dtopotools_examples.ipynb`
-
 * :ref:`geoclaw/Okada.ipynb`
 
 **Examples illustrating methods:**
