@@ -53,6 +53,7 @@ templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
+html_sourcelink_suffix = '' # Don't add '.txt' to ipynb's.
 
 # The encoding of source files.
 #source_encoding = 'utf-8'
