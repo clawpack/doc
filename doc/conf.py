@@ -40,7 +40,7 @@ sys.path.append(os.path.join(clawpack_root,'riemann/src/python/riemann'))
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx','plot_directive','only_directives',
-              'sphinx.ext.inheritance_diagram', 'nbsphinx']
+              'sphinx.ext.inheritance_diagram', 'nbsphinx','edit_on_github']
 
 nbsphinx_allow_errors = False
 
@@ -54,6 +54,8 @@ templates_path = ['_templates']
 # The suffix of source filenames.
 source_suffix = '.rst'
 html_sourcelink_suffix = '' # Don't add '.txt' to ipynb's.
+edit_on_github_project = 'clawpack/doc'
+edit_on_github_branch = 'master/doc'
 
 # The encoding of source files.
 #source_encoding = 'utf-8'
