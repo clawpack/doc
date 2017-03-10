@@ -7,9 +7,66 @@
 ***********************
 PyClaw output
 ***********************
+In the documentation below, it is assumed that `claw` refers to a 
+`pyclaw.controller.Controller` object, as is customary in the example
+scripts.
+
+Output frames
+=============
+The result of a PyClaw simulation is a set of snapshots, or *frames*
+of the solution.  By default these are written to disk in a subdirectory
+named `_outdir`.  Writing of output files can be turned off by setting
+`claw.output_format = None`.
+
+If `claw.keep_copy = True`, then output frames are also saved in memory
+in the list `claw.frames`.  Each entry is a `pyclaw.solution.Solution`
+object.  Thus the initial condition is available from `claw.frames[0].q`
+and the final solution is in `claw.frames[-1].q`.
+This can be convenient for working with
+smaller simulations without reading from and writing to disk.
+
+
+When output is saved/written
+============================
+PyClaw supports the same basic options as other Clawpack packages for
+controlling output.  These are selected by setting `claw.output_style`:
+
+    * `claw.output_style = 1`: Evenly spaced output, between the initial
+      and final simulation times.  The number of outputs is the value of
+      `claw.num_output_times`.
+    * `claw.output_style = 2`: Manual specification of output times.
+      Output will be written at the times specified in
+      `claw.output_times`, which should be a list.
+    * Write output after a certain number of steps have been taken;
+      the number is specified in `claw.nstepout`.  For instance,
+      if `claw.nstepout = 3`, then output is written after every 3
+      steps.  This is most often useful for debugging.
+
+Where and how output is written
+===============================
+The following options control the kind and location of output
+files:
+
+    * `claw.output_format`: A string specifying the format in which output data
+      is written.  The default is `ascii`.  Other valid options are `binary`,
+      `hdf5`, and `petsc`.  These formats can be useful for obtaining
+      smaller output files or for loading output data into other software.
+      Finally, this can be set to `None` to avoid writing any output to disk.
+    * `claw.outdir`: Subdirectory in which to place output files.  Defaults
+      to `_output`.
+    * `claw.output_file_prefix`: Allows manual specification of the prefix
+      for output files.
+    * `claw.overwrite`: if True, allow existing files in the output
+      directory to be overwritten by the current run.
+
+What output is written
+======================
 PyClaw supports options to output more
 than just the solution :math:`q`.  It can provide:
 
+    * Snapshots of the values in the `aux` array at the initial time
+      and/or output times.  This is turned on by setting
+      `claw.write_aux_int = True` or `claw.write_aux_always = True`.
     * Output of derived quantities computed from :math:`q`; for instance,
       pressure (not a conserved quantity) could be computed from density
       and energy.
@@ -24,6 +81,7 @@ to compute them at run-time for large parallel runs.
 Gauge output is written at every timestep.  In order to get this data without a
 gauge, one would otherwise have to write the full solution out at every
 timestep, which might be very slow.
+
 
 
 Outputting derived quantities
@@ -60,6 +118,9 @@ in state.p
     >>> state.mp = 1
     >>> claw.p_function = stress
 
+For a working example, see `the PyClaw P-system example <https://github.com/clawpack/pyclaw/blob/master/examples/psystem_2d/psystem_2d.py>`_.
+
+
 Outputting functionals
 ===============================
 In PyClaw a functional is a scalar quantity computed from :math:`q` that is written
@@ -72,15 +133,28 @@ to file at each output time.  For now, only functionals of the form
 
 are supported.  In other words, the functional must be the absolute
 integral of some function of :math:`q`.  To enable writing functionals, simply
-set state.mf to the number of functionals and point the controller to a 
-function that computes :math:`f(q)`
+set `state.mF` to the number of functionals::
+
+    >>> state.mf = 1
+
+and point the controller to a function that computes :math:`f(q)` elementwise
+and stores it in the array
+`state.F`.  For instance, if your first two conserved quantities are density
+and momentum, you might write:
 
 .. doctest::
 
-    >>> def compute_f(state):
-    ...    state.F[0,:,:] = state.q[0,:,:]*state.q[1,:,:]
+    >>> def energy(state):
+    ...    state.F[0,:,:] = 0.5 * state.q[0,:,:]*state.q[1,:,:]
+    >>> claw.compute_F = energy
+    >>> claw.F_file_name = 'total_energy'
 
-    >>> state.mf = 1
+The total energy (summed over the grid) would then be written to
+`_output/total_energy.txt`.  The output file has two columns; the
+first is time and the second is the functional value.  Output is
+written at the same times that `q` is written to file.
+
+For a working example, see `the PyClaw P-system example <https://github.com/clawpack/pyclaw/blob/master/examples/psystem_2d/psystem_2d.py>`_.
 
 Using gauges
 ===================
@@ -111,9 +185,12 @@ To write some other quantity, simply provide a function
 
     >>> solver.compute_gauge_values = f
 
+For a working example, see `the PyClaw P-system example <https://github.com/clawpack/pyclaw/blob/master/examples/psystem_2d/psystem_2d.py>`_.
 
+
+*******
 Logging
-=======
+*******
 By default, PyClaw prints a message to the screen each time it writes
 an output file.  This message is also writing to the file `pyclaw.log`
 in the working directory.  There are additional warning or error messages

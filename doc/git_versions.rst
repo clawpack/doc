@@ -1,9 +1,9 @@
 
 .. _git_versions:
 
-==============================
-Keeping track of git versions
-==============================
+=============================================
+Keeping track of repository versions with Git
+=============================================
 
 The command::
 

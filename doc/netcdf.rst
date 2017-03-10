@@ -1,10 +1,12 @@
+:orphan:
+
 .. _netcdf:
 
 ==========================
 Using NetCDF output
 ==========================
 
-.. warning:: NetCDF output is currently broken in 5.0.0.
+.. warning:: NetCDF output is currently broken in version 5.x.
 
 
 The AMRClaw and GeoClaw codes have the option to output results in

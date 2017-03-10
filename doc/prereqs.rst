@@ -1,3 +1,4 @@
+:orphan:
 
 .. _prereqs:
 
@@ -12,25 +13,22 @@ Operating system
 ------------------
 
 - Linux
-- Mac OS X (you need to have the `Xcode developer tools
+- Mac OS X: For the Fortran packages, you need to have the `Xcode developer tools
   <http://developer.apple.com/technologies/tools/xcode.html>`_ installed in
-  order to have "make" working)
+  order to have `make` working.  PyClaw does not require `make`.
 
 
 .. _prereqs_fortran:
 
 Fortran
 -------
+PyClaw can now be installed without a Fortran compiler; see :ref:`installing_conda`.
 
-- `gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler
+To use the other packages, you will need 
+`gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler
 
 See :ref:`fortran_compilers` for more about which compilers work well with
 Clawpack.
-
-Note that Fortran is required even if you only plan to use the "pure Python"
-finite volume methods in PyClaw, since the Riemann solvers are mostly 
-written in Fortran and compiled for use in PyClaw using 
-`f2py <https://docs.scipy.org/doc/numpy-dev/f2py/>`_.
 
 .. _prereqs_python:
 

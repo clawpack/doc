@@ -7,11 +7,12 @@
 Full Table of Contents
 ====================================================
 
+
 Overview and Getting Started
 ============================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    about
    changes
@@ -22,6 +23,7 @@ Overview and Getting Started
    setenv
    first_run
    clawpack_components
+   wp_algorithms
    trouble
 
 .. toctree::
@@ -32,19 +34,16 @@ Overview and Getting Started
    aws
 
 
-
 Examples and Applications
 ============================
+
+See also:  :ref:`galleries`
 
 .. toctree::
    :maxdepth: 1
    
-
-   galleries
    apps
    fvmbook
-   newapp
-   sharing
    contribute_apps
    testing
    sphinxdoc
@@ -54,9 +53,12 @@ Classic, AMRClaw, and GeoClaw
 
 Using the Fortran codes
 -------------------------
-.. toctree::
-   :maxdepth: 2
+General information that applies to Classic, AMRClaw, and GeoClaw.
 
+.. toctree::
+   :maxdepth: 1
+
+   first_run_fortran
    fortran
    fortran_compilers
    f77_vs_f90
@@ -74,6 +76,8 @@ Using the Fortran codes
    output_styles
    mapc2p
    restart
+   newapp
+   sharing
 
 AMRClaw: adaptive mesh refinement
 ---------------------------------
@@ -82,11 +86,6 @@ AMRClaw: adaptive mesh refinement
    :maxdepth: 2
 
    amrclaw
-   setrun_amrclaw
-   setrun_amrclaw_sample
-   amr_algorithm
-   refinement
-   gauges
 
 GeoClaw: geophysical flows
 --------------------------
@@ -95,21 +94,6 @@ GeoClaw: geophysical flows
    :maxdepth: 2
 
    geoclaw
-   geohints
-   topo
-   topotools
-   setrun_geoclaw
-   plotting_geoclaw
-   googleearth_plotting
-   quick_tsunami
-   okada
-   sealevel
-   manning
-   fgout
-   fgmax
-   tsunamidata
-
-
 
 PyClaw
 ======
@@ -120,6 +104,15 @@ PyClaw
    pyclaw/index
 
 
+Riemann
+=======
+All Clawpack packages make use of the same collection of Riemann solvers.
+
+.. toctree::
+   :maxdepth: 2
+
+   riemann
+   riemann/Shallow_water_Riemann_solvers
 
 VisClaw: Plotting and Visualization Tools
 =========================================
@@ -128,16 +121,18 @@ VisClaw: Plotting and Visualization Tools
    :maxdepth: 2
    
    plotting
-   plotting_python
-   setplot
-   current_data
-   plotexamples
-   plotting_faq
-   geoplot
-   matlab_plotting
-   visit_plotting
 
 
+Migrating applications from older versions of Clawpack
+======================================================
+If you are looking to run an application that was written
+for Clawpack 4.x, this may be helpful.
+
+.. toctree::
+   :maxdepth: 2
+
+   claw43to46
+   claw46to50
 
 
 Developers' resources
@@ -151,6 +146,7 @@ Developers' resources
    howto_doc
    regression
    git_versions
+   photos
 
 See also :ref:`setup_dev`
 

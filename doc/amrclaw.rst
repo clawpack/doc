@@ -31,4 +31,15 @@ Python plotting tools for 3d are still under development.  For now, the
 Matlab tools from Clawpack 4.3 can still be used, see
 :ref:`matlabplots`.
 
+.. toctree::
+   :maxdepth: 2
+
+   amrclaw/amrclaw_advection_2d_square
+   amrclaw1d
+   setrun_amrclaw
+   setrun_amrclaw_sample
+   amr_algorithm
+   refinement
+   gauges
+
 
