@@ -20,7 +20,7 @@ import sys, os
 # is relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
 sys.path.append(os.path.abspath('../..'))
-sys.path.append(os.path.abspath('./ext'))
+sys.path.append(os.path.abspath('../doc/ext'))
 
 clawpack_root = os.path.abspath('../..')
 print "clawpack_root = ",clawpack_root
@@ -49,7 +49,7 @@ mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-
 
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['../doc/_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
@@ -61,7 +61,7 @@ edit_on_github_branch = 'master/doc'
 #source_encoding = 'utf-8'
 
 # The master toctree document.
-master_doc = 'contents'
+master_doc = 'index'
 
 # General information about the project.
 project = u'Clawpack'
@@ -112,11 +112,11 @@ pygments_style = 'sphinx'
 
 
 sys.path.append(os.path.abspath('_themes'))
-html_theme_path = ['_themes']
+html_theme_path = ['../doc/_themes']
 html_extra_path = ['extra_files']
 html_theme = 'flask'
 github_fork = 'clawpack'
-html_additional_pages = {'index': 'index.html'}
+#html_additional_pages = {'index': 'index.html'}
 
 
 # Custom sidebar templates, maps document names to template names.
@@ -154,12 +154,12 @@ html_logo = None
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = '_static/clawicon.ico'
+html_favicon = '../doc/_static/clawicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['../doc/_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -237,13 +237,6 @@ latex_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 #intersphinx_mapping = {'http://docs.python.org/dev': None}
 #intersphinx_mapping = {'kingkong': ('http://kingkong.amath.washington.edu/clawpack/trunk/doc/sphinx/', None)}
-
-# works for webpages?
-#intersphinx_mapping = {'gallery':('../../../gallery','../gallery/_build/html/objects.inv')}
-
-# works locally:
-intersphinx_mapping = {'gallery':('../../../gallery/_build/html','../gallery/_build/html/objects.inv')}
-
 
 keep_warnings = 'True'
 
