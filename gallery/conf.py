@@ -112,7 +112,7 @@ pygments_style = 'sphinx'
 
 
 sys.path.append(os.path.abspath('_themes'))
-html_theme_path = ['../doc/_themes']
+html_theme_path = ['_themes']
 html_extra_path = ['extra_files']
 html_theme = 'flask'
 github_fork = 'clawpack'
@@ -238,9 +238,15 @@ latex_documents = [
 #intersphinx_mapping = {'http://docs.python.org/dev': None}
 #intersphinx_mapping = {'kingkong': ('http://kingkong.amath.washington.edu/clawpack/trunk/doc/sphinx/', None)}
 
+# works for webpages?
+#intersphinx_mapping = {'gallery':('../../../doc','../doc/_build/html/objects.inv')}
+
+# works locally:
+intersphinx_mapping = {'main':('../../../doc/_build/html','../doc/_build/html/objects.inv')}
+
 keep_warnings = 'True'
 
-inheritance_graph_attrs = dict(rankdir="TB", 
+inheritance_graph_attrs = dict(rankdir="TB",
                                fontsize=12,splines='"true"',penwidth=100)
 
 inheritance_node_attrs = dict(fontsize=12, shape='box3d',
