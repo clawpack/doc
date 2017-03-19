@@ -238,11 +238,14 @@ latex_documents = [
 #intersphinx_mapping = {'http://docs.python.org/dev': None}
 #intersphinx_mapping = {'kingkong': ('http://kingkong.amath.washington.edu/clawpack/trunk/doc/sphinx/', None)}
 
-# works for webpages?
-#intersphinx_mapping = {'gallery':('../../../gallery','../gallery/_build/html/objects.inv')}
+SPHINX_WEB = os.environ.get('SPHINX_WEB', 'False')
 
-# works locally:
-intersphinx_mapping = {'gallery':('../../../gallery/_build/html','../gallery/_build/html/objects.inv')}
+if SPHINX_WEB in ['True',True]:
+    # works for webpages?
+    intersphinx_mapping = {'gallery':('gallery','../gallery/_build/html/objects.inv')}
+else:
+    # works locally:
+    intersphinx_mapping = {'gallery':('../../../gallery/_build/html','../gallery/_build/html/objects.inv')}
 
 
 keep_warnings = 'True'
