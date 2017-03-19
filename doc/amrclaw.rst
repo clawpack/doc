@@ -14,6 +14,7 @@ also be used for 1-dimensional problems, see :ref:`amrclaw_1d`.)
 
 * :ref:`amr_algorithm`
 * :ref:`refinement`
+* :ref:`amrclaw_doxygen`
 
 Block-structured AMR is implemented, in which rectangular patches of the
 grid at level `L` are refined to level `L+1`.  
