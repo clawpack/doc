@@ -4,6 +4,8 @@
 Guide for updating this documentation
 =============================================
 
+Out of date -- see the README.md at https://github.com/clawpack/doc
+
 The restructured text files are in the `clawpac/doc
 <https://github.com/clawpack/doc>`_ repository in `$CLAW/doc/doc`.
 
