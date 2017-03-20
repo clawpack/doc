@@ -14,9 +14,9 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 SPHINX_WEB ?= False
 ifeq ($(SPHINX_WEB),True)
-	LAYOUT = _themes/flask/layout_web.html
+	LAYOUT = _themes/flask_web/layout.html
 else
-	LAYOUT = _themes/flask/layout_local.html
+	LAYOUT = _themes/flask_local/layout.html
 endif
 
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
@@ -45,8 +45,6 @@ clean:
 
 html:
 	@echo Using LAYOUT = $(LAYOUT)
-	rm -f _themes/flask/layout.html
-	cp $(LAYOUT) _themes/flask/layout.html
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -140,15 +138,11 @@ doctest:
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 html_local:
-	rm -f _themes/flask/layout.html
-	cp _themes/flask/layout_local.html _themes/flask/layout.html
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 html_web:
-	rm -f _themes/flask/layout.html
-	cp _themes/flask/layout_web.html _themes/flask/layout.html
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

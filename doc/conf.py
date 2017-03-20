@@ -114,7 +114,12 @@ pygments_style = 'sphinx'
 sys.path.append(os.path.abspath('_themes'))
 html_theme_path = ['_themes']
 html_extra_path = ['extra_files']
-html_theme = 'flask'
+SPHINX_WEB = os.environ.get('SPHINX_WEB', 'False')
+if SPHINX_WEB in ['True',True]:
+    html_theme = 'flask_web'
+else:
+    html_theme = 'flask_local'
+
 github_fork = 'clawpack'
 html_additional_pages = {'index': 'index.html'}
 
@@ -238,7 +243,6 @@ latex_documents = [
 #intersphinx_mapping = {'http://docs.python.org/dev': None}
 #intersphinx_mapping = {'kingkong': ('http://kingkong.amath.washington.edu/clawpack/trunk/doc/sphinx/', None)}
 
-SPHINX_WEB = os.environ.get('SPHINX_WEB', 'False')
 
 if SPHINX_WEB in ['True',True]:
     # works for webpages?
@@ -250,9 +254,8 @@ else:
 
 keep_warnings = 'True'
 
-inheritance_graph_attrs = dict(rankdir="TB", 
+inheritance_graph_attrs = dict(rankdir="TB",
                                fontsize=12,splines='"true"',penwidth=100)
 
 inheritance_node_attrs = dict(fontsize=12, shape='box3d',
                               color='black', style='filled', fillcolor='gray')
-
