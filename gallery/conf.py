@@ -53,7 +53,6 @@ templates_path = ['../doc/_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
-html_sourcelink_suffix = '' # Don't add '.txt' to ipynb's.
 edit_on_github_project = 'clawpack/doc'
 edit_on_github_branch = 'master/doc'
 
