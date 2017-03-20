@@ -7,6 +7,7 @@
 Full Table of Contents
 ====================================================
 
+
 Overview and Getting Started
 ============================
 
@@ -36,10 +37,11 @@ Overview and Getting Started
 Examples and Applications
 ============================
 
+See also:  :ref:`galleries`
+
 .. toctree::
    :maxdepth: 1
    
-   galleries
    apps
    fvmbook
    contribute_apps

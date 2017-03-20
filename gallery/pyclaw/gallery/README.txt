@@ -1,5 +1,5 @@
 
-To build the gallery (e.g. for amrclaw):
+To build the gallery for pyclaw:
 
   python make_plots.py 
   python gallery.py
