@@ -72,7 +72,7 @@ is done should be specified for GeoClaw applications:
    region but only the parts of this region near the shore actually need to
    be refined.
 
-.. attribute:: rundata.refinement_data.max_level_deep : float
+.. attribute:: rundata.refinement_data.deep_depth : float
 
    The deepness that triggers the refinement limitation imposed by
    `max_level_deep` above.
