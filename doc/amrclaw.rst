@@ -15,6 +15,7 @@ also be used for 1-dimensional problems, see :ref:`amrclaw_1d`.)
 * :ref:`amr_algorithm`
 * :ref:`refinement`
 * :ref:`amrclaw_doxygen`
+* :ref:`amrclaw_flowcharts`
 
 Block-structured AMR is implemented, in which rectangular patches of the
 grid at level `L` are refined to level `L+1`.  
@@ -42,5 +43,7 @@ Matlab tools from Clawpack 4.3 can still be used, see
    amr_algorithm
    refinement
    gauges
+   amrclaw_doxygen
+   amrclaw_flowcharts
 
 
