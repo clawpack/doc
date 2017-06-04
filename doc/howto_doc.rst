@@ -4,9 +4,9 @@
 Guide for updating this documentation
 =============================================
 
-Out of date -- see the README.md at https://github.com/clawpack/doc
+See also the README.md at https://github.com/clawpack/doc
 
-The restructured text files are in the `clawpac/doc
+The restructured text files are in the `clawpack/doc
 <https://github.com/clawpack/doc>`_ repository in `$CLAW/doc/doc`.
 
 Before proceeding, first make sure other repositories are checked out to
@@ -18,7 +18,25 @@ To create html files::
     cd $CLAW/doc/doc
     make html
 
-Or, to make the version that shows previous versions, first install the
+To view the files, point your browser to `$CLAW/doc/doc/_build/html/index.html`
+
+To generate pages with old Clawpack versions
+=============================================
+
+This should be done when you are close to pushing changes to the website,
+otherwise the above approach works fine and shows the current state of the
+documentation based on files in your working directory.
+
+The instructions below make webpages that list v5.4.0, etc. and allow
+viewing docs that may be more relevant to a previous version of Clawpack.
+
+But note that the `.rst` files used to build these pages come form what is
+checked into the `master` branch on Github (and the commits corresponding to
+tags such as `v5.4.0`).  So if you have changed `.rst` files but these have
+not yet been merged into `master` on Github, you will not see the changes
+reflected in the html files you build.
+
+To make pages that show previous Clawpack versions, first install the
 sphinx extension via::
 
     pip install -U sphinx
@@ -27,6 +45,7 @@ sphinx extension via::
 and then do this::
 
     cd $CLAW/doc/doc
+    export SPHINX_WEB=False # to build for local viewing
     sphinx-versioning build -i -r master doc ./_build/html
 
 Note that `-i` causes versions to be listed in reverse order at the bottom,
@@ -35,10 +54,42 @@ the directory containing the `.rst` files relative to the top directory
 of the Git repository. Only `.rst` files that are checked into Git on some
 branch at `origin` are seen.
 
-To view the files, point your browser to `$CLAW/doc/doc/_build/html/index.html`
+To view the files, point your browser to `$CLAW/doc/doc/_build/html/master/index.html`
 
 If you like what you see, you can push back to your fork and then issue a
 pull request to have these changes incorporated into the documentation.
+
+Note: to make versions where the links to the gallery work properly after the
+pages are pushed to the Clawpack website (but not locally), set
+the environment variable `SPHINX_WEB` to True in the above steps.
+This variable is used in `conf.py` to adjust the links used in
+`intersphinx_mapping` since two sphinx projects are linked together.
+
+Updating the gallery
+--------------------
+
+The gallery webpages are now decoupled from the main sphinx pages, and reside
+in `$CLAW/doc/gallery` rather than `$CLAW/doc/doc`.  
+
+To remake the galleries, you need to first run all the examples that produce
+results shown in the galleries.  
+
+**Add instructions for this step.**
+
+Then do the following:
+
+    cd $CLAW/doc/gallery
+    export SPHINX_WEB=False # to build for local viewing
+    sphinx-versioning build -i -r master doc ./_build/html
+
+If the environment variable `SPHINX_WEB` is set to False (or not set) then
+this makes files in which the links work to jump to the main doc files, when
+viewed locally.
+
+Set the environment variable `SPHINX_WEB` to True to make files where the
+links work properly when pushed to the Clawpack webpages.
+This variable is used in `conf.py` to adjust the links used in
+`intersphinx_mapping` since two sphinx projects are linked together.
 
 
 Updating the webpages
@@ -51,8 +102,10 @@ which causes them to show up on the web at
 `http://clawpack.github.io
 <http://clawpack.github.io>`_.  
 
-To do so, first create the html files as described above in
-`$CLAW/doc/doc/_build/html`.  Commit any changed source files and 
+To do so, first create the html files as described above, with
+`SPHINX_WEB=True` in both the `doc` and `gallery` directories.
+
+Commit any changed source files and 
 push to `clawpack/doc <https://github.com/clawpack/doc>`_.
 
 Then do::
@@ -62,14 +115,18 @@ Then do::
     git pull origin  # make sure you are up to date before doing next steps!
 
     cd $CLAW/doc/doc
-    source rsync_clawpack.github.sh     
+    rsync -azv _build/html/ ../../clawpack.github.com/
+    
+If you have updated the gallery, also do::
 
-This copies the contents of `$CLAW/doc/doc/_build/html/` to 
-`$CLAW/clawpack.github.com/`
+    rsync -azv ../gallery/_build/html/ ../../clawpack.github.com/gallery/
 
-Then move to the latter repository and add and commit any new or changed files. 
+
+Then move to the `clawpack.github.com` repository and 
+add and commit any new or changed files. 
 All files are needed, so ::
 
+    cd $CLAW/clawpack.github.com
     git add . 
 
 should work.  For the commit message you might want to add the commit
@@ -89,7 +146,7 @@ which assumes that `origin` is
 It may take a few minutes for the updated webpages to appear at 
 `<http://clawpack.github.io/>`_.
 
-Note that `<http://clawpack.org>`_ and `<http://www.clawpack.org>`_
+Note that `<http://clawpack.org>`_ and `<http://www.clawpack.com>`_
 should also resolve properly to `<http://clawpack.github.io/>`_.
 and that `www.clawpack.org` should appear in the browser address bar.  The
 file `extra_files/CNAME` combined with settings on the domain server
