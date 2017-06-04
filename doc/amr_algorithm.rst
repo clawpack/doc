@@ -161,3 +161,7 @@ The user can control the criteria used for flagging cells for refinement.
 
 See :ref:`refinement` for details.
 
+For more details
+----------------
+
+See :ref:`amrclaw_doxygen`.

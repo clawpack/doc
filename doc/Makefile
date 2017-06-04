@@ -12,6 +12,13 @@ PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
+SPHINX_WEB ?= False
+ifeq ($(SPHINX_WEB),True)
+	LAYOUT = _themes/flask_web/layout.html
+else
+	LAYOUT = _themes/flask_local/layout.html
+endif
+
 .PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
 
 help:
@@ -37,6 +44,7 @@ clean:
 	-rm -rf $(BUILDDIR)/*
 
 html:
+	@echo Using LAYOUT = $(LAYOUT)
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -128,9 +136,4 @@ doctest:
 	$(SPHINXBUILD) -b doctest $(ALLSPHINXOPTS) $(BUILDDIR)/doctest
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
-
-versions:
-	sphinx-versioning build -i -r master doc ./_build/html
-	@echo "Running sphinx-versioning" \
-	      "results in _build/html/master/contents.html"
 

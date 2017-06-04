@@ -53,7 +53,6 @@ templates_path = ['../doc/_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
-html_sourcelink_suffix = '' # Don't add '.txt' to ipynb's.
 edit_on_github_project = 'clawpack/doc'
 edit_on_github_branch = 'master/doc'
 
@@ -110,11 +109,15 @@ exclude_trees = ['users']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
 
-
+SPHINX_WEB = os.environ.get('SPHINX_WEB', 'False')
 sys.path.append(os.path.abspath('_themes'))
 html_theme_path = ['_themes']
 html_extra_path = ['extra_files']
-html_theme = 'flask'
+if SPHINX_WEB in ['True',True]:
+    html_theme = 'flask_web'
+else:
+    html_theme = 'flask_local'
+
 github_fork = 'clawpack'
 #html_additional_pages = {'index': 'index.html'}
 
@@ -238,11 +241,14 @@ latex_documents = [
 #intersphinx_mapping = {'http://docs.python.org/dev': None}
 #intersphinx_mapping = {'kingkong': ('http://kingkong.amath.washington.edu/clawpack/trunk/doc/sphinx/', None)}
 
-# works for webpages?
-#intersphinx_mapping = {'gallery':('../../../doc','../doc/_build/html/objects.inv')}
 
-# works locally:
-intersphinx_mapping = {'main':('../../../doc/_build/html','../doc/_build/html/objects.inv')}
+if SPHINX_WEB in ['True',True]:
+    # works for webpages?
+    intersphinx_mapping = {'main':('..','../doc/_build/html/objects.inv')}
+else:
+    # works locally:
+    intersphinx_mapping = {'main':('../../../doc/_build/html','../doc/_build/html/objects.inv')}
+
 
 keep_warnings = 'True'
 
@@ -251,4 +257,3 @@ inheritance_graph_attrs = dict(rankdir="TB",
 
 inheritance_node_attrs = dict(fontsize=12, shape='box3d',
                               color='black', style='filled', fillcolor='gray')
-
