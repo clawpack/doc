@@ -7,9 +7,7 @@
 Release 5.3.1
 ==========================
 
-Release candidate pending.
-
-Clawpack 5.3.1 was released on TBA.  See :ref:`installing`.
+Clawpack 5.3.1 was released on November 10, 2015.  See :ref:`installing`.
 
 Changes relative to Clawpack 5.3.0 (May 21, 2015) are shown below.
 
