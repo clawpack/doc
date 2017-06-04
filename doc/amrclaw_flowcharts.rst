@@ -15,3 +15,7 @@ AMRClaw.
 For those who want to get into the gory details, this might be useful:
 
 - `Monster flowchart <_static/flowcharts/AMRClawMonsterFlowchart.pdf>`_
+
+The left column shows the basic steps, with subsequent columns providing more
+details.
+
