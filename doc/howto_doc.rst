@@ -98,3 +98,12 @@ links like `<http://www.clawpack.org/links/an11>`_ resolve properly to
 webpages on the University of Washington server.  Links of this nature have
 been provided in published paper and some contain large amounts of data that
 have not been copied to Github.
+
+.. _howto_build_doxygen:
+
+Building doxygen documentation
+------------------------------
+
+See `$CLAW/doc/doc/doxygen/amrclaw/2d/README.md`
+for information on how to build the :ref:`amrclaw_doxygen`.
+

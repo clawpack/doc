@@ -164,4 +164,7 @@ See :ref:`refinement` for details.
 For more details
 ----------------
 
-See :ref:`amrclaw_doxygen`.
+See 
+
+- :ref:`amrclaw_doxygen`.
+- :ref:`amrclaw_flowcharts`.
