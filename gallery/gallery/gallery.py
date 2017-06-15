@@ -103,7 +103,7 @@ class Gallery(object):
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs ('./'+gitem.appdir)
-                static_dir = '$CLAW/doc/doc/_static/'
+                static_dir = '$CLAW/doc/gallery/_static/'
 
                 if not os.path.exists(static_dir+gitem.appdir):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))

@@ -3,8 +3,13 @@ Runs code in each example directory to create sample results for webpage.
 
 Sends output and errors to separate files to simplify looking for errors.
 """
+from __future__ import absolute_import
+from __future__ import print_function
+from six.moves import input
+
 import os
 import sys
+
 
 
 def list_examples(examples_dir=None):
@@ -77,7 +82,7 @@ def make_plots(examples_dir=None):
 
     print("Will run code and make plots in every subdirectory of ")
     print("    "+examples_dir)
-    ans = raw_input("Ok? ")
+    ans = input("Ok? ")
     if ans.lower() not in ['y','yes']:
         print("Aborting.")
         sys.exit()
