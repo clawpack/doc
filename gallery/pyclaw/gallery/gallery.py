@@ -114,8 +114,18 @@ class Gallery(object):
                 print("+++ static_dir = "+static_dir+gitem.appdir)
 
                 if copy_plots:
-                    os.system('cp -r %s/%s %s' % (self.clawdir+gitem.appdir,
-                              gitem.plotdir, static_dir+gitem.appdir+'/'+gitem.plotdir))
+                    # still debugging this...
+                    fname = os.path.join(self.clawdir, gitem.appdir)
+                    print('++++ copying %s' % fname)
+                    todir = os.path.join(static_dir, gitem.appdir)
+                    print('++++      to %s' % todir)
+                    os.system('cp -r %s %s/' % (fname,todir))
+                    # The code below has a problem if 
+                    #   static_dir+gitem.appdir+'/'+gitem.plotdir
+                    #   already exists -- it puts it in as a subdirectory rather
+                    #   than overwriting. 
+                    #os.system('cp -r %s/%s %s' % (self.clawdir+gitem.appdir,
+                    #          gitem.plotdir, static_dir+gitem.appdir+'/'+gitem.plotdir))
 
                 gfile.write('\n')
                 desc = gitem.description.lstrip().replace('\n',' ')
