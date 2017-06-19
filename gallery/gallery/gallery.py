@@ -124,6 +124,8 @@ class Gallery(object):
                     files = files + clawgit
                     for file in files:
                         os.system('cp %s %s' % (file, static_dir+gitem.appdir))
+                    fromdir = CLAW+'/'+gitem.appdir
+                    print "+++ copied files from ",fromdir
                     print "+++ copied files to ",static_dir+gitem.appdir
                     #print "+++ files: ",files
 
