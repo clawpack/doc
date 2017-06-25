@@ -6,8 +6,17 @@ Guide for updating this documentation
 
 See also the README.md at https://github.com/clawpack/doc
 
-The restructured text files are in the `clawpack/doc
-<https://github.com/clawpack/doc>`_ repository in `$CLAW/doc/doc`.
+The `clawpack/doc <https://github.com/clawpack/doc>`_ repository is not
+included in the Clawpack distribution and must be cloned separately if you
+want to work with these files.
+
+After cloning into the `$CLAW` directory, the restructured text
+files for the main documentation are in `$CLAW/doc/doc`.  All files
+related to the gallery are in `$CLAW/doc/gallery`.  As of Version
+5.4.1, these two subdirectories are separate Sphinx projects connected using 
+`intersphinx <http://www.sphinx-doc.org/en/stable/ext/intersphinx.html>`_.  
+This is so that past versions of the main documentation pages can
+be supported without past versions of the galleries.
 
 Before proceeding, first make sure other repositories are checked out to
 master, since some pages now have literalinclude's that bring in code 
@@ -77,7 +86,8 @@ in `$CLAW/doc/gallery` rather than `$CLAW/doc/doc`.
 To remake the galleries, you need to first run all the examples that produce
 results shown in the galleries.  
 
-**Add instructions for this step.**
+For detailed instructions, see `CLAW/doc/gallery/README.md
+<https://github.com/clawpack/doc/blob/master/gallery/README.md>`_.
 
 Then do the following::
 
