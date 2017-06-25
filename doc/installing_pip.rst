@@ -35,10 +35,10 @@ install command (you might want to first read the notes below to see if you
 want to change anything in this command)::  
 
     pip install --src=$HOME/clawpack_src --user -e \
-        git+https://github.com/clawpack/clawpack.git@v5.4.0#egg=clawpack-v5.4.0
+        git+https://github.com/clawpack/clawpack.git@v5.4.1rc-beta#egg=clawpack-v5.4.1rc-beta
 
 This will install Clawpack into the directory
-`$HOME/clawpack_src/clawpack-v5.4.0`, or the top 
+`$HOME/clawpack_src/clawpack-v5.4.1rc-beta`, or the top 
 installation directory can be changed by modifying the `--src` target.
 
 See :ref:`clawpack_components` for a list of what's included in this top level.
@@ -50,11 +50,11 @@ more information.
 
 In order to use the Fortran codes within Clawpack (`classic`,
 `amrclaw`, or `geoclaw`), you should then set the environment
-variable `CLAW` to point to the `clawpack-v5.4.0` directory within
+variable `CLAW` to point to the `clawpack-v5.4.1rc-beta` directory within
 the installation directory `$HOME/clawpack_src`, and `FC` to point
 to the desired Fortran compiler, e.g. in the bash shell::
 
-    export CLAW=$HOME/clawpack_src/clawpack-v5.4.0
+    export CLAW=$HOME/clawpack_src/clawpack-v5.4.1rc-beta
     export FC=gfortran
 
 **Note:** 
@@ -78,7 +78,7 @@ tools, e.g. VisClaw for visualization), they you could do::
 
 or, more specifically, ::
 
-    pip install clawpack==5.4.0
+    pip install clawpack==5.4.1rc-beta
 
 However, if you think you might want to use the Fortran packages as well
 (Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source

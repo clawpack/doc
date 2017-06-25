@@ -5,6 +5,19 @@
 AMRClaw for 1d problems
 ---------------------------
 
+**New in Version 5.4.1**
+
+AMRClaw has been extended to support one-dimensional AMR directly.
+
+The `setrun.py` file has the same form as for 2d AMRClaw, with the obvious
+changes to eliminate the y-direction.  See :ref:`setrun_amrclaw_sample`.
+
+For some examples, see the `1d` examples in `$CLAW/amrclaw/examples/` and in
+:ref:`gallery_classic_amrclaw`.
+
+
+Old approach, deprecated:
+-------------------------
 
 The two-dimensional code can also be used for 1-dimensional problems, by
 setting `num_cells[1] = 1` so there is only one cell in the `y` direction.

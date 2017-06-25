@@ -41,7 +41,7 @@ This data must then be converted into seafloor deformation to create the
 is often done using the Okada model as described at
 :ref:`okada`.
 
-* `USGS archive <http://earthquake.usgs.gov/earthquakes/eqinthenews/2012/>`_
+* `USGS archive <https://earthquake.usgs.gov/earthquakes/browse/>`_
 * `Chen Ji's archive, UCSB
   <http://www.geol.ucsb.edu/faculty/ji/big_earthquakes/home.html>`_
 
