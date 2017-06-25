@@ -4,7 +4,10 @@
 Guide for updating this documentation
 =============================================
 
-See also the README.md at https://github.com/clawpack/doc
+See also the README.md at https://github.com/clawpack/doc.
+
+When updating the documentation for a new release, see also
+:ref:`howto_release`.
 
 The `clawpack/doc <https://github.com/clawpack/doc>`_ repository is not
 included in the Clawpack distribution and must be cloned separately if you
