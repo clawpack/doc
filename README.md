@@ -38,6 +38,6 @@ To make version for clawpack.org webpages, assuming you have cloned
 To make gallery for local viewing / webpages, do the steps above but with
 `doc/doc` replaced by `doc/gallery` and `rsync_doc.sh` replaced by
 `rsync_gallery.sh`.   Note that to do this you first have to build the
-gallery by running all the examples and producing plots.  See documention in
-the directories below.  (Which needs to be updated.)
+gallery by running all the examples and producing plots.  See documentation in
+`doc/gallery/README.md` for more details.
 

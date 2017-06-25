@@ -103,7 +103,7 @@ class Gallery(object):
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs ('./'+gitem.appdir)
-                static_dir = '$CLAW/doc/doc/_static/'
+                static_dir = '$CLAW/doc/gallery/_static/'
 
                 if not os.path.exists(static_dir+gitem.appdir):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
@@ -124,6 +124,8 @@ class Gallery(object):
                     files = files + clawgit
                     for file in files:
                         os.system('cp %s %s' % (file, static_dir+gitem.appdir))
+                    fromdir = CLAW+'/'+gitem.appdir
+                    print "+++ copied files from ",fromdir
                     print "+++ copied files to ",static_dir+gitem.appdir
                     #print "+++ files: ",files
 
@@ -208,13 +210,33 @@ def make_1d():
     gallery = Gallery(title="Gallery of 1d Classic applications")
     plotdir = '_plots'
 
+       
+    #----------------------------------------------
+    gsec = gallery.new_section('1-dimensional Advection')
+    appdir = 'classic/examples/advection_1d_example1'
+    description = """
+         Advecting square wave and Gaussian with periodic BCs."""
+    images = ('frame0000fig1', 'frame0004fig1', 'frame0020fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'amrclaw/examples/advection_1d_example1'
+    description = """
+         AMR applied to Advecting square wave and Gaussian with periodic BCs."""
+    images = ('frame0000fig1', 'frame0004fig1', 'frame0020fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
 
     #----------------------------------------------
     gsec = gallery.new_section('1-dimensional acoustics')
     appdir = 'classic/examples/acoustics_1d_example1'
     description = """
-         Acoustics equations with interface showing reflection and
-         transmission."""
+         Acoustics equations with Gaussian initial data."""
+    images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'amrclaw/examples/acoustics_1d_homogeneous'
+    description = """
+         AMR on acoustics equations with Gaussian initial data."""
     images = ('frame0000fig1', 'frame0004fig1', 'frame0010fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
@@ -225,7 +247,29 @@ def make_1d():
     images = ('frame0000fig0', 'frame0007fig0', 'frame0010fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
+    appdir = 'amrclaw/examples/acoustics_1d_heterogeneous'
+    description = """
+         Acoustics equations with interface showing reflection and
+         transmission."""
+    images = ('frame0000fig1', 'frame0007fig1', 'frame0010fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
        
+    #----------------------------------------------
+    gsec = gallery.new_section('1-dimensional Euler')
+    appdir = 'classic/examples/euler_1d_wcblast'
+    description = """
+         Woodward-Colella blast wave problem for Euler equations of gas dynamics."""
+    images = ('frame0000fig1', 'frame0010fig1', 'frame0020fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+    appdir = 'amrclaw/examples/euler_1d_wcblast'
+    description = """
+         AMR on Woodward-Colella blast wave problem for Euler equations of gas dynamics."""
+    images = ('frame0000fig1', 'frame005fig1', 'frame0010fig2')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
     gallery.create('gallery_1d.rst')
     return gallery
 

@@ -107,15 +107,18 @@ class Gallery(object):
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs('./'+gitem.appdir)
-                static_dir = clawdir_default+'doc/doc/_static/'
+                static_dir = clawdir_default+'doc/gallery/_static/'
 
                 if not os.path.exists(static_dir+gitem.appdir):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
                 print("+++ static_dir = "+static_dir+gitem.appdir)
 
                 if copy_plots:
-                    os.system('cp -r %s/%s %s' % (self.clawdir+gitem.appdir,
-                              gitem.plotdir, static_dir+gitem.appdir+'/'+gitem.plotdir))
+                    fname = os.path.join(self.clawdir, gitem.appdir, gitem.plotdir)
+                    print('++++ copying %s' % fname)
+                    todir = os.path.join(static_dir, gitem.appdir)
+                    print('++++      to %s' % todir)
+                    os.system('cp -r %s %s/' % (fname,todir))
 
                 gfile.write('\n')
                 desc = gitem.description.lstrip().replace('\n',' ')
@@ -386,10 +389,12 @@ def make_2d():
     images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
     gsec.new_item(appdir, appname, plotdir, description, images)
 
-    appname = 'shock_forward_step'
-    description = """ Shockwave hitting a step."""
-    images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
-    gsec.new_item(appdir, appname, plotdir, description, images)
+    # Removing this example from gallery
+    # since it doesn't run correctly with Roe solver
+    #appname = 'shock_forward_step'
+    #description = """ Shockwave hitting a step."""
+    #images = ('frame0000fig0', 'frame0004fig0', 'frame0010fig0')
+    #gsec.new_item(appdir, appname, plotdir, description, images)
 
     appname = 'quadrants'
     description = """Quadrants: 2D Riemann problem with four shockwaves."""
