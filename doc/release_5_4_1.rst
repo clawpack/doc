@@ -3,14 +3,14 @@
 
 .. comment: Change master to v5.4.1 in github links below once release is tagged
 
-.. _release_5_4_1:
+.. _release_5_4.1:
 
 ==========================
-Release 5.4.1
+Release 5.4.1rc-beta
 ==========================
 
 
-Clawpack 5.4.1 was released on June 25, 2017.  See :ref:`installing`.
+Clawpack 5.4.1rc-beta was released on June 25, 2017.  See :ref:`installing`.
 
 Changes relative to Clawpack 5.4.0 (February 17, 2017) are shown below.
 
