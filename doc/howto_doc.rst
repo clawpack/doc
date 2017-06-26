@@ -96,7 +96,10 @@ Then do the following::
 
     cd $CLAW/doc/gallery
     export SPHINX_WEB=False # to build for local viewing
-    sphinx-versioning build -i -r master doc ./_build/html
+    make html
+
+Note that `sphinxversioning-build` is not used in the gallery since we don't
+track versions here.
 
 If the environment variable `SPHINX_WEB` is set to False (or not set) then
 this makes files in which the links work to jump to the main doc files, when

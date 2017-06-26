@@ -44,6 +44,13 @@ If this worked then the file `$CLAW/doc/gallery/_build/html/index.html` should d
 
 # Update version on website
 
+To make gallery pages that are properly linked to the other Docs when posted
+on the website, you must do::
+
+    cd $CLAW/doc/gallery
+    export SPHINX_WEB=True
+    make html
+
 The html files created must be moved to the `$CLAW/clawpack.github.com` repository and pushed to Github in order to show up on the webpages at http://www.clawpack.org/gallery/.
 
 The shell script `$CLAW/doc/rsync_gallery.sh` can be used to `rsync` these files.
