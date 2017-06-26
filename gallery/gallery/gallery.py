@@ -266,7 +266,7 @@ def make_1d():
     appdir = 'amrclaw/examples/euler_1d_wcblast'
     description = """
          AMR on Woodward-Colella blast wave problem for Euler equations of gas dynamics."""
-    images = ('frame0000fig1', 'frame005fig1', 'frame0010fig2')
+    images = ('frame0000fig1', 'frame0005fig1', 'frame0010fig2')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 

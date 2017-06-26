@@ -144,6 +144,7 @@ Developers' resources
    community
    developers
    howto_doc
+   howto_release
    regression
    git_versions
    photos
