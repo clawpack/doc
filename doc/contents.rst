@@ -37,7 +37,6 @@ Overview and Getting Started
 Examples and Applications
 ============================
 
-See also:  :ref:`galleries`
 
 .. toctree::
    :maxdepth: 1
@@ -66,7 +65,6 @@ General information that applies to Classic, AMRClaw, and GeoClaw.
    openmp
    timing
    python
-   notebooks
    makefiles
    makefiles_library
    application_documentation
