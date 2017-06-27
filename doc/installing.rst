@@ -34,8 +34,7 @@ Install from a tarfile
 
 Download a tar file of the latest release:
 
-* `https://github.com/clawpack/clawpack/releases/download/v5.4.1rc-beta/clawpack-v5.4.1rc-beta.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/v5.4.1rc-beta/clawpack-v5.4.1rc-beta.tar.gz>`_
+* https://github.com/clawpack/clawpack/releases/download/v5.4.1rc-beta/clawpack-5.4.1rc-beta.tar.gz
 * :ref:`previous`
 * :ref:`changes`
 
