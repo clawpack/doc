@@ -70,8 +70,8 @@ In addition to the parameters above, the Okada model also requires an elastic
 parameter, the Poisson ratio, which is usually taken to be 0.25.
 
 
-`This IPython notebook
-<http://nbviewer.ipython.org/url/clawpack.github.io/notebooks/Okada.ipynb>`_
+`This Jupyter notebook
+<http://www.clawpack.org/gallery/_static/notebooks/Okada.html>`_
 illustrates how the Okada model works and how to generate the seafloor
 deformation needed in GeoClaw using this model.
 
