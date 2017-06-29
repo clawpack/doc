@@ -110,10 +110,18 @@ Note these tags are used in the documentation for pages like
 :ref:`changes_to_master` which generate diffs between the latest version and
 the current master branch of each resposity.
 
-When you do a release on https://github.com/clawpack/clawpack/releases that
-is not a pre-release, it should trigger uploading a zipfile to Zenodo
-and assigning it a DOI.  Go to the `the Zenodo page <https://zenodo.org/>`_ 
-and search for Clawpack to find this.
+Zenodo 
+------
+
+Go to the `the Zenodo page <https://zenodo.org/>`_ 
+and create a new upload for the latest tar file, following the framework of 
+https://doi.org/10.5281/zenodo.820730, for example.  This will issue a new
+DOI, which should be added to the page `$CLAW/doc/doc/previous.rst`.
+
+Note that the Github repository is not linked to Zenodo for automatic uploading
+on release since that would only archive a zip file of the main `clawpack`
+repository.  Instead we want to archive the tar file containing all
+subrepositories too.
 
 Updating the documentation
 --------------------------
