@@ -18,8 +18,11 @@ Clawpack 5.x
 * :ref:`release_5_2_2`  -- October 28, 2014
 * :ref:`release_5_3_0`  -- May 21, 2015
 * :ref:`release_5_3_1`  -- November 10, 2015
+  `[DOI 10.5281/zenodo.50982] <http://dx.doi.org/10.5281/zenodo.50982>`_
 * :ref:`release_5_4_0`  -- January 17, 2017
-* :ref:`release_5_4_1`  -- June 25, 2017
+  `[DOI 10.5281/zenodo.262111] <http://dx.doi.org/10.5281/zenodo.262111>`_
+* :ref:`release_5_4_1`  -- June 28, 2017
+  `[DOI 10.5281/zenodo.820730] <https://doi.org/10.5281/zenodo.820730>`_
 * :ref:`changes_to_master`
 
 

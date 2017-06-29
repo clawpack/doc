@@ -98,7 +98,7 @@ Then do the following::
     export SPHINX_WEB=False # to build for local viewing
     make html
 
-Note that `sphinxversioning-build` is not used in the gallery since we don't
+Note that `sphinx-versioning build` is not used in the gallery since we don't
 track versions here.
 
 If the environment variable `SPHINX_WEB` is set to False (or not set) then
