@@ -66,8 +66,11 @@ Once the PR has been merged::
 Create tar file (first install https://github.com/Kentzo/git-archive-all)::
 
     cd $CLAW
-    git-archive-all --prefix clawpack-5.x.x/ clawpack-5.x.x.tar
-    gzip clawpack-5.x.x.tar
+    git-archive-all --prefix clawpack-v5.x.x/ clawpack-v5.x.x.tar
+    gzip clawpack-v5.x.x.tar
+
+(Note: best to use v5.x.x rather than just 5.x.x to be consistent with the
+directory name created if following :ref:`installing_pip`.)
 
 Draft a new release on the webpage
 https://github.com/clawpack/clawpack/releases.
@@ -75,11 +78,11 @@ Indicate that it is pre-release if desired.
 
 As a comment, add text such as::
     
-    Download the clawpack-5.x.x.tar.gz file below, not the other tar
+    Download the clawpack-v5.x.x.tar.gz file below, not the other tar
     file of zip file. Those only include the top-level Clawpack directories and
     not all the submodules.
 
-Then attach the tar file `clawpack-5.x.x.tar.gz` to be
+Then attach the tar file `clawpack-v5.x.x.tar.gz` to be
 included in the release by using the link "Attach binaries..." before
 finalizing the release.  (You can go back and "Edit release" if necessary.)
 
