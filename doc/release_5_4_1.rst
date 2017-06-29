@@ -57,6 +57,9 @@ Changes to riemann
 
 - Added several Riemann solvers for new problems.
 - Improved several existing solvers.
+- The GeoClaw Riemann solver `riemann_aug_JCP` in `geoclaw_riemann_utils.f`
+  has been modified to incorporate pressure source terms for storm surge
+  simulations.  The calling sequence has changed.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.4.0...master>`_
@@ -86,7 +89,9 @@ Changes to geoclaw
 
 - Allow more flexibility in specification of `fgmax` grids when doing a restart.
 - Print more digits in gauge locations to output files `gauge*.txt`.
-- For storm surge, the pressure gradient source term has been moved to the Riemann solver for well-balancing.  
+- For storm surge, the pressure gradient source term has been moved to the 
+  Riemann solver for well-balancing.  This may cause slightly different 
+  results on these applications but should not affect others.
 - The output and plotting functions for surge and multilayer versions been refactored.
 - Other minor fixes and improvements of Python tools.
 
