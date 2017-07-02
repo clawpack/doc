@@ -159,6 +159,38 @@ When making changes for a new release, the following pages in the directory
  - Update `conf.py` to the new version number, and also
    `$CLAW/doc/gallery/conf.py`
 
+Updating the apps repository
+----------------------------
 
+Ideally all the apps in the :ref:`apps` should be rerun with the new release
+and any issues fixed.  If old apps are modified, add a note to the
+`README.rst` file in the directory that indicates when it was last updated
+and to what release.  Some apps already have a section at the end of this
+file of the form::
+
+    Version history:
+    ----------------
+
+    - Updated for Clawpack 5.3.0 on 15 Sept 2015
+
+    - Updated for Clawpack 5.4.0 on 4 Jan 2017
+
+
+
+Updating the Dockerfile
+-----------------------
+
+Note that unlike the tar file for a new release, the docker image includes
+a clone of the `apps` repository, so it would be best to first update that
+repository if necessary.
+
+ - Clone the repository https://github.com/clawpack/docker-files 
+
+ - Make a new `Dockerfile` for the new version by copying an old one
+   and changing the version numbers in it.  Make any other changes needed
+   for this new release.
+
+ - See the `README.md` file in that repo for instructions on building an
+   image and pushing it to dockerhub (which requires push permission).
 
 
