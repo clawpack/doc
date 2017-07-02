@@ -26,11 +26,15 @@ os.system(cmd)
 
 notebooks = ['geoclaw/topotools_examples.ipynb',
              'geoclaw/dtopotools_examples.ipynb',
-             'geoclaw/Okada.ipynb']
+             'geoclaw/Okada.ipynb',
+             'geoclaw/chile2010a/chile2010a.ipynb',
+             'geoclaw/chile2010b/chile2010b.ipynb',
+             'amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb',
+             'classic/advection_1d/advection_1d.ipynb',
+             'classic/acoustics_1d_example1/acoustics_1d_example1.ipynb']
 
+#notebooks = ['classic/acoustics_1d_example1/acoustics_1d_example1.ipynb']
 
-#notebooks = ['amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb']
-#notebooks = ['classic/advection_1d/advection_1d.ipynb']
 
 for nb in notebooks:
     nbdir, nbname = os.path.split(nb)
@@ -45,7 +49,7 @@ for nb in notebooks:
             "--execute",
             "--output", output_file,
             "--ExecutePreprocessor.kernel_name=python2",
-            "--ExecutePreprocessor.timeout=60", 
+            "--ExecutePreprocessor.timeout=600", 
             input_file]
 
     cmd = ' '.join(args)
