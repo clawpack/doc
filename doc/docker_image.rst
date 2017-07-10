@@ -11,12 +11,12 @@ docker image from the `DockerHub Clawpack repositories
 
 To download an image::
 
-    $ docker pull clawpack/v5.4.0_dockerimage
+    $ docker pull clawpack/v5.4.1_dockerimage
 
 To create a container and run it::
 
-    $ docker run -i -t -p 8889:8889 --name clawpack-v5.4.0_container \
-        clawpack/v5.4.0_dockerimage
+    $ docker run -i -t -p 8889:8889 --name clawpack-v5.4.1_container \
+        clawpack/v5.4.1_dockerimage
 
 You can change the container name if you wish.
 
@@ -25,7 +25,7 @@ You should now see a prompt like::
     root...# 
 
 indicating that you are in the container.  There will be a directory
-`/clawpack-v5.4.0` that contains the Clawpack installation (including the
+`/clawpack-v5.4.1` that contains the Clawpack installation (including the
 current master branch of the :ref:`apps`).
 
 Running Jupyter notebooks
@@ -37,7 +37,7 @@ if you want).
 
 To do so, in the docker container run this command::
 
-    root...# jupyter notebook --notebook-dir=/clawpack-v5.4.0/apps/notebooks \
+    root...# jupyter notebook --notebook-dir=/clawpack-v5.4.1/apps/notebooks \
                  --ip='*' --port=8889 --no-browser
 
 Then open a browser to::
@@ -57,7 +57,7 @@ Restarting a container
 
 You can restart the container via::
 
-    docker start -a -i clawpack-v5.4.0_container
+    docker start -a -i clawpack-v5.4.1_container
 
 
 Creating your own docker image
