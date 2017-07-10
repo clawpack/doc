@@ -60,14 +60,22 @@ You can restart the container via::
     docker start -a -i clawpack-v5.4.0_container
 
 
+Creating your own docker image
+------------------------------
+
+If you want to create a new docker image that includes other software in
+addition to Clawpack, you can find the `Dockerile` used to create the docker
+image on dockerhub in the repository
+https://github.com/clawpack/docker-files.
+
+This might be useful if you want to distribute your own code that depends on
+Clawpack in a form that's easy for others to use.
+
+
 More resources:
 ---------------
 
  - `Introduction to Docker
    <https://geohackweek.github.io/Introductory/01-docker-tutorial/>`_ from 
    the recent `GeoHack Week <https://geohackweek.github.io>`_ at UW.
-
- - https://github.com/clawpack/docker-files contains the Dockerfile used to
-   create this image.  You can modify if you want to create an image that
-   includes other dependencies for your own work, for example.
 
