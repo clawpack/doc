@@ -139,8 +139,5 @@ doctest:
 
 versions:
 	sphinx-versioning build -i -r master doc ./_build/html
-	source cp_galleries.sh
+	bash cp_galleries.sh
 
-vtest:
-	ls -l ./_build/html/galleries.html
-	bash ./cp_galleries.sh
