@@ -137,4 +137,7 @@ doctest:
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
+versions:
+	sphinx-versioning build -i -r master doc ./_build/html
+	bash cp_galleries.sh
 
