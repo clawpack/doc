@@ -86,6 +86,8 @@ Other major contributors include:
   `@donnaboise <https://github.com/donnaboise/>`_.
 * Ondřej Čertík,
   `@certik <https://github.com/certik/>`_.
+* Brisa Davis,
+  `@BrisaDavis <https://github.com/BrisaDavis/>`_.
 * Grady Lemoine, 
   `@gradylemoine <https://github.com/gradylemoine/>`_.
 * Sorin Mitran. 

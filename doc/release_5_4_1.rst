@@ -108,3 +108,19 @@ For changes in PyClaw, see the `PyClaw changelog
 See `pyclaw diffs
 <https://github.com/clawpack/pyclaw/compare/v5.4.0...v5.4.1>`_
 
+===========================
+Other Clawpack Repositories
+===========================
+
+The repositories below are not included in the Clawpack tarfile or pip
+install, but changes to these repositories may also be of interest.
+
+- `apps diffs
+  <https://github.com/clawpack/apps/compare/v5.4.0...v5.4.1>`_
+
+- `doc diffs
+  <https://github.com/clawpack/doc/compare/v5.4.0...v5.4.1>`_
+
+- `docker-files diffs
+  <https://github.com/clawpack/docker-files/compare/v5.4.0...v5.4.1>`_
+

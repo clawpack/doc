@@ -12,14 +12,18 @@ Overview and Getting Started
 ============================
 
 .. toctree::
+   :maxdepth: 2
+
+   about
+
+.. toctree::
    :maxdepth: 1
    
-   about
    changes
    previous
    packages
-   installing_pip
    installing
+   installing_pip
    setenv
    first_run
    clawpack_components
