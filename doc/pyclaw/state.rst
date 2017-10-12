@@ -23,13 +23,13 @@ are interested in the geometry of the local state you can find it through the
 Serial :class:`pyclaw.state.State`
 ==================================
    
-.. autoclass:: pyclaw.state.State
+.. autoclass:: clawpack.pyclaw.state.State
    :members:
    :member-order: groupwise
 
 Parallel :class:`petclaw.state.State`
 ===========================================
 
-.. autoclass:: petclaw.state.State
+.. autoclass:: clawpack.petclaw.state.State
    :members:
    :member-order: groupwise

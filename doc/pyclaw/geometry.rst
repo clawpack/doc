@@ -52,7 +52,7 @@ Serial Geometry Objects
 :class:`pyclaw.geometry.Domain`
 =================================
 
-.. autoclass:: pyclaw.geometry.Domain
+.. autoclass:: clawpack.pyclaw.geometry.Domain
    :members:
    :member-order: groupwise
 
@@ -60,7 +60,7 @@ Serial Geometry Objects
 :class:`pyclaw.geometry.Patch`
 =================================
 
-.. autoclass:: pyclaw.geometry.Patch
+.. autoclass:: clawpack.pyclaw.geometry.Patch
    :members:
    :member-order: groupwise
    :show-inheritance:
@@ -69,7 +69,7 @@ Serial Geometry Objects
 :class:`pyclaw.geometry.Grid`
 =================================
 
-.. autoclass:: pyclaw.geometry.Grid
+.. autoclass:: clawpack.pyclaw.geometry.Grid
    :members:
    :member-order: groupwise
    
@@ -77,7 +77,7 @@ Serial Geometry Objects
 :class:`pyclaw.geometry.Dimension`
 ==================================
 
-.. autoclass:: pyclaw.geometry.Dimension
+.. autoclass:: clawpack.pyclaw.geometry.Dimension
    :members:
    :member-order: groupwise
 
@@ -89,7 +89,7 @@ Parallel Geometry Objects
 :class:`petclaw.geometry.Domain`
 ===================================
 
-.. autoclass:: petclaw.geometry.Domain
+.. autoclass:: clawpack.petclaw.geometry.Domain
    :members:
    :member-order: groupwise
    :show-inheritance:
@@ -97,7 +97,7 @@ Parallel Geometry Objects
 :class:`petclaw.geometry.Patch`
 ===============================
 
-.. autoclass:: petclaw.geometry.Patch
+.. autoclass:: clawpack.petclaw.geometry.Patch
   :members:
   :member-order: groupwise
   :show-inheritance:
