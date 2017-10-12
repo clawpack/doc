@@ -9,5 +9,5 @@ Pyclaw Utility Module
 :mod:`pyclaw.util`
 =============================
 
-.. automodule:: pyclaw.util
+.. automodule:: clawpack.pyclaw.util
    :members:

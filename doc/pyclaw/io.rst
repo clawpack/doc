@@ -68,7 +68,7 @@ libraries needed.
 :mod:`pyclaw.io.ascii`
 ======================
 
-.. automodule:: pyclaw.io.ascii
+.. automodule:: clawpack.pyclaw.fileio.ascii
     :members:
     
 .. _HDF5:
@@ -76,7 +76,7 @@ libraries needed.
 :mod:`pyclaw.io.hdf5`
 =====================
 
-.. automodule:: pyclaw.io.hdf5
+.. automodule:: clawpack.pyclaw.fileio.hdf5
     :members:
 
 .. _NetCDF:
@@ -84,5 +84,5 @@ libraries needed.
 :mod:`pyclaw.io.netcdf`
 =======================
 
-.. automodule:: pyclaw.io.netcdf
+.. automodule:: clawpack.pyclaw.fileio.netcdf
     :members:

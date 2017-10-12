@@ -48,6 +48,6 @@ List of serial and parallel objects in a :class:`~pyclaw.solution.Solution` clas
 :class:`pyclaw.solution.Solution`
 =================================
 
-.. autoclass:: pyclaw.solution.Solution
+.. autoclass:: clawpack.pyclaw.solution.Solution
    :members:
    :member-order: groupwise

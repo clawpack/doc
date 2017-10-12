@@ -43,7 +43,7 @@ work in its entirety.
 :class:`pyclaw.controller.Controller`
 =====================================
 
-.. autoclass:: pyclaw.controller.Controller
+.. autoclass:: clawpack.pyclaw.controller.Controller
    :members:
    :member-order: groupwise
    

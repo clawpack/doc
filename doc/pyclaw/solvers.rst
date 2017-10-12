@@ -93,7 +93,7 @@ about the methods and attributes they provide each class.
 :mod:`pyclaw.sharpclaw`
 ===============================
 
-.. autoclass:: pyclaw.sharpclaw.solver.SharpClawSolver
+.. autoclass:: clawpack.pyclaw.sharpclaw.solver.SharpClawSolver
    :members:
 
 
