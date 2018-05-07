@@ -136,6 +136,7 @@ for Clawpack 4.x, this may be helpful.
    claw43to46
    claw46to50
 
+.. _contents-developers-resources:
 
 Developers' resources
 =====================

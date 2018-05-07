@@ -4,6 +4,9 @@
 Developers' Guide
 **************************************
 
+.. seealso::
+    :ref:`contents-developers-resources`
+
 .. contents::
 
 Guidelines for contributing

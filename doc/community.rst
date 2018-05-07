@@ -59,18 +59,22 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
--  Minisymposterium on Clawpack and GeoClaw at 
-   at the `SIAM CSE 2017 Conference <http://www.siam.org/meetings/cse17>`_,
-   February/March, 2017.
-
-- Tutorial on storm surge modeling with GeoClaw, Tulane University, April, 2017.
+- None currently planned.
 
 Recent
 ^^^^^^^^
 
+- Tutorial on storm surge modeling with GeoClaw, Tulane University, as part
+  of the `Clifford Lectures <http://www2.tulane.edu/sse/math/news/clifford-lectures-april-2017.cfm>`_, April, 2017.
+
+-  Minisymposterium on Clawpack and GeoClaw at 
+   at the `SIAM CSE 2017 Conference <http://www.siam.org/meetings/cse17>`_,
+   February/March, 2017.
+
 - `Clinic at the CSDMS Annual Meeting
   <http://csdms.colorado.edu/wiki/CSDMS_2016_annual_meeting_Randy_LeVeque>`_ 
   in Boulder, CO, May 2016.
+
 -  Minisymposterium on 
    `Clawpack Development, Extensions and Applications
    <http://depts.washington.edu/clawpack/posters/siam_cse_2015/>`_
@@ -87,8 +91,10 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- GeoClaw Developers' workshop at `CSDMS
-  <http://csdms.colorado.edu>`_, tentatively planned for autumn, 2017.
+- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2018/>`_, 
+  May 25-28, 2018, at the Univesity of Colorado, immediately following the 
+  `CSDMS Annual Meeting <https://csdms.colorado.edu/wiki/Form:Annualmeeting2018>`_.
+
 
 Previous
 ^^^^^^^^
