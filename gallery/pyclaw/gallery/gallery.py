@@ -141,7 +141,7 @@ class Gallery(object):
                 rf.write(gsec.title+'\n')
                 rf.write('-'*len(gsec.title)+'\n')
                 rf.write('\n')
-                rf.write('.. automodule:: pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
+                rf.write('.. automodule:: clawpack.pyclaw.examples.'+gitem.appdir.split('/')[-1]+'.'+gitem.appname+'\n')
 
                 rf.write('\n')
                 rf.write('Output:\n')

@@ -56,25 +56,9 @@ executing the Python script.  For convenience, the scripts are set up to pass an
 command-line options as arguments to the setup function.
 
 
-List of built-in examples
+Built-in examples
 =========================
 You can see results from many of the examples in the :ref:`galleries`.
-
-.. toctree::
-   :glob:
-   :maxdepth: 1
-
-   gallery/*adv*
-   gallery/*acoust*
-   gallery/*burg*
-   gallery/*shallow*
-   gallery/*blast*
-   gallery/*shock*
-   gallery/*psystem*
-   gallery/*Rossby*
-   gallery/*dam*
-   gallery/kpp
-   gallery/stegoton
 
 
 Adding new examples
