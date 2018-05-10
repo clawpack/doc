@@ -20,7 +20,7 @@ def list_examples(examples_dir=None):
 
     if examples_dir is None:
         from clawpack import pyclaw
-        examples_dir = pyclaw.__path__[0]+'/examples'
+        examples_dir = list(pyclaw.__path__)[0]+'/examples'
 
     examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()
@@ -75,7 +75,7 @@ def run_examples(examples_dir=None):
 def make_plots(examples_dir=None):
     if examples_dir is None:
         from clawpack import pyclaw
-        examples_dir = pyclaw.__path__[0]+'/examples'
+        examples_dir = list(pyclaw.__path__)[0]+'/examples'
 
     examples_dir = os.path.abspath(examples_dir)
     current_dir = os.getcwd()

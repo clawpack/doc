@@ -46,7 +46,7 @@ PyClaw Documentation
    ../developers
    troubleshooting
    about
-   gallery/gallery_all
+   ../gallery/pyclaw/gallery/gallery_all
 
 
 .. _pyclaw_reference:
