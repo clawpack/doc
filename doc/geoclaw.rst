@@ -39,6 +39,7 @@ More will eventually appear in the :ref:`apps`.
    geoclaw_started
    geohints
    topo
+   grid_registration
    topotools
    geoclaw/topotools_examples
    geoclaw/dtopotools_examples

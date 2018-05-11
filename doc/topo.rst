@@ -6,11 +6,15 @@
 Topography data
 *****************************************************************
 
+.. seealso::
+   - :ref:`topotools`
+   - :ref:`grid_registration`
+
 The :ref:`geoclaw` software for flow over topography requires at least one
 topo file to be input, see :ref:`setrun_geoclaw`.
 
-Currently topo files are restricted to three possible formats as ASCII files.
-A future project is to allow other formats including NetCDF.
+Currently topo files are restricted to three possible formats as ASCII files, or
+NetCDF files are also allowed.
 
 In the descriptions below it is assumed that the topo file gives the
 elevation of the topography (relative to some reference level) as a value of
@@ -31,6 +35,17 @@ computation, the topo used in the fine cells have an average value that is
 equal to the coarse cell value.  This is crucial in maintaining the
 ocean-at-rest steady state, for example.
 
+.. warning:: Some changes were made in version 5.5.0 that affect how
+   topofiles with `topo_type in [2,3]` 
+   are interpreted for files with a header specifying
+   `xllcorner` and `yllcorner`.  
+   This may cause computed results to differ from previous results using
+   the same topofiles if the header contains this specification.
+   See :ref:`grid_registration` for more details on this `llcorner`
+   registration.
+   The description below has been modified to use `lower` registration,
+   equivalent to `llcenter` registration.
+
 The recognized topotypes are:
 
   **topotype = 1**
@@ -40,21 +55,22 @@ The recognized topotypes are:
     The size of the grid and spacing
     between the grid points is deduced from the data.  
 
-    *Example:* if you want a flat bottom at B = -1000.
-    over a domain  0. <= x <= 10. and  20. <= y <= 30.
-    then the topo file could be simply::
+    *Example:* The data below would be used in the GeoClaw code
+    to define a bilinear function
+    over the domain  0. <= x <= 10. and  20. <= y <= 30.
+    that decreases (deeper water) as you move to the east or to the south::
 
-        0.  30.  -1000.
-        10. 30.  -1000.
-        0.  20.  -1000.
-        10. 20.  -1000.
+            0.  30.  -1000.
+            10. 30.  -2000.
+            0.  20.  -3000.
+            10. 20.  -4000.
 
     These files are larger than necessary since they store the x,y values at
     each point even though the points are required to be equally spaced.
     Many data sets come this way, but note that you can convert a file of
-    this type to one of the more compact types below using
-    `clawpack.geoclaw.topotools.converttopotype(inputfile, outputfile,
-    topotypein=1, topotypeout=2, nodata_value=None)`.
+    this type to one of the more compact types below using::
+    
+        [insert python code]
 
 
 
@@ -62,36 +78,46 @@ The recognized topotypes are:
 
     The file starts with a header consisting of 6 lines containing::
 
-      mx
-      my
-      xllcorner
-      yllcorner
-      cellsize
-      nodataval
+      XXX  mx
+      XXX  my
+      XXX  xlower | xllcenter | xllcorner
+      XXX  ylower | yllcenter | yllcorner
+      XXX  cellsize
+      XXX  nodataval
 
     and is followed by mx*my lines containing the z values at each x,y,
     again progressing from upper left (NW) corner across
     rows (moving east), then down in standard GIS form.  
     The lower left corner of the grid
-    is *(xllcorner, yllcorner)* and the distance between grid points in both
+    is *(xlower, ylower)* and the distance between grid points in both
     x and y is *cellsize*.  The value *nodataval* indicates what value of z
-    is specified for missing data points (often something like 9999. in data
+    is specified for missing data points (often something like -9999 in data
     sets with missing values).
 
+    Note: 
+
+     - The value `XXX` and the label (e.g. `xlower`) can appear in
+       either order in each of the header lines.  
+     - the `cellsize` line can include two values `dx, dy` rather than a single
+       value, in case the spacing is different in `x` and `y`.
+
     *Example:*  For the same example as above, the topo file with
-    topotype==2 would be::
+    topotype==2 and `lower` registration would be::
 
       2         mx
       2         my
-      0.        xllcorner
-      20.       yllcorner
+      0.        xlower
+      20.       ylower
       10.       cellsize
-      9999.     nodatavalue
+      -9999     nodatavalue
       -1000.
-      -1000.
-      -1000.
-      -1000.
+      -2000.
+      -3000.
+      -4000.
 
+    This file would be interpreted the same way if `llcenter` registration
+    was specified on lines 3 and 4, but differently if `llcorner`
+    was specified -- see :ref:`grid_registration`.
 
   **topotype = 3**
 
@@ -101,21 +127,33 @@ The recognized topotypes are:
     of data, going from west to east).
 
     *Example:*  For the same example as above, the topo file with
-    topotype==3 would be::
+    topotype==3 and `lower` registration would be::
 
       2         mx
       2         my
-      0.        xllcorner
-      20.       yllcorner
+      0.        xlower
+      20.       ylower
       10.       cellsize
-      9999.     nodatavalue
-      -1000.  -1000.
-      -1000.  -1000.
+      -9999     nodatavalue
+      -1000.  -2000.
+      -3000.  -4000.
+
+    This file would be interpreted the same way if `llcenter` registration
+    was specified on lines 3 and 4, but differently if `llcorner`
+    was specified -- see :ref:`grid_registration`.
+
+    Note: 
+
+     - The value `XXX` and the label (e.g. `xlower`) can appear in
+       either order in each of the header lines.  
+     - the `cellsize` line can include two values `dx, dy` rather than a single
+       value, in case the spacing is different in `x` and `y`.
 
     This is essentially the same as the `ESRI ASCII Raster format
-    <http://resources.esri.com/help/9.3/arcgisengine/java/GP_ToolRef/spatial_analyst_tools/esri_ascii_raster_format.htm>`_
-    except that the Fortran code assumes the parameter values come first rather
-    than the labels.
+    <http://resources.esri.com/help/9.3/arcgisengine/java/GP_ToolRef/spatial_analyst_tools/esri_ascii_raster_format.htm>`_,
+    but it is important to note which grid registration is used.
+    NCEI and etopo1 data sets generally have this format with `llcorner`
+    registration!  See :ref:`grid_registration` for more details.
 
   **topotype = 4**
 
@@ -128,9 +166,8 @@ The recognized topotypes are:
     command line or in the Makefile.
 
 The Fortran code will recognize headers for *topotype* 2
-or 3 that have the labels first and then the parameter values.  Note that
-the label strings are ignored in either case, the order of lines 
-is important.
+or 3 that have the labels first and then the parameter values.  
+The order of lines is important.
 
 It is also possible to specify values -1, -2, or -3 for *topotype*, in which
 case the *z* values will be negated as they are read in (since some data
@@ -168,15 +205,6 @@ Some Python tools for working with topography files are available, see
 
 Topography displacement files
 -----------------------------
-
-.. warning::  Some problems have recently been observed when trying to
-   specify time-varying topography with `dtopo` files.  Nearly instantaneous
-   displacement occuring at the start seems to work ok, but slowly varying
-   displacement does not always work well when AMR is also being used.
-   A better version of this code is currently being developed, but for now
-   use with caution!
-
-   This has been fixed in Clawpack 5.1.0.
 
 
 For tsunami generation a file *dtopo* is generally used to specify the

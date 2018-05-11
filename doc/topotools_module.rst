@@ -4,7 +4,10 @@
 topotools module for working with topography data
 =================================================
 
-.. warning :: This describes new tools added in Clawpack 5.2.1
+.. seealso::
+   - :ref:`topo`
+   - :ref:`topotools`
+
 
 :ref:`geoclaw/topotools_examples.ipynb` illustrates how to use some of the tools.
 
