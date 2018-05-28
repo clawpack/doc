@@ -14,10 +14,21 @@ These changes should appear in the next release.  If you need them now,
 see :ref:`developers` for instructions on cloning and installing from the
 master branch. 
 
+Changes that are not backward compatible
+----------------------------------------
+
+ - The format of checkpoint styles has changed for AMRClaw and GeoClaw, so old
+   checkpoint files can not be used to restart with newer code.
+
+General changes
+---------------
+
+ - `LICENSE` file added to all repositories, with BSD license
 
 Changes to classic
 ------------------
 
+ - None other than addition of License.
 
 See `classic diffs
 <https://github.com/clawpack/classic/compare/v5.4.1...master>`_
@@ -25,12 +36,16 @@ See `classic diffs
 Changes to clawutil
 -------------------
 
+ - Minor changes
+
 See `clawutil diffs
 <https://github.com/clawpack/clawutil/compare/v5.4.1...master>`_
 
 Changes to visclaw
 ------------------
 
+ - Minor changes to Matlab codes 
+ - Minor changes to kml functionality
  
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.4.1...master>`_
