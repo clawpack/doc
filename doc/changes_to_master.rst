@@ -91,8 +91,8 @@ Changes to geoclaw
   restart, and resize the nodal arrays and boundary lists.
 
 - The geoclaw versions for checkpointing and restarting also had
-to change to write out maxgr, and call the allocate routines for
-the arrays that depend on maxgr. (see amrclaw changes)
+  to change to write out maxgr, and call the allocate routines for
+  the arrays that depend on maxgr. (see amrclaw changes)
 
 See `geoclaw diffs
 <https://github.com/clawpack/geoclaw/compare/v5.4.1...master>`_
