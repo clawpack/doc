@@ -6,18 +6,46 @@
 Pyclaw 
 ======
 
-Installation::
+.. _pyclaw_install:
+
+PyClaw installation
+-------------------
+
+Just do this::
 
     pip install clawpack
 
-To run an example, launch an IPython session and then::
+This requires that you have a Fortran compiler installed.
+Alternatively, if you use `Anaconda <https://store.continuum.io/cshop/anaconda/>`_ or 
+`Conda <https://pypi.python.org/pypi/conda>`_, you can::
+
+    conda install -c clawpack -c conda-forge clawpack=5.4.1
+
+This option will also install optional dependencies including PETSc and HDF5,
+which are useful for large-scale parallel runs.  It does not require that you
+have a Fortran compiler.
+
+Examples
+--------
+
+Next, try running an example `Jupyter notebook <http://www.clawpack.org/gallery/notebooks.html#notebooks>`_.
+
+Alternatively, to run an example from the **IPython prompt**::
 
     from clawpack.pyclaw import examples
     claw = examples.shock_bubble_interaction.setup()
     claw.run()
     claw.plot()
 
-**Features:**
+To run an example and plot the results directly from the command line,
+go to the directory where Clawpack is installed and then::
+
+    cd pyclaw/examples/euler_2d
+    python shock_bubble_interaction.py iplot=1
+
+
+Features
+--------
 
     * A **hyperbolic PDE solver** in 1D, 2D, and 3D, including mapped grids and surfaces, built on Clawpack;
     * **Massively parallel** -- the same simple script that runs on your laptop will
@@ -86,18 +114,10 @@ Indices and tables
 * :ref:`search`
 
 
-Citing
+Citing PyClaw
 =======================
-If you use PyClaw in work that will be published, please cite the Clawpack software::
-
-    @misc{clawpack,
-        title={Clawpack software}, 
-        author={Clawpack Development Team}, 
-        url={http://www.clawpack.org}, 
-        note={Version x.y},
-        year={2014}}
-
-and the paper::
+If you use PyClaw in work that will be published, please cite the Clawpack software
+(see :ref:`citing`) and also mention specifically that you used PyClaw, and cite the paper::
 
     @article{pyclaw-sisc,
             Author = {Ketcheson, David I. and Mandli, Kyle T. and Ahmadia, Aron J. and Alghamdi, Amal and {Quezada de Luna}, Manuel and Parsani, Matteo and Knepley, Matthew G. and Emmett, Matthew},
@@ -108,8 +128,6 @@ and the paper::
             Title = {{PyClaw: Accessible, Extensible, Scalable Tools for Wave Propagation Problems}},
             Volume = {34},
             Year = {2012}}
-
-Please fill in the version number that you used.
 
 If you use the Classic (2nd-order) solver, you may also wish to cite::
 

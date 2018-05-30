@@ -11,10 +11,13 @@ if you have not already done so.  This is very useful in helping
 us track the extent of usage, and important to the :ref:`funding` agencies
 who support this work.  Please also see :ref:`citing`.
 
+If you will only use PyClaw and/or VisClaw, skip to :ref:`pyclaw_install` for
+the simplest installation instructions.
+
 Instead of installing Clawpack and all its dependencies, another alternative
 is :ref:`docker_image`.
 
-See also :ref:`previous`.
+For installation of older versions, see :ref:`previous`.
 
 **Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 
