@@ -6,7 +6,7 @@ Testing a PyClaw installation and running an example
 If you downloaded Clawpack manually, you can test your :ref:`pyclaw`
 installation as follows (starting from your `clawpack` directory)::
 
-    cd pyclaw
+    cd pyclaw/examples
     nosetests
 
 This should return 'OK'.
@@ -15,11 +15,12 @@ This should return 'OK'.
 Running an example
 ------------------
 
-Many examples of PyClaw simulations can be seen in the :ref:`galleries`
-and :ref:`notebooks`.
+Many examples of PyClaw simulations can be seen in the 
+`PyClaw gallery <http://www.clawpack.org/gallery/pyclaw/gallery/gallery_all.html>`_
+and `Jupyter notebook examples <http://www.clawpack.org/gallery/notebooks.html#notebooks>`_.
 
 You might also want to download the :ref:`apps`, which contains additional
-examples.
+examples in `apps/notebooks/pyclaw`.
 
 From the Jupyter notebook
 *************************
