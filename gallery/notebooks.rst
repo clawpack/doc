@@ -25,6 +25,8 @@ here may not work with the current Clawpack.
 * `A 2D fluid dynamics example <https://github.com/clawpack/apps/blob/master/notebooks/pyclaw/Quadrants.ipynb>`_
 * `Stegotons: solitary waves arising in non-dispersive periodic media <https://github.com/clawpack/apps/blob/master/notebooks/pyclaw/Stegotons.ipynb>`_
 * `Demonstration of different limiters for advection <http://nbviewer.ipython.org/gist/ketch/9508222>`_
+* `PyClaw's Geometry tools <https://gist.github.com/ketch/1a7888d1fcc37209b260>`_
+* `Solitary waves formed by diffraction of shallow water waves over a corrugated bottom <http://nbviewer.jupyter.org/gist/ketch/9250942>`_
 
 **Examples using Fortran Classic:**
 
