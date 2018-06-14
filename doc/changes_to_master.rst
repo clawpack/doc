@@ -17,8 +17,14 @@ master branch.
 Changes that are not backward compatible
 ----------------------------------------
 
- - The format of checkpoint styles has changed for AMRClaw and GeoClaw, so old
-   checkpoint files can not be used to restart with newer code.
+- The format of checkpoint styles has changed for AMRClaw and GeoClaw, so old
+  checkpoint files can not be used to restart with newer code.
+
+- In GeoClaw, the way some topofiles are interpreted has been changed to conform with 
+  the intended "grid registration".
+  This is not backward compatable for files with headers that specify
+  `xllower, yllower`.  See below for more details.
+
 
 General changes
 ---------------
@@ -66,6 +72,14 @@ See `riemann diffs
 
 Changes to amrclaw
 ------------------
+
+- The `valout` routine has been rewritten and now prints out timing
+  information to two files in the output directory: `timing.txt` contains a
+  summary at the end of the run, while `timing.csv` contains cumulative timing
+  information at each output time.  The script
+  `examples/advection_2d_inflow/plot_timing_stats.py` gives an example of how
+  this data might be plotted.  Information on both wall time and CPU time is
+  included, particularly useful for multi-core simulations.
 
 - Write more digits in `regions.data` file.
 
@@ -139,11 +153,23 @@ Changes to geoclaw
   This allows downloading only a subset of the DEM and at a coarsened resolution.
   The old way of doing this is not robust and sometimes gave incorrect results
   due to issues with the old etopo1 server (which is no longer maintained).
+  See :ref:`topo_netcdf` and 
+  `PR #308 <https://github.com/clawpack/geoclaw/pull/308>`_.
+  An example can be found in `tests/test_etopo1.py`.
+
+- More generally, topofiles can now be read in from netCDF files either
+  locally or from the web.  See :ref:`topo_netcdf` for some documentation.
 
 - New capabilities have been added to download NOAA tide gauge data, see
   `PR #287 <https://github.com/clawpack/geoclaw/pull/287>`_.
 
 - Some plotting issues have been resolved.
+
+- `dtopotools.SiftFault` now has the rigidity `mu` set properly, which
+  changes the magnitude `Mw` that is reported for a fault created using
+  the NOAA SIFT database.
+
+- `topotools.read` now allows `dx != dy` in a header for `topo_type in [2,3]`.
 
 - Many other minor changes.
 
