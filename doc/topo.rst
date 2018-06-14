@@ -9,6 +9,7 @@ Topography data
 .. seealso::
    - :ref:`topotools`
    - :ref:`grid_registration`
+   - :ref:`tsunamidata`
 
 The :ref:`geoclaw` software for flow over topography requires at least one
 topo file to be input, see :ref:`setrun_geoclaw`.
@@ -161,7 +162,8 @@ The recognized topotypes are:
     `CF MetaData conventions (v. 1.6) <http://cfconventions.org>`_. Files 
     that conform to this standard can be read in by GeoClaw.  The `topotools`
     module also has support for reading and writing (including therefore 
-    conversion) of these types of bathymetry files.  To use this functionality
+    conversion) of these types of bathymetry files (see :ref:`topo_netcdf`
+    below).  To use this functionality
     you will need to add *-DNETCDF* to the *FFLAGS* variable either by the
     command line or in the Makefile.
 
@@ -203,6 +205,9 @@ Some Python tools for working with topography files are available, see
 
 .. _topo_netcdf:
 
+NetCDF format
+^^^^^^^^^^^^^
+
 Topofiles can be read in netCDF format, either from local `.nc` files or
 from some online databases that provide netCDF servers, e.g. the NOAA
 THREDDS server.  Use the 
@@ -212,6 +217,13 @@ both limiting the extent and the resolution, e.g. by sampling every other
 point (by setting `coarsen=2`). This is particularly useful if you only want
 a subset of a huge online netCDF file (e.g. coastal DEMs at 1/3 arcsecond
 resolution are typically several gigabytes).
+
+The dictionary `topotools.remote_topo_urls` contains some useful URLs for
+etopo1 and a few other NOAA THREDDS datasets. This allows reading etopo1
+data, for example, via::
+
+    >>> from clawpack.geoclaw import topotools
+    >>> topo1 = topotools.read_netcdf('etopo1',...)
 
 See `$CLAW/geoclaw/tests/test_etopo1.py` for one example, in which a very
 small patch from the global etopo1 database (which has 1 arcminute resolution)

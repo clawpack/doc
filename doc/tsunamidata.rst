@@ -5,6 +5,8 @@
 Some sources of tsunami data
 ==================================
 
+.. seealso :: :ref:`topo`
+
 Topography / bathymetry
 ------------------------
 
@@ -19,15 +21,18 @@ resolution of the global bathymetry and the result assumed to be relative to
 MHW.  This is important if comparing to tide gauge observation or when
 modeling inundation.
 
+The NOAA Design-a-Grid tool no longer exists but you can download data sets
+from:
 
-* `GEODAS Grid Translator - Design-a-Grid
-  <http://www.ngdc.noaa.gov/mgg/gdas/gd_designagrid.html>`_:
-  ETOPO 1 minute resolution of all oceans.
-  **This has disappeared --- replaced by:**
 * `NGDC's WCS Grid Extraction Tool <http://maps.ngdc.noaa.gov/viewers/wcs-client/>`_
 * `NOAA NGDC inundataion relief
   <http://www.ngdc.noaa.gov/mgg/coastal/coastal.html>`_:
   High resolution data near US coastlines.
+
+It is also possible (and preferable) to open a remote NetCDF file on the
+NOAA THREDDS server to download data, which allows downloading only a
+subsampled subset of a large DEM.  See :ref:`topo_netcdf` for more
+details.
 
 .. _tsunamidata_sources:
 
