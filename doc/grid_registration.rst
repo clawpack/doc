@@ -14,6 +14,8 @@ Grid registration
 GeoClaw `topo_type == 3` is
 essentially the same as the `ESRI ASCII Raster format <http://resources.esri.com/help/9.3/arcgisengine/java/GP_ToolRef/spatial_analyst_tools/esri_ascii_raster_format.htm>`_
 but it is important to note which grid registration is used.
+(`topo_type == 2` uses the same header conventions, so this discussion also
+applies to these files.)
 
 See `this NOAA page <https://www.ngdc.noaa.gov/mgg/global/gridregistration.html>`_
 and `the wikipedia ESRI grid page <https://en.wikipedia.org/wiki/Esri_grid>`_
@@ -104,3 +106,15 @@ registration.  So if you rerun a previous example that had a topofile specifying
 properly) viewed as specified at slightly different points.  If you need to try to
 reproduce your earlier results, you could change `llcorner` to `lower` in the
 header lines, for example.
+
+For GeoClaw `topo_type=1`, each row contains `x, y, z` data for a single
+point and we interpret `z` as the pointwise data at the specified `x, y`.
+
+NetCDF files
+------------
+
+For netCDF files the
+data points are generally interpreted as pointwise values at the points
+specified in the `lat` and `lon` arrays included in the file (or as
+cell-averaged values with these points as the cell centers).
+

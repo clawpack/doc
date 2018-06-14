@@ -201,6 +201,33 @@ Several on-line databases are available for topograpy, see
 Some Python tools for working with topography files are available, see
 :ref:`topotools`.
 
+.. _topo_netcdf:
+
+Topofiles can be read in netCDF format, either from local `.nc` files or
+from some online databases that provide netCDF servers, e.g. the NOAA
+THREDDS server.  Use the 
+`topotools.read_netcdf <topotools_module.html#clawpack.geoclaw.topotools.read_netcdf>`_
+function.  Note that this also allows reading in only a subset of the data,
+both limiting the extent and the resolution, e.g. by sampling every other
+point (by setting `coarsen=2`). This is particularly useful if you only want
+a subset of a huge online netCDF file (e.g. coastal DEMs at 1/3 arcsecond
+resolution are typically several gigabytes).
+
+See `$CLAW/geoclaw/tests/test_etopo1.py` for one example, in which a very
+small patch from the global etopo1 database (which has 1 arcminute resolution)
+is downloaded at different resolutions.
+
+**Note:** Earlier versions of clawpack included `etopotools.py` providing a
+different way to download subsampled etopo1 topography.  That has been
+deprecated since the old way is no longer supported by NOAA and did not
+always do the subsampling properly.
+
+See also :ref:`grid_registration` for important information about the manner
+in which the data downloaded should be interpreted.  For netCDF files the
+data points are generally interpreted as pointwise values at the points
+specified in the `lat` and `lon` arrays included in the file (or as
+cell-averaged values with these points as the cell centers).
+
 .. _topo_dtopo:
 
 Topography displacement files

@@ -2,6 +2,8 @@
 
 .. _netcdf:
 
+.. seealso:: :ref:`topo_netcdf`.
+
 ==========================
 Using NetCDF output
 ==========================
