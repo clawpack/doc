@@ -118,6 +118,8 @@ See `amrclaw diffs
 
 Changes to geoclaw
 ------------------
+- Makefile.geoclaw changed to include the new files to initialize,
+  restart, and resize the nodal arrays and boundary lists.
 
 - The way some topofiles are interpreted has been changed to conform with 
   the intended "grid registration".  In particular, topofiles with a header 

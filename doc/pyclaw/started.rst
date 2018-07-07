@@ -79,7 +79,7 @@ First install nose: ::
 
 Then ::
 
-    cd clawpack/pyclaw
+    cd clawpack/pyclaw/examples
     nosetests 
 
 If you have followed the instructions for :ref:`parallel`, you can run the tests in parallel::
