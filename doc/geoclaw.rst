@@ -46,6 +46,7 @@ More will eventually appear in the :ref:`apps`.
    plotting_geoclaw
    googleearth_plotting
    quick_tsunami
+   quick_surge
    okada
    sealevel
    manning
@@ -53,6 +54,7 @@ More will eventually appear in the :ref:`apps`.
    fgmax
    tsunamidata
    geoclaw/Okada
+   surgedata
 
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x

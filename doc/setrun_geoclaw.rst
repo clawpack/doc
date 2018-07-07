@@ -63,6 +63,16 @@ is done should be specified for GeoClaw applications:
    been set (see Section :ref:`regions`) and also on several other
    attributes described below that contain information on minimum and
    maximum refinement allowed in various regions.
+
+
+.. attribute:: rundata.refinement_data.speed_tolerance : list
+
+   Cells are flagged for refinement at a level if the magnitude of the 
+   velocity is greater than the corresponding value in the list.  For 
+   instance if `rundata.refinement_data.speed_tolerance = [1.0, 2.0, 3.0]`
+   then cells with a speed of 1.0 would refine to level 2, cells with a 
+   speed of 2.0 would refine to level 3, and cells with a speed of 3.0
+   would refine to level 4.
     
 .. attribute:: rundata.refinement_data.max_level_deep : int
 
@@ -367,3 +377,82 @@ Fixed grid maximum monitoring / arrival times
    Should take the value 1, 2, or 5 and indicates how many values to monitor.
    See :ref:`fgmax` for more details.
 
+
+.. _setrun_surge:
+
+Storm Specification Data
+------------------------
+
+.. attribute:: rundata.surge_data.wind_forcing : bool
+
+   Includes the wind forcing term if `True`.  The drag coefficient is specified
+   by `rundata.surge_data.drag_law`.
+
+.. attribute:: rundata.surge_data.drag_law : integer
+
+   This specifies how to deterimine the wind drag coefficient.  Valid options
+   include include `0` implying use no wind drag (effectively eliminates the
+   wind source term but still computes the wind), `1` uses the Garret wind
+   drag law, and `2` uses the Powell (2006) wind drag law.
+
+.. attribute:: rundata.surge_data.pressure_forcing : bool
+
+   Includes the pressure forcing term if `True`.
+
+.. attribute:: rundata.surge_data.wind_index : int
+
+   Specifies at what index into the `aux` array the wind velocities are stored.
+   Note that this is Python indexed in the setrun but will be corrected in the
+   FORTRAN code (1 is added to the index).
+
+.. attribute:: rundata.surge_data.pressure_index : int
+
+   Specifies at what index into the `aux` array the wind velocities are stored.
+   Note that this is Python indexed in the setrun but will be corrected in the
+   FORTRAN code (1 is added to the index).
+
+.. attribute:: rundata.surge_data.display_landfall_time : bool
+
+   Sets whether the console output displays time relative to land fall in days.
+   In GeoClaw versions past 5.5 this only deterimines whether the time is 
+   displayed in seconds or days.
+
+.. attribute:: rundata.surge_data.wind_refine : list
+
+   Similar to the `speed_tolerance` data, cells are flagged for refinement at 
+   a level if the magnitude of the wind velocity is greater than the 
+   corresponding value in the list.  For 
+   instance if `wind_refine = [20.0, 30.0, 40.0]`
+   then cells with a wind speed of 2.0 would refine to level 2, cells with a 
+   wind speed of 30.0 would refine to level 3, and cells with a wind speed of 
+   40.0 would refine to level 4.  This can also be set to a boolean which if
+   `False` disables wind based refinement.
+
+.. attribute:: rundata.surge_data.R_refine : list
+
+   Similar to the `wind_refine` data, cells are flagged based on the radial
+   distance to the storm's center.  This can also be set to a boolean which if
+   `False` disables storm radial based refinement.
+
+.. attribute:: rundata.surge_data.storm_specification_type : int
+
+   Specifies the type of storm being used.  Positive options refer to a 
+   parameterized storm model where as negative integers refer to fully 
+   specified storms, for instance from HWRF, to be specified.
+
+   Valid options 
+
+    - `-1`: The input data is specified in the HWRF format.
+    - `0`: No storm specified
+    - `1`: Parameterized storm requested using the Holland 1980 modeled storm.
+    - `2`: Parameterized storm requested using the Holland 2010 modeled storm.
+    - `3`: Parameterized storm requested using the Chava, Lin, Emmanuel modeled 
+      storm.
+
+.. attribute:: rundata.surge_data.storm_file : string
+
+   Specifies the path to the storm data.  IF `storm_specification_type > 0` then
+   this should point to a GeoClaw formatted storm file (see :ref:`storm_module` for 
+   details).  If `storm_specification < 0` then this should either specify a path
+   to files specifying the storm or a single file depending on the type of input
+   data.
