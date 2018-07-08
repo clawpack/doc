@@ -4,15 +4,12 @@
 Pyclaw Limiters
 ===============
 
-.. note::
-    Need to provide short explanation of limiters here.
+.. autofunction:: clawpack.pyclaw.limiters.tvd.limit
 
-.. autofunction:: pyclaw.limiters.tvd.limit
+:mod:`clawpack.pyclaw.limiters.tvd`
+===================================
 
-:mod:`pyclaw.limiters.tvd`
-=============================
-
-.. automodule:: pyclaw.limiters.tvd
+.. automodule:: clawpack.pyclaw.limiters.tvd
     :exclude-members: limit
     :members:
    
