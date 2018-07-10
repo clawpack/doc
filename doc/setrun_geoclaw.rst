@@ -420,7 +420,7 @@ Storm Specification Data
 .. attribute:: rundata.surge_data.wind_refine : list
 
    Similar to the `speed_tolerance` data, cells are flagged for refinement at 
-   a level if the magnitude of the wind velocity is greater than the 
+   a level if the magnitude of the wind velocity in m/s is greater than the 
    corresponding value in the list.  For 
    instance if `wind_refine = [20.0, 30.0, 40.0]`
    then cells with a wind speed of 20.0 would refine to level 2, cells with a 
