@@ -423,7 +423,7 @@ Storm Specification Data
    a level if the magnitude of the wind velocity is greater than the 
    corresponding value in the list.  For 
    instance if `wind_refine = [20.0, 30.0, 40.0]`
-   then cells with a wind speed of 2.0 would refine to level 2, cells with a 
+   then cells with a wind speed of 20.0 would refine to level 2, cells with a 
    wind speed of 30.0 would refine to level 3, and cells with a wind speed of 
    40.0 would refine to level 4.  This can also be set to a boolean which if
    `False` disables wind based refinement.
