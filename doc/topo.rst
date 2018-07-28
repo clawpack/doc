@@ -270,7 +270,7 @@ Currently two formats are supported for this file:
     each line containing *mx* values of *dz*.
 
 The Okada model can be used to generate *dtopo* files from fault parameters,
-as described in :ref:`okada`. 
+as described in :ref:`okada`.  See also :ref:`dtopotools_module`.
 
 Note that if the topography is moving, it is important to insure that the
 time step is small enough to capture the motion.  Starting in Version 5.1.0,
