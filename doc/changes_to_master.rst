@@ -50,8 +50,11 @@ See `clawutil diffs
 Changes to visclaw
 ------------------
 
+ - The script `src/python/visclaw/plot_timing_stats.py` 
+   can be used to plot timing data that is now printed out following
+   AMRClaw and GeoClaw runs.  See the AMRClaw notes below for more details.
  - Minor changes to Matlab codes 
- - Minor changes to kml functionality
+ - Minor changes to kml functionality, and printing of more digits
  - `ClawPlotItem.colorbar_kwargs` added for setting other colorbar keyword
    arguments
  - `ClawPlotAxes.beforeframe` added to allow e.g. plotting on a background
@@ -66,6 +69,7 @@ Changes to riemann
 
  - Add some vectorized Riemann solvers
  - Changes to layered shallow water solvers
+ - Add some Riemann solvers for adjoint equations
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.4.1...master>`_
@@ -73,12 +77,19 @@ See `riemann diffs
 Changes to amrclaw
 ------------------
 
-- The `valout` routine has been rewritten and now prints out timing
+- The `valout.f` routine in `amrclaw/src/Nd` (for `N=1,2,3`)
+  has been cleaned up as `valout.f90`, and now also prints out timing
   information to two files in the output directory: `timing.txt` contains a
   summary at the end of the run, while `timing.csv` contains cumulative timing
-  information at each output time.  The script
-  `examples/advection_2d_inflow/plot_timing_stats.py` gives an example of how
-  this data might be plotted.  Information on both wall time and CPU time is
+  information at each output time.  
+
+- The boundary condition routines `amrclaw/src/Nd/bcNamr.f`  (for `N=1,2,3`)
+  have been replaced with modernized versions `amrclaw/src/Nd/bcNamr.f90` 
+  that should be easier to read and modify by users if necessary.
+  
+- The script `$CLAW/visclaw/src/python/visclaw/plot_timing_stats.py` 
+  can be used to plot this data (or modify this script as desired).
+  Information on both wall time and CPU time is
   included, particularly useful for multi-core simulations.
 
 - Write more digits in `regions.data` file.
@@ -132,10 +143,23 @@ Changes to geoclaw
   Change the header to specify `xlower` and `ylower` (or `xllcenter,
   yllcenter`) if you want the data to be interpreted in the old manner.
   
+- The boundary condition routine `geoclaw/src/2d/shallow/bc2amr.f` 
+  have been replaced with a modernized version `geoclaw/src/2d/shallow/bc2amr.f`
+  that should be easier to read and modify by users if necessary.
+  (Similar to changes made in amrclaw.)
+    
 - The format of checkpoint files changed to include `maxgr`.
   **This is not backward compatible -- old checkpoint files can not be used
   to restart with the new code.**
 
+- The `valout.f` routine in `src/2d/shallow`
+  has been cleaned up as `valout.f90`, and now also prints out timing
+  information to two files in the output directory.  See the notes
+  for amrclaw above for more details.
+
+- Many updates have been made to the storm surge code.
+  **@mandli should update this section.**
+  
 - Multi-layer shallow water solvers have been extended to work with AMR.
   (This is still under development and may have some bugs.)
 
@@ -170,6 +194,10 @@ Changes to geoclaw
 - `dtopotools.SiftFault` now has the rigidity `mu` set properly, which
   changes the magnitude `Mw` that is reported for a fault created using
   the NOAA SIFT database.
+
+- `dtopotools.SubFault` has been extended to allow triangular subfaults
+  in addition to rectangular subfaults.  Some examples illustrating this
+  should be added to the `apps` repository.
 
 - `topotools.read` now allows `dx != dy` in a header for `topo_type in [2,3]`.
 
