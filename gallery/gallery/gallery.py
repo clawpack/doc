@@ -7,7 +7,7 @@ produced using "bash make_all.sh" or "make .plots".
 
 You should use the script make_plots.py to do this first.
 """
-
+from __future__ import print_function
 import os, glob
 
 
@@ -68,18 +68,18 @@ class Gallery(object):
         if gallery_dir is None:
             gallery_dir = gallery_dir_default
 
-        print "Gallery files will be created in directory "
-        print "   ", gallery_dir
+        print("Gallery files will be created in directory ")
+        print("   ", gallery_dir)
 
         try:
             if not os.path.isdir(gallery_dir):
                 os.system('mkdir %s' % gallery_dir)
-                print "Created directory ",gallery_dir
+                print("Created directory ",gallery_dir)
             start_dir = os.getcwd()
             os.chdir(gallery_dir)
         except:
-            print "*** Error moving to directory ",gallery_dir
-            print "*** Gallery not created"
+            print("*** Error moving to directory ",gallery_dir)
+            print("*** Gallery not created")
             raise
 
         gfile = open(fname, 'w')
@@ -107,7 +107,7 @@ class Gallery(object):
 
                 if not os.path.exists(static_dir+gitem.appdir):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
-                print "+++ static_dir = ",static_dir
+                print("+++ static_dir = ",static_dir)
 
                 os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
                 if copy_plots:
@@ -125,9 +125,9 @@ class Gallery(object):
                     for file in files:
                         os.system('cp %s %s' % (file, static_dir+gitem.appdir))
                     fromdir = CLAW+'/'+gitem.appdir
-                    print "+++ copied files from ",fromdir
-                    print "+++ copied files to ",static_dir+gitem.appdir
-                    #print "+++ files: ",files
+                    print("+++ copied files from ",fromdir)
+                    print("+++ copied files to ",static_dir+gitem.appdir)
+                    #print("+++ files: ",files)
 
 
 
@@ -160,11 +160,11 @@ class Gallery(object):
                     src_name = os.path.join(self.clawdir,src_name)
                     src_png = src_name + '.png'
                     if not os.path.isdir('thumbnails'):
-                        print "Creating directory thumbnails"
+                        print("Creating directory thumbnails")
                         os.system('mkdir thumbnails')
                     thumb_file = os.path.join('thumbnails',thumb_name + '.png')
                     if os.path.isfile(thumb_file) and (not remake):
-                        print "Thumbnail exists: ",thumb_file
+                        print("Thumbnail exists: ",thumb_file)
                     else:
                         scale = 0.3
                         make_thumb(src_png ,thumb_file, scale)
@@ -172,7 +172,7 @@ class Gallery(object):
                     gfile.write('   :target: %s\n' % src_html)
                 gfile.write('\n\n')
 
-        print "Created ",fname, " in directory ", os.getcwd()
+        print("Created ",fname, " in directory ", os.getcwd())
         os.chdir(start_dir)
                     
 
@@ -180,14 +180,14 @@ def make_thumb(src_file, thumb_file, scale):
     
     from numpy import floor 
     if not os.path.exists(src_file):
-        print '*** Error in make_thumb: cannot find file ',src_file
+        print('*** Error in make_thumb: cannot find file ',src_file)
     else:
         # convert scale to percent:
         scale = int(floor(scale*100))
         os.system('convert -resize %s' % scale + '% ' + \
             '%s %s' % (src_file, thumb_file))
-        print "Converted ",src_file
-        print "   to     ",thumb_file
+        print("Converted ",src_file)
+        print("   to     ",thumb_file)
 
    
 
@@ -309,6 +309,13 @@ def make_2d():
     description = """
         Advection in an annular region with AMR."""
     images = ('frame0000fig0', 'frame0002fig0', 'frame0002fig2')
+    gsec.new_item(appdir, plotdir, description, images)
+    #----------------------------------------------
+
+    appdir = 'amrclaw/examples/advection_2d_inflow'
+    description = """
+        Advection with inflow boundary conditions."""
+    images = ('frame0000fig0', 'frame0001fig0', 'frame0002fig0')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
 
