@@ -25,11 +25,21 @@ Changes that are not backward compatible
   This is not backward compatable for files with headers that specify
   `xllower, yllower`.  See below for more details.
 
+- Many of the previous storm surge capabilies in GeoClaw have been enhanced and
+  simplified in terms of handling storm input.  Some of these changes are not
+  backwards compatible due to the way storm data is now specified and how
+  time references to landfall are now specified.  The examples in GeoClaw now
+  are updated to reflect these changes however and it is highly recommended
+  that users look at these examples for how to change their own existing
+  examples.
+
 
 General changes
 ---------------
 
  - `LICENSE` file added to all repositories, with BSD license
+ - `CODE_OF_CONDUCT.md` has been added to the super repository so as to
+   define a code of conduct for the community.
 
 Changes to classic
 ------------------
@@ -146,7 +156,8 @@ Changes to geoclaw
 - The boundary condition routine `geoclaw/src/2d/shallow/bc2amr.f` 
   have been replaced with a modernized version `geoclaw/src/2d/shallow/bc2amr.f`
   that should be easier to read and modify by users if necessary.
-  (Similar to changes made in amrclaw.)
+  (Similar to changes made in amrclaw.)  In the case of extrapolation boundary
+  conditions all aux variables are also copied rather than just bathymetry.
     
 - The format of checkpoint files changed to include `maxgr`.
   **This is not backward compatible -- old checkpoint files can not be used
@@ -157,11 +168,31 @@ Changes to geoclaw
   information to two files in the output directory.  See the notes
   for amrclaw above for more details.
 
-- Many updates have been made to the storm surge code.
-  **@mandli should update this section.**
+- The storm surge capabilties have been significantly changed including:
+  - A new storm format that GeoClaw now reads in directly.  There is also
+    a new Python storm module that contains the capability of converting
+    many common formats into the format that GeoClaw now expects.  These
+    formats currently include ATCF, HURDAT, JMA, IBtRACS, and TCVITALS.
+  - Time reference is now specific to landfall or anything else that the 
+    use requests.  In other words you no longer need absolute values of
+    start and stop times but everything is relative to landfall.
+  - The Fortran code for storms is now simplified following the above
+    restricted format.  This is all handled via the Python module.
+  - Additional parameterized wind and pressure fields are now included
+    in addition to the existing Holland 1980 field.
+  - Additional preliminary support for storm data beyond parameterized
+    versions have been added.  This is primarily in the form of stubs 
+    so that an API can be establised for the different data sources that
+    we intend to add in the future including HWRF and other formats.
+  - Changes to plotting storm surge applications have also been included
+    that mimic the ones above.  Again please refer to the examples in 
+    GeoClaw to see how to adapt your application.
   
 - Multi-layer shallow water solvers have been extended to work with AMR.
   (This is still under development and may have some bugs.)
+
+- There is a new Makefile.multilayer file that should be used for 
+  multilayer applications.
 
 - Makefile.geoclaw changed to include the new files to initialize,
   restart, and resize the nodal arrays and boundary lists.
