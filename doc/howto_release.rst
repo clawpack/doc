@@ -54,7 +54,7 @@ version number to include `5.4.1rc-alpha`, for example.
 
 **NOTE:** Once one or more release candidates have been tested, the final
 such PR  should contain a change of the version number in the file
-`$CLAW/setrun.py` to the full version e.g. `5.4.1`.
+`$CLAW/setup.py` to the full version e.g. `5.4.1`.
 
 Once the PR has been merged::
 

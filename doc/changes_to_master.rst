@@ -14,6 +14,10 @@ These changes should appear in the next release.  If you need them now,
 see :ref:`developers` for instructions on cloning and installing from the
 master branch. 
 
+To see documentation that has already been developed to accompany any new
+features listed below, click on the "future" branch of the documentation, in
+the menu on the left hand side of this page.
+
 Changes that are not backward compatible
 ----------------------------------------
 
@@ -169,21 +173,27 @@ Changes to geoclaw
   for amrclaw above for more details.
 
 - The storm surge capabilties have been significantly changed including:
+
   - A new storm format that GeoClaw now reads in directly.  There is also
     a new Python storm module that contains the capability of converting
     many common formats into the format that GeoClaw now expects.  These
     formats currently include ATCF, HURDAT, JMA, IBtRACS, and TCVITALS.
+
   - Time reference is now specific to landfall or anything else that the 
     use requests.  In other words you no longer need absolute values of
     start and stop times but everything is relative to landfall.
+
   - The Fortran code for storms is now simplified following the above
     restricted format.  This is all handled via the Python module.
+
   - Additional parameterized wind and pressure fields are now included
     in addition to the existing Holland 1980 field.
+
   - Additional preliminary support for storm data beyond parameterized
     versions have been added.  This is primarily in the form of stubs 
     so that an API can be establised for the different data sources that
     we intend to add in the future including HWRF and other formats.
+
   - Changes to plotting storm surge applications have also been included
     that mimic the ones above.  Again please refer to the examples in 
     GeoClaw to see how to adapt your application.

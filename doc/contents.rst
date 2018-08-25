@@ -7,6 +7,15 @@
 Full Table of Contents
 ====================================================
 
+This is the documentation for **Clawpack Version 5.5.0.** 
+For documentation corresponding to older versions see the list of
+past releases in the menu to the left.  The *future* version refers
+to new documentation for features that have been merged into the
+master branch of a Clawpack repository, but have not yet been
+released.  To use one of these features, see :ref:`setup_dev`.
+
+**What's New??** For release notes, summaries of changes between releases, 
+and links to all the Github commit logs, see :ref:`changes`.
 
 Overview and Getting Started
 ============================

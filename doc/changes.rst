@@ -7,9 +7,27 @@ Recent changes --- release notes
 Clawpack 5.x
 ------------
 
+* Click on the Install tab or visit :ref:`installing` for installation
+  instructions. 
+
+* Versions of Clawpack 5.0 can be found at
+  `https://github.com/clawpack/clawpack/releases/
+  <https://github.com/clawpack/clawpack/releases/>`_.
+
+* Recent versions can also be found on 
+  `Zenodo <https://zenodo.org>`_ with
+  permanent DOIs, listed below.  
+
+* Please see :ref:`citing` for the suggested way to cite the version of
+  Clawpack that you are using in publications.
+
 * Clawpack 5.0 has significant changes from past versions. See
   :ref:`clawpack5`.
+
 * For changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
+
+Releases:
+^^^^^^^^^
 
 * :ref:`release_5_0_0`  -- January 8, 2014
 * :ref:`release_5_1_0`  -- March 2, 2014
