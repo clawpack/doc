@@ -217,17 +217,17 @@ htmlhelp_basename = 'Clawpackdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'Clawpack.tex', ur'Clawpack Documentation',
-   ur'RJL', 'manual'),
+  ('contents', 'ClawpackDocs30Nov2014.tex', ur'Clawpack Documentation',
+   ur'The Clawpack Development Team', 'manual', False),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+latex_logo =  '_static/clawlogo.jpg'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = False
+latex_use_parts = True
 
 # Additional stuff for the LaTeX preamble.
 #latex_preamble = ''
@@ -236,7 +236,10 @@ latex_documents = [
 #latex_appendices = []
 
 # If false, no module index is generated.
-#latex_use_modindex = True
+latex_use_modindex = True
+
+latex_show_pagerefs = True
+latex_show_urls = 'inline'
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
