@@ -46,9 +46,9 @@ The instructions below make webpages that list v5.4.0, etc. and allow
 viewing docs that may be more relevant to a previous version of Clawpack.
 
 But note that the `.rst` files used to build these pages come form what is
-checked into the `master` branch on Github (and the commits corresponding to
+checked into the `v5.x.x` branch on Github (and the commits corresponding to
 tags such as `v5.4.0`).  So if you have changed `.rst` files but these have
-not yet been merged into `master` on Github, you will not see the changes
+not yet been merged into `v5.x.x` or `dev` on Github, you will not see the changes
 reflected in the html files you build.
 
 To make pages that show previous Clawpack versions, first install the
@@ -61,15 +61,18 @@ and then do this::
 
     cd $CLAW/doc/doc
     export SPHINX_WEB=False # to build for local viewing
-    sphinx-versioning build -i -r master doc ./_build/html
+    sphinx-versioning build -i -r v5.x.x doc ./_build/html 
+        # change v5.x.x to the current version
 
 Note that `-i` causes versions to be listed in reverse order at the bottom,
-`-r master` uses the master branch for the main landing page, and `doc` is
+`-r v5.x.x` uses the `v5.x.x` branch for the main landing page, and `doc` is
 the directory containing the `.rst` files relative to the top directory
 of the Git repository. Only `.rst` files that are checked into Git on some
 branch at `origin` are seen.
 
-To view the files, point your browser to `$CLAW/doc/doc/_build/html/master/index.html`
+To view the files, point your browser to
+`$CLAW/doc/doc/_build/html/v5.x.x/index.html`  
+(with `5.x.x` replaced by the current version).
 
 If you like what you see, you can push back to your fork and then issue a
 pull request to have these changes incorporated into the documentation.
@@ -90,7 +93,7 @@ To remake the galleries, you need to first run all the examples that produce
 results shown in the galleries.  
 
 For detailed instructions, see `CLAW/doc/gallery/README.md
-<https://github.com/clawpack/doc/blob/master/gallery/README.md>`_.
+<https://github.com/clawpack/doc/blob/dev/gallery/README.md>`_.
 
 Then do the following::
 
@@ -130,7 +133,7 @@ push to `clawpack/doc <https://github.com/clawpack/doc>`_.
 Then do::
 
     cd $CLAW/clawpack.github.com
-    git checkout master
+    git checkout v5.x.x
     git pull origin  # make sure you are up to date before doing next steps!
 
     cd $CLAW/doc/doc
