@@ -37,8 +37,8 @@ Install from a tarfile
 
 Download a tar file of the latest release:
 
-* `https://github.com/clawpack/clawpack/releases/download/v5.4.1/clawpack-5.4.1.tar.gz
-  <https://github.com/clawpack/clawpack/releases/download/v5.4.1/clawpack-5.4.1.tar.gz>`_
+* `https://github.com/clawpack/clawpack/releases/download/v5.5.0/clawpack-5.5.0.tar.gz
+  <https://github.com/clawpack/clawpack/releases/download/v5.5.0/clawpack-5.5.0.tar.gz>`_
 * :ref:`previous`
 * :ref:`changes`
 
@@ -48,11 +48,11 @@ See :ref:`clawpack_components` for a list of what's included in this tar file.
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
 
-    tar -xzvf clawpack-5.4.1.tar.gz
+    tar -xzvf clawpack-5.5.0.tar.gz
 
 Then move into the top level directory::
 
-    cd clawpack-5.4.1
+    cd clawpack-5.5.0
 
 Next install the Python components of Clawpack (but read the next two
 paragraphs first)::
@@ -144,7 +144,7 @@ Conda binaries are available for Mac OS X and Ubuntu Linux
 
 From a terminal, simply do::
 
-    conda install -c clawpack -c conda-forge clawpack=5.4.1
+    conda install -c clawpack -c conda-forge clawpack=5.5.0
 
 You might want to consider first creating a separate `conda environment
 <http://conda.pydata.org/docs/using/envs.html>`_ if you want to separate
