@@ -42,7 +42,7 @@ Releases:
 * :ref:`release_5_4_1`  -- June 28, 2017
   `[DOI 10.5281/zenodo.820730] <https://doi.org/10.5281/zenodo.820730>`_
 * :ref:`release_5_5_0`  -- August 28, 2018
-  `[DOI  to appear ]
+  `[DOI  to appear ]`
 * :ref:`changes_to_master`
 
 
