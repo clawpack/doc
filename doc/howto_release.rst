@@ -99,14 +99,14 @@ appropriate version number in these commands::
     cd $CLAW
     git checkout master; git pull # make sure up to date!
     git tag v5.x.x
-    git push --tags upstream
+    git push upstream v5.x.x
 
     cd ../pyclaw
     git checkout master; git pull # make sure up to date!
     git tag v5.x.x
-    git push --tags upstream
+    git push upstream v5.x.x
 
-Do the same in all other repos (classic, amrclaw, geoclaw, clawutil, clawvis,
+Do the same in all other repos (classic, amrclaw, geoclaw, clawutil, visclaw,
 riemann).
 
 Note these tags are used in the documentation for pages like
