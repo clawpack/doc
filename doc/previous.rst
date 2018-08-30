@@ -12,6 +12,7 @@ Previous versions of Clawpack
   `Zenodo <https://zenodo.org>`_ with
   permanent DOIs.  
 
+    * Version 5.4.1: `10.5281/zenodo.1405834 <https://doi.org/10.5281/zenodo.1405834>`_
     * Version 5.4.1: `10.5281/zenodo.820730 <https://doi.org/10.5281/zenodo.820730>`_
     * Version 5.4.0: `10.5281/zenodo.262111 <http://dx.doi.org/10.5281/zenodo.262111>`_
     * Version 5.3.1: `10.5281/zenodo.50982 <http://dx.doi.org/10.5281/zenodo.50982>`_
