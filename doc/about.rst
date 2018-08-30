@@ -93,6 +93,10 @@ Other major contributors include:
 * Sorin Mitran. 
 * Matteo Parsani,
   `@mparsani <https://github.com/mparsani/>`_.
+* Xinsheng Qin 
+  `@xinshengqin <https://github.com/xinshengqin/>`_.
+* Avi Schwarzschild 
+  `@aks2203 <https://github.com/aks2203/>`_.
 * Andy Terrel,
   `@aterrel <https://github.com/aterrel/>`_.
 * Chris Vogl,
@@ -111,8 +115,8 @@ Citing this work
 If you use Clawpack in publications, please cite the software itself as
 well, with a citation similar to the following::
 
-    Clawpack Development Team (2017), Clawpack Version 5.4.0,
-    http://www.clawpack.org, doi:10.5281/zenodo.262111.
+    Clawpack Development Team (2017), Clawpack Version 5.5.0,
+    http://www.clawpack.org, doi:10.5281/zenodo.1405834.
 
 Here's the bibtex::
 
@@ -120,9 +124,9 @@ Here's the bibtex::
         title={Clawpack software}, 
         author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
-        note={Version 5.4.0},
-        doi={10.5281/zenodo.262111},
-        year={2017}}
+        note={Version 5.5.0},
+        doi={10.5281/zenodo.1405834},
+        year={2018}}
 
 Please fill in the version number that you used, and its year, with the
 appropriate DOI from `Zenodo <https://zenodo.org>`_, if available.  
