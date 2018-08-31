@@ -70,6 +70,7 @@ having problems with importing Python modules.
 Quick Installation of only PyClaw
 =====================================
 
+.. warning:: Not yet updated to 5.5.0.
 
 If you only want to use PyClaw (and associated Python
 tools, e.g. VisClaw for visualization), they you could do::
@@ -78,7 +79,7 @@ tools, e.g. VisClaw for visualization), they you could do::
 
 or, more specifically, ::
 
-    pip install clawpack==v5.5.0
+    pip install clawpack==v5.4.1
 
 However, if you think you might want to use the Fortran packages as well
 (Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source

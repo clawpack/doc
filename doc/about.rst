@@ -115,7 +115,7 @@ Citing this work
 If you use Clawpack in publications, please cite the software itself as
 well, with a citation similar to the following::
 
-    Clawpack Development Team (2017), Clawpack Version 5.5.0,
+    Clawpack Development Team (2018), Clawpack Version 5.5.0,
     http://www.clawpack.org, doi:10.5281/zenodo.1405834.
 
 Here's the bibtex::
