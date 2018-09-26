@@ -48,11 +48,11 @@ See :ref:`clawpack_components` for a list of what's included in this tar file.
 Save this tar file in the directory where you want the top level of the
 clawpack tree to reside.  Then untar using the command::   
 
-    tar -xzvf clawpack-5.5.0.tar.gz
+    tar -xzvf clawpack-v5.5.0.tar.gz
 
 Then move into the top level directory::
 
-    cd clawpack-5.5.0
+    cd clawpack-v5.5.0
 
 Next install the Python components of Clawpack (but read the next two
 paragraphs first)::
