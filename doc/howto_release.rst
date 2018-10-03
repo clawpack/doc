@@ -113,6 +113,47 @@ Note these tags are used in the documentation for pages like
 :ref:`changes_to_master` which generate diffs between the latest version and
 the current master branch of each resposity.
 
+
+Pypi
+----
+To release on the pypi server (for installation via pip) we have to do a bit
+of trickery.  We can't just follow the directions at https://packaging.python.org/tutorials/packaging-projects/
+because we have a very non-Pythonic directory structure; in particular,
+the subdirectories `clawpack/x/` do not have an `__init__.py`.
+
+Here's what to do::
+
+	cd $CLAW
+	git-archive-all --prefix clawpack-x.x.x/ clawpack-x.x.x.tar
+
+Then unpack the resulting tarball in another location.  Next::
+	
+        cd $CLAW
+	python setup.py sdist
+        cd dist
+
+Now extract that resulting tarball.  Then copy the file PKG-INFO from this second tarball 
+to the first one.  Finally, repack the first tarball and put it in `$CLAW/dist`::
+	
+	tar  -cvf clawpack-x.x.x.tar clawpack-x.x.x
+	gzip clawpack-x.x.x.tar
+        mv clawpack-x.x.x.tar $CLAW/dist
+
+Upload to the testpypi server for testing (you will need to have created an account there)::
+	
+	cd ..
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+Test it::
+
+	pip3 uninstall clawpack
+	pip3 install —no-cache—dir —index-url https://test.pypi.org/simple/ clawpack
+	
+Once that works, do the real upload to pypi::
+
+	twine upload dist/*
+
+
 Zenodo 
 ------
 
