@@ -135,18 +135,14 @@ See :ref:`setup_dev` for instructions.
 Install using conda (does not require a Fortran compiler)
 =========================================================
 
-.. warning:: This is currently under development and not extensively tested.
-
-.. warning:: Not yet updated to 5.5.0.
-
 You can install PyClaw and VisClaw only (without AMRClaw, GeoClaw, or Classic)
 via the `conda package manager <http://conda.pydata.org/docs/index.html>`_.
 Conda binaries are available for Mac OS X and Ubuntu Linux
-(may work on other flavors of Linux).
+(may work on other flavors of Linux), using Python 2.7 or Python 3.6.
 
 From a terminal, simply do::
 
-    conda install -c clawpack -c conda-forge clawpack=5.4.1
+    conda install -c clawpack -c conda-forge
 
 You might want to consider first creating a separate `conda environment
 <http://conda.pydata.org/docs/using/envs.html>`_ if you want to separate
