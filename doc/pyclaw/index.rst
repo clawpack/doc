@@ -15,15 +15,16 @@ Just do this::
 
     pip install clawpack
 
-This requires that you have a Fortran compiler installed.
+Installing with pip requires that you have a Fortran compiler installed.
+
 Alternatively, if you use `Anaconda <https://store.continuum.io/cshop/anaconda/>`_ or 
 `Conda <https://pypi.python.org/pypi/conda>`_, you can::
 
-    conda install -c clawpack -c conda-forge clawpack=5.4.1
+    conda install -c clawpack -c conda-forge clawpack
 
 This option will also install optional dependencies including PETSc and HDF5,
-which are useful for large-scale parallel runs.  It does not require that you
-have a Fortran compiler.
+which are useful for large-scale parallel runs.  Installing with Conda does not
+require that you have a Fortran compiler.
 
 Examples
 --------
