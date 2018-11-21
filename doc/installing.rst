@@ -71,39 +71,6 @@ plan to use Classic, AMRClaw, or GeoClaw continue with :ref:`setenv` to
 set the environment variables `CLAW` and `FC`.
 
 
-.. _install_no-pyclaw:
-
-Install other packages without compiling PyClaw
-================================================
-If you get errors in the compilation step when using `pip install` or
-`python setup.py install`, check :ref:`trouble_installation`. 
-If your problem is not addressed there, please `let us know <claw-users@googlegroups.com>`_
-or `raise an issue <https://github.com/clawpack/clawpack/issues>`_.
-You can still use the Fortran codes (AMRClaw, GeoClaw, and Classic) by doing
-the following.  
-
-First, download a tarfile of the latest release as described above in
-the section :ref:`installing_tarfile`.  
-
-Next :ref:`setenv`, including `CLAW`, `FC`, and  `PYTHONPATH`.
-
-Then you should be able to do::
-
-    cd $CLAW   # assuming this environment variable was properly set
-    python setup.py symlink-only
-
-This will create some symbolic links in the `$CLAW/clawpack` 
-subdirectory of your top level Clawpack directory, but does not compile code
-or put anything in your site-packages.
-In Python you should now be able to do the following, for example::
-
-    >>> from clawpack import visclaw
-
-If not then either your `$PYTHONPATH` environment variable is not set
-properly or the required symbolic links were not created.
-See :ref:`setenv` for more information, and :ref:`python_path` if you are
-having problems with importing Python modules.
-
 Next go to :ref:`first_run`.
 
 .. _install_pyclaw_parallel:

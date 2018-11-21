@@ -75,11 +75,11 @@ Quick Installation of only PyClaw
 If you only want to use PyClaw (and associated Python
 tools, e.g. VisClaw for visualization), they you could do::
 
-    pip install clawpack
+    pip install --user clawpack
 
 or, more specifically, ::
 
-    pip install clawpack==v5.4.1
+    pip install --user clawpack==v5.5.0
 
 However, if you think you might want to use the Fortran packages as well
 (Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source
@@ -153,9 +153,7 @@ here are some tips:
   finding these files.
 
 - If you wish to point to a different version of the Clawpack Python tools, 
-  you need to rerun `pip install`.  Or you may need to remove the path from the
-  `easy-install.pth` file if you want to switch to using `PYTHONPATH`.
-  See :ref:`python_path` for more information.
+  you need to rerun `pip install`.
 
 - If you get a Fortran error message when installing, see
   :ref:`trouble_f2py`.
