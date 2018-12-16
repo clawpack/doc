@@ -13,7 +13,7 @@ environment variable `CLAW` to point to the top level of clawpack tree
 (there is no need to perform this step if you will only use PyClaw).
 In the bash shell these can be set via::
 
-    export CLAW=/full/path/to/top/level
+    export CLAW=/full/path/to/clawpack  # to top level clawpack directory
 
 
 FC
@@ -38,3 +38,10 @@ should list the top level directory, and report for example::
     README.md       riemann/        pyclaw/
     amrclaw/        setup.py        clawutil/       
     geoclaw/        visclaw/        classic/        
+
+PYTHONPATH
+----------
+
+We do not recommend setting this environment variable.  See
+:ref:`python_path` for more information.  Instead we recommend using `pip
+install` to set the Python path appropriately, see :ref:`installing_pip`.

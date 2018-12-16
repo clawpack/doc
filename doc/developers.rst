@@ -57,7 +57,8 @@ You can create a read-only development version of Clawpack via::
 
     git clone git://github.com/clawpack/clawpack.git
     cd clawpack
-    python setup.py git-dev
+    git submodule init
+    git submodule update
 
 This downloads the following clawpack modules as subrepositories checked out at
 specific commits (as opposed to the tip of a branch). 
@@ -273,7 +274,7 @@ anything:
     if you have modified any Fortran code, you need to recompile::
 
         cd clawpack/
-        pip install -e .
+        pip install --user -e .
 
     Then run the tests::
 
