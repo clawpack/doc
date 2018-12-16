@@ -1,8 +1,10 @@
 :orphan:
+
 .. _python_path:
 
 Python path
 ===========
+
 
 When using PyClaw or other Python tools from Clawpack (e.g. the
 visualization tools in VisClaw or :ref:`topotools` from GeoClaw), you need
@@ -26,6 +28,29 @@ The script `$CLAW/clawutil/src/python/clawutil/whichclaw.py` may be useful in
 debugging paths.  It prints out information on how various paths and environment
 variables are set.  (Available starting in Version 5.4.0.)
 
+Sample output::
+
+    $ python $CLAW/clawutil/src/python/clawutil/whichclaw.py
+
+    `import clawpack` imports from:
+        /Users/rjl/clawpack_src/clawpack-v5.5.0
+
+    The CLAW environment variable is set to: 
+        /Users/rjl/D/clawpack-v5.5.0
+    The PYTHONPATH environment variable is not set
+
+    The following directories on sys.path might contain clawpack,
+    and are searched in this order:
+        /Users/rjl/clawpack_src/clawpack-v5.5.0
+
+    The following easy-install.pth files list clawpack:
+        /Users/rjl/Library/Python/2.7/lib/python/site-packages/easy-install.pth
+            (points to /Users/rjl/clawpack_src/clawpack-v5.5.0)
+
+Beware if there seems to be a conflict (e.g. between where the `CLAW` 
+environment variable points and where Python imports from).
+See below for more about `sys.path` and `easy-install.pth` files.
+
 Which version was imported?
 ---------------------------
 
@@ -36,10 +61,10 @@ Try the following in a Python (or IPython) shell::
 
 This should print out something like::
 
-    '/Users/rjl/clawpack_src/clawpack-v5.3.1/clawpack/__init__.py'
+    '/Users/rjl/clawpack_src/clawpack-v5.5.0/clawpack/__init__.py'
 
 This shows where clawpack is being imported from.  In this case the
-directory `/Users/rjl/clawpack_src/clawpack-v5.3.1` is the directory
+directory `/Users/rjl/clawpack_src/clawpack-v5.5.0` is the directory
 normally referred to as `$CLAW` in this documentation.  Within this
 directory, there is a subdirectory `$CLAW/clawpack` that contains a file
 `__init__.py`, which is a standard Python way of indicating that the files
@@ -52,25 +77,28 @@ this path looking for the first one that contains a subdirectory named
 `clawpack` containing a file `__init__.py`, (or a file named `clawpack.py`,
 but in this case it should find the `$CLAW/clawpack` directory).  
 
-The directory `$CLAW/clawpack` also contains symbolic links to other
-directories within the Clawpack repository hierarchy that contain
-other Python modules.  This allows you to do, for example::
+.. warning :: Up to version 5.5.0, 
+   the directory `$CLAW/clawpack` also contains symbolic links to other
+   directories within the Clawpack repository hierarchy that contain
+   other Python modules.  This allows you to do, for example::
 
     >>> from clawpack import pyclaw
     >>> pyclaw.__file__
 
-    '/Users/rjl/clawpack_src/clawpack-v5.3.1/clawpack/pyclaw/__init__.py'
+    '/Users/rjl/clawpack_src/clawpack-v5.5.0/clawpack/pyclaw/__init__.py'
 
-If you examine this in bash, e.g. via::
+Starting in Version 5.6.0, symbolic links in `$CLAW/clawpack` 
+have been eliminated.
+Instead `$CLAW/clawpack/__init__.py` includes a dictionary of subpackages with 
+the relative path indicated in this file::
 
-    $ ls -l $CLAW/clawpack/pyclaw
+    >>> import clawpack
+    >>> clawpack._subpackages
+    {'forestclaw': 'pyclaw/src', 'amrclaw': 'amrclaw/src/python', 'riemann': 'riemann', 
+     'pyclaw': 'pyclaw/src', 'classic': 'classic/src/python', 'visclaw': 'visclaw/src/python', 
+    'clawutil': 'clawutil/src/python', 'petclaw': 'pyclaw/src', 'geoclaw': 'geoclaw/src/python'}
+  
 
-you should find that this is a symbolic link to the directory
-`$CLAW/pyclaw/src/pyclaw`, which is where you would find the actual source
-code for things in the `pyclaw` package.
-
-These symbolic links are set up when you install clawpack (using `pip
-install` or more explicitly using e.g. `python setup.py symlink-only`).
 
 **Example:** Suppose you want to examine the Python code for the `Iplotclaw`
 module of VisClaw (see :ref:`plotting_Iplotclaw`).  You can figure out where
@@ -137,14 +165,33 @@ path to this via::
 PYTHONPATH
 ----------
 
+.. warning :: Setting the environment variable `PYTHONPATH` is generally
+   considered bad practice in the Python community
+   and can lead to problems, see for example
+   `PYTHONPATH Considered Harmful <https://orbifold.xyz/pythonpath.html>`_.
+
 If you have an environment variable `PYTHONPATH` set, the paths specified
 here may be searched before or after what is specified in the users'
 `site-packages/easy-install.pth`, depending on how you set `PYTHONPATH`.  
+See also 
+https://docs.python.org/3/using/cmdline.html#environment-variables.
+Hence trying to use `PYTHONPATH` if you have also used pip to install a
+different version of Clawpack can lead to confusion.
 
-To see if this is set, in the bash shell you can do::
+To see if this environment variable is set, in the bash shell you can do::
 
      $ echo $PYTHONPATH
 
+or use the :ref:`whichclaw` utility to report this, along with any other
+possibly conflicting `easy-install.pth` files.
+
 See :ref:`setenv` for information on setting environment variables.
 
+In spite of the possible drawbacks, some Clawpack developers often
+use `PYTHONPATH` to switch versions without difficulty.  If you do
+wish to use it, you should set `PYTHONPATH` to point to the top
+level of the clawpack directory for the code you wish to use.
+Then use the :ref:`whichclaw` utility to check that this is where Clawpack
+is imported from, and there is not a `easy-install.pth` that points to a
+different location.
 

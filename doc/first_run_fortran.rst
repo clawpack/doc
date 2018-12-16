@@ -14,6 +14,9 @@ As a first test of the Fortran code, try the following::
     cd $CLAW/classic/tests
     nosetests -sv
 
+(You may need to install `nose <https://nose.readthedocs.io/en/latest/>`_
+if `nosetests` is not on your system.)
+
 This will run several tests and compare a few numbers from the solution with
 archived results.  The tests should run in a few seconds and 
 you should see output similar to this::

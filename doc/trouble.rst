@@ -44,10 +44,22 @@ Then to install using a different compiler, do e.g.::
 
 You may replace ``gfortran`` with the compiler you wish to use.
 
+.. _trouble_fc:
+
+Trouble compiling Fortran code at the command line
+-----------------------------------------------------
+
+The packages Classic, AMRClaw, and GeoClaw all require compiling Fortran
+code in the process of running an example.  This is typically done with the
+`make .exe` command in an example or application directory that contains a
+:ref:`makefiles`.  Even if you don't do this explicitly, due to dependency
+checking in the Makefile the code will be compiled if necessary if you do
+`make .output`, or `make .plots` (or `make all`).
+
 .. _trouble_makeexe:
 
 Trouble running "make .exe"
-+++++++++++++++++++++++++++
+-----------------------------------------------------
 
 If the code does not compile, check the following:
 
