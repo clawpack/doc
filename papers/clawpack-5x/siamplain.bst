@@ -278,7 +278,7 @@ FUNCTION {format.url}
 FUNCTION {format.doi}
 { doi empty$
     { "" }
-    { "\href{http://dx.doi.org/" doi * "}{doi:\nolinkurl{" * doi * "}}" * }
+    { "\href{https://doi.org/" doi * "}{doi:\nolinkurl{" * doi * "}}" * }
   if$
 }
 
