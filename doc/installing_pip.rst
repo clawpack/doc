@@ -1,7 +1,7 @@
 .. _installing_pip:
 
 **************************************
-Installation instructions (pip)
+pip install instructions
 **************************************
 
 For other installation options, see :ref:`installing`.
