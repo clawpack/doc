@@ -27,10 +27,6 @@ the desired version.  `pip` can be used to reset Python paths as well as to
 download a new version of Clawpack and set the path appropriately.  See
 :ref:`python_path` for more information.
 
-Installing with `pip` also compiles Riemann solvers written in Fortran for
-use in PyClaw.  If you get a Fortran error message when installing, see
-:ref:`trouble_f2py`.
-
 
 .. _install_quick_all:
 
@@ -49,12 +45,16 @@ This will install Clawpack into the directory
 `$HOME/clawpack_src/clawpack-v5.5.0`, or the top 
 installation directory can be changed by modifying the `--src` target.
 
-See :ref:`clawpack_components` for a list of what's included in this top level.
+See :ref:`clawpack_components` for a list of what's included in this top
+level directory.
 
 The `--user` flag is necessary if you are installing on a shared computer
 where you do not have root access.  If you do have root access and want it
 to be available to all users, you can omit this flag.  See notes below for
 more information.
+
+The `-e` flag makes it an "editable" install, leaving the source code in
+place and allowing you to modify it if desired.
 
 In order to use the Fortran codes within Clawpack (`classic`,
 `amrclaw`, or `geoclaw`), you should then set the environment
@@ -65,10 +65,15 @@ to the desired Fortran compiler, e.g. in the bash shell::
     export CLAW=$HOME/clawpack_src/clawpack-v5.5.0
     export FC=gfortran
 
-**Note:** 
+**Notes:** 
+
 You may want to set `CLAW` even if you are only using PyClaw, since `$CLAW` is
 sometimes used in this documentation to indicate the top level of the
 Clawpack source directory structure.
+
+Installing with `pip` also compiles Riemann solvers written in Fortran for
+use in PyClaw.  If you get a Fortran error message when installing, see
+:ref:`trouble_f2py`.
 
 See :ref:`setenv` for more information, and :ref:`python_path` if you are
 having problems with importing Python modules.
@@ -91,7 +96,7 @@ or, more specifically, ::
 However, if you think you might want to use the Fortran packages as well
 (Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source
 code, it is recommended that you follow the instructions above for 
-:ref:`install_quick_all` (or see other :ref:`installing`).
+:ref:`install_quick_all` (or see other :ref:`installing_more_options`).
 
 
 Next steps:

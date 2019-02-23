@@ -21,18 +21,13 @@ See also:
 pip install
 -----------
 
-The recommended approach is to use `pip install`. If you routinely use `pip`
-for Python packages and you only want to use PyClaw, the Python interface to
-Clawpack, then installing is as simple as::
-
-        pip install clawpack
-
+The recommended approach is to use `pip install`. 
 It is also possible to have multiple versions of Clawpack installed and
 switch between them (i.e., modify your Python path) using `pip`. 
 (see :ref:`installing_pip`)
 If you plan to do this, or if you also wish to directly use the Fortran
 variants of Clawpack (classic, AMRClaw, and/or GeoClaw), then we recommend 
-instead the following version of the `pip install` command 
+using the following version of the `pip install` command 
 (you might want to first read the notes below to see if you
 want to change anything in this command)::  
 
@@ -63,10 +58,6 @@ to the desired Fortran compiler, e.g. in the bash shell::
     export FC=gfortran
 
 See :ref:`setenv` for more information.   
-
-Installing with `pip` also compiles Riemann solvers written in Fortran for
-use in PyClaw.  If you get a Fortran error message when installing, see
-:ref:`trouble_f2py`.  See also :ref:`prereqs_fortran`.
 
 For more discussion of `pip` installation, and troubleshooting hints, see
 :ref:`installing_pip`.
