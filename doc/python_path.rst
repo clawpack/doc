@@ -141,10 +141,14 @@ If you used `pip` to install Clawpack (following :ref:`installing_pip`),
 then the path to the installed version will may be added to the file
 `easy-install.pth` located in the `site-packages` directory.  If you want
 to switch to a different version you may need to either use `pip` again,
-or remove this line from `site-packages/easy-install.pth`.
+or remove this line from `site-packages/easy-install.pth`, or execute
+`pip uninstall clawpack`.
 
+The :ref:`whichclaw` command is useful for determining where the 
+`site-packages/easy-install.pth` is located.
 
-To find `site-packages/easy-install.pth`, use this these commands in Python::
+More generally, to find `site-packages/easy-install.pth`, 
+use this these commands in Python::
 
     >>> import site
     >>> site.getusersitepackages()
