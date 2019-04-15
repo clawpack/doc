@@ -33,6 +33,7 @@ Overview and Getting Started
    packages
    installing
    installing_pip
+   installing_more_options
    setenv
    first_run
    clawpack_components

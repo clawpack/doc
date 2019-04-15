@@ -1,7 +1,7 @@
 .. _installing_pip:
 
 **************************************
-Installation instructions (pip)
+pip install instructions
 **************************************
 
 For other installation options, see :ref:`installing`.
@@ -27,10 +27,6 @@ the desired version.  `pip` can be used to reset Python paths as well as to
 download a new version of Clawpack and set the path appropriately.  See
 :ref:`python_path` for more information.
 
-Installing with `pip` also compiles Riemann solvers written in Fortran for
-use in PyClaw.  If you get a Fortran error message when installing, see
-:ref:`trouble_f2py`.
-
 
 .. _install_quick_all:
 
@@ -39,22 +35,37 @@ Quick Installation of all packages
 
 The recommended way to install the latest release of Clawpack, for
 using PyClaw and/or the Fortran packages, is to give the following pip
-install command (you might want to first read the notes below to see if you
-want to change anything in this command)::  
+install command 
+**(you might want to first read the notes below to see if you
+want to change anything in this command)**::  
 
     pip install --src=$HOME/clawpack_src --user -e \
         git+https://github.com/clawpack/clawpack.git@v5.5.0#egg=clawpack-v5.5.0
 
-This will install Clawpack into the directory
-`$HOME/clawpack_src/clawpack-v5.5.0`, or the top 
-installation directory can be changed by modifying the `--src` target.
+This will download Clawpack (via a git clone) into the directory
+`$HOME/clawpack_src/clawpack-v5.5.0`.  The top 
+installation directory can be changed by modifying the ``--src`` target 
+(or omit this part to put it in your current working directory).
+If you have already downloaded Clawpack via a different mechanism then
+see :ref:`pip_switch_version` rather than using the above command.
 
-See :ref:`clawpack_components` for a list of what's included in this top level.
+See :ref:`clawpack_components` for a list of what's included in this top
+level directory.
 
-The `--user` flag is necessary if you are installing on a shared computer
+**Note:** Using pip to install will also check some python
+:ref:`prereqs` and may update these on your system, and will use f2py to
+convert Fortran Riemann solvers to Python versions.  See 
+:ref:`installing_options` if you want more control.
+
+The ``--user`` flag is necessary if you are installing on a shared computer
 where you do not have root access.  If you do have root access and want it
 to be available to all users, you can omit this flag.  See notes below for
 more information.
+
+The ``-e`` flag makes it an "editable" install, leaving the source code in
+place and allowing you to modify it if desired.
+(Otherwise, by default, pip would move the python code to some
+`site-packages` directory and delete everything else.)
 
 In order to use the Fortran codes within Clawpack (`classic`,
 `amrclaw`, or `geoclaw`), you should then set the environment
@@ -65,10 +76,15 @@ to the desired Fortran compiler, e.g. in the bash shell::
     export CLAW=$HOME/clawpack_src/clawpack-v5.5.0
     export FC=gfortran
 
-**Note:** 
+**Notes:** 
+
 You may want to set `CLAW` even if you are only using PyClaw, since `$CLAW` is
 sometimes used in this documentation to indicate the top level of the
 Clawpack source directory structure.
+
+Installing with `pip` also compiles Riemann solvers written in Fortran for
+use in PyClaw.  If you get a Fortran error message when installing, see
+:ref:`trouble_f2py`.
 
 See :ref:`setenv` for more information, and :ref:`python_path` if you are
 having problems with importing Python modules.
@@ -91,7 +107,7 @@ or, more specifically, ::
 However, if you think you might want to use the Fortran packages as well
 (Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source
 code, it is recommended that you follow the instructions above for 
-:ref:`install_quick_all` (or see other :ref:`installing`).
+:ref:`install_quick_all` (or see other :ref:`installing_more_options`).
 
 
 Next steps:
@@ -102,6 +118,8 @@ started:
 
 - :ref:`first_run_pyclaw`
 - :ref:`first_run_fortran`
+
+.. _pip_switch_version:
 
 Using pip to install a different version
 -----------------------------------------
@@ -131,6 +149,9 @@ properly via::
     export CLAW=/full/path/to/desired/version/of/clawpack
     cd $CLAW
     pip install --user -e .   # note trailing dot indicating "this directory"
+
+See :ref:`python_path` if you are having problems with the wrong version
+being imported.
 
 
 Experimenting with code in the examples directories
@@ -169,7 +190,8 @@ here are some tips:
   information.
 
 - If you wish to point to a different version of the Clawpack Python tools, 
-  you need to rerun `pip install`.
+  you need to rerun `pip install` (or use `pip uninstall clawpack` to
+  remove clawpack from the search path controlled by pip).
 
 - If you get a Fortran error message when installing, see
   :ref:`trouble_f2py`.

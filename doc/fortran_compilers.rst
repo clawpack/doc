@@ -130,10 +130,14 @@ Set the `FC` environment variable to `ifort`.
 
 * For using OpenMP::
 
-    FFLAGS = -O2 -openmp
+    FFLAGS = -O2 -qopenmp
 
   In this case you should also set the environment variable `OMP_NUM_THREADS`
   to indicate how many threads to use.
+
+  For older versions of the ifort compiler, you may instead need::
+  
+    FFLAGS = -O2 -openmp
 
 * For using NetCDF::
 

@@ -13,29 +13,100 @@ See also:
 * :ref:`previous`
 * :ref:`trouble_installation`
 
-**Register:** Please `register <http://depts.washington.edu/clawpack/register/index.html>`_
-if you have not already done so.  This is very useful in helping
-us track the extent of usage, and important to the :ref:`funding` agencies
-who support this work.  Please also see :ref:`citing`.
-
 **Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 
-**Environment variables:**  
-If you are using the Fortran versions in Classic, AMRClaw, or GeoClaw
-then after installing you also need to set the `CLAW` environment variable,
-and perhaps also the Fortran compiler variable `FC`.
-For example (in a bash shell)::
 
-    export CLAW=/full/path/to/clawpack  # to top level clawpack directory
-    export FC=gfortran                  # or other preferred Fortran compiler
+.. _installing_pipintro:
+
+pip install
+-----------
+
+The recommended approach is to use `pip install`. 
+It is also possible to have multiple versions of Clawpack installed and
+switch between them (i.e., modify your Python path) using `pip`. 
+(see :ref:`installing_pip`)
+If you plan to do this, or if you also wish to directly use the Fortran
+variants of Clawpack (classic, AMRClaw, and/or GeoClaw), then we recommend 
+using the following version of the `pip install` command 
+**(you might want to first read the notes below to see if you
+want to change anything in this command)**::  
+
+    pip install --src=$HOME/clawpack_src --user -e \
+        git+https://github.com/clawpack/clawpack.git@v5.5.0#egg=clawpack-v5.5.0
+
+This will download Clawpack (via a git clone) into the directory
+`$HOME/clawpack_src/clawpack-v5.5.0`.  The top 
+installation directory can be changed by modifying the ``--src`` target 
+(or omit this part to put it in your current working directory).
+If you have already downloaded Clawpack via a different mechanism then
+see :ref:`pip_switch_version` rather than using the above command.
+
+
+See :ref:`clawpack_components` for a list of what's included in this top
+level directory.
+
+**Note:** Using pip to install will also check some python
+:ref:`prereqs` and may update these on your system, and will use f2py to
+convert Fortran Riemann solvers to Python versions.  See 
+:ref:`installing_options` if you want more control.
+
+The ``--user`` flag is necessary if you are installing on a shared computer
+where you do not have root access.  If you do have root access and want it
+to be available to all users, you can omit this flag.  
+
+The ``-e`` flag makes it an "editable" install, leaving the source code in
+place and allowing you to modify it if desired.
+(Otherwise, by default, pip would move the python code to some
+`site-packages` directory and delete everything else.)
+
+In order to use the Fortran codes within Clawpack, 
+you should then set the environment
+variable `CLAW` to point to the `clawpack-v5.5.0` directory within
+the installation directory `$HOME/clawpack_src`, and `FC` to point
+to the desired Fortran compiler, e.g. in the bash shell::
+
+    export CLAW=$HOME/clawpack_src/clawpack-v5.5.0
+    export FC=gfortran
 
 See :ref:`setenv` for more information.   
 
+For more discussion of `pip` installation, and troubleshooting hints, see
+:ref:`installing_pip`.
+
+
+.. _installing_options:
+
+Other Installation Options
+=====================================
+
+In general, *installing* Clawpack requires downloading some version 
+and then setting
+paths so that Python import statements (and possibly Fortran Makefiles) find
+the desired version.  Switching between versions already on your computer
+simply requires resetting paths.  For hints and troubleshooting, see:
+
+ - :ref:`setenv`
+ - :ref:`python_path`
+ - :ref:`installing_pip`
+
+Rather than using `pip`, there are several other options for using
+Clawpack that may be useful depending on your needs.  These are summarized
+in :ref:`installing_more_options`, including:
+
+ - :ref:`installing_tarfile`
+ - :ref:`install_dev`
+ - :ref:`installing_conda`
+ - :ref:`installing_docker`
+ - :ref:`installing_aws`
+ - :ref:`install_pyclaw_parallel`
+
 **Python path:**
-Below we suggest using `pip install` to set up your Python path to point to
-the desired version of Clawpack.  As long as the top level `clawpack`
-directory is on your path, you should be able to import the necessary
-modules in Python.  Instead of pip, you can also set the `PYTHONPATH`
+If you download a tarfile or use `git clone` to download a version, you can
+still use `pip install` to set the Python path appropriately. 
+See :ref:`installing_pip` for details.
+
+If you are *not* using `pip` to set paths, then you will need to set
+the `PYTHONPATH`
 environment variable to point to a particular version of Clawpack,
 but this is `not recommended <https://orbifold.xyz/pythonpath.html>`_.
 See :ref:`python_path` for more details and tips on sorting out your path.
@@ -44,121 +115,6 @@ See :ref:`python_path` for more details and tips on sorting out your path.
 See :ref:`clawpack_components` for a list of what is generally included
 under the top level `clawpack` directory when using any of the approaches below.
 (And what is not included, e.g. the :ref:`apps`.)
-
-.. _installing_options:
-
-Installation Options
-=====================================
-
-*Installing* Clawpack requires downloading some version and then setting
-paths so that Python import statements (and possibly Fortran Makefiles) find
-the desired version.  Before installing, read about environment
-variables and Python path above if you haven't already.
-
-Installing with `pip` also compiles Riemann solvers written in Fortran for
-use in PyClaw.  If you get a Fortran error message when installing, see
-:ref:`trouble_f2py`.  See also :ref:`prereqs_fortran`.
-
-
-.. _installing_pipintro:
-
-pip install
------------
-
-The recommended approach is to use `pip install`.  You can download
-and install with a single command, and you can also use `pip` to
-switch to a different version of Clawpack (i.e. to modify your
-Python path) if you have reason to have multiple versions on your
-computer.  
-
-Depending on your needs, if you only want to use PyClaw it may be as simple as::
-
-        pip install clawpack
-
-but first see :ref:`installing_pip` for more discussion and instructions,
-since we recommend a more complicated version of this command for most purposes.
-
-.. _installing_tarfile:
-
-tar file
---------
-
-You can download the most recent (or certain previous versions) of Clawpack
-as a tar file. After untarring this, you can use `pip install` (and set `CLAW` 
-if necessary) to point to this version.
-
-    - Most recent: `https://github.com/clawpack/clawpack/files/2330639/clawpack-v5.5.0.tar.gz
-      <https://github.com/clawpack/clawpack/files/2330639/clawpack-v5.5.0.tar.gz>`_
-    - :ref:`previous`  (also lists DOIs for recent versions, useful for
-      :ref:`citing`)
-
-After downloading a tar file you can do, e.g. ::
-
-    tar -xzf clawpack-v5.5.0.tar.gz
-    cd clawpack-v5.5.0
-    pip install --user -e .   # note trailing dot indicating "this directory"
-    export CLAW=/full/path/to/clawpack-v5.5.0
-    
-.. _install_dev:
-
-git clone
----------
-
-You can clone the git repositories from `<https://github.com/clawpack>`_.  
-This is particularly useful if you
-want the latest development version or a branch that is not in a release yet,
-and/or if you plan to contribute to the code yourself via a pull request.
-See :ref:`developers` for more details, but the basic commands are::
-
-    git clone git://github.com/clawpack/clawpack.git
-    cd clawpack
-    git submodule init      # for repositories pyclaw, clawutil, visclaw, etc.
-    git submodule update    # clones all the submodule repositories
-    pip install --user -e . # note trailing dot indicating "this directory"
-    export CLAW=/full/path/to/clawpack
-
-.. _installing_conda:
-
-Using conda (does not require a Fortran compiler)
-----------------------------------------------------------
-
-You can install PyClaw and VisClaw only (without AMRClaw, GeoClaw, or Classic)
-via the `conda package manager <http://conda.pydata.org/docs/index.html>`_.
-Conda binaries are available for Mac OS X and Ubuntu Linux
-(may work on other flavors of Linux), using Python 2.7 or 3.6.
-See https://github.com/clawpack/conda-recipes.
-
-From a terminal, simply do::
-
-    conda install -c clawpack -c conda-forge clawpack
-
-You might want to consider first creating a separate `conda environment
-<http://conda.pydata.org/docs/using/envs.html>`_ if you want to separate
-Clawpack and its dependencies from other versions of Python code. 
-
-
-.. _installing_docker:
-    
-Docker
-------
-
-Instead of installing Clawpack and all its dependencies, another alternative
-is :ref:`docker_image`.  The Docker image already contains not only Clawpack
-but also all the :ref:`prereqs`.
-
-.. _install_pyclaw_parallel:
-
-Installing PyClaw for parallel processing with PETSc
-----------------------------------------------------
-
-First, install Clawpack.  Then see the install instructions for :ref:`parallel`.
-
-Alternatively, you may use the following shell scripts (assembled by Damian San Roman)
-to install everything:
-
- -  Linux machine or Beowulf Cluster: https://gist.github.com/sanromd/9112666
- -  Mac OS X: https://gist.github.com/sanromd/10374134
-
 
 
 Next steps:
