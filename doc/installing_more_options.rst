@@ -59,7 +59,6 @@ You can install PyClaw and VisClaw only (without AMRClaw, GeoClaw, or Classic)
 via the `conda package manager <http://conda.pydata.org/docs/index.html>`_.
 Conda binaries are available for Mac OS X and Ubuntu Linux
 (may work on other flavors of Linux), using Python 2.7 or 3.6.
-See https://github.com/clawpack/conda-recipes.
 
 From a terminal, simply do::
 
@@ -69,6 +68,7 @@ You might want to consider first creating a separate `conda environment
 <http://conda.pydata.org/docs/using/envs.html>`_ if you want to separate
 Clawpack and its dependencies from other versions of Python code. 
 
+See https://github.com/clawpack/conda-recipes.
 
 .. _installing_docker:
     
