@@ -25,6 +25,8 @@ Regression tests can be performed via::
     nosetests
 
 For more details, see :ref:`pyclaw_testing`.
+(You may need to install `nose <https://nose.readthedocs.io/en/latest/>`_
+if `nosetests` is not on your system.)
 
 Fortran codes
 -------------

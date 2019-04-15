@@ -1,11 +1,8 @@
 .. _installing_pip:
 
 **************************************
-Installation instructions (pip)
+pip install instructions
 **************************************
-
-These instructions are a work in progress.  Suggestions welcome 
-(`raise an issue <https://github.com/clawpack/doc/issues>`_).
 
 For other installation options, see :ref:`installing`.
 
@@ -16,13 +13,20 @@ See also:
 * :ref:`previous`
 * :ref:`trouble_installation`
 
-Please `register <http://depts.washington.edu/clawpack/register/index.html>`_
+**Register:** Please `register <http://depts.washington.edu/clawpack/register/index.html>`_
 if you have not already done so.  This is very useful in helping
 us track the extent of usage, and important to the :ref:`funding` agencies
 who support this work.
 
 
 **Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
+
+*Installing* Clawpack requires downloading some version and then setting
+paths so that Python import statements (and possibly Fortran Makefiles) find
+the desired version.  `pip` can be used to reset Python paths as well as to
+download a new version of Clawpack and set the path appropriately.  See
+:ref:`python_path` for more information.
+
 
 .. _install_quick_all:
 
@@ -31,22 +35,37 @@ Quick Installation of all packages
 
 The recommended way to install the latest release of Clawpack, for
 using PyClaw and/or the Fortran packages, is to give the following pip
-install command (you might want to first read the notes below to see if you
-want to change anything in this command)::  
+install command 
+**(you might want to first read the notes below to see if you
+want to change anything in this command)**::  
 
     pip install --src=$HOME/clawpack_src --user -e \
         git+https://github.com/clawpack/clawpack.git@v5.5.0#egg=clawpack-v5.5.0
 
-This will install Clawpack into the directory
-`$HOME/clawpack_src/clawpack-v5.5.0`, or the top 
-installation directory can be changed by modifying the `--src` target.
+This will download Clawpack (via a git clone) into the directory
+`$HOME/clawpack_src/clawpack-v5.5.0`.  The top 
+installation directory can be changed by modifying the ``--src`` target 
+(or omit this part to put it in your current working directory).
+If you have already downloaded Clawpack via a different mechanism then
+see :ref:`pip_switch_version` rather than using the above command.
 
-See :ref:`clawpack_components` for a list of what's included in this top level.
+See :ref:`clawpack_components` for a list of what's included in this top
+level directory.
 
-The `--user` flag is necessary if you are installing on a shared computer
+**Note:** Using pip to install will also check some python
+:ref:`prereqs` and may update these on your system, and will use f2py to
+convert Fortran Riemann solvers to Python versions.  See 
+:ref:`installing_options` if you want more control.
+
+The ``--user`` flag is necessary if you are installing on a shared computer
 where you do not have root access.  If you do have root access and want it
 to be available to all users, you can omit this flag.  See notes below for
 more information.
+
+The ``-e`` flag makes it an "editable" install, leaving the source code in
+place and allowing you to modify it if desired.
+(Otherwise, by default, pip would move the python code to some
+`site-packages` directory and delete everything else.)
 
 In order to use the Fortran codes within Clawpack (`classic`,
 `amrclaw`, or `geoclaw`), you should then set the environment
@@ -57,10 +76,15 @@ to the desired Fortran compiler, e.g. in the bash shell::
     export CLAW=$HOME/clawpack_src/clawpack-v5.5.0
     export FC=gfortran
 
-**Note:** 
+**Notes:** 
+
 You may want to set `CLAW` even if you are only using PyClaw, since `$CLAW` is
 sometimes used in this documentation to indicate the top level of the
 Clawpack source directory structure.
+
+Installing with `pip` also compiles Riemann solvers written in Fortran for
+use in PyClaw.  If you get a Fortran error message when installing, see
+:ref:`trouble_f2py`.
 
 See :ref:`setenv` for more information, and :ref:`python_path` if you are
 having problems with importing Python modules.
@@ -70,21 +94,20 @@ having problems with importing Python modules.
 Quick Installation of only PyClaw
 =====================================
 
-.. warning:: Not yet updated to 5.5.0.
 
 If you only want to use PyClaw (and associated Python
 tools, e.g. VisClaw for visualization), they you could do::
 
-    pip install clawpack
+    pip install --user clawpack
 
 or, more specifically, ::
 
-    pip install clawpack==v5.4.1
+    pip install --user clawpack==v5.5.0
 
 However, if you think you might want to use the Fortran packages as well
 (Classic, AMRClaw, GeoClaw) and/or want easier access to the Python source
 code, it is recommended that you follow the instructions above for 
-:ref:`install_quick_all` (or see other :ref:`installing`).
+:ref:`install_quick_all` (or see other :ref:`installing_more_options`).
 
 
 Next steps:
@@ -96,10 +119,12 @@ started:
 - :ref:`first_run_pyclaw`
 - :ref:`first_run_fortran`
 
-Notes on using pip to install
------------------------------
+.. _pip_switch_version:
 
-This approach clones Git repositories from
+Using pip to install a different version
+-----------------------------------------
+
+Using `pip` to download and install actually clones Git repositories from
 https://github.com/clawpack/clawpack.  If you are comfortable with
 Git you can use the same top repository to update Clawpack or switch
 to other versions.  However, if you have made any changes to files
@@ -114,10 +139,28 @@ Instead, you can always install another branch by doing a new
         git+https://github.com/clawpack/clawpack.git@$CLAW_VERSION#egg=clawpack-$CLAW_VERSION
     export CLAW=$HOME/clawpack_src/clawpack-$CLAW_VERSION
 
-We also suggest that if you want to experiment extensively with examples or
+If this version doesn't already exist on your computer then it will clone
+the necessary repositories.
+
+If you already have a different version of Clawpack in some directory 
+obtained by any means (e.g. from a tarfile), then you can set the paths
+properly via::
+
+    export CLAW=/full/path/to/desired/version/of/clawpack
+    cd $CLAW
+    pip install --user -e .   # note trailing dot indicating "this directory"
+
+See :ref:`python_path` if you are having problems with the wrong version
+being imported.
+
+
+Experimenting with code in the examples directories
+---------------------------------------------------
+
+We suggest that if you want to experiment extensively with examples or
 modify an example to solve your own problem, you first copy a directory out
 of the source code tree to a different location, in order to minimize
-confusion if you later want to update to a newer version of clawpack.  See
+confusion if you later want to update to a different version of clawpack.  See
 :ref:`newapp` for more details.
 
 If you want to check out the `master` branch of the clawpack repositories or
@@ -135,16 +178,6 @@ here are some tips:
   remaining in the directory `$CLAW`, which includes all the Fortran packages as
   well as Python source.
 
-- Earlier versions of the installation instructions required setting the
-  environment variable `PYTHONPATH`.  This is not necessary or desirable if
-  you use the `pip install` option, which instead
-  creates or modifies a file `easy-install.pth` that is
-  found in the Python `site-packages` directory (see :ref:`python_path`).
-  The path to the clawpack source is added to this file and hence to the
-  search path for Python.  This allows importing Clawpack modules, but note
-  that directories specified here are searched before those specified by
-  the environment variable `PYTHONPATH`.  
-
 - When the `--user` flag is omitted, the `pip install` will modify a
   system-wide file `easy-install.pth` to add the path. This requires
   root permission.  When the `--user` flag is used, this path will
@@ -152,10 +185,13 @@ here are some tips:
   your user directory structure. See :ref:`python_path` for information on
   finding these files.
 
+- If you use `pip` to install or switch versions then you should **not** set
+  the environment variable `PYTHONPATH`.  See :ref:`python_path` for more
+  information.
+
 - If you wish to point to a different version of the Clawpack Python tools, 
-  you need to rerun `pip install`.  Or you may need to remove the path from the
-  `easy-install.pth` file if you want to switch to using `PYTHONPATH`.
-  See :ref:`python_path` for more information.
+  you need to rerun `pip install` (or use `pip uninstall clawpack` to
+  remove clawpack from the search path controlled by pip).
 
 - If you get a Fortran error message when installing, see
   :ref:`trouble_f2py`.

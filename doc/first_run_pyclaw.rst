@@ -9,7 +9,9 @@ installation as follows (starting from your `clawpack` directory)::
     cd pyclaw/examples
     nosetests
 
-This should return 'OK'.
+This should return 'OK'.  
+(You may need to install `nose <https://nose.readthedocs.io/en/latest/>`_
+if `nosetests` is not on your system.)
 
 
 Running an example
