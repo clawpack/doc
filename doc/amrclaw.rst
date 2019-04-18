@@ -42,6 +42,7 @@ Matlab tools from Clawpack 4.3 can still be used, see
    setrun_amrclaw_sample
    amr_algorithm
    refinement
+   adjoint
    gauges
    amrclaw_doxygen
    amrclaw_flowcharts

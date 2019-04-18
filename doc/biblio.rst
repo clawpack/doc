@@ -72,6 +72,24 @@ Papers describing the Clawpack software and algorithms
    M. J. Berger and I. Rigoutsos. 1991. An Algorithm for Point Clustering
    and Grid Generation. *IEEE Trans. Sys. Man & Cyber.* 21, 1278--1286.
 
+.. [Davis2018]
+   B. N. Davis, 2018. Adjoint-Guided Adaptive Mesh Refinement for 
+   Hyperbolic Systems of Equations,
+   PhD Thesis, University of Washington.
+   `link <https://digital.lib.washington.edu/researchworks/handle/1773/42950>`__
+
+.. [DavisLeVeque2016]
+   B. N. Davis and R. J. LeVeque. 2016. Adjoint Methods for Guiding 
+   Adaptive Mesh Refinement in Tsunami Modeling, 2016.
+   Pure Appl. Geophys. 173 (2016), pp. 4055-4074. 
+   `More info <http://staff.washington.edu/rjl/pubs/adjoint2016>`__
+
+.. [DavisLeVeque2018]
+   B. N. Davis and R. J. LeVeque. 2018. Analysis and Performance Evaluation of 
+   Adjoint-Guided Adaptive Mesh Refinement for Linear Hyperbolic PDEs 
+   Using Clawpack, `Preprint <https://arxiv.org/abs/1810.00927>`_, 
+   `More info <http://staff.washington.edu/rjl/pubs/adjoint2018>`__
+
 .. [LangsethLeVeque00]
    J. O. Langseth and R. J. LeVeque. 2000. 
    `A wave-propagation method for
@@ -151,7 +169,7 @@ Papers describing the Clawpack software and algorithms
 .. [KetParLev13]
    D. I. Ketcheson, Matteo Parsani, and R J LeVeque, 2013,
    High-order Wave Propagation Algorithms for Hyperbolic Systems,
-   *SIAM Journal on Scientific Computing*, 35(1):A351-A377 (2013)
+   *SIAM Journal on Scientific Computing*, 35(1):A351-A377 (2013) ::
 
     @article{KetParLev13,
             Author = {Ketcheson, David I. and Parsani, Matteo and LeVeque,

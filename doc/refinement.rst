@@ -51,6 +51,9 @@ cells for refinement (based on the behavior of the solution) are built into
 AMRClaw.  (A different default approach is used in GeoClaw, see 
 :ref:`refinement_geoclaw`).  
 
+**Note:** Starting in v5.6.0, a new approach is also available, see
+:ref:`adjoint`.
+
 .. _refinement_flag2refine:
 
 flag2refine
