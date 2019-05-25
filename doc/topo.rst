@@ -209,8 +209,9 @@ NetCDF format
 ^^^^^^^^^^^^^
 
 Topofiles can be read in netCDF format, either from local `.nc` files or
-from some online databases that provide netCDF servers, e.g. the NOAA
-THREDDS server.  Use the 
+from some online databases that provide netCDF servers, e.g. the 
+`NOAA THREDDS server <https://www.ncei.noaa.gov/thredds/remoteCatalogService?catalog=https://www.ngdc.noaa.gov/thredds/demCatalog.xml>`_.
+Use the 
 `topotools.read_netcdf <topotools_module.html#clawpack.geoclaw.topotools.read_netcdf>`_
 function.  Note that this also allows reading in only a subset of the data,
 both limiting the extent and the resolution, e.g. by sampling every other
@@ -233,6 +234,8 @@ is downloaded at different resolutions.
 different way to download subsampled etopo1 topography.  That has been
 deprecated since the old way is no longer supported by NOAA and did not
 always do the subsampling properly.
+
+**Note:** Data in the NOAA THREDDS server is referenced to NAVD88, not to MHW!
 
 See also :ref:`grid_registration` for important information about the manner
 in which the data downloaded should be interpreted.  For netCDF files the
