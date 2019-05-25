@@ -185,6 +185,12 @@ linearized about the ocean at rest.  Hence the adjoint problem is also solved
 about the ocean at rest and the adjoint equations take essentially the same
 form as the forward equations.  The adjoint Riemann solver can be found in
 
-- `$CLAW/riemann/src/rpn2_geoclaw_adjoint.f`
-- `$CLAW/riemann/src/rpt2_geoclaw_adjoint.f`
+- `$CLAW/riemann/src/rpn2_geoclaw_adjoint_qwave.f`
+- `$CLAW/riemann/src/rpt2_geoclaw_adjoint_qwave.f`
+
+Note that since in the forward problem the adjoint equation is solved using
+a f-wave formulation, the adjoint problem is a variable-coefficient problem
+in non-conservation form and is solved using the q-wave formulation in which
+jumps in the the solution vector are split into eigenvectors, rather than
+jumps in the flux. See the comments in the `rpn2` solver for more details.
 
