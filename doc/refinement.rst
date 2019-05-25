@@ -51,6 +51,9 @@ cells for refinement (based on the behavior of the solution) are built into
 AMRClaw.  (A different default approach is used in GeoClaw, see 
 :ref:`refinement_geoclaw`).  
 
+**Note:** Starting in v5.6.0, a new approach is also available, see
+:ref:`adjoint`.
+
 .. _refinement_flag2refine:
 
 flag2refine
@@ -167,27 +170,56 @@ Points that are not covered by either region are not constrained by the
 regions at all.   With `amr_levels_max = 6` then they might
 be refined to any level from 1 to 6 depending on the error flagging criteria.
 
-It is easiest to explain how this works by summarizing the implementation:
+Implementation
+--------------
 
-The regridding algorithm from level L to L+1 loops over all grid cells
-at Level L and flags them or not based on the following criteria, where
-`(xc,yc)` represents the cell center and `t` is the current regridding time:
+It is perhaps easiest to understand how this works by summarizing
+the implementation.  Note the order in which different flagging
+criteria are checked was modified in Version 5.5.0 in order to avoid
+the more expensive options for grid cells that are either forbidden
+from being refined or forced to be refined based on `regions` they
+lie in.
 
-* Initialize the flag by applying the error flagging criteria
-  specified by Richardson extrapolation and/or the default or user-supplied
-  routine `flag2refine` to determine whether this cell should be flagged.
+The regridding algorithm from level L to L+1 loops over all grid patches
+(in parallel when OpenMP is used with
+more than one thread).  The cells on each patch are initially marked with 
+`amrflags(i,j) = UNSET`, a special value (set in `amr_module.f90`).
 
-* Loop over all regions (if any) for which `(xc,yc,t)` lies in the region
-  specified.
+In flagging based on regions: 
 
-TODO:  This might be wrong!!!  
+ * If the current level is less than the
+   maximum of all `minlevel` values for regions that contain the cell, then it
+   is marked with `amrflags(i,j) = DOFLAG`.
 
-  * If `L >= maxlevel` for *any* such region, set `flag = False` for this
-    cell and go on to the next cell.
+ * If the current level is greater than or equal to the
+   maximum of all `maxlevel` values for regions that contain the cell, then it
+   is marked with `amrflags(i,j) = DONTFLAG`.
 
-  * If `L < minlevel` for *every* such region, set `flag = True` and
-    go on to the next grid cell.
+If there are any cells in the patch that are still marked as `UNSET` after
+checking all the regions, then if the `setrun` parameter `flag2refine` is
+True, then the routine `flag2refine` is called.
+The user may wish to create their own version of this routine.
+The default library version was modified with the addition of the adjoint
+option in Version 5.6.0 (see :ref:`adjoint`), and does one of two things:
 
+ * If `adjoint_flagging` then it checks the inner product of the forward
+   solution with all adjoints over the specified time period and if the
+   magnitude is greater than `tolsp` the cell is marked `DOFLAG`.
+
+ * Otherwise, the undivided difference of all components of `q` in each
+   coordinate direction is computed, e.g. `abs(q(:,i+1,j) - q(:,i-1,j))` and
+   `abs(q(:,i,j+1) - q(:,i,j-1))` in 2d, and if the maximum of these is 
+   greater than `tolsp` the cell is marked `DOFLAG`.
+
+If there are still any cells in the patch that are still marked as `UNSET`, 
+then if the `setrun` parameter `flag_richardson` is
+True, then the routine `errest` is called. This does flagging based on
+estimates of the one-step error produced by Richardson extrapolation using
+the solution on the current grid and on a coarsened grid.  If
+`adjoint_flagging` then these estimates are applied to the inner product of
+the error estimate with the adjoint solutions over the relevant time period.
+In either case, the setrun parameter `flag_richardson_tol` is used as the
+tolerance.
 
 
 
@@ -197,8 +229,26 @@ Flagging criteria in GeoClaw
 -----------------------------
 
 In GeoClaw, a special `flag2refine` subroutine is defined.
+A standard approach for modeling tsunamis propagating across the ocean
+is to refine anywhere that the surface elevation of the ocean :math:`\eta =
+h+B` is greater in absolute value than some specified `wave_tolerance`, e.g.
+0.1 meter as set, for example, in the `setrun.py` file of
+`$CLAW/geoclaw/examples/tsunami/chile2010`.  
+This `wave_tolerance` parameter can be set for any GeoClaw application.
 
-TODO: need to describe geoclaw flag2refine.
+Often this ends up refining the entire ocean when in fact only some waves
+are of interest.  In this case one can use `regions` as described in
+:ref:`refinement_regions` to limit refinement to certain space-time regions.
+
+Alternatively, starting in Version 5.6.0 one can use adjoint flagging (see
+:ref:`adjoint`) to better select the waves that will reach a particular
+location over a specified time range, including those that might reflect off
+distant shores.
+
+Generally one must also use `regions` to allow (or force) much higher levels of
+refinement over small regions along the coast if one is doing detailed
+inundation modeling of a particular community.
+
 
 
 

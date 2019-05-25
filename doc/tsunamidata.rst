@@ -24,13 +24,16 @@ modeling inundation.
 The NOAA Design-a-Grid tool no longer exists but you can download data sets
 from:
 
-* `NGDC's WCS Grid Extraction Tool <http://maps.ngdc.noaa.gov/viewers/wcs-client/>`_
-* `NOAA NGDC inundataion relief
+* `NCEI's WCS Grid Extraction Tool <http://maps.ngdc.noaa.gov/viewers/wcs-client/>`_
+* `NOAA NCEI inundataion relief
   <http://www.ngdc.noaa.gov/mgg/coastal/coastal.html>`_:
   High resolution data near US coastlines.
+* `More recent catalog
+  <https://data.noaa.gov/waf/NOAA/NESDIS/NGDC/MGG/DEM/iso/>`_
 
-It is also possible (and preferable) to open a remote NetCDF file on the
-NOAA THREDDS server to download data, which allows downloading only a
+It is also possible to open a remote NetCDF file on the
+`NOAA THREDDS server <https://www.ncei.noaa.gov/thredds/remoteCatalogService?catalog=https://www.ngdc.noaa.gov/thredds/demCatalog.xml>`_
+to download data, which allows downloading only a
 subsampled subset of a large DEM.  See :ref:`topo_netcdf` for more
 details.
 
@@ -73,7 +76,7 @@ reference level for the bathymetry.  (Be sure to switch from feet to
 meters!)  Sometimes you can also select the Datum to use when retrieving
 data.
 
-* `NGDC <http://www.ngdc.noaa.gov/hazard/tide.shtml>`_
+* `NCEI <http://www.ngdc.noaa.gov/hazard/tide.shtml>`_
 * NOAA Tides & Currents: `Historic verified data
   <http://tidesandcurrents.noaa.gov/station_retrieve.shtml?type=Historic+Tide+Data>`_
   ...  `Preliminary data
