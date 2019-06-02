@@ -158,7 +158,7 @@ install, but changes to these repositories may also be of interest.
   <https://github.com/clawpack/apps/compare/v5.5.0...master>`_
 
 - `doc diffs
-  <https://github.com/clawpack/doc/compare/v5.5.0...master>`_
+  <https://github.com/clawpack/doc/compare/v5.5.0...dev>`_
 
 - `docker-files diffs
   <https://github.com/clawpack/docker-files/compare/v5.5.0...master>`_
