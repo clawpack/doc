@@ -26,6 +26,8 @@ Run all the examples as described in `CLAW/doc/gallery/README.md
 as required for building the galleries, and check all the resulting plots to
 make sure everything looks correct.
 
+New as of v5.6.0: change the version number in clawpack/clawpack/__init__.py
+Initially set to e.g. v5.4.1rc-alpha, then to final release number.
 
 Release candidates
 ------------------
