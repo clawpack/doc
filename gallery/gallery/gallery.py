@@ -24,6 +24,14 @@ except:
 # Location for gallery files:
 gallery_dir_default = '.'
 
+# _static directory to put plots for sphinx:
+static_dir = CLAW + '/doc/gallery/_static/'
+
+
+# top of clawpack directory where examples were run:
+#clawdir_examples = CLAW + '/'
+clawdir_examples = '/Users/rjl/D/clawpack-v5.6.0_test/clawpack-v5.6.0_galleries/'
+
 remake = True   # True ==> remake all thumbnails even if they exist.
 
 class GalleryItem(object):
@@ -50,7 +58,7 @@ class GallerySection(object):
 class Gallery(object):
     import os
     
-    def __init__(self, title, clawdir=CLAW):
+    def __init__(self, title, clawdir=clawdir_examples):
         self.title = title
         self.clawdir = clawdir
         self.claw_html_root = claw_html_root
@@ -103,28 +111,27 @@ class Gallery(object):
 
                 if not os.path.exists('./'+gitem.appdir):
                     os.makedirs ('./'+gitem.appdir)
-                static_dir = '$CLAW/doc/gallery/_static/'
 
                 if not os.path.exists(static_dir+gitem.appdir):
                     os.system('mkdir -p %s' % (static_dir+gitem.appdir))
                 print("+++ static_dir = ",static_dir)
 
-                os.system('cp %s/README.rst %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
+                os.system('cp %s/README.rst %s' % (clawdir_examples+gitem.appdir, './'+gitem.appdir))
                 if copy_plots:
-                    #os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, './'+gitem.appdir))
-                    os.system('cp -r %s/_plots %s' % ('$CLAW/'+gitem.appdir, \
+                    #os.system('cp -r %s/_plots %s' % (clawdir_examples+gitem.appdir, './'+gitem.appdir))
+                    os.system('cp -r %s/_plots %s' % (clawdir_examples+gitem.appdir, \
                                 static_dir+gitem.appdir))
                 if copy_files:
                     files = []
                     for ft in ['*.f','*.f90','*.py','*.m','*.html','Makefile']:
-                        files = files + glob.glob('%s/%s' % (CLAW+'/'+gitem.appdir,ft))
+                        files = files + glob.glob('%s/%s' % (clawdir_examples+gitem.appdir,ft))
                     # also copy over claw_git_* files to have a record
                     # of how these plots were created
-                    clawgit = glob.glob('%s/_output/claw_git*' % (CLAW+'/'+gitem.appdir))
+                    clawgit = glob.glob('%s/_output/claw_git*' % (clawdir_examples+gitem.appdir))
                     files = files + clawgit
                     for file in files:
                         os.system('cp %s %s' % (file, static_dir+gitem.appdir))
-                    fromdir = CLAW+'/'+gitem.appdir
+                    fromdir = clawdir_examples+'/'+gitem.appdir
                     print("+++ copied files from ",fromdir)
                     print("+++ copied files to ",static_dir+gitem.appdir)
                     #print("+++ files: ",files)
@@ -372,6 +379,15 @@ def make_geoclaw():
     images = ('frame0004fig0', 'frame0008fig0', 'frame0012fig0','gauge32412fig300')
     gsec.new_item(appdir, plotdir, description, images)
 
+    #----------------------------------------------
+    gsec = gallery.new_section('Adjoint AMR Flagging')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/chile2010_adjoint'
+    description = """
+        Simple model of the 2010 tsunami using adjoint flagging."""
+    images = ('frame0008fig0', 'frame0024fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+
 
     #----------------------------------------------
     gsec = gallery.new_section('Radially-symmetric tsuanami in parabolic bowl')
@@ -393,12 +409,18 @@ def make_geoclaw():
     gsec.new_item(appdir, plotdir, description, images)
 
     #----------------------------------------------
-    gsec = gallery.new_section('Hurricane Ike')
+    gsec = gallery.new_section('Storm Surge')
     #----------------------------------------------
     appdir = 'geoclaw/examples/storm-surge/ike'
     description = """
         Storm surge simulation of Hurricane Ike (coarse grid)"""
-    images = ('frame0011fig1003', 'frame0011fig1004', 'frame0011fig1006')
+    images = ('frame0010fig1001', 'frame0010fig1002', 'frame0010fig1007')
+    gsec.new_item(appdir, plotdir, description, images)
+
+    appdir = 'geoclaw/examples/storm-surge/isaac'
+    description = """
+        Storm surge simulation of Hurricane Isaac (coarse grid)"""
+    images = ('frame0008fig1001', 'frame0008fig1002', 'frame0008fig1007')
     gsec.new_item(appdir, plotdir, description, images)
 
 
@@ -408,7 +430,13 @@ def make_geoclaw():
     appdir = 'geoclaw/examples/multi-layer/plane_wave'
     description = """
         Plane wave hitting shelf with multi-layer equations"""
-    images = ('frame0006fig0','frame0006fig1')
+    images = ('frame0005fig1001','frame0005fig1002')
+    gsec.new_item(appdir, plotdir, description, images)
+
+    appdir = 'geoclaw/examples/multi-layer/bowl-radial'
+    description = """
+        Multi-layer waves in a parabolic bowl"""
+    images = ('frame0000fig0','frame0000fig4')
     gsec.new_item(appdir, plotdir, description, images)
 
 
@@ -429,6 +457,7 @@ def make_geoclaw():
     images = ('fgmax_grid1','fgmax_grid2','fgmax_transects','fgmax_along_shore')
     gsec.new_item(appdir, plotdir, description, images)
 
+
     #----------------------------------------------
 
     gallery.create('gallery_geoclaw.rst')
@@ -446,7 +475,7 @@ def make_fvmbook():
     appdir = 'apps/fvmbook/chap3/acousimple'
     description = """
         1D Acoustics simple waves"""
-    images = ('frame0000fig1', 'frame0008fig1', 'frame0025fig1')
+    images = ('frame0000fig1', 'frame0008fig1', 'frame0015fig1')
     gsec.new_item(appdir, plotdir, description, images)
     #----------------------------------------------
         
