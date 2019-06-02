@@ -15,7 +15,7 @@ master branch of a Clawpack repository, but have not yet been
 released.  To use one of these features, see :ref:`setup_dev`.
 
 **What's New??** For release notes, summaries of changes between releases, 
-and links to all the Github commit logs, see :ref:`changes`.
+and links to all the Github commit logs, see :ref:`releases`.
 
 Overview and Getting Started
 ============================
@@ -28,8 +28,7 @@ Overview and Getting Started
 .. toctree::
    :maxdepth: 1
    
-   changes
-   previous
+   releases
    packages
    installing
    installing_pip

@@ -1,10 +1,9 @@
 :orphan:
-.. comment: Change version numbers and DATE.
 
 .. _release_5_3_1:
 
 ==========================
-Release 5.3.1
+v5.3.1 release notes
 ==========================
 
 Clawpack 5.3.1 was released on November 10, 2015.  See :ref:`installing`.

@@ -20,17 +20,21 @@ You can download the most recent (or certain previous versions) of Clawpack
 as a tar file. After untarring this, you can use `pip install` (and set `CLAW` 
 if necessary) to point to this version.
 
-    - Most recent: `https://github.com/clawpack/clawpack/files/2330639/clawpack-v5.5.0.tar.gz
-      <https://github.com/clawpack/clawpack/files/2330639/clawpack-v5.5.0.tar.gz>`_
-    - :ref:`previous`  (also lists DOIs for recent versions, useful for
-      :ref:`citing`)
+Download a tar file from one of these sources:
+
+  - `Clawpack releases on Github
+    <https://github.com/clawpack/clawpack/releases>`_
+
+  - The Zenodo link for the current release, listed at
+    :ref:`releases`  (which also lists DOIs for recent versions, useful for
+    :ref:`citing`)
 
 After downloading a tar file you can do, e.g. ::
 
-    tar -xzf clawpack-v5.5.0.tar.gz
-    cd clawpack-v5.5.0
+    tar -xzf clawpack-v5.6.0.tar.gz
+    cd clawpack-v5.6.0
     pip install --user -e .   # note trailing dot indicating "this directory"
-    export CLAW=/full/path/to/clawpack-v5.5.0
+    export CLAW=/full/path/to/clawpack-v5.6.0
     
 .. _install_dev:
 

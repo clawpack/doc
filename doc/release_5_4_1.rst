@@ -1,12 +1,10 @@
 :orphan:
 
 
-.. comment: Change master to v5.4.1 in github links below once release is tagged
-
 .. _release_5_4_1:
 
 ==========================
-Release 5.4.1
+v5.4.1 release notes
 ==========================
 
 

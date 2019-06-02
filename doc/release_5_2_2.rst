@@ -2,7 +2,7 @@
 .. _release_5_2_2:
 
 ===============================
-Release 5.2.2
+v5.2.2 release notes
 ===============================
 
 Clawpack 5.2.2 was released on October 28, 2014.  
