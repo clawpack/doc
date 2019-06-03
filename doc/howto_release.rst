@@ -82,7 +82,7 @@ As a comment, add text such as::
     
     Download the clawpack-v5.x.x.tar.gz file below, not the other tar
     file of zip file. Those only include the top-level Clawpack directories and
-    not all the submodules.
+    not all the submodules. 
 
 Then attach the tar file `clawpack-v5.x.x.tar.gz` to be
 included in the release by using the link "Attach binaries..." before
@@ -197,7 +197,8 @@ When making changes for a new release, the following pages in the directory
  - Modify `installing.rst` and `installing_pip.rst` to point to the new
    version number in several places.
 
- - Update `previous.rst` to include a link to the new version on Zenodo.
+ - Update `releases.rst` to include a link to the new version on Zenodo.
+   Also update the bibtex and recommended citation in `about.rst`.
 
  - Update `conf.py` to the new version number, and also
    `$CLAW/doc/gallery/conf.py`

@@ -113,6 +113,10 @@ links work properly when pushed to the Clawpack webpages.
 This variable is used in `conf.py` to adjust the links used in
 `intersphinx_mapping` since two sphinx projects are linked together.
 
+Note that `doc/gallery/notebooks.rst` contains pointers to html versions of many
+notebooks, stored in `doc/gallery/_static/notebooks`.  If any notebooks were
+updated for this release, the corresponding html files should be too.
+*(We should automate this).*
 
 Updating the webpages
 ---------------------
