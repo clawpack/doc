@@ -21,7 +21,7 @@ Other notes:
   to the left) may contain documentation of features not yet released.
 
 Releases:
-=========
+---------
 
 Tar files can be downloaded from 
 `https://github.com/clawpack/clawpack/releases/
@@ -29,7 +29,7 @@ Tar files can be downloaded from
 from the Zenodo links provided below.
 
 * :ref:`release_5_6_0`  -- June 2, 2019 
-  `[DOI pending]`  
+  `[DOI 10.5281/zenodo.3237295] <https://doi.org/10.5281/zenodo.3237295>`_
 * :ref:`release_5_5_0`  -- August 28, 2018
   `[DOI 10.5281/zenodo.1405834] <https://doi.org/10.5281/zenodo.1405834>`_
 * :ref:`release_5_4_1`  -- June 28, 2017
