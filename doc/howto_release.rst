@@ -162,7 +162,7 @@ Zenodo
 Go to the `the Zenodo page <https://zenodo.org/>`_ 
 and create a new upload for the latest tar file, following the framework of 
 https://doi.org/10.5281/zenodo.820730, for example.  This will issue a new
-DOI, which should be added to the page `$CLAW/doc/doc/previous.rst`.
+DOI, which should be added to the page `$CLAW/doc/doc/releases.rst`.
 
 Note that the Github repository is not linked to Zenodo for automatic uploading
 on release since that would only archive a zip file of the main `clawpack`
