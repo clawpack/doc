@@ -113,7 +113,7 @@ riemann).
 
 Note these tags are used in the documentation for pages like
 :ref:`changes_to_master` which generate diffs between the latest version and
-the current master branch of each resposity.
+the current master branch of each repository.
 
 
 Pypi
