@@ -25,6 +25,11 @@ any AMRClaw or GeoClaw application directories.
 General changes
 ---------------
 
+A `gpu` branch has been added to many git repositories, and checking this out
+gives a GPU version of two-dimensional AmrClaw and GeoClaw, as described at
+:ref:`gpu`.  This version does not have equivalent capabilities to v5.6.1,
+however, and is not included as part of the tar file for this release.
+
 
 Changes to classic
 ------------------
@@ -84,6 +89,8 @@ Changes to geoclaw
   for some applications by re-using topo values rather than recomputing them.
 - If some topo values are missing replace by value that makes this clearer
   by default, or allow the user to set an appropriate `topo_missing` value.
+- New `geoclaw/examples/tsunami/bowl-slosh-netcdf` added to illustrate
+  using netCDF topofiles.
   
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.6.0...master>`_
 

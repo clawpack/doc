@@ -89,6 +89,7 @@ General information that applies to Classic, AMRClaw, and GeoClaw.
    restart
    newapp
    sharing
+   gpu
 
 AMRClaw: adaptive mesh refinement
 ---------------------------------
