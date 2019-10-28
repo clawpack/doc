@@ -21,6 +21,18 @@ related to the gallery are in `$CLAW/doc/gallery`.  As of Version
 This is so that past versions of the main documentation pages can
 be supported without past versions of the galleries.
 
+The general look of the documentation and various things that appear on each
+page are controlled by the following files:
+
+ - `conf.py` includes the version number, sets the `html_theme`, as well as
+   setting paths to extensions and various other sphinx settings.
+ - `_themes/flask_local/layout.html` determines the menus at the top
+ - `_themes/flask_web/layout.html` version used for building for the web,
+   is the same except for different relative link to the galleries.
+ - `_static/clawlogo.jpg` is the Clawpack logo put on each page
+ - `_static/clawicon.ico` is the icon that appears on browser tabs
+ 
+
 Before proceeding, first make sure other repositories are checked out to
 master, since some pages now have literalinclude's that bring in code 
 (e.g. setaux_defaults.rst, etc).
