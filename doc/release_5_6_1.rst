@@ -62,7 +62,7 @@ See `visclaw diffs
 Changes to riemann
 ------------------
 
-None.
+- 1D MHD solver added.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.6.0...master>`_
@@ -98,7 +98,6 @@ See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.6.0...master>
 Changes to PyClaw
 ------------------
 
-None.
 
 For changes in PyClaw, see the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
