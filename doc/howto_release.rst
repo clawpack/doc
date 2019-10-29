@@ -195,12 +195,13 @@ When making changes for a new release, the following pages in the directory
    number (e.g. `5.y.y`) by the version number of the new release
    (e.g. `5.x.x`) so that links are comparing e.g. `v5.x.x...master`
 
- - Modify `installing.rst` and `installing_pip.rst` to point to the new
-   version number in several places.
-
  - Update `releases.rst` to include a link to the new version on Zenodo.
    Also update the bibtex and recommended citation in `about.rst`.
 
+- Modify several other files to point to the new version number, in particular:
+ `installing.rst` , `installing_pip.rst`, `installing_more_options.rst`,
+ `contents.rst`, `docker_image.rst`.
+     
  - Update `conf.py` to the new version number, and also
    `$CLAW/doc/gallery/conf.py`
 
