@@ -6,7 +6,7 @@
 v5.6.1 release notes
 ===============================
 
-Clawpack 5.6.1 is should be released on October 29, 2019. See :ref:`installing`.
+Clawpack 5.6.1 was released on October 28, 2019. See :ref:`installing`.
 
 Changes relative to Clawpack 5.6.0 (June 2, 2019) are shown below.
 
