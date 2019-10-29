@@ -31,10 +31,10 @@ Download a tar file from one of these sources:
 
 After downloading a tar file you can do, e.g. ::
 
-    tar -xzf clawpack-v5.6.0.tar.gz
-    cd clawpack-v5.6.0
+    tar -xzf clawpack-v5.6.1.tar.gz
+    cd clawpack-v5.6.1
     pip install --user -e .   # note trailing dot indicating "this directory"
-    export CLAW=/full/path/to/clawpack-v5.6.0
+    export CLAW=/full/path/to/clawpack-v5.6.1
     
 .. _install_dev:
 
