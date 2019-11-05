@@ -29,7 +29,7 @@ Tar files can be downloaded from
 from the Zenodo links provided below.
 
 * :ref:`release_5_6_1`  -- October 28, 2019
-  Zenodo, pypi and dockerhub versions still pending.
+  `[DOI 10.5281/zenodo.3528429] <https://doi.org/10.5281/zenodo.3528429>`_
 * :ref:`release_5_6_0`  -- June 2, 2019 
   `[DOI 10.5281/zenodo.3237295] <https://doi.org/10.5281/zenodo.3237295>`_
 * :ref:`release_5_5_0`  -- August 28, 2018
