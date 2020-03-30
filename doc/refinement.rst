@@ -105,6 +105,10 @@ tolerances is exceeded.
 Specifying AMR regions
 ----------------------
 
+**New in Version 5.7.0:** Although the regions described here are still
+supported in v5.7.0, a more general form of :ref:`flagregions`
+are also now supported and are recommended in general rather than
+using what is described below.
 
 In addition to specifying a tolerance or other criteria for flagging
 individual cells as described above, it is possible to specify regions of
@@ -238,7 +242,7 @@ This `wave_tolerance` parameter can be set for any GeoClaw application.
 
 Often this ends up refining the entire ocean when in fact only some waves
 are of interest.  In this case one can use `regions` as described in
-:ref:`refinement_regions` to limit refinement to certain space-time regions.
+:ref:`flagregions` to limit refinement to certain space-time regions.
 
 Alternatively, starting in Version 5.6.0 one can use adjoint flagging (see
 :ref:`adjoint`) to better select the waves that will reach a particular

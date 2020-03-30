@@ -6,7 +6,12 @@ Setting sealevel
 
 GeoClaw has a parameter *sealevel* (see :ref:`setrun_geoclaw`) that can be
 used to specify the initialization of the fluid depth relative to the
-specified topography (see :ref:`topo`).  Unless a different set of initial
+specified topography (see :ref:`topo`).  
+
+**New in v5.7.0:** You can now specify a spatially varying initial surface
+elevation, see :ref:`set_eta_init`.
+
+Unless a different set of initial
 conditions is specified (see :ref:`setrun_qinit`), the default is to
 initialize with zero velocity and depth *h* chosen so that *h+B = sealevel*
 at any point where *B < sealevel*, where *B* is the topography or bathymetry
@@ -33,9 +38,7 @@ you will see a *Datums* link on the left menu.
 
 Note that the difference between MHW and MSL can vary greatly between
 different locations.  
-Global bathymetry data such as the ETOPO1 data (available from
-`GEODAS Grid Translator - Design-a-Grid
-<http://www.ngdc.noaa.gov/mgg/gdas/gd_designagrid.html>`_)
+Global bathymetry data such as the ETOPO1 data (see :ref:`tsunamidata`)
 is generally relative to MSL.  
 However, this data has a resolution of 1 arc-minute, more than 1.5 km, and
 is not suitable as coastal bathymetry, so this data will presumably only be
@@ -55,10 +58,10 @@ to be at rest before the tsunami arrives.
 
 If GeoClaw is used for hazard assessment based on potential tsunami
 scenarios, then thought should be given to the appropriate value of
-*sealevel* to assume.  The NGDC coastal bathymetry data is referenced to MHW
+*sealevel* to assume.  The NCEI coastal bathymetry data is often referenced to MHW
 because this is often the level assumed for tsunami hazard assessment, but
 higher tide levels such as Mean Higher High Water (MHHW) or the Astronomical
 High Tide (AHT) are sometimes used for worst-case scenarios.  
 
-See :ref:`tsunamidata` for some other sources of data.
+See :ref:`tsunamidata` for more information and links to sources of data.
 

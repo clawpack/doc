@@ -45,8 +45,7 @@ Classic
 
 A simple 1-dimensional acoustics equations can be solved
 using the code in `$CLAW/classic/examples/acoustics_1d_example1
-<_static/classic/examples/acoustics_1d_example1/README.html>`__, as
-illustrated in :ref:`gallery_classic_amrclaw`.
+<_static/classic/examples/acoustics_1d_example1/README.html>`__.
 
 Move to this directory via::
 

@@ -50,12 +50,15 @@ More will eventually appear in the :ref:`apps`.
    quick_surge
    okada
    sealevel
+   set_eta_init
    manning
    fgout
    fgmax
    tsunamidata
    geoclaw/Okada
    surgedata
+   marching_front
+   force_dry
 
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x

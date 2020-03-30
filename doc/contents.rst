@@ -118,7 +118,13 @@ PyClaw
 
 Riemann
 =======
+
 All Clawpack packages make use of the same collection of Riemann solvers.
+
+See also the new book `Riemann Problems and Jupyter Solutions
+<http://www.clawpack.org/riemann_book/index.html>`_, soon be published
+by SIAM, which consists of a set of Jupyter notebooks illustrating
+the basic concepts of Riemann problems and approximate solvers.
 
 .. toctree::
    :maxdepth: 2
