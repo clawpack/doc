@@ -65,6 +65,10 @@ If you have any issues or need help using PyClaw, `contact us <claw-users@google
 PyClaw Documentation
 ====================
 
+See also the 
+`Gallery of PyClaw Applications <http://www.clawpack.org/gallery/pyclaw/gallery/gallery_all.html>`_ 
+for some examples of how PyClaw can be used.
+
 .. toctree::
    :maxdepth: 2
 
@@ -75,7 +79,7 @@ PyClaw Documentation
    ../developers
    troubleshooting
    about
-   ../gallery/pyclaw/gallery/gallery_all
+
 
 
 .. _pyclaw_reference:
