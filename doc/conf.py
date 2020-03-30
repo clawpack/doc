@@ -23,7 +23,7 @@ sys.path.append(os.path.abspath('../..'))
 sys.path.append(os.path.abspath('./ext'))
 
 clawpack_root = os.path.abspath('../..')
-print "clawpack_root = ",clawpack_root
+print("clawpack_root = %s" % clawpack_root)
 sys.path.append(os.path.join(clawpack_root,'amrclaw/doc'))
 sys.path.append(os.path.join(clawpack_root,'visclaw/doc'))
 sys.path.append(os.path.join(clawpack_root,'geoclaw/doc'))
@@ -65,7 +65,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'Clawpack'
-copyright = u'CC-BY 2019, The Clawpack Development Team'
+copyright = u'CC-BY 2020, The Clawpack Development Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -254,7 +254,7 @@ else:
     intersphinx_mapping = {'gallery':('../../../gallery/_build/html','../gallery/_build/html/objects.inv')}
 
 
-keep_warnings = 'True'
+keep_warnings = True
 
 inheritance_graph_attrs = dict(rankdir="TB",
                                fontsize=12,splines='"true"',penwidth=100)
