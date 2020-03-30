@@ -41,7 +41,7 @@ sys.path.append(os.path.join(clawpack_root,'riemann/src/python/riemann'))
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx',#'plot_directive',
               'only_directives',
-              'sphinx.ext.inheritance_diagram', 'nbsphinx','edit_on_github']
+              'sphinx.ext.inheritance_diagram']
 
 nbsphinx_allow_errors = False
 
