@@ -144,6 +144,11 @@ smv_tag_whitelist = r'^.*$'  # all tags
 # Will show up in list of Latest releases,  see _templates/versioning.html
 smv_branch_whitelist = r'v5.6.1|dev'    # r'^.*$'
 
+# For possible use in adding version banners?
+# see https://holzhaus.github.io/sphinx-multiversion/master/templates.html#version-banners
+smv_released_pattern = r'v.*'
+smv_latest_version = 'v5.6.1'
+
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
 #html_theme = 'default'
