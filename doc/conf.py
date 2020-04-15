@@ -40,10 +40,11 @@ sys.path.append(os.path.join(clawpack_root,'riemann/src/python/riemann'))
 
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx',#'plot_directive',
-              'only_directives',
-              'sphinx.ext.inheritance_diagram']
+              'only_directives', # 'edit_on_github', # broken
+              'sphinx.ext.inheritance_diagram', 'nbsphinx',
+              'sphinx_multiversion']
 
-nbsphinx_allow_errors = False
+nbsphinx_allow_errors = True
 
 extensions.append('sphinx.ext.mathjax')
 mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
@@ -52,10 +53,11 @@ mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
+
 # The suffix of source filenames.
 source_suffix = '.rst'
 edit_on_github_project = 'clawpack/doc'
-edit_on_github_branch = 'master/doc'
+edit_on_github_branch = 'master/dev'
 
 # The encoding of source files.
 #source_encoding = 'utf-8'
@@ -128,10 +130,24 @@ html_additional_pages = {'index': 'index.html'}
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
-    'index':    ['localtoc.html', 'sourcelink.html', 'searchbox.html'],
+    'index':    ['localtoc.html', 'sourcelink.html', 'searchbox.html',
+                 'versioning.html'],
     '**':       ['localtoc.html', 'relations.html',
-                 'sourcelink.html', 'searchbox.html']
+                 'sourcelink.html', 'searchbox.html', 'versioning.html']
 }
+
+# Whitelist pattern for tags (set to None to ignore all tags)
+# Will show up in list of Older releases,  see _templates/versioning.html
+smv_tag_whitelist = r'^.*$'  # all tags 
+
+# Whitelist pattern for branches (set to None to ignore all branches)
+# Will show up in list of Latest releases,  see _templates/versioning.html
+smv_branch_whitelist = r'v5.6.1|dev'    # r'^.*$'
+
+# For possible use in adding version banners?
+# see https://holzhaus.github.io/sphinx-multiversion/master/templates.html#version-banners
+smv_released_pattern = r'v.*'
+smv_latest_version = 'v5.6.1'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.

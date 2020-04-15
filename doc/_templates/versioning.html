@@ -1,0 +1,14 @@
+{% if versions %}
+<h4>{{ _('Latest Version') }}</h4>
+<ul>
+  {%- for item in versions.branches %}
+  <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+  {%- endfor %}
+</ul>
+<h4>{{ _('Older Versions') }}</h4>
+<ul>
+  {%- for item in versions.tags %}
+  <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+  {%- endfor %}
+</ul>
+{% endif %}
