@@ -119,11 +119,7 @@ pygments_style = 'sphinx'
 sys.path.append(os.path.abspath('_themes'))
 html_theme_path = ['_themes']
 html_extra_path = ['extra_files']
-SPHINX_WEB = os.environ.get('SPHINX_WEB', 'False')
-if SPHINX_WEB in ['True',True]:
-    html_theme = 'flask_web'
-else:
-    html_theme = 'flask_local'
+html_theme = 'flask_local'
 
 github_fork = 'clawpack'
 html_additional_pages = {'index': 'index.html'}
@@ -251,19 +247,6 @@ latex_documents = [
 
 # If false, no module index is generated.
 #latex_use_modindex = True
-
-
-# Example configuration for intersphinx: refer to the Python standard library.
-#intersphinx_mapping = {'http://docs.python.org/dev': None}
-#intersphinx_mapping = {'kingkong': ('http://kingkong.amath.washington.edu/clawpack/trunk/doc/sphinx/', None)}
-
-
-if SPHINX_WEB in ['True',True]:
-    # works for webpages?
-    intersphinx_mapping = {'gallery':('gallery','../gallery/_build/html/objects.inv')}
-else:
-    # works locally:
-    intersphinx_mapping = {'gallery':('../../../gallery/_build/html','../gallery/_build/html/objects.inv')}
 
 
 keep_warnings = True

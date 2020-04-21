@@ -64,13 +64,13 @@ The instructions below make webpages that list v5.4.0, etc. and allow
 viewing docs that may be more relevant to a previous version of Clawpack.
 
 As of v5.7.0, we are now using 
-[sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html)
+`sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__
 instead of 
-[sphinxcontrib-versioning](https://github.com/sphinx-contrib/sphinxcontrib-versioning).
+`sphinxcontrib-versioning <https://github.com/sphinx-contrib/sphinxcontrib-versioning>`__.
 
 
 To make pages that show previous Clawpack versions, first install
-[sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html).
+`sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__.
 
 Insure that any changes you want to show up in multiversion docs has been
 committed to some branch (normally `dev` if you have been adding something new).
@@ -113,11 +113,10 @@ This can be done as follows::
 If you like what you see, you can push back to your fork and then issue a
 pull request to have these changes incorporated into the documentation.
 
-**Note:** To make versions where the links to the gallery work properly after the
-pages are pushed to the Clawpack website (but not locally), set
-the environment variable `SPHINX_WEB` to True in the above steps.
-This variable is used in `conf.py` to adjust the links used in
-`intersphinx_mapping` since two sphinx projects are linked together.
+**Note:** We are no longer using `intersphinx` to link the gallery and the 
+main doc pages together.   Instead there are hard links to `www.clawpack.org`
+to go from one to the other.  So the old use of 
+the environment variable `SPHINX_WEB` is now deprecated.
 
 Updating the gallery
 --------------------
@@ -133,21 +132,10 @@ For detailed instructions, see `CLAW/doc/gallery/README.md
 
 Then do the following::
 
-    cd $CLAW/doc/gallery
-    export SPHINX_WEB=False # to build for local viewing
-    make html
+    cd $CLAW/doc/gallery    make html
 
-Note that `sphinx-versioning build` is not used in the gallery since we don't
-track versions here.
+Note that we don't track past versions in the gallery.
 
-If the environment variable `SPHINX_WEB` is set to False (or not set) then
-this makes files in which the links work to jump to the main doc files, when
-viewed locally.
-
-Set the environment variable `SPHINX_WEB` to True to make files where the
-links work properly when pushed to the Clawpack webpages.
-This variable is used in `conf.py` to adjust the links used in
-`intersphinx_mapping` since two sphinx projects are linked together.
 
 Note that `doc/gallery/notebooks.rst` contains pointers to html versions of many
 notebooks, stored in `doc/gallery/_static/notebooks`.  If any notebooks were
@@ -164,8 +152,8 @@ which causes them to show up on the web at
 `http://clawpack.github.io
 <http://clawpack.github.io>`_.  
 
-To do so, first create the html files as described above, with
-`SPHINX_WEB=True` in both the `doc` and `gallery` directories.
+To do so, first create the html files as described above, which should appear
+in `doc/doc/_build/html` and `doc/gallery/_build/html`.
 
 Commit any changed source files and 
 push to `clawpack/doc <https://github.com/clawpack/doc>`_.
