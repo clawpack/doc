@@ -41,8 +41,6 @@ More will eventually appear in the :ref:`apps`.
    topo
    grid_registration
    topotools
-   geoclaw/topotools_examples
-   geoclaw/dtopotools_examples
    setrun_geoclaw
    plotting_geoclaw
    googleearth_plotting
@@ -51,11 +49,11 @@ More will eventually appear in the :ref:`apps`.
    okada
    sealevel
    set_eta_init
+   lagrangian_gauges
    manning
    fgout
    fgmax
    tsunamidata
-   geoclaw/Okada
    surgedata
    marching_front
    force_dry

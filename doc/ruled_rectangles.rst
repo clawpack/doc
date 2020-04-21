@@ -93,13 +93,13 @@ Define a Ruled Rectangle by specifying a set of points:
     rr.lower = array([0,2,1,3])
     rr.upper = array([4,5,3,6])
 
-Setting `RR.method` to 1 or 0 gives a Ruled Rectangle in which the
+Setting `rr.method` to 1 or 0 gives a Ruled Rectangle in which the
 points specified above are connected by lines or used to define stacked
 boxes.
 
 Both are illustrated in the figure below. Note that we use the method
-`RR.vertices()` to return a list of all the vertices of the polygon
-defined by `RR` for plotting purposes.
+`rr.vertices()` to return a list of all the vertices of the polygon
+defined by `rr` for plotting purposes.
 
 .. code:: ipython3
 
@@ -267,7 +267,7 @@ Here's an example defining a `RuledRectangle` via `slu`:
 ~~~~~~~~~~~~~~~~
 
 `rr.bounding_box()` returns the smallest rectangle `[x1,x2,y1,y2]`
-containing `RR`:
+containing the ruled rectangle:
 
 .. code:: ipython3
 
@@ -284,7 +284,7 @@ containing `RR`:
 ~~~~~~~~~~~~~~~~
 
 If `X,Y` are 2D numpy arrays defining `(x,y)` coordinates on a grid,
-then `RR.mask_outside(X,Y)` returns a mask array `M` of the same
+then `rr.mask_outside(X,Y)` returns a mask array `M` of the same
 shape as `X,Y` that is `True` at points outside the Ruled Rectangle.
 
 .. code:: ipython3
@@ -305,11 +305,11 @@ shape as `X,Y` that is `True` at points outside the Ruled Rectangle.
 .. image:: RuledRectangles_files/RuledRectangles_23_1.png
 
 
-read and write
-~~~~~~~~~~~~~~
+read and write, and instantiating from a file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`RR.write(fname)` writes out the `slu` array and other attributes to
-file `fname`, and `RR.read(fname)` can be used to read in such a
+`rr.write(fname)` writes out the `slu` array and other attributes to
+file `fname`, and `rr.read(fname)` can be used to read in such a
 file. You can also specify `fname` when instantiating a new Ruled
 Rectangle:
 

@@ -46,7 +46,6 @@ Matlab tools from Clawpack 4.3 can still be used, see
    ruled_rectangles
    adjoint
    gauges
-   lagrangian_gauges
    amrclaw_doxygen
    amrclaw_flowcharts
 
