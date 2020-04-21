@@ -18,11 +18,11 @@ specified fault plane.
    is now.)
 
 
-The notebook `geoclaw/dtopotools_examples.ipynb
+The notebook `dtopotools_examples.ipynb
 <http://www.clawpack.org/gallery/_static/notebooks/geoclaw/dtopotools_examples.html>`_
 illustrates how to use some of the tools.
 
-The notebook `geoclaw/Okada.ipynb
+The notebook `Okada.ipynb
 <http://www.clawpack.org/gallery/_static/notebooks/geoclaw/Okada.html>`_
 illustrates the Okada model using some of these tools.
 
