@@ -38,15 +38,14 @@ sys.path.append(os.path.join(clawpack_root,'riemann/src/python/riemann'))
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 # extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.todo', 'sphinx.ext.coverage','sphinx.ext.viewcode','sphinx.ext.inheritance_diagram']
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
-              'sphinx.ext.intersphinx',#'plot_directive',
-              'only_directives', # 'edit_on_github', # broken
-              'sphinx.ext.inheritance_diagram', 'nbsphinx',
-              'sphinx_multiversion']
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.doctest',
+              'only_directives',
+              'sphinx.ext.inheritance_diagram',
+              'sphinx_multiversion',
+              'sphinx.ext.mathjax']
 
-nbsphinx_allow_errors = True
 
-extensions.append('sphinx.ext.mathjax')
 mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 
@@ -56,6 +55,8 @@ templates_path = ['_templates']
 
 # The suffix of source filenames.
 source_suffix = '.rst'
+
+# removed edit_on_github extension since it seemed to be broken
 edit_on_github_project = 'clawpack/doc'
 edit_on_github_branch = 'master/dev'
 
@@ -142,7 +143,7 @@ smv_tag_whitelist = r'^.*$'  # all tags
 
 # Whitelist pattern for branches (set to None to ignore all branches)
 # Will show up in list of Latest releases,  see _templates/versioning.html
-smv_branch_whitelist = r'v5.6.1|dev'    # r'^.*$'
+smv_branch_whitelist = r'v5.6.1|dev'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with
 # Sphinx are currently 'default' and 'sphinxdoc'.
