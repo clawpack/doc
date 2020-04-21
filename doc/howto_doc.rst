@@ -16,10 +16,11 @@ want to work with these files.
 After cloning into the `$CLAW` directory, the restructured text
 files for the main documentation are in `$CLAW/doc/doc`.  All files
 related to the gallery are in `$CLAW/doc/gallery`.  As of Version
-5.4.1, these two subdirectories are separate Sphinx projects connected using 
+5.4.1, these two subdirectories are separate Sphinx projects 
+
+They used to be connected using 
 `intersphinx <http://www.sphinx-doc.org/en/stable/ext/intersphinx.html>`_.  
-This is so that past versions of the main documentation pages can
-be supported without past versions of the galleries.
+but this was dropped in v5.7.0.
 
 The general look of the documentation and various things that appear on each
 page are controlled by the following files:
@@ -37,12 +38,17 @@ Before proceeding, first make sure other repositories are checked out to
 master, since some pages now have literalinclude's that bring in code 
 (e.g. setaux_defaults.rst, etc).
 
-To create html files::
+To create html files from the dev branch only, for example::
 
     cd $CLAW/doc/doc
-    make html
+    git checkout dev
+    sphinx-build -b html . _build1/html
 
-To view the files, point your browser to `$CLAW/doc/doc/_build/html/index.html`
+To view the files, point your browser to `$CLAW/doc/doc/_build1/html/index.html`
+
+Note that we suggest using `_build1` when building a single version so this
+can be quickly rebuilt when writing and editing documentation.
+
 
 To generate pages with old Clawpack versions
 =============================================
@@ -51,41 +57,59 @@ This should be done when you are close to pushing changes to the website,
 otherwise the above approach works fine and shows the current state of the
 documentation based on files in your working directory.
 
-This takes much longer than `make html` since it rebuilds pages for all
+This can take much longer since it rebuilds pages for all
 versions.
 
 The instructions below make webpages that list v5.4.0, etc. and allow
 viewing docs that may be more relevant to a previous version of Clawpack.
 
-But note that the `.rst` files used to build these pages come form what is
-checked into the `v5.x.x` branch on Github (and the commits corresponding to
-tags such as `v5.4.0`).  So if you have changed `.rst` files but these have
-not yet been merged into `v5.x.x` or `dev` on Github, you will not see the changes
-reflected in the html files you build.
+As of v5.7.0, we are now using 
+[sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html)
+instead of 
+[sphinxcontrib-versioning](https://github.com/sphinx-contrib/sphinxcontrib-versioning).
 
-To make pages that show previous Clawpack versions, first install the
-sphinx extension via::
 
-    pip install -U sphinx
-    pip install sphinxcontrib-versioning
+To make pages that show previous Clawpack versions, first install
+[sphinx-multiversion](https://holzhaus.github.io/sphinx-multiversion/master/index.html).
 
-and then do this::
+Insure that any changes you want to show up in multiversion docs has been
+committed to some branch (normally `dev` if you have been adding something new).
+
+And then do this::
 
     cd $CLAW/doc/doc
-    export SPHINX_WEB=False # to build for local viewing
-    sphinx-versioning build -i -r v5.x.x doc ./_build/html 
-        # change v5.x.x to the current version
+    sphinx-multiversion . _build/html
 
-Note that `-i` causes versions to be listed in reverse order at the bottom,
-`-r v5.x.x` uses the `v5.x.x` branch for the main landing page, and `doc` is
-the directory containing the `.rst` files relative to the top directory
-of the Git repository. Only `.rst` files that are checked into Git on some
-branch at `origin` are seen.
+To view the files, point your browser to `_build/html/dev/index.html`  
+and from there you should be able to navigate to other versions.
+    
+Unlike `sphinxcontrib-versioning`, this now uses your local branches and tags
+rather than the versions on Github.  It lists only two branches under "Latest
+Versions" and all tags as "Older Versions".  
+The two branches are set to `dev` and the most
+recent version, by this line of `conf.py`::
 
-To view the files, point your browser to
-`$CLAW/doc/doc/_build/html/v5.x.x/index.html`  
-(with `5.x.x` replaced by the current version).
+    smv_branch_whitelist = r'v5.6.1|dev' 
+    
+This should be updated for a new version.
 
+Note that `_build/html` contains a subdirectory for each version, but there
+are no `.html` files in the top level of `_build/html`.  For the Clawpack
+webpage we need to:
+
+- Copy the files from the current version to the top level so that
+  navigating to http://www.clawpack.org/installing.html, 
+  for example, goes to the current version of this document.
+  
+- Fix the links in the sidebars of each of these `.html` files so that clicking
+  on `dev`, for example, takes you to http://www.clawpack.org/dev/installing.html
+  
+This can be done as follows::
+
+    cd $CLAW/doc/doc/_build/html
+    cp v5.6.1/*.html .   # replacing v5.6.1 with the current version
+    python ../../fix_links_top_level.py
+    
 If you like what you see, you can push back to your fork and then issue a
 pull request to have these changes incorporated into the documentation.
 
