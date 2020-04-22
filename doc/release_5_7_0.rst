@@ -1,6 +1,6 @@
 :orphan:
 
-.. _release_5_7_0
+.. _release_5_7_0:
 
 ===============================
 Changes to master since v5.7.0

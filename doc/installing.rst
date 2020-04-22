@@ -31,10 +31,10 @@ using the following version of the `pip install` command
 want to change anything in this command)**::  
 
     pip install --src=$HOME/clawpack_src --user -e \
-        git+https://github.com/clawpack/clawpack.git@v5.6.1#egg=clawpack-v5.6.1
+        git+https://github.com/clawpack/clawpack.git@v5.7.0#egg=clawpack-v5.7.0
 
 This will download Clawpack (via a git clone) into the directory
-`$HOME/clawpack_src/clawpack-v5.6.1`.  The top 
+`$HOME/clawpack_src/clawpack-v5.7.0`.  The top 
 installation directory can be changed by modifying the ``--src`` target 
 (or omit this part to put it in your current working directory).
 If you have already downloaded Clawpack via a different mechanism then
@@ -60,11 +60,11 @@ place and allowing you to modify it if desired.
 
 In order to use the Fortran codes within Clawpack, 
 you should then set the environment
-variable `CLAW` to point to the `clawpack-v5.6.1` directory within
+variable `CLAW` to point to the `clawpack-v5.7.0` directory within
 the installation directory `$HOME/clawpack_src`, and `FC` to point
 to the desired Fortran compiler, e.g. in the bash shell::
 
-    export CLAW=$HOME/clawpack_src/clawpack-v5.6.1
+    export CLAW=$HOME/clawpack_src/clawpack-v5.7.0
     export FC=gfortran
 
 See :ref:`setenv` for more information.   
