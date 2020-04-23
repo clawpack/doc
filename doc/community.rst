@@ -12,6 +12,7 @@ your question in these docs, please send a note to the
 <https://groups.google.com/forum/#!forum/claw-users>`_.
 
 We are also starting to experiment with the following:
+(Warning: they are not actively used.)
 
 - `clawpack on Gitter <https://gitter.im/clawpack/public>`_
   (Sign in with your github account if you want to post a comment or ask a
@@ -54,12 +55,22 @@ The pages below give some tips for those who want to get involved.
 User Workshops, Clinics, and Tutorials
 ---------------------------------------
 
+Available for streaming
+^^^^^^^^^^^^^^^^^^^^^^^
+
+- `The GeoClaw software and tsunami modeling
+  <https://csdms.colorado.edu/wiki/Presenters-0439>`__ 
+  Webinar for CSDMS in 2019 by Randy LeVeque
+
 Upcoming
 ^^^^^^^^
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- None currently planned.
+- May 22, 2020: GeoClaw webinars and user help sessions are 
+  planned as part of the `CSDMS Annual Meeting
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__.
+  Due to COVID-19 this meeting will be online only.
 
 Recent
 ^^^^^^^^
@@ -91,16 +102,20 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2018/>`_, 
-  May 25-28, 2018, at the Univesity of Colorado, immediately following the 
-  `CSDMS Annual Meeting <https://csdms.colorado.edu/wiki/Form:Annualmeeting2018>`_.
-
+- A GeoClaw Developers hackathon via Zoom is planned in conjunction with the 
+  `CSDMS Annual Meeting
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__,
+  and will start on May 22, 2020.
 
 Previous
 ^^^^^^^^
 
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
+
+- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2018/>`_, 
+  May 25-28, 2018, at the Univesity of Colorado, immediately following the 
+  `CSDMS Annual Meeting <https://csdms.colorado.edu/wiki/Form:Annualmeeting2018>`_.
 
 - Developers' workshop at the University of Washington, August
   `2016 <http://www.clawpack.org/clawdev-2016/>`_.

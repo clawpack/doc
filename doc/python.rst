@@ -8,6 +8,37 @@ Python Hints
 
 .. contents::
 
+.. _python-three:
+
+Dropping support for Python 2.7
+--------------------------------
+
+As of Clawpack v5.7.0 we are no longer supporting Python 2.7, and
+Python 3.x is expected, see :ref:`release_5_7_0`.  At this point we
+believe v5.7.0 still works with Python 2.7, but we are phasing out
+testing this in the future.
+
+This is consistent with the fact that Python 2.7 itself will not be
+maintained beyond January, 2020, and most package we rely on (e.g.
+numpy, matplotlib, jupyter) are also ceasing support for Python 2.7,
+see https://python3statement.org/
+
+Hence we view Clawpack version 5.6.x as the end of the line for Python
+2 support  (probably 5.6.1 unless there's a strong need to update this
+further).  Clawpack 5.6.x will continue to be available, of course,
+but in order to take advantage of future improvements to Clawpack (and
+most other Python packages) we strongly suggest that you start
+converting all of your codes to work in Python 3 if you haven't
+already.  Often this only requires changing print statements to print
+functions, but there are a few other changes.  See e.g.,
+https://docs.python.org/3/howto/pyporting.html
+and other online resources discussing the differences between Python 2 and 3.
+
+.. _python-intro:
+
+What is Python?
+---------------
+
 Python is a powerful object-oriented interpreted scripting/programming
 language. Some version of Python is almost certainly on your computer
 already (on unix, linux, OSX type::

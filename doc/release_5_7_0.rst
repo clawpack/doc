@@ -18,13 +18,43 @@ To see documentation that has already been developed to accompany any new
 features listed below, click on the "dev" branch of the documentation, in
 the menu on the left hand side of this page.
 
+Python support
+---------------
+
+As of v5.7.0 we are no longer supporting Python 2.7, and Python 3.x is
+expected.  At this point we believe v5.7.0 still works with Python 2.7, but
+we are phasing out testing this in the future.
+
+See :ref:`python-three` for more information about this.
+
+
 Changes that are not backward compatible
 ----------------------------------------
 
+Some of the `.data` files generated from `setrun.py` have been changed in both
+amrclaw and geoclaw, so if using these packages it is important to do::
+
+    make new
+    
+to recompile all the code and::
+
+    make data
+    
+to recreate `.data` files in the new form (the latter should happen 
+automatically if you `make .output`, for example).
 
 General changes
 ---------------
 
+- Support for particle tracking via "Lagrangian gauges" has been added to
+  `amrclaw`, but this capability itself has so far only been added to `geoclaw`,
+  see below.  This has changed the format of `gauges.data` files generated 
+  from `setrun.py`.
+  
+- A new way of specifying `flagregions` for guiding adaptive mesh refinement
+  has been introduced in both `amrclaw` and `geoclaw`, and `RuledRectangles`
+  have been introduced to assist in specifying non-rectangular `flagregions`.
+  This has added a new `flagregions.data` file generated from `setrun.py`.
 
 Changes to classic
 ------------------
@@ -113,7 +143,8 @@ Changes to geoclaw
   inundated.  Points can also be specifed using file specified with the same
   format as a topofile (with `topo_type==3`) with 0/1 values indicating which
   points are to be used as fgmax points. For more about all these changes, see
-  `fgmax.html <http://depts.washington.edu/clawpack/sampledocs/sphinx-multiversion/dev/fgmax.html>`_.
+  `fgmax.html <http://depts.washington.edu/clawpack/sampledocs/sphinx-multiversion/dev/fgmax.html>`_.  Note that now a file `fgmax_grids.data` is generated from
+  information in `setrun.py` rather than `fgmax.data`, with a different format.
 
 - Improvements to `fgmax_tools.py` module.
 
