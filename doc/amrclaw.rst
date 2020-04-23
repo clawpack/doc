@@ -2,9 +2,9 @@
 .. _amrclaw:
 
 
-*************************************
-AMRClaw
-*************************************
+*********************************************
+AMRClaw Description and Detailed Contents
+*********************************************
 
 The AMRClaw version of Clawpack provides Adaptive Mesh Refinement (AMR)
 capabilities in 2 and 3 space dimensions.  (The two-dimensional code can
@@ -34,7 +34,7 @@ Matlab tools from Clawpack 4.3 can still be used, see
 :ref:`matlabplots`.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    amrclaw1d
    setrun_amrclaw

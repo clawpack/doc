@@ -1,8 +1,8 @@
 .. _geoclaw:
 
-***************
-GeoClaw
-***************
+*********************************************
+GeoClaw Description and Detailed Contents
+*********************************************
 
 See `www.geoclaw.org <http://www.geoclaw.org>`_ for more overview of the
 GeoClaw software and links to references and uses.
