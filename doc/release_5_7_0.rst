@@ -6,17 +6,16 @@
 v5.7.0 release notes
 ===============================
 
+Clawpack 5.7.0 was released on April 23, 2020. See :ref:`installing`.
 
-Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.7.0) on April 21, 2020.
+Permanent DOI:
+`[DOI 10.5281/zenodo.3764201] <https://doi.org/10.5281/zenodo.3764201>`__.
 
-These changes should appear in the next release.  If you need them now,
-see :ref:`developers` for instructions on cloning and installing from the
-master branch. 
+Changes relative to Clawpack 5.6.1 (October 28, 2019) are shown below.
 
-To see documentation that has already been developed to accompany any new
-features listed below, click on the "dev" branch of the documentation, in
-the menu on the left hand side of this page.
+To see more recent changes that are in the the master branch but not yet
+released, see :ref:`changes_to_master`.
+
 
 Python support
 ---------------
