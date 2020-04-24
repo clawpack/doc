@@ -31,7 +31,7 @@ Tar files can be downloaded from
 from the Zenodo links provided below.
 
 * :ref:`release_5_7_0`  -- April 23, 2020
-  `[DOI 10.5281/zenodo.3764201] <https://doi.org/10.5281/zenodo.3764201>`_
+  `[DOI 10.5281/zenodo.3764278] <https://doi.org/10.5281/zenodo.3764278>`_
 * :ref:`release_5_6_1`  -- October 28, 2019
   `[DOI 10.5281/zenodo.3528429] <https://doi.org/10.5281/zenodo.3528429>`_
 * :ref:`release_5_6_0`  -- June 2, 2019 

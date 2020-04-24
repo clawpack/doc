@@ -9,7 +9,7 @@ v5.7.0 release notes
 Clawpack 5.7.0 was released on April 23, 2020. See :ref:`installing`.
 
 Permanent DOI:
-`[DOI 10.5281/zenodo.3764201] <https://doi.org/10.5281/zenodo.3764201>`__.
+`[DOI 10.5281/zenodo.3764278] <https://doi.org/10.5281/zenodo.3764278>`__.
 
 Changes relative to Clawpack 5.6.1 (October 28, 2019) are shown below.
 
