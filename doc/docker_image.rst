@@ -11,12 +11,12 @@ docker image from the `DockerHub Clawpack repositories
 
 To download an image::
 
-    $ docker pull clawpack/v5.6.1_dockerimage
+    $ docker pull clawpack/v5.7.0_dockerimage
 
 To create a container and run it::
 
-    $ docker run -i -t -p 8889:8889 --name clawpack-v5.6.1_container \
-        clawpack/v5.6.1_dockerimage
+    $ docker run -i -t -p 8889:8889 --name clawpack-v5.7.0_container \
+        clawpack/v5.7.0_dockerimage
 
 You can change the container name if you wish, and also the port 8889 (on
 which jupyter notebooks might be served, see below).
@@ -28,18 +28,22 @@ You should now see a prompt like::
 indicating that you are in the container, logged in as user `jovyan`.
 
 Once logged in to the container, you should find a directory
-`$HOME/clawpack-v5.6.1` that contains the Clawpack installation (including the
+`$HOME/clawpack-v5.7.0` that contains the Clawpack installation (including the
 current master branch of the :ref:`apps`).
 
 A better image for GeoClaw users
 --------------------------------
 
-**Still under development**
-
-GeoClaw users might want to instead use the image `clawpack/v5.6.1_geoclaw`,
-which includes everything in `clawpack/v5.6.1_dockerimage` but also installs
+GeoClaw users might want to instead use the image `clawpack/v5.7.0_geoclaw`,
+which includes everything in `clawpack/v5.7.0_dockerimage` but also installs
 a number of other tools useful for GeoClaw users, see the Dockerfile
-`clawpack/docker-files/Dockerfile_v5.6.1_geoclaw <https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.6.1_geoclaw>`_.
+`clawpack/docker-files/Dockerfile_v5.7.0_geoclaw <https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.7.0_geoclaw>`_.
+
+You can use this in the same manner as the main clawpack docker image, e.g.
+create and run a new container via::
+
+  docker run -i -t -p 8889:8889 --name clawpack-v5.7.0_geoclaw_container \
+              clawpack/v5.7.0_geoclaw_dockerimage
 
 
 Stopping a container
@@ -57,7 +61,7 @@ Restarting a container
 
 You can restart the container via::
 
-    docker start -a -i clawpack-v5.6.1_container
+    docker start -a -i clawpack-v5.7.0_container
 
 
 Running Jupyter notebooks
@@ -81,13 +85,13 @@ the server.
 
 This will open to the top level of `$HOME`, and you can then navigate to
 wherever the notebooks are you want to run, e.g. the sample ones in the
-`apps` repository can be found at `clawpack-v5.6.1/apps/notebooks`.
+`apps` repository can be found at `clawpack-v5.7.0/apps/notebooks`.
 
 PyClaw users might want to start with
-`clawpack-v5.6.1/apps/notebooks/pyclaw/Acoustics-1D.ipynb`.
+`clawpack-v5.7.0/apps/notebooks/pyclaw/Acoustics-1D.ipynb`.
 
 GeoClaw users might want to try running
-`clawpack-v5.6.1/apps/notebooks/geoclaw/chile2010a.ipynb`,
+`clawpack-v5.7.0/apps/notebooks/geoclaw/chile2010a.ipynb`,
 which exercises most aspects of GeoClaw.
 
 
@@ -111,10 +115,10 @@ few particularly useful commands::
     docker info
 
     docker ps -a  # list all containsers
-    docker rm clawpack-v5.6.0_container  # remove a container
+    docker rm clawpack-v5.7.0_container  # remove a container
 
     docker images -a  # list all images
-    docker rmi clawpack/v5.6.0_dockerimage  # remove an image
+    docker rmi clawpack/v5.7.0_dockerimage  # remove an image
     docker prune  # remove all images not used by any container
 
 
@@ -130,16 +134,16 @@ https://github.com/clawpack/docker-files.
 This might be useful if you want to distribute your own code that depends on
 Clawpack in a form that's easy for others to use.
 
-You can also create a Dockerfile that uses the already-build Clawpack 5.6.1
+You can also create a Dockerfile that uses the already-build Clawpack 5.7.0
 on Dockerhub by starting the Dockerfile with::
 
-    FROM clawpack/v5.6.1_dockerimage:release
+    FROM clawpack/v5.7.0_dockerimage:release
 
 and then adding anything addition you want in the image, 
 such as other Python modules you need or your own application code.
 You may need to specify `USER root` in order to install some things, and
 then switch back to `USER jovyan` at the end.  For an example, see
-`clawpack/docker-files/Dockerfile_v5.6.1_geoclaw <https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.6.1_geoclaw>`_.
+`clawpack/docker-files/Dockerfile_v5.7.0_geoclaw <https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.7.0_geoclaw>`_.
 
 
 Dockerfiles for binder
@@ -151,6 +155,9 @@ starting up a Jupyter notebook server on `binder
 including a simple Dockerfile at the top level of your repository that
 uses the dockerhub image, as above. See this repository for a simple example:
 `<https://github.com/rjleveque/test_binder>`_.
+
+The repository for the book `Riemann Problems and Jupyter Solutions
+<http:/www.clawpack.org/riemann_book>`__ also uses this approach.
 
 See `the binder documentation
 <https://mybinder.readthedocs.io/en/latest/sample_repos.html#minimal-dockerfiles-for-binder>`_

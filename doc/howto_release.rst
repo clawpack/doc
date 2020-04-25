@@ -238,6 +238,8 @@ file of the form::
 Updating the Dockerfile
 -----------------------
 
+See :ref:`docker_image` for instructions on using the docker image.
+
 Note that unlike the tar file for a new release, the docker image includes
 a clone of the `apps` repository, so it would be best to first update that
 repository if necessary.
