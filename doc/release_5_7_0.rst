@@ -55,6 +55,14 @@ General changes
   have been introduced to assist in specifying non-rectangular `flagregions`.
   This has added a new `flagregions.data` file generated from `setrun.py`.
 
+- The AMR parameter `max1d` can now be set in `setrun.py`. This parameter
+  controls the maximum size of each grid patch in each spatial dimension.
+  Previously this was set in `amrclaw/src/Nd/amr_module.f90` and changing it
+  required recompiling all library files via `make new`.  The default value
+  is still 60, which seems to work well in relation to cache size and the
+  desire to distribute grids among threads when OpenMP is used. If you want
+  to change it for some application, set `rundata.amrdata.max1d` in `setrun.py`.
+
 Changes to classic
 ------------------
 
