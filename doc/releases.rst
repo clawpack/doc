@@ -16,7 +16,9 @@ Other notes:
 * For changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 * See :ref:`changes_to_master` for changes to the master branch on Github
-  that are not in the most recent release.  The "dev" branch of the 
+  that are not in the most recent release.  
+
+* The "dev" branch of the 
   documentation (selected under Versions on the menu
   to the left) may contain documentation of features not yet released.
 
@@ -28,6 +30,8 @@ Tar files can be downloaded from
 <https://github.com/clawpack/clawpack/releases/>`_ or 
 from the Zenodo links provided below.
 
+* :ref:`release_5_7_0`  -- April 23, 2020
+  `[DOI 10.5281/zenodo.3764278] <https://doi.org/10.5281/zenodo.3764278>`_
 * :ref:`release_5_6_1`  -- October 28, 2019
   `[DOI 10.5281/zenodo.3528429] <https://doi.org/10.5281/zenodo.3528429>`_
 * :ref:`release_5_6_0`  -- June 2, 2019 

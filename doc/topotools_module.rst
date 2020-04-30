@@ -9,7 +9,9 @@ topotools module for working with topography data
    - :ref:`topotools`
 
 
-:ref:`geoclaw/topotools_examples.ipynb` illustrates how to use some of the tools.
+The notebook
+`topotools_examples <http://www.clawpack.org/gallery/_static/notebooks/geoclaw/topotools_examples.html>`__
+illustrates how to use some of the tools.
 
 The file `$CLAW/geoclaw/tests/test_topotools.py` contains some tests of these
 tools.  Looking at these test routines may also give some ideas on 

@@ -48,7 +48,7 @@ for nb in notebooks:
             "--to", "html", 
             "--execute",
             "--output", output_file,
-            "--ExecutePreprocessor.kernel_name=python2",
+            "--ExecutePreprocessor.kernel_name=python3",
             "--ExecutePreprocessor.timeout=600", 
             input_file]
 

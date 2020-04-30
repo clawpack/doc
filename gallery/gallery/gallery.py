@@ -29,8 +29,8 @@ static_dir = CLAW + '/doc/gallery/_static/'
 
 
 # top of clawpack directory where examples were run:
-#clawdir_examples = CLAW + '/'
-clawdir_examples = '/Users/rjl/D/clawpack-v5.6.0_test/clawpack-v5.6.0_galleries/'
+clawdir_examples = CLAW + '/'
+#clawdir_examples = '/Users/rjl/D/clawpack-v5.6.0_test/clawpack-v5.6.0_galleries/'
 
 remake = True   # True ==> remake all thumbnails even if they exist.
 
@@ -58,8 +58,10 @@ class GallerySection(object):
 class Gallery(object):
     import os
     
-    def __init__(self, title, clawdir=clawdir_examples):
+    def __init__(self, title, clawdir=clawdir_examples,
+                 description=""):
         self.title = title
+        self.description = description
         self.clawdir = clawdir
         self.claw_html_root = claw_html_root
         self.sections = []
@@ -97,6 +99,7 @@ class Gallery(object):
         gfile.write(nchar*"=" + "\n")
         gfile.write("%s\n"  % self.title)
         gfile.write(nchar*"=" + "\n")
+        gfile.write("%s\n\n" % self.description)
         gfile.write(".. contents::\n\n")
 
         #gfile.write("%s\n" % self.title)
@@ -175,7 +178,7 @@ class Gallery(object):
                     else:
                         scale = 0.3
                         make_thumb(src_png ,thumb_file, scale)
-                    gfile.write('.. image:: %s\n   :width: 5cm\n' % thumb_file)
+                    gfile.write('.. image:: %s\n   :height: 4cm\n' % thumb_file)
                     gfile.write('   :target: %s\n' % src_html)
                 gfile.write('\n\n')
 
@@ -207,6 +210,17 @@ def test():
     description = """
         Advecting square with periodic boundary."""
     images = ('frame0000fig1', 'frame0004fig1')
+    gsec.new_item(appdir, plotdir, description, images)
+
+    gsec = gallery.new_section('Geoclaw test')
+
+    #----------------------------------------------
+    gsec = gallery.new_section('eta_init and force_dry')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/eta_init_force_dry'
+    description = """
+        Tsunami with subsidence and dry regions below sea level."""
+    images = ('frame0000fig11', 'frame0003fig11', 'frame0010fig11')
     gsec.new_item(appdir, plotdir, description, images)
        
     gallery.create('test.rst',copy_files=True)
@@ -367,7 +381,9 @@ def make_2d():
     return gallery
 
 def make_geoclaw():
-    gallery = Gallery("Gallery of GeoClaw applications")
+    description = """See also the `Gallery of Jupyter notebooks <http://www.clawpack.org/gallery/notebooks.html>`__."""
+    gallery = Gallery("Gallery of GeoClaw applications",
+                      description=description)
     plotdir = '_plots'
 
     #----------------------------------------------
@@ -387,6 +403,15 @@ def make_geoclaw():
         Simple model of the 2010 tsunami using adjoint flagging."""
     images = ('frame0008fig0', 'frame0024fig0')
     gsec.new_item(appdir, plotdir, description, images)
+    
+    #----------------------------------------------
+    gsec = gallery.new_section('Adjoint problem')
+    #----------------------------------------------
+    appdir = 'geoclaw/examples/tsunami/chile2010_adjoint/adjoint'
+    description = """
+                Adjoint solution from DART 32412, used for adjoint flagging."""
+    images = ('frame0008fig0', 'frame0024fig0')
+    gsec.new_item(appdir, plotdir, description, images)
 
 
     #----------------------------------------------
@@ -395,7 +420,7 @@ def make_geoclaw():
     appdir = 'geoclaw/examples/tsunami/bowl-radial'
     description = """
         Sample code where solution should be radially symmetric."""
-    images = ('frame0000fig0', 'frame0015fig0', 'frame0015fig10', 'gauge0004fig300')
+    images = ('frame0000fig0', 'frame0015fig0', 'frame0015fig10')
     gsec.new_item(appdir, plotdir, description, images)
 
 
@@ -439,22 +464,41 @@ def make_geoclaw():
     images = ('frame0000fig0','frame0000fig4')
     gsec.new_item(appdir, plotdir, description, images)
 
-
     #----------------------------------------------
-    gsec = gallery.new_section('fgmax examples')
+    gsec = gallery.new_section('eta_init and force_dry')
     #----------------------------------------------
-    appdir = 'apps/tsunami/chile2010_fgmax'
+    appdir = 'geoclaw/examples/tsunami/eta_init_force_dry'
     description = """
-        Chile 2010 wave heights and arrival times"""
-    images = ('frame0001fig0','frame0002fig0','amplitude_times')
+        Tsunami with subsidence and dry regions below sea level."""
+    images = ('frame0000fig11', 'frame0003fig11', 'frame0010fig11')
     gsec.new_item(appdir, plotdir, description, images)
 
     #----------------------------------------------
 
-    appdir = 'apps/tsunami/bowl_radial_fgmax'
+    appdir = 'apps/tsunami/shelf1d'
     description = """
-        Radial bowl comparing maximum amplitudes near x-axis and on diagonal"""
-    images = ('fgmax_grid1','fgmax_grid2','fgmax_transects','fgmax_along_shore')
+        Tsunami interacting with 1d continental shelf"""
+    images = ('frame0000fig2','frame0002fig2','frame0005fig2')
+    gsec.new_item(appdir, plotdir, description, images)
+1
+       
+    #----------------------------------------------
+    gsec = gallery.new_section('fgmax examples')
+    #----------------------------------------------
+    
+    appdir = 'geoclaw/examples/tsunami/radial-ocean-island-fgmax'
+    description = """
+        Radial ocean and island test problem from `AWR 2011 paper
+        <http://faculty.washington.edu/rjl/pubs/awr10/index.html>`__."""
+    images = ('frame0005fig7', 'frame0006fig7', 'gauge0002fig300')
+    gsec.new_item(appdir, plotdir, description, images)
+    
+    #----------------------------------------------
+
+    appdir = 'apps/tsunami/chile2010_fgmax'
+    description = """
+        Chile 2010 wave heights and arrival times"""
+    images = ('frame0001fig0','frame0002fig0','amplitude_times')
     gsec.new_item(appdir, plotdir, description, images)
 
 
@@ -630,7 +674,9 @@ def make_classic_amrclaw():
     gallery_2d = make_2d()
 
     # make gallery of everything:
-    gallery_classic_amrclaw = Gallery(title="Gallery of Classic and AMRClaw applications")
+    description = """See also the `Gallery of Jupyter notebooks <http://www.clawpack.org/gallery/notebooks.html>`__."""
+    gallery_classic_amrclaw = Gallery(title="Gallery of Classic and AMRClaw applications",
+                                description=description)
     gallery_classic_amrclaw.sections = gallery_1d.sections + gallery_2d.sections 
     #gallery_classic_amrclaw.sections = gallery_2d.sections 
     

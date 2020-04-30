@@ -1,7 +1,10 @@
+.. _contents:
+
+`The Clawpack Homepage <index.html>`__ contains a general introduction to
+the Clawpack open source software project.
+
 .. contents::
    :depth: 3
-
-.. _contents:
 
 ====================================================
 Full Table of Contents
@@ -170,8 +173,8 @@ Developers' resources
 
 See also :ref:`setup_dev`
 
-Bibliography
-============
+References
+==========
 
 .. toctree::
    :maxdepth: 1

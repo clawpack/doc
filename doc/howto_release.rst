@@ -26,8 +26,14 @@ Run all the examples as described in `CLAW/doc/gallery/README.md
 as required for building the galleries, and check all the resulting plots to
 make sure everything looks correct.
 
-New as of v5.6.0: change the version number in clawpack/clawpack/__init__.py
-Initially set to e.g. v5.4.1rc-alpha, then to final release number.
+Version numbers
+---------------
+
+Change the version number in `clawpack/clawpack/__init__.py`.
+Initially set it to e.g. v5.4.1rc-alpha, then to the final release number.
+
+The version number is also set in `clawpack/setup.py` and should be changed
+there to be consistent with `clawpack/clawpack/__init__.py`
 
 Release candidates
 ------------------
@@ -177,6 +183,12 @@ See :ref:`howto_doc` for general instructions on building the documentation
 and galleries using Sphinx, and for how to push changes to Github so they
 show up on the web.
 
+Note that in the `clawpack/doc` repository there is no `master` branch.
+There should be one corresponding to the latest release and
+also a branch `dev` that has changes since the last release. For a new
+release create a new branch from the `dev` branch with the version number,
+and update `conf.py` for the new version.
+
 When making changes for a new release, the following pages in the directory
 `$CLAW/doc/doc` need to be updated:
 
@@ -189,7 +201,7 @@ When making changes for a new release, the following pages in the directory
    release, using the diffs that show up in `changes_to_master.rst` as a guide.
 
  - Add and commit this new page, and also add a link to it to the file
-   `changes.rst` (to show up in :ref:`changes`).
+   `releases.rst` (to show up in :ref:`releases`).
 
  - Modify the page `changes_to_master.rst` by replacing the previous version
    number (e.g. `5.y.y`) by the version number of the new release
@@ -198,9 +210,9 @@ When making changes for a new release, the following pages in the directory
  - Update `releases.rst` to include a link to the new version on Zenodo.
    Also update the bibtex and recommended citation in `about.rst`.
 
-- Modify several other files to point to the new version number, in particular:
- `installing.rst` , `installing_pip.rst`, `installing_more_options.rst`,
- `contents.rst`, `docker_image.rst`.
+ - Modify several other files to point to the new version number, in particular
+   `installing.rst` , `installing_pip.rst`, `installing_more_options.rst`,
+   `contents.rst`, `docker_image.rst`.
      
  - Update `conf.py` to the new version number, and also
    `$CLAW/doc/gallery/conf.py`
@@ -225,6 +237,8 @@ file of the form::
 
 Updating the Dockerfile
 -----------------------
+
+See :ref:`docker_image` for instructions on using the docker image.
 
 Note that unlike the tar file for a new release, the docker image includes
 a clone of the `apps` repository, so it would be best to first update that

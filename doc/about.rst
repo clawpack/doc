@@ -81,6 +81,8 @@ Other major contributors include:
   `@ahmadia <https://github.com/ahmadia/>`_.
 * Amal Alghamdi,
   `@amal-ghamdi <https://github.com/amal-ghamdi/>`_.
+* Ian Bolliger,
+  `@bolliger32 <https://github.com/bolliger32/>`_.
 * Peter Blossey.
 * Donna Calhoun, 
   `@donnaboise <https://github.com/donnaboise/>`_.
@@ -115,8 +117,8 @@ Citing this work
 If you use Clawpack in publications, please cite the software itself as
 well, with a citation similar to the following::
 
-    Clawpack Development Team (2019), Clawpack Version 5.6.0,
-    http://www.clawpack.org, doi: 10.5281/zenodo.3237295
+    Clawpack Development Team (2020), Clawpack Version 5.7.0,
+    http://www.clawpack.org, doi: TBD
 
 Here's the bibtex::
 
@@ -124,9 +126,9 @@ Here's the bibtex::
         title={Clawpack software}, 
         author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
-        note={Version 5.6.0},
-        doi={10.5281/zenodo.3237295},
-        year={2019}}
+        note={Version 5.7.0},
+        doi={TBD},
+        year={2020}}
 
 Please fill in the version number that you used, and its year, with the
 appropriate DOI from `Zenodo <https://zenodo.org>`_, if available.  
