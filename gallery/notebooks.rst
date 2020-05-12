@@ -9,17 +9,24 @@ The `Jupyter notebook <http://jupyter.org/>`_
 is a very nice platform for illustrating Clawpack examples.
 
 If you have used Clawpack with the Jupyter notebook, please send us a link
-or submit a pull request to the `apps repository <http://github.com/clawpack/apps>`_.
+or submit a pull request to the `apps repository <http://github.com/clawpack/apps>`__.
 The links below will take you to static view of several notebooks
 as html files.  You can also play animations in them and interact
 with some plots, but to actually run the code yourself you should clone the 
 apps repository.
 
-**Warning:** The notebooks and tools to support them are being actively
-developed, so these may change in the near future and the versions posted
-here may not work with the current Clawpack.
+**Version:** Most of these notebooks now work with Clawpack 5.7.0.
 
-**Examples using PyClaw:**
+**Finding the notebooks:**  The links below are to html rendered versions of the
+notebooks.  See the beginning of each notebook for information on where to find
+the original `.ipynb` file.  Many of them are in the 
+`apps repository <http://github.com/clawpack/apps>`__,
+in some subdirectory of `$CLAW/apps/notebooks`.
+
+.. _notebooks_pyclaw:
+
+Examples using PyClaw
+------------------------------------
 
 * :ref:`pyclaw/intro_notebook.ipynb`
 * `A 2D fluid dynamics example <https://github.com/clawpack/apps/blob/master/notebooks/pyclaw/Quadrants.ipynb>`_
@@ -28,56 +35,93 @@ here may not work with the current Clawpack.
 * `PyClaw's Geometry tools <https://gist.github.com/ketch/1a7888d1fcc37209b260>`_
 * `Solitary waves formed by diffraction of shallow water waves over a corrugated bottom <http://nbviewer.jupyter.org/gist/ketch/9250942>`_
 
-**Examples using Fortran Classic:**
+.. _notebooks_classic:
 
-* `advection_1d <_static/notebooks/classic/advection_1d/advection_1d.html>`_
-  illustrating upwind, Lax-Wendroff, and limiter methods.
-* `acoustics_1d_example1 <_static/notebooks/classic/acoustics_1d_example1/acoustics_1d_example1.html>`_
-
-**Examples using AMRClaw:**
-
-* `advection_2d <_static/notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.html>`_
-
-**Examples using GeoClaw:**
-
-* `chile2010a <_static/notebooks/geoclaw/chile2010a/chile2010a.html>`_
-  illustrates how to set up a basic GeoClaw run with adaptive refinement.
-* `chile2010b <_static/notebooks/geoclaw/chile2010b/chile2010b.html>`_
-  illustrates setting regions and gauges.
-* `topotools_examples <_static/notebooks/geoclaw/topotools_examples.html>`_
-  illustrates some of the tools from :ref:`topotools_module`.
-* `dtopotools_examples <_static/notebooks/geoclaw/dtopotools_examples.html>`_
-  illustrates some of the tools from :ref:`dtopotools_module`.
-* `Okada <_static/notebooks/geoclaw/Okada.html>`_
-  illustrates use of the Okada model for generating sea floor deformation.
-
-**Examples for VisClaw:**
-
-* `Animation tools demo
-  <https://nbviewer.jupyter.org/url/www.clawpack.org/_static/notebooks/animation_tools_demo.ipynb>`_
-
-**Riemann solvers:**
-
-A set of notebooks is under development to illustrate Riemann solvers.  See
-http://www.clawpack.org/riemann_book/index.html.
-
-.. _notebooks_old:
-
-Old notebooks --- many need updating
+Examples using Fortran Classic
 ------------------------------------
 
-**Examples illustrating Riemann solvers:**
 
-* `The Riemann problem for the Euler equations <http://nbviewer.ipython.org/gist/ketch/08ce0845da0c8f3fa9ff>`_
-* `Euler shock tube  <http://nbviewer.ipython.org/gist/ketch/d31fd8d2d7739e59b6c6>`_
-* `Riemann solutions of the shallow water equations <http://nbviewer.ipython.org/gist/rjleveque/8994740>`_ 
-* `Shallow water equations -- Riemann solver tests <http://nbviewer.ipython.org/url/faculty.washington.edu/rjl/notebooks/shallow/SW_riemann_tester.ipynb>`_
-* `Acoustics equations and their Riemann solver in 1D and 2D
-  <http://nbviewer.ipython.org/github/maojrs/ipynotebooks/blob/master/acoustics_riemann.ipynb>`_
-* `Elasticity equations and their Riemann solver in 2D and 3D <http://nbviewer.ipython.org/github/maojrs/ipynotebooks/blob/master/elasticity_riemann.ipynb>`_
+* `advection_1d <_static/apps/notebooks/classic/advection_1d/advection_1d.html>`_
+  illustrating upwind, Lax-Wendroff, and limiter methods.
+  From `$CLAW/apps/notebooks/classic/advection_1d.ipynb`.
+  
+* `acoustics_1d_example1 <_static/apps/notebooks/classic/acoustics_1d_example1/acoustics_1d_example1.html>`_.
+  From `$CLAW/apps/notebooks/classic/acoustics_1d_example1.ipynb`.
+
+.. _notebooks_amrclaw:
+
+Examples using AMRClaw
+------------------------------------
 
 
-**Examples illustrating methods:**
+* `advection_2d <_static/apps/notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.html>`_
+
+.. _notebooks_geoclaw:
+
+Examples using GeoClaw
+------------------------------------
+
+
+* `chile2010a <_static/apps/notebooks/geoclaw/chile2010a/chile2010a.html>`_
+  illustrates how to set up a basic GeoClaw run with adaptive refinement.
+* `chile2010b <_static/apps/notebooks/geoclaw/chile2010b/chile2010b.html>`_
+  illustrates setting regions and gauges.
+* `topotools_examples <_static/apps/notebooks/geoclaw/topotools_examples.html>`_
+  illustrates some of the tools from :ref:`topotools_module`.
+* `dtopotools_examples <_static/apps/notebooks/geoclaw/dtopotools_examples.html>`_
+  illustrates some of the tools from :ref:`dtopotools_module`.
+* `Okada <_static/apps/notebooks/geoclaw/Okada.html>`_
+  illustrates use of the Okada model for generating sea floor deformation.
+
+.. _notebooks_tools:
+
+Tools for running clawpack and visualizing results in notebooks
+-----------------------------------------------------------------
+
+Several of the notebooks above use the `clawpack.clawutil.nbtools
+<https://github.com/clawpack/clawutil/blob/master/src/python/clawutil/nbtools.py` module
+of notebook tools to compile and run Fortran versions of Clawpack Classic,
+AMRClaw, or GeoClaw, and display the plots and/or animations of the results
+in the notebook.  For example, see 
+  
+* `amrclaw/advection_2d <_static/apps/notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.html>`__
+* `chile2010a <_static/apps/notebooks/geoclaw/chile2010a/chile2010a.html>`__
+
+The animations are presented with the aid of the 
+  
+* `clawpack.visclaw.animation_tools <https://github.com/clawpack/visclaw/blob/master/src/python/visclaw/animation_tools.py>`__ module. 
+
+The notebook
+
+* `animation tools demo <_static/apps/notebooks/visclaw/animation_tools_demo.html>`__
+
+shows some other related animation tools, including ways to create interactive
+animations using Jupyter widgets or as embedded or stand-alone javascript
+or mp4 files.
+
+.. _notebooks_riemann:
+
+Riemann solvers
+------------------------------------
+
+A collection of notebooks illustrating exact and approximate Riemann solvers
+is available in the repository
+
+- `<https://github.com/clawpack/riemann_book>`__
+
+and visible as rendered html files at 
+
+- `<http://www.clawpack.org/riemann_book>`__
+
+These were developed for the book `Riemann Problems and Jupyter Solutions
+<http://www.clawpack.org/riemann_book>`__ by D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo
+to be published by SIAM in 2020.
+
+
+.. _notebooks_methods:
+
+Illustration of numerical methods
+------------------------------------
 
 * `Advection Equation and the REA algorithm <http://nbviewer.ipython.org/github/maojrs/ipynotebooks/blob/master/advection_REA.ipynb>`_
 
