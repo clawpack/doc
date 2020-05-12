@@ -56,6 +56,9 @@ Examples using AMRClaw
 
 * `advection_2d <_static/apps/notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.html>`_
 
+* `RuledRectangles <_static/apps/notebooks/amrclaw/RuledRectangles.html>`_
+  Illustration of Ruled Rectangles from `clawpack.amrclaw.region_tools`. 
+
 .. _notebooks_geoclaw:
 
 Examples using GeoClaw

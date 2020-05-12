@@ -38,6 +38,7 @@ all_notebooks = [ \
     'notebooks/geoclaw/chile2010a/chile2010a.ipynb',
     'notebooks/geoclaw/chile2010b/chile2010b.ipynb',
     'notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb',
+    'notebooks/amrclaw/RuledRectangles.ipynb',
     'notebooks/classic/advection_1d/advection_1d.ipynb',
     'notebooks/classic/acoustics_1d_example1/acoustics_1d_example1.ipynb',
     'notebooks/visclaw/animation_tools_demo.ipynb',
@@ -51,8 +52,8 @@ notebooks = all_notebooks
 #notebooks = [nb for nb in all_notebooks if 'geoclaw' in nb]
 #notebooks = [nb for nb in all_notebooks if 'visclaw' in nb]
 
-# for testing:
-#notebooks = ['notebooks/classic/test.ipynb']
+# or explicitly list:
+#notebooks = ['notebooks/amrclaw/RuledRectangles.ipynb']
 
 skipped = []
 
