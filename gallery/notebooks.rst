@@ -72,6 +72,8 @@ Examples using GeoClaw
   illustrates some of the tools from :ref:`dtopotools_module`.
 * `Okada <_static/apps/notebooks/geoclaw/Okada.html>`_
   illustrates use of the Okada model for generating sea floor deformation.
+  
+
 
 .. _notebooks_tools:
 
@@ -98,6 +100,25 @@ The notebook
 shows some other related animation tools, including ways to create interactive
 animations using Jupyter widgets or as embedded or stand-alone javascript
 or mp4 files.
+
+
+.. _notebooks_vis:
+
+Plotting and visualization
+---------------------------
+
+In addition to the notebooks referenced above, the following notebooks also
+show how to use various plotting and visualization tools available in Clawpack:
+
+* `pcolorcells <_static/apps/notebooks/visclaw/pcolorcells.html>`__
+  A version of `pcolormesh` that works better for finite volume cell averaged
+  data, also with an illustration of use in making kml overlays for Google Earth.
+  
+* `gridtools <_static/apps/notebooks/visclaw/gridtools.html>`__
+  Tools to extract data from (so far only 2D) AMRClaw output, e.g. to 
+  extract a uniform grid or a 1D transect that uses the finest available
+  grid info at each point.
+
 
 .. _notebooks_riemann:
 

@@ -40,7 +40,9 @@ all_notebooks = [ \
     'notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb',
     'notebooks/classic/advection_1d/advection_1d.ipynb',
     'notebooks/classic/acoustics_1d_example1/acoustics_1d_example1.ipynb',
-    'notebooks/visclaw/animation_tools_demo.ipynb'
+    'notebooks/visclaw/animation_tools_demo.ipynb',
+    'notebooks/visclaw/pcolorcells.ipynb',
+    'notebooks/visclaw/gridtools.ipynb'
     ]
 
 notebooks = all_notebooks
