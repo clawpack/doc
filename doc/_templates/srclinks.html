@@ -1,0 +1,28 @@
+{%- if show_source and has_source and sourcename %}
+<div class="widget navlinks">
+  <h3>{{ _('This Page') }}</h3>
+  <ul class="this-page-menu">
+    <li><a href="{{ pathto('_sources/' + sourcename, true)|e }}"
+            rel="nofollow"
+            target="_blank">{{ _('Source .rst') }}</a></li>
+   {%- if show_srclink_url %}
+    <li><a href="{{ show_srclink_url }}"
+            rel="nofollow"
+            target="_blank">{{ _('Source on GitHub') }}</a></li>
+   {%- endif %}
+   {%- if history_srclink_url %}
+     <li><a href="{{ history_srclink_url }}"
+             rel="nofollow"
+             target="_blank">{{ _('History') }}</a></li>
+   {%- endif %}
+   {%- if edit_srclink_url %}
+    <li><a href="{{ edit_srclink_url }}"
+            rel="nofollow"
+            target="_blank">{{ _('Suggest Edits') }}</a></li>
+   {%- endif %}
+     <li><a href="https://github.com/clawpack/doc/issues/new"
+             rel="nofollow"
+             target="_blank">{{ _('Raise an Issue') }}</a></li>
+  </ul>
+</div>
+{%- endif %}
