@@ -39,6 +39,10 @@ which includes everything in `clawpack/v5.7.0_dockerimage` but also installs
 a number of other tools useful for GeoClaw users, see the Dockerfile
 `clawpack/docker-files/Dockerfile_v5.7.0_geoclaw <https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.7.0_geoclaw>`_.
 
+You can pull this image from dockerhub via::
+
+    $ docker pull clawpack/v5.7.0_geoclaw_dockerimage
+
 You can use this in the same manner as the main clawpack docker image, e.g.
 create and run a new container via::
 
@@ -103,6 +107,24 @@ files, and/or the plots generated, back to the host machine (e.g. some
 directory on your laptop).  You can use the `--volume` flag when running a
 container to accomplish this, see 
 `docker volume documentation <https://docs.docker.com/storage/volumes/>`_.
+
+For example, if you have created a directory `$HOME/docker_disk` on your computer
+then adding::
+
+    -v $HOME/docker_disk:/home/jovyan/work
+
+to your `docker run` command will map this directory to `/home/jovyan/work` in
+the docker container.  So you can move Clawpack output or plots to that directory 
+in order to have access to them from your host computer.
+
+Putting this together with previous options, here's a sample command
+that creates and runs a geoclaw-based container with this mapping
+and also allowing us to start a Jupyter server::
+
+    $ docker run -i -t -p 8889:8889 -v ~/docker_disk:/home/jovyan/work \
+      --name clawpack-v5.7.0_geoclaw_container \
+      clawpack/v5.7.0_geoclaw_dockerimage
+
 
 Some other useful docker commands
 ---------------------------------
