@@ -6,9 +6,7 @@ Ruled Rectangles
 **New in Version 5.7.0.**
 
 Adapted from `this notebook
-<http://www.clawpack.org/new_features_for_v5.7.0/notebooks_html/RuledRectangles.html>`_
-from a `collection illustrating new features for v5.7.0
-<http://www.clawpack.org/new_features_for_v5.7.0/>`_.
+<http://www.clawpack.org/gallery/_static/apps/notebooks/amrclaw/RuledRectangles.html>`_.
 
 In past versions of AMRClaw and GeoClaw, one could specify "refinement
 regions" as rectangles over which a `minlevel` and `maxlevel` are

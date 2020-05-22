@@ -75,6 +75,13 @@ Examples using GeoClaw
   illustrates some of the tools from :ref:`dtopotools_module`.
 * `Okada <_static/apps/notebooks/geoclaw/Okada.html>`_
   illustrates use of the Okada model for generating sea floor deformation.
+* `MarchingFront <_static/apps/notebooks/geoclaw/MarchingFront.html>`_
+  illustrates a marching front algorithm that can be used to identify land
+  behind dikes, and also useful for creating Ruled Rectangles for use as
+  flagregions, or to select fgmax points below some fixed elevation.
+* `ForceDry <_static/apps/notebooks/geoclaw/ForceDry.html>`_
+  illustrates how to force some regions to be initialized as dry land even
+  if they are below sea level (but protected by dikes).
   
 
 

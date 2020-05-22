@@ -54,7 +54,7 @@ notebooks = all_notebooks
 #notebooks = [nb for nb in all_notebooks if 'visclaw' in nb]
 
 # or explicitly list:
-#notebooks = ['notebooks/amrclaw/RuledRectangles.ipynb']
+notebooks = ['notebooks/geoclaw/MarchingFront.ipynb']
 
 skipped = []
 
