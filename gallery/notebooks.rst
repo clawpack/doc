@@ -82,6 +82,9 @@ Examples using GeoClaw
 * `ForceDry <_static/apps/notebooks/geoclaw/ForceDry.html>`_
   illustrates how to force some regions to be initialized as dry land even
   if they are below sea level (but protected by dikes).
+* `MakeFlagregionsCoast <_static/apps/notebooks/geoclaw/MakeFlagregionsCoast.html>`_
+  illustrating making a ruled rectangle for use as a flagregion using the
+  marching front algorithm.
   
 
 

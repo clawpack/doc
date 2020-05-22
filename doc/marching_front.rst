@@ -7,7 +7,7 @@ Marching Front algorithm
 **New in Version 5.7.0.**
 
 Adapted from `this notebook
-<http://www.clawpack.org/gallery/_static/apps/notebooks/amrclaw/MarchingFront.html>`_.
+<http://www.clawpack.org/gallery/_static/apps/notebooks/geoclaw/MarchingFront.html>`_.
 
 
 The module `clawpack.geoclaw.marching_front` defines a function
