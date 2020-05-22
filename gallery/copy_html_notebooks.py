@@ -37,6 +37,7 @@ all_notebooks = [ \
     'notebooks/geoclaw/Okada.ipynb',
     'notebooks/geoclaw/MarchingFront.ipynb',
     'notebooks/geoclaw/ForceDry.ipynb',
+    'notebooks/geoclaw/MakeFlagregionsCoast.ipynb',
     'notebooks/geoclaw/chile2010a/chile2010a.ipynb',
     'notebooks/geoclaw/chile2010b/chile2010b.ipynb',
     'notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb',
@@ -55,7 +56,9 @@ notebooks = all_notebooks
 #notebooks = [nb for nb in all_notebooks if 'visclaw' in nb]
 
 # or explicitly list:
-notebooks = ['notebooks/geoclaw/MarchingFront.ipynb']
+notebooks = ['notebooks/geoclaw/MarchingFront.ipynb',
+    'notebooks/geoclaw/ForceDry.ipynb',
+    'notebooks/geoclaw/MakeFlagregionsCoast.ipynb']
 
 skipped = []
 
