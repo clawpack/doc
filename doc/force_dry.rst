@@ -7,9 +7,7 @@ Force Cells to be Dry Initially
 **New in Version 5.7.0.**
 
 Adapted from `this notebook
-<http://www.clawpack.org/new_features_for_v5.7.0/notebooks_html/ForceDry.html>`_
-from a `collection illustrating new features for v5.7.0
-<http://www.clawpack.org/new_features_for_v5.7.0/>`_.
+<http://www.clawpack.org/gallery/_static/apps/notebooks/geoclaw/ForceDry.html>`_.
 
 See also :ref:`marching_front`, which describes a
 tool to select points from a topography DEM that satisfy given
