@@ -35,6 +35,7 @@ all_notebooks = [ \
     'notebooks/geoclaw/topotools_examples.ipynb',
     'notebooks/geoclaw/dtopotools_examples.ipynb',
     'notebooks/geoclaw/Okada.ipynb',
+    'notebooks/geoclaw/MarchingFront.ipynb',
     'notebooks/geoclaw/chile2010a/chile2010a.ipynb',
     'notebooks/geoclaw/chile2010b/chile2010b.ipynb',
     'notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb',

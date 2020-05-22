@@ -480,7 +480,7 @@ def make_geoclaw():
         Tsunami interacting with 1d continental shelf"""
     images = ('frame0000fig2','frame0002fig2','frame0005fig2')
     gsec.new_item(appdir, plotdir, description, images)
-1
+ 
        
     #----------------------------------------------
     gsec = gallery.new_section('fgmax examples')
@@ -501,6 +501,18 @@ def make_geoclaw():
     images = ('frame0001fig0','frame0002fig0','amplitude_times')
     gsec.new_item(appdir, plotdir, description, images)
 
+       
+    #----------------------------------------------
+    gsec = gallery.new_section('Lagrangian gauges')
+    #----------------------------------------------
+    
+    appdir = 'geoclaw/examples/tsunami/island-particles'
+    description = """
+        Lagrangian gauges allow particle tracking"""
+    images = ('frame0007fig0', 'frame0025fig0')
+    gsec.new_item(appdir, plotdir, description, images)
+    
+    #----------------------------------------------
 
     #----------------------------------------------
 
