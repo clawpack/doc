@@ -13,7 +13,7 @@ your question in these docs, please send a note to the
 
 Along with the google group we also have created a slack
 workspace.  If you would like to join please `fill out this 
-form
+form: 
 <https://forms.gle/HaWxefH5pTibgbgN8>`_.
 
 We are also starting to experiment with the following:
