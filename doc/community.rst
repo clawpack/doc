@@ -11,6 +11,11 @@ your question in these docs, please send a note to the
 `claw-users google group
 <https://groups.google.com/forum/#!forum/claw-users>`_.
 
+Along with the google group we also have created a slack
+workspace.  If you would like to join please `fill out this 
+form: 
+<https://forms.gle/HaWxefH5pTibgbgN8>`_.
+
 We are also starting to experiment with the following:
 (Warning: they are not actively used.)
 
