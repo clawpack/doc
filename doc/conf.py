@@ -239,8 +239,7 @@ htmlhelp_basename = 'Clawpackdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, document class [howto/manual]).
 latex_documents = [
-  ('index', 'Clawpack.tex', ur'Clawpack Documentation',
-   ur'RJL', 'manual'),
+  ('index', 'Clawpack.tex', r'Clawpack Documentation', r'RJL', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
