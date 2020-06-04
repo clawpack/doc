@@ -11,10 +11,10 @@ your question in these docs, please send a note to the
 `claw-users google group
 <https://groups.google.com/forum/#!forum/claw-users>`_.
 
+**Slack channel.**
 Along with the google group we also have created a slack
 workspace.  If you would like to join please `fill out this 
-form: 
-<https://forms.gle/HaWxefH5pTibgbgN8>`_.
+form <https://forms.gle/HaWxefH5pTibgbgN8>`_.
 
 We are also starting to experiment with the following:
 (Warning: they are not actively used.)
@@ -63,6 +63,11 @@ User Workshops, Clinics, and Tutorials
 Available for streaming
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+- The `Clawpack youtube channel
+  <https://www.youtube.com/channel/UCxIdwWtDvUG_kdn-KiSVroQ>`__
+  now has several videos on aspects of GeoClaw.  Additional introductory
+  videos on Clawpack more generally will be added. 
+
 - `The GeoClaw software and tsunami modeling
   <https://csdms.colorado.edu/wiki/Presenters-0439>`__ 
   Webinar for CSDMS in 2019 by Randy LeVeque
@@ -72,13 +77,19 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- May 22, 2020: GeoClaw webinars and user help sessions are 
-  planned as part of the `CSDMS Annual Meeting
-  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__.
-  Due to COVID-19 this meeting will be online only.
+- None currently scheduled.
 
 Recent
 ^^^^^^^^
+
+- GeoClaw webinars and user help sessions
+  planned as part of the 2020 `CSDMS Annual Meeting
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__
+  took place online due to COVID-19, on May 22, 2020.  
+  Four short presentations can be found on the `Clawpack youtube channel
+  <https://www.youtube.com/channel/UCxIdwWtDvUG_kdn-KiSVroQ>`__.
+  For titles and links to related slides and resources, see the 
+  `workshop webpage <http://www.clawpack.org/geoclawdev-2020/>`__.
 
 - Tutorial on storm surge modeling with GeoClaw, Tulane University, as part
   of the `Clifford Lectures <http://www2.tulane.edu/sse/math/news/clifford-lectures-april-2017.cfm>`_, April, 2017.
