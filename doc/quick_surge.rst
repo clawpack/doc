@@ -6,6 +6,10 @@
 Quick start guide for storm surge modeling
 *****************************************************************
 
+See also this `youtube video <https://www.youtube.com/watch?v=YurKRmYgGfk&t=10s>`__
+and the related materials from the `2020 GeoClaw Developers Workshop
+<http://www.clawpack.org/geoclawdev-2020/>`__.
+
 To get started with a storm surge computation it is best to refer to a previous
 working example.  For example, you might start with 
 `$CLAW/geoclaw/examples/storm-surge/ike`.  There are also a number of additional 

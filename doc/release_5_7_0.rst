@@ -139,6 +139,11 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+- For an overview of changes to GeoClaw, see also this `youtube video
+  <https://www.youtube.com/watch?v=xM1SQBNMVgM&list=PLHJVj2zE9oLSc3d6rm7n85jIIePMCBSlu>`__
+  and the related materials from the `2020 GeoClaw Developers Workshop
+  <http://www.clawpack.org/geoclawdev-2020/>`__.
+
 - Support for "Lagrangian gauges" that can be used for particle tracking
   to help visualize the flow.  See
   `lagrangian_gauges.html <http://depts.washington.edu/clawpack/sampledocs/sphinx-multiversion/dev/lagrangian_gauges.html>`_.
