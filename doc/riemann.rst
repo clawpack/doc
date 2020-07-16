@@ -13,6 +13,11 @@ The directory `$CLAW/riemann/src` contains Riemann solvers for many
 applications, including advection, acoustics, shallow water equations, Euler
 equations, traffic flow, Burgers' equation, etc.
 
+See also the new book `Riemann Problems and Jupyter Solutions
+<https://bookstore.siam.org/fa16/bonus>`_ (SIAM, 2020),
+which consists of a set of Jupyter notebooks illustrating
+the basic concepts of Riemann problems and approximate solvers.
+
 .. _rp1:
 
 One-dimensional Riemann solver
