@@ -29,6 +29,5 @@ The examples converted so far can be found in the
 directory `apps/fvmbook` if you clone the `apps` repository.
 (See :ref:`apps`.)
 
-You can also browse the examples in the 
-:ref:`gallery_fvmbook`.
-
+You can also browse the examples and plots/animations of the results in the
+`Clawpack gallery of fvmbook applications <http://www.clawpack.org/gallery/gallery/gallery_fvmbook.html>`__
