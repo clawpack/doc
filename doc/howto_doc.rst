@@ -28,10 +28,9 @@ page are controlled by the following files:
  - `conf.py` includes the version number, sets the `html_theme`, as well as
    setting paths to extensions and various other sphinx settings.
  - `_themes/flask_local/layout.html` determines the menus at the top
- - `_themes/flask_web/layout.html` version used for building for the web,
-   is the same except for different relative link to the galleries.
  - `_static/clawlogo.jpg` is the Clawpack logo put on each page
  - `_static/clawicon.ico` is the icon that appears on browser tabs
+ - `_templates/index.html` contains the main landing page
  
 
 Before proceeding, first make sure other repositories are checked out to
