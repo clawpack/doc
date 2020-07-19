@@ -115,7 +115,7 @@ This can be done as follows::
 
     cd $CLAW/doc/doc/_build/html
     rm -f *.html         # remove the html file with bad sidebars
-    cp v5.7.0/*.html .   # replacing v5.7.0 with the current version
+    cp v5.7.0/* .   # replacing v5.7.0 with the current version
     python ../../fix_links_top_level.py
     
 If you like what you see, you can push back to your fork and then issue a
