@@ -2,7 +2,9 @@ html {
   height: 100%;
 }
 body {
-  min-width: 150px;
+  width: 700px
+  min-width: 60%;
+  max-width: 95%;
   height: 100%;
 }
 a.button {
@@ -55,7 +57,7 @@ a.button {
   background-color: #7F0000;
 }
 #header {
-  width: 830px;
+  width: 100%;
   margin: 0 auto;
   zoom: 1;
   margin: 0 auto;
@@ -84,13 +86,14 @@ a.button {
   color: #7F0000;
 }
 #header h1:first-child {
-  margin-left: 0;
+  margin-left: 10px;
 }
 #header nav {
   display: block;
   float: left;
-  width: 500px;
-  margin-left: 10px;
+  width: 700px;
+  max-width: 90%;
+  margin-left: 5px;
   font-size: 16px;
 }
 #header nav:first-child {
