@@ -34,6 +34,7 @@ static_apps_dir = os.path.join(CLAW,'doc','gallery','_static','apps')
 all_notebooks = [ \
     'notebooks/geoclaw/topotools_examples.ipynb',
     'notebooks/geoclaw/dtopotools_examples.ipynb',
+    'notebooks/geoclaw/dtopo_triangular/CSZ_example.ipynb',
     'notebooks/geoclaw/Okada.ipynb',
     'notebooks/geoclaw/MarchingFront.ipynb',
     'notebooks/geoclaw/ForceDry.ipynb',
@@ -56,9 +57,10 @@ notebooks = all_notebooks
 #notebooks = [nb for nb in all_notebooks if 'visclaw' in nb]
 
 # or explicitly list:
-notebooks = ['notebooks/geoclaw/MarchingFront.ipynb',
-    'notebooks/geoclaw/ForceDry.ipynb',
-    'notebooks/geoclaw/MakeFlagregionsCoast.ipynb']
+if 0:
+    notebooks = ['notebooks/geoclaw/MarchingFront.ipynb',
+        'notebooks/geoclaw/ForceDry.ipynb',
+        'notebooks/geoclaw/MakeFlagregionsCoast.ipynb']
 
 skipped = []
 

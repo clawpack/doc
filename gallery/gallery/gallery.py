@@ -481,7 +481,15 @@ def make_geoclaw():
     images = ('frame0000fig2','frame0002fig2','frame0005fig2')
     gsec.new_item(appdir, plotdir, description, images)
  
-       
+    #----------------------------------------------
+
+    appdir = 'apps/tsunami-examples/tohoku2011_hawaii_currents'
+    description = """
+        Tohoku tsunami and comparison with gauge data in Hawaii"""
+    images = ('frame0001fig1','frame0012fig1','gauge5680fig300')
+    gsec.new_item(appdir, plotdir, description, images)
+ 
+ 
     #----------------------------------------------
     gsec = gallery.new_section('fgmax examples')
     #----------------------------------------------
