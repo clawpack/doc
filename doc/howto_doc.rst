@@ -20,7 +20,7 @@ related to the gallery are in `$CLAW/doc/gallery`.  As of Version
 
 They used to be connected using 
 `intersphinx <http://www.sphinx-doc.org/en/stable/ext/intersphinx.html>`_.  
-but this was dropped in v5.7.0.
+but this was dropped in v5.7.x.
 
 The general look of the documentation and various things that appear on each
 page are controlled by the following files:
@@ -66,7 +66,7 @@ versions.
 The instructions below make webpages that list v5.4.0, etc. and allow
 viewing docs that may be more relevant to a previous version of Clawpack.
 
-As of v5.7.0, we are now using 
+As of v5.7.x, we are now using 
 `sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__
 instead of 
 `sphinxcontrib-versioning <https://github.com/sphinx-contrib/sphinxcontrib-versioning>`__.
@@ -96,7 +96,7 @@ Versions" and all tags as "Older Versions".
 The two branches are set to `dev` and the most
 recent version, by this line of `conf.py`::
 
-    smv_branch_whitelist = r'v5.7.0|dev' 
+    smv_branch_whitelist = r'v5.7.x|dev' 
     
 This should be updated for a new version.
 
@@ -115,7 +115,7 @@ This can be done as follows::
 
     cd $CLAW/doc/doc/_build/html
     rm -f *.html         # remove the html file with bad sidebars
-    cp v5.7.0/* .   # replacing v5.7.0 with the current version
+    cp -r v5.7.x/* .   # replacing v5.7.x with the current version
     python ../../fix_links_top_level.py
     
 If you like what you see, you can push back to your fork and then issue a
