@@ -47,7 +47,8 @@ all_notebooks = [ \
     'notebooks/classic/acoustics_1d_example1/acoustics_1d_example1.ipynb',
     'notebooks/visclaw/animation_tools_demo.ipynb',
     'notebooks/visclaw/pcolorcells.ipynb',
-    'notebooks/visclaw/gridtools.ipynb'
+    'notebooks/visclaw/gridtools.ipynb',
+    'tsunami-examples/tohoku2011_hawaii_currents/compare_results.ipynb'
     ]
 
 notebooks = all_notebooks
@@ -61,6 +62,7 @@ if 0:
     notebooks = ['notebooks/geoclaw/MarchingFront.ipynb',
         'notebooks/geoclaw/ForceDry.ipynb',
         'notebooks/geoclaw/MakeFlagregionsCoast.ipynb']
+
 
 skipped = []
 

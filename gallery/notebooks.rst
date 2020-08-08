@@ -70,20 +70,26 @@ Examples using GeoClaw
 
 * `topotools_examples <_static/apps/notebooks/geoclaw/topotools_examples.html>`_
   illustrates some of the tools from :ref:`topotools_module`.
+
 * `dtopotools_examples <_static/apps/notebooks/geoclaw/dtopotools_examples.html>`_
   illustrates some of the tools from :ref:`dtopotools_module`.
+
 * `Okada <_static/apps/notebooks/geoclaw/Okada.html>`_
   illustrates use of the Okada model for generating sea floor deformation.
+
 * `CSZ_example <_static/apps/notebooks/geoclaw/dtopo_triangular/CSZ_example.html>`_
   illustrates use of the Okada model on triangles rather than
-  rectangles, creating a dtopo file for a CSZ realization.
+  rectangles, creating a dtopo file for a "random" Cascadia Subduction Zone event.
+
 * `MarchingFront <_static/apps/notebooks/geoclaw/MarchingFront.html>`_
   illustrates a marching front algorithm that can be used to identify land
   behind dikes, and also useful for creating Ruled Rectangles for use as
   flagregions, or to select fgmax points below some fixed elevation.
+
 * `ForceDry <_static/apps/notebooks/geoclaw/ForceDry.html>`_
   illustrates how to force some regions to be initialized as dry land even
   if they are below sea level (but protected by dikes).
+
 * `MakeFlagregionsCoast <_static/apps/notebooks/geoclaw/MakeFlagregionsCoast.html>`_
   illustrating making a ruled rectangle for use as a flagregion using the
   marching front algorithm.
@@ -99,6 +105,7 @@ Chile 2010
 
 * `chile2010a <_static/apps/notebooks/geoclaw/chile2010a/chile2010a.html>`_
   illustrates how to set up a basic GeoClaw run with adaptive refinement.
+
 * `chile2010b <_static/apps/notebooks/geoclaw/chile2010b/chile2010b.html>`_
   illustrates setting regions and gauges.
   
