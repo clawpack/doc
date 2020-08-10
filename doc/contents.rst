@@ -83,6 +83,7 @@ General information that applies to Classic, AMRClaw, and GeoClaw.
    python
    makefiles
    makefiles_library
+   b4run
    application_documentation
    setrun
    setrun_sample

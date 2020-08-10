@@ -20,7 +20,7 @@ related to the gallery are in `$CLAW/doc/gallery`.  As of Version
 
 They used to be connected using 
 `intersphinx <http://www.sphinx-doc.org/en/stable/ext/intersphinx.html>`_.  
-but this was dropped in v5.7.0.
+but this was dropped in v5.7.x.
 
 The general look of the documentation and various things that appear on each
 page are controlled by the following files:
@@ -28,10 +28,9 @@ page are controlled by the following files:
  - `conf.py` includes the version number, sets the `html_theme`, as well as
    setting paths to extensions and various other sphinx settings.
  - `_themes/flask_local/layout.html` determines the menus at the top
- - `_themes/flask_web/layout.html` version used for building for the web,
-   is the same except for different relative link to the galleries.
  - `_static/clawlogo.jpg` is the Clawpack logo put on each page
  - `_static/clawicon.ico` is the icon that appears on browser tabs
+ - `_templates/index.html` contains the main landing page
  
 
 Before proceeding, first make sure other repositories are checked out to
@@ -42,6 +41,10 @@ To create html files from the dev branch only, for example::
 
     cd $CLAW/doc/doc
     git checkout dev
+    make html
+
+The `Makefile` has been modified so that `make html` does this::
+
     sphinx-build -b html . _build1/html
 
 To view the files, point your browser to `$CLAW/doc/doc/_build1/html/index.html`
@@ -63,7 +66,7 @@ versions.
 The instructions below make webpages that list v5.4.0, etc. and allow
 viewing docs that may be more relevant to a previous version of Clawpack.
 
-As of v5.7.0, we are now using 
+As of v5.7.x, we are now using 
 `sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__
 instead of 
 `sphinxcontrib-versioning <https://github.com/sphinx-contrib/sphinxcontrib-versioning>`__.
@@ -78,6 +81,10 @@ committed to some branch (normally `dev` if you have been adding something new).
 And then do this::
 
     cd $CLAW/doc/doc
+    make versions
+
+The `Makefile` has been modified so that `make versions` does this::
+
     sphinx-multiversion . _build/html
 
 To view the files, point your browser to `_build/html/dev/index.html`  
@@ -89,7 +96,7 @@ Versions" and all tags as "Older Versions".
 The two branches are set to `dev` and the most
 recent version, by this line of `conf.py`::
 
-    smv_branch_whitelist = r'v5.6.1|dev' 
+    smv_branch_whitelist = r'v5.7.x|dev' 
     
 This should be updated for a new version.
 
@@ -107,7 +114,8 @@ webpage we need to:
 This can be done as follows::
 
     cd $CLAW/doc/doc/_build/html
-    cp v5.6.1/*.html .   # replacing v5.6.1 with the current version
+    rm -f *.html         # remove the html file with bad sidebars
+    cp -r v5.7.x/* .   # replacing v5.7.x with the current version
     python ../../fix_links_top_level.py
     
 If you like what you see, you can push back to your fork and then issue a

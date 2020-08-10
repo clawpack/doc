@@ -6,31 +6,25 @@
 setaux default routines
 ========================
 
-For GeoClaw, see :ref:`setaux_geoclaw`.
-
-Below are the default `setaux` library routines for Classic and AMRClaw.  
+Below are links to the default `setaux` library routines for Classic and AMRClaw.  
 By default these do nothing.  If you wish to specify `aux` arrays you will
 need to copy one of these files to your application directory and modify it
 as needed.  Remember to change to `Makefile` to point to the proper version.
 
 
-`$CLAW/classic/src/1d/setaux.f90`:
+- `$CLAW/classic/src/1d/setaux.f90
+  <https://github.com/clawpack/classic/blob/master/src/1d/setaux.f90>`__
 
-.. literalinclude:: ../../classic/src/1d/setaux.f90
-   :language: fortran
-   :linenos:
+- `$CLAW/classic/src/2d/setaux.f90
+  <https://github.com/clawpack/classic/blob/master/src/2d/setaux.f90>`__
 
-`$CLAW/classic/src/2d/setaux.f90`:
+- `$CLAW/classic/src/3d/setaux.f90
+  <https://github.com/clawpack/classic/blob/master/src/3d/setaux.f90>`__
 
-.. literalinclude:: ../../classic/src/2d/setaux.f90
-   :language: fortran
-   :linenos:
+(Note: these links are for the version checked in to the master branch.
+You can select a different branch or tag from the GitHub page.)
 
-`$CLAW/classic/src/3d/setaux.f90`:
 
-.. literalinclude:: ../../classic/src/3d/setaux.f90
-   :language: fortran
-   :linenos:
 
 
 .. _setaux_geoclaw:
@@ -44,8 +38,6 @@ to `dx*dy` (the capacity function), and `aux(3,i,j)` to the length ratio of
 the bottom edge to `dx` (The latter two quantities vary  
 with latitude when `coordinate_system == 2`).
 
-`$CLAW/geoclaw/src/2d/shallow/setaux.f90`:
+- `$CLAW/geoclaw/src/2d/shallow/b4step2.f90
+  <https://github.com/clawpack/geoclaw/blob/master/src/2d/shallow/b4step2.f90>`__
 
-.. literalinclude:: ../../geoclaw/src/2d/shallow/setaux.f90
-   :language: fortran
-   :linenos:

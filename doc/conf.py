@@ -47,7 +47,7 @@ extensions = ['sphinx.ext.autodoc',
               'srclinks']
 
 
-mathjax_path = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
+mathjax_path = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 
 # Add any paths that contain templates here, relative to this directory.
@@ -142,7 +142,8 @@ html_sidebars = {
 
 # Whitelist pattern for tags (set to None to ignore all tags)
 # Will show up in list of Older releases,  see _templates/versioning.html
-smv_tag_whitelist = r'^.*$'  # all tags 
+#smv_tag_whitelist = r'^.*$'  # all tags 
+smv_tag_whitelist = r'^v\d+\.\d+\.x$'  # all tags of form v*.*.x
 
 # Whitelist pattern for branches (set to None to ignore all branches)
 # Will show up in list of Latest releases,  see _templates/versioning.html

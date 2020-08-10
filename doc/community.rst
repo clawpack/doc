@@ -6,6 +6,9 @@ Clawpack Community
 
 **We welcome new users!**  
 
+We also welcome new contributors; see :ref:`developers` for tips on 
+contributing code or new examples.
+
 If you run into problems or can't find the answer to
 your question in these docs, please send a note to the 
 `claw-users google group

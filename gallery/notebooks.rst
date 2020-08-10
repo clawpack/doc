@@ -8,8 +8,6 @@ The `Jupyter notebook <http://jupyter.org/>`_
 (formerly known as IPython notebook)
 is a very nice platform for illustrating Clawpack examples.
 
-If you have used Clawpack with the Jupyter notebook, please send us a link
-or submit a pull request to the `apps repository <http://github.com/clawpack/apps>`__.
 The links below will take you to static view of several notebooks
 as html files.  You can also play animations in them and interact
 with some plots, but to actually run the code yourself you should clone the 
@@ -22,6 +20,12 @@ notebooks.  See the beginning of each notebook for information on where to find
 the original `.ipynb` file.  Many of them are in the 
 `apps repository <http://github.com/clawpack/apps>`__,
 in some subdirectory of `$CLAW/apps/notebooks`.
+
+If you have used Clawpack with the Jupyter notebook and would like to submit
+your notebook for inclusion, please send us a link
+or submit a 
+`pull request to the apps repository <http://github.com/clawpack/apps/pulls>`__.
+
 
 .. _notebooks_pyclaw:
 
@@ -64,28 +68,53 @@ Examples using AMRClaw
 Examples using GeoClaw
 ------------------------------------
 
-
-* `chile2010a <_static/apps/notebooks/geoclaw/chile2010a/chile2010a.html>`_
-  illustrates how to set up a basic GeoClaw run with adaptive refinement.
-* `chile2010b <_static/apps/notebooks/geoclaw/chile2010b/chile2010b.html>`_
-  illustrates setting regions and gauges.
 * `topotools_examples <_static/apps/notebooks/geoclaw/topotools_examples.html>`_
   illustrates some of the tools from :ref:`topotools_module`.
+
 * `dtopotools_examples <_static/apps/notebooks/geoclaw/dtopotools_examples.html>`_
   illustrates some of the tools from :ref:`dtopotools_module`.
+
 * `Okada <_static/apps/notebooks/geoclaw/Okada.html>`_
   illustrates use of the Okada model for generating sea floor deformation.
+
+* `CSZ_example <_static/apps/notebooks/geoclaw/dtopo_triangular/CSZ_example.html>`_
+  illustrates use of the Okada model on triangles rather than
+  rectangles, creating a dtopo file for a "random" Cascadia Subduction Zone event.
+
 * `MarchingFront <_static/apps/notebooks/geoclaw/MarchingFront.html>`_
   illustrates a marching front algorithm that can be used to identify land
   behind dikes, and also useful for creating Ruled Rectangles for use as
   flagregions, or to select fgmax points below some fixed elevation.
+
 * `ForceDry <_static/apps/notebooks/geoclaw/ForceDry.html>`_
   illustrates how to force some regions to be initialized as dry land even
   if they are below sea level (but protected by dikes).
+
 * `MakeFlagregionsCoast <_static/apps/notebooks/geoclaw/MakeFlagregionsCoast.html>`_
   illustrating making a ruled rectangle for use as a flagregion using the
   marching front algorithm.
+
+
+.. _notebooks_tsunami-examples:
+
+Tsunami modeling examples
+-------------------------
+
+Chile 2010
+^^^^^^^^^^^
+
+* `chile2010a <_static/apps/notebooks/geoclaw/chile2010a/chile2010a.html>`_
+  illustrates how to set up a basic GeoClaw run with adaptive refinement.
+
+* `chile2010b <_static/apps/notebooks/geoclaw/chile2010b/chile2010b.html>`_
+  illustrates setting regions and gauges.
   
+Tohoku 2011
+^^^^^^^^^^^^
+
+* `compare_results <_static/apps/tsunami-examples/tohoku2011_hawaii_currents/compare_results.html>`_ 
+  compares GeoClaw results to observations at a tide gauge and 
+  ADCP current profiler in Hawaii.
 
 
 .. _notebooks_tools:
@@ -94,7 +123,7 @@ Tools for running clawpack and visualizing results in notebooks
 -----------------------------------------------------------------
 
 Several of the notebooks above use the `clawpack.clawutil.nbtools
-<https://github.com/clawpack/clawutil/blob/master/src/python/clawutil/nbtools.py` module
+<https://github.com/clawpack/clawutil/blob/master/src/python/clawutil/nbtools.py>`__ module
 of notebook tools to compile and run Fortran versions of Clawpack Classic,
 AMRClaw, or GeoClaw, and display the plots and/or animations of the results
 in the notebook.  For example, see 
@@ -145,11 +174,12 @@ is available in the repository
 
 and visible as rendered html files at 
 
-- `<http://www.clawpack.org/riemann_book>`__
+- `<http://www.clawpack.org/riemann_book/html/Index.html>`__
 
 These were developed for the book `Riemann Problems and Jupyter Solutions
-<http://www.clawpack.org/riemann_book>`__ by D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo
-to be published by SIAM in 2020.
+<https://bookstore.siam.org/fa16/bonus>`__ 
+by D. I. Ketcheson, R. J. LeVeque, and M. J. del Razo.  
+A paperback version was published by SIAM in 2020.
 
 
 .. _notebooks_methods:
