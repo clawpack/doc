@@ -117,8 +117,8 @@ Citing this work
 If you use Clawpack in publications, please cite the software itself as
 well, with a citation similar to the following::
 
-    Clawpack Development Team (2020), Clawpack Version 5.7.0,
-    http://www.clawpack.org, doi: 10.5281/zenodo.3764278
+    Clawpack Development Team (2020), Clawpack Version 5.7.1,
+    http://www.clawpack.org, doi: 10.5281/zenodo.??
 
 Here's the bibtex::
 
@@ -126,8 +126,8 @@ Here's the bibtex::
         title={Clawpack software}, 
         author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
-        note={Version 5.7.0},
-        doi={https://doi.org/10.5281/zenodo.3764278},
+        note={Version 5.7.1},
+        doi={https://doi.org/10.5281/zenodo.??},
         year={2020}}
 
 Please fill in the version number that you used, and its year, with the
@@ -186,16 +186,16 @@ Development of this software has been supported in part by
 
  * NSF Grants DMS-8657319, DMS-9204329, DMS-9303404, DMS-9505021, 
    DMS-96226645, DMS-9803442, DMS-0106511, CMS-0245206,  DMS-0609661,
-   DMS-0914942, DMS-1216732, EAR-1331412.
+   DMS-0914942, DMS-1216732, EAR-1331412, CMMI-1536198.
 
  * DOE Grants DE-FG06-93ER25181,  DE-FG03-96ER25292, DE-FG02-88ER25053,
-   DE-FG02-92ER25139, DE-FG03-00ER2592, DE-FC02-01ER25474
+   DE-FG02-92ER25139, DE-FG03-00ER2592, DE-FC02-01ER25474.
 
- * AFOSR grant F49620-94-0132, 
+ * AFOSR grant F49620-94-0132. 
 
- * NIH grant 5R01AR53652-2,
+ * NIH grant 5R01AR53652-2.
 
- * ONR grant N00014-09-1-0649
+ * ONR grant N00014-09-1-0649.
 
  * The Norwegian Research Council (NFR) through the program no.  101039/420.
 
@@ -207,7 +207,13 @@ Development of this software has been supported in part by
 
  * University of Washington CoMotion Fellowship.
 
- * Grants from King Abdullah University of Science and Technology (KAUST)
+ * Grants from King Abdullah University of Science and Technology (KAUST).
+
+ * Contracts from Washington State Emergency Management Division, with 
+   funding from the National Tsunami Hazard Mitigation Program.
+
+ * Contracts from the NASA Asteroid Threat Assessment Project, Planetary
+   Defense Coordination Office.
 
 Any opinions, findings, and conclusions or recommendations expressed in this
 material are those of the author(s) and do not necessarily reflect the views
