@@ -86,10 +86,10 @@ The repositories below are not included in the Clawpack tarfile or pip
 install, but changes to these repositories may also be of interest.
 
 - `apps diffs
-  <https://github.com/clawpack/apps/compare/v5.7.0...master>`_
+  <https://github.com/clawpack/apps/compare/v5.6.0...master>`_
 
 - `doc diffs
-  <https://github.com/clawpack/doc/compare/v5.7.0...dev>`_
+  <https://github.com/clawpack/doc/compare/v5.7.x...dev>`_
 
 - `docker-files diffs
   <https://github.com/clawpack/docker-files/compare/v5.7.0...master>`_
