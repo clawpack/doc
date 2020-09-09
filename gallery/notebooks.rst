@@ -100,6 +100,20 @@ Examples using GeoClaw
 Tsunami modeling examples
 -------------------------
 
+Radial Ocean
+^^^^^^^^^^^^
+
+These notebooks are part of
+`$CLAW/geoclaw/examples/tsunami/radial_ocean_island_fgmax
+<_static/geoclaw/examples/tsunami/radial-ocean-island-fgmax/README.html>`__.
+
+* `make_input_files <_static/geoclaw/examples/tsunami/radial-ocean-island-fgmax/make_input_files.html>`__
+  creates input files.
+
+* `process_fgmax <_static/geoclaw/examples/tsunami/radial-ocean-island-fgmax/process_fgmax.html>`__
+  makes plots of fgmax results.
+
+
 Chile 2010
 ^^^^^^^^^^^
 
