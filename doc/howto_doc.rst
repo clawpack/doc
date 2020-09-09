@@ -6,9 +6,6 @@ Guide for updating this documentation
 
 See also the README.md at https://github.com/clawpack/doc.
 
-When updating the documentation for a new release, see also
-:ref:`howto_release`.
-
 The `clawpack/doc <https://github.com/clawpack/doc>`_ repository is not
 included in the Clawpack distribution and must be cloned separately if you
 want to work with these files.
@@ -22,6 +19,52 @@ They used to be connected using
 `intersphinx <http://www.sphinx-doc.org/en/stable/ext/intersphinx.html>`_.  
 but this was dropped in v5.7.x.
 
+Git branches and tags
+---------------------
+
+Older versions of the documentation used to be tagged for each minor
+release, e.g. `v5.6.1`.  Starting with v5.7.0, these are now only tagged
+with the major release, e.g. `v5.7.x`.  
+
+The side menu on the Sphinx pages now lists only these major tags. The
+assumption is that any changes within e.g. the 5.7 version are minor enough
+that the documentation should not change substantially.
+
+There are two active **branches** at any time, one for the current major
+release, e.g. `v5.7.x`, and one named `dev` for the development of documenation
+for features not yet released.  When a new major release is done the
+`v5.7.x` branch will be retired, creating a `v5.7.x` tag instead along with
+a new `v5.8.x` branch.
+
+As documents are improved, continue to update the current release branch,
+e.g. `v5.7.x`, and also merge these changes in to the `dev` branch.  In
+general `dev` should be up to date with the current release branch along
+with perhaps some new documentation for features not in the current
+release.
+
+Note that the file `conf.py` contains the version number.  Please insure
+that the `dev` branch and current release branch each have the correct
+thing. This can easily get messed up when merging from one branch to the
+other.  One way to help avoid this is to always merge via, e.g.::
+
+    git checkout dev
+    git merge v5.7.0 --no-ff --no-commit 
+
+and then check before doing the merge commit to make sure `conf.py` hasn't
+been improperly changed.  If it has, and that's the only change to this
+file, you can do::
+
+    git reset HEAD conf.py
+    git checkout conf.py
+
+and check that it's correct before committing via e.g.::
+
+    git commit -m "merged recent v5.7.x changes into dev"
+    
+
+Configuration and style files
+-----------------------------
+
 The general look of the documentation and various things that appear on each
 page are controlled by the following files:
 
@@ -32,10 +75,19 @@ page are controlled by the following files:
  - `_static/clawicon.ico` is the icon that appears on browser tabs
  - `_templates/index.html` contains the main landing page
  
+.. _howto_doc_release:
+
+Updating the docs for a new release
+-----------------------------------
+
+When updating the documentation for a new release, see also
+:ref:`howto_release_doc` for a list of necessary changes.
+
 
 Before proceeding, first make sure other repositories are checked out to
 master, since some pages now have literalinclude's that bring in code 
 (e.g. setaux_defaults.rst, etc).
+**Note: This is no longer true.**
 
 To create html files from the dev branch only, for example::
 
@@ -53,8 +105,8 @@ Note that we suggest using `_build1` when building a single version so this
 can be quickly rebuilt when writing and editing documentation.
 
 
-To generate pages with old Clawpack versions
-=============================================
+To generate docs including previous versions
+--------------------------------------------
 
 This should be done when you are close to pushing changes to the website,
 otherwise the above approach works fine and shows the current state of the
@@ -230,3 +282,19 @@ links like `<http://www.clawpack.org/links/an11>`_ resolve properly to
 webpages on the University of Washington server.  Links of this nature have
 been provided in published paper and some contain large amounts of data that
 have not been copied to Github.
+
+Pages from other clawpack repositories
+--------------------------------------
+
+Some webpages are created within other clawpack repositories. 
+For example, the page http://www.clawpack.org/geoclawdev-2020/
+is modified by pushing changes to the master branch of the repository
+`geoclawdev-2020 <https://github.com/clawpack/geoclawdev-2020>`__.
+This is configured in that repository, in the `GitHub Pages` section found 
+under `Settings`.
+
+Other repositories that create webpages include:
+
+- `geoclawdev-2018 <https://github.com/clawpack/geoclawdev-2018>`__
+- `clawdev-2016 <https://github.com/clawpack/clawdev-2016>`__
+    

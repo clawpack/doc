@@ -176,6 +176,8 @@ on release since that would only archive a zip file of the main `clawpack`
 repository.  Instead we want to archive the tar file containing all
 subrepositories too.
 
+.. _howto_release_doc:
+
 Updating the documentation
 --------------------------
 
