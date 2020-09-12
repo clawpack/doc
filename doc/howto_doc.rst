@@ -48,7 +48,7 @@ thing. This can easily get messed up when merging from one branch to the
 other.  One way to help avoid this is to always merge via, e.g.::
 
     git checkout dev
-    git merge v5.7.0 --no-ff --no-commit 
+    git merge v5.7.x --no-ff --no-commit 
 
 and then check before doing the merge commit to make sure `conf.py` hasn't
 been improperly changed.  If it has, and that's the only change to this
