@@ -6,10 +6,10 @@
 v5.7.1 release notes
 ===============================
 
-Clawpack 5.7.1 was released on September TBD, 2020. See :ref:`installing`.
+Clawpack 5.7.1 was released on September 11, 2020. See :ref:`installing`.
 
 Permanent DOI:
-`[DOI 10.5281/zenodo.TBD] <https://doi.org/10.5281/zenodo.TBD>`__.
+`[DOI 10.5281/zenodo.4025432] <https://doi.org/10.5281/zenodo.4025432>`__.
 
 Changes relative to Clawpack 5.7.0 (April 23, 2020) are shown below.
 
@@ -20,10 +20,12 @@ released, see :ref:`changes_to_master`.
 Changes that are not backward compatible
 ----------------------------------------
 
+- None
 
 General changes
 ---------------
 
+- None
 
 Changes to classic
 ------------------

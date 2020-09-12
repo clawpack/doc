@@ -8,7 +8,7 @@ Changes to master since v5.7.1
 
 
 Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.7.1) on September TBD, 2020.
+each repository since the last release (v5.7.1) on September 11, 2020.
 
 These changes should appear in the next release.  If you need them now,
 see :ref:`developers` for instructions on cloning and installing from the
