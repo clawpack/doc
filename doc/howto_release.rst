@@ -215,9 +215,12 @@ When making changes for a new release, the following pages in the directory
  - Modify several other files to point to the new version number, in particular
    `installing.rst` , `installing_pip.rst`, `installing_more_options.rst`,
    `contents.rst`, `docker_image.rst`.
+
+ - Modify the main landing page `_templates/index.html` to cite the
+   proper version number and DOI.
      
  - Update `conf.py` to the new version number, and also
-   `$CLAW/doc/gallery/conf.py`
+   `$CLAW/doc/gallery/conf.py`  (For a major release.)
 
 Updating the apps repository
 ----------------------------

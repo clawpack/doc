@@ -133,6 +133,7 @@ committed to some branch (normally `dev` if you have been adding something new).
 And then do this::
 
     cd $CLAW/doc/doc
+    rm -rf _build   # recommended to make sure new versions are clean
     make versions
 
 The `Makefile` has been modified so that `make versions` does this::
@@ -166,7 +167,6 @@ webpage we need to:
 This can be done as follows::
 
     cd $CLAW/doc/doc/_build/html
-    rm -f *.html         # remove the html file with bad sidebars
     cp -r v5.7.x/* .   # replacing v5.7.x with the current version
     python ../../fix_links_top_level.py
     
