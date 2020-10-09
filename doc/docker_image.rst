@@ -152,8 +152,10 @@ on Dockerhub by starting the Dockerfile with::
 and then adding anything addition you want in the image, 
 such as other Python modules you need or your own application code.
 You may need to specify `USER root` in order to install some things, and
-then switch back to `USER jovyan` at the end.  For an example, see
-`clawpack/docker-files/Dockerfile_v5.7.1_geoclaw <https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.7.1_geoclaw>`_.
+then switch back to `USER jovyan` at the end.  For an example, see how
+`clawpack/docker-files/Dockerfile_v5.7.0_geoclaw
+<https://github.com/clawpack/docker-files/blob/master/Dockerfile_v5.7.0_geoclaw>`_
+is built on top of `clawpack/v5.7.0_dockerimage:release`.
 
 
 Dockerfiles for binder
