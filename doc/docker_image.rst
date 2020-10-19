@@ -11,12 +11,12 @@ docker image from the `DockerHub Clawpack repositories
 
 To download an image::
 
-    $ docker pull clawpack/v5.7.1_dockerimage
+    $ docker pull clawpack/v5.7.1_dockerimage:release
 
 To create a container and run it::
 
     $ docker run -i -t -p 8889:8889 --name clawpack-v5.7.1_container \
-        clawpack/v5.7.1_dockerimage
+        clawpack/v5.7.1_dockerimage:release
 
 You can change the container name if you wish, and also the port 8889 (on
 which jupyter notebooks might be served, see below).
@@ -128,7 +128,7 @@ few particularly useful commands::
     docker rm clawpack-v5.7.1_container  # remove a container
 
     docker images -a  # list all images
-    docker rmi clawpack/v5.7.1_dockerimage  # remove an image
+    docker rmi clawpack/v5.7.1_dockerimage:release  # remove an image
     docker prune  # remove all images not used by any container
 
 
