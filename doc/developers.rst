@@ -4,8 +4,16 @@
 Developers' Guide
 **************************************
 
-.. seealso::
-    :ref:`contents-developers-resources`
+See also the following pages from :ref:`contents-developers-resources`:
+
+.. toctree::
+   :maxdepth: 1
+
+   howto_doc
+   howto_release
+   regression
+   git_versions
+   
 
 .. contents::
 
