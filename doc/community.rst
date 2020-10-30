@@ -121,10 +121,8 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- A GeoClaw Developers hackathon via Zoom is planned in conjunction with the 
-  `CSDMS Annual Meeting
-  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__,
-  and will start on May 22, 2020.
+- None currently scheduled.
+
 
 Previous
 ^^^^^^^^
@@ -132,7 +130,12 @@ Previous
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
 
-- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2018/>`_, 
+- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2020/>`__
+  held via Zoom in conjunction with the `CSDMS Annual Meeting
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__,
+  May 22-23, 2020.
+
+- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2018/>`__, 
   May 25-28, 2018, at the Univesity of Colorado, immediately following the 
   `CSDMS Annual Meeting <https://csdms.colorado.edu/wiki/Form:Annualmeeting2018>`_.
 
