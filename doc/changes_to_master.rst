@@ -64,6 +64,22 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+Several changes were made to fix long-standing bugs.  These fixes lead to
+slightly different results than those obtained with previous versions of
+GeoClaw.  In all the tests performed so far the changes are minor and it is
+thought that the new version is at least as accurate as the old version. 
+Please let the developers know if you run into problems that may be related
+to these changes.
+
+- In `filpatch.f90`: The slope chosen for interpolating from a
+  coarse grid to the ghost cells
+  of a fine-grid patch had an index error that could affect the
+  sign of the slope used in momentum components.  Also slopes were
+  not always initialized to zero properly at the start of a loop
+
+- Some index errors were fixed in `fgmax_interp.f90`.
+
+- WIP: Changes to `riemann/src/rpt2_geoclaw.f90`.
 
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.7.1...master>`_
 
