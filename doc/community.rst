@@ -158,3 +158,5 @@ have been tackled (and/or are still work in progress).
 Other Clawpack events
 ---------------------
 
+- `Clawpack swag <https://shop.spreadshirt.com/numfocus/clawpack?idea=5e1cdc882051766d206bd00e>`__
+  is now available!

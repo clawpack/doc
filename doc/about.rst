@@ -133,6 +133,11 @@ Here's the bibtex::
 Please fill in the version number that you used, and its year, with the
 appropriate DOI from `Zenodo <https://zenodo.org>`_, if available.  
 See :ref:`releases`.
+It is best to refer to the particular release used to obtain your results,
+but if you need to refer to multiple past releases, 
+or to cite Clawpack more generally, you can also use the DOI
+`10.17605/osf.io/kmw6h <https://doi.org/10.17605/osf.io/kmw6h>`__.
+
 
 Also please cite the `recent article <https://peerj.com/articles/cs-68/>`_::
 

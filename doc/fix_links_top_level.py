@@ -47,4 +47,16 @@ for file in files:
 
     print('Done with %s' % file)
     
+files = glob.glob('riemann/*.html') + glob.glob('pyclaw/*.html')
+for file in files:
+    lines = open(file,'r').readlines()
+    with open(file,'w') as f:
+        for line in lines:
+            line = line.replace('../../v5','../v5')
+            line = line.replace('../../dev','../dev')
+            f.write(line)
+
+    print('Done with %s' % file)
+    
+
 
