@@ -30,6 +30,11 @@ Tar files can be downloaded from
 <https://github.com/clawpack/clawpack/releases/>`_ or 
 from the Zenodo links provided below.
 
+Tar files for all recent releases 
+can also be referenced with the single DOI
+`10.17605/osf.io/kmw6h <https://doi.org/10.17605/osf.io/kmw6h>`__.
+See :ref:`citing` for more information on how best to cite Clawpack.
+
 * :ref:`release_5_7_1`  -- September 11, 2020
   `[DOI 10.5281/zenodo.4025432] <https://doi.org/10.5281/zenodo.4025432>`_
 * :ref:`release_5_7_0`  -- April 23, 2020
