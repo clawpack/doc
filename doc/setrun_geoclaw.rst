@@ -172,7 +172,7 @@ bathymetry) data files in GeoClaw.
    *topofiles* should be a list of the form *[file1info, file2info, etc.]*
    where each element is itself a list of the form 
 
-     [topotype, minlevel, maxlevel, t1, t2, fname]
+     [topotype, fname]
 
    with values
 
@@ -180,25 +180,13 @@ bathymetry) data files in GeoClaw.
 
        1,2 or 3 depending on the format of the file (see :ref:`topo`).
 
-     *minlevel* : integer
-
-       the minimum refinement level that should be enforced in the region
-       covered by this grid (for times between *t1* and *t2*).
-
-     *maxlevel* : integer
-
-       the maximum refinement level that should be allowed in the region
-       covered by this grid (for times between *t1* and *t2*).
-     
-     *t1, t2* : floats
-
-       the time interval over which refinement should be controlled.
-
      *fname* : string
 
        the name of the topo file.
 
-    For more about controlling AMR in various regions, see :ref:`regions`.
+    **Note:** Starting in v5.8.0 implicitly specifying a flag region for
+    AMR is no longer supported in the specification of a topo file.
+    For more about controlling AMR in various regions, see :ref:`flagregions`.
 
 .. attribute:: rundata.dtopo_data.dtopofiles : list of lists
 
@@ -209,7 +197,7 @@ bathymetry) data files in GeoClaw.
    where each element (currently at most 1 is allowed!)
    is itself a list of the form 
 
-     [dtopotype, minlevel, maxlevel, fname]
+     [dtopotype, fname]
 
    with values
 
@@ -217,20 +205,14 @@ bathymetry) data files in GeoClaw.
 
        1 or 3 depending on the format of the file (see :ref:`topo_dtopo`).
 
-     *minlevel* : integer
-
-       the minimum refinement level that should be enforced in the region
-       covered by this grid.
-
-     *maxlevel* : integer
-
-       the maximum refinement level that should be allowed in the region
-       covered by this grid.
-     
      *fname* : string
 
        the name of the dtopo file.  See :ref:`topo_dtopo` for information about
        the format of data in this file.
+
+    **Note:** Starting in v5.8.0 implicitly specifying a flag region for
+    AMR is no longer supported in the specification of a dtopo file.
+    For more about controlling AMR in various regions, see :ref:`flagregions`.
 
 
 .. attribute:: rundata.dtopo_data.dt_max_dtopo : float
@@ -270,24 +252,19 @@ described at :ref:`qinit_file`.
    where each element (currently at most 1 is allowed!)
    is itself a list of the form 
 
-     [minlevel, maxlevel, fname]
+     [fname]
 
    with values
 
-     *minlevel* : integer
-
-       the minimum refinement level that should be enforced in the region
-       covered by this grid.
-
-     *maxlevel* : integer
-
-       the maximum refinement level that should be allowed in the region
-       covered by this grid.
-     
      *fname* : string
 
        the name of the qinitdata file.  See :ref:`topo` for information about
        the format of data in this file.
+
+    **Note:** Starting in v5.8.0 implicitly specifying a flag region for
+    AMR is no longer supported in the specification of a dtopo file.
+    For more about controlling AMR in various regions, see :ref:`flagregions`.
+
 
 See :ref:`qinit_file` for more details about the format.
 
@@ -297,8 +274,12 @@ See :ref:`qinit_file` for more details about the format.
 AMR refinement region parameters
 --------------------------------
 
-    This is now a general AMRClaw parameter, still available in particular
-    for GeoClaw applications.  See :ref:`refinement_regions`.
+    As in AMRClaw (see :ref:`setrun_amrclaw`),
+    one can specify `regions` and/or `flagregions` to control flagging cells
+    for refinement to the next level.  The old style `regions` is a list
+    of lists while the new `flagregions` is a list of 
+    `clawpack.amrclaw.data.FlagRegion` objects. 
+    See :ref:`refinement_regions` and :ref:`flagregions` for more details.
 
 
 .. _setrun_fixedgrids:

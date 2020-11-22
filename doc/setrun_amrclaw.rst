@@ -154,7 +154,50 @@ Special AMR parameters
 
    List of lists of the form
    `[minlevel,maxlevel,t1,t2,x1,x2,y1,y2]`.
-   See :ref:`refinement_regions`
+   See :ref:`refinement_regions`.  
+   This attribute may be phased out in the future in favor of `flagregions`,
+   but currently both are supported.
+
+.. attribute:: flagregions : list
+
+   (Introduced in v5.7.0)
+   List of objects of class `clawpack.amrclaw.data.FlagRegion` that specify
+   regions where further adaptive refinement is either forced or forbiddne.
+   These objects are more flexible than the
+   older `regions` lists and are now preferred.  See :ref:`flagregions`.
+
+.. attribute:: max1d : int
+
+   The maximum size (in each spatial dimension) of any grid patch.  If
+   a larger region must be refined then it it split into multiple patches.
+   This can be tuned if desired based on cache size and OMP efficiency
+   (recall that multiple patches can be advanced in time in parallel).
+   For debugging it may also be useful to vary this parameter.
+   For most cases the default values work fine: 500 in 1D, 60 in 2D, 32 in 3D.
+
+.. attribute:: memsize : int
+
+   The initial length of the `alloc` array used internally in AMRClaw for
+   dynamic allocation of grid patch data.  The default values depend on
+   the number of space dimensions and may be large enough.  If the
+   `alloc` array is not long enough, then Fortran's dynamic memory
+   allocation will be used to double the size of this array and copy over
+   all previous data, so it is not necessary to specify a value unless you
+   are running a large problem and are concerned about the time spent
+   repeatedly doubling and copying.  The default values are::
+
+       2**20 - 1 = 1048575 in 1D, 
+       2**22 - 1 = 4194303 in 2D, 
+       2**23 - 1 = 8388607 in 3D.  
+
+   These are chosen so that repeated doubling can get as close to `2**30 - 1` as
+   possible, the limit of `int*4` array indices.  The code will crash if 
+   more memory is needed, in which case you may have to recompile with
+   `int*8` index variables.
+
+   
+
+
 
 Debugging flags for additional printing
 ---------------------------------------
