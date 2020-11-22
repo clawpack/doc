@@ -21,6 +21,27 @@ the menu on the left hand side of this page.
 Changes that are not backward compatible
 ----------------------------------------
 
+- For AMRClaw and GeoClaw, the data file `amr.data` now created from
+  `setrun.py` now includes an additional line with the parameter `memsize`
+  specifying the initial length of the `alloc` array used for allocating
+  memory to patches when adaptive refinement is used.  This can be specified
+  in `setrun.py` by setting `amrdata.memsize`.  If it is not set, then 
+  default values are used that are similar to past default values;
+  see :ref:`setrun_amrclaw`.
+  So this is backward compatible in the sense that no changes to `setrun.py`
+  are required, but the old `amr.data` files will not work so you may need 
+  to do `make data` to create a new version.
+
+- In GeoClaw, refinement "regions" can no longer be specified implicitly
+  when listing a topo dtopo or qinit file.  See the `geoclaw` section below.
+  **Note:** You may need to explicitly declare new `regions` or
+  `flagregions` to produce the same behavior as in past versions of GeoClaw.
+
+- The GeoClaw transverse Riemann solver `rpt2_geoclaw.f` has been improved
+  and results in slightly different computated results in some cases. For
+  more details see the `geoclaw` section below.
+
+
 
 General changes
 ---------------
@@ -57,6 +78,8 @@ See `riemann diffs
 Changes to amrclaw
 ------------------
 
+- A `memsize` parameter can now be set in `setrun.py`, see above
+  and :ref:`setrun_amrclaw`.
 
 See `amrclaw diffs
 <https://github.com/clawpack/amrclaw/compare/v5.7.1...master>`_
@@ -79,7 +102,54 @@ to these changes.
 
 - Some index errors were fixed in `fgmax_interp.f90`.
 
-- WIP: Changes to `riemann/src/rpt2_geoclaw.f90`.
+- Changes to `riemann/src/rpt2_geoclaw.f90`.  These cause some change in 
+  results but tests have shown the new results appear to be at least as 
+  good as previous results and the code may be more stable in some
+  situations.
+
+- The new `flagregions` introduced in v5.7.0 (see :ref:`flagregions`)
+  were not implemented properly in GeoClaw, and in some situations
+  refinement to a `maxlevel` that was indicated only in `flagregion` was
+  not allowed as expected. This is now fixed.
+
+- In previous versions of GeoClaw one could implicitly define AMR flag
+  regions that are aligned with the spatial extent of topo, dtopo, or qinit 
+  files by specifying `minlevel, maxlevel` (and in the case of topo files, 
+  a time interval `t1, t2`) when the file name is given.  This feature
+  did not always work as advertised and was often confusing.   If these
+  values are specified then they are now ignored, as explained in
+  more detail in the following items.   Not that you may have to explicitly
+  declare new flag regions now in order to have the expected refinement regions.
+
+- When specifying topo files in `setrun.py` using the format::
+    
+    [topotype, minlevel, maxlevel, t1, t2, fname]
+
+  the values `minlevel, maxlevel, t1, t2` will now be ignored.  
+  To avoid warning messages, instead specify::
+
+    [topotype, fname]
+
+- When specifying dtopo files in `setrun.py` using the format::
+    
+    [topotype, minlevel, maxlevel, fname]
+
+  the values `minlevel, maxlevel` will now be ignored.  
+  To avoid warning messages, instead specify::
+
+    [topotype, fname]
+
+- When specifying qinit files in `setrun.py` using the format::
+    
+    [minlevel, maxlevel, fname]
+
+  the values `minlevel, maxlevel` will now be ignored.  
+  To avoid warning messages, instead specify::
+
+    [fname]
+
+- A `memsize` parameter can now be set in `setrun.py`, see above
+  and :ref:`setrun_amrclaw`.
 
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.7.1...master>`_
 
