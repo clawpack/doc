@@ -69,9 +69,9 @@ The function is defined by:
    def select_by_flooding(Ztopo, mask=None, prev_pts_chosen=None,
                           Z1=-5., Z2=0., max_iters=None, verbose=False):
 
-If `Z1 <= Z2` then points where `Ztopo <= Z1` are first selected and
+If `Z1 <= Z2` then points where `Ztopo < Z1` are first selected and
 then a marching algorithm is used to select neighboring points that
-satisfy `Ztopo <= Z2`.
+satisfy `Ztopo < Z2`.
 
 Think of chosen points as “wet” and unchosen points as “dry” and new
 points are flooded if at least one neighbor is “wet” and the topography
@@ -81,7 +81,7 @@ dry land with lower elevation.
 
 However, this can also be called with `Z1 > Z2`, in which case points
 where `Ztopo >= Z1` are first selected and then the marching algorithm
-is used to select neighboring points that satisfy `Ztopo >= Z2`. This
+is used to select neighboring points that satisfy `Ztopo > Z2`. This
 is useful to select offshore points where the water is shallow, (and
 that are connected to the shore by a path of shallow points) e.g. to
 identify points on the continental shelf to set up a flag region for
