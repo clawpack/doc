@@ -39,13 +39,18 @@ Changes that are not backward compatible
 
 - The GeoClaw transverse Riemann solver `rpt2_geoclaw.f` has been improved
   and results in slightly different computated results in some cases. For
-  more details see the `geoclaw` section below.
+  more details see the `riemann` and `geoclaw` sections below.
 
-
+- For AMRClaw and GeoClaw,
+  an additional short array is saved in a checkpoint file for use in a 
+  restart.  Due to this change, a checkpoint file created using a previous
+  version of Clawpack cannot be used for a restart with the new version.
 
 General changes
 ---------------
 
+The travis tests that automatically run on pull requests no longer test using
+Python2, only Python3.  See :ref:`python-three`.
 
 Changes to classic
 ------------------
@@ -64,6 +69,10 @@ See `clawutil diffs
 Changes to visclaw
 ------------------
 
+- `ClawPlotAxes.skip_patches_outside_xylimits` does not work properly if there
+  is a `mapc2p` function defining a grid mapping, so it is now ignored in 
+  this case.
+
  
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.7.1...master>`_
@@ -71,6 +80,21 @@ See `visclaw diffs
 Changes to riemann
 ------------------
 
+- The GeoClaw transverse solver `rpt2_geoclaw.f` was modified to fix some
+  long-standing bugs and change some of the logic.  
+  
+  The new version gives
+  slightly different results on most problems, but extensive testing indicates
+  the new results are at least as good as the old.  The new version has also
+  been refactored to make the logic clearer and to avoid some unnecessary work,
+  and generally runs faster.  In some cases where instabilities had been
+  observed in long-duration runs (particularly for storm surge), the new 
+  version appears to provide better stability.
+  
+  In particular, the left- and right-going waves are now split up transversely
+  using states in the cell to the left (resp. right) in which the splitting is
+  performed, rather than using Roe averages based on the cell from which the
+  wave originates.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.7.1...master>`_
@@ -78,8 +102,19 @@ See `riemann diffs
 Changes to amrclaw
 ------------------
 
+- An additional short array is saved in a checkpoint file for use in a 
+  restart.  Due to this change, a checkpoint file created using a previous
+  version of Clawpack cannot be used for a restart with the new version.
+  
 - A `memsize` parameter can now be set in `setrun.py`, see above
   and :ref:`setrun_amrclaw`.
+  
+- `src/2d/prepc.f` was improved to use less storage from the
+  work array `alloc` that is used for memory allocation for AMR patches.
+  For large-scale problems this can be a substantial savings and allow
+  running larger problems.
+  
+
 
 See `amrclaw diffs
 <https://github.com/clawpack/amrclaw/compare/v5.7.1...master>`_
@@ -105,7 +140,7 @@ to these changes.
 - Changes to `riemann/src/rpt2_geoclaw.f90`.  These cause some change in 
   results but tests have shown the new results appear to be at least as 
   good as previous results and the code may be more stable in some
-  situations.
+  situations.  For more detail see the "Changes to riemann" above.
 
 - The new `flagregions` introduced in v5.7.0 (see :ref:`flagregions`)
   were not implemented properly in GeoClaw, and in some situations
@@ -151,6 +186,10 @@ to these changes.
 - A `memsize` parameter can now be set in `setrun.py`, see above
   and :ref:`setrun_amrclaw`.
 
+- An additional short array is saved in a checkpoint file for use in a 
+  restart.  Due to this change, a checkpoint file created using a previous
+  version of Clawpack cannot be used for a restart with the new version.
+  
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.7.1...master>`_
 
 
