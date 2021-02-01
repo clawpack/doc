@@ -301,8 +301,8 @@ perturbation.
 
 The file format is similar to what is described above for *topotype=1*, but
 now each line contains *x,y,dq* where *dq* is a perturbation to one of the 
-components of *q* as specified by the value of *iqinit* specified (see
-:ref:`setrun_qinit`).  If *iqinit = 4*, the value *dq* is instead the
+components of *q* as specified by the value of *qinit_type* specified (see
+:ref:`setrun_qinit`).  If *qinit_type = 4*, the value *dq* is instead the
 surface elevation desired for the initial data and the depth *h* (first
 component of *q*) is set accordingly.
 

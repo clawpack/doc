@@ -251,10 +251,10 @@ qinit data file parameters
 A modification to the initial data specified by default can be made as
 described at :ref:`qinit_file`.
 
-.. attribute:: iqinit : integer
+.. attribute:: qinit_type : integer
 
    Specifies what type of perturbation is stored in the *qinitfile*, 
-   see :ref:`qinit_file` for more information.  Valid values for *iqinit*
+   see :ref:`qinit_file` for more information.  Valid values for *qinit_type*
    are
    
     - 0 = No perturbation specified
