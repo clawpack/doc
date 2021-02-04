@@ -6,9 +6,9 @@
 v5.8.0 release notes
 ===============================
 
-Clawpack 5.8.0 was released on TBA. See :ref:`installing`.
+Clawpack 5.8.0 was released on February 4, 2021. See :ref:`installing`.
 
-Permanent DOI: TBA
+Permanent DOI: http://doi.org/10.5281/zenodo.4503024
 
 
 Changes relative to Clawpack 5.7.1 (Sept. 11, 2020) are shown below.
