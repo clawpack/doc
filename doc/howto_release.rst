@@ -176,6 +176,13 @@ on release since that would only archive a zip file of the main `clawpack`
 repository.  Instead we want to archive the tar file containing all
 subrepositories too.
 
+Open Science Framework (OSF)
+----------------------------
+
+Go to https://osf.io/kmw6h/files/ and upload the latest tarfile to the set
+of versions that can be accessed with the single DOI 
+`10.17605/osf.io/kmw6h <https://doi.org/10.17605/osf.io/kmw6h>`__.
+
 .. _howto_release_doc:
 
 Updating the documentation
