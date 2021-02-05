@@ -9,6 +9,19 @@ you have `Docker <https://www.docker.com/>`_ installed then you can now use a
 docker image from the `DockerHub Clawpack repositories
 <https://hub.docker.com/u/clawpack/dashboard/>`_.
 
+Using Version 5.8.0
+-------------------
+
+We are currently having problems creating a new Docker image for v5.8.0.
+However, you can follow the instructions below for v5.7.1 and then within a
+container, install v5.8.0 via::
+
+    jovyan $ pip install --src=$HOME/ --user -e \
+             git+https://github.com/clawpack/clawpack.git@v5.8.0#egg=clawpack-v5.8.0
+    
+Getting started
+----------------
+
 To download an image::
 
     $ docker pull clawpack/v5.7.1_dockerimage:release
