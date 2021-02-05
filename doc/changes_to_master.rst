@@ -8,7 +8,7 @@ Changes to master since v5.8.0
 
 
 Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.8.0) on TBA.
+each repository since the last release (v5.8.0) on February 4, 2021.
 
 These changes should appear in the next release.  If you need them now,
 see :ref:`developers` for instructions on cloning and installing from the
