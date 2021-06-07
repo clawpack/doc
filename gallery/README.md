@@ -4,7 +4,7 @@
 
 #### Step 1: Run all examples
 
-Run the script `$CLAW/classic/examples/run_tests.py` and examine the files
+Run the script `$CLAW/classic/examples/run_examples.py` and examine the files
   `make_all_errors.txt` and
   `make_all_output.txt`
 for any errors.

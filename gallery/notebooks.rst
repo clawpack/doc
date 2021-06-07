@@ -91,9 +91,13 @@ Examples using GeoClaw
   if they are below sea level (but protected by dikes).
 
 * `MakeFlagregionsCoast <_static/apps/notebooks/geoclaw/MakeFlagregionsCoast.html>`_
-  illustrating making a ruled rectangle for use as a flagregion using the
+  illustrates making a ruled rectangle for use as a flagregion using the
   marching front algorithm.
 
+* `IslandBuffering <_static/apps/notebooks/geoclaw/IslandBuffering.html>`_
+  illustrates how to make a ruled rectangle surrounding an island with
+  a buffer zone that extends out some distance that is independent 
+  of water depth.
 
 .. _notebooks_tsunami-examples:
 
