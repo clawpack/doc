@@ -74,18 +74,6 @@ is done should be specified for GeoClaw applications:
    speed of 2.0 would refine to level 3, and cells with a speed of 3.0
    would refine to level 4.
     
-.. attribute:: rundata.refinement_data.max_level_deep : int
-
-   For simulations over the ocean, it is often useful to specify
-   a *maximum refinement level* allowed in deep parts of the ocean.  This is
-   useful if a high level of refinement is specified on some rectangular
-   region but only the parts of this region near the shore actually need to
-   be refined.
-
-.. attribute:: rundata.refinement_data.deep_depth : float
-
-   The deepness that triggers the refinement limitation imposed by
-   `max_level_deep` above.
 
 .. _setrun_geo:
 
