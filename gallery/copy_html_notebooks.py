@@ -41,6 +41,7 @@ all_notebooks = [ \
     'notebooks/geoclaw/MakeFlagregionsCoast.ipynb',
     'notebooks/geoclaw/chile2010a/chile2010a.ipynb',
     'notebooks/geoclaw/chile2010b/chile2010b.ipynb',
+    'notebooks/geoclaw/IslandBuffering.ipynb',
     'notebooks/amrclaw/advection_2d_square/amrclaw_advection_2d_square.ipynb',
     'notebooks/amrclaw/RuledRectangles.ipynb',
     'notebooks/classic/advection_1d/advection_1d.ipynb',
