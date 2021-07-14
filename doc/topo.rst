@@ -69,9 +69,11 @@ The recognized topotypes are:
     These files are larger than necessary since they store the x,y values at
     each point even though the points are required to be equally spaced.
     Many data sets come this way, but note that you can convert a file of
-    this type to one of the more compact types below using::
+    this type to one of the more compact types below using e.g.::
     
-        [insert python code]
+        from clawpack.geoclaw import topotools
+        topo = topotools.Topography(input_path, topo_type=1)
+        topo.write(output_path, topo_type=3)
 
 
 
