@@ -3,28 +3,44 @@
 .. _pyclaw:
 
 
-Pyclaw 
+PyClaw 
 ======
+
+In this section of the documentation, PyClaw refers 
+a Python version of the hyperbolic PDE solvers that allows solving the
+problem in Python (e.g. in a Jupyter notebook) without explicitly using
+any Fortran code.  Versions of the solvers are written in Python.
+However, they use Riemann solvers that are converted from the Fortran
+versions into Python-callable versions using 
+`f2py <https://numpy.org/doc/stable/f2py/>`__,  
+to facilitate using the same large set of solvers from either Fortran
+or Python.  Note that
+in order for this to work the solvers must be precompiled, as is done
+when using `pip install`, for example (see :ref:`installing_pip`).
+
+See :ref:`clawpack_packages` for more information about the different
+capabilities of PyClaw relative to :ref:`contents_fortcodes`.
+
+**Note:** The `clawpack/pyclaw` directory also contains some 
+Python tools that are used many places in
+Clawpack, e.g. when plotting with :ref:`visclaw` or when compiling and
+running Fortran code using a `Makefile` and `setrun.py` file
+(when using :ref:`contents_fortcodes`).
+These modules are mostly used "under the hood".  
+Other Python tools of use in the Fortran versions
+are described elsewhere; see e.g. :ref:`plotting` or :ref:`geoclaw`.
+All of these modules are pure Python and should work fine as long
+as the top level of Clawpack is on your :ref:`python_path`.
+
 
 .. _pyclaw_install:
 
 PyClaw installation
 -------------------
 
-Just do this::
+Using `pip install` is the recommended approach, see
+:ref:`installing_pip`.
 
-    pip install clawpack
-
-Installing with pip requires that you have a Fortran compiler installed.
-
-Alternatively, if you use `Anaconda <https://store.continuum.io/cshop/anaconda/>`_ or 
-`Conda <https://pypi.python.org/pypi/conda>`_, you can::
-
-    conda install -c clawpack -c conda-forge clawpack
-
-This option will also install optional dependencies including PETSc and HDF5,
-which are useful for large-scale parallel runs.  Installing with Conda does not
-require that you have a Fortran compiler.
 
 Examples
 --------

@@ -14,6 +14,13 @@ See also:
 
 **Prerequisites:** Before installing, check that you have the :ref:`prereqs`.
 
+.. warning :: Several users have recently experienced problems using the 
+   `pip install` option below, see e.g. 
+   `<https://github.com/clawpack/clawpack/issues/203>`__.
+
+   If you only plan to use the Fortran versions of the solvers 
+   (:ref:`contents_fortcodes`, rather than :ref:`pyclaw`), 
+   then you might want to try one of the :ref:`installing_options`.
 
 .. _installing_pipintro:
 
@@ -45,9 +52,11 @@ See :ref:`clawpack_components` for a list of what's included in this top
 level directory.
 
 **Note:** Using pip to install will also check some python
-:ref:`prereqs` and may update these on your system, and will use f2py to
-convert Fortran Riemann solvers to Python versions.  See 
-:ref:`installing_options` if you want more control.
+:ref:`prereqs` and may update these on your system, and will use 
+`f2py <https://numpy.org/doc/stable/f2py/>`__ 
+to  convert Fortran Riemann solvers to Python versions.  
+(This is really only needed if you plan to use :ref:`pyclaw`.)
+See :ref:`installing_options` if you want more control.
 
 The ``--user`` flag is necessary if you are installing on a shared computer
 where you do not have root access.  If you do have root access and want it
@@ -87,6 +96,20 @@ simply requires resetting paths.  For hints and troubleshooting, see:
  - :ref:`setenv`
  - :ref:`python_path`
  - :ref:`installing_pip`
+
+Note that if you wish to use the Python version of PDE solvers in 
+:ref:`pyclaw`, these require precompiling the Fortran Riemann solvers using
+`f2py <https://numpy.org/doc/stable/f2py/>`__  
+to create Python versions. 
+This is also done by `pip install`, along with setting paths.
+Switching versions by resetting paths does not require recompiling these
+solvers.
+
+If you are only using the Fortran solvers 
+(when using :ref:`contents_fortcodes`) then Python versions of the Riemann
+solvers are not required.  In this case, any problems that arise
+from the use of `f2py` can be avoided by simply setting paths in a
+different manner.
 
 Rather than using `pip`, there are several other options for using
 Clawpack that may be useful depending on your needs.  These are summarized

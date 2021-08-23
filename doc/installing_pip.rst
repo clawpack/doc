@@ -4,6 +4,14 @@
 pip install instructions
 **************************************
 
+.. warning :: Several users have recently experienced problems using the 
+   `pip install` option below, see e.g. 
+   `<https://github.com/clawpack/clawpack/issues/203>`__.
+
+   If you only plan to use the Fortran versions of the solvers 
+   (rather than :ref:`pyclaw`), then you might want to try one of the
+   :ref:`installing_options`.
+
 For other installation options, see :ref:`installing`.
 
 See also:

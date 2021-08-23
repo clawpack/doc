@@ -63,6 +63,8 @@ Examples and Applications
    testing
    sphinxdoc
 
+.. _contents_fortcodes:
+
 Classic, AMRClaw, and GeoClaw
 ==============================
 
