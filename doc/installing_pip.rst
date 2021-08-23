@@ -47,7 +47,8 @@ install command
 want to change anything in this command)**::  
 
     pip install --src=$HOME/clawpack_src --user -e \
-        git+https://github.com/clawpack/clawpack.git@v5.8.0#egg=clawpack-v5.8.0
+        git+https://github.com/clawpack/clawpack.git@v5.8.0#egg=clawpack-v5.8.0 \
+        --use-deprecated=legacy-resolver
 
 This will download Clawpack (via a git clone) into the directory
 `$HOME/clawpack_src/clawpack-v5.8.0`.  The top 
