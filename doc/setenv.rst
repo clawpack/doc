@@ -5,6 +5,10 @@
 Set environment variables
 =========================
 
+The `export` commands below work in the bash shell.  The syntax may
+be different in other shells.
+
+
 CLAW
 ----
 
@@ -42,6 +46,12 @@ should list the top level directory, and report for example::
 PYTHONPATH
 ----------
 
-We do not recommend setting this environment variable.  See
-:ref:`python_path` for more information.  Instead we recommend using `pip
-install` to set the Python path appropriately, see :ref:`installing_pip`.
+If you used `pip` to install Clawpack then you should not set this 
+environment variable.  But if you installed without `pip`, e.g. following
+:ref:`installing_fortcodes`, then you need to set `PYTHONPATH` to include
+the directory `$CLAW`.  If `PYTHONPATH` is already set, then you may want to
+insert `$CLAW` into the list of directories searched by Python via::
+
+    export PYTHONPATH=$CLAW:$PYTHONPATH
+
+See :ref:`python_path` for more information.  

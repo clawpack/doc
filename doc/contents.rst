@@ -35,7 +35,7 @@ Overview and Getting Started
    packages
    installing
    installing_pip
-   installing_more_options
+   installing_fortcodes
    setenv
    first_run
    clawpack_components
