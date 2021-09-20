@@ -58,6 +58,7 @@ Examples and Applications
    :maxdepth: 1
    
    apps
+   galleries
    fvmbook
    contribute_apps
    testing

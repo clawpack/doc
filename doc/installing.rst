@@ -9,6 +9,7 @@ Installing Clawpack
 See also:
 
 - :ref:`releases`
+- :ref:`docker_image` as an alternative to installing
 
 **Register:** Please `register <http://depts.washington.edu/clawpack/register/index.html>`_
 if you have not already done so.  This is very useful in helping
