@@ -7,10 +7,10 @@ Which Clawpack solver should I use?
 
 Clawpack includes a number of related hyperbolic PDE solvers:
 
- - Classic
- - :ref:`amrclaw`
- - :ref:`geoclaw`
- - :ref:`pyclaw`
+ - Classic (single grid solvers in Fortran)
+ - :ref:`amrclaw` (adaptive mesh refinement in Fortran)
+ - :ref:`geoclaw` (geophysical flows with AMR, in Fortran)
+ - :ref:`pyclaw`  (Python version of solvers)
 
 All of them are built on common algorithmic
 ideas, make use of the same set of Riemann solvers, and can be used with VisClaw
@@ -20,20 +20,26 @@ the main differences between them.
 
 Installation and user interface
 ===============================
-The AMRClaw, GeoClaw, and Classic solvers are Fortran-based
+The :ref:`contents_fortcodes` solvers are Fortran-based
 packages and rely on Makefiles and environment variables.  Problems are
 specified partially through Python scripts at run time (`setrun.py`) and partially
 through custom Fortran code at compile time (to set initial conditions, for instance).
 
-With PyClaw, problems are specified entirely at run time through 
+With :ref:`pyclaw`, problems are specified entirely at run time through 
 Python script files, or
 interactively (e.g., in IPython or Jupyter notebooks).  
 Typically, the user does not need to
 write any Fortran code (though custom routines can be written in Fortran
 when necessary for performance reasons).
+
 PyClaw uses much of the same library of Fortran code, but that code is
 compiled during installation so that it can be imported dynamically within
-Python programs.
+Python programs.  In particular, Fortran versions of all the :ref:`riemann`  
+available in Classic or AMRClaw are also exposed in PyClaw.  These are
+converted using `f2py <https://numpy.org/doc/stable/f2py/>`__, a step
+that sometimes causes problems and is not required if you are only using
+Fortran versions of the solvers.
+
 
 
 Algorithmic differences

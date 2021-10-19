@@ -3,6 +3,8 @@
 Testing a PyClaw installation and running an example
 =====================================================
 
+First ensure that you have :ref:`setenv` and that you have the :ref:`prereqs`.
+
 If you downloaded Clawpack manually, you can test your :ref:`pyclaw`
 installation as follows (starting from your `clawpack` directory)::
 

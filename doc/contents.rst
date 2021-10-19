@@ -35,7 +35,7 @@ Overview and Getting Started
    packages
    installing
    installing_pip
-   installing_more_options
+   installing_fortcodes
    setenv
    first_run
    clawpack_components
@@ -58,10 +58,13 @@ Examples and Applications
    :maxdepth: 1
    
    apps
+   galleries
    fvmbook
    contribute_apps
    testing
    sphinxdoc
+
+.. _contents_fortcodes:
 
 Classic, AMRClaw, and GeoClaw
 ==============================
