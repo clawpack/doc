@@ -29,12 +29,15 @@ General changes
 Changes to classic
 ------------------
 
+No changes.
 
 See `classic diffs
 <https://github.com/clawpack/classic/compare/v5.8.0...master>`_
 
 Changes to clawutil
 -------------------
+
+No changes.
 
 
 See `clawutil diffs
@@ -43,12 +46,15 @@ See `clawutil diffs
 Changes to visclaw
 ------------------
 
+No major changes.
+
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.8.0...master>`_
 
 Changes to riemann
 ------------------
 
+- Fix `rp1_shallow_hlle.f90` to work better near dry states.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.8.0...master>`_
@@ -56,12 +62,18 @@ See `riemann diffs
 Changes to amrclaw
 ------------------
 
+No changes.
+
 See `amrclaw diffs
 <https://github.com/clawpack/amrclaw/compare/v5.8.0...master>`_
 
 Changes to geoclaw
 ------------------
 
+- Some improvements to storm tracks
+- Reading (some) geotiff files now supported in `topotools`
+- Added `kmltools.topo2kmz` to make Google Earth overlays showing topography
+- Some other bug fixes.
   
 See `geoclaw diffs 
 <https://github.com/clawpack/geoclaw/compare/v5.8.0...master>`_
