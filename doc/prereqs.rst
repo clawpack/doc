@@ -22,10 +22,10 @@ Operating system
 
 Fortran
 -------
-PyClaw can now be installed without a Fortran compiler; see :ref:`installing_conda`.
 
-To use the other packages, you will need 
-`gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler
+To use the Fortran versions of the PDE solvers (:ref:`contents_fortcodes`), 
+you will need 
+`gfortran <http://gcc.gnu.org/wiki/GFortran>`_ or another F90 compiler.
 
 See :ref:`fortran_compilers` for more about which compilers work well with
 Clawpack.
@@ -35,15 +35,14 @@ Clawpack.
 Python
 ------
 
-- Python Version 2.7 or above, or (**new in 5.4.0**) Python 3
+- Python Version 3.0 or above (much of the code works in Python2, but this
+  is no longer officially supported; see :ref:`python-three`).
 - `NumPy <http://www.numpy.org/>`_  (for PyClaw/VisClaw)
 - `matplotlib <http://matplotlib.org/>`_ (for PyClaw/VisClaw)
 
-The `Anaconda Python Distribution <https://docs.continuum.io/anaconda/index>`_
-is an easy way to get all of these. 
-See :ref:`python` for more information on
-installing the required modules and to get started using Python if
-you are not familiar with it.
+There are many ways to install the Python scientific stack, e.g. via
+`apt-get` or `brew`.  On MacOS, you might check out 
+`ScipySuperpack for Homebrew <http://stronginference.com/ScipySuperpack/>`__.
 
 .. _prereqs_pip:
 
@@ -51,9 +50,8 @@ pip
 ---
 
 If you are installing via `pip install` then you need `pip`.
-You may already have it; in particular the Anaconda Python distribution
-contains pip. If you need to install it, see 
-`<https://pip.pypa.io/en/stable/installing/>`_
+If you need to install it, see 
+`<https://pip.pypa.io/en/stable/installation/>`_
 
 The version of `pip install` suggested for :ref:`install_quick_all` requires
 a recent version of `pip`, so you may need to upgrade if you run into

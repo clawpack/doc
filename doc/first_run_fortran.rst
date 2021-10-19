@@ -7,7 +7,7 @@ This assumes that you have downloaded the Fortran components of Clawpack,
 see :ref:`install_fortran`.
 
 First ensure that you have :ref:`setenv`
-and that you have the :ref:`install_prerequisites`.
+and that you have the :ref:`prereqs`.
 
 As a first test of the Fortran code, try the following::
 
@@ -37,7 +37,8 @@ There are similar `tests` subdirectories of `$CLAW/amrclaw` and
 Running an example
 ------------------
 
-Many examples of Clawpack simulations can be seen in the :ref:`galleries`.
+Many examples of Clawpack simulations can be seen in the 
+`gallery <http://www.clawpack.org/gallery/index.html>`__.
 
 
 Classic
