@@ -10,7 +10,7 @@ the Clawpack open source software project.
 Full Table of Contents
 ====================================================
 
-This is the documentation for **Clawpack Version 5.8.0.** 
+This is the documentation for **Clawpack Version 5.8.1.** 
 For documentation corresponding to older versions see the list of
 past releases in the menu to the left.  The *future* version refers
 to new documentation for features that have been merged into the
