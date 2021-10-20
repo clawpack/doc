@@ -220,11 +220,12 @@ When making changes for a new release, the following pages in the directory
    Also update the bibtex and recommended citation in `about.rst`.
 
  - Modify several other files to point to the new version number, in particular
-   `installing.rst` , `installing_pip.rst`, `installing_fortcodes.rst`,
+   `installing_pip.rst`, `installing_fortcodes.rst`,
    `contents.rst`, `docker_image.rst`.
 
  - Modify the main landing page `_templates/index.html` to cite the
-   proper version number and DOI.
+   proper version number and DOI. 
+   (No longer necessary -- This page has been changed to be more generic.)
      
  - Update `conf.py` to the new version number, and also
    `$CLAW/doc/gallery/conf.py`  (For a major release.)

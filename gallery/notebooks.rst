@@ -157,9 +157,7 @@ The notebook
 
 * `animation tools demo <_static/apps/notebooks/visclaw/animation_tools_demo.html>`__
 
-shows some other related animation tools, including ways to create interactive
-animations using Jupyter widgets or as embedded or stand-alone javascript
-or mp4 files.
+shows some other related animation tools.
 
 
 .. _notebooks_vis:
@@ -179,6 +177,11 @@ show how to use various plotting and visualization tools available in Clawpack:
   extract a uniform grid or a 1D transect that uses the finest available
   grid info at each point.
 
+* `animation tools demo <_static/apps/notebooks/visclaw/animation_tools_demo.html>`__
+  illustrates animation tools, including ways to create interactive
+  animations using Jupyter widgets or as embedded or stand-alone javascript
+  or mp4 files. (These tools may be useful for plots created outside of
+  Clawpack as well.)
 
 .. _notebooks_riemann:
 

@@ -133,6 +133,7 @@ Here's the bibtex::
 Please fill in the version number that you used, and its year, with the
 appropriate DOI from `Zenodo <https://zenodo.org>`_, if available.  
 See :ref:`releases`.
+
 It is best to refer to the particular release used to obtain your results,
 but if you need to refer to multiple past releases, 
 or to cite Clawpack more generally, you can also use the DOI
