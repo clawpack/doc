@@ -36,7 +36,7 @@ can also be referenced with the single DOI
 See :ref:`citing` for more information on how best to cite Clawpack.
 
 * :ref:`release_5_8_1`  -- October 19, 2021
-  `[DOI 10.5281/zenodo.??] <https://doi.org/10.5281/zenodo.??>`_
+  `[DOI 10.5281/zenodo.5595424] <https://doi.org/10.5281/zenodo.5595424>`_
 * :ref:`release_5_8_0`  -- February 4, 2021
   `[DOI 10.5281/zenodo.4503024] <https://doi.org/10.5281/zenodo.4503024>`_
 * :ref:`release_5_7_1`  -- September 11, 2020
