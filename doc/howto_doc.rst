@@ -192,7 +192,8 @@ For detailed instructions, see `CLAW/doc/gallery/README.md
 
 Then do the following::
 
-    cd $CLAW/doc/gallery    make html
+    cd $CLAW/doc/gallery
+    make html
 
 Note that we don't track past versions in the gallery.
 

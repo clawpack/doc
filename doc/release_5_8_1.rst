@@ -11,7 +11,7 @@ Clawpack 5.8.1 was released on October 19, 2021. See :ref:`installing`.
 **The installation instructions have been reorganized (once again)
 in an attempt to make the different options clearer.**
 
-Permanent DOI: http://doi.org/10.5281/zenodo.??
+Permanent DOI: http://doi.org/10.5281/zenodo.5595424
 
 
 Changes relative to Clawpack 5.8.0 (February 4, 2021) are shown below.
