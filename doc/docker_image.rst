@@ -12,12 +12,12 @@ docker image from the `DockerHub Clawpack repositories
 Using Version 5.8.0 or above
 ----------------------------
 
-We are currently having problems creating a new Docker image for v5.8.0.
+We are currently having problems creating a new Docker image for v5.8.x.
 However, you can follow the instructions below for v5.7.1 and then within a
-container, install v5.8.0 via::
+container, install v5.8.x via e.g.::
 
     jovyan $ pip install --src=$HOME/ --user -e \
-             git+https://github.com/clawpack/clawpack.git@v5.8.0#egg=clawpack-v5.8.0
+             git+https://github.com/clawpack/clawpack.git@v5.8.2#egg=clawpack-v5.8.2
     
 Getting started
 ----------------
