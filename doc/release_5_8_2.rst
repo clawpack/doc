@@ -1,69 +1,79 @@
 :orphan:
 
-.. _changes_to_master:
+.. _release_5_8_2:
 
 ===============================
-Changes to master since v5.8.2
+v5.8.2 release notes
 ===============================
 
+Clawpack 5.8.2 was released on December 14, 2021. See :ref:`installing`.
 
-Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.8.2) on December 14, 2021.
+Permanent DOI: http://doi.org/10.5281/zenodo.XX
 
-These changes should appear in the next release.  If you need them now,
-see :ref:`developers` for instructions on cloning and installing from the
-master branch. 
 
-To see documentation that has already been developed to accompany any new
-features listed below, click on the "dev" branch of the documentation, in
-the menu on the left hand side of this page.
+Changes relative to Clawpack 5.8.1 (October 19, 2021) are shown below.
+
+To see more recent changes that are in the the master branch but not yet
+released, see :ref:`changes_to_master`.
+
 
 Changes that are not backward compatible
 ----------------------------------------
 
+None.
 
 General changes
 ---------------
+
+None.
+
 
 
 Changes to classic
 ------------------
 
+None.
 
 See `classic diffs
-<https://github.com/clawpack/classic/compare/v5.8.2...master>`_
+<https://github.com/clawpack/classic/compare/v5.8.1...v5.8.2>`_
 
 Changes to clawutil
 -------------------
 
+Minor addition of a print statement.
 
 See `clawutil diffs
-<https://github.com/clawpack/clawutil/compare/v5.8.2...master>`_
+<https://github.com/clawpack/clawutil/compare/v5.8.1...v5.8.2>`_
 
 Changes to visclaw
 ------------------
 
+None.
  
 See `visclaw diffs
-<https://github.com/clawpack/visclaw/compare/v5.8.2...master>`_
+<https://github.com/clawpack/visclaw/compare/v5.8.1...v5.8.2>`_
 
 Changes to riemann
 ------------------
 
+None.
 
 See `riemann diffs
-<https://github.com/clawpack/riemann/compare/v5.8.2...master>`_
+<https://github.com/clawpack/riemann/compare/v5.8.1...v5.8.2>`_
 
 Changes to amrclaw
 ------------------
 
+- Bug fix that avoids some segmentation faults when running amrclaw or geoclaw
+  jobs with many grids.
 
 See `amrclaw diffs
-<https://github.com/clawpack/amrclaw/compare/v5.8.2...master>`_
+<https://github.com/clawpack/amrclaw/compare/v5.8.1...v5.8.2>`_
 
 Changes to geoclaw
 ------------------
 
+None, although the bug fix in amrclaw is sometimes needed.
 
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.6.1...master>`_
 
@@ -71,12 +81,11 @@ See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.6.1...master>
 Changes to PyClaw
 ------------------
 
-
 For changes in PyClaw, see the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
 
 See `pyclaw diffs
-<https://github.com/clawpack/pyclaw/compare/v5.8.2...master>`_
+<https://github.com/clawpack/pyclaw/compare/v5.8.1...v5.8.2>`_
 
 ===========================
 Other Clawpack Repositories
@@ -86,7 +95,7 @@ The repositories below are not included in the Clawpack tarfile or pip
 install, but changes to these repositories may also be of interest.
 
 - `apps diffs
-  <https://github.com/clawpack/apps/compare/v5.8.2...master>`_
+  <https://github.com/clawpack/apps/compare/v5.8.1...v5.8.2>`_
 
 - `doc diffs
   <https://github.com/clawpack/doc/compare/v5.8.x...dev>`_
@@ -94,5 +103,5 @@ install, but changes to these repositories may also be of interest.
   documentation.
 
 - `docker-files diffs
-  <https://github.com/clawpack/docker-files/compare/v5.8.2...master>`_
+  <https://github.com/clawpack/docker-files/compare/v5.8.1...v5.8.2>`_
 
