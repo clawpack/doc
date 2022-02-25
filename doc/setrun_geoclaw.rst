@@ -277,74 +277,43 @@ Fixed grid output parameters
 
 .. attribute:: fixedgrids : list of lists
 
+   **Removed from GeoClaw as of v5.9.0.**  
+   Use `ref`:setrun_fgmax` and/or `ref`:setrun_fgout` instead.
 
-   This can be used to specify a set of grids where output should be
-   produced at the specified resolution regardless of how the AMR grids look
-   at each time.  Interpolation from the best available grid near each point
-   is used.  This is useful for comparing AMR output to results obtained
-   with other codes that use a fixed grid.  
-
-
-   *fixedgrids* should be a list of the form *[grid1info, grid2info, etc.]*
-   where each element is itself a list of the form 
-
-     [t1, t2, x1, x2, y1, y2, xpoints, ypoints]
-
-   with values
-     
-     *t1, t2* : floats
-
-       the time interval over which output should be written for this grid.
-
-     *x1, x2, y1, y2* : floats
-       
-       the spacial extent of this grid.
-
-     *xpoints, ypoints* : floats
-
-       the number of grid points in the x and y directions (the grid will
-       include *x1*, *x2* and *xpoints-2* points in between, for example).
-
-     *ioutarrivaltimes* : int
-
-       **Deprecated feature.**  This should generally be set to 0.  If you want to
-       keep track of arrival times, it is recommended to use the new `fgmax`
-       parameters described below.  
-
-     *ioutsurfacemax* :
-
-       **Deprecated feature.**  This should generally be set to 0.  If you want to
-       keep track of surface or depth maxima, it is recommended to use the new 
-       `fgmax` parameters described below.  
 
 .. _setrun_fgmax:
 
 Fixed grid maximum monitoring / arrival times
 ---------------------------------------------
 
-.. attribute:: fgmax_files : list of strings
+.. attribute:: fgmax_grids : list of clawpack.geoclaw.fgmax_tools.FGoutGrid
+   objects.
+
 
    This can be used to specify a set of grids on which to monitor the
    maximum flow depth (or other quantities) observed over the course of
    the computation, and/or the arrival time of the flow or wave.
 
-   This works better than using the older `fixedgrids` approach since it now
-   correctly interpolates when a grid point lies near the junction of two
-   grid patches, which was not always handled properly before.
 
    The "grids" also do not have to be rectangular grids aligned with the
    coordinate directions, but can consist of an arbitrary list of points
    that could also be points along a one-dimensional transect or points
    following a coastline, for example.
 
-   *fgmax_files* should be a list of strings specifying the file names of
-   files that list the points on each grid and additional information
-   required for each grid, as described at :ref:`fgmax`.
+   See :ref:`fgmax` for more details.
 
 .. attribute:: fgmax_data.num_fgmax_val : int
 
    Should take the value 1, 2, or 5 and indicates how many values to monitor.
    See :ref:`fgmax` for more details.
+
+.. _setrun_fgout:
+
+Fixed grid output
+-----------------
+
+.. attribute:: fgout_grids : list of clawpack.geoclaw.fgout_tools.FGoutGrid
+   objects.
 
 
 .. _setrun_surge:
