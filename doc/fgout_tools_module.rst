@@ -1,7 +1,7 @@
 
 .. _fgout_tools_module:
 
-fgout_tools module for working with topography data
+fgout_tools module for working with fgout grids
 ====================================================
 
 .. seealso::

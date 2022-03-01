@@ -9,7 +9,7 @@ Fixed grid output
 
 See also:
 
- - :ref:`fgout_tools_module` - Tools for working with fgout files
+ - :ref:`fgout_tools_module`
  - :ref:`setrun_fgout` - For adding fgout data to `setrun.py`
 
 GeoClaw has the capability to output the results at specified output times
@@ -95,8 +95,8 @@ Here's an example of how one grid can be set up::
     fgout = fgout_tools.FGoutGrid()
     fgout.fgno = 1
     fgout.output_format = 'binary'
-    fgout.nx = 201
-    fgout.ny = 251
+    fgout.nx = 200
+    fgout.ny = 250
     fgout.x1 = -115.
     fgout.x2 = -70.
     fgout.y1 = -55.
@@ -106,10 +106,14 @@ Here's an example of how one grid can be set up::
     fgout.nout = 37
     fgout_grids.append(fgout) 
 
-This specifies output on a 201 by 251 grid of equally spaced points on the
-rectangle `[-115, -70] x [-55, -10]`.  The output times are equally spaced
-from `tstart = 0` to `tend = 6*3600` (6 hours).  There will be 37 total outputs,
-so one every 10 minutes.  
+This specifies output on a 200 by 250 grid of equally spaced points on the
+rectangle `[-115, -70] x [-55, -10]`.  (Note that these points are viewed
+as cell centers of a grid with these edges, so the actual points will
+be displaced from these edges.  See :ref:`fgout_registration` below.)
+
+The output times are equally spaced
+from `tstart = 0` to `tend = 6*3600` (6 hours).  
+There will be 37 total outputs, so one every 10 minutes.  
 
 
 .. _fgout_format:
@@ -176,7 +180,24 @@ Additional attributes are defined using lazy evaluation only if requested
 by the user, for convenience, including `h, hu, hv, eta, u, v, s, hss`, 
 where `s` is the speed and `hss` is the momentum flux.
 
-For some examples, see [to appear].
+For some examples, see `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
+
+.. _fgout_registration:
+
+fgout grid registration
+-----------------------
+
+Note above that fgout points are specified by setting e.g. `fgout.x1,
+fgout.x2` and `fgout.nx` in `setrun.py`.  For consistency with the way the
+finite volume computational grid is set (and written to the output files),
+the values `x1, x2` are viewed as cell edges and `nx` is the desired number
+of cells (in the `x` direction).  The actual fgout points will be at the
+cell centers.  So the cell width (= distance between points)
+is `dx = (x2-x1)/nx`, and the first cell will have `x` coordinate `x1 + dx/2`.
+
+Solution values at these points are interpolated from the finite volume 
+GeoClaw solution as described in the next section. 
+
 
 .. _fgout_interp:
 
