@@ -19,7 +19,7 @@ These examples are not included in the basic Clawpack installation.
 Users interested in obtaining this collection of applications can either
 clone the repository using git::
 
-    git clone git://github.com/clawpack/apps
+    git clone https://github.com/clawpack/apps
 
 or navigate to `https://github.com/clawpack/apps <https://github.com/clawpack/apps>`_
 and click on the green "Code" button to see other options, such as downloading
