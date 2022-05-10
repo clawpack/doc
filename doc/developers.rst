@@ -68,8 +68,16 @@ You can create a read-only development version of Clawpack via::
     git submodule init
     git submodule update
 
-This downloads the following clawpack modules as subrepositories checked out at
-specific commits (as opposed to the tip of a branch). 
+
+**Note:** The `https://github.com...` form of specifying a remote
+clones the repository in a form that does not allow pushing to it
+(unlike the `git@github.com:...` form).  This is good practice, so
+you do not accidently try to push to the main clawpack repository
+rather than to your own fork (see :ref:`dev_remote` below if you
+need your own fork, e.g. for issuing pull requests).
+
+The commands above download the following clawpack modules as subrepositories
+checked out at specific commits (as opposed to the tip of a branch).
 
 * `<https://github.com/clawpack/pyclaw>`_  (Python code, some of which is
   needed also for Fortran version)
@@ -195,11 +203,11 @@ Then go through the above steps to add your own fork as a remote
 if you plan to modify code and issue pull requests.
 
 **Note:** The `https://github.com...` form of specifying a remote
-clones the repository in a form
-that does not allow pushing to it (unlike the `git@github.com:...` form).
-This is good practice, so you do not
-accidently try to push to the main clawpack repository rather than to your
-own fork.
+clones the repository in a form that does not allow pushing to it
+(unlike the `git@github.com:...` form).  This is good practice, so
+you do not accidently try to push to the main clawpack repository
+rather than to your own fork.
+
 
 Modifying code
 ==============
