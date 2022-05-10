@@ -58,7 +58,7 @@ want the latest development version or a branch that is not in a release yet,
 and/or if you plan to contribute to the code yourself via a pull request.
 See :ref:`developers` for more details, but the basic commands are::
 
-    git clone git://github.com/clawpack/clawpack.git
+    git clone https://github.com/clawpack/clawpack.git
     cd clawpack
     git checkout v5.8.2     # or an older version; `git tag -l` to list options
     git submodule init      # for repositories pyclaw, clawutil, visclaw, etc.

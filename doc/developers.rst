@@ -63,13 +63,21 @@ Cloning the most recent code from Github
 
 You can create a read-only development version of Clawpack via::
 
-    git clone git://github.com/clawpack/clawpack.git
+    git clone https://github.com/clawpack/clawpack.git
     cd clawpack
     git submodule init
     git submodule update
 
-This downloads the following clawpack modules as subrepositories checked out at
-specific commits (as opposed to the tip of a branch). 
+
+**Note:** The `https://github.com...` form of specifying a remote
+clones the repository in a form that does not allow pushing to it
+(unlike the `git@github.com:...` form).  This is good practice, so
+you do not accidently try to push to the main clawpack repository
+rather than to your own fork (see :ref:`dev_remote` below if you
+need your own fork, e.g. for issuing pull requests).
+
+The commands above download the following clawpack modules as subrepositories
+checked out at specific commits (as opposed to the tip of a branch).
 
 * `<https://github.com/clawpack/pyclaw>`_  (Python code, some of which is
   needed also for Fortran version)
@@ -189,17 +197,17 @@ You might also want to clone some or all of the following repositories:
 These are not brought over by cloning the top `clawpack` super-repository.
 You can get one of these in read-only mode by doing, e.g.::
 
-    git clone git://github.com/clawpack/doc.git
+    git clone https://github.com/clawpack/doc.git
 
 Then go through the above steps to add your own fork as a remote 
 if you plan to modify code and issue pull requests.
 
-**Note:** The `git://github.com...` form of specifying a remote
-clones the repository in a form
-that does not allow pushing to it (unlike the `git@github.com:...` or
-`https://github.com...` forms).  This is good practic so you do not
-accidently try to push to the main clawpack repository rather than to your
-own fork.
+**Note:** The `https://github.com...` form of specifying a remote
+clones the repository in a form that does not allow pushing to it
+(unlike the `git@github.com:...` form).  This is good practice, so
+you do not accidently try to push to the main clawpack repository
+rather than to your own fork.
+
 
 Modifying code
 ==============
