@@ -177,7 +177,7 @@ repository:
 
    provided you have ssh keys set up, or else:
 
-        git remote add username htpps://github.com/username/amrclaw.git
+        git remote add username https://github.com/username/amrclaw.git
 
    if you don't mind having to type your password whenever you push or pull.
 
