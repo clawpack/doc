@@ -272,13 +272,14 @@ AMR refinement region parameters
 
 .. _setrun_fixedgrids:
 
-Fixed grid output parameters
-----------------------------
+Deprecated Fixedgrid output parameters
+-------------------------------------
 
 .. attribute:: fixedgrids : list of lists
 
    **Removed from GeoClaw as of v5.9.0.**  
-   Use `ref`:setrun_fgmax` and/or `ref`:setrun_fgout` instead.
+   Use :ref:`setrun_fgmax` and/or :ref:`setrun_fgout` instead, 
+   see below.
 
 
 .. _setrun_fgmax:
@@ -315,6 +316,7 @@ Fixed grid output
 .. attribute:: fgout_grids : list of clawpack.geoclaw.fgout_tools.FGoutGrid
    objects.
 
+   See :ref:`fgout` for more details.
 
 .. _setrun_surge:
 

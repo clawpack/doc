@@ -80,6 +80,8 @@ The file `$CLAW/classic/src/1d/Makefile.classic_1d` contains::
 
 For the `classic` 1d code there are no modules, only subroutines.
 
+.. _makefiles_replace:
+
 Replacing files with the same name as library files
 ---------------------------------------------------
 

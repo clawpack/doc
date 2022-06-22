@@ -23,12 +23,12 @@ such as particle tracking:
     1. The solution is output on a fixed uniform grid at each fgout
     time, independent of the AMR structure.  This is useful in order
     to produce a set of frames for an animation that are all the same
-    size array.
+    resolution with the same size array.
 
     2. It is possible to produce fgout outputs at times that do not
     coincide with the time steps of the computation, whereas standard
-    frame output can only occur at the end of a time step on all
-    levels.  Thus it does not require reducing the time step to hit
+    frame output can only occur at the end of a time step on coarsest
+    level.  Thus it does not require reducing the time step to hit
     the fgout times exactly, which would cause significant increase in
     computing time and possible degradation of the computed solution
     if the coarse grid time steps had to be greatly reduced to match
@@ -39,6 +39,7 @@ such as particle tracking:
     create an fgout grid that only covers this region at the desired
     resolution and does not require output of the entire AMR structure
     over the entire computational domain at each output time.
+    This can *greatly* reduce the size of the output in some cases.
 
     4. If an fgout grid is output with sufficiently fine temporal resolution,
     then this set of data can be used to explore the solution in various ways
@@ -50,11 +51,12 @@ such as particle tracking:
     advance of the GeoClaw run (see :ref:`gauges`).  Similarly, the fluid
     velocities computed from GeoClaw can be used to track particles (as
     massless tracer particles for visualization purposes, or with more
-    complex dynamics for debris tracking). The module :ref:`fgout_module`
-    provides some tools for interpolating from fgout frames to arbitrary
-    points `(x,y,t)`.
+    complex dynamics for debris tracking). The Python module
+    :ref:`fgout_tools_module` provides some tools for interpolating
+    from fgout frames to arbitrary points `(x,y,t)`.
 
-The original version of this from Clawpack 4.6 existed through v5.8.x, but has
+The original version of this, capability, originally called `fixedgrid
+output` in Clawpack 4.6 was carried over and existed through v5.8.x, but has
 been removed as of Version 5.9.0.
 
 An improved version for monitoring maximum values and arrival times was
@@ -73,14 +75,17 @@ The GeoClaw Fortran code reads in one or more files that specify fgout grids
 grid(s) for writing out the solution on a fixed grid throughout
 the computation.  
 
-The fgout grid(s) are specified to GeoClaw in 
-`setrun.py` by setting `rundata.fgout_data.fgout_grids`
-to be a list of objects of class `fgout_tools.FGoutGrid`.
-The output appears in files such as `_output/fgmax0001.txt`.
+The desired fgout grid(s) are specified to GeoClaw in `setrun.py`,
+by setting `rundata.fgout_data.fgout_grids` to be a list of objects
+of class `fgout_tools.FGoutGrid`.  
+After doing `make data` or `make .output`, these are written out
+to `fgout_grids.data`, the file that is read by the Fortran code at runtime.
 
-You can assign numbers to each fgout grid
-using the `fgno` attribute, described below, rather than being numbered
-sequentially by order specified in the `setrun.py` file.
+More than one fgout grid can be specified, and an integer label with at
+most 4 digits can be assigned to each grid.  You can assign numbers
+to each fgout grid using the `fgno` attribute, described below, or
+if you do not then they will be numbered sequentially (1,2, etc.)
+based on the order they are specified in the `setrun.py` file.
 
 
 A simple example
@@ -107,9 +112,9 @@ Here's an example of how one grid can be set up::
     fgout_grids.append(fgout) 
 
 This specifies output on a 200 by 250 grid of equally spaced points on the
-rectangle `[-115, -70] x [-55, -10]`.  (Note that these points are viewed
-as cell centers of a grid with these edges, so the actual points will
-be displaced from these edges.  See :ref:`fgout_registration` below.)
+rectangle `[-115, -70] x [-55, -10]`.  (Note that these values are cell
+edges, the actual fgout points will be at cell centers, 
+displaced from these edges.  See :ref:`fgout_registration` below.)
 
 The output times are equally spaced
 from `tstart = 0` to `tend = 6*3600` (6 hours).  
@@ -152,13 +157,16 @@ to specify that the file names start with `fgout...` rather than `fort.`.
 This can be done in `setplot.py` via::
 
     plotdata.file_prefix = 'fgout0001'  # for fgout grid fgno==1
-    plotdata.format = 'binary'    # 'ascii' or 'binary' to match fgout
+    plotdata.format = 'binary'    # 'ascii' or 'binary' to match fgout.output_format
 
 .. _fgout_plotting:
 
+Reading and plotting fgout arrays directly
+------------------------------------------
+
 Alternatively, since every output frame consists of only a single uniform
-grid of data, it is much easier to manipulate or plot directly than
-general AMR data.  The `fgout_tools.py` module described at
+grid of data, it is much easier to manipulate or plot this data directly than
+for general AMR data.  The `fgout_tools.py` module described at
 :ref:`fgout_tools_module` provides tools for reading frames and producing
 arrays that can then be worked with directly.
 
@@ -173,12 +181,13 @@ For example, here's how to read a frame 5 of an fgout grid set up as above::
     fgframe = 5
     fgout = fgout_grid.read_frame(fgframe)
 
-Then `fgout.X` and `fgout.Y` are 2-dimensional arrays with defining the grid
+Then `fgout.X` and `fgout.Y` are 2-dimensional arrays defining the grid
 and `fgout.q` defines the standard GeoClaw `q` array, with `q[0:4,:,:]` 
 corresponding to `h, hu, hv, eta`, where `eta = h+B` and `B` is the topography.
-Additional attributes are defined using lazy evaluation only if requested
-by the user, for convenience, including `h, hu, hv, eta, u, v, s, hss`, 
-where `s` is the speed and `hss` is the momentum flux.
+For convenience, additional attributes are defined using lazy
+evaluation only if requested by the user, including 
+`h, hu, hv, eta, u, v, s, hss`, where `s` is the speed and 
+`hss` is the momentum flux.
 
 For some examples, see `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
 
@@ -193,7 +202,8 @@ finite volume computational grid is set (and written to the output files),
 the values `x1, x2` are viewed as cell edges and `nx` is the desired number
 of cells (in the `x` direction).  The actual fgout points will be at the
 cell centers.  So the cell width (= distance between points)
-is `dx = (x2-x1)/nx`, and the first cell will have `x` coordinate `x1 + dx/2`.
+is `dx = (x2-x1)/nx`, and the first fgout point (cell center)
+will have `x` coordinate `x1 + dx/2`.
 
 Solution values at these points are interpolated from the finite volume 
 GeoClaw solution as described in the next section. 
@@ -229,3 +239,6 @@ linear interpolation between the times, because interpolating
 `h`, `B`, and `eta` separately near the shore can lead to unphysically large
 values of `h` and/or `eta`.
 
+If you want to change one of these methods, you can make your own version of
+`fgout_module.f90` and point to this in the `Makefile` under `MODULES=`
+(see :ref:`makefiles_replace`).
