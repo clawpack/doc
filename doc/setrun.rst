@@ -145,11 +145,15 @@ below.
 
 .. attribute:: output_format: str
 
-   Format of output.  Currently the following are supported:
+   Format of output.  Currently the following are supported in amrclaw and
+   geoclaw (only `'ascii'` in classic):
 
-   * `'ascii'` : the files `fort.q0000` etc. are ASCII files.
-   * `'binary'` : Raw binary dump.  Working??
-   * `'netcdf'` : NetCDF format.  Working??
+   * `'ascii'` : the files `fort.q0000` etc. are ASCII files,
+   * `'binary64'` : Raw binary dump of full float64 (kind=8) values,
+   * `'binary32'` : Raw binary dump of float32 (kind=4) truncated values.
+     This is almost always sufficient precision for plotting or
+     post-processing purposes, and results in files that are 
+     half as large as `'binary64'`.
 
 .. attribute:: output_q_components: list of booleans or str
 

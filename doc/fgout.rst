@@ -17,8 +17,9 @@ on a specified "fixed grid" by interpolating from the AMR grids active at each
 output time.
 
 This complements the normal output frame capabilities of Clawpack,
-and has several advantages for some applications, particularly when making animations or when using the GeoClaw solution as input to another process,
-such as particle tracking:
+and has several advantages for some applications, particularly when
+making animations or when using the GeoClaw solution as input to
+another process, such as particle tracking:
 
     1. The solution is output on a fixed uniform grid at each fgout
     time, independent of the AMR structure.  This is useful in order
@@ -99,7 +100,7 @@ Here's an example of how one grid can be set up::
 
     fgout = fgout_tools.FGoutGrid()
     fgout.fgno = 1
-    fgout.output_format = 'binary'
+    fgout.output_format = 'binary32'
     fgout.nx = 200
     fgout.ny = 250
     fgout.x1 = -115.
@@ -120,6 +121,15 @@ The output times are equally spaced
 from `tstart = 0` to `tend = 6*3600` (6 hours).  
 There will be 37 total outputs, so one every 10 minutes.  
 
+The parameter `fgout.output_format` can be set to `'ascii'`, `'binary32'`,
+or `'binary64'`, the same options as supported for the standard output in
+geoclaw as of v5.9.0.  
+Usually`'binary32'` is best, which truncates the float64 (kind=8)
+computated values in the fortran code to float32 (kind=4) before dumping the
+raw binary.  This is almost always sufficient precision for plotting or
+post-processing needs, and results in smaller files than either of the other
+options.  This may be particularly important if hundreds of fgout frames 
+are saved for making an animation or doing particle tracking.
 
 .. _fgout_format:
 
@@ -130,8 +140,9 @@ After GeoClaw has run, the output directory should contain
 files of this form for each fgout grid:
 
  - `fgout0001.t0000`  # containing info about this output time
- - `fgout0001.q0000`  # header (and also data if output_format=='ascii')
- - `fgout0001.b0000`  # data in binary format (only if output_format=='binary')
+ - `fgout0001.q0000`  # header (and also data if `output_format=='ascii'`)
+ - `fgout0001.b0000`  # data in binary format (only if 
+   `output_format=='binary32'` or `'binary64'`)
 
 These would be for fgout grid number `fgno = 1` at the first output time.
 
@@ -157,7 +168,7 @@ to specify that the file names start with `fgout...` rather than `fort.`.
 This can be done in `setplot.py` via::
 
     plotdata.file_prefix = 'fgout0001'  # for fgout grid fgno==1
-    plotdata.format = 'binary'    # 'ascii' or 'binary' to match fgout.output_format
+    plotdata.format = 'binary32'    # set to match fgout.output_format
 
 .. _fgout_plotting:
 
@@ -175,7 +186,7 @@ For example, here's how to read a frame 5 of an fgout grid set up as above::
 
     fgno = 1
     outdir = '_output'
-    output_format = 'binary'  # format of fgout grid output
+    output_format = 'binary32'  # format of fgout grid output
     fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, output_format)
 
     fgframe = 5
