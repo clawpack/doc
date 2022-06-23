@@ -212,17 +212,12 @@ grid, and if you want to plot the `q` values on this grid you should use
 the water surface eta on top of topography for a single frame of fgout data
 as read above::
 
-```
-    from clawpack.visclaw import plottols, geoplot
+    from clawpack.visclaw import plottools, geoplot
+    from numpy import ma
 
-    plottools.pcolorcells(fgout.X,fgout.Y,fgout.B,
-                          cmap=geoplot.land_colors)
-
+    plottools.pcolorcells(fgout.X,fgout.Y,fgout.B, cmap=geoplot.land_colors)
     eta = ma.masked_where(fgout.h<0.001, fgout.eta)
-
-    eta_plot = plottools.pcolorcells(fgout.X,fgout.Y,eta,
-                                     cmap=geoplot.tsunami_colormap)
-```
+    eta_plot = plottools.pcolorcells(fgout.X,fgout.Y,eta, cmap=geoplot.tsunami_colormap)
 
 For more detailed examples of plotting, including making animations,
 see `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
