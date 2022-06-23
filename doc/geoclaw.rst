@@ -53,6 +53,7 @@ More will eventually appear in the :ref:`apps`.
    manning
    fgout
    fgmax
+   nearshore_interp
    tsunamidata
    surgedata
    marching_front

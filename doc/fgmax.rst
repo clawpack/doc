@@ -287,12 +287,8 @@ the `fg.interp_method` parameter described above.
 Setting `fg.interp_method = 0` is recommended since
 interpolating the fluid depth and the topography
 separately and then computing the surface elevation by adding these
-may give unrealistic high values.  For example if one cell has topo `B = -2`
-and `hmax = 6` (so `eta = B+hmax = 4`) and the neighboring cell has `B = 50`
-and `hmax = 0` then 1D linear interpolation to the midpoint would give
-`B = 24` and `hmax = 3` and hence `eta = 27` as the surface elevation at
-a point that apparently gets wet, much higher than the actual surface
-elevation in the wet finite volume cell.
+may give unrealistic high values.  See :ref:`nearshore_interp`.
+
 
 
 .. _fgmax_example:

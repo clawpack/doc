@@ -64,6 +64,9 @@ where level is the AMR level used to determine the q values at this time.
 Internally the finest level available at each gauge is used, with bilinear
 interpolation to the gauge locations from the 4 nearest cell centers.
 
+**Note:** In GeoClaw, zero-order interpolation is used instead of piecewise
+linear interpolation; see :ref:`nearshore_interp`.
+
 **New in 5.4.0.**
 The output that is in the gauge files can be controlled by a variety of
 parameters.  These can be specified on a per gauge basis or set for all gauges
