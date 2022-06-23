@@ -63,9 +63,10 @@ been removed as of Version 5.9.0.
 An improved version for monitoring maximum values and arrival times was
 added in v5.7.0, referred to as `fgmax grids`; see :ref:`fgmax`.
 
-An improved version of of the capability to output on a fixed grid at more
+An improved version of the capability to output on a fixed grid at more
 frequent times than the standard AMR output is being introduced in v5.9.0,
 and these are now called `fgout grids` to complement the `fgmax grids`.
+These `fgout grids` are described further below.
 
 .. _fgout_input:
 
@@ -84,8 +85,8 @@ to `fgout_grids.data`, the file that is read by the Fortran code at runtime.
 
 More than one fgout grid can be specified, and an integer label with at
 most 4 digits can be assigned to each grid.  You can assign numbers
-to each fgout grid using the `fgno` attribute, described below, or
-if you do not then they will be numbered sequentially (1,2, etc.)
+to each fgout grid using the `fgno` attribute, described below.
+If you do not assign numbers, they will be numbered sequentially (1,2, etc.)
 based on the order they are specified in the `setrun.py` file.
 
 
@@ -170,6 +171,10 @@ This can be done in `setplot.py` via::
     plotdata.file_prefix = 'fgout0001'  # for fgout grid fgno==1
     plotdata.format = 'binary32'    # set to match fgout.output_format
 
+An example is provided in 
+`$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
+
+
 .. _fgout_plotting:
 
 Reading and plotting fgout arrays directly
@@ -200,7 +205,27 @@ evaluation only if requested by the user, including
 `h, hu, hv, eta, u, v, s, hss`, where `s` is the speed and 
 `hss` is the momentum flux.
 
-For some examples, see `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
+The values in `fgout.X` and `fgout.Y` are the cell centers of the fgout
+grid, and if you want to plot the `q` values on this grid you should use
+`clawpack.visclaw.plottools.pcolorcells`, as described at
+:ref:`pcolorcells`.  For example, here's a minimalist example of plotting
+the water surface eta on top of topography for a single frame of fgout data
+as read above::
+
+```
+    from clawpack.visclaw import plottols, geoplot
+
+    plottools.pcolorcells(fgout.X,fgout.Y,fgout.B,
+                          cmap=geoplot.land_colors)
+
+    eta = ma.masked_where(fgout.h<0.001, fgout.eta)
+
+    eta_plot = plottools.pcolorcells(fgout.X,fgout.Y,eta,
+                                     cmap=geoplot.tsunami_colormap)
+```
+
+For more detailed examples of plotting, including making animations,
+see `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
 
 .. _fgout_registration:
 
@@ -209,7 +234,8 @@ fgout grid registration
 
 Note above that fgout points are specified by setting e.g. `fgout.x1,
 fgout.x2` and `fgout.nx` in `setrun.py`.  For consistency with the way the
-finite volume computational grid is set (and written to the output files),
+finite volume computational grid is specified in `setrun.py`
+(and written to the output files),
 the values `x1, x2` are viewed as cell edges and `nx` is the desired number
 of cells (in the `x` direction).  The actual fgout points will be at the
 cell centers.  So the cell width (= distance between points)
@@ -233,13 +259,14 @@ and the first time step after the fgout time.
 
 The default spatial interpolation method used to assign values to fgout points
 at each time step is to assume the computational solution is constant in each
-finite volume cell and simply evaluate this value in the cell that includes
+finite volume cell and simply evaluate this value in the finest AMR level
+grid cell that includes
 the fgout point.  This is controlled by the parameter `method = 0` in
 subroutine `fgout_interp` in `$CLAW/geoclaw/src/2d/shallow/fgout_module.f90`.
 This is generally recommended rather than setting `method = 1`, which gives
 linear interpolation between finite volume cell centers, because interpolating
 `h`, `B`, and `eta` separately near the shore can lead to unphysically large
-values of `h` and/or `eta`.
+values of `h` and/or `eta` (see :ref:`nearshore_interp`).
 
 Similarly, the temporal intepolation between the two neighboring time steps is
 done by simply using the value at the later time step, as controlled by the
@@ -248,7 +275,7 @@ subroutine `fgout_write` in `$CLAW/geoclaw/src/2d/shallow/fgout_module.f90`.
 This is generally recommended rather than setting `method = 1`, which gives
 linear interpolation between the times, because interpolating
 `h`, `B`, and `eta` separately near the shore can lead to unphysically large
-values of `h` and/or `eta`.
+values of `h` and/or `eta` (see :ref:`nearshore_interp`).
 
 If you want to change one of these methods, you can make your own version of
 `fgout_module.f90` and point to this in the `Makefile` under `MODULES=`
