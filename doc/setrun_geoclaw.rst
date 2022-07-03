@@ -82,28 +82,28 @@ General geo parameters
 
 `rundata.geo_data` has the following additional attributes:
 
-.. attribute:: gravity : float
+.. attribute:: rundata.geo_data.gravity : float
 
    gravitational constant in m/s**2, e.g.  *gravity = 9.81*.
 
-.. attribute:: coordinate_system : integer
+.. attribute:: rundata.geo_data.coordinate_system : integer
 
    *coordinate_system = 1* for Cartesian x-y in meters, 
    
    *coordinate_system = 2* for latitude-longitude on the sphere.
 
-.. attribute:: earth_radius : float
+.. attribute:: rundata.geo_data.earth_radius : float
 
    radius of the earth in meters, e.g.  *earth_radius = 6367.5e3*.
 
-.. attribute:: coriolis_forcing : bool
+.. attribute:: rundata.geo_data.coriolis_forcing : bool
 
    *coriolis_forcing = True* to include Coriolis terms in momentum equations
 
    *coriolis_forcing = False* to omit Coriolis terms (usually fine for tsunami modeling)
    
 
-.. attribute:: sea_level : float
+.. attribute:: rundata.geo_data.sea_level : float
 
    sea level (often *sea_level = 0.*)  
    This is relative to the 0 vertical datum of the topography files used.
@@ -111,25 +111,25 @@ General geo parameters
    :ref:`sealevel`.
 
 
-.. attribute:: friction_forcing : bool
+.. attribute:: rundata.geo_data.friction_forcing : bool
 
    Whether to apply friction source terms in momentum equations.
    See :ref:`manning` for more discussion of the next three parameters.
 
-.. attribute:: friction_depth : float
+.. attribute:: rundata.geo_data.friction_depth : float
 
    Friction source terms are only applied in water shallower than this,
    i.e. if `h < friction_depth`, 
    assuming they have negligible effect in deeper water.
 
-.. attribute:: manning_coefficient : float or list of floats
+.. attribute:: rundata.geo_data.manning_coefficient : float or list of floats
 
    For friction source terms, the Manning coefficient.  If a single value
    is given, this value will be used where ever h < friction_depth.
    If a list of values is given, then the next parameter delineates the
    regions where each is used based on values of the topography B.
 
-.. attribute:: manning_break : list of floats
+.. attribute:: rundata.geo_data.manning_break : list of floats
 
    If manning_coefficient is a list of length N, then this should be a 
    monotonically increasing list
@@ -221,7 +221,7 @@ qinit data file parameters
 A modification to the initial data specified by default can be made as
 described at :ref:`qinit_file`.
 
-.. attribute:: qinit_type : integer
+.. attribute:: rundata.qinit_data.qinit_type : integer
 
    Specifies what type of perturbation is stored in the *qinitfile*, 
    see :ref:`qinit_file` for more information.  Valid values for *qinit_type*
@@ -234,7 +234,7 @@ described at :ref:`qinit_file`.
     - 4 = Perturbation to surface level
 
 
-.. attribute:: qinitfiles : list of lists
+.. attribute:: rundata.qinit_data.qinitfiles : list of lists
 
    *qinitfiles* should be a list of the form *[]* or *[file1info]*
    where each element (currently at most 1 is allowed!)
@@ -256,26 +256,65 @@ described at :ref:`qinit_file`.
 
 See :ref:`qinit_file` for more details about the format.
 
+Force some cells to be initially dry
+-------------------------------------
+
+.. attribute:: rundata.qinit_data.force_dry_list: list of `clawpack.geoclaw.data.ForceDry` objects
+
+Normally the finite volume cells with topography values below sea level (as
+specified by `rundata.geo_data.sea_level`) are initialized as wet, with the
+depth of water `h` needed to bring the surface eta to sea level.  If the
+computational domain includes regions where there is dry land below sea level
+(e.g. behind a dike or levy), then these regions can be specified via this
+attribute. See :ref:`force_dry`.
+
+Adjust sea level in some regions
+--------------------------------
+
+.. attribute:: rundata.qinit_data.variable_eta_init: logical
+
+Normally a single constant value of sea level 
+(specified by `rundata.geo_data.sea_level`) is used to initialize the
+depth of water required to bring the surface eta to sea level.
+Sometimes sea level should have different values in different locations,
+e.g. for an inland lake with surface level above the ocean level, or in
+regions where coseismic uplift or subsidence moves the original water
+vertically.  If so, set this attribute to `True` and see :ref:`set_eta_init`
+for more discussion on how to proceed.
+    
 
 .. _setrun_regions:
 
 AMR refinement region parameters
 --------------------------------
 
+
     As in AMRClaw (see :ref:`setrun_amrclaw`),
     one can specify `regions` and/or `flagregions` to control flagging cells
-    for refinement to the next level.  The old style `regions` is a list
-    of lists while the new `flagregions` is a list of 
-    `clawpack.amrclaw.data.FlagRegion` objects. 
+    for refinement to the next level.  
     See :ref:`refinement_regions` and :ref:`flagregions` for more details.
+
+.. attribute:: rundata.regiondata.regions: list of regions
+
+    An old style `region` is a list of the form
+
+        `[minlevel,maxlevel,t1,t2,x1,x2,y1,y2]`
+
+    See :ref:`refinement_regions` for more details.
+
+.. attribute:: rundata.regiondata.flagregions: list of flagregions
+
+    A new style `flagregion` is an object of class 
+    `clawpack.amrclaw.data.FlagRegion`. 
+    See :ref:`flagregions` for more details.
 
 
 .. _setrun_fixedgrids:
 
 Deprecated Fixedgrid output parameters
--------------------------------------
+---------------------------------------
 
-.. attribute:: fixedgrids : list of lists
+.. attribute:: rundata.fixedgrids : list of lists
 
    **Removed from GeoClaw as of v5.9.0.**  
    Use :ref:`setrun_fgmax` and/or :ref:`setrun_fgout` instead, 
@@ -287,7 +326,7 @@ Deprecated Fixedgrid output parameters
 Fixed grid maximum monitoring / arrival times
 ---------------------------------------------
 
-.. attribute:: fgmax_grids : list of clawpack.geoclaw.fgmax_tools.FGoutGrid
+.. attribute:: rundata.fgmax_grids : list of clawpack.geoclaw.fgmax_tools.FGoutGrid
    objects.
 
 
@@ -301,9 +340,20 @@ Fixed grid maximum monitoring / arrival times
    that could also be points along a one-dimensional transect or points
    following a coastline, for example.
 
+   You can set these via e.g.::
+    
+        from clawpack.geoclaw import fgmax_tools
+        fgmax_grids = rundata.fgmax_data.fgmax_grids  # empty list initially
+
+        fgmax = fgmax_tools.FGmaxGrid()
+        # set fgmax attributes
+        fgmax_grids.append(fgmax)    # written to fgmax_grids.data
+
+        # repeat for additional fgout grids if desired
+
    See :ref:`fgmax` for more details.
 
-.. attribute:: fgmax_data.num_fgmax_val : int
+.. attribute:: rundata.fgmax_data.num_fgmax_val : int
 
    Should take the value 1, 2, or 5 and indicates how many values to monitor.
    See :ref:`fgmax` for more details.
@@ -313,8 +363,19 @@ Fixed grid maximum monitoring / arrival times
 Fixed grid output
 -----------------
 
-.. attribute:: fgout_grids : list of clawpack.geoclaw.fgout_tools.FGoutGrid
+.. attribute:: rundata.fgout_grids : list of clawpack.geoclaw.fgout_tools.FGoutGrid
    objects.
+
+   You can set these via e.g.::
+    
+        from clawpack.geoclaw import fgout_tools
+        fgout_grids = rundata.fgout_data.fgout_grids  # empty list initially
+
+        fgout = fgout_tools.FGoutGrid()
+        # set fgout attributes
+        fgout_grids.append(fgout)    # written to fgout_grids.data
+
+        # repeat for additional fgout grids if desired
 
    See :ref:`fgout` for more details.
 

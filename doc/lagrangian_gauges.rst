@@ -8,7 +8,7 @@ Lagrangian gauges for particle tracking
 Specifying Lagrangian Gauges
 ----------------------------
 
-Gauges are normally added in `setrun.py` via lines of the form:
+:ref:`gauges` are normally added in `setrun.py` via lines of the form:
 
 ::
 
@@ -19,9 +19,10 @@ for `t1 <= t <= t2`. Several properties can already be set for gauges,
 for example `rundata.gaugedata.display_format` can be used to specify
 how many digits to print out. This can be either a single format string
 or a dictionary with an entry for each gauge, as described at
-http://www.clawpack.org/gauges.html.
+:ref:`gauges`.
 
-A new property has now been defined that specifies whether each gauge is
+As of GeoClaw Version 5.7.0,
+a new property has been defined that specifies whether each gauge is
 "stationary" or "lagrangian". In the past all gauges were stationary,
 i.e. `(xg,yg)` is a fixed location. If a gauge is set to be lagrangian
 then `(xg,yg)` specifies the initial location for `t <= t1` but
@@ -70,3 +71,17 @@ Visclaw tools for plotting
 
 A new module `clawpack.visclaw.particle_tools` has been added to
 facilitate plotting particle locations and particle paths.
+
+An alternative using fgout grids
+---------------------------------
+
+One can also use the :ref:`fgout` capabilities added to
+GeoClaw in Version 5.9.0 in order to capture the solution over a specified
+fixed grid at frequent output times.  If this output is frequent enough,
+then it is also possible to sample these outputs at a fixed location to give
+a time series similar to a gauge output, but with the advantage that the
+points need not be specified prior to the run (at least for any point that
+can be spatially interpolated from the fgout grid(s) captured in the run).
+The temporal resolution will be that specified for the fgout grids. 
+See :ref:`fgout` for more details.
+

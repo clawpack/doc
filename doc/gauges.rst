@@ -25,6 +25,19 @@ Gauges are useful in several ways, e.g.:
     comparing to curves that give the solution as a function of time often reveals
     more clearly differences in accuracy or nonphysical oscillations.
 
+**Note:** The capability of using :ref:`lagrangian_gauges` has been added to 
+GeoClaw in Version 5.7.0 (it is not available in AMRClaw at this time).
+
+**Note:** One can also use the :ref:`fgout` capabilities added to
+GeoClaw in Version 5.9.0 in order to capture the solution over a specified
+fixed grid at frequent output times.  If this output is frequent enough,
+then it is also possible to sample these outputs at a fixed location to give
+a time series similar to a gauge output, but with the advantage that the
+points need not be specified prior to the run (at least for any point that
+can be spatially interpolated from the fgout grid(s) captured in the run).
+The temporal resolution will be that specified for the fgout grids. 
+See :ref:`fgout` for more details.
+
 .. _setrun_guages:
 
 Gauge parameters in setrun

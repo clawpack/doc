@@ -184,7 +184,8 @@ Alternatively, since every output frame consists of only a single uniform
 grid of data, it is much easier to manipulate or plot this data directly than
 for general AMR data.  The `fgout_tools.py` module described at
 :ref:`fgout_tools_module` provides tools for reading frames and producing
-arrays that can then be worked with directly.
+arrays that can then be worked with directly. It also contains tools for
+interpolating within these grids in both space and time.
 
 For example, here's how to read a frame 5 of an fgout grid set up as above::
 
