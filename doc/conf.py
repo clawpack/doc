@@ -75,7 +75,7 @@ master_doc = 'contents'
 
 # General information about the project.
 project = u'Clawpack'
-copyright = u'CC-BY 2020, The Clawpack Development Team'
+copyright = u'CC-BY 2022, The Clawpack Development Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
