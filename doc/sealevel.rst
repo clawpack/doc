@@ -1,10 +1,10 @@
 .. _sealevel:
 
 ==========================
-Setting sealevel
+Setting sea_level
 ==========================
 
-GeoClaw has a parameter *sealevel* (see :ref:`setrun_geoclaw`) that can be
+GeoClaw has a parameter *sea_level* (see :ref:`setrun_geoclaw`) that can be
 used to specify the initialization of the fluid depth relative to the
 specified topography (see :ref:`topo`).  
 
@@ -13,8 +13,8 @@ elevation, see :ref:`set_eta_init`.
 
 Unless a different set of initial
 conditions is specified (see :ref:`setrun_qinit`), the default is to
-initialize with zero velocity and depth *h* chosen so that *h+B = sealevel*
-at any point where *B < sealevel*, where *B* is the topography or bathymetry
+initialize with zero velocity and depth *h* chosen so that *h+B = sea_level*
+at any point where *B < sea_level*, where *B* is the topography or bathymetry
 in the grid cell (as determined by interpolation from the specified
 *topo* files as described in :ref:`topo`).
 
@@ -25,9 +25,9 @@ modeling (e.g. from
 `NOAA NGDC inundataion relief
 <http://www.ngdc.noaa.gov/mgg/coastal/coastal.html>`_)
 is often relative to Mean High Water (MHW), in
-which case setting *sealevel = 0.* corresponds to assuming the water level
+which case setting *sea_level = 0.* corresponds to assuming the water level
 is initially at MHW.  To adjust to use a different tide level, the value of
-*sealevel* must be set appropriately.  The relation between MHW and other
+*sea_level* must be set appropriately.  The relation between MHW and other
 tide levels such as Mean Sea Level (MSL) can often be found from the NGDC
 webpages for a nearby tide gauge. 
 For example, if you go to a station page such as 
@@ -58,7 +58,7 @@ to be at rest before the tsunami arrives.
 
 If GeoClaw is used for hazard assessment based on potential tsunami
 scenarios, then thought should be given to the appropriate value of
-*sealevel* to assume.  The NCEI coastal bathymetry data is often referenced to MHW
+*sea_level* to assume.  The NCEI coastal bathymetry data is often referenced to MHW
 because this is often the level assumed for tsunami hazard assessment, but
 higher tide levels such as Mean Higher High Water (MHHW) or the Astronomical
 High Tide (AHT) are sometimes used for worst-case scenarios.  
