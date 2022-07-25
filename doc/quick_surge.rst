@@ -33,7 +33,7 @@ Here we will concentrate on changing the Hurricane Ike (2018) example into one f
 Hurricane Elsa (2021).
 
 1. First copy the files (setrun.py, setplot.py, makefile) located in the Hurricane Ike directorty located at
-   `$CLAW/geoclaw/examples/storm-surge/ike</cite>`. Note: if reader has not yet set up environment 
+   `$CLAW/geoclaw/examples/storm-surge/ike`. Note: if reader has not yet set up environment 
    variable `CLAW`, please refer to this page: `Setting Environment Variable <http://www.clawpack.org/setenv.html>`__.
 
 2. Next let’s find some better topography for the west coast Florida area. There are several places where we can get topography/bathymetry data, for
