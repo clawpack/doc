@@ -13,7 +13,9 @@ Other notes:
 * Please see :ref:`citing` for the suggested way to cite the version of
   Clawpack that you are using in publications.
 
-* For changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
+* For older changes in PyClaw, see the `PyClaw changelog <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
+  Starting with v5.9.0, changes will be recorded in the release notes along
+  with those for other repositories.
 
 * See :ref:`changes_to_master` for changes to the master branch on Github
   that are not in the most recent release.  

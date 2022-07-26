@@ -66,6 +66,15 @@ Changes to visclaw
 ------------------
 
 - Support for `'binary32'` and `fgout` grids added.
+
+- `pcolor` plots are now rasterized by default, which greatly reduces the
+  file size in some cases.  When e.g. `savefig('filename.svg')` is used
+  the labels are still vector graphics but the flow field is rasterized.
+  Passing the option `pcolor_kwargs = {"rasterized":False}` in setplot
+  turns this off. See `<https://github.com/clawpack/visclaw/pull/286>`.
+
+- The `JSAnimation` subdirectory was removed, since we now use
+  `anim.to_jshtml` instead.
  
 See `visclaw diffs
 <https://github.com/clawpack/visclaw/compare/v5.8.2...master>`_
@@ -73,6 +82,7 @@ See `visclaw diffs
 Changes to riemann
 ------------------
 
+- None.
 
 See `riemann diffs
 <https://github.com/clawpack/riemann/compare/v5.8.2...master>`_
@@ -80,7 +90,8 @@ See `riemann diffs
 Changes to amrclaw
 ------------------
 
-- Support for `output_format='binary32'` added.
+- Support for `output_format='binary32'` added for both output frames and
+  gauges.
 
 See `amrclaw diffs
 <https://github.com/clawpack/amrclaw/compare/v5.8.2...master>`_
@@ -88,7 +99,8 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
-- Support for `output_format='binary32'` added.
+- Support for `output_format='binary32'` added for both output frames and
+  gauges.
 
 - New `fgout` grid capabilities added, as described at :ref:`fgout`.
   This allows specifying one or more fixed resolution rectangular grids on
@@ -108,12 +120,21 @@ See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.8.2...master>
 Changes to PyClaw
 ------------------
 
+- Support for reading fgout frames added, by passing the parameter
+  `file_prefix` more consistently (which can be e.g. `fgout` rather than
+  `fort`, as used for output frames).
 
-For changes in PyClaw, see the `PyClaw changelog
+- Support for reading binary output files with format `'binary32'` or
+  `'binary64'`.  Added for both output frames and gauges.  The old `'binary'`
+  format is equivalent to `'binary64'`.
+
+- Support reading `file_format` from the `fort.t` files, now one of `ascii`,
+  `binary32`, or `binary64`.  See General Changes above for more details.
+
+See `pyclaw diffs <https://github.com/clawpack/pyclaw/compare/v5.8.2...master>`_
+
+For older changes in PyClaw, see also the `PyClaw changelog
 <https://github.com/clawpack/pyclaw/blob/master/CHANGES.md>`_.
-
-See `pyclaw diffs
-<https://github.com/clawpack/pyclaw/compare/v5.8.2...master>`_
 
 ===========================
 Other Clawpack Repositories
