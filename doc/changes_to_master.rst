@@ -114,6 +114,12 @@ Changes to geoclaw
   replaces the very old `fixedgrid` capability,
   which has now been further deprecated.
 
+- `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax` has been replaced by
+  `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.  This example
+  now also shows how to plot results on fgout grids either by 
+  using a special `setplot` function or by reading them directly.
+  It also shows how to make an animation from the fgout results.
+
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.8.2...master>`_
 
 
