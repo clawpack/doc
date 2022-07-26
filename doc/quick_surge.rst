@@ -94,4 +94,4 @@ Hurricane Elsa (2021).
    Once the simulation runs successfully, we can see the result at :code:`DirectoryPath/_plots/_PlotIndex.html`. 
 
 For a more detailed, step-by-step guide to storm surge simulations/validations, please find the jupyter 
-notebook `setup.ipynb` at this `github repository <https://github.com/mandli/apps>`__.
+notebook `setup.ipynb` at this `github repository <https://github.com/mandli/surge-examples>`__.
