@@ -122,8 +122,8 @@ class Gallery(object):
                 os.system('cp %s/README.rst %s' % (clawdir_examples+gitem.appdir, './'+gitem.appdir))
                 if copy_plots:
                     #os.system('cp -r %s/_plots %s' % (clawdir_examples+gitem.appdir, './'+gitem.appdir))
-                    os.system('cp -r %s/_plots %s' % (clawdir_examples+gitem.appdir, \
-                                static_dir+gitem.appdir))
+                    os.system('cp -r %s/%s %s' % (clawdir_examples+gitem.appdir, \
+                                gitem.plotdir,static_dir+gitem.appdir))
                 if copy_files:
                     files = []
                     for ft in ['*.f','*.f90','*.py','*.m','*.html','Makefile']:
@@ -503,12 +503,24 @@ def make_geoclaw():
     
     #----------------------------------------------
 
-    appdir = 'apps/tsunami/chile2010_fgmax'
+    appdir = 'geoclaw/examples/tsunami/chile2010_fgmax-fgout'
     description = """
         Chile 2010 wave heights and arrival times"""
     images = ('frame0001fig0','frame0002fig0','amplitude_times')
     gsec.new_item(appdir, plotdir, description, images)
 
+ 
+    #----------------------------------------------
+    gsec = gallery.new_section('fgout examples')
+    #----------------------------------------------
+    
+    appdir = 'geoclaw/examples/tsunami/chile2010_fgmax-fgout'
+    description = """
+        Chile 2010 output on fgout grid and animation"""
+    images = ('fgout0001frame0009fig0','fgout0001frame0017fig0')
+    gsec.new_item(appdir, '_plots_fgout', description, images)
+
+ 
        
     #----------------------------------------------
     gsec = gallery.new_section('Lagrangian gauges')
