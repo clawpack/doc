@@ -9,6 +9,7 @@ Pyclaw Input/Output Package
 Pyclaw supports the following input and output formats:
 
  * ASCII_ - ASCII file I/O, supports traditional clawpack format files
+ * BINARY_ - for reading binary output files containing 32 or 64 byte floats
  * HDF5_ - HDF5 file I/O
  * NetCDF_ - NetCDF file I/O, support for NetCDF3 and NetCDF4 files
  
@@ -69,6 +70,14 @@ libraries needed.
 ==========================
 
 .. automodule:: clawpack.pyclaw.fileio.ascii
+    :members:
+    
+.. _BINARY:
+
+:mod:`pyclaw.fileio.binary`
+===========================
+
+.. automodule:: clawpack.pyclaw.fileio.binary
     :members:
     
 .. _HDF5:

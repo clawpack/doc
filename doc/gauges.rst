@@ -85,11 +85,14 @@ The output that is in the gauge files can be controlled by a variety of
 parameters.  These can be specified on a per gauge basis or set for all gauges
 specified.  The output parameters are
 
-- *file_format* : Specifies the file format of the gauge data.  Currently
-  *"ascii"* is the only value accepted.
+- *file_format* : Specifies the file format of the gauge data.  Starting in
+  v5.9.0, this value can be *"ascii"*, *"binary64*", or *"binary32*".
+  The latter value generally results in the smallest file size and reduction
+  of the 8-byte computated values to 4-byte output still gives sufficient
+  precision for most applications.
 - *display_format* : Specifies the format of the numbers written to the gauge
-  file for each field.  These are Fortran format strings defaulting to
-  *"e15.7"*.
+  file for each field, in the case *file_format="ascii"*.
+  These are Fortran format strings defaulting to *"e15.7"*.
 - *q_out_fields* : Specifies which fields of the q array to output. Specify as
   a list the indices that should be output.  Defaults to *"all"*.
 - *aux_out_fields* : Specifies which fields of the aux array to output.
@@ -141,10 +144,17 @@ fields for that layer.
  - Some header info appears in each of these files to describe the gauge
    output.
 
+ - **New in 5.9.0:** If binary output is requested (see below) then files
+   such as `gauge00001.txt` contain only a header for each gauge, but the 
+   data is all in a corresponding binary file such as `gauge00001.bin`.
+
  - When doing a restart (see :ref:`restart`), gauge output from the original run
    is no longer overwritten by the second run. Instead gauge
    output from the restart run will be appended to the end of each
-   `gaugeXXXXX.txt` file.
+   `gaugeXXXXX.txt` file (or `gaugeXXXXX.bin` in the case of binary output).
+   Note that if you restart from a time earlier than the end of the previous
+   computation, or do multiple restarts from the same checkpoint file, 
+   the appended data will not be at monotonically increasing times.
 
 
 Plotting tools
