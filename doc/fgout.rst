@@ -5,7 +5,7 @@
 Fixed grid output
 =====================
 
-**To appear in v5.9.0:** 
+**New in v5.9.0:** 
 
 See also:
 
@@ -64,7 +64,7 @@ An improved version for monitoring maximum values and arrival times was
 added in v5.7.0, referred to as `fgmax grids`; see :ref:`fgmax`.
 
 An improved version of the capability to output on a fixed grid at more
-frequent times than the standard AMR output is being introduced in v5.9.0,
+frequent times than the standard AMR output has been introduced in v5.9.0,
 and these are now called `fgout grids` to complement the `fgmax grids`.
 These `fgout grids` are described further below.
 

@@ -36,9 +36,9 @@ Download a tar file from one of these sources:
 
 After downloading a tar file you can do, e.g. ::
 
-    tar -xzf clawpack-v5.8.2.tar.gz
-    cd clawpack-v5.8.2
-    export CLAW=/full/path/to/clawpack-v5.8.2  # in bash
+    tar -xzf clawpack-v5.9.0.tar.gz
+    cd clawpack-v5.9.0
+    export CLAW=/full/path/to/clawpack-v5.9.0  # in bash
     
 The last command sets an environment variable when using the bash shell.
 The syntax may be different in other shells.  Replace `/full/path/to`
@@ -60,7 +60,7 @@ See :ref:`developers` for more details, but the basic commands are::
 
     git clone https://github.com/clawpack/clawpack.git
     cd clawpack
-    git checkout v5.8.2     # or an older version; `git tag -l` to list options
+    git checkout v5.9.0     # or an older version; `git tag -l` to list options
     git submodule init      # for repositories pyclaw, clawutil, visclaw, etc.
     git submodule update    # clones all the submodule repositories
     export CLAW=/full/path/to/clawpack    # in bash

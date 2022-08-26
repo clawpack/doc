@@ -32,7 +32,7 @@ Clawpack is via::
 
 or, more specifically, ::
 
-    pip install --user clawpack==v5.8.2
+    pip install --user clawpack==v5.9.0
 
 or you can choose a previous version from the `PyPi history <https://pypi.org/project/clawpack/#history>`__.
 
@@ -56,7 +56,7 @@ following command
 want to change anything in this command)**::  
 
     pip install --src=$HOME/clawpack_src --user -e \
-        git+https://github.com/clawpack/clawpack.git@v5.8.2#egg=clawpack-v5.8.2 \
+        git+https://github.com/clawpack/clawpack.git@v5.9.0#egg=clawpack-v5.9.0 \
         --use-deprecated=legacy-resolver
         
         
@@ -72,7 +72,7 @@ want to change anything in this command)**::
   :ref:`installing_options` if you want more control.
 
 - This will download Clawpack (via a git clone) into the directory
-  `$HOME/clawpack_src/clawpack-v5.8.2`.  The top 
+  `$HOME/clawpack_src/clawpack-v5.9.0`.  The top 
   installation directory can be changed by modifying the ``--src`` target 
   (or omit this part to put it in your current working directory).
   If you have already downloaded Clawpack via a different mechanism then
@@ -93,11 +93,11 @@ want to change anything in this command)**::
   
 - In order to use the Fortran codes within Clawpack (`classic`,
   `amrclaw`, or `geoclaw`), you should then set the environment
-  variable `CLAW` to point to the `clawpack-v5.8.2` directory within
+  variable `CLAW` to point to the `clawpack-v5.9.0` directory within
   the installation directory `$HOME/clawpack_src`, and `FC` to point
   to the desired Fortran compiler, e.g. in the bash shell::
   
-        export CLAW=$HOME/clawpack_src/clawpack-v5.8.2
+        export CLAW=$HOME/clawpack_src/clawpack-v5.9.0
         export FC=gfortran
 
 
