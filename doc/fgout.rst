@@ -19,7 +19,9 @@ output time.
 This complements the normal output frame capabilities of Clawpack,
 and has several advantages for some applications, particularly when
 making animations or when using the GeoClaw solution as input to
-another process, such as particle tracking:
+another process, such as particle tracking.
+
+Advantages include:
 
     1. The solution is output on a fixed uniform grid at each fgout
     time, independent of the AMR structure.  This is useful in order
@@ -28,8 +30,8 @@ another process, such as particle tracking:
 
     2. It is possible to produce fgout outputs at times that do not
     coincide with the time steps of the computation, whereas standard
-    frame output can only occur at the end of a time step on coarsest
-    level.  Thus it does not require reducing the time step to hit
+    frame output can only occur at the end of a time step on the coarsest
+    level.  Hence fgout output does not require reducing the time step to hit
     the fgout times exactly, which would cause significant increase in
     computing time and possible degradation of the computed solution
     if the coarse grid time steps had to be greatly reduced to match

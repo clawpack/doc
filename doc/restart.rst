@@ -92,9 +92,16 @@ be repeated in two frames if `clawdata.output_t0 == True` in the restarted run.
 Gauge output from the original run 
 is no longer overwritten by the second run. Instead gauge
 output from the restart run will be appended to the end of each
-`gaugeXXXXX.txt` file.  (If multiple restarts are performed from the same
-checkpoint file then these will accumulate in an undesirable fashion, but
-for for most purposes this does the right thing.)
+`gaugeXXXXX.txt` file (or `gaugeXXXXX.bin` in the case of binary gauge
+output, introduced in v5.9.0).  
+
+Note that if you have to restart a computation from a checkpoint
+file that is at an earlier time than the original computation
+reached, then intermediate gauge outputs will be repeated twice,
+and data from these output files may have to be adjusted to account
+for this.  If multiple restarts are performed from the same checkpoint
+file then gauge data will accumulate in an undesirable fashion, but
+for most purposes this does the right thing.
 
 
 
