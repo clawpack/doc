@@ -46,6 +46,11 @@ General changes
   are also much smaller than the files created with the `'ascii'`
   option, which is generally recommended only for debugging if you need to 
   examine the output files directly.
+  For more info, see http://www.clawpack.org/output_styles.html
+
+- Gauge output in amrclaw and geoclaw can also now be specified as
+  'ascii', 'binary64', or 'binary32',
+  see http://www.clawpack.org/gauges.html for instructions.
 
 - Adding support for `'binary32'` required changes in the pyclaw, clawutil 
   and visclaw repositories as well.
