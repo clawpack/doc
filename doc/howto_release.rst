@@ -130,37 +130,51 @@ of trickery.  We can't just follow the directions at https://packaging.python.or
 because we have a very non-Pythonic directory structure; in particular,
 the subdirectories `clawpack/x/` do not have an `__init__.py`.
 
-Here's what to do::
+Here's what to do, starting with a clean clone in some directory
+referred to below as `$TEMP` (replace `5.x.x` by the new version number)::
 
-	cd $CLAW
-	git-archive-all --prefix clawpack-x.x.x/ clawpack-x.x.x.tar
+    cd $TEMP
+    git clone https://github.com/clawpack/clawpack.git
+    cd clawpack    # should now be in $TEMP/clawpack
+    source pull_all.sh
+    git submodule update --init --recursive
+    git-archive-all --prefix clawpack-5.x.x/ clawpack-5.x.x.tar
 
-Then unpack the resulting tarball in another location.  Next::
-	
-        cd $CLAW
-	python setup.py sdist
-        cd dist
+    mv clawpack-5.x.x.tar ..
+    cd .. 
+    tar -xf clawpack-5.x.x.tar  # creates $TEMP/clawpack-5.x.x
 
-Now extract that resulting tarball.  Then copy the file PKG-INFO from this second tarball 
-to the first one.  Finally, repack the first tarball and put it in `$CLAW/dist`::
-	
-	tar  -cvf clawpack-x.x.x.tar clawpack-x.x.x
-	gzip clawpack-x.x.x.tar
-        mv clawpack-x.x.x.tar $CLAW/dist
+    cd clawpack
+    python3 setup.py sdist  # creates $TEMP/clawpack/dist/clawpack-5.x.x.tar.gz
+    cd dist     # should be in $TEMP/clawpack/dist
+    tar -xzf clawpack-5.x.x.tar.gz
 
-Upload to the testpypi server for testing (you will need to have created an account there)::
-	
-	cd ..
-	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+    cp clawpack-5.x.x/PKG-INFO ../../clawpack-5.x.x
+    rm -rf clawpack-5.x.x
 
-Test it::
+    cd ../..   # should be in $TEMP
+    rm clawpack-5.x.x.tar
+    tar -cf clawpack-5.x.x.tar clawpack-5.x.x
+    gzip clawpack-5.x.x.tar
+    mv clawpack-5.x.x.tar.gz clawpack/dist
+
+Upload to the testpypi server for testing
+(you will need to have created an account there)::
+
+    cd clawpack   # should be in $TEMP/clawpack
+    twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+    credentials: [[test pypi]]
+
+Click the link and check that it looks okay.  You can also test via::
 
 	pip3 uninstall clawpack
 	pip3 install —no-cache—dir —index-url https://test.pypi.org/simple/ clawpack
 	
 Once that works, do the real upload to pypi::
 
-	twine upload dist/*
+    twine upload dist/*
+
 
 
 Zenodo 

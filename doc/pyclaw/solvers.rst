@@ -50,7 +50,11 @@ Key differences between the Classic and SharpClaw solvers are:
 
     * The source term routine for the Classic solver should return the integral of
       the source term over a step, while the source term routine for SharpClaw
-      should return the instantaneous value of the source term.
+      should return the instantaneous value of the source term.  For Classic,
+      the source term function is set using `solver.step_source`, while for
+      SharpClaw it is set using `solver.dq_src`.  The `shock-bubble interaction
+      example <https://www.clawpack.org/gallery/pyclaw/gallery/shock_bubble_interaction.html>`_
+      shows how to use each of these.
 
     * The solvers have different options.  For a list of options and possible
       values, see the documentation of the :class:`~pyclaw.classic.solver.ClawSolver` and 
