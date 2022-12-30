@@ -9,27 +9,29 @@ you have `Docker <https://www.docker.com/>`_ installed then you can now use a
 docker image from the `DockerHub Clawpack repositories
 <https://hub.docker.com/u/clawpack/dashboard/>`_.
 
-Using Version 5.8.0 or above
+Using Version 5.9.0 or above
 ----------------------------
 
-We are currently having problems creating a new Docker image for v5.8.x.
-However, you can follow the instructions below for v5.7.1 and then within a
-container, install v5.8.x via e.g.::
+A new docker image has been created for v5.9.x.  This image includes
+Clawpack v5.9.0 and a number of packages of primary interest to GeoClaw users.
 
-    jovyan $ pip install --src=$HOME/ --user -e \
-             git+https://github.com/clawpack/clawpack.git@v5.8.2#egg=clawpack-v5.8.2
-    
+It also now includes the packages and files needed to execute the
+Jupyter notebooks from the book
+`Riemann Problems and Jupyter Solutions
+<https://bookstore.siam.org/fa16/bonus>`__.
+These notebooks can be found in the `riemann_book` directory.
+
 Getting started
 ----------------
 
 To download an image::
 
-    $ docker pull clawpack/v5.7.1_dockerimage:release
+    $ docker pull clawpack/v5.9.0_dockerimage:release
 
 To create a container and run it::
 
-    $ docker run -i -t -p 8889:8889 --name clawpack-v5.7.1_container \
-        clawpack/v5.7.1_dockerimage:release
+    $ docker run -i -t -p 8889:8889 --name clawpack-v5.9.0_container \
+        clawpack/v5.9.0_dockerimage:release
 
 You can change the container name if you wish, and also the port 8889 (on
 which jupyter notebooks might be served, see below).
@@ -41,14 +43,9 @@ You should now see a prompt like::
 indicating that you are in the container, logged in as user `jovyan`.
 
 Once logged in to the container, you should find a directory
-`$HOME/clawpack-v5.7.1` that contains the Clawpack installation (including the
+`$HOME/clawpack-v5.9.0` that contains the Clawpack installation (including the
 current master branch of the :ref:`apps`).
 
-A better image for GeoClaw users
---------------------------------
-
-**Note:** Starting with v5.7.1 there is only a single docker image, which
-now also includes some packages of primary interest to GeoClaw users.
 
 
 Stopping a container
@@ -66,7 +63,7 @@ Restarting a container
 
 You can restart the container via::
 
-    docker start -a -i clawpack-v5.7.1_container
+    docker start -a -i clawpack-v5.9.0_container
 
 
 Running Jupyter notebooks
@@ -90,13 +87,13 @@ the server.
 
 This will open to the top level of `$HOME`, and you can then navigate to
 wherever the notebooks are you want to run, e.g. the sample ones in the
-`apps` repository can be found at `clawpack-v5.7.1/apps/notebooks`.
+`apps` repository can be found at `clawpack-v5.9.0/apps/notebooks`.
 
 PyClaw users might want to start with
-`clawpack-v5.7.1/apps/notebooks/pyclaw/Acoustics-1D.ipynb`.
+`clawpack-v5.9.0/apps/notebooks/pyclaw/Acoustics-1D.ipynb`.
 
 GeoClaw users might want to try running
-`clawpack-v5.7.1/apps/notebooks/geoclaw/chile2010a.ipynb`,
+`clawpack-v5.9.0/apps/notebooks/geoclaw/chile2010a.ipynb`,
 which exercises most aspects of GeoClaw.
 
 
@@ -109,10 +106,11 @@ directory on your laptop).  You can use the `--volume` flag when running a
 container to accomplish this, see 
 `docker volume documentation <https://docs.docker.com/storage/volumes/>`_.
 
-For example, if you have created a directory `$HOME/docker_disk` on your computer
-then adding::
+For example, if you have created a directory `$HOME/docker/volumes/work` 
+on your computer (it can have a different name but should be in
+`$HOME/docker/volumes/`) then adding::
 
-    -v $HOME/docker_disk:/home/jovyan/work
+    -v $HOME/docker/volumes/work:/home/jovyan/work
 
 to your `docker run` command will map this directory to `/home/jovyan/work` in
 the docker container.  So you can move Clawpack output or plots to that directory 
@@ -122,9 +120,10 @@ Putting this together with previous options, here's a sample command
 that creates and runs a geoclaw-based container with this mapping
 and also allowing us to start a Jupyter server::
 
-    $ docker run -i -t -p 8889:8889 -v ~/docker_disk:/home/jovyan/work \
-      --name clawpack-v5.7.1_geoclaw_container \
-      clawpack/v5.7.1_geoclaw_dockerimage
+    $ docker run -i -t -p 8889:8889 \
+      -v $HOME/docker/volumes/work:/home/jovyan/work \
+      --name clawpack-v5.9.0_container \
+      clawpack/v5.9.0_geoclaw_dockerimage
 
 
 Some other useful docker commands
@@ -157,10 +156,10 @@ https://github.com/clawpack/docker-files.
 This might be useful if you want to distribute your own code that depends on
 Clawpack in a form that's easy for others to use.
 
-You can also create a Dockerfile that uses the already-build Clawpack 5.7.1
+You can also create a Dockerfile that uses the already-build Clawpack 5.9.0
 on Dockerhub by starting the Dockerfile with::
 
-    FROM clawpack/v5.7.1_dockerimage:release
+    FROM clawpack/v5.9.0_dockerimage:release
 
 and then adding anything addition you want in the image, 
 such as other Python modules you need or your own application code.
