@@ -108,15 +108,17 @@ can be quickly rebuilt when writing and editing documentation.
 To generate docs including previous versions
 --------------------------------------------
 
+If you have just done a new major release, first see :ref:`howto_doc_major`
+below.
+
+The instructions below make webpages that list v5.7.x, v5.8.x, etc. and allow
+viewing docs that may be more relevant to a previous version of Clawpack.
+
 This should be done when you are close to pushing changes to the website,
 otherwise the above approach works fine and shows the current state of the
 documentation based on files in your working directory.
 
-This can take much longer since it rebuilds pages for all
-versions.
-
-The instructions below make webpages that list v5.4.0, etc. and allow
-viewing docs that may be more relevant to a previous version of Clawpack.
+This can take longer since it rebuilds pages for all versions.
 
 As of v5.7.x, we are now using 
 `sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__
@@ -177,6 +179,35 @@ pull request to have these changes incorporated into the documentation.
 main doc pages together.   Instead there are hard links to `www.clawpack.org`
 to go from one to the other.  So the old use of 
 the environment variable `SPHINX_WEB` is now deprecated.
+
+.. _howto_doc_major:
+
+Updating for a new major version
+--------------------------------
+
+When updating a minor version, e.g. from v5.7.0 to v5.7.1, we will continue
+to use the same branch v5.7.x.  You should just make sure the v5.7.x and dev
+are up to date with each other at the time of release.
+
+When updating to the next major version, e.g. from v5.7.x to v5.8.x, it is
+necessary to do the following:
+
+- Create a new branch v5.8.x from v5.7.x (or dev).
+
+- Delete branch v5.7.x and replace it with a tag, so that the proper
+  versions get included in the documentation when next it is built.
+
+For example, this could be done as follows::
+
+    git checkout v5.7.x       # assuming up to date with dev
+    git checkout -b v5.8.x    # create new branch
+    git branch -d v5.7.x      # remove old branch
+    git push origin :v5.7.x   # delete branch on github
+    git tag v5.7.x            # create new tag
+    git push origin v5.8.x    # push new branch
+    git push origin --tags    # push new tag
+
+
 
 Updating the gallery
 --------------------
