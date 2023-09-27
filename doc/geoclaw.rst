@@ -58,6 +58,7 @@ More will eventually appear in the :ref:`apps`.
    surgedata
    marching_front
    force_dry
+   sphere_source
 
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x

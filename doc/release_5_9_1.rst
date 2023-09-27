@@ -67,8 +67,10 @@ Changes to visclaw
   to facilitate making nicer looking plots without so much need to use
   `kwargs` attributes or define an `afteraxes function`, for example.
 
-  The lines below are extracted from `$CLAW/visclaw/src/python/visclaw/data.py`)
-
+  The lines below are extracted from
+  `$CLAW/visclaw/src/python/visclaw/data.py`.
+  For more information about these attributes (and others), see
+  `<https://www.clawpack.org/dev/setplot.html>`__.
 
   - Added to `ClawPlotFigure`::
   
@@ -146,6 +148,14 @@ Changes to geoclaw
   
 - Added `geoclaw.data.FGmaxData.read()` function to read in the data from a
   `fgmax_grids.data` file.
+  
+- Added `sphere_source` as local variable in `src/2d/shallow/src2.f90`, set to
+  0 for now for backward compability.  This allows testing the addition of
+  source terms that should be included on the sphere but were always missing.
+  After further testing, the plan is to change the default in the next major
+  release v5.10.0 and also allow this to be adjusted in `setrun.py`.
+  See `<https://www.clawpack.org/dev/sphere_source.html>`__
+  for more information.
   
 - Other minor fixes.
 
