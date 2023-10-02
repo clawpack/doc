@@ -27,6 +27,17 @@ Attributes
     of a :ref:`ClawPlotData` object
 
 
+  .. attribute:: figsize : tuple
+
+    Figure size in (x,y) as in matplotlib.
+
+  .. attribute:: facecolor : color
+
+    Color for the background of the figure (behind the axes).
+    By default (if `facecolor is None`) the clawpack theme tan color is used.
+
+    For plots to be included in publications you probably want to use
+    `'w'` for a white background instead.
 
   .. attribute:: kwargs : dictionary
 

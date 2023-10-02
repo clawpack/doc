@@ -283,10 +283,30 @@ Special attributes for plot_type = '2d_pcolor'
      frame to frame.  Also, if AMR is used, they may vary from patch to patch,
      yielding very confusing plots.
 
-.. attribute:: pcolor_colorbar : bool
+.. attribute:: add_colorbar : bool
 
      If True, a colorbar is added to the plot.
 
+Special attributes for plot_type = '2d_imshow'
+-------------------------------------------------
+
+.. attribute:: imshow_cmap : matplotlib colormap
+
+.. attribute:: imshow_cmin : float
+
+.. attribute:: imshow_cmax : float
+
+     In general you should specify *imshow_cmin* and *imshow_cmax* to
+     specify the range of q values over which the colormap applies.  If they 
+     are not specified they will be chosen automatically and may vary from
+     frame to frame.  Also, if AMR is used, they may vary from patch to patch,
+     yielding very confusing plots.
+
+.. attribute:: add_colorbar : bool
+
+     If True, a colorbar is added to the plot.
+
+    
 
 .. _amr_attributes:
 
@@ -325,6 +345,29 @@ levels, e.g.::
 
 will result in celledges being shown only on levels 1 and 2, not on finer
 levels.
+
+Colorbar attributes
+===================
+
+If `add_colorbar == True`, then the following attributes are also used
+(see the `matplotlib colorbar documentation
+<https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.colorbar.html>`_
+for descriptions and note that other kwargs can also be specified in a
+dictionary):
+
+.. attribute:: colorbar_shrink : float
+
+.. attribute:: colorbar_label : str
+
+.. attribute:: colorbar_ticks : str
+
+.. attribute:: colorbar_tick_labels : str
+
+.. attribute:: colorbar_extend : str
+
+.. attribute:: colorbar_kwargs : dictionary
+
+   Other kwargs to be passed to `colorbar`.
 
 
 
