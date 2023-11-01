@@ -21,6 +21,7 @@ by turning them on and recompiling.  In the future they will be added by
 default with a parameter that can be adjusted in `setrun.py`.
 
 A document is in preparation to describe these source terms and show some
-examples of the impact they have. A link will be posted here soon.
+examples of the impact they have. A draft can be viewed at
+`<https://faculty.washington.edu/rjl/misc/spherical_swe_2023-10-27.pdf>`__
 
 
