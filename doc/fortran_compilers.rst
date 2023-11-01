@@ -52,7 +52,7 @@ code, and this dependency is not handled automatically.  So always do::
 before rerunning an example with `make .output` or `make .plots`.
 
 
-.. _fortran_LFAGS:
+.. _fortran_LFLAGS:
 
 `LFLAGS` environment variable
 ------------------------------
