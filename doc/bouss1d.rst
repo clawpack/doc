@@ -6,7 +6,7 @@ Boussinesq solvers in One Space Dimension
 
 .. warning :: Not yet incorporated in clawpack master branch or releases.
 
-As of Version 5.10.0, the geoclaw repository contains some code for solving
+As of Version 5.10.0 (?), the geoclaw repository contains some code for solving
 problems in one space dimension, as described more generally in
 :ref:`geoclaw1d`.  This code also supports two different sets of
 dispersive Boussinesq equations that have been used in the literature
@@ -103,17 +103,17 @@ setrun.py
 Some additional parameters must be added to `setrun.py`, typically set as 
 follows::
 
-    #rundata.add_data(BoussData1D(),'bouss_data')  # FIX!
+    from clawpack.geoclaw.data import BoussData1D
+    rundata.add_data(BoussData1D(),'bouss_data')
     rundata.bouss_data.bouss = True
     rundata.bouss_data.equations = 2  # for SGN (recommended, or 1 for MS)
     rundata.bouss_data.deepBouss = 5.  # depth (meters) to switch to SWE
 
 The `rundata.bouss_data` object has attributes:
 
-- `bouss` (logical). Set to `True` to use Boussinesq corrections,
-  set to `False` to revert to shallow water equations
-- `equations` (int): Which equation set to use (1 for MS, 2 for SGN).
-- `deepBouss` (float): water depth at which to switch from Boussinesq
+- `bouss_equations` (int): Which equation set to use 
+  (0 for SWE, 1 for MS, 2 for SGN).
+- `bouss_min_depth` (float): water depth at which to switch from Boussinesq
   to SWE.
 
 The latter parameter is needed because in very shallow water, and for
@@ -122,5 +122,5 @@ So some criterion is needed to drop these correction terms and revert to
 solving SWE near shore.  Many different approaches have been used in the
 literature.  So far we have only implemented the simplest common approach,
 which is to revert to SWE in any grid cell where the initial water depth (at
-the initial time) is less than `deepBouss`.
+the initial time) is less than `bouss_min_depth`.
 

@@ -6,7 +6,7 @@ GeoClaw in One Space Dimension
 
 .. warning :: Not yet incorporated in clawpack master branch or releases.
 
-As of Version 5.10.0, the geoclaw repository contains some code for solving
+As of Version 5.10.0 (?), the geoclaw repository contains some code for solving
 problems in one space dimension.  This can be used for solving plane wave
 problems on planar topography (including onshore inundation), as well as
 radially symmetric problems on the plane 
@@ -83,7 +83,7 @@ can be used to specify the coordinate system to be used.
 
   As in the case of radial symmetry, the spherical case requires some
   changes in the equations and the addition of a geometric source term.
-  Near each pole the solution behaves much like in the radial symmetric case,
+  Near each pole the solution behaves much as in the radial symmetric case,
   but note that waves from a disturbance at one pole will initially
   decay as they spread out but after passing the equator they will start to
   refocus at the other pole.
