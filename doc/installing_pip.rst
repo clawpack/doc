@@ -32,7 +32,7 @@ Clawpack is via::
 
 or, more specifically, ::
 
-    pip install --user clawpack==v5.9.1
+    pip install --user clawpack==v5.9.2
 
 or you can choose a previous version from the `PyPi history <https://pypi.org/project/clawpack/#history>`__.
 
@@ -55,8 +55,8 @@ following command
 **(you might want to first read the notes below to see if you
 want to change anything in this command)**::  
 
-    pip install --src=$HOME/clawpack_src --user -e \
-        git+https://github.com/clawpack/clawpack.git@v5.9.1#egg=clawpack-v5.9.1 \
+    pip install --src=$HOME/clawpack_src --user -e --no-build-isolation \
+        git+https://github.com/clawpack/clawpack.git@v5.9.2#egg=clawpack-v5.9.2 \
         --use-deprecated=legacy-resolver
         
         
@@ -72,7 +72,7 @@ want to change anything in this command)**::
   :ref:`installing_options` if you want more control.
 
 - This will download Clawpack (via a git clone) into the directory
-  `$HOME/clawpack_src/clawpack-v5.9.1`.  The top 
+  `$HOME/clawpack_src/clawpack-v5.9.2`.  The top 
   installation directory can be changed by modifying the ``--src`` target 
   (or omit this part to put it in your current working directory).
   If you have already downloaded Clawpack via a different mechanism then
@@ -93,11 +93,11 @@ want to change anything in this command)**::
   
 - In order to use the Fortran codes within Clawpack (`classic`,
   `amrclaw`, or `geoclaw`), you should then set the environment
-  variable `CLAW` to point to the `clawpack-v5.9.1` directory within
+  variable `CLAW` to point to the `clawpack-v5.9.2` directory within
   the installation directory `$HOME/clawpack_src`, and `FC` to point
   to the desired Fortran compiler, e.g. in the bash shell::
   
-        export CLAW=$HOME/clawpack_src/clawpack-v5.9.1
+        export CLAW=$HOME/clawpack_src/clawpack-v5.9.2
         export FC=gfortran
 
 
@@ -140,7 +140,7 @@ Instead, you can always install another branch by doing a new
 `pip install` into a different subdirectory of `clawpack_src`, e.g. ::
 
     export CLAW_VERSION=v5.3.1  # used several places in next commands
-    pip install --src=$HOME/clawpack_src --user -e \
+    pip install --src=$HOME/clawpack_src --user -e --no-build-isolation \
         git+https://github.com/clawpack/clawpack.git@$CLAW_VERSION#egg=clawpack-$CLAW_VERSION
     export CLAW=$HOME/clawpack_src/clawpack-$CLAW_VERSION
 
@@ -153,7 +153,7 @@ properly via::
 
     export CLAW=/full/path/to/desired/version/of/clawpack
     cd $CLAW
-    pip install --user -e .   # note trailing dot indicating "this directory"
+    pip install --user -e --no-build-isolation ./   # note trailing dot indicating "this directory"
 
 See :ref:`python_path` if you are having problems with the wrong version
 being imported.

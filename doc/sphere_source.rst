@@ -17,8 +17,13 @@ variation in cell size with latitude.
 As of v5.9.1, these source terms have been added to
 `$CLAW/geoclaw/src/2d/shallow/src2.f90`.  In v5.9.1 these terms are turned
 off by default for backward compatibility but to allow for further testing
-by turning them on and recompiling.  In the future they will be added by
-default with a parameter that can be adjusted in `setrun.py`.
+by turning them on and recompiling.  
+As of v5.9.2, there is a `setrun.py` parameter `rundata.geo_data.sphere_source`
+that can be set to 0 (default) for no source terms, 1 to add the source term
+only in the mass equation, or 2 to add source terms in the momentum equations
+too.
+In the future the default value will probably be 1, to add the source term
+in mass. 
 
 A document is in preparation to describe these source terms and show some
 examples of the impact they have. A draft can be viewed at
