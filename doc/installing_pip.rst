@@ -55,9 +55,8 @@ following command
 **(you might want to first read the notes below to see if you
 want to change anything in this command)**::  
 
-    pip install --src=$HOME/clawpack_src --user -e --no-build-isolation \
-        git+https://github.com/clawpack/clawpack.git@v5.9.2#egg=clawpack-v5.9.2 \
-        --use-deprecated=legacy-resolver
+    pip install --src=$HOME/clawpack_src --user --no-build-isolation -e \
+        git+https://github.com/clawpack/clawpack.git@v5.9.2#egg=clawpack
         
         
 **Notes:** 
@@ -140,8 +139,8 @@ Instead, you can always install another branch by doing a new
 `pip install` into a different subdirectory of `clawpack_src`, e.g. ::
 
     export CLAW_VERSION=v5.3.1  # used several places in next commands
-    pip install --src=$HOME/clawpack_src --user -e --no-build-isolation \
-        git+https://github.com/clawpack/clawpack.git@$CLAW_VERSION#egg=clawpack-$CLAW_VERSION
+    pip install --src=$HOME/clawpack_src --user --no-build-isolation -e \
+        git+https://github.com/clawpack/clawpack.git@$CLAW_VERSION#egg=clawpack
     export CLAW=$HOME/clawpack_src/clawpack-$CLAW_VERSION
 
 If this version doesn't already exist on your computer then it will clone
@@ -153,7 +152,7 @@ properly via::
 
     export CLAW=/full/path/to/desired/version/of/clawpack
     cd $CLAW
-    pip install --user -e --no-build-isolation ./   # note trailing dot indicating "this directory"
+    pip install --user --no-build-isolation -e ./
 
 See :ref:`python_path` if you are having problems with the wrong version
 being imported.
