@@ -33,7 +33,7 @@ General changes
 ---------------
 
 The build process for the Python modules has been completely redone using
-`meson <https://mesonbuild.com/>` in place of `distutils`, which is being
+`meson <https://mesonbuild.com/>`__ in place of `distutils`, which is being
 deprecated.  We chose `meson` since this is now being used by many of the core
 scientific python projects that we use, e.g. `numpy` and `scipy`.  This should
 not affect most users, except for some changes to the recommended installation

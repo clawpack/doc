@@ -99,7 +99,7 @@ things in a different repository.)
 
 Now install this version of Clawpack using::
 
-    pip install -e --no-build-isolation ./
+    pip install --no-build-isolation -e ./
 
 The `-e` flag means that this is an editabl version of the Clawpack code
 (rather than installing the original version in the `site-packages`
@@ -290,7 +290,7 @@ anything:
     if you have modified any Fortran code, you need to recompile::
 
         cd clawpack/
-        pip install --user -e --no-build-isolation ./
+        pip install --user --no-build-isolation -e ./
 
     Then run the tests::
 
