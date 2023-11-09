@@ -34,11 +34,12 @@ The following attributes can be set by the user:
       symmetric,
     * '1d_fill_between' : 1d filled plot between two variable specified by
       the attributes *plot_var* and *fill_var2*.
-
+    * '2d_imshow' : two dimentional raster plot
     * '2d_contour' : two dimensional contour plot,
     * '2d_pcolor' : two dimensional pcolor plot,
     * '2d_schlieren' : two dimensional Schlieren plot,
     * '2d_patch' : two dimensional plot of only the cell and/or patch edges, no data
+    * '2d_hillshade' : two dimensional hillshade plot.
 
 .. attribute:: outdir : str or None
 
@@ -306,7 +307,29 @@ Special attributes for plot_type = '2d_imshow'
 
      If True, a colorbar is added to the plot.
 
-    
+Special attributes for plot_type = '2d_hillshade'
+------------------------------------------------- 
+
+.. attribute:: hillshade_vertical_exaggeration : float
+
+     Vertical exaggeration for hillshade calulation. Default of 1. 
+
+.. attribute:: hillshade_azimuth_degree : float
+
+     Light source azimuth angle for hillshade calculation. Default 
+     is 315 (light coming from the northwest). Valid values are 
+     0-360.
+
+.. attribute:: hillshade_altitude_degree : float
+
+     Light source altitude angle from the horizon for hillshade 
+     calculation. Default is 45. Valid values are 0-90.
+
+.. attribute:: hillshade_latlon : bool
+
+     If True, correct the ratio between x and y units and z units 
+     by 1/111200 to reflect that x and y units are degrees. 
+     Default is False.
 
 .. _amr_attributes:
 
