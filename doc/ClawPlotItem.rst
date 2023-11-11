@@ -318,7 +318,8 @@ Special attributes for plot_type = '2d_hillshade'
 
      Light source azimuth angle for hillshade calculation. Default 
      is 315 (light coming from the northwest). Valid values are 
-     0-360.
+     0-360 degrees clockwise from North.  The default value is recommended
+     for proper interpretation by most people.
 
 .. attribute:: hillshade_altitude_degree : float
 
