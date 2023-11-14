@@ -303,6 +303,19 @@ Special attributes for plot_type = '2d_imshow'
      frame to frame.  Also, if AMR is used, they may vary from patch to patch,
      yielding very confusing plots.
 
+.. attribute:: imshow_norm : matplotlib color norm
+
+     As an alternative to setting  *imshow_cmin* and *imshow_cmax*, provide
+     a `matplotlib color norm
+<https://matplotlib.org/stable/api/colors_api.html#color-norms>`_ 
+     to *imshow_norm*. This will be used to normalize the values of q into the 
+     colorspace specified by the colormap. If *imshow_norm* is provided, it 
+     will be used instead of *imshow_cmin* and *imshow_cmax*.
+
+.. attribute:: imshow_alpha : float
+
+     The transparency value (between 0 [transparent] and 1 [opaque]).
+
 .. attribute:: add_colorbar : bool
 
      If True, a colorbar is added to the plot.
