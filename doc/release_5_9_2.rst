@@ -85,6 +85,19 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+The `setrun` parameter `rundata.fixed_grid_data` was removed from
+`geoclaw/src/python/geoclaw/data.py` and is no longer available in `setrun`.
+This old way of specifying fixed grid output has been deprecated for some
+time in favor of `fgmax` and `fgout` grids, but some old `setrun.py` files
+may still set ::
+
+    fixedgrids = rundata.fixed_grid_data.fixedgrids
+
+and throw an error that can be fixed by deleting this line.
+If items are appended to this list in your `setrun`, then these should be
+converted to `fgmax` and/or `fgout` grids.
+
+
 The `setrun` parameter `runclaw.geo_data.sphere_source` was added to allow
 experimenting with the spherical source term that is currently missing from
 the default GeoClaw code, see :ref:`sphere_source`, which now includes a
