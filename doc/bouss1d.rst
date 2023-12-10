@@ -20,36 +20,12 @@ equations contain higher order derivative terms and so they are no longer
 hyperbolic. The equations implemented include third-order derivatives
 with respect to `txx`.  However, the implementations proceed by alternating
 steps with the shallow water equations and the solution of elliptic
-equations that involve only second-order derivatives in `xx`.
+equations that involve second-order derivatives in `xx` but no time derivatives.
+In one space dimension, solving this equation requires solving a tridiagonal
+linear system of equations in each time step.
 
-.. _bouss1d_sgn:
-
-The SGN equations
------------------
-
-The recommended set of equations to use are a modification of the
-Serre-Green-Naghdi (SGN) equations with the addition of a parameter `alpha`
-suggested by Bonneton et al.  Both the 1d and 2d versions of these equations
-and their GeoClaw implementation are discussed in [BergerLeVeque2023]_.
-Setting `alpha = 1` gives the original SGN equations, but `alpha = 1.153` is
-recommended since it gives a better approximation to the linear dispersion
-relation of the Airy solution to the full 3d problem.
-
-.. _bouss1d_ms:
-
-The Madsen-Sorensen (MS) equations
-----------------------------------
-
-These equations also give a good approximation to the linear dispersion
-relation of the Airy solution when the parameter `beta = 1/15` is used.
-These equations were used in an earlier GeoClaw implementation known as
-BoussClaw.  These have been reimplemented in GeoClaw more recently,
-including a 2d implementation that allows the use of AMR.  However,
-extensive tests with these equations have revealed some stability issues,
-particularly in the case of AMR, which have also been reported by others.
-The 1d MS implementation is included in GeoClaw but it is generally not
-recommended except for those interested in comparing different formulations
-and perhaps further investigating the stability issues.
+See :ref:`bouss2d` and [BergerLeVeque2023]_ for more discussion
+of the Boussinesq-type equations SGN and MS that are implemented in GeoClaw.
 
 .. _bouss1d_usage:
 
@@ -100,21 +76,39 @@ setrun.py
 ^^^^^^^^^
 
 
-Some additional parameters must be added to `setrun.py`, typically set as 
-follows::
+To use the Boussinesq solvers, somewhere in the `setrun` function you
+must include ::
 
     from clawpack.geoclaw.data import BoussData1D
     rundata.add_data(BoussData1D(),'bouss_data')
-    rundata.bouss_data.bouss = True
-    rundata.bouss_data.equations = 2  # for SGN (recommended, or 1 for MS)
+    
+and then the following parameters can be adjusted (the values shown here
+are the default values that will be used if you do not specify a value 
+directly)::
+    
+    rundata.bouss_data.equations = 2   # 0=SWE, 1=MS, 2=SGN
     rundata.bouss_data.deepBouss = 5.  # depth (meters) to switch to SWE
 
 The `rundata.bouss_data` object has attributes:
 
-- `bouss_equations` (int): Which equation set to use 
-  (0 for SWE, 1 for MS, 2 for SGN).
-- `bouss_min_depth` (float): water depth at which to switch from Boussinesq
-  to SWE.
+- `bouss_equations`: The system of equations being solved.  Setting this to 2
+  gives the recommended SGN equations.
+  
+  The value `alpha = 1.153` recommended for SGN is
+  hardwired into `$CLAW/geoclaw/src/2d/bouss/bouss_module.f90`.  To change
+  this value, you must modify this module.  (See :ref:`makefiles_library`
+  for tips on modifying a library routine.)  Similarly, if you set
+  `bouss_equations = 1` for the Madsen-Sorensen equations, the recommended 
+  parameter value `B = 1/15` is set in `bouss_module.f90`.
+  
+  Setting `bouss_equations = 0` causes the code to revert to the shallow
+  water equations, useful for comparing dispersive and nondispersive results.
+   
+- `bouss_min_depth`: The criterion used for switching from Boussinesq to SWE
+  in shallow water and onshore.  If the original water depth `h` at time `t0`
+  is less than `bouss_min_depth` in a cell or any of its nearest neighbors,
+  then this cell is omitted from set of unknowns in the elliptic equation
+  solve and no dispersive correction terms are calculated for this cell.   
 
 The latter parameter is needed because in very shallow water, and for
 modeling onshore inundation, the Boussinesq equations are not suitable.
@@ -123,4 +117,4 @@ solving SWE near shore.  Many different approaches have been used in the
 literature.  So far we have only implemented the simplest common approach,
 which is to revert to SWE in any grid cell where the initial water depth (at
 the initial time) is less than `bouss_min_depth`.
-
+See :ref:`bouss2d_switch` for more discussion.
