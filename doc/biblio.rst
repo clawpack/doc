@@ -147,7 +147,7 @@ Papers describing the Clawpack software and algorithms
 
 .. [LeVeque-FVMHP] 
    R. J. LeVeque.  
-   `Finite Volume Methods for Hyperbolic Problems. <http://www.amath.washington.edu/~claw/book.html>`_
+   `Finite Volume Methods for Hyperbolic Problems. <https://www.clawpack.org/fvmhp_materials/>`_
    Cambridge University Press, Cambridge, UK, 2002. ::
 
         @book{LeVeque-FVMHP,
@@ -155,7 +155,7 @@ Papers describing the Clawpack software and algorithms
             Title = {Finite Volume Methods for Hyperbolic Problems},
             Publisher = {Cambridge University Press},
             Year = {2002},
-            Url = {http://www.clawpack.org/book.html}}
+            Url = {https://www.clawpack.org/fvmhp_materials/}}
 
    See :ref:`gallery_fvmbook` for some sample results from this book.
 
