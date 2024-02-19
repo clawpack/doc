@@ -96,6 +96,11 @@ This should give a snapshot of the repositories that work well together.
 repositories and checking out a different commit in one repository may break
 things in a different repository.)
 
+Before proceeding, it is necessary to make sure you have a few
+other packages installed that are now listed in `$CLAW/requirements-dev.txt`
+(currently on the master branch and to appear in v5.10.0)::
+
+    pip install -r requirements-dev.txt
 
 Now install this version of Clawpack using::
 
