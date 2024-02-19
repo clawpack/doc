@@ -206,6 +206,24 @@ Papers describing the Clawpack software and algorithms
             Volume = {34},
             Year = {2012}}
 
+.. [KimEtAl2017] 
+   J. Kim, G. K. Pedersen, and F. Lovholt, and R. J. LeVeque,
+   A Boussinesq type extension of the GeoClaw model - a study of wave
+   breaking phenomena applying dispersive long wave models,
+   Coastal Engineering 122 (2017), pp. 75-86. 
+   DOI 10.1016/j.coastaleng.2017.01.005
+   ::
+
+      @article{Kim201775,
+        title = "A Boussinesq type extension of the GeoClaw model - a study of wave
+                breaking phenomena applying dispersive long wave models ",
+        author = "Jihwan Kim and Geir K. Pedersen and Finn L{\o}vholt and Randall J.  LeVeque",
+        journal = "Coastal Engineering ",
+        volume = "122",
+        pages = "75 - 86",
+        year = "2017",
+        doi = "http://dx.doi.org/10.1016/j.coastaleng.2017.01.005",
+        }
 
 .. [MandliEtAl2016]
    Kyle T. Mandli, Aron J. Ahmadia, Marsha Berger, Donna Calhoun, David L.

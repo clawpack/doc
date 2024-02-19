@@ -50,7 +50,7 @@ which can use MPI to solve these these systems. Using the Boussinesq solvers
 requires these prerequesites, as discussed further in :ref:`bouss2d_prereqs`.
 
 See [BergerLeVeque2023]_ for more discussion of the equations solved and the
-AMR strategy used.
+AMR strategy used, along with simulation results from several test problems.
 
 .. _bouss2d_eqns:
 
@@ -89,7 +89,7 @@ The Madsen-Sorensen (MS) equations
 These equations also give a good approximation to the linear dispersion
 relation of the Airy solution when the parameter `beta = 1/15` is used.
 These equations were used in an earlier GeoClaw implementation known as
-BoussClaw.  *[Todo: add citations]*
+BoussClaw [KimEtAl2017]_.
 These have been reimplemented in GeoClaw more recently,
 including a 2d implementation that allows the use of AMR.  However,
 extensive tests with these equations have revealed some stability issues,
@@ -203,8 +203,9 @@ and source code files that are used by default from the library
 be modified for the Boussinesq code.
 
 Two `Makefile` variables `PETSC_DIR` and `PETSC_ARCH` must be set (perhaps as
-environment variables in the shell from which `make` is invoked). These are
-described further below in :ref:`bouss2d_prereqs`.
+environment variables in the shell from which `make` is invoked). Together
+these specify the path to the installation of PETSc that you wish to use, see
+`Maintaining Your PETSc Installation(s) <https://petsc.org/release/install/multibuild/>`_ in the PETSc documentation.
 
 The `Makefile` should also include a line of the form::
 
@@ -213,11 +214,10 @@ The `Makefile` should also include a line of the form::
 with a pointer to the file that sets various `PETSc` options. The file
 `$CLAW/geoclaw/examples/bouss/petscMPIoptions` gives the options used in
 the examples, which may be adequate for other problems too.
-*[Todo: more description of options?]*
 
 In addition to a line of the form ::
 
-    EXE = $(PWD)/xgeoclaw
+    EXE = xgeoclaw
 
 that specifies the name and location of the executable to be generated, the
 `Makefile` should also contain a line of the form::
@@ -250,9 +250,6 @@ installed, be sure to read `Configuring PETSc
 <https://petsc.org/release/install/install/#configuring-petsc>`__
 before installing.
 
-
-*[Todo: How to set `$PETSC_DIR` And `$PETSC_ARCH`]*
-
 See also the PETSc documentation page
 `Environmental Variables $PETSC_DIR And $PETSC_ARCH <https://petsc.org/release/install/multibuild/#environmental-variables-petsc-dir-and-petsc-arch>`__
 
@@ -269,4 +266,11 @@ literature.  So far we have only implemented the simplest common approach,
 which is to revert to SWE in any grid cell where the initial water depth (at
 the initial time) is less than `bouss_min_depth`.
 
-*[Todo: Add more discussion.]*
+Examples
+--------
+
+In addition to the example application included in GeoClaw, found in the
+directory `$CLAW/geoclaw/examples/bouss/radial_flat`, several other examples
+of usage can be found in the code repository
+https://github.com/rjleveque/ImplicitAMR-paper
+developed to accompany the paper [BergerLeVeque2023]_.
