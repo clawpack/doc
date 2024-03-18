@@ -40,10 +40,6 @@ Changes that are not backward compatible
 
   as part of the installation.
 
-General changes
----------------
-
-
 
 
 Changes to classic
@@ -66,9 +62,11 @@ Changes to clawutil
 
   - RUNEXE was added to provide a string to be inserted before the name
     of the executable `EXE` in order to run it. This is necessary in
-    particular to run the new 2D Boussinesq code using MPI.
+    particular to run the new 2D Boussinesq code using MPI, see
+    :ref:`bouss2d` for instructions. 
+    
     (Support for this also added to
-    `$CLAW/clawutil/src/python/clawutil/runclaw.py`.
+    `$CLAW/clawutil/src/python/clawutil/runclaw.py`).
 
   - If `FC` is any variant of `gfortran` then use the same flags as
     `gfortran`.

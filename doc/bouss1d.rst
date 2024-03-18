@@ -8,11 +8,11 @@ Boussinesq solvers in One Space Dimension
 
 As of Version 5.10.0 (?), the geoclaw repository contains some code for solving
 problems in one space dimension, as described more generally in
-:ref:`geoclaw1d`.  This code also supports two different sets of
+:ref:`geoclaw1d`.  This 1d code also supports two different sets of
 dispersive Boussinesq equations that have been used in the literature
 to better model wave propagation in situations where the wavelength is not
 sufficiently long relative to the fluid depth for the shallow water
-equation approximation to be accurate.
+equation (SWE) approximation to be accurate.
 
 These Boussinesq equations are still depth-averaged equation with the same
 conserved quantities (fluid depth `h` and momentum `hu` in 1d), but the
@@ -26,6 +26,9 @@ linear system of equations in each time step.
 
 See :ref:`bouss2d` and [BergerLeVeque2023]_ for more discussion
 of the Boussinesq-type equations SGN and MS that are implemented in GeoClaw.
+We recommend using the Serre-Green-Naghdi (SGN) equations rather than
+Madsen-Sorensen (MS), which has similar dispersive properties but
+is less stable.
 
 .. _bouss1d_usage:
 
@@ -41,10 +44,10 @@ equations are both implemented.  The axisymmetric version on the sphere
 Specifying topo and dtopo files is identical to what is described for 
 :ref:`geoclaw1d`.
 
-**Some things that must change:**
-
+The `Makefile` and `setrun.py` files must be modified from those used
+for SWE as described below.
 See the examples with names like `$CLAW/geoclaw/examples/1d/bouss_*` 
-for some sample code that can be modified for other problems.
+for sample files to use as a template.
 
 .. _bouss1d_makefile:
 
@@ -56,13 +59,13 @@ the `$CLAW/geoclaw/src/1d/shallow` and `$CLAW/geoclaw/src/1d/bouss`
 libraries.  
 
 Solving the Boussinesq equations requires solving an elliptic equation each
-time step, by setting up and solving a tridiagonal linear system of
+time step, which in one space dimension yields a tridiagonal linear system of
 equations.  LAPACK is used for this, and the `Makefile` requires `FFLAGS` to
-include `-llapack -lblas` or explicit pointers to these librarires on your
+include `-llapack -lblas` or explicit pointers to these libraries on your
 computer.  Alternatively, the file
 `$CLAW/geoclaw/src/1d/bouss/lapack_tridiag.f`
 contains the necessary soubroutines from lapack and the blas and so you can
-add this to the list of `SOURCES` in the `Makefile`.  See e.g. 
+add this to the list of `SOURCES` in the `Makefile`.  See
 `$CLAW/geoclaw/src/1d/examples/bouss_wavetank_matsuyama/Makefile`
 for an example.
 
@@ -99,7 +102,7 @@ The `rundata.bouss_data` object has attributes:
   this value, you must modify this module.  (See :ref:`makefiles_library`
   for tips on modifying a library routine.)  Similarly, if you set
   `bouss_equations = 1` for the Madsen-Sorensen equations, the recommended 
-  parameter value `B = 1/15` is set in `bouss_module.f90`.
+  parameter value `Bparam = 1/15` is set in `bouss_module.f90`.
   
   Setting `bouss_equations = 0` causes the code to revert to the shallow
   water equations, useful for comparing dispersive and nondispersive results.
