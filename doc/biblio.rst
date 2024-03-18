@@ -157,7 +157,9 @@ Papers describing the Clawpack software and algorithms
             Year = {2002},
             Url = {https://www.clawpack.org/fvmhp_materials/}}
 
-   See :ref:`gallery_fvmbook` for some sample results from this book.
+   See the `Gallery of fvmbook applications
+   <https://www.clawpack.org/gallery/gallery/gallery_fvmbook.html>`__
+   for some sample results from this book.
 
 .. [LeVequeGeorgeBerger]
    R. J. LeVeque, D. L. George, and M. J. Berger,  2011,
@@ -246,6 +248,14 @@ Papers describing the Clawpack software and algorithms
 
 Papers describing applications
 ------------------------------
+
+This list is very out of date!  A 
+`Google Scholar search on "clawpack software"
+<https://scholar.google.com/scholar?hl=en&as_sdt=0%2C48&q=clawpack+software&btnG=>`__
+gives hundreds of hits that may be of interest.
+
+For GeoClaw applications, see also `www.geoclaw.org
+<http://www.geoclaw.org>`__ for additional references and other links.
 
 .. [CalHelLeV08]
    D. A. Calhoun, C. Helzel, and R. J. LeVeque. 

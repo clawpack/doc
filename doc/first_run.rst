@@ -24,8 +24,9 @@ and that you have the :ref:`install_prerequisites`.
 
 A simple 1-dimensional acoustics equations can be solved
 using the code in `$CLAW/classic/examples/acoustics_1d_example1
-<_static/classic/examples/acoustics_1d_example1/README.html>`__, as
-illustrated in :ref:`gallery_classic_amrclaw`.
+<https://www.clawpack.org/gallery/_static/classic/examples/acoustics_1d_example1/README.html>`__, as
+illustrated in the `Gallery of Classic and AMRClaw applications
+<https://www.clawpack.org/gallery/gallery/gallery_classic_amrclaw.html>`__
 
 Move to this directory via::
 

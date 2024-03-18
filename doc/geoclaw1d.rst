@@ -4,9 +4,7 @@
 GeoClaw in One Space Dimension
 *********************************************
 
-.. warning :: Not yet incorporated in clawpack master branch or releases.
-
-As of Version 5.10.0 (?), the geoclaw repository contains some code for solving
+As of Version 5.10.0, the geoclaw repository contains some code for solving
 problems in one space dimension.  This can be used for solving plane wave
 problems on planar topography (including onshore inundation), as well as
 radially symmetric problems on the plane 
@@ -22,7 +20,9 @@ Some general notes:
   in x.  For some 1d problems this may be the best approach.
 
 - By contrast, the newly introduced 1d code does not support AMR at this
-  time.  Instead, a fixed grid is used.  However, the grid spacing may be
+  time.  Instead, a fixed grid is used.  
+
+  However, the grid spacing may be
   variable and some tools are provided to compute a mapped grid that has the
   property that the Courant number (based on the linearized
   shallow water wave speed `sqrt(g*h)`)is roughly constant, so that cells in
@@ -47,9 +47,10 @@ with some additional routines needed for the Boussinesq solvers in
 
 Some examples illustrating usage can be found in
 `$CLAW/geoclaw/examples/1d`, and some plots and animations can be viewed in
-the :ref:`gallery_geoclaw`.
+the `GeoClaw Gallery
+<https://www.clawpack.org/gallery/gallery/gallery_geoclaw.html>`__
 
-.. geoclaw1d_coord:
+.. _geoclaw1d_coord:
 
 Coordinate systems
 -------------------
@@ -68,8 +69,8 @@ can be used to specify the coordinate system to be used.
   a rotationally symmetric 2d solution.  The 2d shallow water (or
   Boussinesq) equations can then be reduced to 1d equations that have a
   similar form to the plane wave equations, with the addition also of a
-  geometric source term.  This source term is built in to the solution
-  procedure in this case.
+  geometric source term [BergerLeVeque2023]_.
+  This source term is built in to the solution procedure in this case.
 
 - `rundata.geo_data.coordinate_system == 2`: `x` is measured in degrees
   for a problem that is rotationally symmetric on the sphere about some axis
@@ -104,7 +105,9 @@ can be used to specify the computational grid to be used.
 - `rundata.grid_data.grid_type == 1`: A mapped grid is used. 
   In this case a function `mapc2p.f90` must be provided to map 
   the computational grid specified in `setrun.py` to physical cells.
-  See :ref:`mapc2p`.
+  See :ref:`mapc2p`.  In this case `0 <= x <= 1` is used in the examples,
+  but any computational grid interval can be used as long as `mapc2p`
+  maps equally spaced points on this interval to te desired physical grid.
 
 - `rundata.grid_data.grid_type == 2`: A nonuniform grid is used with a
   user-specified set of grid cell edges.  In this case
@@ -117,6 +120,23 @@ can be used to specify the computational grid to be used.
     clawdata.num_cells[0] = mx       # number of grid cells
 
   In this case the number of celledges in the data file should be `mx+1`.
+  A `mapc2p` function that maps the unit interval to the physical grid
+  must then be specified in `setplot.py`, and can be generated using the
+  function `clawpack.geoclaw.nonuniform_grid_tools.make_mapc2p()`.
+
+  The module  `clawpack.geoclaw.nonuniform_grid_tools.py`
+  also includes tools to create a nonuniform grid with the property that
+  a specified uniform grid width is used onshore an in very shallow
+  water, but are much larger in deeper water, with the physical grid widths
+  chosen so that the CFL number is roughly uniform (based on the propagation
+  speed `sqrt(g*h)`).
+  Most of the examples in `$CLAW/geoclaw/examples/1d_classic/`
+  illustrate this.
+
+Note that when using `grid_type` 1 or 2, any gauges specified in `setrun.py`
+must be specified in computational coordinates, not physical coordinates.
+See, e.g. `$CLAW/geoclaw/examples/1d_classic/ocean_shelf_beach/setrun.py`
+for an example.
 
 .. geoclaw1d_topo:
 

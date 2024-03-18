@@ -4,9 +4,8 @@
 Boussinesq solvers in Two Space Dimensions
 *********************************************
 
-.. warning :: Not yet incorporated in clawpack master branch or releases.
 
-As of Version 5.10.0 (?), GeoClaw includes the option to solve a
+As of Version 5.10.0, GeoClaw includes the option to solve a
 dispersive Boussinesq-type equation known as Serre-Green-Naghdi (SGN)
 instead of the usual shallow water equations (SWE).
 This equation and related depth-averaged equations have been used

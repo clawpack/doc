@@ -31,6 +31,10 @@ adjacent to wet cells and that allow wetting and drying, for example as a
 tsunami inundates dry land.
 
 Some sample calculations can be viewed in the :ref:`gallery_geoclaw`.
+illustrated in the `Gallery of GeoClaw applications
+<https://www.clawpack.org/gallery/gallery/gallery_geoclaw.html>`__.
+See also the `sample Jupyter notebooks
+<https://www.clawpack.org/gallery/notebooks.html#examples-using-geoclaw>`__.
 More will eventually appear in the :ref:`apps`.
 
 .. toctree::

@@ -1,9 +1,9 @@
 
 .. _fgmax:
 
-=====================
-Fixed grid monitoring
-=====================
+==============================
+Fixed grid monitoring (fgmax)
+==============================
 
 .. warning::
 
@@ -14,6 +14,7 @@ See also:
 
  - :ref:`fgmax_tools_module`
  - :ref:`setrun_fgmax` - For adding fgmax data to `setrun.py`
+ - :ref:`fgmax_examples` - Links to some examples
 
 GeoClaw has the capability to monitor the maximum value of
 certain quantities on a specified fixed
@@ -344,14 +345,7 @@ These files are most easily dealt with using :ref:`fgmax_tools_module` by
 defining an object of class `fgmax_tools.FGmaxGrid` and using the  
 class function `read_output` to read the output.  
 
-For an example of how to process and plot the fgmax results, see the
-notebook `make_input_files.ipynb` in the directory
-`$CLAW/geoclaw/examples/tsunami/radial-ocean-island-fgmax`.
-
-For some other examples, see `apps/tsunami/chile2010_fgmax` and 
-`apps/tsunami/bowl_radial_fgmax` in the :ref:`apps`.   
-Sample results appear in the :ref:`gallery_geoclaw`.
-
+For examples, see :ref:`fgmax_examples`.
 
 .. _fgmax_output_format:
 
@@ -416,4 +410,22 @@ the input file.  The time reported as the "arrival time" is the first time the
 value of the surface elevation is greater than `sea_level` + `arrival_tol`.
 Points where this value is `-0.99999000E+99` never met this criterion, perhaps
 because the point was never inundated.  
+
+.. _fgmax_examples:
+
+fgmax examples
+---------------
+
+
+For an example of how to process and plot the fgmax results, see the
+notebook `make_input_files.ipynb` in the directory
+`$CLAW/geoclaw/examples/tsunami/radial-ocean-island-fgmax`
+or the rendered version linked from the
+`README <https://www.clawpack.org/gallery/_static/geoclaw/examples/tsunami/radial-ocean-island-fgmax/README.html>`__
+in the `GeoClaw Gallery
+<https://www.clawpack.org/gallery/gallery/gallery_geoclaw.html>`__
+
+For another examples, see 
+`$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout` and
+its `README <https://www.clawpack.org/gallery/_static/geoclaw/examples/tsunami/chile2010_fgmax-fgout/README.html>`__.
 

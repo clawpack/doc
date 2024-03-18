@@ -1,9 +1,9 @@
 
 .. _fgout:
 
-=====================
-Fixed grid output
-=====================
+==============================
+Fixed grid output (fgout)
+==============================
 
 **New in v5.9.0:** 
 
@@ -11,6 +11,7 @@ See also:
 
  - :ref:`fgout_tools_module`
  - :ref:`setrun_fgout` - For adding fgout data to `setrun.py`
+ - :ref:`fgout_examples` - Links to some examples
 
 GeoClaw has the capability to output the results at specified output times
 on a specified "fixed grid" by interpolating from the AMR grids active at each 
@@ -278,3 +279,16 @@ values of `h` and/or `eta` (see :ref:`nearshore_interp`).
 If you want to change one of these methods, you can make your own version of
 `fgout_module.f90` and point to this in the `Makefile` under `MODULES=`
 (see :ref:`makefiles_replace`).
+
+.. _fgout_examples:
+
+fgout examples
+---------------
+
+For some examples, see
+`$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
+Sample results appear in the `GeoClaw Gallery
+<https://www.clawpack.org/gallery/gallery/gallery_geoclaw.html>`__;
+see the 
+`README <https://www.clawpack.org/gallery/_static/geoclaw/examples/tsunami/chile2010_fgmax-fgout/README.html>`__
+for a description and links to the plots and a script for making an animation.

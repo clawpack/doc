@@ -4,9 +4,7 @@
 Boussinesq solvers in One Space Dimension
 *********************************************
 
-.. warning :: Not yet incorporated in clawpack master branch or releases.
-
-As of Version 5.10.0 (?), the geoclaw repository contains some code for solving
+As of Version 5.10.0, the geoclaw repository contains some code for solving
 problems in one space dimension, as described more generally in
 :ref:`geoclaw1d`.  This 1d code also supports two different sets of
 dispersive Boussinesq equations that have been used in the literature
