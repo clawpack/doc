@@ -40,7 +40,11 @@ Changes that are not backward compatible
 
   as part of the installation.
 
-
+- In GeoClaw, when solving equations on the sphere, a spherical source term
+  in the mass equation is now included by default.  This term was missing
+  previously and so results may change.
+  See https://www.clawpack.org/sphere_source.html for more discussion
+  and instructions for omitting this source term.
 
 Changes to classic
 ------------------
@@ -95,6 +99,25 @@ Changes to visclaw
 
 - Remove deprecated `faceted` kwarg in calls to pcolor from `frametools.py`.
 
+- Option added to make mpeg movies when doing `make plots`.
+  Provided `ffmpeg <https://ffmpeg.org/>`__ is installed,
+  simply include this line in `setplot.py`::
+
+    plotdata.mp4_movie = True
+
+  Then `_plots` will include `movie_figN.mp4` for each `figno N` listed in ::
+
+    plotdata.print_fignos
+
+  and will also be linked from the `_PlotIndex.html` file.
+
+  You can also now easily change the name of the movie (also for the .html
+  version created by JSAnimation and the .gif version if requested) via e.g.::
+
+    plotdata.movie_name_prefix = 'chile2010_'   # default is 'movie_'
+
+  Then `_plots` will include `chile2010_figN.mp4` for each figure.
+
 - Updates to matlab plotting routines.
  
 See `visclaw diffs
@@ -134,6 +157,12 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+- For shallow water equations on the sphere, a spherical source term
+  in the mass equation is now included by default.  This term was missing
+  previously and so results may change.
+  See https://www.clawpack.org/sphere_source.html for more discussion
+  and instructions for omitting this source term.
+  
 - 1D GeoClaw code added, as described at :ref:`geoclaw1d`. In particular there
   are new directories `$CLAW/geoclaw/src/1d_classic` and
   `$CLAW/geoclaw/examples/1d_classic`.
@@ -144,6 +173,11 @@ Changes to geoclaw
 - 2D Boussinesq code added, as described in :ref:`bouss2d`.  In particular there
   are new directories `$CLAW/geoclaw/src/2d/bouss` and 
   `$CLAW/geoclaw/examples/2d/bouss`.
+
+- Using the 2D Boussinesq version of the code requires `PETSc
+  <https://petsc.org/release/>`__ for solving the large sparse linear systems
+  that arise, which also requires LAPACK, BLAS, and MPI;
+  see `Prerequisites for the 2d Boussinesq code <https://www.clawpack.org/dev/bouss2d.html#bouss2d-prereqs>`__.
 
 - `checkpt_style == 4` is now supported, meaning to create a checkpoint file
   at every output time.  (As with other options, setting it to -4 means to
