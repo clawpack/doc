@@ -117,8 +117,8 @@ Citing this work
 If you use Clawpack in publications, please cite the software itself as
 well, with a citation similar to the following::
 
-    Clawpack Development Team (2020), Clawpack Version 5.7.1,
-    http://www.clawpack.org, doi: 10.5281/zenodo.4025432
+    Clawpack Development Team (2024), Clawpack Version 5.10.0,
+    http://www.clawpack.org, doi: 10.5281/zenodo.10896214
 
 Here's the bibtex::
 
@@ -126,9 +126,9 @@ Here's the bibtex::
         title={Clawpack software}, 
         author={{Clawpack Development Team}}, 
         url={http://www.clawpack.org}, 
-        note={Version 5.7.1},
-        doi={https://doi.org/10.5281/zenodo.4025432},
-        year={2020}}
+        note={Version 5.10.0},
+        doi={https://doi.org/10.5281/zenodo.10896214},
+        year={2024}}
 
 Please fill in the version number that you used, and its year, with the
 appropriate DOI from `Zenodo <https://zenodo.org>`_, if available.  
