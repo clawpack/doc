@@ -29,11 +29,13 @@ make sure everything looks correct.
 Version numbers
 ---------------
 
-Change the version number in `clawpack/clawpack/__init__.py`.
-Initially set it to e.g. v5.4.1rc-alpha, then to the final release number.
+Change the version number in the following files to the new version number:
 
-The version number is also set in `clawpack/setup.py` and should be changed
-there to be consistent with `clawpack/clawpack/__init__.py`
+ - `clawpack/clawpack/__init__.py`
+ - `clawpack/setup.py`
+ - `clawpack/pyproject.toml`
+
+
 
 Release candidates
 ------------------
@@ -125,8 +127,9 @@ the current master branch of each repository.
 
 Pypi
 ----
+
 To release on the pypi server (for installation via pip) we 
-simply build from a clean clone and upload:
+simply build from a clean clone and upload::
 
     git clone https://github.com/clawpack/clawpack.git
     cd clawpack
@@ -134,8 +137,11 @@ simply build from a clean clone and upload:
     git submodule update
     python -m build
 
-You can first upload to the testpypi server for testing
-(you will need to have created an account there)::
+To upload to Pypi you need an account there and you must be listed as a
+maintainer of Clawpack.  Then you can update using
+`twine <https://pypi.org/project/twine/>`__.
+
+You can first upload to the testpypi server for testing::
 
     twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
