@@ -125,48 +125,21 @@ the current master branch of each repository.
 
 Pypi
 ----
-To release on the pypi server (for installation via pip) we have to do a bit
-of trickery.  We can't just follow the directions at https://packaging.python.org/tutorials/packaging-projects/
-because we have a very non-Pythonic directory structure; in particular,
-the subdirectories `clawpack/x/` do not have an `__init__.py`.
+To release on the pypi server (for installation via pip) we 
+simply build from a clean clone and upload:
 
-Here's what to do, starting with a clean clone in some directory
-referred to below as `$TEMP` (replace `5.x.x` by the new version number)::
-
-    cd $TEMP
     git clone https://github.com/clawpack/clawpack.git
-    cd clawpack    # should now be in $TEMP/clawpack
-    source pull_all.sh
-    git submodule update --init --recursive
-    git-archive-all --prefix clawpack-5.x.x/ clawpack-5.x.x.tar
-
-    mv clawpack-5.x.x.tar ..
-    cd .. 
-    tar -xf clawpack-5.x.x.tar  # creates $TEMP/clawpack-5.x.x
-
     cd clawpack
-    python3 setup.py sdist  # creates $TEMP/clawpack/dist/clawpack-5.x.x.tar.gz
-    cd dist     # should be in $TEMP/clawpack/dist
-    tar -xzf clawpack-5.x.x.tar.gz
+    git submodule init
+    git submodule update
+    python -m build
 
-    cp clawpack-5.x.x/PKG-INFO ../../clawpack-5.x.x
-    rm -rf clawpack-5.x.x
-
-    cd ../..   # should be in $TEMP
-    rm clawpack-5.x.x.tar
-    tar -cf clawpack-5.x.x.tar clawpack-5.x.x
-    gzip clawpack-5.x.x.tar
-    mv clawpack-5.x.x.tar.gz clawpack/dist
-
-Upload to the testpypi server for testing
+You can first upload to the testpypi server for testing
 (you will need to have created an account there)::
 
-    cd clawpack   # should be in $TEMP/clawpack
     twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-    credentials: [[test pypi]]
-
-Click the link and check that it looks okay.  You can also test via::
+Click the link and check that it looks okay.  You can also test installation via::
 
 	pip3 uninstall clawpack
 	pip3 install —no-cache—dir —index-url https://test.pypi.org/simple/ clawpack
