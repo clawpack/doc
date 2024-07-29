@@ -5,7 +5,7 @@
 Fixed grid output (fgout)
 ==============================
 
-**New in v5.9.0:** 
+**New in v5.9.0, with a change to the API in v5.11.0:** 
 
 See also:
 
@@ -69,7 +69,8 @@ added in v5.7.0, referred to as `fgmax grids`; see :ref:`fgmax`.
 An improved version of the capability to output on a fixed grid at more
 frequent times than the standard AMR output has been introduced in v5.9.0,
 and these are now called `fgout grids` to complement the `fgmax grids`.
-These `fgout grids` are described further below.
+These `fgout grids` are described further below (with some changes
+introduced in v5.11.0).
 
 .. _fgout_input:
 
@@ -96,6 +97,8 @@ based on the order they are specified in the `setrun.py` file.
 A simple example
 -----------------
 
+**Modified for v5.11.0**
+
 Here's an example of how one grid can be set up::
 
     from clawpack.geoclaw import fgout_tools
@@ -111,9 +114,11 @@ Here's an example of how one grid can be set up::
     fgout.x2 = -70.
     fgout.y1 = -55.
     fgout.y2 = -10.
+    fgout.output_style = 1  # new in v5.11.0
     fgout.tstart = 0.
     fgout.tend = 6.*3600
     fgout.nout = 37
+    fgout.q_out_vars = [1,2,3,4]  # new in v5.11.0
     fgout_grids.append(fgout) 
 
 This specifies output on a 200 by 250 grid of equally spaced points on the
@@ -123,17 +128,30 @@ displaced from these edges.  See :ref:`fgout_registration` below.)
 
 The output times are equally spaced
 from `tstart = 0` to `tend = 6*3600` (6 hours).  
-There will be 37 total outputs, so one every 10 minutes.  
+There will be 37 total outputs, so one every 10 minutes.
 
 The parameter `fgout.output_format` can be set to `'ascii'`, `'binary32'`,
-or `'binary64'`, the same options as supported for the standard output in
-geoclaw as of v5.9.0.  
+or `'binary' == 'binary64'`; the same options as supported for the
+standard output in geoclaw as of v5.9.0.  
 Usually`'binary32'` is best, which truncates the float64 (kind=8)
 computated values in the fortran code to float32 (kind=4) before dumping the
 raw binary.  This is almost always sufficient precision for plotting or
 post-processing needs, and results in smaller files than either of the other
 options.  This may be particularly important if hundreds of fgout frames 
 are saved for making an animation or doing particle tracking.
+
+**New in v5.11.0:** `fgout.output_style == 1` corresponds to specifying
+`tstart`, `tend`, and `nout` as previously.  But now it is possible
+to instead set fgout.output_style == 2`, in which case a list of output
+times can be specified that need not be equally spaced, e.g. ::
+
+    fgout.output_style = 2  # new in v5.11.0
+    fgout.output_times = [0.] + list(linspace(1,2,13)*3600)
+    
+to output a frame at time 0 and then every 5 minutes from 1 hour to 2 hours.
+
+You can also now specify which components of `q` to save for each frame,
+see below and :ref:`fgout_q_out_vars`.
 
 .. _fgout_format:
 
@@ -145,8 +163,7 @@ files of this form for each fgout grid:
 
  - `fgout0001.t0000`  # containing info about this output time
  - `fgout0001.q0000`  # header (and also data if `output_format=='ascii'`)
- - `fgout0001.b0000`  # data in binary format (only if 
-   `output_format=='binary32'` or `'binary64'`)
+ - `fgout0001.b0000`  # data in binary format (only if `output_format` is a binary type`)
 
 These would be for fgout grid number `fgno = 1` at the first output time.
 
@@ -192,22 +209,50 @@ interpolating within these grids in both space and time.
 
 For example, here's how to read a frame 5 of an fgout grid set up as above::
 
-
     fgno = 1
     outdir = '_output'
-    output_format = 'binary32'  # format of fgout grid output
-    fgout_grid = fgout_tools.FGoutGrid(fgno, outdir, output_format)
+    fgout_grid = fgout_tools.FGoutGrid(fgno, outdir)
+    fgout_grid.read_fgout_grids_data() # required as of v5.11.0
 
     fgframe = 5
     fgout = fgout_grid.read_frame(fgframe)
+    
+The call to `read_fgout_grids_data()` reads `_output/fgout_grids.data`
+and sets the `output_format` along with other fgout grid parameters set there.
+It also sets `fgout.X`, `fgout.Y` as 2D arrays that are the same for
+all fgout frames.
 
-Then `fgout.X` and `fgout.Y` are 2-dimensional arrays defining the grid
-and `fgout.q` defines the standard GeoClaw `q` array, with `q[0:4,:,:]` 
-corresponding to `h, hu, hv, eta`, where `eta = h+B` and `B` is the topography.
+**Incompatibility with previous versions:**  If you have fgout output created
+with a version of Clawpack prior to v5.11.0 and you wish to process it using
+a newer version, calling ::
+
+    fgout_grid.read_fgout_grids_data()
+    
+should throw an error because the contents and ordering of information in
+`fgout_grids.data` has changed.  To read this data in the old style,
+instead use::
+
+    fgout_grid.read_fgout_grids_data_pre511()
+    
+The format of fgout frames has *not* changed, so once the basic grid information
+has been set, loading each frame should still work fine.
+
+**Reading each frame:**
+The call to `read_frame()` above loads `fgout.q` for a frame number `fgframe`.
+This defines the `q` array, with `q[0:mq,:,:]` 
+corresponding to the requested `q_out_vars`.
+
+**New in v5.11.0:** Previously `mq=4` and the `q` array always contained
+`h, hu, hv, eta`, where `eta = h+B` and `B` is the topography.
+This is still the default is `q_out_vars` is not specified in setting up the
+fgout grid, but fewer components of `q` can now be output, along with additional
+variables (see :ref:`fgout_q_out_vars`).
+
 For convenience, additional attributes are defined using lazy
-evaluation only if requested by the user, including 
-`h, hu, hv, eta, u, v, s, hss`, where `s` is the speed and 
-`hss` is the momentum flux.
+evaluation only if requested by the user, e.g.,
+`h, hu, hv, eta, B, u, v, s, hss`, where `s` is the speed and 
+`hss` is the momentum flux, provided enough components of q have been saved
+to compute these.
 
 The values in `fgout.X` and `fgout.Y` are the cell centers of the fgout
 grid, and if you want to plot the `q` values on this grid you should use
@@ -226,6 +271,87 @@ as read above::
 For more detailed examples of plotting, including making animations,
 see `$CLAW/geoclaw/examples/tsunami/chile2010_fgmax-fgout`.
 
+
+.. _fgout_q_out_vars:
+
+Specifying `q_out_vars`
+-----------------------
+
+**New in v5.11.0:**
+
+Previously, each fgout frame contained columns for `h, hu, hv, eta` at each
+fgout time, where `eta = h + B` based on the current topography `B` at the
+fgout point.
+
+Starting in v5.11.0 the user can specify `q_out_vars` as an array containing
+the indices of the Fortran `q` array that should be output, and/or additional
+integers that specify `eta` or `B`.  The previous default corresponds to
+setting::
+
+    fgout.q_out_vars = [1,2,3,4]
+
+since in the standard GeoClaw Fortran code has 3 variables in `q` (h, hu, hv)
+and index 4 indicates that `eta = h+B` should also be written out for each
+frame.
+
+The integer 5 can be used to indicate that `B` should be written out.
+For example, to only write out `h` and `B`, the user would set::
+
+    fgout.q_out_vars = [1,5]
+
+Note that if any two of `h,eta,B` are saved then the third can be computed
+since `eta = h+B`.  The lazy evaluation routines will compute any of these
+from the others if that is possible (or raise an exception if not).
+
+Note that if know that the underlying AMR grids will never change in the fgout
+region then it would be possible to do a short run with::
+
+    fgout.q_out_vars = [5]
+
+to capture the `B` values and then the full run with::
+
+    fgout.q_out_vars = [1]
+
+to capture only `h` for each frame and still be able to calculate `eta` for
+each frame if needed for plotting, reducing the file size (possibly useful
+if hundreds of frames on a fine resolution will be saved over some
+region where the AMR resolution is fixed).
+
+**Additional variables for Boussinesq solvers:**
+
+If the dispersive Boussinesq equations are solved (as introduced in v5.10.0,
+see :ref:`bouss2d`), then the Fortran `q` array has two additional components
+`q[4] = huc` and `q[5] = hvc`.  These are used to store corrections to the 
+momenta `hu` and `hv` at each time step, which are computed by solving an
+elliptic equation with an implicit solver.  It is convenient to store these
+in `q` computationally, but the user rarely wants to see these values, and
+so the `q_out_vars` can be used to suppress plotting these components and
+only save `h, hu, hv, eta` as in the standard GeoClaw case by setting::
+
+    fgout.q_out_vars = [1,2,3,6]
+    
+where now 6 represents `eta` (and 7 would indicate that `B` should be saved).
+
+**qmap dictionary:**
+
+To identify which component of the `q` array read in corresponds to what
+variable name, a dictionary `fgout_grid.qmap` is used, with the standard
+GeoClaw default being::
+
+    {'h': 1, 'hu': 2, 'hv': 3, 'eta': 4, 'B': 5}
+    
+This dictionary can be specified when instantiating a new `FGoutGrid` object,
+e.g.::
+
+    fgout_grid = fgout_tools.FGoutGrid(fgno=1, outdir='_output', qmap='geoclaw')
+
+to use the default GeoClaw dictionary. This is also the default if `qmap`
+is not specified.  Alternatively you can instantiate this with
+`qmap='geoclaw-bouss'`, which would be equivalent to instantiating with::
+
+    qmap = {'h':1, 'hu':2, 'hv':3, 'huc':4, 'hvc':5, 'eta':6, 'B':7}
+    
+    
 .. _fgout_registration:
 
 fgout grid registration
