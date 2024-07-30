@@ -6,9 +6,9 @@
 v5.10.0 release notes
 ===============================
 
-Clawpack 5.10.0 was released on XX. See :ref:`installing`.
+Clawpack 5.10.0 was released on March 29, 2024. See :ref:`installing`.
 
-Permanent DOI: http://doi.org/10.5281/zenodo.XX
+Permanent DOI: http://doi.org/10.5281/zenodo.10896214
 
 
 Changes relative to Clawpack 5.9.2 (November 4, 2023) are shown below.
@@ -16,17 +16,6 @@ Changes relative to Clawpack 5.9.2 (November 4, 2023) are shown below.
 To see more recent changes that are in the the master branch but not yet
 released, see :ref:`changes_to_master`.
 
-
-Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.10.0) on XX.
-
-These changes should appear in the next release.  If you need them now,
-see :ref:`developers` for instructions on cloning and installing from the
-master branch. 
-
-To see documentation that has already been developed to accompany any new
-features listed below, click on the "dev" branch of the documentation, in
-the menu on the left hand side of this page.
 
 Changes that are not backward compatible
 ----------------------------------------

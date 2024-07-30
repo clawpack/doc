@@ -17,17 +17,6 @@ To see more recent changes that are in the the master branch but not yet
 released, see :ref:`changes_to_master`.
 
 
-Follow the links to see changes that have been made to the master branch of
-each repository since the last release (v5.9.2) on November 4, 2023.
-
-These changes should appear in the next release.  If you need them now,
-see :ref:`developers` for instructions on cloning and installing from the
-master branch. 
-
-To see documentation that has already been developed to accompany any new
-features listed below, click on the "dev" branch of the documentation, in
-the menu on the left hand side of this page.
-
 
 General changes
 ---------------
