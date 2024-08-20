@@ -5,7 +5,9 @@
 Fixed grid output (fgout)
 ==============================
 
-**New in v5.9.0, with a change to the API in v5.11.0:** 
+**New in v5.9.0, with a change to the API in v5.11.0.**
+
+**In particular note the** :ref:`fgout_changed511`
 
 See also:
 
@@ -222,7 +224,12 @@ and sets the `output_format` along with other fgout grid parameters set there.
 It also sets `fgout.X`, `fgout.Y` as 2D arrays that are the same for
 all fgout frames.
 
-**Incompatibility with previous versions:**  If you have fgout output created
+.. _fgout_changed511:
+
+Incompatibility with previous versions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you have fgout output created
 with a version of Clawpack prior to v5.11.0 and you wish to process it using
 a newer version, calling ::
 
