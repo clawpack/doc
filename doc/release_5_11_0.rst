@@ -6,7 +6,7 @@
 v5.11.0 release notes
 ===============================
 
-Clawpack 5.11.0 was released on XX. See :ref:`installing`.
+Clawpack 5.11.0 was released on August 25, 2024. See :ref:`installing`.
 
 Permanent DOI: http://doi.org/10.5281/zenodo.XX
 
