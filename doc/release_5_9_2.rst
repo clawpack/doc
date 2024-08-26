@@ -8,7 +8,7 @@ v5.9.2 release notes
 
 Clawpack 5.9.2 was released on November 4, 2023. See :ref:`installing`.
 
-Permanent DOI: http://doi.org/10.5281/zenodo.XXX
+Permanent DOI: http://doi.org/10.5281/zenodo.10076317
 
 
 Changes relative to Clawpack 5.9.2 (October 2, 2023) are shown below.
