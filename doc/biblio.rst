@@ -67,7 +67,7 @@ Papers describing the Clawpack software and algorithms
    M. J. Berger and R. J. LeVeque. 2023
    `Implicit Adaptive Mesh Refinement for Dispersive Tsunami Propagation
    <http://faculty.washington.edu/rjl/pubs/mjb-rjl-implicit-2023/>`_
-   *Submitted for publication*
+   *SIAM J. Sci. Comput.* 46 (2024) pp. B554 - B578.
 
 .. [BergerOliger84]
    M. J. Berger and J. Oliger. 1984. Adaptive mesh refinement for 
