@@ -2,7 +2,7 @@
 .. _output_styles:
 
 ******************************
-Output data sytles and formats
+Output data styles and formats
 ******************************
 
 Output style
