@@ -345,27 +345,3 @@ below.
    restart a computation.
    See :ref:`restart` for more details.
 
-     * *checkpt_style = 0* : Do not checkpoint at all
-    
-     * *checkpt_style = 1* : Checkpoint only at the final time.
-    
-     * *checkpt_style = 2* : Specify a list of checkpoint times. 
-
-       This is generally **not** recommended because time steps will be 
-       adjusted to hit the checkpoint times, but may be useful in order to
-       create a checkpoint file just before some event of interest (e.g.
-       when debugging a code that is known to crash at a certain time).
-
-       Requires additional parameter:
-
-       * checkpt_times : list of floats
-    
-     * *checkpt_style = 3* : Specify an interval for checkpointing.
-
-       Requires additional parameter:
-
-       * checkpt_interval : int
-
-         Checkpoint every `checkpt_interval` time steps on Level 1 (coarsest
-         level).
-

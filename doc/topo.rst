@@ -222,11 +222,25 @@ a subset of a huge online netCDF file (e.g. coastal DEMs at 1/3 arcsecond
 resolution are typically several gigabytes).
 
 The dictionary `topotools.remote_topo_urls` contains some useful URLs for
-etopo1 and a few other NOAA THREDDS datasets. This allows reading etopo1
-data, for example, via::
+etopo and a few other NOAA THREDDS datasets. This allows reading etopo
+60 arc-second data, for example, via::
 
-    >>> from clawpack.geoclaw import topotools
-    >>> topo1 = topotools.read_netcdf('etopo1',...)
+    from clawpack.geoclaw import topotools
+    extent = [-135, -120, 38, 52]
+    topo = topotools.read_netcdf('etopo22_60s', extent=extent,
+                                 coarsen=1, verbose=True)
+
+A quick plot of the topography can then be created using::
+
+    topo.plot()
+
+(with numerous optional arguments),
+and the topo can be saved as an ASCII raster topofile via, e.g.::
+
+    fname = 'topo.asc'
+    topo.write(fname, topo_type=3, header_style='asc',
+               grid_registration='llcenter', Z_format='%.1f')
+
 
 See `$CLAW/geoclaw/tests/test_etopo1.py` for one example, in which a very
 small patch from the global etopo1 database (which has 1 arcminute resolution)
