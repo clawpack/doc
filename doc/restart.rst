@@ -67,10 +67,10 @@ See the comments in :ref:`setrun_sample` for examples.
 
 .. _restart_stop:
 
-STOP file
----------
+Aborting a computation with a STOP file
+---------------------------------------
 
-As of v5.10.0, it is possible to abort a running calculation and have it
+As of v5.10.0, it is possible to abort a running computation and have it
 save a checkpoint file before quitting.  Simply create a (possibly empty)
 file named `STOP` in the directory from which the (amrclaw or geoclaw)
 code is running. The code will continue to run until the current coarse
@@ -81,6 +81,12 @@ checkpoint file will be named `fort.chkNNNNN` based on the number of coarse
 time steps taken so far (if `abs(checkpt_style) >= 0`) or the next available
 `fort.chkaaaaa` or `fort.chkbbbbb` if a negative `checkpt_style` was specified.
 
+Note that an the usual AMR output may not be written out at the time
+the calculation quits, unless this time had been specified as an output
+time.  If you want to output the solution at this time without taking any
+additional time steps, you could do a restart that reads in the final
+checkpoint file and that has `tfinal` adjusted in `setrun.py` to be earlier 
+than the time of this checkpoint.
 
 .. _restart_restart:
 
