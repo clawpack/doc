@@ -14,25 +14,38 @@ Note that it is important to know what elevation :math:`B=0`
 corresponds to for each
 topography dataset you might use (i.e. the 
 `vertical datum <http://tidesandcurrents.noaa.gov/datum_options.html>`_)
-Global ETOPO1 bathymetry is relative to MSL (Mean Sea Level), 
+Global ETOPO bathymetry is relative to MSL (Mean Sea Level), 
 while tsunami inundation relief is often relative to MHW (Mean High Water).
 These can often be combined since the difference is small relative to the
 resolution of the global bathymetry and the result assumed to be relative to
 MHW.  This is important if comparing to tide gauge observation or when
 modeling inundation.
 
-The NOAA Design-a-Grid tool no longer exists but you can download data sets
-from:
 
-* `NCEI's WCS Grid Extraction Tool <http://maps.ngdc.noaa.gov/viewers/wcs-client/>`_
+* `ETOPO Global Relief Model
+  <https://www.ncei.noaa.gov/products/etopo-global-relief-model>` provides 
+  global bathymetry data at 15, 30 or 60 arc-second resolution.
+  Note that ETOPO 2022 is the current version and ETOPO1 (often used in the
+  past for GeoClaw modeling is obsolete). 
+  Subsets of the 30 or 60 arc-second versions can be downloaded using
+  the `geoclaw.topotools.read_netcdf` function, see
+  :ref:`topo_netcdf`.  For the 15 arcsecond data it is necessary
+  to download one or more tiles from the `15 Arc-second Resolution Bedrock
+  elevation netCDF catalog
+  <https://www.ngdc.noaa.gov/thredds/catalog/global/ETOPO2022/15s/15s_bed_elev_netcdf/catalog.html>
+
+* `NCEI's Bathymetric Data Viewer <https://www.ncei.noaa.gov/maps/bathymetry/>`_
+  (Unselect Multibeam Survey Tracklines and Hydrographic Survey Outlines and
+  select DEM Footprings to see what is available.)
+
 * `NOAA NCEI inundataion relief
   <http://www.ngdc.noaa.gov/mgg/coastal/coastal.html>`_:
-  High resolution data near US coastlines.
-* `More recent catalog
-  <https://data.noaa.gov/waf/NOAA/NESDIS/NGDC/MGG/DEM/iso/>`_
+  High resolution data near US coastlines. Includes a link to the
+  `THREDDS Data Server <https://www.ngdc.noaa.gov/thredds/demCatalog.html>`_
+  for direct access, and `Metadata <https://data.noaa.gov/waf/NOAA/NESDIS/NGDC/MGG/DEM/iso/>`_
 
 It is also possible to open a remote NetCDF file on the
-`NOAA THREDDS server <https://www.ncei.noaa.gov/thredds/remoteCatalogService?catalog=https://www.ngdc.noaa.gov/thredds/demCatalog.xml>`_
+`NOAA THREDDS server https://www.ngdc.noaa.gov/thredds/demCatalog.html>`_
 to download data, which allows downloading only a
 subsampled subset of a large DEM.  See :ref:`topo_netcdf` for more
 details.
