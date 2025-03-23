@@ -234,11 +234,12 @@ A quick plot of the topography can then be created using::
 
     topo.plot()
 
-and it can be saved as an ASCII raster file via:
+(with numerous optional arguments),
+and the topo can be saved as an ASCII raster topofile via, e.g.::
 
     fname = 'topo.asc'
     topo.write(fname, topo_type=3, header_style='asc',
-               grid_registration='llcenter', Z_format='%.0f')
+               grid_registration='llcenter', Z_format='%.1f')
 
 
 See `$CLAW/geoclaw/tests/test_etopo1.py` for one example, in which a very
