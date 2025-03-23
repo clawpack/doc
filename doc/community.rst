@@ -80,13 +80,23 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- None currently scheduled.
+- Several GeoClaw developers will be available at the `CSDMS Annual Meeting
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2025>`__,
+  at CU-Boulder, May 13-15, 2025.
 
 Recent
 ^^^^^^^^
 
+- Tutorial on GeoClaw and D-Claw at the `CSDMS Annual Meeting 
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2024>`__
+  This was not recorded, but some of the teaching materials
+  are available in `this Github repository
+  <https://github.com/clawpack/geoclaw_tutorial_csdms2024>`__.
+  including this Jupyter notebook on `Sample results for Quillayute River flooding
+  <https://depts.washington.edu/clawpack/geoclaw/geoclaw_tutorial_csdms2024/quillayute/ViewPlotsQuillayute.html>`__
+
 - GeoClaw webinars and user help sessions
-  planned as part of the 2020 `CSDMS Annual Meeting
+  as part of the 2020 `CSDMS Annual Meeting
   <https://csdms.colorado.edu/wiki/Form:Annualmeeting2020>`__
   took place online due to COVID-19, on May 22, 2020.  
   Four short presentations can be found on the `Clawpack youtube channel
@@ -121,7 +131,15 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- None currently scheduled.
+- `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2025/>`__
+  held following the `CSDMS Annual Meeting
+  <https://csdms.colorado.edu/wiki/Form:Annualmeeting2025>`__,
+  University of Colorado, May 16-18, 2025.
+
+- A Clawpack Developers Workshop is tentatively scheduled to follow the
+  `5th Biennial Meeting of SIAM Pacific Northwest Section
+  <https://sites.google.com/view/2025siampnwconference/home>`__,
+  October 6-7, 2025. 
 
 
 Previous
