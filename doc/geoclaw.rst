@@ -66,6 +66,7 @@ More will eventually appear in the :ref:`apps`.
    geoclaw1d
    bouss1d
    bouss2d
+   speed_limit
 
 * `Links <http://depts.washington.edu/clawpack/geoclaw/>`_
   to relevant papers and sample codes (some are based on the Clawpack 4.x
