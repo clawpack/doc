@@ -45,6 +45,9 @@ More will eventually appear in the :ref:`apps`.
    topo
    grid_registration
    topotools
+   dtopo
+   landslides
+   dclaw
    setrun_geoclaw
    plotting_geoclaw
    googleearth_plotting
