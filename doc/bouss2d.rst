@@ -4,6 +4,11 @@
 Boussinesq solvers in Two Space Dimensions
 *********************************************
 
+.. warning :: The PETSc version required and the set of environment variables
+   that must be set to use the 2D Boussinesq solvers changed in Version 5.12.0.
+   PETSc Version 3.20 (or later) should now be used.
+   This documentation has been updated, and see also
+   `$CLAW/geoclaw/examples/bouss/README.txt` for additional setup information.
 
 As of Version 5.10.0, GeoClaw includes the option to solve a
 dispersive Boussinesq-type equation known as Serre-Green-Naghdi (SGN)
@@ -38,7 +43,7 @@ The right hand side also involves third order derivatives of the topography.
 In two space dimensions, solving this
 elliptic equation requires setting up and solving a sparse
 linear system of equations in each time step, at each refinement level when
-AMR is being used. All grid cells from all patches at 
+AMR is being used. All grid cells from all patches at
 the same refinement level
 are included in the linear system. Boundary conditions at the edge of
 patches must be interpolated from coarser level solutions, in much the same
@@ -68,7 +73,7 @@ The equations we solve are not the original depth-averaged dispersive
 equations derived by Boussinesq, but for simplicity
 in this documentation and the code, we often refer to the
 equations simply as "Boussinesq equations", following common practice.
-Many variants of these equations have been derived and fine-tuned to 
+Many variants of these equations have been derived and fine-tuned to
 better match the dispersion relation of the linearized
 `Airy wave theory <https://en.wikipedia.org/wiki/Airy_wave_theory>`__
 and to incorporate variable bottom topography.
@@ -92,7 +97,7 @@ relation of the Airy solution to the full 3d problem.
 This value is
 hardwired into `$CLAW/geoclaw/src/2d/bouss/bouss_module.f90`.  To change
 this value, you must modify this module.  (See :ref:`makefiles_library`
-for tips on modifying a library routine.) 
+for tips on modifying a library routine.)
 Setting `alpha = 1` gives the original SGN equations.
 
 
@@ -106,7 +111,7 @@ another Boussinesq-type dispersive system, the Madsen-Sorensen (MS) equations.
 These equations also give a good approximation to the linear dispersion
 relation of the Airy solution when the parameter `Bparam = 1/15` is used,
 which is hardwired into `$CLAW/geoclaw/src/2d/bouss/bouss_module.f90`.
-These equations were used in an earlier GeoClaw implementation 
+These equations were used in an earlier GeoClaw implementation
 by Jihwan Kim, known as BoussClaw  [KimEtAl2017]_.
 This implementation was successfully used in a number of studies
 (see [BergerLeVeque2023]_ for some citations).
@@ -115,7 +120,7 @@ particularly with the use of AMR, which have also been reported by others.
 Implementations of MS in both 1D and 2D  are included in GeoClaw,
 but are generally not
 recommended except for those interested in comparing different
-formulations for small numbers of time steps, 
+formulations for small numbers of time steps,
 and perhaps further investigating the stability issues.
 
 .. _bouss2d_usage:
@@ -138,7 +143,7 @@ setrun.py
 As mentioned above, it is necessary to set::
 
     clawdata.num_eqn = 5
-    
+
 instead of the usual value 3 used for SWE, since correction terms for the
 momenta are also stored in the `q` arrays to facilitate interpolation to
 ghost cells of finer level patches each time step.
@@ -148,9 +153,9 @@ Boussinesq solvers.  Somewhere in the `setrun` function you must include ::
 
     from clawpack.geoclaw.data import BoussData
     rundata.add_data(BoussData(),'bouss_data')
-    
+
 and then the following parameters can be adjusted (the values shown here
-are the default values that will be used if you do not specify a value 
+are the default values that will be used if you do not specify a value
 directly)::
 
     rundata.bouss_data.bouss_equations = 2    # 0=SWE, 1=MS, 2=SGN
@@ -164,13 +169,13 @@ These parameters are described below:
 
 - `bouss_equations`: The system of equations being solved.  Setting this to 2
   gives the recommended SGN equations, while 1 gives Madsen-Sorensen.
-  
+
   Setting `bouss_equations = 0` causes the code to revert to the shallow
   water equations, useful for comparing dispersive and nondispersive results.
   (But if `bouss_data` is being set, it still requires `clawdata.num_eqn = 5`
   and the two new components in q are always 0 in this case, so this is
-  slightly less efficient than using the standard GeoClaw.) 
-  
+  slightly less efficient than using the standard GeoClaw.)
+
 - `bouss_min_level`: The minimum AMR level on which Boussinesq correction
   terms should be applied.  In some cases it may be desirable to use the SWE
   on the coarsest grids in the ocean while Boussinesq corrections are only
@@ -179,11 +184,11 @@ These parameters are described below:
 - `bouss_max_level`: The finest AMR level on which Boussinesq correction
   terms should be applied.  In some cases it may be desirable to use the SWE
   only on coarser grids if the finest level grid only exists in very shallow
-  regions or onshore, where the the equations switch to SWE for inundation  
+  regions or onshore, where the the equations switch to SWE for inundation
   modeling.  Since much of the computational work is often on the finest level,
   avoiding the Boussinesq terms altogether on these levels may be advantageous
   in some situations.
- 
+
 - `bouss_min_depth`: The criterion used for switching from Boussinesq to SWE
   in shallow water and onshore.  If the original water depth `h` at time `t0`
   is less than `bouss_min_depth` in a cell or any of its nearest
@@ -202,13 +207,13 @@ These parameters are described below:
   motion in the first few time steps and it is necessary to get things going
   with the SWE.  For most applications this is not necessary and you need
   only change this parameter if you are solving a problem for which `t0 < 0`.
- 
+
 .. _bouss2d_makefile:
 
 Makefile
 ^^^^^^^^
 
-You can copy the `Makefile` from 
+You can copy the `Makefile` from
 `$CLAW/geoclaw/examples/bouss/radial_flat/Makefile` and make any adjustments
 needed.
 
@@ -219,22 +224,23 @@ and source code files that are used by default from the library
 `$CLAW/geoclaw/src/2d/shallow` in the case of files that did not need to
 be modified for the Boussinesq code.
 
-Two `Makefile` variables `PETSC_DIR` and `PETSC_ARCH` must be set (perhaps as
-environment variables in the shell from which `make` is invoked). These are
-described further below in :ref:`bouss2d_prereqs`.
+The `Makefile` uses several variables that must be set either by hardwiring
+them in the `Makefile` or as environment variables in the shell from
+which `make` is invoked.  The sample bash script
+`$CLAW/geoclaw/examples/bouss/setenv.sh` shows how these might be set, with
+comments.
 
-The `FFLAGS` specified in the `Makefile` should include `-DHAVE_PETSC`
-to indicate that `PETSc` is being used, necessary when compiling the
-source code for Boussinesq solvers.
+One variable that must be set as an environment variable is `PETSC_OPTIONS`,
+which should be set in bash as::
 
-The `Makefile` should also include a line of the form::
+    export PETSC_OPTIONS="-options_file /path/to/petscMPIoptions"
 
-    PETSC_OPTIONS=-options_file $(CLAW)/geoclaw/examples/bouss/petscMPIoptions
-
-with a pointer to the file that sets various `PETSc` options. The file
+where `petscMPIoptions` is a file that specifies the linear solver and
+preconditioner to use, convergence tolerances,
+and other parameters needed by PETSc.  The file
 `$CLAW/geoclaw/examples/bouss/petscMPIoptions` gives the options used in
 the examples, which may be adequate for other problems too.
-This file includes some comments briefly explaining the options set. 
+This file includes some comments briefly explaining the options set.
 We use a GMRES Krylov space method as the main solver
 and algebraic multigrid as the preconditioner.
 For more about the options for these methods, see:
@@ -243,6 +249,10 @@ For more about the options for these methods, see:
    - https://petsc.org/release/manualpages/PC/PCSetFromOptions/
 
 
+The `FFLAGS` specified in the `Makefile` should include `-DHAVE_PETSC`
+to indicate that `PETSc` is being used, necessary when compiling the
+source code for Boussinesq solvers.
+
 In addition to a line of the form ::
 
     EXE = xgeoclaw
@@ -250,17 +260,11 @@ In addition to a line of the form ::
 that specifies the name and location of the executable to be generated, the
 `Makefile` should also contain a line of the form::
 
-    RUNEXE="${PETSC_DIR}/${PETSC_ARCH}/bin/mpiexec -n 6"
+    RUNEXE="${CLAW_MPIEXEC} -n ${BOUSS_MPI_PROCS}"
 
-This is the command that should be used in order to run the executable.
-In other words, if you set `PETSC_DIR` and `PETSC_ARCH` as environment
-variables, and the executable is named `xgeoclaw` as usual, then the command ::
-
-    $PETSC_DIR/$PETSC_ARCH/bin/mpiexec -n 6 xgeoclaw
-    
-given in the shell should run the executable (invoking MPI with 6 processes in
-this example).  If this does not work then one of the environment variables
-may be set incorrectly to find the `mpiexec` command.
+The variable `CLAW_MPIEXEC` must be the path to the command used to run the
+executable `$EXE` with MPI, and `BOUSS_MPI_PROCS` is the number of MPI
+processes to use.
 
 
 .. _bouss2d_prereqs:
@@ -270,17 +274,17 @@ Prerequisites for the 2d Boussinesq code
 
 Currently the only linear solver supported is `PETSc`, so this must be
 installed, see `<https://petsc.org/release/install/>`__ for instructions
-and also note the `PETSc prerequisites 
+and also note the `PETSc prerequisites
 <https://petsc.org/release/install/install_tutorial/#prerequisites>`__.
 Note that MPI, LAPACK, and the BLAS are required and will be installed as
 part of installing PETSc.  If you already have some of the prerequisites
-installed, be sure to read `Configuring PETSc 
+installed, be sure to read `Configuring PETSc
 <https://petsc.org/release/install/install/#configuring-petsc>`__
 before installing.
 
 The environment variables `$PETSC_DIR` and `$PETSC_ARCH` must be set
 appropriately based on your PETSc installation, either as environment
-variables or directly in the `Makefile`. 
+variables or directly in the `Makefile`.
 See the PETSc documentation page
 `Environmental Variables $PETSC_DIR And $PETSC_ARCH <https://petsc.org/release/install/multibuild/#environmental-variables-petsc-dir-and-petsc-arch>`__.
 
