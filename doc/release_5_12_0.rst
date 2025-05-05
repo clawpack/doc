@@ -3,7 +3,7 @@
 .. _release_5_12_0:
 
 ===============================
-v5.12.0 release notes
+master release notes
 ===============================
 
 Clawpack 5.12.0 was released on May XX, 2025. See :ref:`installing`.
@@ -36,10 +36,10 @@ Github CI (rather than travis).
 Changes to classic
 ------------------
 
-- Some changes to `tests`.
+- None
 
 See `classic diffs
-<https://github.com/clawpack/classic/compare/v5.11.0...v5.12.0>`_
+<https://github.com/clawpack/classic/compare/v5.11.0...master>`_
 
 Changes to clawutil
 -------------------
@@ -48,7 +48,7 @@ Changes to clawutil
   which prints out the values of environment variables used in the `Makefile`.
 
 See `clawutil diffs
-<https://github.com/clawpack/clawutil/compare/v5.11.0...v5.12.0>`_
+<https://github.com/clawpack/clawutil/compare/v5.11.0...master>`_
 
 Changes to visclaw
 ------------------
@@ -56,7 +56,7 @@ Changes to visclaw
 - Several minor changes.
 
 See `visclaw diffs
-<https://github.com/clawpack/visclaw/compare/v5.11.0...v5.12.0>`_
+<https://github.com/clawpack/visclaw/compare/v5.11.0...master>`_
 
 Changes to riemann
 ------------------
@@ -64,7 +64,7 @@ Changes to riemann
 - Several minor changes.
 
 See `riemann diffs
-<https://github.com/clawpack/riemann/compare/v5.11.0...v5.12.0>`_
+<https://github.com/clawpack/riemann/compare/v5.11.0...master>`_
 
 Changes to amrclaw
 ------------------
@@ -77,7 +77,7 @@ Changes to amrclaw
 - Allow an arbitrary number of flagregions (was limited to 99 previously).
 
 See `amrclaw diffs
-<https://github.com/clawpack/amrclaw/compare/v5.11.0...v5.12.0>`_
+<https://github.com/clawpack/amrclaw/compare/v5.11.0...master>`_
 
 Changes to geoclaw
 ------------------
@@ -115,7 +115,7 @@ Changes to geoclaw
 
 - Numerous other bug fixes and enhancements.
 
-See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.11.0...v5.12.0>`_
+See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.11.0...master>`_
 
 
 Changes to PyClaw
@@ -125,7 +125,7 @@ Changes to PyClaw
 
 - Several other minor changes.
 
-See `pyclaw diffs <https://github.com/clawpack/pyclaw/compare/v5.11.0...v5.12.0>`_
+See `pyclaw diffs <https://github.com/clawpack/pyclaw/compare/v5.11.0...master>`_
 
 ===========================
 Other Clawpack Repositories
@@ -135,10 +135,10 @@ The repositories below are not included in the Clawpack tarfile or pip
 install, but changes to these repositories may also be of interest.
 
 - `apps diffs
-  <https://github.com/clawpack/apps/compare/v5.11.0...v5.12.0>`_
+  <https://github.com/clawpack/apps/compare/v5.11.0...master>`_
 
 - `doc diffs
   <https://github.com/clawpack/doc/compare/v5.11.x...dev>`_
 
 - `docker-files diffs
-  <https://github.com/clawpack/docker-files/compare/v5.11.0...v5.12.0>`_
+  <https://github.com/clawpack/docker-files/compare/v5.11.0...master>`_
