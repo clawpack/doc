@@ -22,7 +22,7 @@ Changes that are not backward compatible
 
 - In GeoClaw, several bugs were fixed in the implicit solvers for Boussinesq
   equations. A newer version of PETSc (>= 3.20) is now required and names
-  of some variables in the `petscMIPoptions` file have changed, along with
+  of some variables in the `petscMPIoptions` file have changed, along with
   some of the environment variables expected in the `Makefile`.
 
 
@@ -101,8 +101,14 @@ Changes to geoclaw
   boundary conditions at patch edges are handled in the linear system solver
   when there are
   re-entrant corners on a fine level (e.g. the inside corner of an L-shaped
-  union of patches).  Domain boundaries were also not handled properly in the
+  union of patches).  Domain boundaries were not always handled properly in the
   case of solid wall or periodic boundary conditions.
+
+- For efficiency, the sparse matrix needed for the dispersive terms is now
+  built directly in CSR (compressed sparse row) format, as used by the
+  PETSc linear solvers, instead of building the matrix in 
+  COO (coordinate, or triplet format) and then converting.  
+  This should not affect users' code (except to make it run faster).
 
 - The 2D Boussinesq code should now be run with PETSc 23.0 (or later), which
   requires some changes to parameter names in the `petscMPIoptions` file
