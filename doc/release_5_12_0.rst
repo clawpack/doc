@@ -8,7 +8,7 @@ v5.12.0 release notes
 
 Clawpack 5.12.0 was released on May 5, 2025. See :ref:`installing`.
 
-Permanent DOI: http://doi.org/10.5281/zenodo.XX
+Permanent DOI: http://doi.org/10.5281/zenodo.15350682
 
 
 Changes relative to Clawpack 5.11.0 (August 25, 2024) are shown below.
