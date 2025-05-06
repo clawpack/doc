@@ -82,7 +82,15 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
-- Several new capabilities added for storms.
+- Some new capabilities added for storms.
+
+  Support for reading in data files that specify wind and pressure
+  fields on a grid is now supported. This currently specifically
+  reads files in the Oceanweather Inc. formats NWS12 (ASCII) and
+  NWS13 (NetCDF) with further support for more general NetCDF data
+  included. This should be considered experimental at this time but
+  is included to test this functionality out and start to plan out
+  support for more file formats and nested grids.
 
 - A new `speed_limit` was introduced that can be set in `setrun.py`, e.g. ::
 
