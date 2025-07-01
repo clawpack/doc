@@ -14,6 +14,8 @@ your question in these docs, please send a note to the
 `claw-users google group
 <https://groups.google.com/forum/#!forum/claw-users>`_.
 
+We have adopted the :ref:`code_of_conduct`.  Please see that page for more information.
+
 **Bug reports and suggested improvements**
 
 If you find a bug or want to suggest an improvement, please raise an issue
