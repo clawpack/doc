@@ -13,6 +13,7 @@ See also the following pages from :ref:`contents-developers-resources`:
    howto_release
    regression
    git_versions
+   code_of_conduct
    
 
 .. contents::
