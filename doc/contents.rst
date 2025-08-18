@@ -41,6 +41,7 @@ Overview and Getting Started
    clawpack_components
    wp_algorithms
    trouble
+   logos
 
 .. toctree::
    :maxdepth: 1
