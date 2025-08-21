@@ -48,6 +48,7 @@ More will eventually appear in the :ref:`apps`.
    geohints
    topo
    grid_registration
+   topo_order
    topotools
    dtopo
    landslides

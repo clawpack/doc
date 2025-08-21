@@ -9,6 +9,7 @@ Topography data
 .. seealso::
    - :ref:`topotools`
    - :ref:`grid_registration`
+   - :ref:`topo_order`
    - :ref:`tsunamidata`
    - :ref:`dtopo`
 
@@ -36,6 +37,13 @@ has the feature that if a grid cell is refined at some stage in the
 computation, the topo used in the fine cells have an average value that is
 equal to the coarse cell value.  This is crucial in maintaining the
 ocean-at-rest steady state, for example.
+
+Normally the "best information" is assumed to come from the topofile with
+the finest resolution that covers a point, if there are more than one.
+This may not always be true, or it may be ambiguous which file to use if two
+have essentially the same resolution.  In version 5.13.0 a new `setrun.py`
+parameter was introduced to allow specifying the order of preference, see
+:ref:`topo_order`.
 
 .. warning:: Some changes were made in version 5.5.0 that affect how
    topofiles with `topo_type in [2,3]`
