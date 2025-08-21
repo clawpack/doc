@@ -60,9 +60,19 @@ Available for streaming
   now has several videos on aspects of GeoClaw.  Additional introductory
   videos on Clawpack more generally will be added.
 
+- `Tsunamis, Landslides and Asteroid Impacts: GeoClaw Models Deadly Flows <https://www.simonsfoundation.org/2025/07/30/tsunamis-landslides-and-asteroid-impacts-geoclaw-models-deadly-flows/>`_,
+  2025 Simons Foundation article on GeoClaw, accompanied by a couple of videos.
+
 - `The GeoClaw software and tsunami modeling
   <https://csdms.colorado.edu/wiki/Presenters-0439>`__
   Webinar for CSDMS in 2019 by Randy LeVeque
+
+- A set of 25 videos on material from the book `Finite Volume Methods for
+  Hyperbolic Problems <https://www.clawpack.org/fvmhp_materials/>`__
+  were recorded in 2023 and are available in `this playlist
+  <https://www.youtube.com/playlist?list=PLHJVj2zE9oLRPo7Xn1QI6WTl9QrBXLkqS>`__.
+  For a summary of the contents of each video, see `this webpage
+  <https://faculty.washington.edu/rjl/classes/am574w2023/lectures.html>`__.
 
 Upcoming
 ^^^^^^^^
@@ -173,8 +183,8 @@ Clawpack Swag and Logos
 - See :ref:`logos` for more versions and a zip file of logos.
 
 
-.. image:: clawpack_logos/GeoClawLogoTitleFrame.jpg
+.. image:: clawpack_logos/ClawpackLogoTitleFrame.jpg
     :height: 100px
 
-.. image:: clawpack_logos/ClawpackLogoTitleFrame.jpg
+.. image:: clawpack_logos/GeoClawLogoTitleFrame.jpg
     :height: 100px
