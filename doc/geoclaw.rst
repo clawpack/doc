@@ -1,8 +1,12 @@
 .. _geoclaw:
 
 *********************************************
-GeoClaw Description and Detailed Contents
+GeoClaw Description and Contents
 *********************************************
+
+.. image:: clawpack_logos/GeoClawLogoTitleFrame.jpg
+    :height: 100px
+    :target: https://www.clawpack.org/logos.html
 
 See `www.geoclaw.org <http://www.geoclaw.org>`_ for more overview of the
 GeoClaw software and links to references and uses.

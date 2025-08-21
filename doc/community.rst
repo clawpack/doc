@@ -163,8 +163,18 @@ have been tackled (and/or are still work in progress).
 - Claw-Dev workshop at UW in `2013 <http://www.clawpack.org/clawdev2013/>`_
 
 
-Other Clawpack events
----------------------
+Clawpack Swag and Logos
+------------------------
 
 - `Clawpack swag <https://shop.spreadshirt.com/numfocus/clawpack?idea=5e1cdc882051766d206bd00e>`__
-  is now available!
+  is now available!  
+  More coming soon we hope, also with the new GeoClaw logo.
+
+- See :ref:`logos` for more versions and a zip file of logos.
+
+
+.. image:: clawpack_logos/GeoClawLogoTitleFrame.jpg
+    :height: 100px
+
+.. image:: clawpack_logos/ClawpackLogoTitleFrame.jpg
+    :height: 100px

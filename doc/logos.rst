@@ -7,8 +7,9 @@ Clawpack Logos
 The following logos are available in the zip file
 `clawpack.org/logos <https://www.clawpack.org/clawpack_logos.zip>`__.
 
-With thanks to graphic designers at the `Flatiron Institute
-<https://www.simonsfoundation.org/flatiron/>`__.
+Created with the generous support of 
+graphic designers at `NumFOCUS <https://numfocus.org/>`__
+and the `Flatiron Institute <https://www.simonsfoundation.org/flatiron/>`__.
 
 **ClawpackLogoC.jpg:**
 
@@ -25,7 +26,7 @@ With thanks to graphic designers at the `Flatiron Institute
 .. image:: clawpack_logos/ClawpackLogoTitleFrame.jpg
     :height: 100px
 
-**clawicon.ico** (for browser tab):
+**clawicon.ico** (low-res favicon for browser tab):
 
 .. image:: clawpack_logos/clawicon.ico
     :height: 30px
