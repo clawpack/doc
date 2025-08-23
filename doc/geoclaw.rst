@@ -51,6 +51,7 @@ More will eventually appear in the :ref:`apps`.
    topo_order
    topotools
    dtopo
+   kmltools_module
    landslides
    dclaw
    setrun_geoclaw
