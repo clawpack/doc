@@ -123,6 +123,11 @@ Changes to geoclaw
   slightly and it is important to be precise about which one has the better
   data.  See :ref:`topo_order` for more details.
 
+- General support added for reading and interpolating storms from NetCDF data, 
+  generalizing the previous support for OWI format storms,
+  both the ASCII and NetCDF file formats. See `PR #658
+  <https://github.com/clawpack/geoclaw/pull/658>`__ for more details.
+
 - A new function `geoclaw.kmltools.dtopo_contours2kmz` was added to plot
   contour lines of a dtopo deformation and wrap the plot in kml for viewing
   on Google Earth.
