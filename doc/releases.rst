@@ -37,8 +37,8 @@ can also be referenced with the single DOI
 `10.17605/osf.io/kmw6h <https://doi.org/10.17605/osf.io/kmw6h>`__.
 See :ref:`citing` for more information on how best to cite Clawpack.
 
-* :ref:`release_5_13_0`  -- TBD
-  `[DOI 10.5281/zenodo.TBD] <https://doi.org/10.5281/zenodo.TBD>`_
+* :ref:`release_5_13_0`  -- August 23, 2025
+  `[DOI 10.5281/zenodo.16933803] <https://doi.org/10.5281/zenodo.16933803>`_
 * :ref:`release_5_12_0`  -- May 5, 2025
   `[DOI 10.5281/zenodo.15350682] <https://doi.org/10.5281/zenodo.15350682>`_
 * :ref:`release_5_11_0`  -- August 25, 2024

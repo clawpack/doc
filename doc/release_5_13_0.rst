@@ -6,9 +6,9 @@
 v5.13.0 release notes
 ===============================
 
-Clawpack 5.13.0 was released on TBD. See :ref:`installing`.
+Clawpack 5.13.0 was released on August 23, 2025. See :ref:`installing`.
 
-Permanent DOI: http://doi.org/10.5281/zenodo.TBD
+Permanent DOI: http://doi.org/10.5281/zenodo.16933803
 
 
 Changes relative to Clawpack 5.12.0 (May 5, 2025) are shown below.
