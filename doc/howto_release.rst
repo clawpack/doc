@@ -137,6 +137,8 @@ simply build from a clean clone and upload::
     git submodule update
     python -m build
 
+For the last step to work you may need to pip install build.
+
 To upload to Pypi you need an account there and you must be listed as a
 maintainer of Clawpack.  Then you can update using
 `twine <https://pypi.org/project/twine/>`__.
