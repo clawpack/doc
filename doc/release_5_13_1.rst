@@ -45,6 +45,10 @@ See `classic diffs
 Changes to clawutil
 -------------------
 
+- A utility `clawutil.util.fullpath_import` was added to make it easier to
+  do imports from arbitrary paths that are not part of any package.
+  See `#186 <https://github.com/clawpack/clawutil/pull/186>`_.
+
 - minor bug fixes
 
 See `clawutil diffs
@@ -80,13 +84,23 @@ Changes to geoclaw
 - The 1D code was failing because the new `override_topo_order` parameter
   introduced in v5.13.0 in 2D was also written to the `topo.data` files in
   1D, but was not being read in by the Fortran.  This was fixed in
-  [#669](https://github.com/clawpack/geoclaw/pull/669).
+  `#669 <https://github.com/clawpack/geoclaw/pull/669>`__.
   (Only one topofile is currently allowed in 1D, so the value of this
   flag is moot.)
 
 - A bug introduced in the 2D code resulted in a call to `b4step2` having
   the wrong number of parameters. This was fixed in
-  [#670](https://github.com/clawpack/geoclaw/pull/670).
+  `#670 <https://github.com/clawpack/geoclaw/pull/670>`__.
+
+- In `gauges.data` files, the desired `file_format` is converted from a
+  string such as `binary32` or `binary64` to an integer for reading into
+  GeoClaw.  These integers used to be 3 and 2 respectively for these two
+  binary formats and now are 2 and 3 to match the convention used e.g. for
+  `fgout` files.  This should not matter to users as long as `make data`
+  and `make output` are performed with the same version of GeoClaw.
+
+- A utility module `center_points.py` was added to adjust gauges or other
+  points to lie at the center of computational cells on a desired resolution.
 
 - Several other more minor bug fixes and enhancements.
 
