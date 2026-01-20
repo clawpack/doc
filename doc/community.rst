@@ -127,9 +127,7 @@ Upcoming
 
 Please join us at one of the upcoming sessions, or help plan one elsewhere...
 
-- A Clawpack Developers Workshop is tentatively scheduled October 6-8, 2025,
-  following the `5th Biennial Meeting of SIAM Pacific Northwest Section
-  <https://sites.google.com/view/2025siampnwconference/home>`__.
+- Stay tuned.
 
 
 Previous
@@ -137,6 +135,11 @@ Previous
 
 See the links below for summaries of some projects that
 have been tackled (and/or are still work in progress).
+
+- `Clawpack/GeoClaw Developers Workshop <http://www.clawpack.org/clawdev-2025/>`__
+  following the `5th Biennial Meeting of SIAM Pacific Northwest Section
+  <https://sites.google.com/view/2025siampnwconference/home>`__.
+  University of Washington, October 6-7, 2026.
 
 - `GeoClaw Developers Workshop <http://www.clawpack.org/geoclawdev-2025/>`__
   held following the `CSDMS Annual Meeting
@@ -176,9 +179,8 @@ have been tackled (and/or are still work in progress).
 Clawpack Swag and Logos
 ------------------------
 
-- `Clawpack swag <https://shop.spreadshirt.com/numfocus/clawpack?idea=5e1cdc882051766d206bd00e>`__
+- `Clawpack and GeoClaw swag <https://numfocus.myspreadshop.com/geoclaw>`__
   is now available!  
-  More coming soon we hope, also with the new GeoClaw logo.
 
 - See :ref:`logos` for more versions and a zip file of logos.
 

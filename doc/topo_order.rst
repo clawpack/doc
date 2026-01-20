@@ -6,6 +6,11 @@
 Topography file ordering
 *****************************************************************
 
+.. warning :: This feature has bugs in v5.13.0 and v5.13.1 and should not
+   be used until the next release.  See
+   https://github.com/clawpack/geoclaw/issues/689
+
+
 .. seealso::
    - :ref:`topo`
 
