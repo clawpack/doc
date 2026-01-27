@@ -5,7 +5,7 @@
 Setting a Speed Limit to Avoid Instabilities
 *****************************************************************
 
-**To appear in v5.11.1.**  Not yet in the master branch...  
+**Feature added in v5.11.1.**
 
 See https://github.com/clawpack/geoclaw/pull/637
 for some more information on this modification.

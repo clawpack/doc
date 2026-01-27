@@ -18,25 +18,27 @@ Other notes:
   with those for other repositories.
 
 * See :ref:`changes_to_master` for changes to the master branch on Github
-  that are not in the most recent release.  
+  that are not in the most recent release.
 
-* The "dev" branch of the 
+* The "dev" branch of the
   documentation (selected under Versions on the menu
   to the left) may contain documentation of features not yet released.
 
 Releases:
 ---------
 
-Tar files can be downloaded from 
+Tar files can be downloaded from
 `https://github.com/clawpack/clawpack/releases/
-<https://github.com/clawpack/clawpack/releases/>`_ or 
+<https://github.com/clawpack/clawpack/releases/>`_ or
 from the Zenodo links provided below.
 
-Tar files for all recent releases 
+Tar files for all recent releases
 can also be referenced with the single DOI
 `10.17605/osf.io/kmw6h <https://doi.org/10.17605/osf.io/kmw6h>`__.
 See :ref:`citing` for more information on how best to cite Clawpack.
 
+* :ref:`release_5_14_0`  -- January 26, 2026
+  `[DOI 10.5281/zenodo.18382457] <https://doi.org/10.5281/zenodo.18382457>`_
 * :ref:`release_5_13_1`  -- September 12, 2025
   `[DOI 10.5281/zenodo.17107527] <https://doi.org/10.5281/zenodo.17107527>`_
 * :ref:`release_5_13_0`  -- August 23, 2025
@@ -65,7 +67,7 @@ See :ref:`citing` for more information on how best to cite Clawpack.
   `[DOI 10.5281/zenodo.3764278] <https://doi.org/10.5281/zenodo.3764278>`_
 * :ref:`release_5_6_1`  -- October 28, 2019
   `[DOI 10.5281/zenodo.3528429] <https://doi.org/10.5281/zenodo.3528429>`_
-* :ref:`release_5_6_0`  -- June 2, 2019 
+* :ref:`release_5_6_0`  -- June 2, 2019
   `[DOI 10.5281/zenodo.3237295] <https://doi.org/10.5281/zenodo.3237295>`_
 * :ref:`release_5_5_0`  -- August 28, 2018
   `[DOI 10.5281/zenodo.1405834] <https://doi.org/10.5281/zenodo.1405834>`_
@@ -88,10 +90,9 @@ See :ref:`citing` for more information on how best to cite Clawpack.
 Clawpack 4.x
 -------------
 
-Clawpack 5.x has significant changes from past versions (prior to 2014). 
+Clawpack 5.x has significant changes from past versions (prior to 2014).
 See :ref:`clawpack5`.
 
 For documentation and recent changes to the Clawpack 4.x version, please see
 `Clawpack 4.x documentation
 <http://depts.washington.edu/clawpack/users-4.x/index.html>`_
-
