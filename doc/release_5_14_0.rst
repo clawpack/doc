@@ -6,9 +6,9 @@
 v5.14.0 release notes
 ===============================
 
-Clawpack 5.14.0 was released on January XX, 2026. See :ref:`installing`.
+Clawpack 5.14.0 was released on January 26, 2026. See :ref:`installing`.
 
-Permanent DOI: https://doi.org/10.5281/zenodo.XX
+Permanent DOI: https://doi.org/10.5281/zenodo.18382457
 
 
 Changes relative to Clawpack 5.13.1 (Sept. 12, 2025) are shown below.
