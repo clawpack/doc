@@ -319,4 +319,4 @@ The interested user is encouraged to browse the `Matlab Gallery`_ for
 examples of the types of plots that can be created with the Clawpack Matlab
 plotting routines.
 
-.. _Matlab Gallery: http://math.boisestate.edu/~calhoun/visclaw/matlab_gallery/test_graphics/index.html
+.. _Matlab Gallery: http://www.forestclaw.org/visclaw/matlab_gallery/test_graphics/index.html
