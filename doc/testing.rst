@@ -24,11 +24,15 @@ The Fortran code in Clawpack has a suite of regression tests that can be run to
 check that the code is working properly.  In each of the Fortran packages there
 are a series of regression tests along side some of the examples as well as some
 tests for Python functionality.  All these tests can be run by going to the base
-directory of the corresponding pacakge and running::
+directory of the corresponding pacakge and running:
+
+.. code-block:: console
 
     pytest
 
-The most useful option for debugging a failing test is to use::
+The most useful option for debugging a failing test is to use:
+
+.. code-block:: console
     
     pytest --basetemp=./test_output
 
@@ -65,13 +69,9 @@ and place the following content in it:
 
 
     def test_acoustics_1d_example1(tmp_path: Path, save: bool):
-        runner = test.ClassicTestRunner(
-            tmp_path=tmp_path,
-            test_path=Path(__file__).parent,
-        )
+        runner = test.ClassicTestRunner(tmp_path,
+                                        test_path=Path(__file__).parent)
 
-        # Set data using default setrun.py file in local directory.  If you want
-        # to override this then hand it another setrun.py
         runner.set_data()
 
         runner.rundata.clawdata.num_output_times = 2
@@ -80,13 +80,10 @@ and place the following content in it:
 
         runner.write_data()
 
-        # Build xclaw and execute code
         runner.executable_name = "xclaw"
         runner.build_executable()
         runner.run_code()
 
-        # Check t=0.5 and t=1.0, we are looking at both the pressure and velocity
-        # in this test so need to specify those indices
         runner.check_frame(1, indices=(0, 1), save=save)
         runner.check_frame(2, indices=(0, 1), save=save)
 

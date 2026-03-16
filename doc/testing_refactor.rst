@@ -95,4 +95,5 @@ When migrating an old test:
 
 Reference example
 -----------------
-`$CLAW/classic/examples/acoustics_1d_heterogeneous/test_acoustics_1d_heterogeneous.py` is intended to serve as an example.
+`$CLAW/classic/examples/acoustics_1d_heterogeneous/test_acoustics_1d_heterogeneous.py`
+is intended to serve as an example setup.
