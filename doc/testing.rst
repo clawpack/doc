@@ -41,10 +41,31 @@ package `pytetst` also has a number of additional debugging options that you can
 use.  See the `pytest documentation <https://docs.pytest.org/>`_ for more
 details.
 
+If you would like to use a different default `setrun.py` file for testing you 
+can modify the test script to use a different `setrun.py` file. 
+
+If you would like to plot the output of a test, you can use the same plotting
+tools that are used for the examples.  You can find the output of the test in
+the `test_output` directory if you used the `--basetemp` option above.  You can
+then use the plotting tools to plot the output from the test.  For example:
+
+.. code-block:: console
+
+    cd $CLAW/classic/examples/acoustics_1d_example1
+    pytest --basetemp=./test_output .
+    python plotclaw.py test_output/test_acoustics_1d_example1/ ./_plots ./setplot.py
+
+which will run the test and save the output into a subdirectory of
+`test_output`.  The plotting command will then plot the output from the
+appropriate subdirectory specified.
+
 Adding Regression Tests
 -----------------------
 
-If you want to add a new regression test using the new `pytest` framework, you can follow along with this example for the acoustics_1d_example1 test.  If something more complicated is needed, take a look at the other tests available in the packages, or reach out to the developers for help.
+If you want to add a new regression test using the new `pytest` framework, you
+can follow along with this example for the acoustics_1d_example1 test.  If
+something more complicated is needed, take a look at the other tests available
+in the packages, or reach out to the developers for help.
 
 Adding a Test for `acoustics_1d_example1`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
