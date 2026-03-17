@@ -41,13 +41,23 @@ package `pytetst` also has a number of additional debugging options that you can
 use.  See the `pytest documentation <https://docs.pytest.org/>`_ for more
 details.
 
-If you would like to use a different default `setrun.py` file for testing you 
-can modify the test script to use a different `setrun.py` file. 
+Hints
+^^^^^
+- Often times the output from a failing test will overwhelm the console output.  In this case, you can use the following to pipe the output into the file `log.txt` and look at it directly:
 
-If you would like to plot the output of a test, you can use the same plotting
-tools that are used for the examples.  You can find the output of the test in
-the `test_output` directory if you used the `--basetemp` option above.  You can
-then use the plotting tools to plot the output from the test.  For example:
+.. code-block:: console
+
+    pytest --basetemp=./test_output > log.txt 2>&1
+
+- If you would like to use a different default `setrun.py` file for testing you
+  can modify the test script to use a different `setrun.py` file. 
+- If you would like to plot the output of a test, you can use the same plotting
+  tools that are used for the examples.  You can find the output of the test in
+  the `test_output` directory if you used the `--basetemp` option above. You
+  can then use the plotting tools to plot the output from the test.  For
+  example this code will run the test and save the output into a subdirectory
+  of `test_output`.  The plotting command will then plot the output from the
+  appropriate subdirectory specified:
 
 .. code-block:: console
 
@@ -55,9 +65,7 @@ then use the plotting tools to plot the output from the test.  For example:
     pytest --basetemp=./test_output .
     python plotclaw.py test_output/test_acoustics_1d_example1/ ./_plots ./setplot.py
 
-which will run the test and save the output into a subdirectory of
-`test_output`.  The plotting command will then plot the output from the
-appropriate subdirectory specified.
+
 
 Adding Regression Tests
 -----------------------
