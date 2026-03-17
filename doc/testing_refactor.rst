@@ -84,6 +84,16 @@ CI should:
  - prefer fast, stable examples in PR checks
  - allow broader coverage in scheduled or extended workflows
 
+Compiler Flags and Numerical Reproducibility
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Regression tests are sensitive to floating-point roundoff and compiler
+optimizations. To ensure stable and reproducible results across platforms,
+CI uses conservative optimization flags (e.g., `-O1`).
+
+Higher optimization levels may produce small numerical differences and are
+not currently used for regression validation.
+
 Migration guidance
 ------------------
 
