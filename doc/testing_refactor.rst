@@ -84,6 +84,12 @@ CI should:
  - prefer fast, stable examples in PR checks
  - allow broader coverage in scheduled or extended workflows
 
+Data Included in the Repository for CI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Example regression tests should avoid external downloads when possible. Small,
+stable input files should be checked into the repository. Download and
+conversion logic should be tested separately in focused utility tests.
+
 Compiler Flags and Numerical Reproducibility
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
