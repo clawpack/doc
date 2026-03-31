@@ -43,7 +43,9 @@ details.
 
 Hints
 ^^^^^
-- Often times the output from a failing test will overwhelm the console output.  In this case, you can use the following to pipe the output into the file `log.txt` and look at it directly:
+- Often times the output from a failing test will overwhelm the console output.
+  In this case, you can use the following to pipe the output into the file
+  `log.txt` and look at it directly:
 
 .. code-block:: console
 
@@ -65,7 +67,19 @@ Hints
     pytest --basetemp=./test_output .
     python plotclaw.py test_output/test_acoustics_1d_example1/ ./_plots ./setplot.py
 
+- If you would like to plot output from a test that the output was saved for,
+  e.g. with `--basetemp=./test_output`, you can use the same plotting commands
+  to plot the output from the test.  For example this code will plot the output
+  from the test `test_acoustics_1d_example1`:
 
+.. code-block:: console
+
+    python plotclaw.py test_output/test_acoustics_1d_example1#/ ./_plots ./setplot.py
+
+Note that the `#` in the command above is used to specify the subdirectory of
+`test_output` that contains the output from the test.  You can use this same
+command to plot the output from any test that you have saved the output for.  
+The script `plotclaw.py` is in VisClaw.
 
 Adding Regression Tests
 -----------------------
