@@ -1,6 +1,11 @@
+.. _testing_refactor:
+
 =========================
 Clawpack Testing Refactor
 =========================
+
+.. seealso::
+   - :ref:`testing`
 
 Overview
 --------
