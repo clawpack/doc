@@ -5,10 +5,16 @@
 Testing your installation
 ===================================================================
 
+Clawpack has switched from using `nose` tests to
+`pytest <https://docs.pytest.org/>`_.
+
+See :ref:`testing_refactor` for more information about the switch,
+and :ref:`legacy_testing` for some notes on using `nose`.
+
 PyClaw Tests
 ------------
 
-You can exercise all the tests in PyClaw by running the following command from 
+You can exercise all the tests in PyClaw by running the following command from
 the base of the `pyclaw directory`:
 
 .. code-block:: console
@@ -33,11 +39,11 @@ directory of the corresponding pacakge and running:
 The most useful option for debugging a failing test is to use:
 
 .. code-block:: console
-    
+
     pytest --basetemp=./test_output
 
-which will save the output from the teset into the directory `test_output`.  The
-package `pytetst` also has a number of additional debugging options that you can
+which will save the output from the tests into the directory `test_output`.  The
+package `pytest` also has a number of additional debugging options that you can
 use.  See the `pytest documentation <https://docs.pytest.org/>`_ for more
 details.
 
@@ -52,10 +58,10 @@ Hints
     pytest --basetemp=./test_output > log.txt 2>&1
 
 - If you would like to use a different default `setrun.py` file for testing you
-  can modify the test script to use a different `setrun.py` file. 
+  can modify the test script to use a different `setrun.py` file.
 - If you would like to plot the output of a test, you can use the same plotting
   tools that are used for the examples.  You can find the output of the test in
-  the `test_output` directory if you used the `--basetemp` option above. You
+  the `test_output` directory if you used the `\--basetemp` option above. You
   can then use the plotting tools to plot the output from the test.  For
   example this code will run the test and save the output into a subdirectory
   of `test_output`.  The plotting command will then plot the output from the
@@ -68,7 +74,7 @@ Hints
     python plotclaw.py test_output/test_acoustics_1d_example1/ ./_plots ./setplot.py
 
 - If you would like to plot output from a test that the output was saved for,
-  e.g. with `--basetemp=./test_output`, you can use the same plotting commands
+  e.g. with `\--basetemp=./test_output`, you can use the same plotting commands
   to plot the output from the test.  For example this code will plot the output
   from the test `test_acoustics_1d_example1`:
 
@@ -78,7 +84,7 @@ Hints
 
 Note that the `#` in the command above is used to specify the subdirectory of
 `test_output` that contains the output from the test.  You can use this same
-command to plot the output from any test that you have saved the output for.  
+command to plot the output from any test that you have saved the output for.
 The script `plotclaw.py` is in VisClaw.
 
 Adding Regression Tests
@@ -146,16 +152,16 @@ or with:
     pytest test_acoustics_1d_example1.py
 
 
-2. We now need to generate the expected results for this test.  To do this, run the test with the `--save` option:
+2. We now need to generate the expected results for this test.  To do this, run the test with the `\--save` option:
 
 .. code-block:: console
 
     pytest test_acoustics_1d_example1.py --save
 
-This will run the test and save the results in a directory called `regression_data` in the same directory as the test.  This file contains the expected results for the test, which will be used to compare against future runs of the test.  Note that if you would like to see the full output of the test, you can add `--basetemp=./test_output` to the command above, which will save the output from the test into the directory `test_output`.
+This will run the test and save the results in a directory called `regression_data` in the same directory as the test.  This file contains the expected results for the test, which will be used to compare against future runs of the test.  Note that if you would like to see the full output of the test, you can add `\--basetemp=./test_output` to the command above, which will save the output from the test into the directory `test_output`.
 
 
-3. Now you can run the test without the `--save` option to check that it is working properly.  If the test passes, you should see output similar to this:
+3. Now you can run the test without the `\--save` option to check that it is working properly.  If the test passes, you should see output similar to this:
 
 .. code-block:: console
 
@@ -170,9 +176,11 @@ This will run the test and save the results in a directory called `regression_da
 
 To complete the test you will want to add the test script `test_acoustics_1d_example1.py` add the regression data to the repository.
 
-==============
+.. _legacy_testing:
+
 Legacy Testing
-==============
+-------------------------
+
 
 Tests via `nose` are no longer supported, but if you have an older version of
 Clawpack installed and `nostests` available, you can still run the old tests.
@@ -202,7 +210,7 @@ As a first test of the Fortran code, try the following::
 
 
 This will run several tests and compare a few numbers from the solution with
-archived results.  The tests should run in a few seconds and 
+archived results.  The tests should run in a few seconds and
 you should see output similar to this::
 
     runTest (tests.acoustics_1d_heterogeneous.regression_tests.Acoustics1DHeterogeneousTest) ... ok

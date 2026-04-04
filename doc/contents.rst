@@ -63,6 +63,7 @@ Examples and Applications
    fvmbook
    contribute_apps
    testing
+   testing_refactor
    sphinxdoc
 
 .. _contents_fortcodes:
