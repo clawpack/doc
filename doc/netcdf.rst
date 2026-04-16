@@ -11,12 +11,14 @@
    test_structure
    next_steps
 
+.. _netcdf_input:
+
 GeoClaw NetCDF Input System
 ===========================
 
 This document covers the NetCDF input pipeline introduced in the
-``refactor-netcdf-support`` PR. It has two sections: a user guide for
-scientists who want to use NetCDF files as input, and a developer
+``refactor-netcdf-support`` PR (VERSION ?5.15?). It has two sections: a user
+guide for scientists who want to use NetCDF files as input, and a developer
 reference for those working on the implementation.
 
 --------------
@@ -59,6 +61,20 @@ What your file must provide
 Registering a NetCDF topo file in setrun.py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+If your file meets the above requirements and either has the variable `z` or
+only one 2D variable in the file, you can simply use the following in
+``setrun.py``:
+
+.. code:: python
+   
+   rundata.topo_data.topofiles.append([4, 'bathy.nc'])
+
+This matches with what is expected for backwards compatibility.
+
+If your file meets the above requirements and has a non-standard variable name
+or you want to specify crop bounds you can use the Python API to interrogate the
+file and write a descriptor:   
+
 .. code:: python
 
    from clawpack.geoclaw.netcdf_utils import TopoInterrogator
@@ -67,11 +83,12 @@ Registering a NetCDF topo file in setrun.py
    rundata.topo_data.topofiles.append([4, 'bathy.nc', meta])
 
 That is the only change required in most cases. GeoClaw's Python layer
-interrogates the file when you run ``setrun.py`` and writes the
-necessary descriptor information into ``topo.data`` automatically.
-Variable and coordinate names are auto-detected from CF attributes where
-possible; pass ``var_name``, ``lon_name``, or ``lat_name`` explicitly to
-``TopoInterrogator`` if auto-detection fails.
+interrogates the file when you run ``setrun.py`` and writes the necessary
+descriptor information into ``topo.data`` automatically. Variable and coordinate
+names are auto-detected from CF attributes where possible; pass ``var_name``,
+``lon_name``, or ``lat_name`` explicitly to ``TopoInterrogator`` if
+auto-detection fails.  This also should handle multiple different coordinate
+layouts.
 
 Domain subsetting (crop)
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -86,7 +103,7 @@ without creating a smaller file:
                                 {'crop_bounds': [-100, -80, 20, 35]}])
 
 Only the subset is read into memory at runtime. The full file is never
-loaded.
+loaded.  Note this is the same as using the 
 
 Checking CF compliance
 ^^^^^^^^^^^^^^^^^^^^^^
