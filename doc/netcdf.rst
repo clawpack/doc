@@ -171,42 +171,135 @@ In ``setrun.py``:
    surge_data.storm_specification_type = 'data'
    surge_data.storm_file = 'isaac.storm'
 
-Then create the storm descriptor file, *e.g.* ``isaac.storm``, using the
-Python API:
+Then create the storm descriptor file, *e.g.* ``isaac.storm``. GeoClaw
+uses a two-stage discovery process: standard variable names are found
+automatically from CF ``axis`` / ``standard_name`` attributes and
+built-in fallback lists; you only need to supply ``var_mapping`` for
+roles whose names are non-standard. Coordinate names (``lon``, ``lat``,
+``time``) are always discovered automatically and never need to be
+specified.
+
+**Case 1 — all standard names (ERA5 and similar):**
+
+ERA5 variable names (``u10``, ``v10``, ``msl``) are in the built-in
+fallback lists and are found automatically. No ``var_mapping`` is
+required:
 
 .. code:: python
 
-   from clawpack.geoclaw.surge.storm import Storm
    import numpy as np
+   from clawpack.geoclaw.surge.storm import Storm
 
    storm = Storm()
    storm.time_offset = np.datetime64('2012-08-29')
    storm.file_format = 'netcdf'
-   storm.file_paths = ['path/to/forcing.nc']
+   storm.file_paths = ['path/to/era5_forcing.nc']
    storm.write('isaac.storm', file_format='data')
 
-If your variable or dimension names are non-standard, provide a mapping:
+**Case 2 — mixed: standard wind names, non-standard pressure:**
+
+A common pattern when a file has multiple pressure fields (e.g. mean
+sea-level and surface pressure) or a non-standard pressure variable
+name. Specify only the roles that cannot be discovered automatically;
+the rest are still found from the fallback lists:
 
 .. code:: python
 
    storm.write('isaac.storm', file_format='data',
-               dim_mapping={'t': 'valid_time'},
-               var_mapping={'wind_u': 'u10', 'wind_v': 'v10',
-                            'pressure': 'msl'})
+               var_mapping={'pressure': 'prmsl'})
+
+Any name supplied in ``var_mapping`` is validated against the variables
+actually present in the file before the descriptor is written, so a
+typo raises an informative error immediately rather than producing
+incorrect output silently.
+
+**Case 3 — all non-standard names (e.g. NWS13/OWI-NetCDF):**
+
+Supply all three roles explicitly when none of the variable names match
+the built-in fallback lists:
+
+.. code:: python
+
+   storm = Storm()
+   storm.time_offset = np.datetime64('2012-08-29')
+   storm.file_format = 'nws13'
+   storm.file_paths = ['path/to/nws13_forcing.nc']
+   storm.write('isaac.storm', file_format='data',
+               var_mapping={'wind_u': 'uwnd',
+                            'wind_v': 'vwnd',
+                            'pressure': 'press'})
+
+**Advanced: pre-built MetInterrogator:**
+
+If you need direct control over CF validation, unit checking, or
+lon/lat convention detection before the descriptor is written, you can
+construct a :class:`~clawpack.geoclaw.netcdf_utils.MetInterrogator`
+explicitly and pass it via ``met_interrogator``. When a pre-built
+interrogator is supplied, auto-discovery and ``var_mapping`` validation
+are bypassed entirely:
+
+.. code:: python
+
+   from clawpack.geoclaw.netcdf_utils import MetInterrogator
+
+   mi = MetInterrogator('path/to/forcing.nc',
+                        variable_map={'wind_u': 'u10',
+                                      'wind_v': 'v10',
+                                      'pressure': 'msl'})
+   storm.write('isaac.storm', file_format='data', met_interrogator=mi)
+
+.. note::
+
+   ``dim_mapping`` is accepted by ``write()`` / ``write_data()`` for
+   backwards compatibility but has no effect -- coordinate names are
+   always discovered automatically via CF conventions.
+
+.. note::
+
+   ``storm.window`` (ramp width and application domain) and
+   ``MetInterrogator``'s ``crop_bounds`` (read-time spatial subset of
+   the NetCDF file) are independent. Setting one does not affect the
+   other.
+
 
 Time handling
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
-GeoClaw works in seconds from a user-defined offset (typically landfall
-or storm genesis). All CF time decoding -- including calendar handling
-and unit conversion from hours/days -- is done in Python. The Fortran
-runtime sees only seconds from offset.
-
-Set the offset when constructing the storm:
+GeoClaw works in seconds relative to a user-defined reference time
+(typically landfall or storm genesis). Set it when constructing the
+storm:
 
 .. code:: python
 
    storm.time_offset = np.datetime64('2012-08-29T00:00')  # landfall time
+
+Python computes ``nc_time_offset`` — the elapsed seconds from
+``storm.time_offset`` to the first record in the file — and writes it
+to the descriptor. This value is independent of how the file encodes
+time internally (Unix epoch, local epoch, hours-since-reference, etc.).
+
+Fortran converts raw time values using:
+
+.. code::
+
+   storm_time[i] = raw[i] − raw[0] + nc_time_offset
+
+Subtracting ``raw[0]`` converts any absolute encoding to
+elapsed-since-first-record; adding ``nc_time_offset`` then anchors that
+to ``storm.time_offset``. No unit conversion (hours→seconds,
+days→seconds) is performed in Fortran: the descriptor stores
+``nc_time_offset`` in seconds and the raw values are read as stored.
+``write_data`` passes ``time_reference=storm.time_offset`` to
+``MetInterrogator`` automatically; no additional user action is needed.
+
+Longitude convention
+^^^^^^^^^^^^^^^^^^^^^^
+
+Longitude convention ([0, 360] vs [-180, 180]) is detected and
+normalized automatically by ``MetInterrogator``. ERA5 files that store
+longitude in [0, 360] do not need to be preprocessed to [-180, 180]
+before use. The detected convention is written to the descriptor and
+Fortran applies index normalization at runtime without copying arrays.
 
 --------------
 
@@ -219,14 +312,16 @@ Architecture overview
 The system has a strict Python/Fortran split:
 
 **Python** handles: file interrogation, CF attribute parsing, coordinate
-convention detection, fill value resolution, unit conversion, time
-decoding, crop bound validation, and descriptor writing.
+convention detection, fill value resolution, unit conversion,
+``nc_time_offset`` computation (elapsed seconds from ``storm.time_offset``
+to the first record), crop bound validation, and descriptor writing.
 
 **Fortran** handles: opening the NetCDF file at runtime using
 information from the descriptor, index arithmetic for coordinate
 normalization (no data copies), domain subsetting via
-``start``/``count`` arguments to ``nf90_get_var``, and time-slice reads
-for met forcing.
+``start``/``count`` arguments to ``nf90_get_var``, time-slice reads
+for met forcing, and converting raw time values to seconds from
+``storm.time_offset`` via ``raw[i] − raw[0] + nc_time_offset``.
 
 Fortran assumes the unit contract from ``GEOCLAW_NETCDF_UNITS`` in
 ``units.py`` without checking. Python enforces it.
@@ -351,20 +446,20 @@ silent Fortran ``STOP`` produces no useful output.
 Known technical debt
 ~~~~~~~~~~~~~~~~~~~~
 
--  ``util.get_netcdf_names`` and the coordinate/variable discovery logic
-   in ``NetCDFInterrogator`` are parallel implementations. They should
-   be consolidated -- ``NetCDFInterrogator`` should be the single source
-   and ``util.get_netcdf_names`` should delegate to it. This is deferred
-   to the surge module refactor.
--  ``Storm.write(file_format="data")`` does not yet call
-   ``DescriptorWriter`` directly for NetCDF storm entries. Currently the
-   tests write descriptors manually. The integration should happen as
-   part of the surge refactor.
+-  ``util.get_netcdf_names`` (in ``util.py``) remains a parallel
+   implementation of variable name discovery alongside
+   ``NetCDFInterrogator``. ``Storm.write_data`` now uses
+   ``MetInterrogator`` for NetCDF met forcing (format 2), but falls back
+   to ``util.get_netcdf_names`` for variable name discovery when no
+   explicit ``var_mapping`` is provided. Full consolidation -- making
+   ``util.get_netcdf_names`` delegate to ``NetCDFInterrogator`` and
+   removing the duplicate -- remains a TODO.
 -  WRF raw output requires ``MetPreprocessor`` for string-time decoding
    (``Times`` character array, not a numeric CF time variable) and
    curvilinear grid handling (``XLAT``/``XLONG`` are 2D time-varying
    arrays). A skip-marked test stub documents the gap in
    ``test_storm.py``.
+
 
 Adding a new met forcing field (e.g. precipitation)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -406,10 +501,11 @@ binary files are committed to the repository.
 Next steps
 ----------
 
--  **Surge module refactor**: consolidate ``util.get_netcdf_names`` into
-   ``NetCDFInterrogator``, wire ``Storm.write`` to use
-   ``DescriptorWriter``, clean up parallel discovery paths in
-   ``storm.py``
+-  **Consolidate util.get_netcdf_names**: ``Storm.write_data`` now
+   calls ``MetInterrogator`` and ``DescriptorWriter`` for NetCDF met
+   forcing; the remaining step is to make ``util.get_netcdf_names``
+   delegate to ``NetCDFInterrogator`` and remove the duplicate discovery
+   logic in ``storm.py``
 -  **WRF support**: implement ``MetPreprocessor`` to handle string-time
    axis and curvilinear grid; the skip-marked test stub in
    ``test_storm.py`` documents the expected interface
