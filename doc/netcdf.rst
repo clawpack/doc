@@ -61,34 +61,50 @@ What your file must provide
 Registering a NetCDF topo file in setrun.py
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If your file meets the above requirements and either has the variable `z` or
-only one 2D variable in the file, you can simply use the following in
+If your file meets the above requirements, you can simply use the following in
 ``setrun.py``:
 
 .. code:: python
-   
+
    rundata.topo_data.topofiles.append([4, 'bathy.nc'])
 
 This matches with what is expected for backwards compatibility.
 
-If your file meets the above requirements and has a non-standard variable name
-or you want to specify crop bounds you can use the Python API to interrogate the
-file and write a descriptor:   
+If you want to specify crop bounds, or if GeoClaw cannot find the elevation
+variable automatically, use the Python API to interrogate the file and write a
+descriptor:
 
 .. code:: python
 
    from clawpack.geoclaw.netcdf_utils import TopoInterrogator
-   meta = TopoInterrogator('bathy.nc', var_name='z',
+   meta = TopoInterrogator('bathy.nc',
                            crop_bounds=(-100, -60, 15, 35)).interrogate_topo()
    rundata.topo_data.topofiles.append([4, 'bathy.nc', meta])
 
 That is the only change required in most cases. GeoClaw's Python layer
 interrogates the file when you run ``setrun.py`` and writes the necessary
-descriptor information into ``topo.data`` automatically. Variable and coordinate
-names are auto-detected from CF attributes where possible; pass ``var_name``,
-``lon_name``, or ``lat_name`` explicitly to ``TopoInterrogator`` if
-auto-detection fails.  This also should handle multiple different coordinate
-layouts.
+descriptor information into ``topo.data`` automatically.
+
+The elevation variable is found automatically using a two-step search:
+
+1. **CF** ``standard_name`` **attribute** — variables whose ``standard_name``
+   is one of ``surface_altitude``, ``height_above_mean_sea_level``,
+   ``height_above_reference_ellipsoid``, ``bedrock_altitude``, ``altitude``,
+   ``height``, or ``sea_floor_depth_below_geoid`` are matched first.
+2. **Common variable names** — if no CF match is found, the variable name is
+   checked against a built-in list that includes ``z``, ``elevation``,
+   ``topo``, ``height``, ``altitude``, ``depth``, ``dem``, ``bathymetry``,
+   ``bathy``, ``Band1``, and several capitalisation variants.
+
+Pass ``var_name`` explicitly only when none of the names above match your file,
+or when the file contains multiple variables that would both match and you need
+to disambiguate::
+
+   meta = TopoInterrogator('bathy.nc', var_name='my_elevation',
+                           crop_bounds=(-100, -60, 15, 35)).interrogate_topo()
+
+Coordinate names (``lon``/``latitude``/``x`` etc.) and dimension ordering are
+always discovered automatically and never need to be specified.
 
 Domain subsetting (crop)
 ^^^^^^^^^^^^^^^^^^^^^^^^
