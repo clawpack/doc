@@ -71,18 +71,19 @@ If your file meets the above requirements, you can simply use the following in
 This matches with what is expected for backwards compatibility.
 
 If you want to specify crop bounds, or if GeoClaw cannot find the elevation
-variable automatically, use the Python API to interrogate the file and write a
-descriptor:
+variable automatically, use ``topo_entries()`` to interrogate the file:
 
 .. code:: python
 
    from clawpack.geoclaw.netcdf_utils import TopoInterrogator
-   meta = TopoInterrogator('bathy.nc',
-                           crop_bounds=(-100, -60, 15, 35)).interrogate_topo()
-   rundata.topo_data.topofiles.append([4, 'bathy.nc', meta])
+   with TopoInterrogator('bathy.nc', crop_bounds=(-100, -60, 15, 35)) as intr:
+       rundata.topo_data.topofiles.extend(intr.topo_entries())
 
-That is the only change required in most cases. GeoClaw's Python layer
-interrogates the file when you run ``setrun.py`` and writes the necessary
+``topo_entries()`` returns a list of ``[4, path, TopoMetadata]`` entries ready
+to pass directly to ``topofiles``.  In the common case the list has one entry,
+but it may contain two when the crop region straddles the file's longitude cut
+point (e.g. a global file cropped across the dateline) — ``extend`` handles
+both cases without extra logic.  GeoClaw's Python layer writes the necessary
 descriptor information into ``topo.data`` automatically.
 
 The elevation variable is found automatically using a two-step search:
@@ -110,16 +111,18 @@ Domain subsetting (crop)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 If your NetCDF file covers a larger area than your simulation domain
-(common with global or regional datasets), you can crop at read time
-without creating a smaller file:
+(common with global or regional datasets), pass ``crop_bounds`` to
+``TopoInterrogator`` and use ``topo_entries()`` to register the file:
 
 .. code:: python
 
-   topo_data.topofiles.append([4, 'gebco_global.nc',
-                                {'crop_bounds': [-100, -80, 20, 35]}])
+   from clawpack.geoclaw.netcdf_utils import TopoInterrogator
+   with TopoInterrogator('gebco_global.nc',
+                         crop_bounds=(-100, -80, 20, 35)) as intr:
+       rundata.topo_data.topofiles.extend(intr.topo_entries())
 
 Only the subset is read into memory at runtime. The full file is never
-loaded.  Note this is the same as using the 
+loaded.
 
 Checking CF compliance
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -388,7 +391,7 @@ Topo (lines in topo.data after topo_type)
    var_name       = z
    lon_name       = longitude
    lat_name       = latitude
-   lon_convention = 180
+   lon_offset     = 0.0
    lat_order      = S_to_N
    dim_order      = lat,lon
    fill_value     = -9999.0
