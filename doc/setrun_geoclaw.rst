@@ -453,7 +453,16 @@ Storm Specification Data
 .. attribute:: rundata.surge_data.storm_file : string
 
    Specifies the path to the storm data.  IF `storm_specification_type > 0` then
-   this should point to a GeoClaw formatted storm file (see :ref:`storm_module` for 
+   this should point to a GeoClaw formatted storm file (see :ref:`storm_module` for
    details).  If `storm_specification < 0` then this should either specify a path
    to files specifying the storm or a single file depending on the type of input
    data.
+
+.. attribute:: rundata.surge_data.storm_time_scale : float
+
+   A multiplicative scale factor applied to the storm's time axis.  Values
+   greater than 1 slow the storm down (it takes longer to traverse the
+   domain); values less than 1 speed it up.  The default is ``1.0`` (no
+   scaling).  This is primarily useful for sensitivity studies and for
+   creating synthetic storms whose tracks are spatially identical to a
+   historical event but travel at a different speed.

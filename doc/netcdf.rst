@@ -71,13 +71,13 @@ If your file meets the above requirements, you can simply use the following in
 This matches with what is expected for backwards compatibility.
 
 If you want to specify crop bounds, or if GeoClaw cannot find the elevation
-variable automatically, use ``topo_entries()`` to interrogate the file:
+variable automatically, use ``topo_entries()`` to inspect the file:
 
 .. code:: python
 
-   from clawpack.geoclaw.netcdf_utils import TopoInterrogator
-   with TopoInterrogator('bathy.nc', crop_bounds=(-100, -60, 15, 35)) as intr:
-       rundata.topo_data.topofiles.extend(intr.topo_entries())
+   from clawpack.geoclaw.netcdf_utils import TopoInspector
+   with TopoInspector('bathy.nc', crop_bounds=(-100, -60, 15, 35)) as insp:
+       rundata.topo_data.topofiles.extend(insp.topo_entries())
 
 ``topo_entries()`` returns a list of ``[4, path, TopoMetadata]`` entries ready
 to pass directly to ``topofiles``.  In the common case the list has one entry,
@@ -101,8 +101,8 @@ Pass ``var_name`` explicitly only when none of the names above match your file,
 or when the file contains multiple variables that would both match and you need
 to disambiguate::
 
-   meta = TopoInterrogator('bathy.nc', var_name='my_elevation',
-                           crop_bounds=(-100, -60, 15, 35)).interrogate_topo()
+   meta = TopoInspector('bathy.nc', var_name='my_elevation',
+                        crop_bounds=(-100, -60, 15, 35)).inspect_topo()
 
 Coordinate names (``lon``/``latitude``/``x`` etc.) and dimension ordering are
 always discovered automatically and never need to be specified.
@@ -112,14 +112,14 @@ Domain subsetting (crop)
 
 If your NetCDF file covers a larger area than your simulation domain
 (common with global or regional datasets), pass ``crop_bounds`` to
-``TopoInterrogator`` and use ``topo_entries()`` to register the file:
+``TopoInspector`` and use ``topo_entries()`` to register the file:
 
 .. code:: python
 
-   from clawpack.geoclaw.netcdf_utils import TopoInterrogator
-   with TopoInterrogator('gebco_global.nc',
-                         crop_bounds=(-100, -80, 20, 35)) as intr:
-       rundata.topo_data.topofiles.extend(intr.topo_entries())
+   from clawpack.geoclaw.netcdf_utils import TopoInspector
+   with TopoInspector('gebco_global.nc',
+                      crop_bounds=(-100, -80, 20, 35)) as insp:
+       rundata.topo_data.topofiles.extend(insp.topo_entries())
 
 Only the subset is read into memory at runtime. The full file is never
 loaded.
@@ -178,7 +178,7 @@ Time                          seconds from user-defined offset
 ============================= ================================
 
 If your file uses hPa/mbar for pressure or knots for wind,
-``MetInterrogator`` will convert automatically.
+``MetInspector`` will convert automatically.
 
 Registering a NetCDF storm file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -248,24 +248,24 @@ the built-in fallback lists:
                             'wind_v': 'vwnd',
                             'pressure': 'press'})
 
-**Advanced: pre-built MetInterrogator:**
+**Advanced: pre-built MetInspector:**
 
 If you need direct control over CF validation, unit checking, or
 lon/lat convention detection before the descriptor is written, you can
-construct a :class:`~clawpack.geoclaw.netcdf_utils.MetInterrogator`
-explicitly and pass it via ``met_interrogator``. When a pre-built
-interrogator is supplied, auto-discovery and ``var_mapping`` validation
+construct a :class:`~clawpack.geoclaw.netcdf_utils.MetInspector`
+explicitly and pass it via ``met_inspector``. When a pre-built
+inspector is supplied, auto-discovery and ``var_mapping`` validation
 are bypassed entirely:
 
 .. code:: python
 
-   from clawpack.geoclaw.netcdf_utils import MetInterrogator
+   from clawpack.geoclaw.netcdf_utils import MetInspector
 
-   mi = MetInterrogator('path/to/forcing.nc',
-                        variable_map={'wind_u': 'u10',
-                                      'wind_v': 'v10',
-                                      'pressure': 'msl'})
-   storm.write('isaac.storm', file_format='data', met_interrogator=mi)
+   mi = MetInspector('path/to/forcing.nc',
+                     variable_map={'wind_u': 'u10',
+                                   'wind_v': 'v10',
+                                   'pressure': 'msl'})
+   storm.write('isaac.storm', file_format='data', met_inspector=mi)
 
 .. note::
 
@@ -276,7 +276,7 @@ are bypassed entirely:
 .. note::
 
    ``storm.window`` (ramp width and application domain) and
-   ``MetInterrogator``'s ``crop_bounds`` (read-time spatial subset of
+   ``MetInspector``'s ``crop_bounds`` (read-time spatial subset of
    the NetCDF file) are independent. Setting one does not affect the
    other.
 
@@ -309,13 +309,13 @@ to ``storm.time_offset``. No unit conversion (hours→seconds,
 days→seconds) is performed in Fortran: the descriptor stores
 ``nc_time_offset`` in seconds and the raw values are read as stored.
 ``write_data`` passes ``time_reference=storm.time_offset`` to
-``MetInterrogator`` automatically; no additional user action is needed.
+``MetInspector`` automatically; no additional user action is needed.
 
 Longitude convention
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Longitude convention ([0, 360] vs [-180, 180]) is detected and
-normalized automatically by ``MetInterrogator``. ERA5 files that store
+normalized automatically by ``MetInspector``. ERA5 files that store
 longitude in [0, 360] do not need to be preprocessed to [-180, 180]
 before use. The detected convention is written to the descriptor and
 Fortran applies index normalization at runtime without copying arrays.
@@ -330,7 +330,7 @@ Architecture overview
 
 The system has a strict Python/Fortran split:
 
-**Python** handles: file interrogation, CF attribute parsing, coordinate
+**Python** handles: file inspection, CF attribute parsing, coordinate
 convention detection, fill value resolution, unit conversion,
 ``nc_time_offset`` computation (elapsed seconds from ``storm.time_offset``
 to the first record), crop bound validation, and descriptor writing.
@@ -350,7 +350,7 @@ Class hierarchy (``netcdf_utils.py``)
 
 ::
 
-   NetCDFInterrogator
+   NetCDFInspector
        - open file (xarray, Dask-lazy)
        - discover coordinate variables by name heuristics + CF standard_name
        - detect lon convention, lat order, dim order
@@ -358,12 +358,12 @@ Class hierarchy (``netcdf_utils.py``)
        - validate crop bounds against file extent
        - output: NetCDFDescriptor dataclass
 
-   TopoInterrogator(NetCDFInterrogator)
+   TopoInspector(NetCDFInspector)
        - detect fill values within crop region (hard error)
        - verify and convert units to contract
        - no multi-file coverage logic (Fortran handles compositing)
 
-   MetInterrogator(NetCDFInterrogator)
+   MetInspector(NetCDFInspector)
        - check wind_u, wind_v, pressure present and on same grid/time axis
        - convert units to contract
        - decode CF time to seconds from offset
@@ -467,11 +467,11 @@ Known technical debt
 
 -  ``util.get_netcdf_names`` (in ``util.py``) remains a parallel
    implementation of variable name discovery alongside
-   ``NetCDFInterrogator``. ``Storm.write_data`` now uses
-   ``MetInterrogator`` for NetCDF met forcing (format 2), but falls back
+   ``NetCDFInspector``. ``Storm.write_data`` now uses
+   ``MetInspector`` for NetCDF met forcing (format 2), but falls back
    to ``util.get_netcdf_names`` for variable name discovery when no
    explicit ``var_mapping`` is provided. Full consolidation -- making
-   ``util.get_netcdf_names`` delegate to ``NetCDFInterrogator`` and
+   ``util.get_netcdf_names`` delegate to ``NetCDFInspector`` and
    removing the duplicate -- remains a TODO.
 -  WRF raw output requires ``MetPreprocessor`` for string-time decoding
    (``Times`` character array, not a numeric CF time variable) and
@@ -484,13 +484,13 @@ Adding a new met forcing field (e.g. precipitation)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Add the role and unit to ``GEOCLAW_NETCDF_UNITS`` in ``units.py``
-2. Add detection logic to ``MetInterrogator`` for the new variable
+2. Add detection logic to ``MetInspector`` for the new variable
 3. ``DescriptorWriter`` requires no change -- new ``&variable_info``
-   blocks are written automatically for any role the interrogator
+   blocks are written automatically for any role the inspector
    returns
 4. Add the Fortran reader logic in the storm NetCDF module to consume
    the new ``geoclaw_role`` value
-5. Add unit tests in ``tests/netcdf/test_met_interrogator.py``
+5. Add unit tests in ``tests/netcdf/test_met_inspector.py``
 6. Add a regression test in the appropriate storm surge example
 
 Test structure
@@ -500,9 +500,9 @@ Test structure
 
    tests/netcdf/                        unit tests for netcdf_utils.py
        conftest.py                      in-memory NetCDF fixtures
-       test_base_interrogator.py
-       test_topo_interrogator.py
-       test_met_interrogator.py
+       test_base_inspector.py
+       test_topo_inspector.py
+       test_met_inspector.py
        test_descriptor_writer.py
        test_cf_normalizer.py
 
@@ -521,19 +521,19 @@ Next steps
 ----------
 
 -  **Consolidate util.get_netcdf_names**: ``Storm.write_data`` now
-   calls ``MetInterrogator`` and ``DescriptorWriter`` for NetCDF met
+   calls ``MetInspector`` and ``DescriptorWriter`` for NetCDF met
    forcing; the remaining step is to make ``util.get_netcdf_names``
-   delegate to ``NetCDFInterrogator`` and remove the duplicate discovery
+   delegate to ``NetCDFInspector`` and remove the duplicate discovery
    logic in ``storm.py``
 -  **WRF support**: implement ``MetPreprocessor`` to handle string-time
    axis and curvilinear grid; the skip-marked test stub in
    ``test_storm.py`` documents the expected interface
 -  **Precipitation field**: reserved in ``GEOCLAW_NETCDF_UNITS``, add
-   ``MetInterrogator`` detection and Fortran consumer
+   ``MetInspector`` detection and Fortran consumer
 -  **Friction field**: same pattern as precipitation
 -  **CLI tool**: expose ``CFNormalizer`` as a command-line utility for
    users who want to check or repair their NetCDF files before running
    GeoClaw
 -  **Duplicate code audit**: other places in the GeoClaw codebase that
    do ad-hoc NetCDF variable discovery should be identified and migrated
-   to ``NetCDFInterrogator``
+   to ``NetCDFInspector``
