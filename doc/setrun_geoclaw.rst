@@ -155,26 +155,88 @@ See :ref:`topo` for more information about specifying topography (and
 bathymetry) data files in GeoClaw.
 
 
-.. attribute:: rundata.topo_data.topofiles : list of lists
+.. attribute:: rundata.topo_data.topofiles : list
 
-   *topofiles* should be a list of the form *[file1info, file2info, etc.]*
-   where each element is itself a list of the form 
+   A list of topography file entries.  The preferred form uses
+   :class:`~clawpack.geoclaw.topotools.Topography` objects::
 
-     [topotype, fname]
+      from clawpack.geoclaw.topotools import Topography
 
-   with values
+      t = Topography()
+      t.path = 'etopo1.tt2'
+      t.topo_type = 2
+      rundata.topo_data.topofiles.append(t)
 
-     *topotype* : integer
+   .. deprecated::
+      The ``[topotype, fname]`` list format is deprecated.  It still works
+      but emits a ``DeprecationWarning``.  Use ``Topography`` objects as
+      shown above.
 
-       1,2 or 3 depending on the format of the file (see :ref:`topo`).
+   **Note:** Starting in v5.8.0 implicitly specifying a flag region for
+   AMR is no longer supported in the specification of a topo file.
+   For more about controlling AMR in various regions, see :ref:`flagregions`.
 
-     *fname* : string
+   See :ref:`topo` for information about the topo file formats
+   (``topo_type`` values 2, 3, 4).
 
-       the name of the topo file.
+   See :ref:`topo_order` for how priority is determined when topo files
+   overlap, and :ref:`topodata_format` for the ``topo.data`` file format.
 
-    **Note:** Starting in v5.8.0 implicitly specifying a flag region for
-    AMR is no longer supported in the specification of a topo file.
-    For more about controlling AMR in various regions, see :ref:`flagregions`.
+.. _setrun_topo_preprocessing:
+
+Topography preprocessing attributes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Each :class:`~clawpack.geoclaw.topotools.Topography` entry in ``topofiles``
+supports seven preprocessing attributes that are applied automatically when
+the file is loaded by :meth:`~clawpack.geoclaw.topotools.Topography.read`.
+Set them on the object before appending to ``topofiles``:
+
++----------------+----------------+-----------+-----------------------------------------------+
+| Attribute      | Type           | Default   | Description                                   |
++================+================+===========+===============================================+
+| ``crop_extent``| list or None   | ``None``  | ``[x1, x2, y1, y2]`` crop region.            |
++----------------+----------------+-----------+-----------------------------------------------+
+| ``coarsen``    | int            | ``1``     | Stride-subsampling factor (1 = no coarsen).  |
++----------------+----------------+-----------+-----------------------------------------------+
+| ``buffer``     | int            | ``0``     | Grid-point margin outside crop region.        |
++----------------+----------------+-----------+-----------------------------------------------+
+| ``align``      | tuple or None  | ``None``  | ``(x, y)`` alignment for coarsened grids.    |
++----------------+----------------+-----------+-----------------------------------------------+
+| ``x_shift``    | float          | ``0.0``   | Constant added to all x coordinates.          |
++----------------+----------------+-----------+-----------------------------------------------+
+| ``z_shift``    | float          | ``0.0``   | Constant added to non-missing Z values.       |
++----------------+----------------+-----------+-----------------------------------------------+
+| ``negate_z``   | bool           | ``False`` | If ``True``, flip the sign of all Z values.  |
++----------------+----------------+-----------+-----------------------------------------------+
+
+.. note::
+
+   **Non-obvious behaviors:**
+
+   - ``crop_extent`` is a preprocessing input. It is distinct from
+     ``Topography.extent``, which is a read-only property returning the
+     spatial bounds of the already-loaded data.
+
+   - ``buffer`` is in grid points, not degrees.  Float values are truncated
+     via ``int()``, so ``buffer=0.5`` is equivalent to ``buffer=0``.
+
+   - ``negate_z`` is independent of the ``topo_type < 0`` sign convention.
+     If both ``topo_type < 0`` **and** ``negate_z=True`` are active, two
+     sign flips are applied and the result is the original Z (net identity).
+
+   - ``coarsen`` uses stride subsampling (every nth point), not cell
+     averaging.
+
+Example using several attributes::
+
+   t = Topography()
+   t.path = 'gebco_2023.nc'
+   t.topo_type = 4
+   t.crop_extent = [-100., -60., 10., 50.]
+   t.coarsen = 2
+   t.z_shift = 10.0
+   rundata.topo_data.topofiles.append(t)
 
 .. attribute:: rundata.dtopo_data.dtopofiles : list of lists
 

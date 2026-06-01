@@ -49,6 +49,7 @@ More will eventually appear in the :ref:`apps`.
    topo
    grid_registration
    topo_order
+   topodata_format
    topotools
    dtopo
    kmltools_module

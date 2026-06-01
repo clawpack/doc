@@ -64,6 +64,47 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+- **Topography preprocessing attributes.**
+  :class:`~clawpack.geoclaw.topotools.Topography` now supports seven
+  preprocessing attributes (``crop_extent``, ``coarsen``, ``buffer``,
+  ``align``, ``x_shift``, ``z_shift``, ``negate_z``) that are applied
+  automatically when :meth:`~clawpack.geoclaw.topotools.Topography.read`
+  loads a file.  See :ref:`setrun_topo_preprocessing` for the full table
+  and :ref:`topotools` for usage examples and operation order.
+
+- **CF-aware NetCDF reading.**
+  NetCDF topography files (``topo_type=4``) are now read via
+  :class:`~clawpack.geoclaw.netcdf_utils.TopoInspector`, which auto-detects
+  coordinate variable names using CF conventions (``standard_name``, ``axis``,
+  and common fallback names).  Files with non-standard coordinate names and
+  non-standard dimension orders are handled automatically.
+  :meth:`~clawpack.geoclaw.topotools.Topography.read_header` also uses CF
+  detection for type-4 files, enabling a lazy-load pattern where coordinates
+  are available without loading the elevation array.
+  See :ref:`topotools` for an example.
+
+- **Python-owned priority ordering.**
+  Topography files in ``topo.data`` are now sorted entirely in Python by
+  :meth:`~clawpack.geoclaw.data.TopographyData._compute_priority_order`
+  before writing.  The first file listed in ``topo.data`` is assigned rank 1
+  (highest priority) by Fortran; no Fortran-side sorting occurs.
+  ``rundata.topo_data.override_order = True`` preserves user-specified list
+  order; when used, the finest (highest-resolution) file should be listed
+  first.  See :ref:`topo_order`.
+
+- **topo_type=1 deprecated.**
+  Reading and writing ``topo_type=1`` (``x y z`` one-point-per-line ASCII)
+  now emit a ``DeprecationWarning``.  Setting any preprocessing attribute
+  before reading a type-1 file raises ``NotImplementedError``.  To convert::
+
+      t = Topography()
+      t.read('old.tt1', topo_type=1)   # DeprecationWarning
+      t.write('new.tt2', topo_type=2)
+
+- **New** ``topo.data`` **format.**
+  Each per-file block in ``topo.data`` now contains 9 lines (up from 2),
+  recording all preprocessing attributes.  See :ref:`topodata_format` for
+  the complete format specification.
 
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.14.0...master>`_
 
