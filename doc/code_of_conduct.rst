@@ -37,7 +37,7 @@ How To Report
 
 If you feel that the Code of Conduct has been violated, feel free to submit a
 report, by using the form: `NumFOCUS Code of Conduct Reporting Form
-<https://numfocus.typeform.com/to/ynjGdT?typeform-source=numfocus.org>`_. 
+<https://forms.monday.com/forms/f130e8cddb99568fa86cf077b8912a60?r=use1>`_. 
 
 Who Will Receive Your Report
 ----------------------------
