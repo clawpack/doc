@@ -23,8 +23,10 @@ then the finer one is used.
 
 This ordering is computed entirely in Python by
 ``TopographyData._compute_priority_order`` and written into ``topo.data``
-before the Fortran run.  The first file listed in ``topo.data`` is assigned
-rank 1 (highest priority) by Fortran.  No Fortran-side sorting occurs.
+before the Fortran run.  Files are written coarsest-first (finest last),
+matching the traditional GeoClaw listing order; the **last** file listed in
+``topo.data`` is assigned rank 1 (highest priority) by Fortran.  No
+Fortran-side sorting occurs.
 
 This usually works fine but may not always be what is wanted. In particular
 there may be two DEMs at essentially the same resolution, but one is a more
@@ -36,7 +38,7 @@ resolutions are essentially identical, `dx*dy` maybe be slightly different
 (perhaps at the roundoff level) and so it could be that the older one is viewed
 as "finer" and would be used preferentially.  Even if `dx*dy` is exactly the
 same, it is not obvious which one would be used in GeoClaw.
-(The one listed first in `rundata.topo_data.topofiles`
+(The one listed last in `rundata.topo_data.topofiles`
 is given higher priority in this case, with a relative tolerance of
 0.001 used to judge whether the resolutions are the same).
 
@@ -55,8 +57,8 @@ If `setrun.py` specifies::
 
 then the preference order is no longer based on the computed resolution.
 Instead the list order in `rundata.topo_data.topofiles` is used as-is: the
-first file in the list is given the highest priority (rank 1).  Normally you
-should list the finest (highest-resolution) DEM first and the coarsest last,
+last file in the list is given the highest priority (rank 1).  Normally you
+should list the coarsest DEM first and the finest (highest-resolution) last,
 to reproduce the default behavior.  This allows precise specification of the
 order of preference when automatic sorting by resolution is not appropriate.
 

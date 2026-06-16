@@ -86,11 +86,12 @@ Changes to geoclaw
 - **Python-owned priority ordering.**
   Topography files in ``topo.data`` are now sorted entirely in Python by
   :meth:`~clawpack.geoclaw.data.TopographyData._compute_priority_order`
-  before writing.  The first file listed in ``topo.data`` is assigned rank 1
-  (highest priority) by Fortran; no Fortran-side sorting occurs.
-  ``rundata.topo_data.override_order = True`` preserves user-specified list
-  order; when used, the finest (highest-resolution) file should be listed
-  first.  See :ref:`topo_order`.
+  before writing.  Files are written coarsest-first (finest last), matching
+  the traditional GeoClaw listing order; the last file listed in ``topo.data``
+  is assigned rank 1 (highest priority) by Fortran, with no Fortran-side
+  sorting.  ``rundata.topo_data.override_order = True`` preserves
+  user-specified list order; when used, the finest (highest-resolution) file
+  should be listed last.  See :ref:`topo_order`.
 
 - **topo_type=1 deprecated.**
   Reading and writing ``topo_type=1`` (``x y z`` one-point-per-line ASCII)

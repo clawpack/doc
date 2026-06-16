@@ -54,8 +54,8 @@ Global Header (3 lines)
 Per-File Block (9 lines, all types)
 ------------------------------------
 
-One block follows for each topography file, in priority order (finest
-resolution first; see :ref:`priority_convention` below).
+One block follows for each topography file, in priority order (coarsest
+resolution first, finest last; see :ref:`priority_convention` below).
 
 ::
 
@@ -190,17 +190,20 @@ Type-4 NetCDF file, with crop and negate
 Priority Convention
 -------------------
 
-The first file block in ``topo.data`` is assigned **rank 1** by Fortran
+The **last** file block in ``topo.data`` is assigned **rank 1** by Fortran
 (highest priority in overlap resolution).  Fortran stores this mapping in
-``mtopoorder``: ``mtopoorder(1) = 1`` means file-index 1 → rank 1.
+``mtopoorder`` using the reversed assignment ``mtopoorder(i) = mtopofiles+1-i``,
+so the last file listed maps to rank 1.
 
 Python's :meth:`~clawpack.geoclaw.data.TopographyData._compute_priority_order`
-sorts files by cell area ascending (finest = smallest ``dx * dy``) before
-writing, so the finest file is automatically written first.
+sorts files by cell area descending (coarsest = largest ``dx * dy`` first,
+finest last) before writing, so the finest file is automatically written
+last.  This matches the traditional GeoClaw convention of listing topography
+files from coarsest to finest.
 
 To override this sort and use your own ordering, set
 ``TopographyData.override_order = True``.  When ``True``, you are responsible
-for placing the finest file first in ``topofiles``.
+for placing the finest file last in ``topofiles``.
 
 .. warning::
    ``override_order`` is a Python-only attribute.  It is **not** written to
