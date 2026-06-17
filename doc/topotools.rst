@@ -75,8 +75,53 @@ to determine file resolution without loading elevation data.
        t.write('new.tt2', topo_type=2)  # save as type 2
 
    Genuinely unstructured (scattered) point data cannot be converted this
-   way and must be gridded externally (e.g. ``scipy.interpolate``, GMT)
-   before use in GeoClaw.
+   way.  Either grid it externally (e.g. ``scipy.interpolate``, GMT) or use
+   :meth:`~clawpack.geoclaw.topotools.Topography.interp_unstructured` (see
+   `Gridding unstructured (scattered) data`_ below).
+
+
+Gridding unstructured (scattered) data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+GeoClaw's solvers require topography on a regular, logically rectangular grid
+(Cartesian x-y in meters, or lon-lat -- see ``coordinate_system`` in
+:ref:`setrun_geoclaw`), but survey or sounding data often comes as scattered
+``(x, y, z)`` points.  A
+:class:`~clawpack.geoclaw.topotools.Topography` constructed with
+``unstructured=True`` holds such points in its ``x``, ``y``, and ``z``
+arrays, and
+:meth:`~clawpack.geoclaw.topotools.Topography.interp_unstructured`
+interpolates them onto a regular grid, optionally filling gaps from one or
+more coarser (structured or unstructured) "fill" topographies:
+
+.. code-block:: python
+
+   from clawpack.geoclaw.topotools import Topography
+
+   # Scattered survey points (x, y, z)
+   survey = Topography(unstructured=True)
+   survey.x = x_points
+   survey.y = y_points
+   survey.z = z_values
+
+   # A coarser regional DEM used to fill gaps between survey points
+   regional = Topography(path='regional.tt3', topo_type=3)
+   regional.read()
+
+   survey.interp_unstructured(regional, extent=[x1, x2, y1, y2],
+                              proximity_radius=100.0)
+   survey.unstructured        # now False -- it holds a regular grid
+   survey.write('combined.tt3', topo_type=3)
+
+The grid spacing is taken from the minimum spacing of the scattered points
+(bounded below by ``delta_limit`` meters) unless set explicitly with
+``delta``.  A fill point is used only where it lies inside ``extent``, carries
+valid data, and is more than ``proximity_radius`` meters from every scattered
+point, so the higher-resolution survey data is preferred wherever it exists.
+Missing fill values (``NaN`` in memory, or a numeric ``no_data_value``) are
+dropped.  See
+:meth:`~clawpack.geoclaw.topotools.Topography.interp_unstructured` for the
+full set of parameters.
 
 
 .. toctree::

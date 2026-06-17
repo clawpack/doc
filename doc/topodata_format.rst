@@ -282,5 +282,8 @@ Type-1 files (``x y z`` ASCII, one point per line) are still readable with a
     t.read('old_file.tt1', topo_type=1)   # DeprecationWarning
     t.write('new_file.tt2', topo_type=2)  # convert to type 2
 
-For genuinely unstructured (scattered) point data, use
-``scipy.interpolate``, GMT, or a similar tool to grid the data before use.
+For genuinely unstructured (scattered) point data, grid it onto a regular,
+logically rectangular grid before use -- either with an external tool
+(``scipy.interpolate``, GMT) or with
+:meth:`~clawpack.geoclaw.topotools.Topography.interp_unstructured` (see
+:ref:`topotools`).
