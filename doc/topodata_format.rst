@@ -51,7 +51,7 @@ Global Header (3 lines)
    sorts the files before writing but is **not** written to ``topo.data``.
 
 
-Per-File Block (9 lines, all types)
+Per-File Block (10 lines, all types)
 ------------------------------------
 
 One block follows for each topography file, in priority order (coarsest
@@ -66,6 +66,7 @@ resolution first, finest last; see :ref:`priority_convention` below).
     <buffer>                    # buffer
     <x_align> <y_align>         # align [x y]
     <x_shift>                   # x_shift
+    <y_shift>                   # y_shift
     <z_shift>                   # z_shift
     T|F                         # negate_z
 
@@ -95,6 +96,11 @@ resolution first, finest last; see :ref:`priority_convention` below).
 
 ``x_shift``
     Float added to all x coordinates after loading (``0`` = no shift).
+    A registration offset: ``x_domain = x_file + x_shift``.
+
+``y_shift``
+    Float added to all y coordinates after loading (``0`` = no shift),
+    the y-direction counterpart of ``x_shift``.
 
 ``z_shift``
     Float added to all non-missing elevation values (``0`` = no shift).
@@ -108,26 +114,36 @@ resolution first, finest last; see :ref:`priority_convention` below).
 NetCDF Descriptor Block (type 4 only)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For ``topo_type = 4`` files, the 9-line block is followed immediately by a
+For ``topo_type = 4`` files, the 10-line block is followed immediately by a
 CF descriptor block.  The descriptor is a sequence of ``key=value`` lines
 terminated by a blank line, parsed by Fortran's ``read_netcdf_descriptor``.
+The coordinate keys are projection-agnostic (``x_name``/``y_name``, not
+``lon``/``lat``); only the ``lon_wrap_offset`` longitude wrap is geographic.
 Example::
 
     var_name=elevation
-    lon_name=lon
-    lat_name=lat
-    lat_order=S_to_N
-    dim_order=lat,lon
-    lon_convention=180
-    lon_offset=0.0
-    source_units=m
+    x_name=lon
+    y_name=lat
+    y_increasing=True
+    dim_order=y,x
+    lon_wrap_offset=0.0
     fill_action=abort
 
-``lon_offset``
+``x_name`` / ``y_name``
+    Names of the x and y coordinate variables in the file (auto-detected by
+    the inspector via CF ``axis``/``standard_name``/common names).
+
+``y_increasing``
+    ``True`` if the y coordinate increases with array index, else ``False``.
+    Informational: the y-axis direction is re-detected from the coordinates
+    at read time.
+
+``lon_wrap_offset``
     Scalar added by Fortran to file longitudes to convert them to domain
-    coordinates: ``x_domain = x_file + lon_offset``.  For files using the
-    ``[0, 360]`` convention against a ``[-180, 180]`` domain, this is
-    ``-360.0``.  Use
+    coordinates: ``x_domain = x_file + lon_wrap_offset``.  For a geographic
+    file using the ``[0, 360]`` convention against a ``[-180, 180]`` domain,
+    this is ``-360.0``; for a non-geographic (projected) x axis it is ``0.0``
+    (the wrap is skipped).  Use
     :meth:`TopoInspector.topo_entries()
     <clawpack.geoclaw.netcdf_utils.TopoInspector.topo_entries>` to compute
     the correct value automatically.
@@ -152,6 +168,7 @@ Type-2 ASCII file, no preprocessing
     0                          # buffer
     0. 0.                      # align [x y]
     0                          # x_shift
+    0                          # y_shift
     0                          # z_shift
     F                          # negate_z
 
@@ -171,17 +188,16 @@ Type-4 NetCDF file, with crop and negate
     2                          # buffer
     0. 0.                      # align [x y]
     0                          # x_shift
+    0                          # y_shift
     0                          # z_shift
     T                          # negate_z
 
     var_name=elevation
-    lon_name=lon
-    lat_name=lat
-    lat_order=S_to_N
-    dim_order=lat,lon
-    lon_convention=180
-    lon_offset=0.0
-    source_units=m
+    x_name=lon
+    y_name=lat
+    y_increasing=True
+    dim_order=y,x
+    lon_wrap_offset=0.0
     fill_action=abort
 
 

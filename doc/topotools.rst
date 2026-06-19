@@ -62,6 +62,26 @@ This pattern is also used internally by ``TopographyData._compute_priority_order
 to determine file resolution without loading elevation data.
 
 
+Vertical datum metadata
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:class:`~clawpack.geoclaw.topotools.Topography` and
+:class:`~clawpack.geoclaw.dtopotools.DTopography` carry an optional ``datum``
+attribute recording the vertical reference of the elevation/deformation data
+(e.g. ``'MSL'`` or ``'NAVD88'``).  It defaults to ``None``, is populated from a
+NetCDF ``vertical_datum`` (or ``datum``) attribute on read, and is written
+back out on NetCDF write (``topo_type=4`` / ``dtopo_type=4``).  ASCII formats
+have no datum field, so the value is not persisted for types 1/2/3.
+
+The datum is **informational only** -- GeoClaw performs no vertical-datum
+transformation and always uses the Z values as given.  As a guard, both
+:meth:`~clawpack.geoclaw.data.TopographyData.write` (when producing
+``topo.data``) and :meth:`~clawpack.geoclaw.data.DTopoData.write` (``dtopo.data``)
+issue a warning if the files they are given carry more than one distinct
+datum, since mixing vertical references without converting between them is a
+likely error.
+
+
 .. deprecated::
    ``topo_type=1`` (three-column ``x y z`` ASCII, one point per line) is
    deprecated.  Reading emits a ``DeprecationWarning``; writing also emits a
