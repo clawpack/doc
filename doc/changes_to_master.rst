@@ -21,6 +21,19 @@ the menu on the left hand side of this page.
 Changes that are not backward compatible
 ----------------------------------------
 
+- **NetCDF input units are now required and enforced (geoclaw).**  NetCDF
+  topography and dtopo elevation must declare CF ``units`` of meters, and
+  gridded meteorological forcing must be wind ``m/s`` / pressure ``Pa``.  A
+  missing ``units`` attribute, or a non-contract unit (e.g. ``km``, ``hPa``,
+  ``mbar``, ``knots``), now raises a ``ValueError`` instead of being assumed
+  or silently converted -- GeoClaw does not convert units on the read path.
+  Pre-convert to the contract units, or pass ``assume_units``
+  (``TopoInspector`` / ``Topography.read`` via ``nc_params``, or
+  ``MetInspector(assume_units=True)``) for a file known to be in contract
+  units but lacking the attribute.  Met NetCDF forcing additionally requires
+  a CF *absolute* datetime time axis; a bare numeric time axis is rejected.
+  See :ref:`netcdf_input`.
+
 
 General changes
 ---------------
@@ -106,6 +119,27 @@ Changes to geoclaw
   Each per-file block in ``topo.data`` now contains 9 lines (up from 2),
   recording all preprocessing attributes.  See :ref:`topodata_format` for
   the complete format specification.
+
+- **dtopo NetCDF (**\ ``dtopo_type=4``\ **).**
+  :class:`~clawpack.geoclaw.dtopotools.DTopography` reads and writes
+  CF-compliant NetCDF dtopo files.  The optional ``time_reference`` attribute
+  selects a CF datetime time axis (``units = "seconds since <ref>"``) that a
+  plain ``xarray.open_dataset`` decodes to ``datetime64``; without it a bare
+  ``units = "seconds"`` (simulation-relative) axis is written.  The reader
+  scales the time axis by its CF ``units``, fixing an earlier bug where a
+  ``"hours"``/``"minutes"`` axis was misread as seconds.  See
+  :ref:`netcdf_input` and :ref:`dtopo_formats`.
+
+- **NetCDF write dtype control.**
+  ``Topography.write(topo_type=4, z_dtype=...)`` and
+  ``DTopography.write(dtopo_type=4, dz_dtype=...)`` override the on-disk
+  elevation/deformation dtype (default ``"float32"``; pass ``"float64"`` for
+  full double precision).
+
+- **Robust NetCDF file opening.**
+  A NetCDF backend engine is now selected explicitly, so a valid file opens
+  even when its name uses a non-standard extension (e.g. ``.dtt3``) that
+  xarray's extension-based engine guessing would not recognize.
 
 See `geoclaw diffs <https://github.com/clawpack/geoclaw/compare/v5.14.0...master>`_
 

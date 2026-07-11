@@ -11,9 +11,9 @@ netcdf_utils module for NetCDF input
 
 The ``netcdf_utils`` module provides the Python layer for reading NetCDF
 topography and meteorological forcing files in GeoClaw.  It handles CF
-attribute parsing, coordinate convention detection, unit conversion, and
-descriptor writing so that Fortran only needs to open the file and read
-pre-validated indices.
+attribute parsing, coordinate convention detection, unit verification
+(non-contract units are rejected, not converted), and descriptor writing so
+that Fortran only needs to open the file and read pre-validated indices.
 
 The main classes are:
 
@@ -22,8 +22,8 @@ The main classes are:
 - :class:`~clawpack.geoclaw.netcdf_utils.TopoInspector` — topography
   subclass; fill-value checking within the crop region, unit enforcement.
 - :class:`~clawpack.geoclaw.netcdf_utils.MetInspector` — meteorological
-  subclass; wind/pressure variable discovery, CF time decoding, unit
-  conversion.
+  subclass; wind/pressure variable discovery, CF datetime decoding, unit
+  verification (non-contract or missing units are rejected).
 - :class:`~clawpack.geoclaw.netcdf_utils.CFNormalizer` — adds or repairs
   CF attributes in place without modifying data values.
 - :class:`~clawpack.geoclaw.netcdf_utils.DescriptorWriter` — writes the

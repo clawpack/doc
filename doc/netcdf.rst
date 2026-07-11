@@ -1,23 +1,10 @@
-.. toctree::
-   :maxdepth: 2
-
-   user_guide
-   developer_reference
-   descriptor_format
-   unit_contract
-   coordinate_normalization
-   technical_debt
-   adding_met_field
-   test_structure
-   next_steps
-
 .. _netcdf_input:
 
 GeoClaw NetCDF Input System
 ===========================
 
 This document covers the NetCDF input pipeline introduced in the
-``refactor-netcdf-support`` PR (VERSION ?5.15?). It has two sections: a user
+``refactor-netcdf-support`` PR (first released after v5.14.0). It has two sections: a user
 guide for scientists who want to use NetCDF files as input, and a developer
 reference for those working on the implementation.
 
@@ -46,13 +33,24 @@ What GeoClaw handles automatically
    resolved automatically. If a fill value is found within your
    simulation domain, GeoClaw will abort with an error -- this is
    intentional, as missing bathymetry is a silent correctness hazard.
+-  File extension: the NetCDF backend engine is selected explicitly, so a
+   valid NetCDF file opens even when its name uses a non-standard
+   extension (e.g. ``.dtt3``) that xarray's extension-based engine
+   guessing would otherwise fail to recognize.
 
 What your file must provide
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 -  A 2D variable containing elevation in **meters** (positive up,
-   negative for ocean). If your file uses feet or another unit, use
-   ``CFNormalizer`` to convert before running (see below).
+   negative for ocean), carrying a CF ``units`` attribute equal to meters
+   (e.g. ``units = "m"``).  Units are **required** and never assumed: a
+   variable with no ``units`` attribute, or with a non-meter unit (even a
+   recognized one such as ``km``), is **rejected** with an error rather
+   than being silently misread -- GeoClaw does not convert units on the
+   read path.  Pre-convert non-meter data to meters first.  For a file
+   that is genuinely in meters but merely omits the attribute, you can opt
+   in explicitly by passing ``assume_units='m'`` to ``TopoInspector`` (or
+   ``nc_params={'assume_units': 'm'}`` to ``Topography.read``).
 -  1D coordinate variables for latitude and longitude with recognizable
    names (``lat``/``latitude``/``y`` and ``lon``/``longitude``/``x`` are
    all detected). Curvilinear (2D coordinate) grids are not currently
@@ -142,6 +140,56 @@ If you are unsure whether your file will be read correctly, the
 attributes, and resolves ``_FillValue``/``missing_value`` conflicts. It
 does not resample or reproject.
 
+Writing NetCDF topo files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A ``topotools.Topography`` object can be written as a CF-compliant NetCDF
+file (``topo_type=4``) that GeoClaw reads back through the same descriptor
+mechanism::
+
+   topo.write('bathy.nc', topo_type=4)                     # elevation float32
+   topo.write('bathy.nc', topo_type=4, z_dtype='float64')  # full precision
+
+The elevation variable is written with ``units = "m"``.  It is stored on
+disk as ``float32`` by default -- sub-millimeter precision for Earth
+topography (``abs(Z) < 10000`` m) at half the file size -- and
+``z_dtype='float64'`` selects full double precision.
+
+--------------
+
+Seafloor deformation (dtopo) from NetCDF
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Time-dependent seafloor deformation (dtopo) can also be read from and
+written to CF-compliant NetCDF using ``dtopo_type=4`` (see :ref:`dtopo`):
+
+.. code:: python
+
+   from clawpack.geoclaw import dtopotools
+   dtopo = dtopotools.DTopography('deformation.nc', dtopo_type=4)   # read
+   dtopo.write('out.nc', dtopo_type=4)                             # write
+   dtopo.write('out.nc', dtopo_type=4, dz_dtype='float64')         # full precision
+
+As with topography, the deformation is in meters and stored ``float32`` by
+default (pass ``dz_dtype='float64'`` for full double precision).
+
+**Time axis.**  By default the time coordinate is written as a bare CF
+duration, ``units = "seconds"``, holding simulation-relative times.  If you
+set the optional ``time_reference`` attribute to a real-world epoch (for
+example the earthquake origin time), the file is instead written with a CF
+datetime axis, ``units = "seconds since <time_reference>"``::
+
+   dtopo.time_reference = '2011-03-11T05:46:00'
+   dtopo.write('out.nc', dtopo_type=4)
+
+A datetime axis is more interoperable (a plain ``xarray.open_dataset`` or a
+GIS tool decodes it to real timestamps) and round-trips back to the same
+simulation-relative times.  On read, the time axis is interpreted using its
+CF ``units``, so an axis in ``"minutes"``, ``"hours"``, or a
+``"<unit> since <date>"`` datetime is scaled to seconds correctly rather
+than assumed to already be in seconds.  Unlike met forcing, a bare
+``"seconds"`` (relative) dtopo axis is allowed.
+
 --------------
 
 Storm surge met forcing from NetCDF
@@ -164,21 +212,31 @@ curvilinear grid and string-encoded time axis).
 Required variables and units
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-GeoClaw expects the following in the NetCDF file **after any unit
-conversion** (conversion happens automatically during Python
-preprocessing):
+GeoClaw expects the following variables in the NetCDF file, already in
+the contract units shown (units are verified, not converted):
 
-============================= ================================
+============================= ==================================
 Variable                      Unit
-============================= ================================
+============================= ==================================
 Wind (u-component, eastward)  m/s
 Wind (v-component, northward) m/s
 Surface pressure              Pa
-Time                          seconds from user-defined offset
-============================= ================================
+Time                          seconds since a reference date
+============================= ==================================
 
-If your file uses hPa/mbar for pressure or knots for wind,
-``MetInspector`` will convert automatically.
+Units are **required** and never assumed.  A variable with no ``units``
+attribute, or in a non-contract unit (e.g. ``hPa``/``mbar`` for pressure
+or ``knots`` for wind), is **rejected** with an error rather than being
+converted -- GeoClaw does not convert units on the read path.  Pre-convert
+such a file to ``m/s`` / ``Pa`` first (or, for a file known to be in
+contract units but lacking the attributes, pass ``assume_units=True`` to
+``MetInspector``).  The time coordinate must be an **absolute time in
+seconds** -- CF ``units`` of the form ``"seconds since <date>"`` (e.g.
+``"seconds since 2020-01-01"``).  Fortran reads the raw time values as
+integer seconds and does **not** scale by the CF unit, so a file whose time
+is in ``hours``/``days`` since a reference (such as a raw ERA5 file) must be
+converted to ``"seconds since ..."`` first; a bare numeric/duration time
+axis with no reference date is rejected outright (see `Time handling`_ below).
 
 Registering a NetCDF storm file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -311,6 +369,17 @@ days→seconds) is performed in Fortran: the descriptor stores
 ``write_data`` passes ``time_reference=storm.time_offset`` to
 ``MetInspector`` automatically; no additional user action is needed.
 
+The met time axis must be an absolute time in **seconds** -- CF ``units`` of
+the form ``"seconds since <date>"`` (e.g. ``"seconds since 2020-01-01"``),
+which xarray decodes to datetimes for the offset computation above.  Because
+Fortran reads the raw time values as integer seconds and does **not** scale
+by the CF unit, a file storing time in ``hours``/``days`` since a reference
+(such as a raw ERA5 file) must be converted to ``"seconds since ..."`` first.
+A bare numeric/duration axis with no reference date is **rejected** outright.
+This differs from dtopo NetCDF, where Python collapses the time axis to
+``(t0, dt)`` in seconds and therefore any CF duration or datetime axis is
+accepted (see `Seafloor deformation (dtopo) from NetCDF`_).
+
 Longitude convention
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -331,7 +400,8 @@ Architecture overview
 The system has a strict Python/Fortran split:
 
 **Python** handles: file inspection, CF attribute parsing, coordinate
-convention detection, fill value resolution, unit conversion,
+convention detection, fill value resolution, unit verification
+(non-contract units are rejected, not converted),
 ``nc_time_offset`` computation (elapsed seconds from ``storm.time_offset``
 to the first record), crop bound validation, and descriptor writing.
 
@@ -360,13 +430,13 @@ Class hierarchy (``netcdf_utils.py``)
 
    TopoInspector(NetCDFInspector)
        - detect fill values within crop region (hard error)
-       - verify and convert units to contract
+       - verify units against the contract (reject non-contract; no conversion)
        - no multi-file coverage logic (Fortran handles compositing)
 
    MetInspector(NetCDFInspector)
        - check wind_u, wind_v, pressure present and on same grid/time axis
-       - convert units to contract
-       - decode CF time to seconds from offset
+       - verify units against the contract (reject non-contract; no conversion)
+       - decode CF datetime axis to seconds from offset (reject bare-numeric)
        - detect ensemble/member dimensions (hard error if non-singleton)
        - partial domain coverage is allowed (Fortran fills edges)
 
@@ -389,10 +459,10 @@ Topo (lines in topo.data after topo_type)
 ::
 
    var_name       = z
-   lon_name       = longitude
-   lat_name       = latitude
-   lon_offset     = 0.0
-   lat_order      = S_to_N
+   x_name         = longitude
+   y_name         = latitude
+   lon_wrap_offset = 0.0
+   y_increasing   = True
    dim_order      = lat,lon
    fill_value     = -9999.0
    fill_action    = abort
@@ -401,28 +471,49 @@ Topo (lines in topo.data after topo_type)
 ``fill_action = abort`` is the only supported value for topography.
 ``crop_bounds`` is omitted if no crop is specified.
 
+dtopo (lines in dtopo.data after the per-file block)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+   var_name       = dz
+   x_name         = longitude
+   y_name         = latitude
+   time_name      = time
+   lon_wrap_offset = 0.0
+   y_increasing   = True
+   dim_order      = time,lat,lon
+   t0             = 0.0
+   dt             = 10.0
+
+``t0`` and ``dt`` give the first time and the uniform time step in simulation
+**seconds**; Python collapses the CF time axis to these (scaling by the file's
+CF ``units``), so Fortran never parses CF time for dtopo.  ``time_name`` is the
+name of the time coordinate in the file.
+
 Met forcing (body of \*.storm after format header)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 
-   # format: netcdf
    &file_info
-     source_file    = /path/to/forcing.nc
-     lon_name       = longitude
-     lat_name       = latitude
+     x_name         = longitude
+     y_name         = latitude
      time_name      = valid_time
      dim_order      = time,lat,lon
-     lon_convention = 360
-     lat_order      = S_to_N
+     lon_wrap       = 360
+     y_increasing   = True
      fill_value     = -9999.0
      fill_action    = warn
      time_offset    = 0.0
-     crop_bounds    = -100.0 -80.0 20.0 35.0
    /
    &variable_info  var_name=u10    geoclaw_role=wind_u    /
    &variable_info  var_name=v10    geoclaw_role=wind_v    /
    &variable_info  var_name=msl    geoclaw_role=pressure  /
+
+(``lon_wrap`` is written only for a geographic longitude axis; ``fill_value``
+only when the file declares one; ``crop_bounds`` is carried by the top-level
+``crop_extent`` line rather than the descriptor.)
 
 The ``&variable_info`` blocks use a manually parsed key=value format
 (not true repeated Fortran namelists) for compiler portability. Fortran
@@ -444,16 +535,19 @@ Defined in ``units.py``:
        "time":     "s",
    }
 
-All conversion happens in Python before the descriptor is written.
-Fortran trusts the descriptor and never checks units. If you add a new
-``geoclaw_role``, add its contract unit here first.
+Python verifies units against this contract and **rejects** files whose
+variables are in non-contract units or lack a ``units`` attribute; no unit
+conversion is performed on the read path.  Fortran trusts the descriptor
+and never checks units. If you add a new ``geoclaw_role``, add its contract
+unit here first.
 
 Fortran coordinate normalization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Fortran applies coordinate normalization via index arithmetic only -- no
-arrays are duplicated. The descriptor provides ``lon_convention`` and
-``lat_order``; the reader uses these to compute correct indices when
+arrays are duplicated. The descriptor provides the longitude-wrap field
+(``lon_wrap`` for met, ``lon_wrap_offset`` for topo) and the latitude order
+(``y_increasing``); the reader uses these to compute correct indices when
 calling ``nf90_get_var``. For crop bounds, ``start`` and ``count`` are
 computed from the coordinate arrays at runtime.
 
