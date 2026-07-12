@@ -21,18 +21,25 @@ the menu on the left hand side of this page.
 Changes that are not backward compatible
 ----------------------------------------
 
-- **NetCDF input units are now required and enforced (geoclaw).**  NetCDF
-  topography and dtopo elevation must declare CF ``units`` of meters, and
-  gridded meteorological forcing must be wind ``m/s`` / pressure ``Pa``.  A
-  missing ``units`` attribute, or a non-contract unit (e.g. ``km``, ``hPa``,
-  ``mbar``, ``knots``), now raises a ``ValueError`` instead of being assumed
-  or silently converted -- GeoClaw does not convert units on the read path.
-  Pre-convert to the contract units, or pass ``assume_units``
-  (``TopoInspector`` / ``Topography.read`` via ``nc_params``, or
-  ``MetInspector(assume_units=True)``) for a file known to be in contract
-  units but lacking the attribute.  Met NetCDF forcing additionally requires
-  a CF *absolute* datetime time axis; a bare numeric time axis is rejected.
-  See :ref:`netcdf_input`.
+- **NetCDF input units are now required, and recognized units are converted
+  automatically (geoclaw).**  NetCDF input variables must declare a CF
+  ``units`` attribute.  A variable already in the contract unit (topo/dtopo
+  ``m``, wind ``m/s``, pressure ``Pa``) passes through unchanged; a
+  *recognized* non-contract unit (e.g. ``km``/``cm``, ``hPa``/``mbar``,
+  ``knots``, or a ``"hours since ..."`` time axis) is now **converted
+  automatically** -- Python resolves it to a multiplicative scale factor that
+  Fortran applies on read.  A **missing** ``units`` attribute or an
+  **unrecognized** unit still raises a ``ValueError`` rather than being
+  silently misread (met forcing falls back to the storm format's documented
+  unit when the attribute is absent, e.g. NWS13/OWI pressure ``mbar``).  Pass
+  ``assume_units`` (``TopoInspector`` / ``Topography.read`` via ``nc_params``,
+  or ``MetInspector(assume_units=True)``) for a file that omits the attribute.
+  A resolved field is also magnitude-checked: a pressure field mislabeled
+  ``Pa`` but really ``hPa``/``mbar`` is auto-corrected with a warning, and a
+  physically implausible field raises (bypass with ``skip_sanity_check``).
+  Met NetCDF forcing requires a CF *absolute* datetime time axis; a bare
+  numeric time axis with no reference date is rejected.  See
+  :ref:`netcdf_input`.
 
 
 General changes
