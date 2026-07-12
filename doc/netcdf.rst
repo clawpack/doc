@@ -157,11 +157,21 @@ mechanism::
 
    topo.write('bathy.nc', topo_type=4)                     # elevation float32
    topo.write('bathy.nc', topo_type=4, z_dtype='float64')  # full precision
+   topo.write('bathy.nc', topo_type=4, compression=True)   # zlib-compressed
 
 The elevation variable is written with ``units = "m"``.  It is stored on
 disk as ``float32`` by default -- sub-millimeter precision for Earth
 topography (``abs(Z) < 10000`` m) at half the file size -- and
 ``z_dtype='float64'`` selects full double precision.
+
+Pass ``compression=True`` to zlib-compress the elevation variable (zlib level
+1 with the byte ``shuffle`` filter).  The compressed file is a normal,
+randomly-readable NetCDF -- the netCDF library decompresses on read, so no
+reader or Fortran change is needed -- and is typically much smaller,
+especially for sparse or smooth fields.  ``compression`` also accepts an
+integer zlib level (``1``--``9``) or a dict of encoding options for full
+control; the default ``None`` writes an uncompressed file, bit-identical to
+before.
 
 --------------
 
@@ -177,10 +187,14 @@ written to CF-compliant NetCDF using ``dtopo_type=4`` (see :ref:`dtopo`):
    dtopo = dtopotools.DTopography('deformation.nc', dtopo_type=4)   # read
    dtopo.write('out.nc', dtopo_type=4)                             # write
    dtopo.write('out.nc', dtopo_type=4, dz_dtype='float64')         # full precision
+   dtopo.write('out.nc', dtopo_type=4, compression=True)           # zlib-compressed
 
 As with topography, the deformation contract unit is meters and it is stored
 ``float32`` by default (pass ``dz_dtype='float64'`` for full double
-precision).  A recognized non-meter unit (e.g. ``km``) is converted
+precision).  ``compression=True`` zlib-compresses the deformation variable
+(and chunks it one time slice at a time, matching how Fortran reads it),
+which shrinks a typical sparse dtopo file several-fold while remaining
+directly readable; an integer level or a dict is also accepted.  A recognized non-meter unit (e.g. ``km``) is converted
 automatically on read, exactly as for topography; a missing or unrecognized
 unit raises.  (ASCII dtopo types remain meters-implied, unchanged.)
 
