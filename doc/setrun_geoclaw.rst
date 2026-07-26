@@ -188,27 +188,50 @@ Topography preprocessing attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each :class:`~clawpack.geoclaw.topotools.Topography` entry in ``topofiles``
-supports seven preprocessing attributes that are applied automatically when
+supports eight preprocessing attributes that are applied automatically when
 the file is loaded by :meth:`~clawpack.geoclaw.topotools.Topography.read`.
 Set them on the object before appending to ``topofiles``:
 
-+----------------+----------------+-----------+-----------------------------------------------+
-| Attribute      | Type           | Default   | Description                                   |
-+================+================+===========+===============================================+
-| ``crop_extent``| list or None   | ``None``  | ``[x1, x2, y1, y2]`` crop region.            |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``coarsen``    | int            | ``1``     | Stride-subsampling factor (1 = no coarsen).  |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``buffer``     | int            | ``0``     | Grid-point margin outside crop region.        |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``align``      | tuple or None  | ``None``  | ``(x, y)`` alignment for coarsened grids.    |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``x_shift``    | float          | ``0.0``   | Constant added to all x coordinates.          |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``z_shift``    | float          | ``0.0``   | Constant added to non-missing Z values.       |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``negate_z``   | bool           | ``False`` | If ``True``, flip the sign of all Z values.  |
-+----------------+----------------+-----------+-----------------------------------------------+
+.. list-table::
+   :header-rows: 1
+   :widths: 16 16 10 48
+
+   * - Attribute
+     - Type
+     - Default
+     - Description
+   * - ``crop_extent``
+     - list or None
+     - ``None``
+     - ``[x1, x2, y1, y2]`` crop region.
+   * - ``coarsen``
+     - int
+     - ``1``
+     - Stride-subsampling factor (1 = no coarsen).
+   * - ``buffer``
+     - int
+     - ``0``
+     - Grid-point margin outside crop region.
+   * - ``align``
+     - tuple or None
+     - ``None``
+     - ``(x, y)`` alignment for coarsened grids.
+   * - ``x_shift``
+     - float
+     - ``0.0``
+     - Constant added to all x coordinates.
+   * - ``y_shift``
+     - float
+     - ``0.0``
+     - Constant added to all y coordinates.
+   * - ``z_shift``
+     - float
+     - ``0.0``
+     - Constant added to non-missing Z values.
+   * - ``negate_z``
+     - bool
+     - ``False``
+     - If ``True``, flip the sign of all Z values.
 
 .. note::
 
