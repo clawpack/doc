@@ -69,7 +69,9 @@ More will eventually appear in the :ref:`apps`.
    fgmax
    nearshore_interp
    tsunamidata
+   met_forcing
    surgedata
+   storm_module
    netcdf
    netcdf_utils_module
    marching_front

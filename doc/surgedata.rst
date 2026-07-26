@@ -5,6 +5,11 @@
 Sources for Storm Surge Data
 ==================================
 
+.. seealso::
+   - :ref:`met_forcing` -- meteorological forcing overview and object model
+   - :ref:`quick_surge` -- storm surge quick start
+   - :ref:`setrun_surge` -- the ``rundata.surge_data`` reference
+
 For storm surge computations the input data is very similar to tsunamis save
 for the specification of the forcing storm (as opposed to an earthquake).  There
 are multiple ways to specify a storm forcing in GeoClaw which include
@@ -18,13 +23,14 @@ are multiple ways to specify a storm forcing in GeoClaw which include
    - the location of the center of the storm (the eye),
    - and sometimes the maximum radius of the storm is also included.
 
-2. Storm described by a grided set of data.  This includes output from a 
+2. Storms described by a gridded set of data.  This includes output from a
    modeled storm such as from HWRF, or observed values if dense enough.  Here GeoClaw
    will interpolate this data to the grid cells as needed rather than assume a particular
-   profile for the wind and pressure.
+   profile for the wind and pressure.  Gridded forcing is provided as OWI/ASCII
+   or NetCDF files; see :ref:`netcdf_input` for the NetCDF workflow.
 
 For the parameterized storm data there are a number of sources supported for this data and
-there is a listing in :ref:`_storm_module` of available input formats.  Valid input files
+there is a listing in :ref:`storm_module` of available input formats.  Valid input files
 for this type of input are made available by the particular agency involved:
 
  - `ATCF <http://ftp.nhc.noaa.gov/atcf/archive/>`_

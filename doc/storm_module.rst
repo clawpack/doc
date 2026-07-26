@@ -1,11 +1,72 @@
 
 .. _storm_module:
 
-Storm Specification Class and Tools
-=================================================
+Meteorological Forcing Python API
+=================================
 
-.. warning :: This describes new tools added in Clawpack 5.5
+.. seealso::
+   - :ref:`met_forcing` -- overview of met forcing and the object model
+   - :ref:`setrun_surge` -- the ``rundata.surge_data`` attribute reference
+   - :ref:`netcdf_input` -- gridded NetCDF met forcing
+
+This is the Python API for building and writing GeoClaw meteorological forcing.
+The object model separates the evolving feature (a :class:`Track` /
+:class:`StormTrack`) from the forcing generated from it
+(:class:`ParametricMetForcing`, :class:`GriddedMetForcing`).  The historical
+:class:`Storm` class is retained as a backwards-compatible wrapper.
+
+Readers ingest many track/data formats; writers emit only the two files
+GeoClaw consumes -- a parametric storm file (``write_geoclaw``) and a gridded
+descriptor (``write_data``).
+
+Storm (compatibility wrapper)
+-----------------------------
 
 .. automodule:: clawpack.geoclaw.surge.storm
    :members:
+   :undoc-members:
+   :show-inheritance:
 
+Track and StormTrack
+--------------------
+
+.. automodule:: clawpack.geoclaw.surge.track
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Parametric met forcing
+----------------------
+
+.. automodule:: clawpack.geoclaw.surge.parametric
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Gridded met forcing
+-------------------
+
+.. automodule:: clawpack.geoclaw.surge.gridded
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Workflow tools
+--------------
+
+.. automodule:: clawpack.geoclaw.surge.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Surge data object
+-----------------
+
+The ``surge.data`` file written by ``setrun.py`` is described by
+:class:`~clawpack.geoclaw.data.SurgeData`; see :ref:`setrun_surge` for the
+per-attribute reference.
+
+.. autoclass:: clawpack.geoclaw.data.SurgeData
+   :members:
+   :undoc-members:
+   :show-inheritance:
