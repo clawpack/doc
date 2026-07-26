@@ -134,8 +134,6 @@ Each patch has a unique `grid_number` that usually isn't needed for
 visualization purposes.
 
 
-
-
 .. _output_binary:
 
 Raw binary output data formats
@@ -163,15 +161,6 @@ Unlike the ASCII data files, the binary output
 files contain ghost cells as well as the interior cells (since a contiguous
 block of memory is dumped for each patch with a single `write` statement).
 
-
-.. _output_netcdf:
-
-NetCDF output data format
-------------------------------
-
-NetCDF output is not currently supported in Clawpack. This is not a suitable
-format for AMR style data.
-
 .. _output_aux:
 
 Output of aux arrays
@@ -185,5 +174,3 @@ have the same format as the `q` data, as
 specifed by `output_format`. Set `output_aux_onlyonce` to
 `True` if the `aux` arrays do not change with time and you only want to
 output these arrays once.
-
-

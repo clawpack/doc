@@ -12,12 +12,13 @@ Topography data
    - :ref:`topo_order`
    - :ref:`tsunamidata`
    - :ref:`dtopo`
+   - :ref:`g_input`
 
 The :ref:`geoclaw` software for flow over topography requires at least one
 topo file to be input, see :ref:`setrun_geoclaw`.
 
-Currently topo files are restricted to three possible formats as ASCII files, or
-NetCDF files are also allowed.
+Currently topo files are restricted to three possible formats as ASCII files,
+and netCDF files.
 
 In the descriptions below it is assumed that the topo file gives the
 elevation of the topography (relative to some reference level) as a value of
@@ -169,14 +170,8 @@ The recognized topotypes are:
 
   **topotype = 4**
 
-    This file type is not ASCII but rather in a NetCDF4 format supported by the
-    `CF MetaData conventions (v. 1.6) <http://cfconventions.org>`_. Files
-    that conform to this standard can be read in by GeoClaw.  The `topotools`
-    module also has support for reading and writing (including therefore
-    conversion) of these types of bathymetry files (see :ref:`topo_netcdf`
-    below).  To use this functionality
-    you will need to add *-DNETCDF* to the *FFLAGS* variable either by the
-    command line or in the Makefile.
+    Read in netCDF formatted topography data.  See :ref:`netcdf_input` for
+    NetCDF topography format information.
 
 The Fortran code will recognize headers for *topotype* 2
 or 3 that have the labels first and then the parameter values.
@@ -214,21 +209,24 @@ Several on-line databases are available for topograpy, see
 Some Python tools for working with topography files are available, see
 :ref:`topotools`.
 
-.. _topo_netcdf:
+.. _noaa_thredds:
 
-NetCDF format
-^^^^^^^^^^^^^
+NOAA THREDDS server
+^^^^^^^^^^^^^^^^^^^^^
 
-Topofiles can be read in netCDF format, either from local `.nc` files or
-from some online databases that provide netCDF servers, e.g. the
-`NOAA THREDDS server <https://www.ncei.noaa.gov/thredds/remoteCatalogService?catalog=https://www.ngdc.noaa.gov/thredds/demCatalog.xml>`_.
-Use the
-`topotools.read_netcdf <topotools_module.html#clawpack.geoclaw.topotools.read_netcdf>`_
-function.  Note that this also allows reading in only a subset of the data,
-both limiting the extent and the resolution, e.g. by sampling every other
-point (by setting `coarsen=2`). This is particularly useful if you only want
-a subset of a huge online netCDF file (e.g. coastal DEMs at 1/3 arcsecond
-resolution are typically several gigabytes).
+The `NOAA THREDDS server
+<https://www.ncei.noaa.gov/thredds/remoteCatalogService?catalog=https://www.ngdc.noaa.gov/thredds/demCatalog.xml>`_
+can be used to access a variety of topography data sets, including the etopo1
+global data set at 1 arcminute resolution and the etopo2 global data set at 2
+arcminute resolution.  These are available in netCDF format and can be read
+directly into GeoClaw.  As a convenience, you can use the `topotools.read_netcdf
+<topotools_module.html#clawpack.geoclaw.topotools.read_netcdf>`_ function.  Note
+that this also allows reading in only a subset of the data, both limiting the
+extent and the resolution, e.g. by sampling every other point (by setting
+`coarsen=2`). This is particularly useful if you only want a subset of a huge
+online netCDF file (e.g. coastal DEMs at 1/3 arcsecond resolution are typically
+several gigabytes).  See :ref:`netcdf_input` for more details on working with
+netCDF files.
 
 The dictionary `topotools.remote_topo_urls` contains some useful URLs for
 etopo and a few other NOAA THREDDS datasets. This allows reading etopo

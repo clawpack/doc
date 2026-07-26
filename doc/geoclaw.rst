@@ -49,6 +49,7 @@ More will eventually appear in the :ref:`apps`.
    topo
    grid_registration
    topo_order
+   topodata_format
    topotools
    dtopo
    kmltools_module
@@ -69,6 +70,8 @@ More will eventually appear in the :ref:`apps`.
    nearshore_interp
    tsunamidata
    surgedata
+   netcdf
+   netcdf_utils_module
    marching_front
    force_dry
    sphere_source

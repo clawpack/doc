@@ -115,7 +115,8 @@ on a uniform grid at a sequence of one or more times.
 dtopo file formats
 ------------------
 
-Currently two formats are supported for this file:
+Three formats are supported for this file: the two ASCII types below and the
+CF-compliant NetCDF ``dtopotype=4`` (see :ref:`netcdf_input`):
 
     **dtopotype=1:**
 
@@ -134,6 +135,17 @@ Currently two formats are supported for this file:
     different, and contains lines specifying *mx, my, mt, xlower, ylower, t0,
     dx, dy*, and *dt*.  These are followed by *mt* sets of *my* lines,
     each line containing *mx* values of *dz*.
+
+    **dtopotype=4:**
+
+    A CF-compliant NetCDF format.  ``dtopotools.DTopography`` reads and writes
+    this type (``dtopo_type=4``) and GeoClaw reads it directly at runtime.
+    The deformation is in meters; the time axis may be a bare CF duration
+    (``units = "seconds"``, simulation-relative -- the default on write) or a
+    CF datetime axis (``units = "seconds since <date>"``, written when
+    ``DTopography.time_reference`` is set to an epoch such as the earthquake
+    origin time), and is interpreted on read by its CF ``units``.  See
+    :ref:`netcdf_input` for details, including the ``dz_dtype`` write option.
 
 Here is an example header for a dtopofile::
 
