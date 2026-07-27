@@ -96,8 +96,13 @@ Examples using GeoClaw
 
 * `IslandBuffering <_static/apps/notebooks/geoclaw/IslandBuffering.html>`_
   illustrates how to make a ruled rectangle surrounding an island with
-  a buffer zone that extends out some distance that is independent 
+  a buffer zone that extends out some distance that is independent
   of water depth.
+
+* `met_forcing_tutorial <_static/apps/notebooks/geoclaw/met_forcing_tutorial/met_forcing_tutorial.html>`_
+  demonstrates GeoClaw's parametric (Holland) and gridded (NetCDF) storm/met
+  forcing, selected through the ``storm_family`` / ``storm_subtype`` API, on a
+  small idealized domain.
 
 .. _notebooks_tsunami-examples:
 
