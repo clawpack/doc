@@ -8,48 +8,110 @@ Quick start guide for storm surge modeling
 
 See also this `youtube video <https://www.youtube.com/watch?v=YurKRmYgGfk&t=10s>`__
 and the related materials from the `2020 GeoClaw Developers Workshop
-<http://www.clawpack.org/geoclawdev-2020/>`__.
+<http://www.clawpack.org/geoclawdev-2020/>`__, the :ref:`met_forcing` overview,
+and the :ref:`setrun_surge` reference.
 
-To get started with a storm surge computation it is best to refer to a previous
-working example.  For example, you might start with 
-`$CLAW/geoclaw/examples/storm-surge/ike`.  There are also a number of additional 
-examples in the `$CLAW/geoclaw/examples/storm-surge` directory as well as some
-in the `$CLAW/apps/surge-examples` directory (this is actually a repository of 
-examples that is actively updated).  The primary input that one needs to provide
-for a new example usually involves two data source
+The quickest way to get started is to run a working example and then adapt it.
+A good starting point is ``$CLAW/geoclaw/examples/storm-surge/ike`` (Hurricane
+Ike, parametric Holland 1980 forcing).  There are further examples in
+``$CLAW/geoclaw/examples/storm-surge`` and in the actively maintained
+``$CLAW/apps/surge-examples`` repository.
 
- - Topography data:  Data that specifies the topography and bathymetry of the
-   region around the area of interest.  For storm surge computations it is 
-   generally good practice to include entire oceanic basins so that you can
-   ensure that flow into and out of the basin is resolved by the computation
-   and is sufficiently distant from the computational domain's boundaries.
- - Storm data:  Of course we need to specify the particular storm that you
-   are interested in.  There are a number of ways to specify a storm which
-   are described in :ref:`setrun_surge`.  Sources for parameterized storms
-   can also be found in :ref:`surgedata` and a description of how to include
-   them in :ref:`_surge_module`.
+Running the Ike example
+=======================
 
-.. warning:: This is a work in progress and only partially has been filled out.
-   If you are interested in the rest of the steps or wish to contribute your
-   own workflow please let us know!
+From ``$CLAW/geoclaw/examples/storm-surge/ike``::
 
-Here we will concentrate on changing the Hurricane Ike example into one for
-Hurricane Katrina.
+    make all
 
-1. First copy the files located in the Hurricane Ike directorty located at
-   `$CLAW/geoclaw/examples/storm-surge/ike`.
+This downloads the topography, writes the storm forcing file, compiles
+``xgeoclaw``, runs the simulation, and produces plots in ``_plots``.  The
+individual steps are also available as separate targets::
 
-2. Next let's find some better topography for the New Orleans area...
+    make .exe       # compile xgeoclaw
+    make data       # write the *.data files from setrun.py
+    make .output    # run the simulation
+    make .plots     # generate plots with setplot.py
 
-3. Now let's find a storm specification for Hurricane Katrina.  In this 
-   example we will use the ATCF database.  For Katrina this ends up being
-   the file located `here <>`_.
+The two inputs a surge computation needs
+========================================
 
-4. We now need to modify the `setrun.py` to use our new storm format and
-   topography we now added...
+- **Topography / bathymetry** for the region of interest.  For surge it is good
+  practice to include entire oceanic basins so that flow into and out of the
+  basin is resolved and the domain boundaries are far from the area of interest.
+  See :ref:`topo` for supported formats.
+- **Storm forcing** describing the wind and pressure.  There are two families
+  (parametric and gridded); see :ref:`met_forcing` for the overview and
+  :ref:`surgedata` for data sources.
 
-5. Finally we need to also modify the plotting so that we have an
+Configuring the forcing in ``setrun.py``
+========================================
 
-6. Gauges...
+Storm forcing is configured through ``rundata.surge_data`` (full reference in
+:ref:`setrun_surge`).  The Ike example enables the wind and pressure source
+terms and selects a parametric Holland 1980 storm::
 
-7. Running the simulation...
+    data = rundata.surge_data
+    data.wind_forcing = True
+    data.pressure_forcing = True
+    data.drag_law = 1                      # Garratt wind drag
+
+    # Preferred, explicit forcing selection:
+    data.storm_family = "parametric"
+    data.storm_subtype = "holland80"
+    data.storm_file = "ike.storm"          # GeoClaw-format storm file
+
+    # AMR refinement on wind speed (m/s) and distance to the eye (m):
+    data.wind_refine = [20.0, 40.0, 60.0]
+    data.R_refine = [60.0e3, 40.0e3, 20.0e3]
+
+The legacy selector ``data.storm_specification_type = 'holland80'`` is
+equivalent and still supported.
+
+Building the storm file
+=======================
+
+The GeoClaw-format storm file (``ike.storm`` above) is produced from a track in
+one of the ingest formats (ATCF, HURDAT, IBTrACS, JMA, TCVITALS).  Using the
+Python API (see :ref:`storm_module`)::
+
+    from clawpack.geoclaw.surge.storm import Storm
+    import numpy as np
+
+    storm = Storm(path="track.dat", file_format="ATCF")
+    storm.time_offset = np.datetime64("2008-09-13T07:00")   # e.g. landfall
+    storm.write("ike.storm", file_format="geoclaw")
+
+Plotting and gauges
+===================
+
+The example ``setplot.py`` uses the ``clawpack.geoclaw.surge.plot`` helpers
+(imported as ``surgeplot``) to plot the surface elevation, wind speed, and
+pressure fields, overlay the storm track, and plot gauge time series.  Gauges
+record the wind and pressure aux fields when ``rundata.gaugedata.aux_out_fields``
+includes the wind/pressure aux indices.
+
+Using gridded (OWI / NetCDF) forcing
+====================================
+
+To force GeoClaw with gridded fields instead of a parametric model, set the
+family to ``"gridded"`` and provide the field files.  For NetCDF this is a
+CF-compliant file of wind (``u10``, ``v10``) and mean-sea-level pressure
+(``msl``); GeoClaw discovers the variables and coordinates automatically.  See
+:ref:`netcdf_input` for the full workflow and the
+``$CLAW/geoclaw/examples/storm-surge/isaac`` example, which drives both
+parametric and gridded forcing from the same ATCF track.
+
+Adapting to a different storm
+=============================
+
+To model a different event, copy the Ike example directory and then:
+
+1. Obtain topography covering the affected basin (see :ref:`topo` and the data
+   sources linked from :ref:`surgedata`).
+2. Obtain the storm track (e.g. an ATCF best-track file; see :ref:`surgedata`)
+   and build the storm file as shown above, or point ``storm_file`` at a
+   gridded descriptor for gridded forcing.
+3. Update ``setrun.py`` -- the domain extent, refinement regions, ``surge_data``
+   selection, gauges, and run time -- for the new event.
+4. Update ``setplot.py`` for the new domain and gauges.

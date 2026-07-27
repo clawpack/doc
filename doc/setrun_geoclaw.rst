@@ -188,27 +188,50 @@ Topography preprocessing attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each :class:`~clawpack.geoclaw.topotools.Topography` entry in ``topofiles``
-supports seven preprocessing attributes that are applied automatically when
+supports eight preprocessing attributes that are applied automatically when
 the file is loaded by :meth:`~clawpack.geoclaw.topotools.Topography.read`.
 Set them on the object before appending to ``topofiles``:
 
-+----------------+----------------+-----------+-----------------------------------------------+
-| Attribute      | Type           | Default   | Description                                   |
-+================+================+===========+===============================================+
-| ``crop_extent``| list or None   | ``None``  | ``[x1, x2, y1, y2]`` crop region.            |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``coarsen``    | int            | ``1``     | Stride-subsampling factor (1 = no coarsen).  |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``buffer``     | int            | ``0``     | Grid-point margin outside crop region.        |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``align``      | tuple or None  | ``None``  | ``(x, y)`` alignment for coarsened grids.    |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``x_shift``    | float          | ``0.0``   | Constant added to all x coordinates.          |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``z_shift``    | float          | ``0.0``   | Constant added to non-missing Z values.       |
-+----------------+----------------+-----------+-----------------------------------------------+
-| ``negate_z``   | bool           | ``False`` | If ``True``, flip the sign of all Z values.  |
-+----------------+----------------+-----------+-----------------------------------------------+
+.. list-table::
+   :header-rows: 1
+   :widths: 16 16 10 48
+
+   * - Attribute
+     - Type
+     - Default
+     - Description
+   * - ``crop_extent``
+     - list or None
+     - ``None``
+     - ``[x1, x2, y1, y2]`` crop region.
+   * - ``coarsen``
+     - int
+     - ``1``
+     - Stride-subsampling factor (1 = no coarsen).
+   * - ``buffer``
+     - int
+     - ``0``
+     - Grid-point margin outside crop region.
+   * - ``align``
+     - tuple or None
+     - ``None``
+     - ``(x, y)`` alignment for coarsened grids.
+   * - ``x_shift``
+     - float
+     - ``0.0``
+     - Constant added to all x coordinates.
+   * - ``y_shift``
+     - float
+     - ``0.0``
+     - Constant added to all y coordinates.
+   * - ``z_shift``
+     - float
+     - ``0.0``
+     - Constant added to non-missing Z values.
+   * - ``negate_z``
+     - bool
+     - ``False``
+     - If ``True``, flip the sign of all Z values.
 
 .. note::
 
@@ -497,20 +520,36 @@ Storm Specification Data
    distance to the storm's center.  This can also be set to a boolean which if
    `False` disables storm radial based refinement.
 
-.. attribute:: rundata.surge_data.storm_specification_type : int
+.. attribute:: rundata.surge_data.storm_family : string
 
-   Specifies the type of storm being used.  Positive options refer to a 
-   parameterized storm model where as negative integers refer to fully 
-   specified storms, for instance from HWRF, to be specified.
+   The forcing family, and the preferred (explicit) way to select forcing
+   together with ``storm_subtype``.  Valid values:
 
-   Valid options 
+    - ``"parametric"``: an analytic model with a storm center/track (see
+      ``storm_subtype`` for the model list).
+    - ``"gridded"``: file-backed wind/pressure fields (OWI/ASCII or NetCDF).
+    - ``"none"``: forcing off.
 
-    - `-1`: The input data is specified in the HWRF format.
-    - `0`: No storm specified
-    - `1`: Parameterized storm requested using the Holland 1980 modeled storm.
-    - `2`: Parameterized storm requested using the Holland 2010 modeled storm.
-    - `3`: Parameterized storm requested using the Chava, Lin, Emmanuel modeled 
-      storm.
+.. attribute:: rundata.surge_data.storm_subtype : string
+
+   The forcing subtype within the family.  For ``"parametric"`` this is a model
+   name -- one of ``"holland80"``, ``"holland2008"``, ``"holland2010"``,
+   ``"cle"``, ``"slosh"``, ``"rankine"``, ``"modified_rankine"``,
+   ``"demaria"``, or ``"willoughby"``.  For ``"gridded"`` use ``"gridded"``
+   (the concrete OWI/NetCDF format is carried by the storm descriptor file).
+
+.. attribute:: rundata.surge_data.storm_specification_type : int or string
+
+   Legacy forcing selector, retained for backwards compatibility and still
+   fully supported.  Used when ``storm_family``/``storm_subtype`` are not set;
+   it may be a model-name string (e.g. ``'holland80'``, ``'data'``) or the
+   signed integer code below, and resolves to the same forcing.
+
+   Integer codes: ``0`` no storm; positive values select a parametric model
+   (``1`` Holland 1980, ``2`` Holland 2010, ``3`` Chavas--Lin--Emanuel, ``4``
+   SLOSH, ``5`` Rankine, ``6`` modified Rankine, ``7`` DeMaria, ``8`` Holland
+   2008, ``9`` Willoughby); a negative value (``-1``) selects gridded/data
+   forcing.
 
 .. attribute:: rundata.surge_data.storm_file : string
 
@@ -528,3 +567,23 @@ Storm Specification Data
    scaling).  This is primarily useful for sensitivity studies and for
    creating synthetic storms whose tracks are spatially identical to a
    historical event but travel at a different speed.
+
+.. attribute:: rundata.surge_data.t_ramp_on : float
+
+   Number of seconds over which the wind/pressure forcing ramps on after the
+   simulation start time.  ``0.0`` (the default) disables the onset ramp.
+   Useful for avoiding an impulsive start when the forcing is already
+   significant at ``t0``.
+
+.. attribute:: rundata.surge_data.t_ramp_off : float
+
+   Number of seconds over which the wind/pressure forcing ramps off before the
+   final time.  ``0.0`` (the default) disables the cutoff ramp.
+
+.. attribute:: rundata.surge_data.rotation_override : int or string
+
+   Overrides the hemisphere-based sense of the storm's rotation.  The default
+   (``0`` or ``"normal"``) chooses the rotation from the hemisphere of the
+   storm center; ``1`` / ``"N"`` forces northern (counter-clockwise) and
+   ``2`` / ``"S"`` forces southern (clockwise).  Primarily useful for
+   idealized or cross-hemisphere synthetic storms.
