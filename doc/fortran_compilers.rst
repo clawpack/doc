@@ -77,6 +77,20 @@ and some testing abilities.  The `PPFLAGS` environment variable is meant to
 provide further control of the pre-processor.  
 
 
+.. _fortran_NETCDF:
+
+Compiling with NetCDF Support
+-----------------------------
+
+For NetCDF we provide convenience flags for compiling with the NetCDF library::
+
+    FFLAGS = -DNETCDF $(NETCDF_FFLAGS)
+    LFLAGS = $(NETCDF_LFLAGS)
+
+These flags are determined using the utility `nf-config` and `pkg-config`. If
+these are not available the older `NETCDF4_DIR` is used and still supported.
+
+
 .. _fortran_gfortran:
 
 gfortran compiler
@@ -101,15 +115,6 @@ gfortran compiler
   :ref:`openmp` for details.   
 
   **Note:** Versions of gfortran before 4.6 are known to have OpenMP bugs.
-
-* For using NetCDF::
-
-    FFLAGS = -DNETCDF -lnetcdf -I$(NETCDF4_DIR)/include
-    LFLAGS = -lnetcdf
-
-  The `FFLAGS` can also be put into `PPFLAGS`.  Note that the variable
-  `NETCDF4_DIR` should be defined in the environment.
-
 
 .. _fortran_intel:
 
