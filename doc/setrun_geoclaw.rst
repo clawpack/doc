@@ -469,41 +469,47 @@ Fixed grid output
 Storm Specification Data
 ------------------------
 
-.. attribute:: rundata.surge_data.wind_forcing : bool
+.. note::
+
+   ``rundata.met_data`` is the meteorological-forcing name for these settings;
+   ``rundata.surge_data`` remains an accepted alias for the same object.  The
+   settings are written to the ``surge.data`` file that GeoClaw reads.
+
+.. attribute:: rundata.met_data.wind_forcing : bool
 
    Includes the wind forcing term if `True`.  The drag coefficient is specified
-   by `rundata.surge_data.drag_law`.
+   by `rundata.met_data.drag_law`.
 
-.. attribute:: rundata.surge_data.drag_law : integer
+.. attribute:: rundata.met_data.drag_law : integer
 
    This specifies how to deterimine the wind drag coefficient.  Valid options
    include include `0` implying use no wind drag (effectively eliminates the
    wind source term but still computes the wind), `1` uses the Garret wind
    drag law, and `2` uses the Powell (2006) wind drag law.
 
-.. attribute:: rundata.surge_data.pressure_forcing : bool
+.. attribute:: rundata.met_data.pressure_forcing : bool
 
    Includes the pressure forcing term if `True`.
 
-.. attribute:: rundata.surge_data.wind_index : int
+.. attribute:: rundata.met_data.wind_index : int
 
    Specifies at what index into the `aux` array the wind velocities are stored.
    Note that this is Python indexed in the setrun but will be corrected in the
    FORTRAN code (1 is added to the index).
 
-.. attribute:: rundata.surge_data.pressure_index : int
+.. attribute:: rundata.met_data.pressure_index : int
 
    Specifies at what index into the `aux` array the wind velocities are stored.
    Note that this is Python indexed in the setrun but will be corrected in the
    FORTRAN code (1 is added to the index).
 
-.. attribute:: rundata.surge_data.display_landfall_time : bool
+.. attribute:: rundata.met_data.display_landfall_time : bool
 
    Sets whether the console output displays time relative to land fall in days.
    In GeoClaw versions past 5.5 this only deterimines whether the time is 
    displayed in seconds or days.
 
-.. attribute:: rundata.surge_data.wind_refine : list
+.. attribute:: rundata.met_data.wind_refine : list
 
    Similar to the `speed_tolerance` data, cells are flagged for refinement at 
    a level if the magnitude of the wind velocity in m/s is greater than the 
@@ -514,13 +520,13 @@ Storm Specification Data
    40.0 would refine to level 4.  This can also be set to a boolean which if
    `False` disables wind based refinement.
 
-.. attribute:: rundata.surge_data.R_refine : list
+.. attribute:: rundata.met_data.R_refine : list
 
    Similar to the `wind_refine` data, cells are flagged based on the radial
    distance to the storm's center.  This can also be set to a boolean which if
    `False` disables storm radial based refinement.
 
-.. attribute:: rundata.surge_data.storm_family : string
+.. attribute:: rundata.met_data.storm_family : string
 
    The forcing family, and the preferred (explicit) way to select forcing
    together with ``storm_subtype``.  Valid values:
@@ -530,7 +536,7 @@ Storm Specification Data
     - ``"gridded"``: file-backed wind/pressure fields (OWI/ASCII or NetCDF).
     - ``"none"``: forcing off.
 
-.. attribute:: rundata.surge_data.storm_subtype : string
+.. attribute:: rundata.met_data.storm_subtype : string
 
    The forcing subtype within the family.  For ``"parametric"`` this is a model
    name -- one of ``"holland80"``, ``"holland2008"``, ``"holland2010"``,
@@ -538,7 +544,7 @@ Storm Specification Data
    ``"demaria"``, or ``"willoughby"``.  For ``"gridded"`` use ``"gridded"``
    (the concrete OWI/NetCDF format is carried by the storm descriptor file).
 
-.. attribute:: rundata.surge_data.storm_specification_type : int or string
+.. attribute:: rundata.met_data.storm_specification_type : int or string
 
    Legacy forcing selector, retained for backwards compatibility and still
    fully supported.  Used when ``storm_family``/``storm_subtype`` are not set;
@@ -551,7 +557,7 @@ Storm Specification Data
    2008, ``9`` Willoughby); a negative value (``-1``) selects gridded/data
    forcing.
 
-.. attribute:: rundata.surge_data.storm_file : string
+.. attribute:: rundata.met_data.storm_file : string
 
    Specifies the path to the storm data.  IF `storm_specification_type > 0` then
    this should point to a GeoClaw formatted storm file (see :ref:`storm_module` for
@@ -559,7 +565,7 @@ Storm Specification Data
    to files specifying the storm or a single file depending on the type of input
    data.
 
-.. attribute:: rundata.surge_data.storm_time_scale : float
+.. attribute:: rundata.met_data.storm_time_scale : float
 
    A multiplicative scale factor applied to the storm's time axis.  Values
    greater than 1 slow the storm down (it takes longer to traverse the
@@ -568,19 +574,19 @@ Storm Specification Data
    creating synthetic storms whose tracks are spatially identical to a
    historical event but travel at a different speed.
 
-.. attribute:: rundata.surge_data.t_ramp_on : float
+.. attribute:: rundata.met_data.t_ramp_on : float
 
    Number of seconds over which the wind/pressure forcing ramps on after the
    simulation start time.  ``0.0`` (the default) disables the onset ramp.
    Useful for avoiding an impulsive start when the forcing is already
    significant at ``t0``.
 
-.. attribute:: rundata.surge_data.t_ramp_off : float
+.. attribute:: rundata.met_data.t_ramp_off : float
 
    Number of seconds over which the wind/pressure forcing ramps off before the
    final time.  ``0.0`` (the default) disables the cutoff ramp.
 
-.. attribute:: rundata.surge_data.rotation_override : int or string
+.. attribute:: rundata.met_data.rotation_override : int or string
 
    Overrides the hemisphere-based sense of the storm's rotation.  The default
    (``0`` or ``"normal"``) chooses the rotation from the hemisphere of the

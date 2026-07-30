@@ -8,7 +8,7 @@ Sources for Storm Surge Data
 .. seealso::
    - :ref:`met_forcing` -- meteorological forcing overview and object model
    - :ref:`quick_surge` -- storm surge quick start
-   - :ref:`setrun_surge` -- the ``rundata.surge_data`` reference
+   - :ref:`setrun_surge` -- the ``rundata.met_data`` reference
 
 For storm surge computations the input data is very similar to tsunamis save
 for the specification of the forcing storm (as opposed to an earthquake).  There

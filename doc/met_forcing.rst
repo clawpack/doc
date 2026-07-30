@@ -19,7 +19,7 @@ Forcing families
 ================
 
 Met forcing comes in two families, selected in ``setrun.py`` through
-``rundata.surge_data`` (see :ref:`setrun_surge`):
+``rundata.met_data`` (see :ref:`setrun_surge`):
 
 **Parametric forcing**
    Wind and pressure fields are generated from a compact, evolving description
@@ -43,9 +43,9 @@ Selecting a forcing
 The explicit, preferred way to select forcing is a **family** plus a
 **subtype**::
 
-    rundata.surge_data.storm_family  = "parametric"   # or "gridded" / "none"
-    rundata.surge_data.storm_subtype = "holland80"    # model, or "gridded"
-    rundata.surge_data.storm_file    = "path/to/storm"
+    rundata.met_data.storm_family  = "parametric"   # or "gridded" / "none"
+    rundata.met_data.storm_subtype = "holland80"    # model, or "gridded"
+    rundata.met_data.storm_file    = "path/to/storm"
 
 See :ref:`setrun_surge` for the full attribute reference.
 
@@ -55,15 +55,15 @@ Python object model
 The Python side is organized around met forcing rather than only storms
 (:ref:`storm_module` is the API reference):
 
-- :class:`~clawpack.geoclaw.surge.track.Track` -- a generic evolving feature
+- :class:`~clawpack.geoclaw.met.track.Track` -- a generic evolving feature
   with a center over time, and
-  :class:`~clawpack.geoclaw.surge.track.StormTrack`, which adds storm metadata
+  :class:`~clawpack.geoclaw.met.track.StormTrack`, which adds storm metadata
   (max wind speed, radius of maximum winds, central pressure, ...).
-- :class:`~clawpack.geoclaw.surge.parametric.ParametricMetForcing` -- forcing
+- :class:`~clawpack.geoclaw.met.parametric.ParametricMetForcing` -- forcing
   from a parameterized model referencing a track.
-- :class:`~clawpack.geoclaw.surge.gridded.GriddedMetForcing` -- forcing from
+- :class:`~clawpack.geoclaw.met.gridded.GriddedMetForcing` -- forcing from
   external field datasets (OWI/ASCII, NetCDF).
-- :class:`~clawpack.geoclaw.surge.storm.Storm` -- a backwards-compatible
+- :class:`~clawpack.geoclaw.met.storm.Storm` -- a backwards-compatible
   wrapper retaining the historical ``read``/``write`` interface; new code can
   use the objects above directly.
 
@@ -91,6 +91,14 @@ Existing ``setrun.py`` scripts continue to work.  The changes are additive:
 - **Object model.** The ``Track`` / ``StormTrack`` / ``ParametricMetForcing`` /
   ``GriddedMetForcing`` classes above, with ``Storm`` retained as a
   compatibility wrapper.
+- **Python package renamed** ``clawpack.geoclaw.surge`` →
+  ``clawpack.geoclaw.met`` (the meteorological-forcing name).  Import from
+  ``clawpack.geoclaw.met`` (e.g. ``clawpack.geoclaw.met.storm``); the old
+  ``clawpack.geoclaw.surge`` still works but emits a ``DeprecationWarning``.  In
+  ``setrun.py`` use ``rundata.met_data`` (the former ``rundata.surge_data``
+  remains an accepted alias), and :class:`~clawpack.geoclaw.data.SurgeData` is
+  also exposed as ``MetData``.  The on-disk ``surge.data`` file and its format
+  are unchanged.
 
 .. note::
 

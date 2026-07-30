@@ -6,7 +6,7 @@ Meteorological Forcing Python API
 
 .. seealso::
    - :ref:`met_forcing` -- overview of met forcing and the object model
-   - :ref:`setrun_surge` -- the ``rundata.surge_data`` attribute reference
+   - :ref:`setrun_surge` -- the ``rundata.met_data`` attribute reference
    - :ref:`netcdf_input` -- gridded NetCDF met forcing
 
 This is the Python API for building and writing GeoClaw meteorological forcing.
@@ -22,7 +22,7 @@ descriptor (``write_data``).
 Storm (compatibility wrapper)
 -----------------------------
 
-.. automodule:: clawpack.geoclaw.surge.storm
+.. automodule:: clawpack.geoclaw.met.storm
    :members:
    :undoc-members:
    :show-inheritance:
@@ -30,7 +30,7 @@ Storm (compatibility wrapper)
 Track and StormTrack
 --------------------
 
-.. automodule:: clawpack.geoclaw.surge.track
+.. automodule:: clawpack.geoclaw.met.track
    :members:
    :undoc-members:
    :show-inheritance:
@@ -38,7 +38,7 @@ Track and StormTrack
 Parametric met forcing
 ----------------------
 
-.. automodule:: clawpack.geoclaw.surge.parametric
+.. automodule:: clawpack.geoclaw.met.parametric
    :members:
    :undoc-members:
    :show-inheritance:
@@ -46,7 +46,7 @@ Parametric met forcing
 Gridded met forcing
 -------------------
 
-.. automodule:: clawpack.geoclaw.surge.gridded
+.. automodule:: clawpack.geoclaw.met.gridded
    :members:
    :undoc-members:
    :show-inheritance:
@@ -54,17 +54,19 @@ Gridded met forcing
 Workflow tools
 --------------
 
-.. automodule:: clawpack.geoclaw.surge.tools
+.. automodule:: clawpack.geoclaw.met.tools
    :members:
    :undoc-members:
    :show-inheritance:
 
-Surge data object
------------------
+Met forcing data object
+-----------------------
 
 The ``surge.data`` file written by ``setrun.py`` is described by
-:class:`~clawpack.geoclaw.data.SurgeData`; see :ref:`setrun_surge` for the
-per-attribute reference.
+:class:`~clawpack.geoclaw.data.SurgeData` (also available under the alias
+``MetData``); it is set in ``setrun.py`` as ``rundata.met_data`` (the former
+``rundata.surge_data`` remains an accepted alias).  See :ref:`setrun_surge` for
+the per-attribute reference.
 
 .. autoclass:: clawpack.geoclaw.data.SurgeData
    :members:
