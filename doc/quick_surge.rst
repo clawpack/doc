@@ -47,11 +47,11 @@ The two inputs a surge computation needs
 Configuring the forcing in ``setrun.py``
 ========================================
 
-Storm forcing is configured through ``rundata.surge_data`` (full reference in
+Storm forcing is configured through ``rundata.met_data`` (full reference in
 :ref:`setrun_surge`).  The Ike example enables the wind and pressure source
 terms and selects a parametric Holland 1980 storm::
 
-    data = rundata.surge_data
+    data = rundata.met_data
     data.wind_forcing = True
     data.pressure_forcing = True
     data.drag_law = 1                      # Garratt wind drag
@@ -75,7 +75,7 @@ The GeoClaw-format storm file (``ike.storm`` above) is produced from a track in
 one of the ingest formats (ATCF, HURDAT, IBTrACS, JMA, TCVITALS).  Using the
 Python API (see :ref:`storm_module`)::
 
-    from clawpack.geoclaw.surge.storm import Storm
+    from clawpack.geoclaw.met.storm import Storm
     import numpy as np
 
     storm = Storm(path="track.dat", file_format="ATCF")
@@ -85,8 +85,8 @@ Python API (see :ref:`storm_module`)::
 Plotting and gauges
 ===================
 
-The example ``setplot.py`` uses the ``clawpack.geoclaw.surge.plot`` helpers
-(imported as ``surgeplot``) to plot the surface elevation, wind speed, and
+The example ``setplot.py`` uses the ``clawpack.geoclaw.met.plot`` helpers
+(imported as ``met_plot``) to plot the surface elevation, wind speed, and
 pressure fields, overlay the storm track, and plot gauge time series.  Gauges
 record the wind and pressure aux fields when ``rundata.gaugedata.aux_out_fields``
 includes the wind/pressure aux indices.
@@ -112,6 +112,6 @@ To model a different event, copy the Ike example directory and then:
 2. Obtain the storm track (e.g. an ATCF best-track file; see :ref:`surgedata`)
    and build the storm file as shown above, or point ``storm_file`` at a
    gridded descriptor for gridded forcing.
-3. Update ``setrun.py`` -- the domain extent, refinement regions, ``surge_data``
+3. Update ``setrun.py`` -- the domain extent, refinement regions, ``met_data``
    selection, gauges, and run time -- for the new event.
 4. Update ``setplot.py`` for the new domain and gauges.

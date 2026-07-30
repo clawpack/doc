@@ -304,7 +304,7 @@ required:
 .. code:: python
 
    import numpy as np
-   from clawpack.geoclaw.surge.storm import Storm
+   from clawpack.geoclaw.met.storm import Storm
 
    storm = Storm()
    storm.time_offset = np.datetime64('2012-08-29')
