@@ -77,10 +77,14 @@ Available for streaming
 Upcoming
 ^^^^^^^^
 
-No events currently planned.
+- None planned.
 
 Recent
 ^^^^^^^^
+
+- GeoClaw Users' Workshop on Zoom, March 19-20, 2026.
+  For more information and the registration link, see 
+  <http://www.clawpack.org/geoclaw-users-2026/>`__
 
 - Tutorial on GeoClaw and D-Claw at the `CSDMS Annual Meeting
   <https://csdms.colorado.edu/wiki/Form:Annualmeeting2024>`__

@@ -46,10 +46,12 @@ More will eventually appear in the :ref:`apps`.
 
    geoclaw_started
    geohints
+   topochanges
    topo
    grid_registration
    topo_order
    topodata_format
+   netcdf
    topotools
    dtopo
    kmltools_module

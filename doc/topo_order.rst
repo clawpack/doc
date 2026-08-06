@@ -6,6 +6,10 @@
 Topography file ordering
 *****************************************************************
 
+.. warning ::  Many changes are being implemented in the way topo and dtopo
+  files are handled, in both the Python tools and the Fortran code.
+  See :ref:`topochanges` for a summary.
+  
 .. warning :: This feature has bugs in v5.13.0 and v5.13.1 and should not
    be used in those versions.  These bugs were fixed (we hope) in v5.14.0.
    See :ref:`release_5_14_0` for more discussion.
