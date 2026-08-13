@@ -105,6 +105,68 @@ Note that we suggest using `_build1` when building a single version so this
 can be quickly rebuilt when writing and editing documentation.
 
 
+.. _howto_doc_warnings:
+
+Checking for documentation warnings
+-----------------------------------
+
+Sphinx does not fail the build on reStructuredText or docstring problems
+(a missing blank line before a list, a bad cross reference, an autodoc import
+issue, and so on).  Historically these warnings were also *embedded* into the
+rendered HTML as "System Message" boxes (via `keep_warnings = True` in
+`conf.py`) while not being obvious on the command line, so they could slip
+onto the website unnoticed.  `keep_warnings` is now `False`, and the
+following `make` targets let you catch warnings before they are merged.
+
+To fail on any warning that is **new** relative to a committed baseline
+(`tools/doc_warnings_baseline.txt`)::
+
+    cd $CLAW/doc/doc
+    make checkwarnings
+
+This does a full re-parse using the lightweight `dummy` builder (no HTML is
+written) and compares the result against the baseline, which records the
+warnings that already existed when the check was introduced.  Only newly
+introduced warnings cause a non-zero exit, so you can fix the backlog
+gradually without the check going red on unrelated pages.
+
+If you intentionally add or remove warnings (e.g. after fixing a batch of
+them), regenerate and commit the baseline::
+
+    make checkwarnings-update
+
+To ignore the baseline entirely and report **every** remaining warning --
+the goal once the backlog has been driven to zero -- use::
+
+    make checkwarnings-strict
+
+The same check runs in CI (`.github/workflows/docs.yml`) on pull requests to
+`dev` and the current release branch.  Because `autodoc` imports the clawpack
+packages, CI installs them with `pip`; the optional parallel package
+`petclaw` (and `petsc4py`) is not installed but is instead listed in
+`autodoc_mock_imports` in `conf.py`.
+
+.. note::
+
+   The exact set of warnings depends on which packages are importable, so the
+   baseline is environment dependent.  Regenerate it in the same environment
+   the CI workflow uses (see `tools/requirements-docs.txt`); the workflow can
+   be run manually to produce an updated baseline as an artifact.
+
+**Possible future enhancements:**
+
+- Extend the same warning check to the separate `gallery` Sphinx project
+  (`$CLAW/doc/gallery`), which first requires running the examples that
+  generate its figures.
+- Turn off `keep_warnings` in `gallery/conf.py` and `doc/pyclaw/conf.py`
+  (used only for standalone pyclaw builds) for consistency.
+- Once the baseline is empty, switch CI to `make checkwarnings-strict` and
+  optionally enable nitpicky (`-n`) cross-reference checking.
+- Reconcile the build/deploy directory mismatch: `make html` writes to
+  `_build1/html`, while deployment (below) rsyncs from `_build/html`, the
+  `make versions` output.
+
+
 To generate docs including previous versions
 --------------------------------------------
 

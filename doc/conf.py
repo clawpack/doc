@@ -16,6 +16,22 @@
 
 import sys, os
 
+# Some optional clawpack subpackages (petclaw, forestclaw) call
+# logging.config.fileConfig() at import time with the default
+# disable_existing_loggers=True.  During the docs build autodoc/pycode import
+# these modules *after* Sphinx has installed its warning logger, so that call
+# would disable it and silently swallow every subsequent reST/docstring
+# warning (they still get embedded in the HTML, but never reported).  Force
+# disable_existing_loggers=False for any fileConfig call so importing these
+# packages can no longer muzzle Sphinx's warnings.
+# (The underlying bug is those packages' __init__.py; see the docs CI notes.)
+import logging.config as _logging_config
+_orig_fileConfig = _logging_config.fileConfig
+def _safe_fileConfig(*args, **kwargs):
+    kwargs['disable_existing_loggers'] = False
+    return _orig_fileConfig(*args, **kwargs)
+_logging_config.fileConfig = _safe_fileConfig
+
 # If your extensions are in another directory, add it here. If the directory
 # is relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
@@ -45,6 +61,13 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx_multiversion',
               'sphinx.ext.mathjax',
               'srclinks']
+
+
+# autodoc imports the documented modules at build time.  petclaw/petsc4py is
+# optional, heavy, and currently untested in the pip-only doc-build environment
+# (including CI), so mock it to keep autodoc imports from failing.  Add further
+# entries here if other optional/compiled modules fail to import.
+autodoc_mock_imports = ['petsc4py', 'clawpack.petclaw']
 
 
 mathjax_path = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
@@ -261,7 +284,11 @@ latex_documents = [
 #latex_use_modindex = True
 
 
-keep_warnings = True
+# Do not embed docutils warnings as "System Message" nodes in the rendered
+# HTML.  Warnings are still written to stderr / the sphinx warning log, where
+# they are caught by ``make checkwarnings`` (see tools/check_doc_warnings.py)
+# and the docs CI workflow, instead of being silently baked into the pages.
+keep_warnings = False
 
 inheritance_graph_attrs = dict(rankdir="TB",
                                fontsize=12,splines='"true"',penwidth=100)
