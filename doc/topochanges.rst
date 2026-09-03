@@ -16,10 +16,10 @@ files are handled, in both the Python tools and the Fortran code.
    - :ref:`topotools`
    - :ref:`topodata_format`
    - :ref:`netcdf_input`
-   - :ref:`topotools`
+   - :ref:`topotools_module`
    - :ref:`topo_order`
    - :ref:`dtopo`
-   - :ref:`dtopotools`
+   - :ref:`dtopotools_module`
 
 Major changes to topo file handling
 ===================================

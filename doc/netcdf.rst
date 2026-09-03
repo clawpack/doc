@@ -1,11 +1,11 @@
 .. _netcdf_input:
 
+GeoClaw NetCDF Input System
+===========================
+
 .. warning ::  Many changes are being implemented in the way topo and dtopo
   files are handled, in both the Python tools and the Fortran code.
   See :ref:`topochanges` for a summary.
-
-GeoClaw NetCDF Input System
-===========================
 
 This document covers the NetCDF input pipeline introduced in the
 ``refactor-netcdf-support``
