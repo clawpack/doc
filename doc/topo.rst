@@ -6,6 +6,10 @@
 Topography data
 *****************************************************************
 
+.. warning ::  Many changes are being implemented in the way topo and dtopo
+  files are handled, in both the Python tools and the Fortran code.
+  See :ref:`topochanges` for a summary.
+  
 .. seealso::
    - :ref:`topotools`
    - :ref:`grid_registration`

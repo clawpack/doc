@@ -84,6 +84,9 @@ See `amrclaw diffs
 Changes to geoclaw
 ------------------
 
+- **Overview of changes related to topo and dtopo files**
+  See :ref:`topochanges`.
+
 - **Topography preprocessing attributes.**
   :class:`~clawpack.geoclaw.topotools.Topography` now supports seven
   preprocessing attributes (``crop_extent``, ``coarsen``, ``buffer``,
@@ -118,9 +121,9 @@ Changes to geoclaw
   now emit a ``DeprecationWarning``.  Setting any preprocessing attribute
   before reading a type-1 file raises ``NotImplementedError``.  To convert::
 
-      t = Topography()
-      t.read('old.tt1', topo_type=1)   # DeprecationWarning
-      t.write('new.tt2', topo_type=2)
+      topo = Topography()
+      topo.read('old.tt1', topo_type=1)   # gives DeprecationWarning
+      topo.write('new.tt2', topo_type=2)
 
 - **New** ``topo.data`` **format.**
   Each per-file block in ``topo.data`` now contains 9 lines (up from 2),
