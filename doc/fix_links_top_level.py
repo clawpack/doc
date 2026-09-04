@@ -1,5 +1,20 @@
 
 """
+DEPRECATED: superseded by tools/promote_latest.py, which is what
+`make versions-promote` (and `make versions-publish`) runs.
+
+Prefer the new script.  This one is kept only so that older instructions keep
+working, and it has two known problems:
+
+  * it only rewrites `*.html`, `riemann/*.html` and `pyclaw/*.html`, so pages
+    nested any deeper keep one `../` segment too many in their version-switcher
+    links -- `pyclaw/evolve/limiters.html` is broken on the live site for
+    exactly this reason;
+  * it must be paired with `cp -r <version>/* .`, which does not match
+    dotfiles and so never promotes `.nojekyll` to the site root.
+
+Original documentation follows.
+
 Script to use with this code for making multi-version docs:
     https://holzhaus.github.io/sphinx-multiversion/master/index.html
 

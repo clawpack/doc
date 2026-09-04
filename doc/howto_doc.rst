@@ -162,9 +162,14 @@ packages, CI installs them with `pip`; the optional parallel package
   (used only for standalone pyclaw builds) for consistency.
 - Once the baseline is empty, switch CI to `make checkwarnings-strict` and
   optionally enable nitpicky (`-n`) cross-reference checking.
-- Reconcile the build/deploy directory mismatch: `make html` writes to
-  `_build1/html`, while deployment (below) rsyncs from `_build/html`, the
-  `make versions` output.
+- Migrate off `sphinx-multiversion`, which is unmaintained and pins the
+  toolchain to `sphinx < 9` (it calls `Config.read()` positionally, and Sphinx
+  9.0 made those arguments keyword-only).  This bound lives in
+  `tools/requirements-docs.txt`.
+- Restore `v5.1.x`--`v5.6.x` to the multiversion build, or formally retire
+  them.  Their `conf.py` refers to a `plot_directive` extension that no longer
+  resolves, so `sphinx-multiversion` skips them and only their long-published
+  HTML remains on the site.
 
 
 To generate docs including previous versions
@@ -197,43 +202,72 @@ committed to some branch (normally `dev` if you have been adding something new).
 And then do this::
 
     cd $CLAW/doc/doc
-    rm -rf _build   # recommended to make sure new versions are clean
-    make versions
+    make versions-publish
 
-The `Makefile` has been modified so that `make versions` does this::
+That single target does the whole job: a clean multiversion build followed by
+the promotion step described below.  It is equivalent to::
 
-    sphinx-multiversion . _build/html
+    make clean-versions      # rm -rf _build
+    make versions            # sphinx-multiversion . _build/html
+    make versions-promote    # python tools/promote_latest.py _build/html
 
-To view the files, point your browser to `_build/html/dev/index.html`  
-and from there you should be able to navigate to other versions.
-    
-Unlike `sphinxcontrib-versioning`, this now uses your local branches and tags
-rather than the versions on Github.  It lists only two branches under "Latest
-Versions" and all tags as "Older Versions".  
-The two branches are set to `dev` and the most
-recent version, by this line of `conf.py`::
+To view the result, point your browser to `_build/html/index.html`, which is
+the current release, and from there you should be able to navigate to other
+versions.
 
-    smv_branch_whitelist = r'v5.7.x|dev' 
-    
-This should be updated for a new version.
+Unlike `sphinxcontrib-versioning`, this uses your local branches and tags
+rather than the versions on Github.  It lists two branches under "Latest
+Versions" and the whitelisted tags as "Older Versions".  The branches are set
+to `dev` and the most recent version, by this line of `conf.py`::
 
-Note that `_build/html` contains a subdirectory for each version, but there
-are no `.html` files in the top level of `_build/html`.  For the Clawpack
+    smv_branch_whitelist = r'^(dev|v5\.14\.x)$'
+
+This should be updated for a new version, along with `smv_latest_version`.
+
+.. warning::
+
+   `sphinx-multiversion` only considers **local** branches and tags
+   (`refs/heads/*` and `refs/tags/*`); it ignores remote-tracking refs such as
+   `clawpack/v5.14.x` unless `smv_remote_whitelist` is set.  If you have never
+   checked out the release branch, it will be missing from your build -- and
+   because it is `smv_latest_version`, the site would end up with no top-level
+   pages at all.  It also silently skips any ref whose `conf.py` fails to
+   load.  `make versions` therefore runs a pre-flight check first::
+
+       make check-versions
+
+   which reports exactly which versions will be built and prints the
+   `git branch` command for anything missing.  Tags `v5.1.x` through `v5.6.x`
+   are known not to build with a current Sphinx (their `conf.py` refers to a
+   `plot_directive` extension that no longer resolves); they are listed in
+   `KNOWN_UNBUILDABLE` in `tools/check_versions.py`, and their already
+   published HTML is left untouched by the deployment step.
+
+Why the promote step is needed
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`_build/html` contains a subdirectory for each version, but immediately after
+`make versions` there are no `.html` files in its top level.  For the Clawpack
 webpage we need to:
 
 - Copy the files from the current version to the top level so that
-  navigating to http://www.clawpack.org/installing.html, 
+  navigating to http://www.clawpack.org/installing.html,
   for example, goes to the current version of this document.
-  
+
 - Fix the links in the sidebars of each of these `.html` files so that clicking
   on `dev`, for example, takes you to http://www.clawpack.org/dev/installing.html
-  
-This can be done as follows::
 
-    cd $CLAW/doc/doc/_build/html
-    cp -r v5.7.x/* .   # replacing v5.7.x with the current version
-    python ../../fix_links_top_level.py
-    
+`make versions-promote` does both, via `tools/promote_latest.py`.  This used to
+be a manual `cp -r v5.7.x/* .` plus `python ../../fix_links_top_level.py`; the
+script replaces that because the manual form had to be edited by hand at each
+release, skipped dotfiles (notably `.nojekyll`, without which GitHub Pages
+will not serve `_static`), and only fixed links one or two directories deep.
+
+You can sanity check the result before deploying::
+
+    cd $CLAW/doc
+    ./doc/tools/check_built_site.sh doc/_build/html
+
 If you like what you see, you can push back to your fork and then issue a
 pull request to have these changes incorporated into the documentation.
 
@@ -299,31 +333,79 @@ updated for this release, the corresponding html files should be too.
 Updating the webpages
 ---------------------
 
-A few developers can push html files to the repository
+The html files live in the repository
 `clawpack/clawpack.github.com
-<https://github.com/clawpack/clawpack.github.com>`_ 
+<https://github.com/clawpack/clawpack.github.com>`_
 which causes them to show up on the web at
 `http://clawpack.github.io
-<http://clawpack.github.io>`_.  
+<http://clawpack.github.io>`_.
 
-To do so, first create the html files as described above, which should appear
-in `doc/doc/_build/html` and `doc/gallery/_build/html`.
+.. _howto_doc_publish_ci:
 
-Commit any changed source files and 
+Publishing with GitHub Actions (preferred)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`.github/workflows/docs-publish.yml` does the build and the push for you.
+Pushing documentation changes to `dev` refreshes `www.clawpack.org/dev/`
+automatically; a full-site publish (all versions plus the top-level pages) is
+run on demand from the Actions tab via **Run workflow**, choosing:
+
+`scope`
+    `dry-run` builds and uploads the site as an artifact without writing
+    anything; `dev-only` publishes just `dev/`; `full-site` publishes every
+    version and the promoted top level.
+
+`target_branch`
+    `ci-preview` is a branch of `clawpack.github.com` that GitHub Pages does
+    not serve, so you can inspect a real diff without affecting the live site.
+    Use `master` only when you mean to publish.
+
+`prune`
+    Off by default.  When on, stale files *inside* rebuilt version directories
+    are deleted.  Nothing outside them is ever removed.
+
+The publish step waits for a reviewer to approve the `clawpack-org-website`
+environment, and the run summary shows the diff and the previous site
+revision, so you can see exactly what will change before approving and how to
+roll back afterwards.
+
+The gallery is *not* published by CI -- its pages and thumbnails have to be
+generated by running the examples (see `gallery/README.md`), so it stays a
+manual `rsync` as described below.
+
+Publishing by hand
+^^^^^^^^^^^^^^^^^^^
+
+This still works and is the fallback if Actions is unavailable.  First create
+the html files as described above, which should appear in
+`doc/doc/_build/html` and `doc/gallery/_build/html`.
+
+Commit any changed source files and
 push to `clawpack/doc <https://github.com/clawpack/doc>`_.
 
 Then do::
 
     cd $CLAW/clawpack.github.com
-    git checkout v5.x.x
+    git checkout master
     git pull origin  # make sure you are up to date before doing next steps!
 
-    cd $CLAW/doc/doc
-    rsync -azv _build/html/ ../../clawpack.github.com/
-    
+    cd $CLAW/doc
+    ./rsync_doc.sh
+
 If you have updated the gallery, also do::
 
-    rsync -azv ../gallery/_build/html/ ../../clawpack.github.com/gallery/
+    ./rsync_gallery.sh
+
+Both scripts refuse to run if there is no promoted build to copy, and neither
+passes `--delete`: the published site contains many directories that no
+current build produces (`gallery/`, `doxygen/`, `pdf/`, `notebooks/`, the
+`v5.1.x`--`v5.6.x` trees, and more), and deleting them would take down large
+parts of the website.  Set `DRYRUN=1` to see what would be copied.
+
+Before committing, you can run the same guard CI uses::
+
+    cd $CLAW/doc
+    ./doc/tools/check_published_tree.sh ../clawpack.github.com doc/_build/html
 
 
 Then move to the `clawpack.github.com` repository and 
