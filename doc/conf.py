@@ -170,11 +170,17 @@ smv_tag_whitelist = r'^v\d+\.\d+\.x$'  # all tags of form v*.*.x
 
 # Whitelist pattern for branches (set to None to ignore all branches)
 # Will show up in list of Latest releases,  see _templates/versioning.html
-smv_branch_whitelist = r'v5.14.x|dev'
+# Anchored at both ends on purpose: sphinx-multiversion matches with re.match,
+# which only anchors the start, so an unanchored r'v5.14.x|dev' would also
+# match a branch named e.g. 'dev-experiment' and publish it as a version.
+smv_branch_whitelist = r'^(dev|v5\.14\.x)$'
 
 # For possible use in adding version banners?
 # see https://holzhaus.github.io/sphinx-multiversion/master/templates.html#version-banners
 smv_released_pattern = r'v.*'
+# Update this at release time (see howto_doc.rst).  tools/promote_latest.py
+# reads it to decide which version gets copied to the site root, so this is
+# the only place the current version needs to be recorded.
 smv_latest_version = 'v5.14.x'
 
 # The theme to use for HTML and HTML Help pages.  Major themes that come with

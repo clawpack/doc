@@ -9,6 +9,14 @@
 #
 # Lower bounds reflect versions known to build the docs; bump as needed.
 
-sphinx>=7.0
+# Upper bound is forced by sphinx-multiversion, which is unmaintained (0.2.4,
+# 2022).  It calls sphinx.config.Config.read(confdir, overrides) positionally,
+# but Sphinx 9.0 made `overrides` and `tags` keyword-only and required:
+#
+#     TypeError: Config.read() takes 2 positional arguments but 3 were given
+#
+# Verified boundary: compatible through 8.2.3, broken from 9.0.0.  Until we
+# migrate off sphinx-multiversion, `make versions` cannot run on Sphinx 9.
+sphinx>=7.0,<9
 sphinx-multiversion>=0.2.4   # only needed for `make versions`
 docutils>=0.20

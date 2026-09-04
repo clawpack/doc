@@ -1,0 +1,278 @@
+name: docs-publish
+
+# Build the multiversion documentation and publish it to
+# clawpack/clawpack.github.com, which is what www.clawpack.org serves.
+#
+# This replaces the manual `make versions` + rsync_doc.sh + commit procedure
+# in doc/howto_doc.rst.  That procedure still works and remains the fallback.
+#
+# Deliberate design choices, each guarding a specific failure:
+#
+#   * The site repo's Pages stays on the legacy branch-source build.  Its
+#     published tree is ~1.6 GiB, well over the 1 GB documented for Pages;
+#     legacy has served it for years, whereas `build_type: workflow` enforces
+#     the cap at deploy time and would be a one-way door.
+#
+#   * The sync is additive and never force-pushes.  The published site holds
+#     ~20 top-level directories no build produces (gallery/, doxygen/, pdf/,
+#     notebooks/, v5.1.x-v5.6.x, ...).  doc/tools/check_published_tree.sh
+#     asserts they are untouched before anything is committed.
+#
+#   * Publishing is gated on a GitHub Environment with required reviewers, so
+#     a human approves each write to the live site after seeing the diff.
+#
+#   * Pull requests build a single version only.  sphinx-multiversion builds
+#     from committed refs via `git archive`, never the working tree, so
+#     `make versions` on a PR would show reviewers the site *without* the PR's
+#     changes.
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - 'doc/**'
+      - '.github/workflows/docs-publish.yml'
+  pull_request:
+    branches: [dev, v5.14.x]
+    paths:
+      - 'doc/**'
+      - '.github/workflows/docs-publish.yml'
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'What to publish'
+        type: choice
+        options: [dry-run, dev-only, full-site]
+        default: dry-run
+      target_branch:
+        description: 'Branch of clawpack.github.com to push to (ci-preview is inert; master is live)'
+        default: ci-preview
+      prune:
+        description: 'Delete stale files inside rebuilt version dirs'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+# Never cancel in progress: a cancelled publish could leave the site repo
+# with a partial sync staged.
+concurrency:
+  group: docs-publish
+  cancel-in-progress: false
+
+jobs:
+  # A PR preview: single version, working tree, no secrets, no publish.
+  preview:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install system build dependencies
+        run: sudo apt-get update && sudo apt-get install -y gfortran
+
+      - name: Install the documentation toolchain
+        run: pip install -r doc/tools/requirements-docs.txt
+
+      - name: Install clawpack (for autodoc imports)
+        run: pip install clawpack
+
+      # Single-version build of this PR's working tree, into doc/_build1/html.
+      - name: Build the docs
+        run: make -C doc html SPHINXOPTS="-j auto"
+
+      - name: Upload the preview build
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-preview-${{ github.event.pull_request.number }}
+          path: doc/_build1/html
+          retention-days: 14
+
+  build:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    # Nine full Sphinx builds, each running autodoc over the clawpack packages.
+    timeout-minutes: 120
+    steps:
+      # fetch-depth: 0 gets the full history *and* all tags.  Both are
+      # required: sphinx-multiversion builds each version from `git archive`
+      # of its ref, and most versions are tags.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install system build dependencies
+        run: sudo apt-get update && sudo apt-get install -y gfortran
+
+      - name: Install the documentation toolchain
+        run: pip install -r doc/tools/requirements-docs.txt
+
+      - name: Install clawpack (for autodoc imports)
+        run: pip install clawpack
+
+      # actions/checkout leaves only the checked-out ref as a local branch,
+      # and sphinx-multiversion ignores remote-tracking refs, so v5.14.x
+      # would silently vanish from the build -- and it is smv_latest_version,
+      # i.e. the whole site root.  This creates the missing local branches
+      # (reading the whitelist from conf.py) and then asserts the version set.
+      - name: Check and materialise the version set
+        working-directory: doc
+        run: python tools/check_versions.py --create-local-branches
+
+      - name: Build all versions and promote the latest
+        working-directory: doc
+        run: make versions-publish SPHINXOPTS="-j auto"
+
+      - name: Check the built site
+        run: doc/tools/check_built_site.sh doc/_build/html
+
+      - name: Upload the built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-site
+          path: doc/_build/html
+          retention-days: 14
+
+  publish:
+    needs: build
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/dev') ||
+      (github.event_name == 'workflow_dispatch' && inputs.scope != 'dry-run')
+    runs-on: ubuntu-latest
+    # Holds CLAWPACK_SITE_DEPLOY_KEY behind required reviewers.
+    environment: clawpack-org-website
+    timeout-minutes: 60
+    env:
+      SCOPE: ${{ github.event_name == 'push' && 'dev-only' || inputs.scope }}
+      TARGET_BRANCH: ${{ github.event_name == 'push' && 'master' || inputs.target_branch }}
+      PRUNE: ${{ inputs.prune && '--prune' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Download the built site
+        uses: actions/download-artifact@v4
+        with:
+          name: built-site
+          path: site-build
+
+      # A queued run must not publish a tree built from a superseded commit.
+      - name: Refuse to publish a stale build
+        if: github.event_name == 'push'
+        run: |
+          git fetch --quiet origin dev
+          head=$(git rev-parse origin/dev)
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            echo "origin/dev has moved to $head since this run started ($GITHUB_SHA)."
+            echo "A newer run will publish; skipping to avoid regressing the site."
+            exit 1
+          fi
+
+      - name: Start ssh-agent with the site deploy key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.CLAWPACK_SITE_DEPLOY_KEY }}
+
+      - name: Clone the published site
+        run: |
+          git clone --depth 1 --branch "$TARGET_BRANCH" \
+            git@github.com:clawpack/clawpack.github.com.git site
+          git -C site config user.name "clawpack-doc-publish"
+          git -C site config user.email "clawpack-doc-publish@users.noreply.github.com"
+
+      - name: Record the current site revision
+        run: |
+          prev=$(git -C site rev-parse HEAD)
+          echo "PREV_SHA=$prev" >> "$GITHUB_ENV"
+          {
+            echo "### Publishing to \`$TARGET_BRANCH\` (scope: \`$SCOPE\`)"
+            echo
+            echo "Site revision before this publish: \`$prev\`"
+            echo "To roll back: \`git revert <publish-sha>\` in clawpack.github.com"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Additive by default.  --delete appears only for `prune`, and
+      # check_published_tree.sh independently verifies that nothing outside
+      # the rebuilt version directories was removed.
+      - name: Sync the built site into the clone
+        run: |
+          delete=""
+          if [ -n "$PRUNE" ]; then delete="--delete"; fi
+
+          case "$SCOPE" in
+            dev-only)
+              rsync -a $delete site-build/dev/ site/dev/
+              ;;
+            full-site)
+              versions=$(find site-build -mindepth 1 -maxdepth 1 -type d \
+                -exec basename {} \; | grep -E '^(dev|v[0-9]+\.[0-9]+\.x)$')
+              for v in $versions; do
+                rsync -a $delete "site-build/$v/" "site/$v/"
+              done
+              # The promoted root, excluding the version dirs handled above.
+              rsync -a --exclude='/dev/' --exclude='/v*.*.x/' site-build/ site/
+              ;;
+            *)
+              echo "unexpected scope: $SCOPE" >&2; exit 1
+              ;;
+          esac
+
+      - name: Assert nothing unmanaged changed
+        run: doc/tools/check_published_tree.sh site site-build "$PRUNE"
+
+      - name: Report the diff
+        if: always()
+        run: |
+          {
+            echo
+            echo '### Changes'
+            echo '```'
+            git -C site diff --stat HEAD | tail -20
+            echo '```'
+            echo
+            echo "New files: $(git -C site ls-files --others --exclude-standard | wc -l)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit and push
+        run: |
+          cd site
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing changed; the published site is already up to date."
+            exit 0
+          fi
+          git commit \
+            -m "docs: update $SCOPE from clawpack/doc@$(echo "$GITHUB_SHA" | cut -c1-8)" \
+            -m "previous-site-sha: $PREV_SHA" \
+            -m "workflow-run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          git push origin "$TARGET_BRANCH"
+
+      - name: Where to verify
+        run: |
+          # shellcheck disable=SC2016  # backticks below are literal Markdown
+          {
+            echo
+            if [ "$TARGET_BRANCH" = "master" ]; then
+              echo 'Live in a few minutes at <https://www.clawpack.org/>. Check:'
+              echo '`gh api repos/clawpack/clawpack.github.com/pages/builds/latest --jq ".status, .error"`'
+            else
+              echo "Pushed to \`$TARGET_BRANCH\`, which GitHub Pages does not serve."
+              echo "Review the diff against \`master\` on github.com."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
