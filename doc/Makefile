@@ -19,7 +19,7 @@ else
 	LAYOUT = _themes/flask_local/layout.html
 endif
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest
+.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest checkwarnings checkwarnings-update checkwarnings-strict
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -39,6 +39,9 @@ help:
 	@echo "  changes    to make an overview of all changed/added/deprecated items"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
+	@echo "  checkwarnings        to fail on any NEW reST/docstring warning (vs the baseline)"
+	@echo "  checkwarnings-update to regenerate the warning baseline (tools/doc_warnings_baseline.txt)"
+	@echo "  checkwarnings-strict to fail on ANY reST/docstring warning, ignoring the baseline"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
@@ -139,4 +142,13 @@ doctest:
 
 versions:
 	sphinx-multiversion . _build/html
+
+checkwarnings:
+	python tools/check_doc_warnings.py
+
+checkwarnings-update:
+	python tools/check_doc_warnings.py --update
+
+checkwarnings-strict:
+	python tools/check_doc_warnings.py --strict
 
