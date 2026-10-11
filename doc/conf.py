@@ -44,17 +44,18 @@ sys.path.append(os.path.abspath('./tools'))
 # is has to be one decision shared with tools/check_doc_warnings.py, or the
 # warning baseline stops being comparable -- hence tools/clawroot.py.
 # Set CLAW to build against the pinned tree (`make claw-pin`).
-from clawroot import claw_root
+#
+# That is the tree for dev and for single-version builds.  In a multiversion
+# build, ext/clawpack_source.py swaps in each released version's own tree
+# (tools/clawpack-release-refs.txt) before autodoc imports anything.
+from clawroot import CLAW_SUBPATHS, claw_root
 clawpack_root = claw_root()
 # Ahead of site-packages, so a pip-installed or editable clawpack cannot
 # shadow the tree we mean to document.
 sys.path.insert(0, clawpack_root)
 print("clawpack_root = %s" % clawpack_root)
-sys.path.append(os.path.join(clawpack_root,'amrclaw/doc'))
-sys.path.append(os.path.join(clawpack_root,'visclaw/doc'))
-sys.path.append(os.path.join(clawpack_root,'geoclaw/doc'))
-sys.path.append(os.path.join(clawpack_root,'pyclaw/src'))
-sys.path.append(os.path.join(clawpack_root,'riemann/src/python/riemann'))
+for _sub in CLAW_SUBPATHS:
+    sys.path.append(os.path.join(clawpack_root, _sub))
 
 
 # General configuration
@@ -70,7 +71,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.inheritance_diagram',
               'sphinx_multiversion',
               'sphinx.ext.mathjax',
-              'srclinks']
+              'srclinks',
+              'clawpack_source']
 
 
 # autodoc imports the documented modules at build time, so anything they

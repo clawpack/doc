@@ -1,0 +1,31 @@
+# The Clawpack source tree each *released* documentation version is built
+# against: <doc version> <clawpack/clawpack commit> [# tag].
+#
+# WHY THIS FILE EXISTS
+#
+# sphinx-multiversion builds every version with dev's conf.py, so without this
+# every version directory would get its API pages from the one tree pinned in
+# clawpack-ref.txt -- i.e. current master.  A release's .rst names modules as
+# they were at that release; where master has since renamed them (surge.storm
+# -> met.storm) autodoc fails to import and the page comes out silently empty,
+# and everywhere else the release pages document code that release never
+# shipped.
+#
+# Each row pins the super-repo commit of the release's newest patch tag.  The
+# subrepo commits come from that commit's submodule pointers, exactly as the
+# release shipped them; tools/fetch_clawpack_src.py --releases materialises
+# one tree per row, and ext/clawpack_source.py selects the tree for the
+# version being built.  `dev` is not listed: it documents clawpack-ref.txt.
+#
+# check_versions.py fails if a buildable release version has no row, or a row
+# names a version that is not built.  When cutting a release, add its row here
+# (and bump the row when a patch release follows).
+
+v5.7.x    5d49f0ab191dc22a6a0dd28daed9907dc8b47bd3   # v5.7.1
+v5.8.x    531a8fb6682d4fb9fab8b0812c83de599117c150   # v5.8.2
+v5.9.x    84be0d766c353753eca52c9fe9a1f15f08966df7   # v5.9.2
+v5.10.x   b87c8e74219dd6e8acad8eb753066b2296030d09   # v5.10.0
+v5.11.x   285b7de9837702276213b7deb040495adc60c4cc   # v5.11.0
+v5.12.x   98ba40b1ef28c527bcbe16495e075dda5fe8f3f5   # v5.12.0
+v5.13.x   634a9b78a75ba1434be5d6e84fda8dbf096e882b   # v5.13.1
+v5.14.x   5ce53b4814a3e03536fa17e8ae05e65960194c56   # v5.14.0

@@ -22,6 +22,10 @@ VERSIONSDIR   = _build
 # it.  Outside the sphinx source dir on purpose -- Sphinx would otherwise walk
 # it looking for .rst files.
 CLAWPIN       = ../.claw-pin
+# One tree per released version (tools/clawpack-release-refs.txt), which
+# `make versions` documents each release against; `make claw-releases` fills
+# it.  $CLAW_VERSION_TREES points the build elsewhere (CI does).
+CLAWRELEASES  = ../.claw-releases
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -35,7 +39,7 @@ else
 	LAYOUT = _themes/flask_local/layout.html
 endif
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest checkenv checkwarnings checkwarnings-update checkwarnings-strict check-versions versions clean-versions versions-promote versions-publish claw-pin claw-pin-check tools-tests
+.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest checkenv checkwarnings checkwarnings-update checkwarnings-strict check-versions versions clean-versions versions-promote versions-publish claw-pin claw-pin-check claw-releases claw-releases-check tools-tests
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -61,6 +65,8 @@ help:
 	@echo "  clean-versions    to remove $(VERSIONSDIR)"
 	@echo "  claw-pin             to clone the Clawpack source tree pinned in tools/clawpack-ref.txt"
 	@echo "                       into $(CLAWPIN); build against it with CLAW=\$$(cd $(CLAWPIN) && pwd)"
+	@echo "  claw-releases        to clone one tree per released version (tools/clawpack-release-refs.txt)"
+	@echo "                       into $(CLAWRELEASES); \`make versions\` documents each release against its own"
 	@echo "  checkenv             to check that every autodoc target imports from \$$CLAW"
 	@echo "  checkwarnings        to fail on any NEW reST/docstring warning (vs the baseline)"
 	@echo "  checkwarnings-update to regenerate the warning baseline (tools/doc_warnings_baseline.txt)"
@@ -209,6 +215,15 @@ claw-pin:
 claw-pin-check:
 	python tools/fetch_clawpack_src.py $(CLAWPIN) --check
 
+# The release trees for `make versions`.  The release commits are all in the
+# history of ordinary clones, so borrowing from $CLAW next door makes this
+# cheap; check-versions refuses to build if they are missing or stale.
+claw-releases:
+	python tools/fetch_clawpack_src.py $(CLAWRELEASES) --releases --reference ../.. --quiet
+
+claw-releases-check:
+	python tools/fetch_clawpack_src.py $(CLAWRELEASES) --releases --check
+
 checkenv:
 	python tools/check_doc_env.py
 
@@ -232,5 +247,6 @@ tools-tests:
 	python tools/test_check_doc_env.py
 	python tools/test_check_doc_warnings.py
 	python tools/test_promote_latest.py
+	python tools/test_compare_autodoc.py
 	bash tools/test_check_published_tree.sh
 

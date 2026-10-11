@@ -186,6 +186,49 @@ able to import what the docs reference::
 To bump the pinned Clawpack, edit `tools/clawpack-ref.txt` and repeat the
 regeneration above in the same commit.
 
+.. _howto_doc_release_trees:
+
+Released versions: one source tree each
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`tools/clawpack-ref.txt` is the tree for `dev`.  A multiversion build documents
+each **released** version against the code that release shipped instead:
+`tools/clawpack-release-refs.txt` maps every built release (`v5.7.x`,
+`v5.8.x`, ...) to the `clawpack/clawpack` commit of its newest patch tag, and
+the subrepos come from that commit's submodule pointers.
+
+This matters because `sphinx-multiversion` builds every version with *this*
+checkout's `conf.py`.  Against one current tree, a release's API pages
+document code it never had, and a module renamed since the release documents
+nothing at all: `storm_module.html` came out empty on every release once
+`surge.storm` became a re-export of `met.storm`, with no warning.
+
+`make claw-releases` clones one tree per row into `$CLAW/doc/.claw-releases`
+(borrowing objects from your checkouts, so all of them take about a minute),
+and `ext/clawpack_source.py` swaps the right one onto `sys.path` as each
+version starts.  `$CLAW_VERSION_TREES` points the build at trees somewhere
+else.  So a full local multiversion build is::
+
+    make claw-pin
+    make claw-releases
+    CLAW=$(cd ../.claw-pin && pwd) make versions-publish
+
+Three checks keep this honest:
+
+- `make check-versions` fails if a built release has no row in
+  `tools/clawpack-release-refs.txt`, a row names a version that is not built,
+  or a release tree is missing or at the wrong commit.
+- The build fails if autodoc cannot import anything, in any version.  (That
+  catches modules that are gone; it cannot catch the re-export case above,
+  which imports fine and documents nothing.)
+- The publish workflow's `stage` summary lists every page that loses API
+  entries compared with the published site, before anyone approves a publish.
+
+When cutting a release, add its row to `tools/clawpack-release-refs.txt` (see
+:ref:`howto_release_doc`).  Releases before 5.8 import the `imp` module, which
+Python 3.12 removed; `ext/clawpack_source.py` provides the one function they
+use.
+
 .. note::
 
    One warning class is never baselined, however long it has been present:
