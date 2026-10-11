@@ -2,15 +2,19 @@ name: docs
 
 # Build the main Clawpack documentation (doc/doc) and fail on any NEW
 # reStructuredText / docstring warning relative to the committed baseline
-# (doc/doc/tools/doc_warnings_baseline.txt).  This only parses/renders the
-# docs (the `dummy` builder writes no HTML) and does not deploy.
+# (doc/tools/doc_warnings_baseline.txt).  This only parses/renders the docs
+# (the `dummy` builder writes no HTML) and does not deploy.
 #
-# NOTE on the baseline: the set of warnings depends on the build environment
-# (which clawpack packages are importable, which optional deps are mocked).
-# The committed baseline must therefore be regenerated in THIS environment,
-# not on a developer's full source checkout.  Run the workflow manually
-# (workflow_dispatch) to produce an updated baseline artifact, then commit it.
-# Until that is done, treat this check as informational in branch protection.
+# The baseline is reproducible because both halves of the environment are
+# pinned: the toolchain in doc/tools/requirements-docs.txt and the Clawpack
+# source tree in doc/tools/clawpack-ref.txt.  A maintainer regenerates it with
+# the same two pins locally --
+#
+#     cd doc && make claw-pin && CLAW=$(cd ../.claw-pin && pwd) make checkwarnings-update
+#
+# -- in a virtualenv with no clawpack installed, and CI reproduces the result.
+# The workflow_dispatch path below remains as a fallback for regenerating it
+# on a runner instead.
 
 on:
   pull_request:
@@ -24,41 +28,53 @@ on:
         type: boolean
         default: false
 
-jobs:
-  checkwarnings:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+permissions:
+  contents: read
 
-      - uses: actions/setup-python@v5
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Unit tests for the scripts in doc/tools/.  No doc toolchain and no source
+  # tree, so it finishes in seconds and gives a clear signal separate from the
+  # build itself.
+  tools-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
+      - name: Run the tools tests
+        working-directory: doc
+        run: make tools-tests
 
-      # gfortran is needed to build the clawpack Fortran extensions on install.
-      - name: Install system build dependencies
-        run: sudo apt-get update && sudo apt-get install -y gfortran
-
-      - name: Install the documentation toolchain
-        run: pip install -r doc/tools/requirements-docs.txt
-
-      # autodoc imports the clawpack subpackages; petclaw/petsc4py is optional
-      # and mocked in conf.py, so it is intentionally NOT installed here.  If a
-      # different subpackage fails to import, add it to autodoc_mock_imports in
-      # doc/conf.py rather than installing heavy/optional deps.
-      - name: Install clawpack (for autodoc imports)
-        run: pip install clawpack
+  checkwarnings:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-doc-build
 
       - name: Check for new documentation warnings
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.update_baseline) }}
         working-directory: doc
         run: make checkwarnings
 
-      # Manual path: regenerate the baseline in the CI environment and upload it
-      # so a maintainer can commit the environment-consistent version.
+      # Manual fallback: regenerate the baseline on the runner and upload it so
+      # a maintainer can commit it.  The pin check is redundant here -- the
+      # composite action already materialised exactly the pinned tree -- so it
+      # is skipped rather than re-run.
       - name: Regenerate baseline
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.update_baseline }}
         working-directory: doc
-        run: make checkwarnings-update
+        run: make checkwarnings-update ALLOW_UNPINNED=1
 
       - name: Upload regenerated baseline
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.update_baseline }}

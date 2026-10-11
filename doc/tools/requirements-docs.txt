@@ -1,14 +1,61 @@
-# Python toolchain for building the main Clawpack documentation
-# (doc/doc).  The clawpack packages themselves are installed separately
-# (see .github/workflows/docs.yml); this file pins only the Sphinx tooling
-# so that the warning baseline (tools/doc_warnings_baseline.txt) and CI agree.
+# Python environment for building the main Clawpack documentation (doc/doc).
 #
-# Regenerate the baseline in an environment built from this file:
+# Everything here is pinned exactly.  The committed warning baseline
+# (tools/doc_warnings_baseline.txt) records the warnings a *specific* toolchain
+# emits over a *specific* Clawpack source tree; loose bounds would let an
+# upstream release turn CI red on its own, with no change on our side.  The
+# source tree side of that pair is tools/clawpack-ref.txt.
+#
+# To reproduce the CI environment exactly:
+#
+#     python -m venv .venv && . .venv/bin/activate
 #     pip install -r tools/requirements-docs.txt
-#     make checkwarnings-update
+#     make claw-pin
+#     CLAW=$(cd ../.claw-pin && pwd) make checkwarnings
 #
-# Lower bounds reflect versions known to build the docs; bump as needed.
+# Use a fresh virtualenv.  An editable or pip-installed clawpack registers a
+# meta-path finder that shadows the pinned source tree regardless of sys.path,
+# and autodoc would then document the wrong code.  tools/check_doc_env.py
+# detects that and says so.
+#
+# To bump: change a pin, rerun the four commands above, and commit the
+# regenerated baseline in the same change.
 
-sphinx>=7.0
-sphinx-multiversion>=0.2.4   # only needed for `make versions`
-docutils>=0.20
+# -----------------------------------------------------------------------------
+# Sphinx toolchain
+# -----------------------------------------------------------------------------
+# Sphinx is held below 9 by sphinx-multiversion, which is unmaintained (0.2.4,
+# 2022).  It calls sphinx.config.Config.read(confdir, overrides) positionally,
+# but Sphinx 9.0 made `overrides` and `tags` keyword-only and required:
+#
+#     TypeError: Config.read() takes 2 positional arguments but 3 were given
+#
+# Verified boundary: compatible through 8.2.3, broken from 9.0.0.  Until we
+# migrate off sphinx-multiversion, `make versions` cannot run on Sphinx 9.
+sphinx==8.2.3
+sphinx-multiversion==0.2.4   # only needed for `make versions`
+docutils==0.21.2
+
+# -----------------------------------------------------------------------------
+# Imported by the Clawpack source tree at module scope
+# -----------------------------------------------------------------------------
+# autodoc imports the modules it documents, so anything a documented module
+# imports at import time has to be installed here -- or mocked in conf.py's
+# autodoc_mock_imports.  A module must be one or the other, never neither:
+# otherwise a build succeeds or fails depending on what the person running it
+# happens to have installed, and the baseline stops being portable.
+#
+# tools/check_doc_env.py enforces that rule.  If it reports a missing module,
+# add it here (light, pure-wheel dependencies) or mock it in conf.py (heavy or
+# platform-specific ones such as vtk, gdal, tables).
+#
+# Not listed, deliberately: utm, pyproj, pooch, rioxarray, dask, vtk, gdal,
+# tables, pupynere.  Every one of those is imported lazily inside a function
+# or a try/except, so it never affects an autodoc import.
+numpy==2.5.3
+scipy==1.18.1
+matplotlib==3.11.1
+pandas==3.0.5          # clawpack.geoclaw.met.*
+xarray==2026.7.0       # clawpack.geoclaw.netcdf_utils
+netCDF4==1.7.4         # clawpack.geoclaw.netcdf_utils, clawpack.pyclaw.fileio.netcdf
+h5py==3.16.0           # clawpack.pyclaw.fileio.hdf5 raises without h5py or tables

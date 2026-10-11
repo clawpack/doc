@@ -1,0 +1,63 @@
+name: Set up a Clawpack doc build
+description: >-
+  Install the pinned Sphinx toolchain, materialise the pinned Clawpack source
+  tree, and verify that autodoc can import it.  Exports CLAW for later steps.
+  The repository must already be checked out (a local action cannot check out
+  the repository it lives in).
+
+# The docs document a Clawpack *source* tree: doc/conf.py puts $CLAW on
+# sys.path and clawpack/clawpack's namespace shim maps clawpack.geoclaw onto
+# geoclaw/src/python/geoclaw and so on.  Nothing here pip-installs clawpack.
+#
+# It used to.  `pip install clawpack` gets the PyPI release, which declares no
+# dependencies at all (so numpy was absent and every autodoc import failed) and
+# predates the surge -> met rename the dev docs describe.  The result was a
+# build that emitted 36 `autodoc: failed to import` warnings and would have
+# published a site with empty API pages.
+#
+# No gfortran either: everything autodoc imports is pure Python.  riemann's
+# compiled solvers are imported inside a try/except and their absence only
+# prints a notice.
+
+inputs:
+  python-version:
+    default: '3.12'
+
+outputs:
+  claw:
+    description: Absolute path of the materialised Clawpack source tree.
+    value: ${{ steps.claw.outputs.path }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v6
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: pip
+        # setup-python's default globs are **/requirements.txt and
+        # **/pyproject.toml; this repository has neither, and `cache: pip`
+        # without this line is a hard error, not a cache miss.
+        cache-dependency-path: doc/tools/requirements-docs.txt
+
+    - name: Install the documentation toolchain
+      shell: bash
+      run: pip install -r doc/tools/requirements-docs.txt
+
+    # Cloned rather than checked out with actions/checkout so that one tracked
+    # file, doc/tools/clawpack-ref.txt, is the single place the pins live --
+    # for CI and for `make claw-pin` alike.
+    - name: Materialise the pinned Clawpack source tree
+      id: claw
+      shell: bash
+      run: |
+        python doc/tools/fetch_clawpack_src.py "$RUNNER_TEMP/claw" --quiet
+        echo "path=$RUNNER_TEMP/claw" >> "$GITHUB_OUTPUT"
+        echo "CLAW=$RUNNER_TEMP/claw" >> "$GITHUB_ENV"
+
+    # Fails loudly on the class of problem that used to surface only as
+    # warnings nobody read.
+    - name: Check the doc build environment
+      shell: bash
+      working-directory: doc
+      run: python tools/check_doc_env.py --check-pin

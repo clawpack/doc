@@ -25,9 +25,22 @@ default    Fail (exit 1) if any warning appears that is NOT in the baseline.
 --strict   Ignore the baseline entirely and fail if there are ANY warnings.
            This is the end goal once the baseline has been driven to empty.
 
-Because autodoc imports the clawpack packages, the set of warnings depends on
-the build environment.  Regenerate the baseline (``--update``) in the same
-environment the CI workflow uses so the signatures agree.
+Some warnings are never baselined at all -- see ``_ALWAYS_FAIL``.  An
+``autodoc: failed to import`` means the API pages for that module come out
+empty, which is a silent content loss no baseline should be allowed to hide.
+
+Reproducibility
+---------------
+autodoc imports the Clawpack packages, so the set of warnings is a property of
+the environment as much as of the docs.  Two things pin it:
+
+    tools/requirements-docs.txt   the Sphinx toolchain and clawpack's deps
+    tools/clawpack-ref.txt        the Clawpack source tree, by commit
+
+Regenerate against both, in a virtualenv with no clawpack installed::
+
+    make claw-pin
+    CLAW=$(cd ../.claw-pin && pwd) make checkwarnings-update
 """
 
 from __future__ import annotations
@@ -39,11 +52,11 @@ import subprocess
 import sys
 import tempfile
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from clawroot import SRC_DIR, TOOLS_DIR, claw_root  # noqa: E402
 
-# tools/ -> doc/doc (source dir) -> .../clawpack (the $CLAW root)
-TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.dirname(TOOLS_DIR)
-CLAW_ROOT = os.path.abspath(os.path.join(SRC_DIR, os.pardir, os.pardir))
+CLAW_ROOT = claw_root()
+DOC_REPO = os.path.dirname(SRC_DIR)      # this repository's root
 BASELINE = os.path.join(TOOLS_DIR, 'doc_warnings_baseline.txt')
 
 # A sphinx warning line looks like one of:
@@ -55,43 +68,101 @@ _WARNING_RE = re.compile(
     r'(?P<msg>.*)$'
 )
 
+# Warnings that must never be absorbed into the baseline, however long they
+# have been around.  `autodoc: failed to import` means the API pages for those
+# modules are *empty* in the built site -- a silent content loss that looks
+# identical to a healthy build unless someone reads the log.  Baselining it
+# once would hide it forever; the first docs-publish runs emitted 36 of these
+# and would have published the result.
+_ALWAYS_FAIL = (
+    ('autodoc: failed to import',
+     'autodoc could not import these -- their API pages would be EMPTY'),
+)
+
+# Absolute paths appear inside warning *messages* as well as in the location
+# field: "duplicate label about, other instance in /abs/path/about.rst".  Left
+# alone they make the baseline machine-specific.
+_ABSPATH_RE = re.compile(r'(?<![\w/])(/[^\s:,()\'"]+)')
+
 
 def _relativize(path: str) -> str:
-    """Return *path* relative to the $CLAW root when possible, else unchanged."""
+    """Rewrite *path* into a form that does not depend on where things live.
+
+    Two roots, because the docs and the code they document need not be in the
+    same place any more: $CLAW can point at a pinned tree materialised
+    somewhere else entirely (see clawroot.py).  The doc repository is anchored
+    on its own so that `doc/doc/topo.rst` means the same thing either way --
+    including in the default layout, where the repository sits inside $CLAW and
+    both roots agree.
+    """
     if not path:
         return path
     abspath = path if os.path.isabs(path) else os.path.join(SRC_DIR, path)
-    try:
-        rel = os.path.relpath(abspath, CLAW_ROOT)
-    except ValueError:  # different drive on Windows
-        return path
-    # Only rewrite paths that actually live under the $CLAW root.
-    return rel if not rel.startswith(os.pardir) else path
+
+    for root, prefix in ((DOC_REPO, 'doc'), (CLAW_ROOT, '')):
+        try:
+            rel = os.path.relpath(abspath, root)
+        except ValueError:  # different drive on Windows
+            continue
+        if not rel.startswith(os.pardir):
+            return os.path.join(prefix, rel) if prefix else rel
+
+    # An installed clawpack still yields a stable suffix, and keeping it
+    # comparable makes a misconfigured build report a location a reader can act
+    # on rather than a runner-specific absolute path.
+    marker = '/site-packages/'
+    if marker in abspath:
+        return abspath.split(marker, 1)[1]
+    return path
 
 
 def _normalize_location(loc: str) -> str:
     """Drop absolute prefixes and volatile line numbers from a warning's location.
 
-    ``/abs/mod.py:docstring of pkg.Cls:7`` -> ``geoclaw/.../mod.py:docstring of pkg.Cls``
+    ``/abs/mod.py:docstring of pkg.Cls:7`` -> ``docstring of pkg.Cls``
     ``/abs/foo.rst:123``                    -> ``doc/doc/foo.rst``
+
+    Docstring warnings are keyed on the dotted name alone.  Where the module
+    file lives depends on how Clawpack was made importable -- a source tree
+    under $CLAW, or site-packages -- but ``clawpack.geoclaw.util.bearing`` is
+    the same object either way, so it is the stable half of the location.
     """
     if not loc:
         return ''
     parts = loc.split(':')
-    filepart = _relativize(parts[0])
     # Keep descriptive middle components (e.g. "docstring of ..."), drop pure
     # line numbers so unrelated edits that shift lines don't churn the baseline.
     rest = [p for p in parts[1:] if not p.strip().isdigit()]
-    return ':'.join([filepart] + rest)
+    if any(p.strip().startswith('docstring of ') for p in rest):
+        return ':'.join(p.strip() for p in rest)
+    return ':'.join([_relativize(parts[0])] + rest)
+
+
+def _scrub_message(msg: str) -> str:
+    """Rewrite absolute paths embedded in a warning message.
+
+    Sphinx names the *other* end of a conflict by absolute path, e.g.
+    ``duplicate label about, other instance in /abs/doc/doc/about.rst``.
+    Without this the baseline only matches the machine that wrote it.
+    """
+    return _ABSPATH_RE.sub(lambda m: _relativize(m.group(1)), msg)
 
 
 def _signature(match: 're.Match[str]') -> str:
     loc = _normalize_location(match.group('loc').strip())
     level = match.group('level')
-    msg = ' '.join(match.group('msg').split())
+    msg = _scrub_message(' '.join(match.group('msg').split()))
     if loc:
         return f'{loc}: {level}: {msg}'
     return f'{level}: {msg}'
+
+
+def _always_fail(signature: str) -> str | None:
+    """The explanation for *signature* if it can never be baselined, else None."""
+    for pattern, explanation in _ALWAYS_FAIL:
+        if pattern in signature:
+            return explanation
+    return None
 
 
 def collect_warnings() -> set[str]:
@@ -147,15 +218,21 @@ def load_baseline() -> set[str]:
 
 
 def write_baseline(signatures: set[str]) -> None:
+    """Rewrite the baseline, refusing to record anything in ``_ALWAYS_FAIL``."""
     header = (
         "# Baseline of pre-existing Clawpack documentation warnings.\n"
         "# Generated by tools/check_doc_warnings.py --update.\n"
         "# `make checkwarnings` fails only on warnings NOT listed here.\n"
-        "# Regenerate in the same environment the CI workflow uses.\n"
+        "#\n"
+        "# Reproducible only against the toolchain in tools/requirements-docs.txt\n"
+        "# and the Clawpack source tree in tools/clawpack-ref.txt.  Regenerate\n"
+        "# with `make claw-pin && CLAW=$(cd ../.claw-pin && pwd) make\n"
+        "# checkwarnings-update` in a virtualenv with no clawpack installed.\n"
     )
+    recorded = {sig for sig in signatures if _always_fail(sig) is None}
     with open(BASELINE, 'w', encoding='utf-8') as fh:
         fh.write(header)
-        for sig in sorted(signatures):
+        for sig in sorted(recorded):
             fh.write(sig + '\n')
 
 
@@ -169,9 +246,32 @@ def main(argv: list[str] | None = None) -> int:
 
     current = collect_warnings()
 
+    # Grouped by explanation so each class is reported once, with its reason.
+    fatal: dict[str, list[str]] = {}
+    for sig in current:
+        explanation = _always_fail(sig)
+        if explanation is not None:
+            fatal.setdefault(explanation, []).append(sig)
+
+    def report_fatal() -> None:
+        for explanation, sigs in sorted(fatal.items()):
+            print(f"\n{len(sigs)} warning(s) that are never baselined -- "
+                  f"{explanation}:\n")
+            for sig in sorted(sigs):
+                print(f"  {sig}")
+        print("\nThis usually means the environment, not the docs, is wrong: "
+              "run\n`python tools/check_doc_env.py` for the underlying import "
+              "errors.")
+
     if args.update:
         write_baseline(current)
-        print(f"Wrote {len(current)} warning(s) to {os.path.relpath(BASELINE, CLAW_ROOT)}")
+        n = len(current) - sum(len(v) for v in fatal.values())
+        # Relative to the sphinx source dir, not $CLAW: $CLAW may be a pinned
+        # tree somewhere else entirely, and "../doc/tools/..." helps nobody.
+        print(f"Wrote {n} warning(s) to {os.path.relpath(BASELINE, SRC_DIR)}")
+        if fatal:
+            report_fatal()
+            return 1
         return 0
 
     if args.strict:
@@ -193,6 +293,13 @@ def main(argv: list[str] | None = None) -> int:
         for sig in sorted(resolved):
             print(f"  - {sig}")
         print()
+
+    # Reported separately from `new`, and before it: when the environment is
+    # broken these dominate the diff, and telling someone to run
+    # `checkwarnings-update` would be exactly the wrong advice.
+    if fatal:
+        report_fatal()
+        return 1
 
     if new:
         print(f"{len(new)} NEW documentation warning(s):\n")

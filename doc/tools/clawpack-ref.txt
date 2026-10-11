@@ -1,0 +1,45 @@
+# The Clawpack source tree the documentation is built against.
+#
+# WHY THIS FILE EXISTS
+#
+# doc/conf.py does `sys.path.append(os.path.abspath('../..'))`, i.e. the parent
+# of this repository, and clawpack/clawpack's `clawpack/__init__.py` shim then
+# extends __path__ to the sibling source trees (geoclaw/src/python, pyclaw/src,
+# ...).  So autodoc documents *source checkouts*, never an installed clawpack.
+# A doc build is therefore only reproducible if those checkouts are pinned.
+#
+# Without a pin the warning baseline (doc_warnings_baseline.txt) is a moving
+# target: any docstring edit anywhere in Clawpack would turn doc CI red, and
+# the baseline would only ever match the machine that last regenerated it.
+#
+# WHY A FLAT MANIFEST AND NOT JUST THE SUPER-REPO SHA
+#
+# clawpack/clawpack's own submodule pointers lag its subrepos.  As of this
+# writing master (73649ee) records geoclaw 11479f67, which predates the
+# surge -> met rename that doc/met_forcing.rst and doc/storm_module.rst
+# document.  Pinning only the super-repo would therefore pin a tree the docs
+# cannot be built against.  Each repo is pinned explicitly instead.
+#
+# When clawpack/clawpack's submodule pointers catch up, these should be set
+# from `git ls-tree <super-repo-sha>` so the two agree.
+#
+# HOW TO BUMP
+#
+#   1. Edit the SHAs below (they must be full 40-character, *pushed* commits;
+#      CI clones from github.com and cannot see local-only branches).
+#   2. make claw-pin              # materialise the pinned tree
+#   3. make checkwarnings-update  # regenerate the baseline against it
+#   4. Commit this file and doc_warnings_baseline.txt together.
+#
+# Format: <repo-name> <sha>.  `clawpack` is the super-repo and provides the
+# namespace shim; the rest are cloned into it as its submodule directories
+# would be.  All are cloned from https://github.com/clawpack/<repo-name>.
+
+clawpack   73649ee8d86220a63ae35e45ad1d5b97102e06ea
+amrclaw    9044e2f9f6fad9d425f6f1b21ca7ebbae902ca2c
+classic    9cedf986668f5c91c1ee1e0c2796232d4cc8bee3
+clawutil   f6f56af449e54af6007006b5688c1355659d5015
+geoclaw    5b6a02f3de967baffb2c5ca3fe456bc89954370f
+pyclaw     f522337ef75abef1153e2025a204b7ef4f7c5c9f
+riemann    fe929bf2403c0ef759e0892998bc80ac84fcfe67
+visclaw    eb16e086b72f66c88efd0d9d76d7b9aacd3e0cd9
