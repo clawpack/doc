@@ -128,9 +128,12 @@ jobs:
         working-directory: doc
         run: python tools/check_versions.py --create-local-branches
 
+      # --jobs=auto, not "-j auto": sphinx-multiversion takes positional
+      # filenames and passes only unknown options through, so a separate
+      # "auto" is taken as a filename and sphinx-build gets a bare -j.
       - name: Build all versions and promote the latest
         working-directory: doc
-        run: make versions-publish SPHINXOPTS="-j auto"
+        run: make versions-publish SPHINXOPTS="--jobs=auto"
 
       - name: Check the built site
         run: doc/tools/check_built_site.sh doc/_build/html
