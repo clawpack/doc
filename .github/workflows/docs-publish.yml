@@ -18,8 +18,20 @@ name: docs-publish
 #     notebooks/, v5.1.x-v5.6.x, ...).  doc/tools/check_published_tree.sh
 #     asserts they are untouched before anything is committed.
 #
-#   * Publishing is gated on a GitHub Environment with required reviewers, so
-#     a human approves each write to the live site after seeing the diff.
+#   * Staging and pushing are separate jobs.  An environment approval gates
+#     the start of a job, never a step, so a single job cannot show its diff
+#     before asking for approval.  `stage` clones the public site anonymously,
+#     syncs, checks and commits locally, and writes the diff to its summary;
+#     `push` holds the deploy key, verifies the site has not moved, and pushes
+#     that exact commit (handed over as a git bundle), so what goes live is
+#     byte-identical to what was shown.
+#
+#   * Two environments, by risk.  `docs-dev` has no reviewers: a dev-only
+#     publish is additive inside dev/ and check_published_tree.sh already
+#     enforces that, so a per-merge approval would only be a rubber stamp.
+#     `docs-site` requires reviewers and gates full-site and prune, the only
+#     publishes that can touch historical version directories.  Both hold
+#     CLAWPACK_SITE_DEPLOY_KEY and allow deployments from `dev` only.
 #
 #   * Pull requests build a single version only.  sphinx-multiversion builds
 #     from committed refs via `git archive`, never the working tree, so
@@ -130,19 +142,28 @@ jobs:
           path: doc/_build/html
           retention-days: 14
 
-  publish:
+  # Stage the publish: clone the public site anonymously, sync, check, commit
+  # locally, and hand that commit to `push` as a git bundle.  No environment
+  # and no secret.  An environment approval gates the *start* of a job, so the
+  # diff has to be complete in an earlier job for a reviewer to see it before
+  # approving; this is that job.
+  stage:
     needs: build
     if: >-
       (github.event_name == 'push' && github.ref == 'refs/heads/dev') ||
       (github.event_name == 'workflow_dispatch' && inputs.scope != 'dry-run')
     runs-on: ubuntu-latest
-    # Holds CLAWPACK_SITE_DEPLOY_KEY behind required reviewers.
-    environment: clawpack-org-website
     timeout-minutes: 60
     env:
       SCOPE: ${{ github.event_name == 'push' && 'dev-only' || inputs.scope }}
       TARGET_BRANCH: ${{ github.event_name == 'push' && 'master' || inputs.target_branch }}
       PRUNE: ${{ inputs.prune && '--prune' || '' }}
+      # Must match `push`'s environment expression below.
+      GATE: ${{ (inputs.scope == 'full-site' || inputs.prune) && 'docs-site' || 'docs-dev' }}
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      prev_sha: ${{ steps.clone.outputs.prev_sha }}
+      publish_sha: ${{ steps.commit.outputs.publish_sha }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -154,40 +175,17 @@ jobs:
           name: built-site
           path: site-build
 
-      # A queued run must not publish a tree built from a superseded commit.
-      - name: Refuse to publish a stale build
-        if: github.event_name == 'push'
-        run: |
-          git fetch --quiet origin dev
-          head=$(git rev-parse origin/dev)
-          if [ "$head" != "$GITHUB_SHA" ]; then
-            echo "origin/dev has moved to $head since this run started ($GITHUB_SHA)."
-            echo "A newer run will publish; skipping to avoid regressing the site."
-            exit 1
-          fi
-
-      - name: Start ssh-agent with the site deploy key
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.CLAWPACK_SITE_DEPLOY_KEY }}
-
-      - name: Clone the published site
+      # clawpack.github.com is public, so staging needs no credentials at all.
+      - name: Clone the published site (read-only)
+        id: clone
         run: |
           git clone --depth 1 --branch "$TARGET_BRANCH" \
-            git@github.com:clawpack/clawpack.github.com.git site
+            https://github.com/clawpack/clawpack.github.com.git site
           git -C site config user.name "clawpack-doc-publish"
           git -C site config user.email "clawpack-doc-publish@users.noreply.github.com"
-
-      - name: Record the current site revision
-        run: |
           prev=$(git -C site rev-parse HEAD)
+          echo "prev_sha=$prev" >> "$GITHUB_OUTPUT"
           echo "PREV_SHA=$prev" >> "$GITHUB_ENV"
-          {
-            echo "### Publishing to \`$TARGET_BRANCH\` (scope: \`$SCOPE\`)"
-            echo
-            echo "Site revision before this publish: \`$prev\`"
-            echo "To roll back: \`git revert <publish-sha>\` in clawpack.github.com"
-          } >> "$GITHUB_STEP_SUMMARY"
 
       # Additive by default.  --delete appears only for `prune`, and
       # check_published_tree.sh independently verifies that nothing outside
@@ -218,37 +216,139 @@ jobs:
       - name: Assert nothing unmanaged changed
         run: doc/tools/check_published_tree.sh site site-build "$PRUNE"
 
-      - name: Report the diff
-        if: always()
+      # The bundle carries only the new commit's objects (its prerequisite is
+      # PREV_SHA, which the site already has), so it stays small even for a
+      # full-site publish of the ~1.6 GiB tree.
+      - name: Commit locally and bundle the commit
+        id: commit
         run: |
-          {
-            echo
-            echo '### Changes'
-            echo '```'
-            git -C site diff --stat HEAD | tail -20
-            echo '```'
-            echo
-            echo "New files: $(git -C site ls-files --others --exclude-standard | wc -l)"
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Commit and push
-        run: |
+          mkdir -p publish
           cd site
           git add -A
           if git diff --cached --quiet; then
             echo "Nothing changed; the published site is already up to date."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit \
             -m "docs: update $SCOPE from clawpack/doc@$(echo "$GITHUB_SHA" | cut -c1-8)" \
             -m "previous-site-sha: $PREV_SHA" \
             -m "workflow-run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          git push origin "$TARGET_BRANCH"
+          git branch publish
+          git bundle create ../publish/publish.bundle publish "^$PREV_SHA"
+          git diff --name-status "$PREV_SHA" HEAD > ../publish/changed-files.txt
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "publish_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Report the diff
+        if: always()
+        run: |
+          {
+            echo "### Staged for \`$TARGET_BRANCH\` (scope: \`$SCOPE\`)"
+            echo
+            echo "Site revision before this publish: \`$PREV_SHA\`"
+            if [ -f publish/changed-files.txt ]; then
+              echo "Staged commit: \`$(git -C site rev-parse HEAD)\`"
+              echo "Pushing it needs the \`$GATE\` environment."
+              echo
+              echo '```'
+              git -C site diff --stat "$PREV_SHA" HEAD | tail -20
+              echo '```'
+              echo
+              echo "Added: $(grep -c '^A' publish/changed-files.txt || true)," \
+                   "modified: $(grep -c '^M' publish/changed-files.txt || true)," \
+                   "deleted: $(grep -c '^D' publish/changed-files.txt || true)." \
+                   "Full list: \`changed-files.txt\` in the \`publish-bundle\` artifact."
+            else
+              echo
+              echo "Nothing to publish."
+            fi
+            echo
+            echo "To roll back after a publish: \`git revert <publish-sha>\` in clawpack.github.com"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the staged commit
+        if: steps.commit.outputs.changed == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: publish-bundle
+          path: publish
+          retention-days: 14
+
+  # Push exactly the commit `stage` reported, nothing rebuilt or re-synced.
+  # The only job that sees the deploy key, and only after its environment
+  # allows it: docs-dev (no reviewers) for dev-only publishes, docs-site
+  # (required reviewers) for full-site and prune.
+  push:
+    needs: stage
+    if: needs.stage.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    environment: ${{ (inputs.scope == 'full-site' || inputs.prune) && 'docs-site' || 'docs-dev' }}
+    timeout-minutes: 30
+    env:
+      TARGET_BRANCH: ${{ github.event_name == 'push' && 'master' || inputs.target_branch }}
+      PREV_SHA: ${{ needs.stage.outputs.prev_sha }}
+      PUBLISH_SHA: ${{ needs.stage.outputs.publish_sha }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      # A queued or long-awaiting run must not publish a tree built from a
+      # superseded commit.
+      - name: Refuse to publish a stale build
+        if: github.event_name == 'push'
+        run: |
+          git fetch --quiet origin dev
+          head=$(git rev-parse origin/dev)
+          if [ "$head" != "$GITHUB_SHA" ]; then
+            echo "origin/dev has moved to $head since this run started ($GITHUB_SHA)."
+            echo "A newer run will publish; skipping to avoid regressing the site."
+            exit 1
+          fi
+
+      - name: Download the staged commit
+        uses: actions/download-artifact@v4
+        with:
+          name: publish-bundle
+          path: publish
+
+      - name: Start ssh-agent with the site deploy key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.CLAWPACK_SITE_DEPLOY_KEY }}
+
+      # Blobless and without a checkout: the push needs the PREV_SHA commit
+      # and its trees, not the 1.6 GiB of content.
+      - name: Check the site has not moved since staging
+        run: |
+          git clone --depth 1 --filter=blob:none --no-checkout \
+            --branch "$TARGET_BRANCH" \
+            git@github.com:clawpack/clawpack.github.com.git site
+          live=$(git -C site rev-parse HEAD)
+          if [ "$live" != "$PREV_SHA" ]; then
+            echo "$TARGET_BRANCH has moved to $live since staging ($PREV_SHA)."
+            echo "The reviewed diff no longer applies; re-run the workflow."
+            exit 1
+          fi
+
+      - name: Push the reviewed commit
+        run: |
+          cd site
+          git bundle verify ../publish/publish.bundle
+          git fetch ../publish/publish.bundle publish:refs/heads/publish
+          got=$(git rev-parse refs/heads/publish)
+          if [ "$got" != "$PUBLISH_SHA" ]; then
+            echo "bundle holds $got, but stage reported $PUBLISH_SHA" >&2
+            exit 1
+          fi
+          git push origin "$PUBLISH_SHA:refs/heads/$TARGET_BRANCH"
 
       - name: Where to verify
         run: |
           # shellcheck disable=SC2016  # backticks below are literal Markdown
           {
+            echo "Pushed \`$PUBLISH_SHA\` to \`$TARGET_BRANCH\`."
             echo
             if [ "$TARGET_BRANCH" = "master" ]; then
               echo 'Live in a few minutes at <https://www.clawpack.org/>. Check:'
