@@ -218,6 +218,12 @@ When making changes for a new release, the following pages in the directory
    `installing_pip.rst`, `installing_fortcodes.rst`,
    `contents.rst`, `docker_image.rst`.
 
+ - Add a row for the new version to `tools/clawpack-release-refs.txt` naming
+   the `clawpack/clawpack` commit of the release tag (and update the row when
+   a patch release follows), so its API pages are built from the code it
+   shipped.  `make check-versions` fails until the row is there.  See
+   :ref:`howto_doc_release_trees`.
+
  - Modify the main landing page `_templates/index.html` to cite the
    proper version number and DOI. 
    (No longer necessary -- This page has been changed to be more generic.)

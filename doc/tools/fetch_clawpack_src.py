@@ -18,6 +18,7 @@ Usage
 -----
     fetch_clawpack_src.py <dest> [--reference DIR] [--quiet]
     fetch_clawpack_src.py <dest> --check
+    fetch_clawpack_src.py <dir> --releases [--reference DIR] [--quiet] [--check]
 
 ``--reference DIR`` treats ``DIR`` as a directory of existing Clawpack clones
 (e.g. an ordinary ``$CLAW``) and borrows their objects, which makes a local
@@ -27,6 +28,14 @@ than shared, so the result stays valid if the reference clones later move.
 ``--check`` verifies an existing tree matches the manifest and exits non-zero
 otherwise.  ``make checkwarnings-update`` uses it to refuse to write a baseline
 from an unpinned tree.
+
+``--releases`` instead builds ``<dir>/<version>/`` for every row of
+``tools/clawpack-release-refs.txt``: the super-repo at the release commit and
+each subrepo at the commit that release's submodule pointer names, i.e. the
+code the release shipped.  ``make versions`` documents each released version
+against its own tree (see ``ext/clawpack_source.py``).  ``--reference`` is
+worth passing here: the release commits are all in the history of ordinary
+clones, so eight trees cost little more than one.
 """
 
 from __future__ import annotations
@@ -36,6 +45,8 @@ import os
 import re
 import subprocess
 import sys
+
+from clawroot import read_release_manifest
 
 
 TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -103,7 +114,9 @@ def _materialise(repo: str, sha: str, target: str, reference: str | None,
         os.makedirs(target, exist_ok=True)
         clone = ['git', 'clone', '--quiet', '--no-checkout']
         if reference:
-            ref_dir = os.path.join(reference, repo)
+            # In a $CLAW layout the super-repo is the directory itself.
+            ref_dir = (reference if repo == SUPER_REPO
+                       else os.path.join(reference, repo))
             if os.path.isdir(os.path.join(ref_dir, '.git')):
                 # --dissociate copies the borrowed objects in, so the result
                 # does not break if the reference clone is later pruned.
@@ -135,6 +148,84 @@ def materialise(dest: str, reference: str | None = None,
     if not os.path.exists(shim):
         raise SystemExit(f'{shim} missing -- `import clawpack.geoclaw` cannot '
                          'work without the super-repo namespace shim')
+
+
+def _subrepo_pins(super_dir: str, sha: str,
+                  subrepos: set[str]) -> list[tuple[str, str]]:
+    """``(subrepo, commit)`` for each submodule pointer in super-repo *sha*.
+
+    Read straight from the tree with ls-tree rather than through `git
+    submodule`, which would want .gitmodules URLs and network access of its
+    own.  Only the subrepos the dev pin also lists are returned; anything
+    else a release happened to carry is not documented.
+    """
+    out = subprocess.run(['git', '-C', super_dir, 'ls-tree', sha],
+                         capture_output=True, text=True, check=True).stdout
+    pins = []
+    for line in out.splitlines():
+        meta, path = line.split('\t', 1)
+        _mode, kind, obj = meta.split()
+        if kind == 'commit' and path in subrepos:
+            pins.append((path, obj))
+    return pins
+
+
+def _release_plan(trees: str) -> list[tuple[str, str, str]]:
+    """``(version, repo, sha)`` for every repo of every release tree.
+
+    The subrepo pins come from the super-repo, so it has to be present
+    first; callers materialise row by row in this order.
+    """
+    subrepos = {repo for repo, _ in read_manifest() if repo != SUPER_REPO}
+    plan = []
+    for version, sha in read_release_manifest().items():
+        root = os.path.join(trees, version)
+        plan.append((version, SUPER_REPO, sha))
+        if _head(root) is not None:
+            for repo, sub_sha in _subrepo_pins(root, sha, subrepos):
+                plan.append((version, repo, sub_sha))
+    return plan
+
+
+def materialise_releases(trees: str, reference: str | None = None,
+                         quiet: bool = False) -> None:
+    """Build ``<trees>/<version>`` for every row of the release manifest."""
+    trees = os.path.abspath(trees)
+    subrepos = {repo for repo, _ in read_manifest() if repo != SUPER_REPO}
+    for version, sha in read_release_manifest().items():
+        root = os.path.join(trees, version)
+        print(f'== {version}')
+        _materialise(SUPER_REPO, sha, root, reference, quiet)
+        pins = _subrepo_pins(root, sha, subrepos)
+        missing = subrepos - {repo for repo, _ in pins}
+        if missing:
+            raise SystemExit(f'{version}: super-repo {sha[:8]} has no '
+                             f'submodule pointer for {", ".join(sorted(missing))}')
+        for repo, sub_sha in pins:
+            _materialise(repo, sub_sha, os.path.join(root, repo), reference,
+                         quiet)
+
+
+def check_releases(trees: str) -> int:
+    """Report whether every release tree under *trees* matches its pins."""
+    trees = os.path.abspath(trees)
+    problems = []
+    for version, repo, sha in _release_plan(trees):
+        root = os.path.join(trees, version)
+        target = root if repo == SUPER_REPO else os.path.join(root, repo)
+        head = _head(target)
+        if head is None:
+            problems.append(f'  {version:<9} {repo:<10} MISSING  (want {sha[:8]})')
+        elif head != sha:
+            problems.append(f'  {version:<9} {repo:<10} {head[:8]} != pinned {sha[:8]}')
+    if problems:
+        print(f'{trees} does not match tools/clawpack-release-refs.txt:\n')
+        print('\n'.join(problems))
+        print('\nRun `make claw-releases` to materialise them.')
+        return 1
+    print(f'{trees} matches tools/clawpack-release-refs.txt '
+          f'({len(read_release_manifest())} releases).')
+    return 0
 
 
 def check(dest: str) -> int:
@@ -172,7 +263,16 @@ def main(argv: list[str] | None = None) -> int:
                         help='verify an existing tree instead of building one')
     parser.add_argument('--quiet', action='store_true',
                         help='only report the resulting SHAs')
+    parser.add_argument('--releases', action='store_true',
+                        help='build one tree per row of '
+                             'tools/clawpack-release-refs.txt under dest')
     args = parser.parse_args(argv)
+
+    if args.releases:
+        if args.check:
+            return check_releases(args.dest)
+        materialise_releases(args.dest, args.reference, args.quiet)
+        return 0
 
     if args.check:
         return check(args.dest)

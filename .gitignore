@@ -16,6 +16,9 @@ api/generated/
 # docs can be built against exactly what CI builds against.  Deliberately
 # outside doc/, which is the Sphinx source dir.
 .claw-pin/
+# `make claw-releases`: one tree per row of doc/tools/clawpack-release-refs.txt,
+# which `make versions` builds each released version against.
+.claw-releases/
 
 # -----------------------------------------------------------------------------
 # Python

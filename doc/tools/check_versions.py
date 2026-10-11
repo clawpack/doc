@@ -55,6 +55,17 @@ import sys
 TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
 DOC_DIR = os.path.dirname(TOOLS_DIR)
 
+sys.path.insert(0, TOOLS_DIR)
+from clawroot import (RELEASE_MANIFEST, read_release_manifest,  # noqa: E402
+                      release_trees_dir)
+import fetch_clawpack_src  # noqa: E402
+
+# Built versions that document the dev pin (tools/clawpack-ref.txt) rather
+# than a release tree.  Every other built version needs a row in
+# tools/clawpack-release-refs.txt, or ext/clawpack_source.py would document it
+# against master.
+PINNED_VERSIONS = {"dev"}
+
 # Refs that match the whitelists but whose conf.py cannot be loaded by a
 # supported Sphinx.  See "The second trap" above.  Their content is already
 # published and the sync never deletes it, so dropping them is not data loss --
@@ -255,6 +266,27 @@ def main(argv=None):
             "ERROR: unexpected version(s) in the build: %s"
             % ", ".join(unexpected)
         )
+
+    releases = set(read_release_manifest())
+    unpinned = sorted(set(built) - PINNED_VERSIONS - releases)
+    stale = sorted(releases - set(built))
+    if unpinned:
+        sys.exit(
+            "ERROR: built version(s) with no Clawpack release tree: %s\n"
+            "Add a row to %s naming the release commit to document them "
+            "against." % (", ".join(unpinned), os.path.relpath(RELEASE_MANIFEST))
+        )
+    if stale:
+        sys.exit(
+            "ERROR: %s lists version(s) that are not built: %s"
+            % (os.path.relpath(RELEASE_MANIFEST), ", ".join(stale))
+        )
+    print("\nrelease trees pinned for %d version(s); %s document(s) the dev pin"
+          % (len(releases), ", ".join(sorted(PINNED_VERSIONS & set(built)))))
+    # A tree left at an old commit after the manifest moved would document the
+    # wrong release without any error, so check the commits, not just presence.
+    if fetch_clawpack_src.check_releases(release_trees_dir()) != 0:
+        sys.exit(1)
 
     if recovered:
         print(

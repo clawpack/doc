@@ -38,11 +38,14 @@ name: docs-publish
 #     `make versions` on a PR would show reviewers the site *without* the PR's
 #     changes.
 #
-#   * The Clawpack source tree autodoc documents is pinned by commit in
-#     doc/tools/clawpack-ref.txt and set up by .github/actions/setup-doc-build.
-#     Every version directory is therefore built against the same source; the
-#     historical ones get API docs from newer code, which is also what the
-#     manual `make versions` + rsync_doc.sh procedure always did.
+#   * Each version is documented against the Clawpack source it shipped.
+#     dev uses the tree pinned in doc/tools/clawpack-ref.txt; each released
+#     version uses its release commit from doc/tools/clawpack-release-refs.txt
+#     (doc/ext/clawpack_source.py swaps it in).  Building every version
+#     against one current tree, as the manual procedure did, documented code
+#     the releases never had and emptied pages for renamed modules.  The
+#     build fails on any autodoc import failure, and `stage` reports every
+#     page that loses API entries before anyone approves.
 
 on:
   push:
@@ -118,6 +121,8 @@ jobs:
           persist-credentials: false
 
       - uses: ./.github/actions/setup-doc-build
+        with:
+          releases: 'true'
 
       # actions/checkout leaves only the checked-out ref as a local branch,
       # and sphinx-multiversion ignores remote-tracking refs, so v5.14.x
@@ -242,6 +247,12 @@ jobs:
           git diff --name-status "$PREV_SHA" HEAD > ../publish/changed-files.txt
           echo "changed=true" >> "$GITHUB_OUTPUT"
           echo "publish_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      # An API page emptied by an import problem is just "M" in the file list
+      # above; this is how a reviewer sees it before approving.
+      - name: Report pages that lose API entries
+        if: steps.commit.outputs.changed == 'true'
+        run: python3 doc/tools/compare_autodoc.py site "$PREV_SHA" HEAD >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report the diff
         if: always()

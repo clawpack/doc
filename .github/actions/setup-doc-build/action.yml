@@ -22,6 +22,12 @@ description: >-
 inputs:
   python-version:
     default: '3.12'
+  releases:
+    description: >-
+      Also materialise one Clawpack tree per released doc version
+      (doc/tools/clawpack-release-refs.txt) and export CLAW_VERSION_TREES, so
+      `make versions` documents each release against the code it shipped.
+    default: 'false'
 
 outputs:
   claw:
@@ -54,6 +60,16 @@ runs:
         python doc/tools/fetch_clawpack_src.py "$RUNNER_TEMP/claw" --quiet
         echo "path=$RUNNER_TEMP/claw" >> "$GITHUB_OUTPUT"
         echo "CLAW=$RUNNER_TEMP/claw" >> "$GITHUB_ENV"
+
+    # --reference borrows from the dev tree just cloned: the release commits
+    # are in its history, so eight more trees cost little more than one.
+    - name: Materialise the release trees
+      if: inputs.releases == 'true'
+      shell: bash
+      run: |
+        python doc/tools/fetch_clawpack_src.py "$RUNNER_TEMP/claw-releases" \
+          --releases --reference "$RUNNER_TEMP/claw" --quiet
+        echo "CLAW_VERSION_TREES=$RUNNER_TEMP/claw-releases" >> "$GITHUB_ENV"
 
     # Fails loudly on the class of problem that used to surface only as
     # warnings nobody read.
