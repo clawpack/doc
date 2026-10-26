@@ -307,7 +307,7 @@ Special attributes for plot_type = '2d_imshow'
 
      As an alternative to setting  *imshow_cmin* and *imshow_cmax*, provide
      a `matplotlib color norm
-<https://matplotlib.org/stable/api/colors_api.html#color-norms>`_ 
+     <https://matplotlib.org/stable/api/colors_api.html#color-norms>`_
      to *imshow_norm*. This will be used to normalize the values of q into the 
      colorspace specified by the colormap. If *imshow_norm* is provided, it 
      will be used instead of *imshow_cmin* and *imshow_cmax*. 
