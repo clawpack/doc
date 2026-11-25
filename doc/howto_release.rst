@@ -4,7 +4,75 @@
 Guide for doing a Clawpack release
 ===================================
 
-This is the procedure used to do a new official release of Clawpack.
+This is the procedure for an official release of Clawpack, e.g. `v5.15.0`.
+For building and publishing the documentation itself, see :ref:`howto_doc`.
+
+Both guides live in the `clawpack/doc` repository as `doc/howto_release.rst`
+and `doc/howto_doc.rst`, and are linked from the repository's `README.md`
+and from :ref:`developers`.
+
+In the commands below, `5.x.x` is the new version, `5.y.y` the previous one,
+and `5.x` the series (the doc branch for the 5.15 series is `v5.15.x`).
+The `upstream` remote is assumed to point at `github.com/clawpack/<repo>`
+(not your fork) and you need push permission there.
+
+.. _howto_release_automation:
+
+What is automated and what is not
+---------------------------------
+
+Almost all of a release is done by hand.  The automation is limited to
+checking and publishing:
+
+=====================================================  =====================================
+Step                                                   How it happens
+=====================================================  =====================================
+Version numbers, release candidate PR, tags            **Manual**
+Tar file and GitHub release                            **Manual**
+PyPI upload                                            **Manual** (`python -m build`, `twine`)
+Zenodo and OSF archives                                **Manual**
+Release notes page, doc version bumps                  **Manual** (edit `.rst` files)
+New doc branch, retire old one to a tag                **Manual** (git)
+Check that an install imports everything it ships      Automatic: `clawpack/clawpack` CI
+                                                       (`installed-imports.yml`) on every PR
+                                                       and nightly
+Check the doc version set and release source trees     Automatic: `make check-versions`, run
+                                                       before every multiversion build
+Build docs for a PR                                    Automatic: `docs.yml` (warnings) and
+                                                       `docs-publish.yml` (preview artifact)
+Publish `www.clawpack.org/dev/`                        Automatic on every merge to `dev`
+Publish the top-level site and all release versions    **Manual trigger**: Actions tab, then
+                                                       approve (see :ref:`howto_doc_publish_ci`)
+Gallery                                                **Manual**: run examples, build, rsync
+Apps repository, Docker image                          **Manual**
+=====================================================  =====================================
+
+.. _howto_release_checklist:
+
+Release checklist
+-----------------
+
+Do these in order.  Each step links to its details below.
+
+#. :ref:`Prepare <howto_release_prepare>`: all repos on `master`, up to date
+   and clean; run the gallery examples and look at the plots.
+#. :ref:`Bump the version number <howto_release_version>` in
+   `clawpack/clawpack` (three files).
+#. :ref:`Release candidate <howto_release_rc>`: PR to `clawpack/clawpack`,
+   optionally a pre-release tar file on GitHub.  Repeat until happy.
+#. :ref:`Final PR and tar file <howto_release_tarfile>`: set the full version,
+   merge, build the tar file, draft the GitHub release.
+#. :ref:`Tag every repository <howto_release_tag>` with `v5.x.x`.
+#. :ref:`Upload to PyPI <howto_release_pypi>` (test PyPI first).
+#. :ref:`Archive on Zenodo and OSF <howto_release_archive>`; note the new DOI.
+#. :ref:`Update the documentation <howto_release_doc>`: release notes page,
+   version numbers, DOI, release-refs row, and for a new 5.x series the new
+   doc branch.  Then publish the full site.
+#. :ref:`Rebuild the gallery <howto_release_gallery>` and publish it.
+#. :ref:`Update the apps repository <howto_release_apps>`.
+#. :ref:`Update the Docker image <howto_release_docker>`.
+
+.. _howto_release_prepare:
 
 Preparation
 -----------
@@ -12,170 +80,156 @@ Preparation
 Make sure all your subrepositories are up to date and clean::
 
     cd $CLAW
-    git co master
+    git checkout master
     git pull
     source pull_all.sh  # to make sure all subrepos are up to date
 
     python $CLAW/clawutil/src/python/claw_git_status.py
 
-Check the output of this last commands in the files `claw_git_status.txt`
+Check the output of the last command in the files `claw_git_status.txt`
 and `claw_git_diffs.txt` to make sure you don't have any uncommitted changes.
-    
-Run all the examples as described in `CLAW/doc/gallery/README.md
-<https://github.com/clawpack/doc/blob/master/gallery/README.md>`_
+
+Run all the examples as described in `$CLAW/doc/gallery/README.md
+<https://github.com/clawpack/doc/blob/dev/gallery/README.md>`_
 as required for building the galleries, and check all the resulting plots to
 make sure everything looks correct.
+
+.. _howto_release_version:
 
 Version numbers
 ---------------
 
-Change the version number in the following files to the new version number:
+Change the version number in these three files in `clawpack/clawpack`:
 
- - `clawpack/clawpack/__init__.py`
- - `clawpack/setup.py`
- - `clawpack/pyproject.toml`
+ - `clawpack/__init__.py` (`__version__`; the meson build reads the version
+   from here via `metadata.py`)
+ - `pyproject.toml` (`version`)
+ - `setup.py` (`MAJOR`, `MINOR`, `MICRO`)
 
+For a release candidate, use e.g. `5.x.xrc-alpha`; the final PR sets the
+full version.
 
+.. _howto_release_rc:
 
 Release candidates
 ------------------
 
-Make sure all repositories are checked out to the master branch and are up to
-date with the main Clawpack repositories and clean, as described in the
-preparation step above.
-
-
-After following the preparation instructions above, do the following::
+After the preparation and version steps above::
 
     cd $CLAW
-    git checkout -b v5.4.1rc-alpha    # change to appropriate name for this rc
+    git checkout -b v5.x.xrc-alpha    # change to appropriate name for this rc
     git add -u .
-    git commit -m "v5.4.1rc-alpha release candidate"
+    git commit -m "v5.x.xrc-alpha release candidate"
     git push <your fork>
 
-Then do a PR on https://github.com/clawpack/clawpack.
+Then open a PR on https://github.com/clawpack/clawpack.  Its
+`installed-imports` check builds and installs the tree as the PR records it and
+imports everything it ships; it must pass.
 
-Create a tar file and a Github release
---------------------------------------
+You can also build a tar file and draft a GitHub *pre-release* for the
+candidate, as in the next step, so others can test it.
 
-We generally do this step for a release candidate first, and then
-do the same for the final release.  For release candidates, modify the
-version number to include `5.4.1rc-alpha`, for example.
+.. _howto_release_tarfile:
 
-**NOTE:** Once one or more release candidates have been tested, the final
-such PR  should contain a change of the version number in the file
-`$CLAW/setup.py` and in `$CLAW/clawpack/__init__.py` to the full version,
-e.g. `5.4.1`.
+Final PR, tar file and GitHub release
+-------------------------------------
+
+Once one or more release candidates have been tested, the final PR sets the
+full version number (e.g. `5.x.x`) in the three files above.
 
 Once the PR has been merged::
 
     cd $CLAW
-    git co master
+    git checkout master
     git pull
     source pull_all.sh  # to make sure all subrepos are up to date
-    
-Create tar file (first install https://github.com/Kentzo/git-archive-all)::
+
+Create the tar file (first install https://github.com/Kentzo/git-archive-all)::
 
     cd $CLAW
     git-archive-all --prefix clawpack-v5.x.x/ clawpack-v5.x.x.tar
     gzip clawpack-v5.x.x.tar
 
-(Note: best to use v5.x.x rather than just 5.x.x to be consistent with the
-directory name created if following :ref:`installing_pip`.)
+(Use `v5.x.x` rather than just `5.x.x` to be consistent with the directory
+name created if following :ref:`installing_pip`.)
 
-Draft a new release on the webpage
-https://github.com/clawpack/clawpack/releases.
-Indicate that it is pre-release if desired.
+Draft a new release at https://github.com/clawpack/clawpack/releases,
+marked as a pre-release if appropriate.  As the description, add text such
+as::
 
-As a comment, add text such as::
-    
     Download the clawpack-v5.x.x.tar.gz file below, not the other tar
-    file of zip file. Those only include the top-level Clawpack directories and
-    not all the submodules. 
+    file or zip file. Those only include the top-level Clawpack directories
+    and not all the submodules.
 
-Then attach the tar file `clawpack-v5.x.x.tar.gz` to be
-included in the release by using the link "Attach binaries..." before
-finalizing the release.  (You can go back and "Edit release" if necessary.)
+Attach `clawpack-v5.x.x.tar.gz` to the release before publishing it.  (You
+can go back and "Edit release" if necessary.)
 
+.. _howto_release_tag:
 
+Tag all repositories
+--------------------
 
-Final release
---------------
-
-After the release has been finalized, **tag all repositories**.  In the commands
-below, it is assumed the remote `upstream` points to the main Github repos
-(not your fork) and that you have push permission.  Change `5.x.x` to the
-appropriate version number in these commands::
+After the release has been published on GitHub, tag every repository::
 
     cd $CLAW
-    git checkout master; git pull # make sure up to date!
+    git checkout master; git pull   # make sure up to date!
     git tag v5.x.x
     git push upstream v5.x.x
 
-    cd ../pyclaw
-    git checkout master; git pull # make sure up to date!
-    git tag v5.x.x
-    git push upstream v5.x.x
+    for repo in pyclaw classic amrclaw geoclaw clawutil visclaw riemann; do
+        (cd $CLAW/$repo && git checkout master && git pull &&
+         git tag v5.x.x && git push upstream v5.x.x)
+    done
 
-Do the same in all other repos (classic, amrclaw, geoclaw, clawutil, visclaw,
-riemann).
+These tags are used by :ref:`changes_to_master` and the release notes pages,
+which link to GitHub diffs between versions.  The `clawpack/clawpack` tag's
+commit is also what goes into `tools/clawpack-release-refs.txt` in the doc
+repo (see :ref:`howto_release_doc`).
 
-Note these tags are used in the documentation for pages like
-:ref:`changes_to_master` which generate diffs between the latest version and
-the current master branch of each repository.
+.. _howto_release_pypi:
 
-
-Pypi
+PyPI
 ----
 
-To release on the pypi server (for installation via pip) we 
-simply build from a clean clone and upload::
+Build from a clean clone::
 
-    git clone https://github.com/clawpack/clawpack.git
+    git clone --recurse-submodules https://github.com/clawpack/clawpack.git
     cd clawpack
-    git submodule init
+    git checkout v5.x.x
     git submodule update
+    pip install build twine
     python -m build
 
-For the last step to work you may need to pip install build.
-
-To upload to Pypi you need an account there and you must be listed as a
-maintainer of Clawpack.  Then you can update using
-`twine <https://pypi.org/project/twine/>`__.
-
-You can first upload to the testpypi server for testing::
+To upload you need a PyPI account and must be listed as a maintainer of
+Clawpack.  Upload to the test server first::
 
     twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-Click the link and check that it looks okay.  You can also test installation via::
+Check that the page looks right and that it installs::
 
-	pip3 uninstall clawpack
-	pip3 install —no-cache—dir —index-url https://test.pypi.org/simple/ clawpack
-	
-Once that works, do the real upload to pypi::
+    pip uninstall clawpack
+    pip install --no-cache-dir --index-url https://test.pypi.org/simple/ clawpack
+
+Then do the real upload::
 
     twine upload dist/*
 
+.. _howto_release_archive:
 
+Zenodo and OSF
+--------------
 
-Zenodo 
-------
+**Zenodo:** go to https://zenodo.org/ and create a new upload of the tar
+file, following the framework of https://doi.org/10.5281/zenodo.820730, for
+example.  This issues a new DOI, which goes into `releases.rst` and
+`about.rst` (see :ref:`howto_release_doc`).
 
-Go to the `the Zenodo page <https://zenodo.org/>`_ 
-and create a new upload for the latest tar file, following the framework of 
-https://doi.org/10.5281/zenodo.820730, for example.  This will issue a new
-DOI, which should be added to the page `$CLAW/doc/doc/releases.rst`.
+The GitHub repository is deliberately *not* linked to Zenodo: that would only
+archive a zip of the top-level `clawpack` repository, not the tar file with
+all the subrepositories.
 
-Note that the Github repository is not linked to Zenodo for automatic uploading
-on release since that would only archive a zip file of the main `clawpack`
-repository.  Instead we want to archive the tar file containing all
-subrepositories too.
-
-Open Science Framework (OSF)
-----------------------------
-
-Go to https://osf.io/kmw6h/files/ and upload the latest tarfile to the set
-of versions that can be accessed with the single DOI 
+**OSF:** upload the tar file to https://osf.io/kmw6h/files/, which keeps all
+versions under the single DOI
 `10.17605/osf.io/kmw6h <https://doi.org/10.17605/osf.io/kmw6h>`__.
 
 .. _howto_release_doc:
@@ -183,58 +237,63 @@ of versions that can be accessed with the single DOI
 Updating the documentation
 --------------------------
 
-See :ref:`howto_doc` for general instructions on building the documentation
-and galleries using Sphinx, and for how to push changes to Github so they
-show up on the web.
+All of this is in the `clawpack/doc` repository.  Details on building and
+publishing are in :ref:`howto_doc`; the branch model is described in
+:ref:`howto_doc_branches`.
 
-Note that in the `clawpack/doc` repository there is no `master` branch.
-There should be one corresponding to the latest release and
-also a branch `dev` that has changes since the last release. For a new
-release create a new branch from the `dev` branch with the version number,
-and update `conf.py` for the new version.
+**1. Release notes page** (on `dev`, in `doc/`):
 
-When making changes for a new release, the following pages in the directory
-`$CLAW/doc/doc` need to be updated:
+ - Copy `changes_to_master.rst` to `release_5_x_x.rst`, change its label and
+   title, and change `master` to `v5.x.x` in each GitHub link so they have the
+   form `v5.y.y...v5.x.x`.
+ - Add a brief summary of the major changes, using those diffs as a guide.
+ - Add it to `releases.rst`, along with the new Zenodo DOI.
+ - In `changes_to_master.rst`, replace `5.y.y` by `5.x.x` so that its links
+   compare `v5.x.x...master`.
 
- - A page like :ref:`release_5_4_0` needs to be created.  Copy
-   `changes_to_master.rst` to `release_5_x_x.rst` for a new release `5.x.x`
-   and then change `master` to `5_x_x` in each link to Github, so they have
-   the form `v5.4.0...v5.4.1`, for example when going from 5.4.0 to 5.4.1.
+**2. Version numbers and citation:**
 
- - Add to this page a brief summary of the major changes from the last
-   release, using the diffs that show up in `changes_to_master.rst` as a guide.
+ - `about.rst`: the bibtex entry and recommended citation (new DOI).
+ - `installing_pip.rst`, `installing_fortcodes.rst`, `contents.rst`,
+   `docker_image.rst`: the version number.
+ - `conf.py` on the release branch: `version` and `release` (e.g. `5.15` and
+   `5.15.x`).  On `dev` these stay `dev`; check that a merge between the two
+   branches has not swapped them (see :ref:`howto_doc_branches`).
 
- - Add and commit this new page, and also add a link to it to the file
-   `releases.rst` (to show up in :ref:`releases`).
+**3. Release source tree** for the API pages: add (or, for a patch release,
+update) the row for `v5.x` in `tools/clawpack-release-refs.txt`, naming the
+commit of the `v5.x.x` tag in `clawpack/clawpack`::
 
- - Modify the page `changes_to_master.rst` by replacing the previous version
-   number (e.g. `5.y.y`) by the version number of the new release
-   (e.g. `5.x.x`) so that links are comparing e.g. `v5.x.x...master`
+    git -C $CLAW rev-parse v5.x.x^{commit}
 
- - Update `releases.rst` to include a link to the new version on Zenodo.
-   Also update the bibtex and recommended citation in `about.rst`.
+`make check-versions` fails until the row is there.  See
+:ref:`howto_doc_release_trees`.
 
- - Modify several other files to point to the new version number, in particular
-   `installing_pip.rst`, `installing_fortcodes.rst`,
-   `contents.rst`, `docker_image.rst`.
+**4. For a new 5.x series only** (e.g. 5.14.x to 5.15.x): follow
+:ref:`howto_doc_major` to create the `v5.15.x` branch, retire `v5.14.x` to a
+tag, and update `smv_branch_whitelist` and `smv_latest_version` in `conf.py`
+and the branch lists in `.github/workflows/docs.yml` and
+`.github/workflows/docs-publish.yml`.  For a patch release (e.g. 5.14.0 to
+5.14.1) just make sure `dev` and `v5.14.x` are up to date with each other.
 
- - Add a row for the new version to `tools/clawpack-release-refs.txt` naming
-   the `clawpack/clawpack` commit of the release tag (and update the row when
-   a patch release follows), so its API pages are built from the code it
-   shipped.  `make check-versions` fails until the row is there.  See
-   :ref:`howto_doc_release_trees`.
+**5. Publish:** merge to `dev` (this republishes `dev/` automatically), then
+run a `full-site` publish from the Actions tab so the top-level pages and the
+release's version directory are rebuilt.  See :ref:`howto_doc_publish_ci`.
 
- - Modify the main landing page `_templates/index.html` to cite the
-   proper version number and DOI. 
-   (No longer necessary -- This page has been changed to be more generic.)
-     
- - Update `conf.py` to the new version number, and also
-   `$CLAW/doc/gallery/conf.py`  (For a major release.)
+.. _howto_release_gallery:
+
+Updating the gallery
+--------------------
+
+The gallery is not built by CI.  Run the examples, build, and rsync it as
+described in :ref:`howto_doc_gallery`.
+
+.. _howto_release_apps:
 
 Updating the apps repository
 ----------------------------
 
-Ideally all the apps in the :ref:`apps` should be rerun with the new release
+Ideally all the apps in :ref:`apps` should be rerun with the new release
 and any issues fixed.  If old apps are modified, add a note to the
 `README.rst` file in the directory that indicates when it was last updated
 and to what release.  Some apps already have a section at the end of this
@@ -247,24 +306,18 @@ file of the form::
 
     - Updated for Clawpack 5.4.0 on 4 Jan 2017
 
+.. _howto_release_docker:
 
-
-Updating the Dockerfile
------------------------
+Updating the Docker image
+-------------------------
 
 See :ref:`docker_image` for instructions on using the docker image.
 
-Note that unlike the tar file for a new release, the docker image includes
-a clone of the `apps` repository, so it would be best to first update that
-repository if necessary.
+Unlike the tar file, the docker image includes a clone of the `apps`
+repository, so update that repository first if necessary.
 
- - Clone the repository https://github.com/clawpack/docker-files 
-
- - Make a new `Dockerfile` for the new version by copying an old one
-   and changing the version numbers in it.  Make any other changes needed
-   for this new release.
-
- - See the `README.md` file in that repo for instructions on building an
-   image and pushing it to dockerhub (which requires push permission).
-
-
+ - Clone https://github.com/clawpack/docker-files
+ - Make a new `Dockerfile` for the new version by copying an old one and
+   changing the version numbers in it, plus any other changes needed.
+ - See the `README.md` in that repo for building an image and pushing it to
+   Docker Hub (which requires push permission).

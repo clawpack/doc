@@ -59,3 +59,10 @@ pandas==3.0.5          # clawpack.geoclaw.met.*
 xarray==2026.7.0       # clawpack.geoclaw.netcdf_utils
 netCDF4==1.7.4         # clawpack.geoclaw.netcdf_utils, clawpack.pyclaw.fileio.netcdf
 h5py==3.16.0           # clawpack.pyclaw.fileio.hdf5 raises without h5py or tables
+
+# Imported only by *released* trees (tools/clawpack-release-refs.txt), which
+# tools/check_doc_env.py does not scan.  v5.7.x-v5.9.x import six at module
+# scope in pyclaw, riemann and geoclaw.  It used to arrive transitively via
+# python-dateutil, which dropped it in 4.0.0; without it `make versions` fails
+# with ~25 autodoc import errors in v5.7.x.
+six==1.17.0

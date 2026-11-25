@@ -23,7 +23,7 @@ This will prompt for each repository and will overwrite the files
 make_plots_errors.txt   and  make_plots_output.txt
 each time so you might want to open those files in a different window.
 
-Before running rsync_clawpack.github.sh, make sure there are no extraneous
+Before running $CLAW/doc/rsync_gallery.sh, make sure there are no extraneous
 frames left from earlier tests:
 rm -rf $CLAW/clawpack.github.com/doc/_static/classic
 rm -rf $CLAW/clawpack.github.com/doc/_static/amrclaw
