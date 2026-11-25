@@ -1,109 +1,94 @@
-
 .. _howto_doc:
 
 Guide for updating this documentation
 =============================================
 
-See also the README.md at https://github.com/clawpack/doc.
+This guide covers building, checking and publishing the Clawpack
+documentation and gallery.  For the release procedure as a whole, see
+:ref:`howto_release`.  Both guides live in the
+`clawpack/doc <https://github.com/clawpack/doc>`_ repository as
+`doc/howto_doc.rst` and `doc/howto_release.rst`, and its `README.md` links
+to them.
 
-The `clawpack/doc <https://github.com/clawpack/doc>`_ repository is not
-included in the Clawpack distribution and must be cloned separately if you
-want to work with these files.
+The `clawpack/doc` repository is not included in the Clawpack distribution
+and must be cloned separately, normally into `$CLAW/doc`.  The main
+documentation sources are in `$CLAW/doc/doc` and the gallery in
+`$CLAW/doc/gallery`; these are two separate Sphinx projects.
 
-After cloning into the `$CLAW` directory, the restructured text
-files for the main documentation are in `$CLAW/doc/doc`.  All files
-related to the gallery are in `$CLAW/doc/gallery`.  As of Version
-5.4.1, these two subdirectories are separate Sphinx projects 
+.. _howto_doc_tasks:
 
-They used to be connected using 
-`intersphinx <http://www.sphinx-doc.org/en/stable/ext/intersphinx.html>`_.  
-but this was dropped in v5.7.x.
+Quick reference
+---------------
 
-Git branches and tags
----------------------
+========================================================  =======================================
+I want to...                                              See
+========================================================  =======================================
+Set up an environment that can build the docs             :ref:`howto_doc_env`
+Preview my edit locally                                   :ref:`howto_doc_preview`
+Check that I have not added Sphinx warnings               :ref:`howto_doc_warnings`
+Build the whole multiversion site locally                 :ref:`howto_doc_versions`
+Get my change onto www.clawpack.org                       :ref:`howto_doc_publish`
+Update the docs for a new release                         :ref:`howto_release_doc`
+Start a new 5.x series branch                             :ref:`howto_doc_major`
+Update the gallery                                        :ref:`howto_doc_gallery`
+========================================================  =======================================
 
-Older versions of the documentation used to be tagged for each minor
-release, e.g. `v5.6.1`.  Starting with v5.7.0, these are now only tagged
-with the major release, e.g. `v5.7.x`.  
+**What is automated:** every PR to `dev` or the current release branch gets a
+warning check (`.github/workflows/docs.yml`) and a downloadable single-version
+preview (`.github/workflows/docs-publish.yml`).  Every merge to `dev`
+republishes `www.clawpack.org/dev/` with no approval needed.  Everything else
+-- the top-level pages, the release version directories and the gallery -- is
+published only when a maintainer asks for it.
 
-The side menu on the Sphinx pages now lists only these major tags. The
-assumption is that any changes within e.g. the 5.7 version are minor enough
-that the documentation should not change substantially.
+.. _howto_doc_env:
 
-There are two active **branches** at any time, one for the current major
-release, e.g. `v5.7.x`, and one named `dev` for the development of documenation
-for features not yet released.  When a new major release is done the
-`v5.7.x` branch will be retired, creating a `v5.7.x` tag instead along with
-a new `v5.8.x` branch.
+Setting up a build environment
+------------------------------
 
-As documents are improved, continue to update the current release branch,
-e.g. `v5.7.x`, and also merge these changes in to the `dev` branch.  In
-general `dev` should be up to date with the current release branch along
-with perhaps some new documentation for features not in the current
-release.
+`autodoc` documents a Clawpack **source tree**, not an installed clawpack (see
+:ref:`howto_doc_pinned_tree`), so the build environment must *not* have
+clawpack installed.  Most local build failures come from this.
 
-Note that the file `conf.py` contains the version number.  Please insure
-that the `dev` branch and current release branch each have the correct
-thing. This can easily get messed up when merging from one branch to the
-other.  One way to help avoid this is to always merge via, e.g.::
+#. Start from a shell with no Clawpack environment active: `deactivate` any
+   virtualenv or conda env that has clawpack installed (in particular an
+   editable `pip install -e`), and `unset PYTHONPATH`.
+#. Create a fresh virtualenv and install the pinned toolchain from
+   `doc/tools/requirements-docs.txt` (Python 3.12, as CI uses)::
 
-    git checkout dev
-    git merge v5.7.x --no-ff --no-commit 
+       cd $CLAW/doc/doc
+       python3.12 -m venv ~/.venvs/clawdoc
+       source ~/.venvs/clawdoc/bin/activate
+       pip install -r tools/requirements-docs.txt
 
-and then check before doing the merge commit to make sure `conf.py` hasn't
-been improperly changed.  If it has, and that's the only change to this
-file, you can do::
+   Do not use `pip install --user` inside a virtualenv; it is refused there.
+   `sphinx-multiversion` is in the requirements file, so nothing else needs
+   installing.
+#. Check that autodoc can import everything from `$CLAW`::
 
-    git reset HEAD conf.py
-    git checkout conf.py
+       make checkenv
 
-and check that it's correct before committing via e.g.::
+   This reports an installed clawpack shadowing the source tree, a stray
+   `PYTHONPATH`, and any module that will not import.
 
-    git commit -m "merged recent v5.7.x changes into dev"
-    
+.. _howto_doc_preview:
 
-Configuration and style files
------------------------------
+Previewing a change (single version)
+------------------------------------
 
-The general look of the documentation and various things that appear on each
-page are controlled by the following files:
-
- - `conf.py` includes the version number, sets the `html_theme`, as well as
-   setting paths to extensions and various other sphinx settings.
- - `_themes/flask_local/layout.html` determines the menus at the top
- - `_static/clawlogo.jpg` is the Clawpack logo put on each page
- - `_static/clawicon.ico` is the icon that appears on browser tabs
- - `_templates/index.html` contains the main landing page
- 
-.. _howto_doc_release:
-
-Updating the docs for a new release
------------------------------------
-
-When updating the documentation for a new release, see also
-:ref:`howto_release_doc` for a list of necessary changes.
-
-
-Before proceeding, first make sure other repositories are checked out to
-master, since some pages now have literalinclude's that bring in code 
-(e.g. setaux_defaults.rst, etc).
-**Note: This is no longer true.**
-
-To create html files from the dev branch only, for example::
+::
 
     cd $CLAW/doc/doc
     git checkout dev
     make html
 
-The `Makefile` has been modified so that `make html` does this::
+This runs `sphinx-build -b html . _build1/html` on your working tree, against
+whatever `$CLAW` points at.  Open `_build1/html/index.html` in a browser.
+It is fast to rebuild, but it has no version sidebar and is **not**
+publishable; `_build1` is kept separate from the multiversion `_build` so a
+quick build never clobbers it.
 
-    sphinx-build -b html . _build1/html
-
-To view the files, point your browser to `$CLAW/doc/doc/_build1/html/index.html`
-
-Note that we suggest using `_build1` when building a single version so this
-can be quickly rebuilt when writing and editing documentation.
-
+The same build of each PR is attached to its `docs-publish` run as the
+`docs-preview-<PR number>` artifact.
 
 .. _howto_doc_warnings:
 
@@ -112,11 +97,8 @@ Checking for documentation warnings
 
 Sphinx does not fail the build on reStructuredText or docstring problems
 (a missing blank line before a list, a bad cross reference, an autodoc import
-issue, and so on).  Historically these warnings were also *embedded* into the
-rendered HTML as "System Message" boxes (via `keep_warnings = True` in
-`conf.py`) while not being obvious on the command line, so they could slip
-onto the website unnoticed.  `keep_warnings` is now `False`, and the
-following `make` targets let you catch warnings before they are merged.
+issue, and so on), and they are easy to miss on the command line.  The
+following `make` targets catch them before they are merged.
 
 To fail on any warning that is **new** relative to a committed baseline
 (`tools/doc_warnings_baseline.txt`)::
@@ -125,31 +107,36 @@ To fail on any warning that is **new** relative to a committed baseline
     make checkwarnings
 
 This does a full re-parse using the lightweight `dummy` builder (no HTML is
-written) and compares the result against the baseline, which records the
-warnings that already existed when the check was introduced.  Only newly
-introduced warnings cause a non-zero exit, so you can fix the backlog
-gradually without the check going red on unrelated pages.
+written) and compares the result against the baseline.  Only newly
+introduced warnings cause a non-zero exit, so the backlog can be fixed
+gradually.
 
 If you intentionally add or remove warnings (e.g. after fixing a batch of
 them), regenerate and commit the baseline with `make checkwarnings-update` --
 but see :ref:`howto_doc_pinned_tree` first, because it only produces a
 reproducible result in the pinned environment.
 
-To ignore the baseline entirely and report **every** remaining warning --
-the goal once the backlog has been driven to zero -- use::
+To ignore the baseline entirely and report **every** remaining warning::
 
     make checkwarnings-strict
 
 The same check runs in CI (`.github/workflows/docs.yml`) on pull requests to
 `dev` and the current release branch.
 
+.. note::
+
+   One warning class is never baselined: `autodoc: failed to import` means
+   the API pages for those modules come out **empty**.
+   `check_doc_warnings.py` reports them separately and fails regardless, and
+   `tools/check_built_site.sh` independently asserts that the built `dev`
+   API pages contain generated content before anything is published.
+
 .. _howto_doc_pinned_tree:
 
 The pinned source tree
 ^^^^^^^^^^^^^^^^^^^^^^
 
-`autodoc` documents a Clawpack **source tree**, not an installed clawpack:
-`conf.py` puts `$CLAW` on `sys.path` and the `clawpack/__init__.py` shim in
+`conf.py` puts `$CLAW` on `sys.path`, and the `clawpack/__init__.py` shim in
 the `clawpack/clawpack` super-repo maps `clawpack.geoclaw` onto
 `geoclaw/src/python/geoclaw`, and so on.  So the set of warnings depends on
 which Clawpack you are pointing at as much as on the docs themselves, and two
@@ -163,25 +150,16 @@ files pin that:
     each Clawpack repository, by commit.
 
 `make claw-pin` clones the second into `$CLAW/doc/.claw-pin` (borrowing
-objects from your own checkouts, so it takes seconds), and `$CLAW` selects
-it.  Regenerate the baseline against both, in a virtualenv with **no**
-clawpack installed::
+objects from your own checkouts, so it takes seconds), and setting `CLAW`
+selects it.  To regenerate the baseline, in the environment from
+:ref:`howto_doc_env`::
 
     cd $CLAW/doc/doc
-    python -m venv /tmp/docvenv && /tmp/docvenv/bin/pip install -r tools/requirements-docs.txt
-    PATH=/tmp/docvenv/bin:$PATH make claw-pin
-    PATH=/tmp/docvenv/bin:$PATH CLAW=$(cd ../.claw-pin && pwd) make checkwarnings-update
+    make claw-pin
+    CLAW=$(cd ../.claw-pin && pwd) make checkwarnings-update
 
 Then commit `tools/doc_warnings_baseline.txt`.  `checkwarnings-update`
-refuses to run against a tree that does not match the pin, because that is
-exactly how the baseline once filled up with one laptop's absolute paths.
-
-A fresh virtualenv matters: an editable or pip-installed clawpack registers a
-meta-path finder that shadows the source tree whatever `sys.path` says.
-`make checkenv` reports that, and every other reason autodoc might not be
-able to import what the docs reference::
-
-    make checkenv
+refuses to run against a tree that does not match the pin.
 
 To bump the pinned Clawpack, edit `tools/clawpack-ref.txt` and repeat the
 regeneration above in the same commit.
@@ -207,11 +185,7 @@ nothing at all: `storm_module.html` came out empty on every release once
 (borrowing objects from your checkouts, so all of them take about a minute),
 and `ext/clawpack_source.py` swaps the right one onto `sys.path` as each
 version starts.  `$CLAW_VERSION_TREES` points the build at trees somewhere
-else.  So a full local multiversion build is::
-
-    make claw-pin
-    make claw-releases
-    CLAW=$(cd ../.claw-pin && pwd) make versions-publish
+else.
 
 Three checks keep this honest:
 
@@ -224,354 +198,323 @@ Three checks keep this honest:
 - The publish workflow's `stage` summary lists every page that loses API
   entries compared with the published site, before anyone approves a publish.
 
-When cutting a release, add its row to `tools/clawpack-release-refs.txt` (see
-:ref:`howto_release_doc`).  Releases before 5.8 import the `imp` module, which
-Python 3.12 removed; `ext/clawpack_source.py` provides the one function they
-use.
+Releases before 5.8 import the `imp` module, which Python 3.12 removed;
+`ext/clawpack_source.py` provides the one function they use.
 
-.. note::
+.. _howto_doc_versions:
 
-   One warning class is never baselined, however long it has been present:
-   `autodoc: failed to import` means the API pages for those modules come out
-   **empty**, which no baseline should be allowed to hide.
-   `check_doc_warnings.py` reports them separately and fails regardless, and
-   `tools/check_built_site.sh` independently asserts that the built `dev`
-   API pages contain generated content before anything is published.
+Building the multiversion site locally
+--------------------------------------
 
-**Possible future enhancements:**
+This builds what www.clawpack.org shows: the current release at the top
+level, plus `dev/`, `v5.13.x/`, ... each with a version sidebar.  You do not
+need it to publish (CI does the same build; see :ref:`howto_doc_publish`),
+but it is the way to check a change that affects several versions, or to
+reproduce a CI failure.
 
-- Extend the same warning check to the separate `gallery` Sphinx project
-  (`$CLAW/doc/gallery`), which first requires running the examples that
-  generate its figures.
-- Turn off `keep_warnings` in `gallery/conf.py` and `doc/pyclaw/conf.py`
-  (used only for standalone pyclaw builds) for consistency.
-- Once the baseline is empty, switch CI to `make checkwarnings-strict` and
-  optionally enable nitpicky (`-n`) cross-reference checking.
-- Migrate off `sphinx-multiversion`, which is unmaintained and pins the
-  toolchain to `sphinx < 9` (it calls `Config.read()` positionally, and Sphinx
-  9.0 made those arguments keyword-only).  This bound lives in
-  `tools/requirements-docs.txt`.
-- Restore `v5.1.x`--`v5.6.x` to the multiversion build, or formally retire
-  them.  Their `conf.py` refers to a `plot_directive` extension that no longer
-  resolves, so `sphinx-multiversion` skips them and only their long-published
-  HTML remains on the site.
-
-
-To generate docs including previous versions
---------------------------------------------
-
-If you have just done a new major release, first see :ref:`howto_doc_major`
-below.
-
-The instructions below make webpages that list v5.7.x, v5.8.x, etc. and allow
-viewing docs that may be more relevant to a previous version of Clawpack.
-
-This should be done when you are close to pushing changes to the website,
-otherwise the above approach works fine and shows the current state of the
-documentation based on files in your working directory.
-
-This can take longer since it rebuilds pages for all versions.
-
-As of v5.7.x, we are now using 
-`sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__
-instead of 
-`sphinxcontrib-versioning <https://github.com/sphinx-contrib/sphinxcontrib-versioning>`__.
-
-
-To make pages that show previous Clawpack versions, first install
-`sphinx-multiversion <https://holzhaus.github.io/sphinx-multiversion/master/index.html>`__.
-
-Insure that any changes you want to show up in multiversion docs has been
-committed to some branch (normally `dev` if you have been adding something new).
-
-And then do this::
+`sphinx-multiversion` builds from committed git refs, never your working
+tree, so commit what you want to see first.  Then, in the environment from
+:ref:`howto_doc_env`, run these **in this order**::
 
     cd $CLAW/doc/doc
-    make versions-publish
+    git fetch upstream --tags            # all v5.*.x tags must exist locally
+    git branch v5.14.x upstream/v5.14.x  # only if you have never checked it out
+    make claw-pin                        # 1. dev's source tree
+    make claw-releases                   # 2. one source tree per release
+    CLAW=$(cd ../.claw-pin && pwd) make versions-publish   # 3. build + promote
 
-That single target does the whole job: a clean multiversion build followed by
-the promotion step described below.  It is equivalent to::
+Step 2 must come before step 3: without the release trees,
+`make check-versions` (which `make versions` runs first) stops with a list of
+what is missing.  Expect several minutes; add `SPHINXOPTS=--jobs=auto` to
+build in parallel.
+
+`make versions-publish` is equivalent to::
 
     make clean-versions      # rm -rf _build
-    make versions            # sphinx-multiversion . _build/html
+    make versions            # check-versions, then sphinx-multiversion . _build/html
     make versions-promote    # python tools/promote_latest.py _build/html
 
-To view the result, point your browser to `_build/html/index.html`, which is
-the current release, and from there you should be able to navigate to other
-versions.
-
-Unlike `sphinxcontrib-versioning`, this uses your local branches and tags
-rather than the versions on Github.  It lists two branches under "Latest
-Versions" and the whitelisted tags as "Older Versions".  The branches are set
-to `dev` and the most recent version, by this line of `conf.py`::
-
-    smv_branch_whitelist = r'^(dev|v5\.14\.x)$'
-
-This should be updated for a new version, along with `smv_latest_version`.
-
-.. warning::
-
-   `sphinx-multiversion` only considers **local** branches and tags
-   (`refs/heads/*` and `refs/tags/*`); it ignores remote-tracking refs such as
-   `clawpack/v5.14.x` unless `smv_remote_whitelist` is set.  If you have never
-   checked out the release branch, it will be missing from your build -- and
-   because it is `smv_latest_version`, the site would end up with no top-level
-   pages at all.  It also silently skips any ref whose `conf.py` fails to
-   load.  `make versions` therefore runs a pre-flight check first::
-
-       make check-versions
-
-   which reports exactly which versions will be built and prints the
-   `git branch` command for anything missing.  Tags `v5.1.x` through `v5.6.x`
-   are known not to build with a current Sphinx (their `conf.py` refers to a
-   `plot_directive` extension that no longer resolves); they are listed in
-   `KNOWN_UNBUILDABLE` in `tools/check_versions.py`, and their already
-   published HTML is left untouched by the deployment step.
-
-Why the promote step is needed
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-`_build/html` contains a subdirectory for each version, but immediately after
-`make versions` there are no `.html` files in its top level.  For the Clawpack
-webpage we need to:
-
-- Copy the files from the current version to the top level so that
-  navigating to http://www.clawpack.org/installing.html,
-  for example, goes to the current version of this document.
-
-- Fix the links in the sidebars of each of these `.html` files so that clicking
-  on `dev`, for example, takes you to http://www.clawpack.org/dev/installing.html
-
-`make versions-promote` does both, via `tools/promote_latest.py`.  This used to
-be a manual `cp -r v5.7.x/* .` plus `python ../../fix_links_top_level.py`; the
-script replaces that because the manual form had to be edited by hand at each
-release, skipped dotfiles (notably `.nojekyll`, without which GitHub Pages
-will not serve `_static`), and only fixed links one or two directories deep.
-
-You can sanity check the result before deploying::
+Open `_build/html/index.html`, which is the current release.  To check the
+result the way CI does::
 
     cd $CLAW/doc
     ./doc/tools/check_built_site.sh doc/_build/html
 
-If you like what you see, you can push back to your fork and then issue a
-pull request to have these changes incorporated into the documentation.
+Which versions get built
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Note:** We are no longer using `intersphinx` to link the gallery and the 
-main doc pages together.   Instead there are hard links to `www.clawpack.org`
-to go from one to the other.  So the old use of 
-the environment variable `SPHINX_WEB` is now deprecated.
+These lines of `conf.py` choose the versions::
 
-.. _howto_doc_major:
+    smv_tag_whitelist = r'^v\d+\.\d+\.x$'          # tags v5.7.x, v5.8.x, ...
+    smv_branch_whitelist = r'^(dev|v5\.14\.x)$'    # dev + current release
+    smv_latest_version = 'v5.14.x'                 # promoted to the top level
 
-Updating for a new major version
---------------------------------
+`make check-versions` prints exactly which versions will be built and why
+any are missing.  Two traps it guards against:
 
-When updating a minor version, e.g. from v5.7.0 to v5.7.1, we will continue
-to use the same branch v5.7.x.  You should just make sure the v5.7.x and dev
-are up to date with each other at the time of release.
+- `sphinx-multiversion` only considers **local** branches and tags; it
+  ignores remote-tracking refs such as `upstream/v5.14.x`.  If you have never
+  checked out the release branch it is silently dropped -- and since it is
+  `smv_latest_version`, the site would have no top-level pages.
+  `check-versions` prints the `git branch` command to fix it.
+- It silently skips any ref whose `conf.py` fails to load.  Tags `v5.1.x`
+  through `v5.6.x` do this with a current Sphinx (their `conf.py` refers to a
+  `plot_directive` extension that no longer resolves); they are listed in
+  `KNOWN_UNBUILDABLE` in `tools/check_versions.py`, and their published HTML
+  is left untouched by publishing.  Any *other* version dropping out is an
+  error.
 
-When updating to the next major version, e.g. from v5.7.x to v5.8.x, it is
-necessary to do the following:
+`make versions-promote` (`tools/promote_latest.py`) copies the
+`smv_latest_version` directory to the top level, including dotfiles such as
+`.nojekyll` that GitHub Pages needs, and rewrites the sidebar links there so
+that e.g. `dev` points at `www.clawpack.org/dev/`.
 
-- Create a new branch v5.8.x from v5.7.x (or dev).
+.. _howto_doc_publish:
 
-- Delete branch v5.7.x and replace it with a tag, so that the proper
-  versions get included in the documentation when next it is built.
-
-For example, this could be done as follows::
-
-    git checkout v5.7.x       # assuming up to date with dev
-    git checkout -b v5.8.x    # create new branch
-    git branch -d v5.7.x      # remove old branch
-    git push origin :v5.7.x   # delete branch on github
-    git tag v5.7.x            # create new tag
-    git push origin v5.8.x    # push new branch
-    git push origin --tags    # push new tag
-
-
-
-Updating the gallery
---------------------
-
-The gallery webpages are now decoupled from the main sphinx pages, and reside
-in `$CLAW/doc/gallery` rather than `$CLAW/doc/doc`.  
-
-To remake the galleries, you need to first run all the examples that produce
-results shown in the galleries.  
-
-For detailed instructions, see `CLAW/doc/gallery/README.md
-<https://github.com/clawpack/doc/blob/dev/gallery/README.md>`_.
-
-Then do the following::
-
-    cd $CLAW/doc/gallery
-    make html
-
-Note that we don't track past versions in the gallery.
-
-
-Note that `doc/gallery/notebooks.rst` contains pointers to html versions of many
-notebooks, stored in `doc/gallery/_static/notebooks`.  If any notebooks were
-updated for this release, the corresponding html files should be too.
-*(We should automate this).*
-
-Updating the webpages
----------------------
+Publishing to www.clawpack.org
+------------------------------
 
 The html files live in the repository
 `clawpack/clawpack.github.com
-<https://github.com/clawpack/clawpack.github.com>`_
-which causes them to show up on the web at
-`http://clawpack.github.io
-<http://clawpack.github.io>`_.
+<https://github.com/clawpack/clawpack.github.com>`_, served by GitHub Pages
+at `www.clawpack.org <http://www.clawpack.org>`_.  The file
+`extra_files/CNAME`, together with the DNS settings for the domain, makes
+`clawpack.org`, `www.clawpack.com` and `clawpack.github.io` all resolve
+there.
 
 .. _howto_doc_publish_ci:
 
 Publishing with GitHub Actions (preferred)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`.github/workflows/docs-publish.yml` does the build and the push for you.
-Pushing documentation changes to `dev` refreshes `www.clawpack.org/dev/`
-automatically; a full-site publish (all versions plus the top-level pages) is
-run on demand from the Actions tab via **Run workflow**, choosing:
+`.github/workflows/docs-publish.yml` does the build and the push.
 
-`scope`
-    `dry-run` builds and uploads the site as an artifact without writing
-    anything; `dev-only` publishes just `dev/`; `full-site` publishes every
-    version and the promoted top level.
+**A change on dev:** merge the PR.  `www.clawpack.org/dev/` is republished
+automatically within a few minutes.  Nothing else to do.
 
-`target_branch`
-    `ci-preview` is a branch of `clawpack.github.com` that GitHub Pages does
-    not serve, so you can inspect a real diff without affecting the live site.
-    Use `master` only when you mean to publish.
+**The top-level pages or a release version** (e.g. after a release, or
+after merging a fix into the release branch):
 
-`prune`
-    Off by default.  When on, stale files *inside* rebuilt version directories
-    are deleted.  Nothing outside them is ever removed.
+#. Make sure the change is on `dev` (and, for the top level, merged into
+   the current release branch -- see :ref:`howto_doc_branches`).
+#. On GitHub go to **Actions -> docs-publish -> Run workflow**, choose the
+   `dev` branch (deployments are only allowed from `dev`), and set:
 
-Publishing runs as two jobs.  `stage` builds the commit that would be pushed
-and shows its diff, the previous site revision and how to roll back in the run
-summary; `push` then pushes exactly that commit.  Which environment gates
-`push` depends on the risk:
+   `scope`
+       `dry-run` builds and uploads the site as an artifact without writing
+       anything; `dev-only` publishes just `dev/`; `full-site` publishes every
+       version and the promoted top level.
 
-`docs-dev`
-    Dev-only publishes (including every push to `dev`).  No reviewers: the
-    sync is additive inside `dev/` and is checked automatically.
+   `target_branch`
+       `ci-preview` is a branch of `clawpack.github.com` that GitHub Pages
+       does not serve, so you can inspect a real diff without affecting the
+       live site.  Use `master` only when you mean to publish.
 
-`docs-site`
-    `full-site` publishes and anything with `prune` on.  Requires a reviewer.
-    Read the `stage` summary on the same run page *before* approving -- the
-    approval is for that exact commit.
+   `prune`
+       Off by default.  When on, stale files *inside* rebuilt version
+       directories are deleted.  Nothing outside them is ever removed.
 
-If `clawpack.github.com` changes between staging and approval, `push` refuses
-and the workflow has to be re-run.
+#. Wait for the `stage` job.  Its run summary shows the diff of the commit
+   that would be pushed, the previous site revision, any page that loses API
+   entries, and how to roll back.  Read it.
+#. Approve the `push` job (environment `docs-site`, which requires a
+   reviewer).  It pushes exactly the commit `stage` showed.  If
+   `clawpack.github.com` changed in between, `push` refuses and the workflow
+   has to be re-run.
 
-Both environments hold the `CLAWPACK_SITE_DEPLOY_KEY` secret (the private half
-of a write deploy key on `clawpack.github.com`) and accept deployments from the
-`dev` branch only, so run the workflow from `dev`.
+Dev-only publishes use the `docs-dev` environment, which has no reviewers:
+they are additive inside `dev/` and checked automatically.  Both
+environments hold the `CLAWPACK_SITE_DEPLOY_KEY` secret (the private half of
+a write deploy key on `clawpack.github.com`).
 
-The gallery is *not* published by CI -- its pages and thumbnails have to be
-generated by running the examples (see `gallery/README.md`), so it stays a
-manual `rsync` as described below.
+The gallery is *not* published by CI; see :ref:`howto_doc_gallery`.
 
 Publishing by hand
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
-This still works and is the fallback if Actions is unavailable.  First create
-the html files as described above, which should appear in
-`doc/doc/_build/html` and `doc/gallery/_build/html`.
+This is the fallback if Actions is unavailable.
 
-Commit any changed source files and
-push to `clawpack/doc <https://github.com/clawpack/doc>`_.
+#. Build the site as in :ref:`howto_doc_versions`, and commit and push any
+   changed sources to `clawpack/doc`.
+#. Bring your clone of the site up to date::
 
-Then do::
+       cd $CLAW/clawpack.github.com
+       git checkout master
+       git pull origin
 
-    cd $CLAW/clawpack.github.com
-    git checkout master
-    git pull origin  # make sure you are up to date before doing next steps!
+#. Copy the build in (`DRYRUN=1` shows what would be copied), and run the
+   same guard CI uses::
 
-    cd $CLAW/doc
-    ./rsync_doc.sh
+       cd $CLAW/doc
+       ./rsync_doc.sh
+       ./doc/tools/check_published_tree.sh ../clawpack.github.com doc/_build/html
 
-If you have updated the gallery, also do::
+   `rsync_doc.sh` refuses to run without a promoted build, and never deletes:
+   the published site has many directories no current build produces
+   (`gallery/`, `doxygen/`, `pdf/`, `notebooks/`, the `v5.1.x`--`v5.6.x`
+   trees, and more).
 
-    ./rsync_gallery.sh
+#. Commit and push::
 
-Both scripts refuse to run if there is no promoted build to copy, and neither
-passes `--delete`: the published site contains many directories that no
-current build produces (`gallery/`, `doxygen/`, `pdf/`, `notebooks/`, the
-`v5.1.x`--`v5.6.x` trees, and more), and deleting them would take down large
-parts of the website.  Set `DRYRUN=1` to see what would be copied.
+       cd $CLAW/clawpack.github.com
+       git add .
+       git commit -m "changes from doc commit <hash>"
+       git push origin
 
-Before committing, you can run the same guard CI uses::
+It may take a few minutes for the pages to update.
 
-    cd $CLAW/doc
-    ./doc/tools/check_published_tree.sh ../clawpack.github.com doc/_build/html
+.. _howto_doc_branches:
 
+Git branches and tags
+---------------------
 
-Then move to the `clawpack.github.com` repository and 
-add and commit any new or changed files. 
-All files are needed, so ::
+There are two active **branches** at any time: one for the current release
+series, e.g. `v5.14.x`, and `dev` for documentation of features not yet
+released.  Older series are **tags** (`v5.7.x`, ..., `v5.13.x`), one per
+series: changes within a series (5.14.0 to 5.14.1) are assumed small enough
+not to need separate documentation.  (Before v5.7.0 each patch release was
+tagged, e.g. `v5.6.1`.)
 
-    cd $CLAW/clawpack.github.com
-    git add . 
+As documents are improved, update `dev` and merge into the current release
+branch as appropriate; `dev` should contain everything in the release branch
+plus documentation of unreleased features.
 
-should work.  For the commit message you might want to add the commit
-hash of the most recent commit in $CLAW/doc/doc::
+`conf.py` holds the version number (`version`/`release`), which differs
+between the two branches and is easy to clobber in a merge.  Merge with::
 
-    cd $CLAW/clawpack.github.com
-    git add . 
-    git commit -m "changes from doc/doc commit <hash>"
+    git checkout v5.14.x
+    git merge dev --no-ff --no-commit
 
-And finally push to the web::
+and check `conf.py` before committing.  If it was changed and that is the
+only change to it::
 
-    git push origin
+    git restore --staged --worktree conf.py
+    git commit -m "merge recent dev changes into v5.14.x"
 
-which assumes that `origin` is
-`git@github.com:clawpack/clawpack.github.com.git`.
+.. _howto_doc_major:
 
-It may take a few minutes for the updated webpages to appear at 
-`<http://clawpack.github.io/>`_.
+Starting a new 5.x series
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Note that `<http://clawpack.org>`_ and `<http://www.clawpack.com>`_
-should also resolve properly to `<http://clawpack.github.io/>`_.
-and that `www.clawpack.org` should appear in the browser address bar.  The
-file `extra_files/CNAME` combined with settings on the domain server
-`godaddy.com` determine this behavior.
+For a patch release (e.g. 5.14.0 to 5.14.1) keep using the `v5.14.x` branch;
+just make sure it and `dev` are up to date with each other, and update the
+`v5.14.x` row of `tools/clawpack-release-refs.txt`.
+
+For a new series (e.g. 5.14.x to 5.15.x):
+
+#. Create the new branch and retire the old one to a tag::
+
+       git checkout v5.14.x       # up to date with dev
+       git checkout -b v5.15.x
+       git tag v5.14.x v5.14.x    # tag the old branch tip...
+       git branch -D v5.14.x      # ...then remove the branch
+       git push upstream v5.15.x
+       git push upstream v5.14.x:refs/tags/v5.14.x
+       git push upstream :refs/heads/v5.14.x
+
+   (A branch and a tag with the same name confuse `git`; the explicit
+   `refs/...` above avoid ambiguity.)
+
+#. On `v5.15.x`, set `version`/`release` in `conf.py`.
+
+#. On `dev`, in `conf.py`, set `smv_branch_whitelist` to
+   `r'^(dev|v5\.15\.x)$'` and `smv_latest_version` to `'v5.15.x'`.
+
+#. On `dev`, replace `v5.14.x` with `v5.15.x` in the `branches:` lists of
+   `.github/workflows/docs.yml` and `.github/workflows/docs-publish.yml`,
+   so PRs to the new release branch are checked.
+
+#. Add the `v5.15.x` row to `tools/clawpack-release-refs.txt`.
+
+#. Run `make check-versions`; it should list `v5.15.x` and `v5.14.x` (now
+   a tag) among the versions built.
+
+.. _howto_doc_gallery:
+
+Updating the gallery
+--------------------
+
+The gallery lives in `$CLAW/doc/gallery`, a separate Sphinx project, and is
+**not** built or published by CI: its pages and thumbnails come from running
+the examples, which is too heavy for CI.  Past versions are not tracked.
+
+#. Run all the examples that produce results shown in the galleries, as
+   described in `$CLAW/doc/gallery/README.md
+   <https://github.com/clawpack/doc/blob/dev/gallery/README.md>`_.
+#. Build::
+
+       cd $CLAW/doc/gallery
+       make html
+
+#. If any notebooks were updated, also update the html versions in
+   `gallery/_static/notebooks` that `gallery/notebooks.rst` points to.
+   *(We should automate this.)*
+#. Publish by hand::
+
+       cd $CLAW/doc
+       ./rsync_gallery.sh
+
+   then commit and push in `$CLAW/clawpack.github.com` as in the last step
+   of publishing by hand above.
+
+Configuration and style files
+-----------------------------
+
+The general look of the documentation is controlled by:
+
+ - `conf.py`: the version number, `html_theme`, paths to extensions and the
+   `sphinx-multiversion` settings.
+ - `_themes/flask_local/layout.html`: the menus at the top.
+ - `_static/clawlogo.jpg`: the Clawpack logo on each page.
+ - `_static/clawicon.ico`: the icon on browser tabs.
+ - `_templates/index.html`: the main landing page.
+
+The main docs and the gallery link to each other with hard links to
+`www.clawpack.org` (they no longer use `intersphinx`; the `SPHINX_WEB`
+environment variable is obsolete).
 
 .. _extra_files:
 
 Extra files for webpages not built by Sphinx
 ---------------------------------------------
 
-Any files placed in `$CLAW/doc/doc/extra_files` will be copied verbatim
-(recursively for subdirectories) to the directory
-`$CLAW/doc/doc/_build/html` when Sphinx is used to build the documentation.
-These will be copied to `$CLAW/clawpack.github.com/` when the 
-`rsync_clawpack.github.sh` script is run and hence will appear on the
-webpages.   
+Any files placed in `$CLAW/doc/doc/extra_files` are copied verbatim
+(recursively) into the built html, and so end up on the website.
 
-For example, the file `$CLAW/doc/doc/extra_files/clawdev2013/index.html`
-should appear at `<http://www.clawpack.org/clawdev2013/index.html>`_.
+For example, `$CLAW/doc/doc/extra_files/clawdev2013/index.html` appears at
+`<http://www.clawpack.org/clawdev2013/index.html>`_.
 
 The files in `$CLAW/doc/doc/extra_files/links` provide redirects so that
-links like `<http://www.clawpack.org/links/an11>`_ resolve properly to
-webpages on the University of Washington server.  Links of this nature have
-been provided in published paper and some contain large amounts of data that
-have not been copied to Github.
+links like `<http://www.clawpack.org/links/an11>`_ resolve to webpages on the
+University of Washington server.  Links of this nature have been given in
+published papers and some point to large amounts of data that have not been
+copied to GitHub.
 
 Pages from other clawpack repositories
 --------------------------------------
 
-Some webpages are created within other clawpack repositories. 
-For example, the page http://www.clawpack.org/geoclawdev-2020/
-is modified by pushing changes to the master branch of the repository
-`geoclawdev-2020 <https://github.com/clawpack/geoclawdev-2020>`__.
-This is configured in that repository, in the `GitHub Pages` section found 
-under `Settings`.
-
-Other repositories that create webpages include:
+Some webpages are created within other clawpack repositories.
+For example, http://www.clawpack.org/geoclawdev-2020/
+is modified by pushing changes to the master branch of
+`geoclawdev-2020 <https://github.com/clawpack/geoclawdev-2020>`__,
+configured under `Settings -> Pages` in that repository.  Others include:
 
 - `geoclawdev-2018 <https://github.com/clawpack/geoclawdev-2018>`__
 - `clawdev-2016 <https://github.com/clawpack/clawdev-2016>`__
-    
+
+Possible future enhancements
+----------------------------
+
+- Extend the warning check to the `gallery` Sphinx project, which first
+  requires running the examples that generate its figures.
+- Turn off `keep_warnings` in `gallery/conf.py` and `doc/pyclaw/conf.py`
+  (used only for standalone pyclaw builds) for consistency.
+- Once the warning baseline is empty, switch CI to
+  `make checkwarnings-strict` and optionally enable nitpicky (`-n`)
+  cross-reference checking.
+- Migrate off `sphinx-multiversion`, which is unmaintained and pins the
+  toolchain to `sphinx < 9` (it calls `Config.read()` positionally, and
+  Sphinx 9.0 made those arguments keyword-only).  This bound lives in
+  `tools/requirements-docs.txt`.
+- Restore `v5.1.x`--`v5.6.x` to the multiversion build, or formally retire
+  them.  Only their long-published HTML remains on the site.
